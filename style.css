@@ -10,3 +10,11 @@ body {
 p {
     white-space: pre-line;
 }
+
+.logo {
+    background-image: url('worflogy_logo_with_glow.svg');
+    width: 100px;
+    height: 100px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
