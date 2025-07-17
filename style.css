@@ -12,9 +12,9 @@ p {
 }
 
 .logo {
-    background-image: url('worflogy_logo_with_glow.svg');
-    width: 100px;
-    height: 100px;
+    background-image: url('logo.svg');
+    width: 200px;
+    height: 200px;
     background-size: contain;
     background-repeat: no-repeat;
 }
