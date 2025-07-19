@@ -23,7 +23,7 @@ header {
 
 .brand .logo {
     background-image: url('worflogy_logo.svg');
-    width: 200px;
+    /* width: 200px; */
     height: 100px;
     background-size: contain;
     background-repeat: no-repeat;
