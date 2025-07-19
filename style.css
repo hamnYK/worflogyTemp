@@ -6,10 +6,6 @@ body {
     font-family: sans-serif;
 }
 
-p {
-    white-space: pre-line;
-}
-
 .logo {
     background-image: url('logo.svg');
     width: 300px;
