@@ -43,7 +43,8 @@ header {
 }
 
 #current span {
-    color: coral;
+    font-weight: bold;
+    color: yellowgreen;
 }
 
 nav ul {
