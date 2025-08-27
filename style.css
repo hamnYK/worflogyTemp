@@ -37,9 +37,7 @@ header {
 }
 
 #about img {
-    max-width: 50%;
-    height: auto;
-    display: block;
+    max-width: 100%;
 }
 
 #current span {
