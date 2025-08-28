@@ -1,4 +1,16 @@
-/* 초기화 */
+/* Pretendard 폰트 불러오기 */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+/* 색상 변수 (GitHub Light Default 컨셉) */
+:root {
+  --bg-color: #F6F8FA;         /* 전체 배경색 (GitHub 배경) */
+  --text-color: #24292E;       /* 기본 글자색 (GitHub 텍스트) */
+  --primary-color: #EAECEF;     /* 메인 색 (GitHub 헤더/경계선) */
+  --accent-color: #0969DA;      /* 포인트 색 (GitHub 블루) */
+  --card-bg-color: #FFFFFF;    /* 섹션 카드 배경색 (GitHub 콘텐츠 배경) */
+}
+
+/* 초기화 및 기본 폰트 설정 */
 * {
     margin: 0;
     padding: 0;
@@ -7,44 +19,72 @@
 
 /* 본문 기본 스타일 */
 body {
-    font-family: sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     line-height: 1.6;
 }
 
 /* 헤더 */
 header {
-    background-color: #0a3d62;
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--text-color);
     padding: 2rem 1rem;
     text-align: center;
+    border-bottom: 1px solid #D0D7DE; /* GitHub 스타일의 경계선 추가 */
 }
 
 .brand .logo {
     background-image: url('worflogy_logo.svg');
-    /* width: 200px; */
     height: 100px;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     margin: 0 auto 1rem auto;
+
+    /* ★★★ 중요 ★★★
+       배경이 밝아졌으므로, 로고를 흰색으로 만들던 filter 속성을 제거합니다.
+       이제 원본 로고 SVG 파일이 그대로 보이게 됩니다.
+    */
+    filter: none;
 }
 
+/* 메인 콘텐츠의 제목 스타일 */
+main h1, main h2, main h3 {
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #D0D7DE; /* 제목 구분선 추가 */
+    padding-bottom: 0.5rem;
+}
+
+/* 메인 콘텐츠의 링크 스타일 */
+main a {
+    color: var(--accent-color);
+    font-weight: 500; /* GitHub처럼 살짝 얇게 조정 */
+    text-decoration: none;
+}
+main a:hover {
+    text-decoration: underline;
+}
+
+/* 특정 섹션의 스타일 조정 */
 #about a {
-    font-weight: bold;
     font-size: x-large;
+    display: inline-block;
+    margin-top: 0.5rem;
 }
 
 #about img {
     max-width: 100%;
 }
 
+/* 강조 텍스트를 포인트 색상으로 변경 */
 #current span {
     font-weight: bold;
-    color: blue;
+    color: var(--text-color); /* 포인트 대신 일반 텍스트와 통일 */
 }
 
+/* 네비게이션 */
 nav ul {
     list-style: none;
     display: flex;
@@ -55,14 +95,16 @@ nav ul {
 }
 
 nav li a {
-    color: white;
+    color: var(--text-color);
     text-decoration: none;
     font-weight: bold;
     padding: 0.5rem 1rem;
+    transition: color 0.3s;
 }
 
 nav li a:hover {
-    text-decoration: underline;
+    color: var(--accent-color);
+    text-decoration: none;
 }
 
 /* 메인 콘텐츠 레이아웃 */
@@ -75,31 +117,27 @@ main {
     gap: 2rem;
 }
 
-section {
+section,
+aside {
     flex: 2;
     min-width: 300px;
-    background: white;
+    background: var(--card-bg-color);
     padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    border: 1px solid #D0D7DE; /* GitHub 스타일의 경계선 */
+    border-radius: 6px; /* GitHub 스타일의 살짝 둥근 모서리 */
 }
 
 aside {
     flex: 1;
-    min-width: 250px;
-    background: #eef5fb;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
 /* 푸터 */
 footer {
-    background-color: #0a3d62;
-    color: white;
+    color: #57606A; /* GitHub 푸터 텍스트 색상 */
     text-align: center;
-    padding: 1rem;
+    padding: 2.5rem;
     margin-top: 2rem;
+    font-size: 14px;
 }
 
 /* 반응형 */
