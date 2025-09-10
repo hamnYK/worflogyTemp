@@ -7,7 +7,7 @@ function updateTime() {
             weekday: 'long',
             hour: '2-digit',
             minute: '2-digit',
-            second: '2-digit',
+            // second: '2-digit', // 초 단위는 필요에 따라 추가 가능
             hour12: false,
             timeZone: 'Asia/Seoul'
         };
