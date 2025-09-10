@@ -15,5 +15,6 @@
         document.getElementById('current-time').innerText = formatter.format(now);
     }
 
-    setInterval(updateTime, 1000);
+    // setInterval(updateTime, 1000);
+    setInterval(updateTime, 60000);
     updateTime();
