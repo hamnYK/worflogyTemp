@@ -119,7 +119,7 @@ main {
 
 section, aside {
     flex: 2;
-    min-width: 300px;
+    max-width: 100%;
     background: var(--card-bg-color);
     padding: 2rem;
     border: 1px solid #D0D7DE;
@@ -209,22 +209,4 @@ footer {
         flex-direction: column;
         padding: 1rem;
     }
-
-    /* --- 슬라이더 반응형 스타일 추가 --- */
-    .slide-item {
-        width: 150px; /* 모바일에서 로고 너비를 150px로 줄입니다. */
-        padding: 0 20px; /* 좌우 여백도 살짝 줄여줍니다. */
-    }
-
-    .slider-track {
-        /* (새로운 로고 너비 150px) * (총 로고 개수 10개) = 1500px */
-        width: calc(150px * 10);
-        /* 애니메이션은 그대로 유지하여 계속 흐르도록 합니다. */
-    }
-
-    .slide-item img {
-        max-height: 50px; /* 필요하다면 로고 이미지 최대 높이도 조절합니다. */
-    }
-    /* --- 여기까지 추가 --- */
-
 }
