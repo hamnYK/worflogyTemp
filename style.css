@@ -22,7 +22,8 @@ body {
     font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
-    line-height: 1.6;
+    line-height: 1.5;
+    overflow-x: hidden;
 }
 
 /* 헤더 */
@@ -72,7 +73,7 @@ main a:hover {
 #about img {
     max-width: 100%;
     height: auto;
-    border-radius: 8px; /* 이미지 모서리 둥글게 */
+    border-radius: 8px;
 }
 
 /* 강조 텍스트를 포인트 색상으로 변경 */
