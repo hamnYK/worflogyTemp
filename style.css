@@ -58,12 +58,12 @@ main h1, main h2, main h3 {
 }
 
 /* 메인 콘텐츠의 링크 스타일 */
-main a {
+main a, current a {
     color: var(--accent-color);
     font-weight: 500; /* GitHub처럼 살짝 얇게 조정 */
     text-decoration: none;
 }
-main a:hover {
+main a:hover, current a:hover {
     text-decoration: underline;
 }
 
