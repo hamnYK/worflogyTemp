@@ -1,209 +1,145 @@
-/* Pretendard 폰트 불러오기 */
+/* Pretendard */
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
-/* 색상 변수 (GitHub Light Default 컨셉) */
-:root {
-  --bg-color: #F6F8FA;         /* 전체 배경색 (GitHub 배경) */
-  --text-color: #24292E;       /* 기본 글자색 (GitHub 텍스트) */
-  --primary-color: #EAECEF;     /* 메인 색 (GitHub 헤더/경계선) */
-  --accent-color: #0969DA;      /* 포인트 색 (GitHub 블루) */
-  --card-bg-color: #FFFFFF;    /* 섹션 카드 배경색 (GitHub 콘텐츠 배경) */
+:root{
+  --bg-color:#F6F8FA;
+  --text-color:#24292E;
+  --primary-color:#EAECEF;
+  --accent-color:#0969DA;
+  --card-bg-color:#FFFFFF;
 }
 
-/* 초기화 및 기본 폰트 설정 */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* Reset */
+*{margin:0;padding:0;box-sizing:border-box;}
+img{border:0;vertical-align:middle;}
+
+/* Body */
+html,body{height:100%;}
+body{
+  font-family:'Pretendard',-apple-system,BlinkMacSystemFont,system-ui,Roboto,'Helvetica Neue','Segoe UI','Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol',sans-serif;
+  background-color:var(--bg-color);
+  color:var(--text-color);
+  line-height:1.6;
 }
 
-/* 본문 기본 스타일 */
-body {
-    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    line-height: 1.6;
+/* Header */
+header{
+  background-color:var(--primary-color);
+  color:var(--text-color);
+  padding:2rem 1rem;
+  text-align:center;
+  border-bottom:1px solid #D0D7DE;
+}
+.brand .logo{
+  background-image:url('worflogy_logo.svg');
+  height:100px;
+  background-size:contain;
+  background-repeat:no-repeat;
+  background-position:center;
+  margin:0 auto 1rem auto;
+}
+.brand .tagline{margin-top:.25rem;}
+
+/* Nav */
+nav ul{
+  list-style:none;
+  display:flex;
+  justify-content:center;
+  gap:2rem;
+  padding:1rem 0;
+  flex-wrap:wrap;
+}
+nav li a{
+  color:var(--text-color);
+  text-decoration:none;
+  font-weight:700;
+  padding:.5rem 1rem;
+  transition:color .3s;
+}
+nav li a:hover{color:var(--accent-color);text-decoration:none;}
+
+/* Layout */
+main{
+  display:flex;
+  flex-wrap:wrap;
+  max-width:1200px;
+  margin:2rem auto;
+  padding:1rem;
+  gap:2rem;
+}
+section,aside{
+  flex:2;
+  min-width:300px;
+  background:var(--card-bg-color);
+  padding:2rem;
+  border:1px solid #D0D7DE;
+  border-radius:6px;
+  overflow:hidden;
+}
+aside{flex:1;}
+
+/* Headings */
+main h1,main h2,main h3{
+  color:var(--text-color);
+  margin-bottom:1rem;
+  border-bottom:1px solid #D0D7DE;
+  padding-bottom:.5rem;
 }
 
-/* 헤더 */
-header {
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    padding: 2rem 1rem;
-    text-align: center;
-    border-bottom: 1px solid #D0D7DE; /* GitHub 스타일의 경계선 추가 */
+/* Links */
+main a{color:var(--accent-color);font-weight:500;text-decoration:none;}
+main a:hover{text-decoration:underline;}
+
+/* About section image — strong guard for responsiveness */
+#about img{
+  display:block;
+  width:100% !important;
+  max-width:100% !important;
+  height:auto !important;
+  border-radius:8px;
+}
+#about .caption{margin-top:.5rem;color:#57606A;font-size:.95rem;}
+
+/* Global safeguard: any content images inside main must not overflow */
+main img{
+  max-width:100% !important;
+  height:auto !important;
 }
 
-.brand .logo {
-    background-image: url('worflogy_logo.svg');
-    height: 100px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    margin: 0 auto 1rem auto;
-    filter: none;
-}
+/* Current time */
+#current span{font-weight:bold;color:var(--text-color);}
+.timeline{margin-top:.75rem;}
+.timeline li{margin:.35rem 0;}
 
-/* 메인 콘텐츠의 제목 스타일 */
-main h1, main h2, main h3 {
-    color: var(--text-color);
-    margin-bottom: 1rem;
-    border-bottom: 1px solid #D0D7DE; /* 제목 구분선 추가 */
-    padding-bottom: 0.5rem;
-}
+/* Partners slider */
+#partners{flex-basis:100%;}
+.slider{width:100%;overflow:hidden;position:relative;padding:1rem 0;}
+.slider-track{display:flex;width:calc(200px * 10);animation:slide 25s linear infinite;}
+.slide-item{flex-shrink:0;width:200px;padding:0 30px;display:flex;align-items:center;justify-content:center;}
+.slide-item img{max-height:60px;width:auto;filter:grayscale(100%);opacity:.7;transition:all .3s ease;}
+.slide-item:hover img{filter:grayscale(0%);opacity:1;transform:scale(1.1);}
+@keyframes slide{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.slider-track:hover{animation-play-state:paused;}
 
-/* 메인 콘텐츠의 링크 스타일 */
-main a {
-    color: var(--accent-color);
-    font-weight: 500; /* GitHub처럼 살짝 얇게 조정 */
-    text-decoration: none;
+/* CTA */
+.cta{
+  display:inline-block;
+  margin-top:.75rem;
+  padding:.6rem 1.1rem;
+  border:1px solid #D0D7DE;
+  border-radius:6px;
+  text-decoration:none;
+  font-weight:600;
 }
-main a:hover {
-    text-decoration: underline;
-}
+.cta:hover{border-color:var(--accent-color);}
 
-/* 특정 섹션의 스타일 조정 */
-#about a {
-    font-size: x-large;
-    display: inline-block;
-    margin-top: 0.5rem;
-}
+/* Footer */
+footer{color:#57606A;text-align:center;padding:2.5rem;margin-top:2rem;font-size:14px;}
 
-#about img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px; /* 이미지 모서리 둥글게 */
-}
-
-/* 강조 텍스트를 포인트 색상으로 변경 */
-#current span {
-    font-weight: bold;
-    color: var(--text-color); /* 포인트 대신 일반 텍스트와 통일 */
-}
-
-/* 네비게이션 */
-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    padding: 1rem 0;
-    flex-wrap: wrap;
-}
-
-nav li a {
-    color: var(--text-color);
-    text-decoration: none;
-    font-weight: bold;
-    padding: 0.5rem 1rem;
-    transition: color 0.3s;
-}
-
-nav li a:hover {
-    color: var(--accent-color);
-    text-decoration: none;
-}
-
-/* 메인 콘텐츠 레이아웃 */
-main {
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 1rem;
-    gap: 2rem;
-}
-
-section, aside {
-    flex: 2;
-    min-width: 300px;
-    background: var(--card-bg-color);
-    padding: 2rem;
-    border: 1px solid #D0D7DE;
-    border-radius: 6px;
-    overflow: hidden; /* Flex 아이템의 내용이 넘치는 것을 방지 */
-}
-
-aside {
-    flex: 1;
-}
-
-/* ======== 파트너 로고 슬라이더 스타일 ======== */
-#partners {
-    flex-basis: 100%;
-    background: var(--card-bg-color);
-    padding: 2rem;
-    border: 1px solid #D0D7DE;
-    border-radius: 6px;
-}
-
-.slider {
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-    padding: 1rem 0;
-}
-
-.slider-track {
-    display: flex;
-    width: calc(200px * 10); 
-    animation: slide 25s linear infinite;
-}
-
-.slide-item {
-    flex-shrink: 0;
-    width: 200px;
-    padding: 0 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.slide-item img {
-    max-height: 60px;
-    width: auto;
-    filter: grayscale(100%);
-    opacity: 0.7;
-    transition: all 0.3s ease;
-}
-
-.slide-item:hover img {
-    filter: grayscale(0%);
-    opacity: 1;
-    transform: scale(1.1);
-}
-
-@keyframes slide {
-    from {
-        transform: translateX(0);
-    }
-    to {
-        transform: translateX(-50%);
-    }
-}
-
-.slider-track:hover {
-    animation-play-state: paused;
-}
-
-/* 푸터 */
-footer {
-    color: #57606A;
-    text-align: center;
-    padding: 2.5rem;
-    margin-top: 2rem;
-    font-size: 14px;
-}
-
-/* 반응형 */
-@media (max-width: 768px) {
-    nav ul {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    main {
-        flex-direction: column;
-        padding: 1rem;
-    }
+/* Responsive */
+@media (max-width: 768px){
+  header{padding:1.25rem 1rem;}
+  nav ul{flex-direction:column;align-items:center;gap:.5rem;}
+  main{flex-direction:column;padding:1rem;}
+  section,aside{padding:1.25rem;}
 }
