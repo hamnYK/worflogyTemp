@@ -68,7 +68,7 @@ main a:hover {
 }
 
 /* 특정 섹션의 스타일 조정 */
-#about a, #current a {
+#about a, #current h3 a {
     font-size: x-large;
     display: inline-block;
     margin-top: 0.5rem;
