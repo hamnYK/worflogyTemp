@@ -3,11 +3,11 @@
 
 /* 색상 변수 (GitHub Light Default 컨셉) */
 :root {
-  --bg-color: #F6F8FA;         /* 전체 배경색 (GitHub 배경) */
-  --text-color: #24292E;       /* 기본 글자색 (GitHub 텍스트) */
-  --primary-color: #EAECEF;     /* 메인 색 (GitHub 헤더/경계선) */
-  --accent-color: #0969DA;      /* 포인트 색 (GitHub 블루) */
-  --card-bg-color: #FFFFFF;    /* 섹션 카드 배경색 (GitHub 콘텐츠 배경) */
+  --bg-color: #F6F8FA;
+  --text-color: #24292E;
+  --primary-color: #EAECEF;
+  --accent-color: #0969DA;
+  --card-bg-color: #FFFFFF;
 }
 
 /* 초기화 및 박스 모델 설정 */
@@ -34,7 +34,7 @@ header {
     color: var(--text-color);
     padding: 2rem 1rem;
     text-align: center;
-    border-bottom: 1px solid #D0D7DE; /* GitHub 스타일의 경계선 추가 */
+    border-bottom: 1px solid #D0D7DE;
 }
 
 .brand .logo {
@@ -51,14 +51,14 @@ header {
 main h1, main h2, main h3 {
     color: var(--text-color);
     margin-bottom: 1rem;
-    border-bottom: 1px solid #D0D7DE; /* 제목 구분선 추가 */
+    border-bottom: 1px solid #D0D7DE;
     padding-bottom: 0.5rem;
 }
 
 /* 메인 콘텐츠의 링크 스타일 */
 main a {
     color: var(--accent-color);
-    font-weight: 500; /* GitHub처럼 살짝 얇게 조정 */
+    font-weight: 500;
     text-decoration: none;
 }
 main a:hover {
@@ -81,7 +81,7 @@ main a:hover {
 /* 강조 텍스트를 포인트 색상으로 변경 */
 #current span {
     font-weight: bold;
-    color: var(--text-color); /* 포인트 대신 일반 텍스트와 통일 */
+    color: var(--text-color);
 }
 
 /* 네비게이션 */
@@ -124,7 +124,7 @@ section, aside {
     padding: 2rem;
     border: 1px solid #D0D7DE;
     border-radius: 6px;
-    overflow: hidden; /* Flex 아이템의 내용이 넘치는 것을 방지 */
+    overflow: hidden;
 }
 
 aside {
