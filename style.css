@@ -41,11 +41,6 @@ header {
     background-repeat: no-repeat;
     background-position: center;
     margin: 0 auto 1rem auto;
-
-    /* ★★★ 중요 ★★★
-       배경이 밝아졌으므로, 로고를 흰색으로 만들던 filter 속성을 제거합니다.
-       이제 원본 로고 SVG 파일이 그대로 보이게 됩니다.
-    */
     filter: none;
 }
 
@@ -152,10 +147,9 @@ aside {
 /* 로고들을 담고 옆으로 흐르는 트랙(띠) */
 .slider-track {
     display: flex;
-    /* (로고 개수 * 2) * (로고 1개 너비 + 여백) 만큼 너비를 줍니다 */
-    /* 예: 로고 3개, 너비 200px -> (3 * 2) * 200px = 1200px */
-    width: calc(200px * 6); 
-    animation: slide 20s linear infinite; /* 애니메이션 적용 */
+    /* (로고 1개 너비 200px) * (총 로고 개수 10개) = 2000px */
+    width: calc(200px * 10); 
+    animation: slide 25s linear infinite; /* 애니메이션 적용 */
 }
 
 /* 개별 로고 아이템 */
