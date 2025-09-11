@@ -69,7 +69,6 @@ main a:hover {
     margin-top: 0.5rem;
 }
 
-/* === 오류 1: 반응형 이미지 리사이즈 문제 === */
 #about img {
     max-width: 100%;
     height: auto;
