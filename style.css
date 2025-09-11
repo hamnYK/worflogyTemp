@@ -10,11 +10,14 @@
   --card-bg-color: #FFFFFF;    /* 섹션 카드 배경색 (GitHub 콘텐츠 배경) */
 }
 
-/* 초기화 및 기본 폰트 설정 */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* 초기화 및 박스 모델 설정 */
+html {
+  box-sizing: border-box;
+}
+*, *::before, *::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
 }
 
 /* 본문 기본 스타일 */
@@ -23,7 +26,6 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.5;
-    overflow-x: hidden;
 }
 
 /* 헤더 */
