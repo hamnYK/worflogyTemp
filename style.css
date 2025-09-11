@@ -69,12 +69,11 @@ main a:hover {
     margin-top: 0.5rem;
 }
 
-/* === 수정 1: 반응형 이미지 리사이즈 문제 해결 === */
+/* === 오류 1: 반응형 이미지 리사이즈 문제 === */
 #about img {
     max-width: 100%;
     height: auto;
-    display: block;
-    margin: 0 auto 1rem auto;
+    border-radius: 6px; /* 이미지 모서리 둥글게 */
 }
 
 /* 강조 텍스트를 포인트 색상으로 변경 */
@@ -116,9 +115,7 @@ main {
     gap: 2rem;
 }
 
-/* === 수정 3: Flexbox 레이아웃 깨짐 문제 해결 === */
-section,
-aside {
+section, aside {
     flex: 2;
     min-width: 300px;
     background: var(--card-bg-color);
@@ -199,7 +196,6 @@ footer {
     font-size: 14px;
 }
 
-/* === 수정 2: 반응형 CSS 문법 오류 해결 === */
 /* 반응형 */
 @media (max-width: 768px) {
     nav ul {
