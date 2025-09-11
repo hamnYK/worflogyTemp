@@ -69,11 +69,12 @@ main a:hover {
     margin-top: 0.5rem;
 }
 
+/* === 수정 1: 반응형 이미지 리사이즈 문제 해결 === */
 #about img {
     max-width: 100%;
-    height: auto; /* 이미지의 가로세로 비율을 유지합니다. */
-    display: block; /* 이미지 아래 불필요한 공백을 제거합니다. */
-    margin: 0 auto 1rem auto; /* 이미지를 가운데 정렬하고 아래쪽에 여백을 줍니다. */
+    height: auto;
+    display: block;
+    margin: 0 auto 1rem auto;
 }
 
 /* 강조 텍스트를 포인트 색상으로 변경 */
@@ -115,14 +116,16 @@ main {
     gap: 2rem;
 }
 
+/* === 수정 3: Flexbox 레이아웃 깨짐 문제 해결 === */
 section,
 aside {
     flex: 2;
     min-width: 300px;
     background: var(--card-bg-color);
     padding: 2rem;
-    border: 1px solid #D0D7DE; /* GitHub 스타일의 경계선 */
-    border-radius: 6px; /* GitHub 스타일의 살짝 둥근 모서리 */
+    border: 1px solid #D0D7DE;
+    border-radius: 6px;
+    overflow: hidden; /* Flex 아이템의 내용이 넘치는 것을 방지 */
 }
 
 aside {
@@ -130,81 +133,73 @@ aside {
 }
 
 /* ======== 파트너 로고 슬라이더 스타일 ======== */
-/* 파트너 섹션 기본 스타일 (다른 섹션과 통일감) */
 #partners {
-    flex-basis: 100%; /* 가로 전체 너비를 차지하도록 설정 */
+    flex-basis: 100%;
     background: var(--card-bg-color);
     padding: 2rem;
     border: 1px solid #D0D7DE;
     border-radius: 6px;
 }
 
-/* 로고가 보여지는 뷰포트(창문) */
 .slider {
     width: 100%;
-    overflow: hidden; /* 중요: 이 영역을 벗어나는 내용은 숨김 */
+    overflow: hidden;
     position: relative;
     padding: 1rem 0;
 }
 
-/* 로고들을 담고 옆으로 흐르는 트랙(띠) */
 .slider-track {
     display: flex;
-    /* (로고 1개 너비 200px) * (총 로고 개수 10개) = 2000px */
     width: calc(200px * 10); 
-    animation: slide 25s linear infinite; /* 애니메이션 적용 */
+    animation: slide 25s linear infinite;
 }
 
-/* 개별 로고 아이템 */
 .slide-item {
     flex-shrink: 0;
-    width: 200px; /* 로고 1개의 너비 */
-    padding: 0 30px; /* 로고 사이 여백 */
+    width: 200px;
+    padding: 0 30px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .slide-item img {
-    max-height: 60px; /* 모든 로고의 최대 높이를 고정 */
+    max-height: 60px;
     width: auto;
-    filter: grayscale(100%); /* 기본적으로 흑백 처리 */
+    filter: grayscale(100%);
     opacity: 0.7;
     transition: all 0.3s ease;
 }
 
-/* 로고에 마우스를 올리면 컬러로 변경 (인터랙티브 효과) */
 .slide-item:hover img {
     filter: grayscale(0%);
     opacity: 1;
     transform: scale(1.1);
 }
 
-/* 슬라이드 애니메이션 정의 */
 @keyframes slide {
     from {
         transform: translateX(0);
     }
     to {
-        /* 트랙 너비의 절반만큼 왼쪽으로 이동 (로고 1세트 만큼) */
         transform: translateX(-50%);
     }
 }
 
-/* 슬라이더 트랙에 마우스를 올리면 애니메이션 일시 정지 */
 .slider-track:hover {
     animation-play-state: paused;
 }
 
 /* 푸터 */
 footer {
-    color: #57606A; /* GitHub 푸터 텍스트 색상 */
+    color: #57606A;
     text-align: center;
     padding: 2.5rem;
     margin-top: 2rem;
     font-size: 14px;
 }
 
+/* === 수정 2: 반응형 CSS 문법 오류 해결 === */
 /* 반응형 */
 @media (max-width: 768px) {
     nav ul {
