@@ -78,7 +78,7 @@ main a:hover {
     border-radius: 8px;
     display: block;
     margin: 0 auto;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 /* 강조 텍스트를 포인트 색상으로 변경 */
@@ -151,7 +151,7 @@ aside {
 
 .slider-track {
     display: flex;
-    width: calc(200px * 10); 
+    width: calc(150px * 10); 
     animation: slide 25s linear infinite;
 }
 
