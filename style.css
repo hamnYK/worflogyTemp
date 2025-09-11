@@ -76,6 +76,9 @@ main a:hover {
     max-width: 100%;
     height: auto;
     border-radius: 8px;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 1rem;
 }
 
 /* 강조 텍스트를 포인트 색상으로 변경 */
