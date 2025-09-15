@@ -151,14 +151,14 @@ aside {
 
 .slider-track {
     display: flex;
-    width: calc(150px * 10); 
+    width: calc(200px * 10); 
     animation: slide 25s linear infinite;
 }
 
 .slide-item {
     position: relative; /* 캡션 위치의 기준점으로 설정 */
     flex-shrink: 0;
-    width: 150px;
+    width: 200px;
     padding: 0 30px 2rem 30px; /* 캡션이 보일 하단 공간(2rem) 확보 */
     display: flex;
     align-items: center;
