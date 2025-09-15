@@ -156,9 +156,10 @@ aside {
 }
 
 .slide-item {
+    position: relative; /* 캡션 위치의 기준점으로 설정 */
     flex-shrink: 0;
     width: 150px;
-    padding: 0 30px;
+    padding: 0 30px 2rem 30px; /* 캡션이 보일 하단 공간(2rem) 확보 */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -190,6 +191,34 @@ aside {
 .slider-track:hover {
     animation-play-state: paused;
 }
+
+/* 로고 캡션 스타일 (추가) */
+.slide-item .caption {
+    position: absolute; /* 부모(.slide-item) 기준으로 위치를 잡음 */
+    bottom: 0; /* 부모의 맨 아래(padding 영역 포함)에 위치 */
+    left: 0;
+    right: 0;
+    
+    color: var(--text-color);
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap; /* 캡션 텍스트가 길어도 줄바꿈되지 않도록 설정 */
+    
+    /* 기본 상태: 숨김 */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px); /* 살짝 아래에 위치시켰다가 */
+    transition: all 0.3s ease-in-out; /* 부드러운 애니메이션 효과 */
+}
+
+/* .slide-item에 마우스를 올렸을 때 캡션 보이기 (추가) */
+.slide-item:hover .caption {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0); /* 제자리로 올라오도록 함 */
+}
+
 
 /* 푸터 */
 footer {
