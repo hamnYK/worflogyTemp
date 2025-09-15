@@ -133,7 +133,7 @@ aside {
     flex: 1;
 }
 
-/* ======== 파트너 로고 슬라이더 스타일 (수정) ======== */
+/* ======== 파트너 로고 슬라이더 스타일 ======== */
 #partners {
     flex-basis: 100%;
     background: var(--card-bg-color);
@@ -151,37 +151,21 @@ aside {
 
 .slider-track {
     display: flex;
-    width: calc(200px * 10); /* .slide-item 너비(200px) * 개수 */
+    width: calc(150px * 10); 
     animation: slide 25s linear infinite;
 }
 
 .slide-item {
-    position: relative; /* 캡션 위치의 기준 */
     flex-shrink: 0;
-    width: 200px; /* 로고가 들어갈 공간을 조금 더 넓힘 */
-    height: 80px; /* 모든 로고의 높이를 통일 */
-    padding: 0 15px;
-    
-    /* 콘텐츠를 수평 및 수직 중앙에 정렬 */
+    width: 150px;
+    padding: 0 30px;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    text-align: center; /* 텍스트 로고를 위한 정렬 */
-    white-space: nowrap; /* 텍스트 로고가 줄바꿈되지 않도록 설정 */
-    font-weight: 500; /* 텍스트 로고 폰트 두께 */
-    font-size: 1.1rem; /* 텍스트 로고 폰트 크기 */
-    color: #57606A; /* 텍스트 로고 색상 */
-    transition: all 0.3s ease;
-}
-
-.slide-item:hover {
-    color: var(--text-color); /* 호버 시 텍스트 색상 변경 */
 }
 
 .slide-item img {
     max-height: 60px;
-    max-width: 100%;
     width: auto;
     filter: grayscale(100%);
     opacity: 0.7;
@@ -205,28 +189,6 @@ aside {
 
 .slider-track:hover {
     animation-play-state: paused;
-}
-
-/* 파트너 로고 캡션 스타일 (위치 조정) */
-.slide-item .caption {
-    position: absolute;
-    bottom: -22px; /* 로고 아이템 바깥 아래쪽으로 위치 조정 */
-    left: 0;
-    right: 0;
-    text-align: center;
-    font-size: 12px;
-    color: var(--text-color);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(10px);
-    transition: all 0.3s ease;
-}
-
-/* 슬라이드 아이템에 마우스를 올렸을 때 캡션 보이기 */
-.slide-item:hover .caption {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
 }
 
 /* 푸터 */
