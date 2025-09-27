@@ -65,6 +65,7 @@ main a:hover {
     text-decoration: underline;
 }
 
+/* 공지의 이미지 조정 */
 aside img {
     max-width: 100%;
     height: auto;
@@ -74,7 +75,7 @@ aside img {
     margin-bottom: 0.5rem;
 }
 
-/* 특정 섹션의 스타일 조정 */
+/* 특정 섹션 id=about의 스타일 조정 */
 #about a {
     font-size: x-large;
     display: inline-block;
@@ -90,10 +91,15 @@ aside img {
     margin-bottom: 0.5rem;
 }
 
-/* 강조 텍스트를 포인트 색상으로 변경 */
+/* 특정 섹션 id=current의 스타일 조정 */
 #current span {
     font-weight: bold;
     color: var(--text-color);
+}
+
+#current a {
+    font-size: 1.1em;
+    font-weight: bold;
 }
 
 /* 네비게이션 */
@@ -168,7 +174,7 @@ aside {
     position: relative; /* 캡션 위치의 기준점으로 설정 */
     flex-shrink: 0;
     width: 200px;
-    padding: 0 30px 2rem 30px; /* 캡션이 보일 하단 공간(2rem) 확보 */
+    padding: 0 30px 2rem 30px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -204,7 +210,7 @@ aside {
 /* 로고 캡션 스타일 (추가) */
 .slide-item .caption {
     position: absolute; /* 부모(.slide-item) 기준으로 위치를 잡음 */
-    bottom: 0; /* 부모의 맨 아래(padding 영역 포함)에 위치 */
+    bottom: 0;
     left: 0;
     right: 0;
     
@@ -217,7 +223,7 @@ aside {
     /* 기본 상태: 숨김 */
     opacity: 0;
     visibility: hidden;
-    transform: translateY(10px); /* 살짝 아래에 위치시켰다가 */
+    transform: translateY(10px); /* 살짝 아래에 위치시켰다가... */
     transition: all 0.3s ease-in-out; /* 부드러운 애니메이션 효과 */
 }
 
