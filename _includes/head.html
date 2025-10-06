@@ -7,23 +7,23 @@
     /* Pretendard 폰트 불러오기 */
     @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
-    /* --- 색상 팔레트 (테두리 색상 미세 조정) --- */
+    /* 색상 테마: Academic Blue & Minimalism */
     :root {
-      --primary-color: #005A9C;
-      --accent-color: #00A98F;
-      --bg-color: #f8f9fa;
+      --primary-color: #4338CA;
+      --accent-color: #6366F1;
+      --bg-color: #F4F6F8;
       --card-bg-color: #ffffff;
-      --text-color: #343a40;
-      --text-muted-color: #6c757d;
-      --border-color: #e9ecef; /* 기존보다 약간 더 부드러운 색으로 변경 */
+      --text-color: #2D3748;
+      --text-muted-color: #718096;
+      --border-color: #E3E8ED;
     }
 
     /* 기본 스타일 및 레이아웃 */
     body {
       font-family: 'Pretendard', sans-serif;
-      font-weight: 400; /* 기본 폰트 두께 명시 */
+      font-weight: 400;
       margin: 0;
-      padding: 3em; /* 전체적인 외부 여백 확보 */
+      padding: 3em;
       background-color: var(--bg-color);
       color: var(--text-color);
       display: flex;
@@ -38,18 +38,18 @@
     header, footer, section, article, aside {
       background-color: var(--card-bg-color);
       border: 1px solid var(--border-color);
-      border-radius: 16px; /* 더 부드러운 곡선 */
-      padding: 3em; /* 상하좌우 여백 통일 */
-      margin-bottom: 2.5em; /* 섹션 간 간격 조정 */
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04); /* 그림자 효과를 더 은은하게 */
+      border-radius: 16px;
+      padding: 3em;
+      margin-bottom: 2.5em;
+      box-shadow: none;
     }
-    nav { margin-bottom: 2em; } /* 메뉴와 카드 간격 조정 */
+    nav { margin-bottom: 2em; }
 
     /* --- 타이포그래피 위계 강화 --- */
     h1, h2, h3 { color: var(--text-color); }
-    h1 { font-size: 2.5em; font-weight: 700; margin-bottom: 0.5em; } /* 크기와 두께 강조 */
+    h1 { font-size: 2.5em; font-weight: 700; margin-bottom: 0.5em; }
     h2 { 
-      font-size: 1.75em; /* h1과의 차이를 더 명확하게 */
+      font-size: 1.75em;
       font-weight: 600;
       color: var(--primary-color);
       border-bottom: 2px solid var(--border-color); 
@@ -68,7 +68,7 @@
     address { font-style: normal; }
 
     a { color: var(--primary-color); text-decoration: none; font-weight: 500; transition: color 0.2s ease; }
-    a:hover { color: var(--accent-color); text-decoration: underline; }
+    a:hover { color: var(--accent-color); text-decoration: none; }
 
     /* 이미지 기본 스타일 */
     img { max-width: 100%; height: auto; border-radius: 8px; display: block; margin: 1.5em auto; }
@@ -76,14 +76,14 @@
     /* --- 컴포넌트별 스타일 정제 --- */
     #content-section a {
       margin: 0 0.5em;
-      padding: 0.7em 1.4em; /* 패딩 증가 */
+      padding: 0.7em 1.4em;
       border-radius: 8px;
-      transition: background-color 0.2s ease, color 0.2s ease; /* 전환 효과 수정 */
-      font-weight: 500; /* 두께를 보통으로 낮춰 편안하게 */
+      transition: background-color 0.2s ease, color 0.2s ease;
+      font-weight: 500;
       border: 1px solid transparent;
     }
     #content-section a:hover {
-      background-color: #e9ecef; /* 은은한 배경색으로 호버 피드백 */
+      background-color: var(--border-color);
       color: var(--primary-color);
       text-decoration: none;
     }
@@ -92,16 +92,16 @@
       color: #ffffff;
       text-decoration: none;
       border-color: var(--primary-color);
-      font-weight: 600; /* 활성화된 메뉴만 강조 */
+      font-weight: 600;
     }
     
     #notion-section li { 
       margin-bottom: 1em; 
       padding: 1.2em; 
       border: 1px solid var(--border-color); 
-      border-left: 4px solid var(--primary-color); /* 왼쪽 바 두께 조정 */
+      border-left: 4px solid var(--primary-color);
       border-radius: 8px; 
-      background-color: transparent; /* 내부 배경색 제거 */
+      background-color: transparent;
     }
     
     #media-section article { margin-bottom: 2em; }
@@ -124,17 +124,16 @@
     .slide-item img { max-height: 50px; width: auto; filter: grayscale(100%); opacity: 0.6; transition: all 0.3s ease; margin: 0; }
     .slide-item:hover img { filter: grayscale(0%); opacity: 1; transform: scale(1.1); }
     
-    /* slide-caption 수정 */
     .slide-caption { 
       opacity: 0; 
       visibility: hidden;
-      margin-top: 1em; /* 로고와 텍스트 사이 간격 */
+      margin-top: 1em;
       font-size: 0.9em;
-      color: var(--text-color); /* 잘 보이도록 기본 텍스트 색상 사용 */
-      background-color: transparent; /* 배경 제거 */
-      padding: 0; /* 패딩 제거 */
-      border: none; /* 테두리 제거 */
-      box-shadow: none; /* 그림자 제거 */
+      color: var(--text-color);
+      background-color: transparent;
+      padding: 0;
+      border: none;
+      box-shadow: none;
       white-space: nowrap; 
       transition: opacity 0.3s ease, visibility 0.3s ease;
     }
@@ -142,12 +141,29 @@
     @keyframes slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     .slider-track:hover { animation-play-state: paused; }
 
+    /* Giscus 위젯 너비 */
+    #giscus-container {
+      width: 94%;
+    }
+
     /* --- #content-area 내부 콘텐츠 스타일 --- */
     #content-area { text-align: left; }
     #content-area h2, #content-area h3 { text-align: left; }
     #content-area ul { list-style: none; padding-left: 0; }
     #content-area li { margin-bottom: 0.8em; padding-left: 1.5em; position: relative; }
-    #content-area li::before { content: '–'; position: absolute; left: 0; top: 0; color: var(--primary-color); font-weight: 700; }
+
+    /* 불릿 포인트 스타일 (수정된 부분) */
+    #content-area li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.5em;
+      transform: translateY(-50%);
+      width: 6px;
+      height: 6px;
+      border: 1.5px solid var(--primary-color);
+      border-radius: 50%;
+    }
 
     /* --- #content-area 내부 테이블 스타일 --- */
     #content-area table { width: 100%; margin-top: 2em; border-collapse: collapse; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; }
@@ -160,31 +176,31 @@
     /* --- 반응형 디자인을 위한 미디어 쿼리 --- */
     @media (max-width: 768px) {
       body {
-        padding: 1.5em; /* 모바일에서는 전체 여백 축소 */
+        padding: 1.5em;
       }
       header, footer, section, article, aside {
-        padding: 1.5em; /* 카드 내부 여백도 축소 */
+        padding: 1.5em;
       }
-      h1 { font-size: 2em; } /* 제목 폰트 크기 조정 */
+      h1 { font-size: 2em; }
       h2 { font-size: 1.5em; }
 
       /* 모바일 메뉴 스타일 (언어 변경 시 줄바꿈 방지) */
       #content-section {
         display: flex;
-        flex-direction: column; /* 메뉴 항목을 세로로 쌓음 */
-        align-items: stretch; /* 메뉴 항목의 너비를 100%로 확장 */
+        flex-direction: column;
+        align-items: stretch;
       }
       #content-section a {
-        margin: 0 0 0.5em 0; /* 위아래 마진으로 간격 조정 */
-        text-align: center; /* 텍스트 가운데 정렬 */
+        margin: 0 0 0.5em 0;
+        text-align: center;
       }
       
       /* 모바일 파트너 로고 스타일 */
       .partners-grid {
-        flex-direction: column; /* 모바일에서는 로고를 세로로 쌓음 */
+        flex-direction: column;
       }
       .partner-item {
-        margin-bottom: 2.5em; /* 로고 간 세로 간격 */
+        margin-bottom: 2.5em;
       }
       .partner-item:last-child {
         margin-bottom: 0;
@@ -197,13 +213,13 @@
       #content-area th, 
       #content-area td, 
       #content-area tr { 
-        display: block; /* 모든 테이블 요소를 블록으로 변경 */
+        display: block;
       }
       
       #content-area thead tr { 
         position: absolute;
         top: -9999px;
-        left: -9999px; /* 화면에 보이지 않도록 thead 숨김 */
+        left: -9999px;
       }
       
       #content-area tr { 
@@ -216,8 +232,8 @@
         border: none;
         border-bottom: 1px solid #eee; 
         position: relative;
-        padding-left: 50%; /* 레이블이 들어갈 공간 확보 */
-        text-align: right; /* 내용을 오른쪽으로 정렬 */
+        padding-left: 50%;
+        text-align: right;
       }
       
       #content-area td:before { 
