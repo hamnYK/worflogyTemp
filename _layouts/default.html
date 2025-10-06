@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+  {%- include head.html -%}
+  <body>
+
+    <div class="gtranslate_wrapper"></div>
+
+    {{ content }}
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const contentArea = document.getElementById('content-area');
+        const subMenu = document.getElementById('content-section');
+        const subMenuLinks = subMenu ? subMenu.querySelectorAll('a') : [];
+        
+        const siteBaseUrl = '{{ site.baseurl }}';
+
+        const walkTokens = (token) => {
+          if (token.type === 'image' && !token.href.startsWith('http')) {
+            if (token.href.startsWith('/')) {
+              token.href = siteBaseUrl + token.href;
+            }
+          }
+        };
+        marked.use({ walkTokens });
+
+        // Giscus 스크립트를 동적으로 로드하는 함수
+        function loadGiscus() {
+          const giscusContainer = document.getElementById('giscus-container');
+          if (!giscusContainer) return;
+
+          const existingScript = document.getElementById('giscus-script');
+          if (existingScript) {
+            existingScript.remove();
+          }
+          
+          const script = document.createElement('script');
+          script.id = 'giscus-script';
+          script.src = "https://giscus.app/client.js";
+          
+          /* 관리자 Giscus 정보 업데이트 */
+          script.setAttribute('data-repo', "hamnYK/WorfBS");
+          script.setAttribute('data-repo-id', "R_kgDOP1voKQ");
+          script.setAttribute('data-category', "Announcements");
+          script.setAttribute('data-category-id', "DIC_kwDOP1voKc4Cv0rD");
+
+          script.setAttribute('data-mapping', "pathname");
+          script.setAttribute('data-strict', "0");
+          script.setAttribute('data-reactions-enabled', "1");
+          script.setAttribute('data-emit-metadata', "0");
+          script.setAttribute('data-input-position', "bottom");
+          script.setAttribute('data-theme', "light");
+          script.setAttribute('data-lang', "ko");
+          script.setAttribute('crossorigin', "anonymous");
+          script.async = true;
+          
+          giscusContainer.appendChild(script);
+        }
+
+        function updateActiveMenu(activeId) {
+          subMenuLinks.forEach(link => {
+            link.classList.toggle('active-menu', link.id === activeId);
+          });
+        }
+
+        function loadContent(mdFile) {
+          const menuId = 'menu-' + mdFile.replace('.md', '');
+          fetch(siteBaseUrl + "/" + mdFile)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('파일 로딩 실패: ' + response.statusText);
+              }
+              return response.text();
+            })
+            .then(markdownText => {
+              if (contentArea) {
+                const contentOnly = markdownText.replace(/^---[\s\S]*?---\s*/, '').trim();
+                contentArea.innerHTML = marked.parse(contentOnly);
+                updateActiveMenu(menuId);
+                loadGiscus(); 
+              }
+            })
+            .catch(error => {
+              console.error('콘텐츠 로딩 오류:', error);
+              if(contentArea) contentArea.innerHTML = "<p>콘텐츠를 불러오는 데 실패했습니다. 파일 경로를 확인해주세요.</p>";
+            });
+        }
+
+        if (subMenu) {
+            subMenu.addEventListener('click', function(e) {
+              const targetLink = e.target.closest('a');
+              if (targetLink && targetLink.id && !targetLink.classList.contains('active-menu')) {
+                e.preventDefault();
+                let mdFile = '';
+                if (targetLink.id === 'menu-servicesolution') mdFile = 'servicesolution.md';
+                if (targetLink.id === 'menu-techvision') mdFile = 'techvision.md';
+                if (targetLink.id === 'menu-ceoinsight') mdFile = 'ceoinsight.md';
+                if (mdFile) loadContent(mdFile);
+              }
+            });
+        }
+        
+        if (contentArea) {
+            loadContent('servicesolution.md');
+        }
+      });
+    </script>
+  </body>
+</html>

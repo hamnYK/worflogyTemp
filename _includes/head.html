@@ -1,0 +1,137 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title | default: site.title }}</title>
+  
+  <style>
+    /* Pretendard 폰트 불러오기 */
+    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+    /* VS Code GitHub Light Default 테마 */
+    :root {
+      --bg-color: #ffffff;
+      --card-bg-color: #f6f8fa;
+      --header-bg-color: #f6f8fa;
+      --text-color: #24292e;
+      --accent-color: #0366d6;
+      --border-color: #e1e4e8;
+      --text-muted-color: #6a737d;
+    }
+
+    /* 기본 스타일 및 레이아웃 */
+    body {
+      font-family: 'Pretendard', sans-serif;
+      margin: 0;
+      padding: 2em;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    main { 
+      width: 100%;
+      max-width: 900px;
+      text-align: center;
+    }
+    header, footer, section, article, aside {
+      background-color: var(--card-bg-color);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5em 2em;
+      margin-bottom: 1.5em;
+    }
+    nav { margin-bottom: 1.5em; }
+    h1, h2, h3 { color: var(--text-color); }
+    h1 { font-size: 2em; margin-bottom: 0.5em; }
+    h2 { font-size: 1.5em; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5em; margin-top: 0; }
+    p { line-height: 1.6; }
+    a { color: var(--accent-color); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    address { font-style: normal; }
+
+    /* 이미지 기본 스타일 */
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+      margin: 1.5em auto;
+    }
+
+    /* 컴포넌트별 스타일 */
+    #content-section a {
+      margin: 0 1em;
+      padding: 0.5em 1em;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+    #content-section a.active-menu, #content-section a:hover {
+      background-color: var(--border-color);
+      text-decoration: none;
+    }
+    #notion-section ul { list-style: none; padding: 0; max-width: 100%; }
+    #notion-section li { margin-bottom: 1em; padding: 1.2em; border: 1px solid var(--border-color); border-radius: 8px; background-color: #ffffff; }
+    
+    #media-section article { margin-bottom: 2em; }
+    #media-section figure { margin: 0; }
+    #media-section figcaption { margin-top: 0.5em; }
+    #media-section h3 { font-size: 1.2em; margin: 0.5em 0; }
+    #media-section p { font-size: 0.9em; color: var(--text-muted-color); margin: 0; }
+    #media-section img { margin-bottom: 1em; }
+
+    #current-time { text-align: center; margin-bottom: 2em; font-size: 1em; color: var(--text-muted-color); }
+
+    /* 로고 슬라이더 */
+    .slider { width: 100%; overflow: hidden; padding: 3em 0; margin-top: 2em; border-top: 1px solid var(--border-color); }
+    .slider-track { display: flex; width: calc(250px * 10); animation: slide 40s linear infinite; }
+    .slide-item { 
+      width: 250px; 
+      padding: 0 40px; 
+      display: flex; 
+      flex-direction: column; /* 아이템 내부 정렬을 세로로 변경 */
+      align-items: center; 
+      justify-content: center; 
+      position: relative; /* 캡션 위치 기준점 */
+    }
+    .slide-item img { 
+      max-height: 50px; 
+      width: auto; 
+      filter: grayscale(100%); 
+      opacity: 0.7; 
+      transition: all 0.3s ease;
+      margin: 0;
+    }
+    .slide-item:hover img { 
+      filter: grayscale(0%); 
+      opacity: 1; 
+      transform: scale(1.05); 
+    }
+    
+    /* 슬라이더 캡션 스타일 */
+    .slide-caption {
+      opacity: 0; /* 평소에는 숨김 */
+      visibility: hidden;
+      position: absolute;
+      bottom: -30px; /* 이미지 아래에 위치 */
+      font-size: 0.8em;
+      color: var(--text-muted-color);
+      background-color: var(--card-bg-color);
+      padding: 2px 8px;
+      border-radius: 4px;
+      white-space: nowrap; /* 캡션이 길어도 한 줄로 표시 */
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .slide-item:hover .slide-caption {
+      opacity: 1; /* 마우스를 올리면 보이게 함 */
+      visibility: visible;
+    }
+
+    @keyframes slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .slider-track:hover { animation-play-state: paused; }
+  </style>
+
+  <script>window.gtranslateSettings = {"default_language":"ko","languages":["ko","en"],"wrapper_selector":".gtranslate_wrapper","switcher_horizontal_position":"right","switcher_vertical_position":"top"}</script>
+  <script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
+
+</head>
