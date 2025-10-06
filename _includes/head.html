@@ -112,14 +112,32 @@
     #media-section img { margin-bottom: 1em; }
 
     #current-time { text-align: center; margin-bottom: 2em; font-size: 1em; color: var(--text-muted-color); }
-
+    
     /* 로고 슬라이더 */
     .slider { width: 100%; overflow: hidden; padding: 2em 0; margin-top: 1em; }
-    .slider-track { display: flex; width: calc(250px * 10); animation: slide 40s linear infinite; }
+    .slider-track { 
+      display: flex; 
+      width: calc(250px * 6); 
+      animation: slide 60s linear infinite; 
+    }
     .slide-item { width: 250px; padding: 0 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
     .slide-item img { max-height: 50px; width: auto; filter: grayscale(100%); opacity: 0.6; transition: all 0.3s ease; margin: 0; }
     .slide-item:hover img { filter: grayscale(0%); opacity: 1; transform: scale(1.1); }
-    .slide-caption { opacity: 0; visibility: hidden; position: absolute; bottom: -35px; font-size: 0.8em; color: var(--text-muted-color); background-color: var(--card-bg-color); padding: 4px 10px; border-radius: 4px; white-space: nowrap; transition: opacity 0.3s ease, visibility 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    
+    /* slide-caption 수정 */
+    .slide-caption { 
+      opacity: 0; 
+      visibility: hidden;
+      margin-top: 1em; /* 로고와 텍스트 사이 간격 */
+      font-size: 0.9em;
+      color: var(--text-color); /* 잘 보이도록 기본 텍스트 색상 사용 */
+      background-color: transparent; /* 배경 제거 */
+      padding: 0; /* 패딩 제거 */
+      border: none; /* 테두리 제거 */
+      box-shadow: none; /* 그림자 제거 */
+      white-space: nowrap; 
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
     .slide-item:hover .slide-caption { opacity: 1; visibility: visible; }
     @keyframes slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     .slider-track:hover { animation-play-state: paused; }
@@ -150,7 +168,7 @@
       h1 { font-size: 2em; } /* 제목 폰트 크기 조정 */
       h2 { font-size: 1.5em; }
 
-      /* 모바일 메뉴 스타일 (언어 변경 시 줄바꿈 방지) (수정된 부분) */
+      /* 모바일 메뉴 스타일 (언어 변경 시 줄바꿈 방지) */
       #content-section {
         display: flex;
         flex-direction: column; /* 메뉴 항목을 세로로 쌓음 */
@@ -159,6 +177,17 @@
       #content-section a {
         margin: 0 0 0.5em 0; /* 위아래 마진으로 간격 조정 */
         text-align: center; /* 텍스트 가운데 정렬 */
+      }
+      
+      /* 모바일 파트너 로고 스타일 */
+      .partners-grid {
+        flex-direction: column; /* 모바일에서는 로고를 세로로 쌓음 */
+      }
+      .partner-item {
+        margin-bottom: 2.5em; /* 로고 간 세로 간격 */
+      }
+      .partner-item:last-child {
+        margin-bottom: 0;
       }
 
       /* 모바일용 테이블 스타일 */
