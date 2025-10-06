@@ -7,22 +7,23 @@
     /* Pretendard 폰트 불러오기 */
     @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
-    /* VS Code GitHub Light Default 테마 */
+    /* --- 색상 팔레트 (테두리 색상 미세 조정) --- */
     :root {
-      --bg-color: #ffffff;
-      --card-bg-color: #f6f8fa;
-      --header-bg-color: #f6f8fa;
-      --text-color: #24292e;
-      --accent-color: #0366d6;
-      --border-color: #e1e4e8;
-      --text-muted-color: #6a737d;
+      --primary-color: #005A9C;
+      --accent-color: #00A98F;
+      --bg-color: #f8f9fa;
+      --card-bg-color: #ffffff;
+      --text-color: #343a40;
+      --text-muted-color: #6c757d;
+      --border-color: #e9ecef; /* 기존보다 약간 더 부드러운 색으로 변경 */
     }
 
     /* 기본 스타일 및 레이아웃 */
     body {
       font-family: 'Pretendard', sans-serif;
+      font-weight: 400; /* 기본 폰트 두께 명시 */
       margin: 0;
-      padding: 2em;
+      padding: 3em; /* 전체적인 외부 여백 확보 */
       background-color: var(--bg-color);
       color: var(--text-color);
       display: flex;
@@ -37,98 +38,175 @@
     header, footer, section, article, aside {
       background-color: var(--card-bg-color);
       border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 1.5em 2em;
+      border-radius: 16px; /* 더 부드러운 곡선 */
+      padding: 3em; /* 상하좌우 여백 통일 */
+      margin-bottom: 2.5em; /* 섹션 간 간격 조정 */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04); /* 그림자 효과를 더 은은하게 */
+    }
+    nav { margin-bottom: 2em; } /* 메뉴와 카드 간격 조정 */
+
+    /* --- 타이포그래피 위계 강화 --- */
+    h1, h2, h3 { color: var(--text-color); }
+    h1 { font-size: 2.5em; font-weight: 700; margin-bottom: 0.5em; } /* 크기와 두께 강조 */
+    h2 { 
+      font-size: 1.75em; /* h1과의 차이를 더 명확하게 */
+      font-weight: 600;
+      color: var(--primary-color);
+      border-bottom: 2px solid var(--border-color); 
+      padding-bottom: 0.8em; 
+      margin-top: 0;
       margin-bottom: 1.5em;
     }
-    nav { margin-bottom: 1.5em; }
-    h1, h2, h3 { color: var(--text-color); }
-    h1 { font-size: 2em; margin-bottom: 0.5em; }
-    h2 { font-size: 1.5em; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5em; margin-top: 0; }
-    p { line-height: 1.6; }
-    a { color: var(--accent-color); text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    p { 
+      line-height: 1.8;
+      text-align: left;
+    }
+    header p, footer p {
+      text-align: center;
+    }
+    #notion-section ul { list-style: none; padding: 0; max-width: 100%; text-align: left; }
     address { font-style: normal; }
 
-    /* 이미지 기본 스타일 */
-    img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 8px;
-      display: block;
-      margin: 1.5em auto;
-    }
+    a { color: var(--primary-color); text-decoration: none; font-weight: 500; transition: color 0.2s ease; }
+    a:hover { color: var(--accent-color); text-decoration: underline; }
 
-    /* 컴포넌트별 스타일 */
+    /* 이미지 기본 스타일 */
+    img { max-width: 100%; height: auto; border-radius: 8px; display: block; margin: 1.5em auto; }
+
+    /* --- 컴포넌트별 스타일 정제 --- */
     #content-section a {
-      margin: 0 1em;
-      padding: 0.5em 1em;
-      border-radius: 6px;
-      transition: background-color 0.3s ease;
+      margin: 0 0.5em;
+      padding: 0.7em 1.4em; /* 패딩 증가 */
+      border-radius: 8px;
+      transition: background-color 0.2s ease, color 0.2s ease; /* 전환 효과 수정 */
+      font-weight: 500; /* 두께를 보통으로 낮춰 편안하게 */
+      border: 1px solid transparent;
     }
-    #content-section a.active-menu, #content-section a:hover {
-      background-color: var(--border-color);
+    #content-section a:hover {
+      background-color: #e9ecef; /* 은은한 배경색으로 호버 피드백 */
+      color: var(--primary-color);
       text-decoration: none;
     }
-    #notion-section ul { list-style: none; padding: 0; max-width: 100%; }
-    #notion-section li { margin-bottom: 1em; padding: 1.2em; border: 1px solid var(--border-color); border-radius: 8px; background-color: #ffffff; }
+    #content-section a.active-menu {
+      background-color: var(--primary-color);
+      color: #ffffff;
+      text-decoration: none;
+      border-color: var(--primary-color);
+      font-weight: 600; /* 활성화된 메뉴만 강조 */
+    }
+    
+    #notion-section li { 
+      margin-bottom: 1em; 
+      padding: 1.2em; 
+      border: 1px solid var(--border-color); 
+      border-left: 4px solid var(--primary-color); /* 왼쪽 바 두께 조정 */
+      border-radius: 8px; 
+      background-color: transparent; /* 내부 배경색 제거 */
+    }
     
     #media-section article { margin-bottom: 2em; }
     #media-section figure { margin: 0; }
-    #media-section figcaption { margin-top: 0.5em; }
+    #media-section figcaption { margin-top: 0.5em; text-align: center; }
     #media-section h3 { font-size: 1.2em; margin: 0.5em 0; }
-    #media-section p { font-size: 0.9em; color: var(--text-muted-color); margin: 0; }
+    #media-section p { font-size: 0.9em; color: var(--text-muted-color); margin: 0; text-align: center; }
     #media-section img { margin-bottom: 1em; }
 
     #current-time { text-align: center; margin-bottom: 2em; font-size: 1em; color: var(--text-muted-color); }
 
     /* 로고 슬라이더 */
-    .slider { width: 100%; overflow: hidden; padding: 3em 0; margin-top: 2em; border-top: 1px solid var(--border-color); }
+    .slider { width: 100%; overflow: hidden; padding: 2em 0; margin-top: 1em; }
     .slider-track { display: flex; width: calc(250px * 10); animation: slide 40s linear infinite; }
-    .slide-item { 
-      width: 250px; 
-      padding: 0 40px; 
-      display: flex; 
-      flex-direction: column; /* 아이템 내부 정렬을 세로로 변경 */
-      align-items: center; 
-      justify-content: center; 
-      position: relative; /* 캡션 위치 기준점 */
-    }
-    .slide-item img { 
-      max-height: 50px; 
-      width: auto; 
-      filter: grayscale(100%); 
-      opacity: 0.7; 
-      transition: all 0.3s ease;
-      margin: 0;
-    }
-    .slide-item:hover img { 
-      filter: grayscale(0%); 
-      opacity: 1; 
-      transform: scale(1.05); 
-    }
-    
-    /* 슬라이더 캡션 스타일 */
-    .slide-caption {
-      opacity: 0; /* 평소에는 숨김 */
-      visibility: hidden;
-      position: absolute;
-      bottom: -30px; /* 이미지 아래에 위치 */
-      font-size: 0.8em;
-      color: var(--text-muted-color);
-      background-color: var(--card-bg-color);
-      padding: 2px 8px;
-      border-radius: 4px;
-      white-space: nowrap; /* 캡션이 길어도 한 줄로 표시 */
-      transition: opacity 0.3s ease, visibility 0.3s ease;
-    }
-    .slide-item:hover .slide-caption {
-      opacity: 1; /* 마우스를 올리면 보이게 함 */
-      visibility: visible;
-    }
-
+    .slide-item { width: 250px; padding: 0 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
+    .slide-item img { max-height: 50px; width: auto; filter: grayscale(100%); opacity: 0.6; transition: all 0.3s ease; margin: 0; }
+    .slide-item:hover img { filter: grayscale(0%); opacity: 1; transform: scale(1.1); }
+    .slide-caption { opacity: 0; visibility: hidden; position: absolute; bottom: -35px; font-size: 0.8em; color: var(--text-muted-color); background-color: var(--card-bg-color); padding: 4px 10px; border-radius: 4px; white-space: nowrap; transition: opacity 0.3s ease, visibility 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .slide-item:hover .slide-caption { opacity: 1; visibility: visible; }
     @keyframes slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     .slider-track:hover { animation-play-state: paused; }
+
+    /* --- #content-area 내부 콘텐츠 스타일 --- */
+    #content-area { text-align: left; }
+    #content-area h2, #content-area h3 { text-align: left; }
+    #content-area ul { list-style: none; padding-left: 0; }
+    #content-area li { margin-bottom: 0.8em; padding-left: 1.5em; position: relative; }
+    #content-area li::before { content: '–'; position: absolute; left: 0; top: 0; color: var(--primary-color); font-weight: 700; }
+
+    /* --- #content-area 내부 테이블 스타일 --- */
+    #content-area table { width: 100%; margin-top: 2em; border-collapse: collapse; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; }
+    #content-area th, #content-area td { padding: 0.8em 1em; border-bottom: 1px solid var(--border-color); }
+    #content-area th { background-color: var(--bg-color); font-weight: 600; text-align: center; }
+    #content-area td { vertical-align: top; }
+    #content-area tbody tr:last-child th,
+    #content-area tbody tr:last-child td { border-bottom: 0; }
+
+    /* --- 반응형 디자인을 위한 미디어 쿼리 --- */
+    @media (max-width: 768px) {
+      body {
+        padding: 1.5em; /* 모바일에서는 전체 여백 축소 */
+      }
+      header, footer, section, article, aside {
+        padding: 1.5em; /* 카드 내부 여백도 축소 */
+      }
+      h1 { font-size: 2em; } /* 제목 폰트 크기 조정 */
+      h2 { font-size: 1.5em; }
+
+      /* 모바일 메뉴 스타일 (언어 변경 시 줄바꿈 방지) (수정된 부분) */
+      #content-section {
+        display: flex;
+        flex-direction: column; /* 메뉴 항목을 세로로 쌓음 */
+        align-items: stretch; /* 메뉴 항목의 너비를 100%로 확장 */
+      }
+      #content-section a {
+        margin: 0 0 0.5em 0; /* 위아래 마진으로 간격 조정 */
+        text-align: center; /* 텍스트 가운데 정렬 */
+      }
+
+      /* 모바일용 테이블 스타일 */
+      #content-area table, 
+      #content-area thead, 
+      #content-area tbody, 
+      #content-area th, 
+      #content-area td, 
+      #content-area tr { 
+        display: block; /* 모든 테이블 요소를 블록으로 변경 */
+      }
+      
+      #content-area thead tr { 
+        position: absolute;
+        top: -9999px;
+        left: -9999px; /* 화면에 보이지 않도록 thead 숨김 */
+      }
+      
+      #content-area tr { 
+        border: 1px solid var(--border-color);
+        margin-bottom: 1em;
+        border-radius: 8px;
+      }
+      
+      #content-area td { 
+        border: none;
+        border-bottom: 1px solid #eee; 
+        position: relative;
+        padding-left: 50%; /* 레이블이 들어갈 공간 확보 */
+        text-align: right; /* 내용을 오른쪽으로 정렬 */
+      }
+      
+      #content-area td:before { 
+        /* 숨겨진 thead의 내용을 가져와 레이블로 사용 */
+        content: attr(data-label); 
+        position: absolute;
+        left: 0;
+        width: 45%; 
+        padding-left: 1em;
+        font-weight: 600;
+        text-align: left;
+        color: var(--primary-color);
+      }
+
+      #content-area td:last-child {
+        border-bottom: 0;
+      }
+    }
   </style>
 
   <script>window.gtranslateSettings = {"default_language":"ko","languages":["ko","en"],"wrapper_selector":".gtranslate_wrapper","switcher_horizontal_position":"right","switcher_vertical_position":"top"}</script>
