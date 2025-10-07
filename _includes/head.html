@@ -235,7 +235,7 @@
       }
       
       #content-area thead {
-        display: none; /* 데스크톱용 a--헤더는 숨김 */
+        display: none;
       }
       
       #content-area tr { 
@@ -250,7 +250,6 @@
         padding: 0.5em 0;
       }
       
-      /* 첫 번째 셀(서비스명)을 카드의 제목으로 스타일링 */
       #content-area td:nth-of-type(1) {
         font-size: 1.2em;
         font-weight: 700;
@@ -260,7 +259,6 @@
         padding-bottom: 0.8em;
       }
       
-      /* 두 번째 셀(베이직) 위에 레이블 추가 */
       #content-area td:nth-of-type(2)::before {
         content: '베이직 (핵심 진단)';
         display: block;
@@ -268,13 +266,20 @@
         margin-bottom: 0.5em;
       }
 
-      /* 세 번째 셀(플러스) 위에 레이블 추가 */
       #content-area td:nth-of-type(3)::before {
         content: '플러스 (실행 계획 포함)';
         display: block;
         font-weight: 600;
         margin-bottom: 0.5em;
-        margin-top: 1em; /* 베이직과 플러스 항목 사이 간격 */
+        margin-top: 1em;
+      }
+
+      /* 언어가 영어일 때 레이블을 변경하는 코드 */
+      html[lang="en"] #content-area td:nth-of-type(2)::before {
+        content: 'Basic (Core Diagnostics)';
+      }
+      html[lang="en"] #content-area td:nth-of-type(3)::before {
+        content: 'Plus (with execution plan)';
       }
     }
   </style>
