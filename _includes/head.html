@@ -225,7 +225,7 @@
       }
 
       /* 모바일용 테이블 스타일 */
-      #content-area table, 
+/*      #content-area table, 
       #content-area thead, 
       #content-area tbody, 
       #content-area th, 
@@ -255,7 +255,6 @@
       }
       
       #content-area td:before { 
-        /* 숨겨진 thead의 내용을 가져와 레이블로 사용 */
         content: attr(data-label); 
         position: absolute;
         left: 0;
@@ -268,6 +267,59 @@
 
       #content-area td:last-child {
         border-bottom: 0;
+      }
+    }*/
+
+      #content-area table, 
+      #content-area thead, 
+      #content-area tbody, 
+      #content-area th, 
+      #content-area td, 
+      #content-area tr { 
+        display: block;
+      }
+      
+      #content-area thead {
+        display: none; /* 데스크톱용 a--헤더는 숨김 */
+      }
+      
+      #content-area tr { 
+        border: 1px solid var(--border-color);
+        margin-bottom: 1.5em;
+        border-radius: 8px;
+        padding: 1em;
+      }
+      
+      #content-area td {
+        border: none;
+        padding: 0.5em 0;
+      }
+      
+      /* 첫 번째 셀(서비스명)을 카드의 제목으로 스타일링 */
+      #content-area td:nth-of-type(1) {
+        font-size: 1.2em;
+        font-weight: 700;
+        color: var(--primary-color);
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 1em;
+        padding-bottom: 0.8em;
+      }
+      
+      /* 두 번째 셀(베이직) 위에 레이블 추가 */
+      #content-area td:nth-of-type(2)::before {
+        content: '베이직 (핵심 진단)';
+        display: block;
+        font-weight: 600;
+        margin-bottom: 0.5em;
+      }
+
+      /* 세 번째 셀(플러스) 위에 레이블 추가 */
+      #content-area td:nth-of-type(3)::before {
+        content: '플러스 (실행 계획 포함)';
+        display: block;
+        font-weight: 600;
+        margin-bottom: 0.5em;
+        margin-top: 1em; /* 베이직과 플러스 항목 사이 간격 */
       }
     }
   </style>
