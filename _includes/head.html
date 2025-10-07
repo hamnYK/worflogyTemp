@@ -45,6 +45,19 @@
     }
     nav { margin-bottom: 2em; }
 
+    /* 듀얼 그리드 레이아웃 */
+    .dual-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr; /* 2열 그리드 */
+      gap: 2.5em;
+    }
+    .dual-grid {
+        margin-bottom: 2.5em;
+    }
+    .dual-grid > * {
+        margin-bottom: 0;
+    }
+
     /* --- 타이포그래피 위계 강화 --- */
     h1, h2, h3 { color: var(--text-color); }
     h1 { font-size: 2.5em; font-weight: 700; margin-bottom: 0.5em; }
@@ -183,6 +196,11 @@
       }
       h1 { font-size: 2em; }
       h2 { font-size: 1.5em; }
+
+      /* 듀얼 그리드 모바일 스타일 */
+      .dual-grid {
+        grid-template-columns: 1fr; /* 1열로 변경 */
+      }
 
       /* 모바일 메뉴 스타일 (언어 변경 시 줄바꿈 방지) */
       #content-section {
