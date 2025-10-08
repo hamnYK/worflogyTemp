@@ -3,6 +3,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ page.title | default: site.title }}</title>
   
+  <!--SEO stratgy-->
+  <meta name="description" content="주식회사 워플로지는 온톨로지와 AI 기술을 융합하여 프로세스 개선 및 의사결정 품질 평가(Human-factor Assessment)를 통해 조직의 문제 해결(Risk Management)을 지원하는 시맨틱 워크플로 디자인 솔루션을 연구개발하는 딥테크 기업입니다.">
+  <meta name="keywords" content="AI, 온톨로지, 시맨틱 워크플로, 리스크 관리, GRC, 지능형 솔루션">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  <meta property="og:title" content="{{ page.title | default: site.title }}">
+  <meta property="og:description" content="{{ page.description | default: site.description }}">
+  <meta property="og:image" content="{{ site.url }}/assets/images/worflogy_logo.svg">
+
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="{{ site.url }}{{ page.url }}">
+  <meta property="twitter:title" content="{{ page.title | default: site.title }}">
+  <meta property="twitter:description" content="{{ page.description | default: site.description }}">
+  <meta property="twitter:image" content="{{ site.url }}/assets/images/worflogy_logo.svg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "주식회사 워플로지",
+    "alternateName": "WORFLOGY Inc.",
+    "url": "https://worflogy.com",
+    "logo": "https://worflogy.com/assets/images/worflogy_logo.svg",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "email": "worflogy@worflogy.com"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "경기도 의왕시 안양판교로 82, 8층 807호",
+      "addressLocality": "의왕시",
+      "addressRegion": "경기도",
+      "postalCode": "16014",
+      "addressCountry": "KR"
+    }
+  }
+  </script>
+
   <style>
     /* Pretendard 폰트 불러오기 */
     @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
