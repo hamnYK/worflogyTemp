@@ -12,7 +12,7 @@ title: 주식회사 워플로지 (WORFLOGY Inc.)
 
   <nav>
     <a href="{{ site.baseurl }}/">Home</a> |
-    <a href="https://docs.google.com/presentation/d/1u4a0zdY86XAzpgv_AzubsszifhT7QPwHFkBQ_ZWmVY0/edit?usp=sharing" target="_blank">IR</a> |
+    <a href="https://docs.google.com/presentation/d/1ZIbFwD0-BFpp1HY-LOm5kefO6hTUq_VB/edit?usp=sharing&ouid=102078437880416879327&rtpof=true&sd=true">IRDN</a> |
     <a href="https://docs.google.com/spreadsheets/d/1lVdA_YIePXFhofIH-OcDZaNUQbtxsbenwas8LmVE8uA/edit?usp=sharing" target="_blank">Admin.</a>
   </nav>
 
