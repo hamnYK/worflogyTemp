@@ -10,17 +10,19 @@ title: 주식회사 워플로지 (WORFLOGY Inc.)
     <p>Worflogy: 리스크 관리 (소통) {AI 솔루션 (시맨틱 워크플로 디자인);}</p>
   </header>
 
-  <nav>
-    <a href="{{ site.baseurl }}/">Home</a> |
-    <a href="https://drive.google.com/file/d/1tgK9Kl2X68F4IIMqCcvfpUHWYIeBZyCQ/view?usp=sharing" target="_blank">IR</a> |
-    <a href="https://docs.google.com/spreadsheets/d/1lVdA_YIePXFhofIH-OcDZaNUQbtxsbenwas8LmVE8uA/edit?usp=sharing" target="_blank">Admin.</a>
+  <nav class="unified-nav">
+    <div class="nav-group-top">
+      <a href="{{ site.baseurl }}/">Home</a> |
+      <a href="https://drive.google.com/file/d/1tgK9Kl2X68F4IIMqCcvfpUHWYIeBZyCQ/view?usp=sharing" target="_blank">IR</a> |
+      <a href="https://docs.google.com/spreadsheets/d/1lVdA_YIePXFhofIH-OcDZaNUQbtxsbenwas8LmVE8uA/edit?usp=sharing" target="_blank">Admin.</a>
+    </div>
+    <hr class="nav-divider">
+    <div id="content-section">
+      <a href="#" id="menu-servicesolution" data-mdfile="servicesolution.md">서비스 솔루션</a> |
+      <a href="#" id="menu-techvision" data-mdfile="techvision.md">기술 비전</a> |
+      <a href="#" id="menu-ceoinsight" data-mdfile="ceoinsight.md">CEO 인사이트</a>
+    </div>
   </nav>
-
-<nav id="content-section">
-  <a href="#" id="menu-servicesolution" data-mdfile="servicesolution.md">서비스 솔루션</a> |
-  <a href="#" id="menu-techvision" data-mdfile="techvision.md">기술 비전</a> |
-  <a href="#" id="menu-ceoinsight" data-mdfile="ceoinsight.md">CEO 인사이트</a>
-</nav>
 
   <article id="content-area"></article>
 
