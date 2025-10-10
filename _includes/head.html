@@ -98,7 +98,23 @@
       margin-bottom: 2.5em;
       box-shadow: none;
     }
-    nav { margin-bottom: 2em; }
+
+    /* nav 스타일에 글래스모피즘 효과 */
+    nav {
+      /* 1. 글래스모피즘(Glassmorphism) 효과 */
+      background: rgba(255, 255, 255, 0.6); /* 반투명 흰색 배경 */
+      backdrop-filter: blur(8px);           /* 배경을 흐리게 만드는 블러 효과 */
+      -webkit-backdrop-filter: blur(8px);   /* Safari 브라우저 호환성 */
+      
+      /* 2. 카드 형태와 디자인 */
+      border-radius: 16px; /* 다른 카드들과 통일감을 주는 둥근 모서리 */
+      padding: 1em 2em;    /* 텍스트와 카드 경계 사이의 여백 */
+      border: 1px solid rgba(255, 255, 255, 0.18); /* 은은한 테두리 */
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);  /* 입체감을 주는 그림자 */
+
+      /* 3. 기존 레이아웃 유지 */
+      margin-bottom: 2em; 
+    }
 
     /* 듀얼 그리드 레이아웃 */
     .dual-grid {
