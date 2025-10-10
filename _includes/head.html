@@ -58,18 +58,33 @@
       --border-color: #E3E8ED;
     }
 
-    /* 기본 스타일 및 레이아웃 */
+    /* [수정] 고정 배경 이미지 */
     body {
       font-family: 'Pretendard', sans-serif;
       font-weight: 400;
       margin: 0;
       padding: 3em;
-      background-color: var(--bg-color);
       color: var(--text-color);
       display: flex;
       flex-direction: column;
       align-items: center;
+
+      /* 1. 배경 이미지 설정: 반투명 오버레이 + 실제 이미지 */
+      background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+        url('/assets/images/BG.png'); /* <-- 실제 이미지 파일 경로 입력 */
+      /* 2. 배경 이미지 고정 */
+      background-attachment: fixed;
+      /* 3. 배경 이미지 크기 (화면 전체 채우기) */
+      background-size: cover;
+      /* 4. 배경 이미지 반복 없음 */
+      background-repeat: no-repeat;
+      /* 5. 배경 이미지 위치 (중앙) */
+      background-position: center;
+      /* 이미지가 로딩되지 않을 때를 위한 대체 배경색 */
+      background-color: var(--bg-color); 
     }
+
     main { 
       width: 100%;
       max-width: 900px;
