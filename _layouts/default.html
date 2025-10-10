@@ -90,13 +90,10 @@
         if (subMenu) {
             subMenu.addEventListener('click', function(e) {
               const targetLink = e.target.closest('a');
-              if (targetLink && targetLink.id && !targetLink.classList.contains('active-menu')) {
+              if (targetLink && targetLink.dataset.mdfile && !targetLink.classList.contains('active-menu')) {
                 e.preventDefault();
-                let mdFile = '';
-                if (targetLink.id === 'menu-servicesolution') mdFile = 'servicesolution.md';
-                if (targetLink.id === 'menu-techvision') mdFile = 'techvision.md';
-                if (targetLink.id === 'menu-ceoinsight') mdFile = 'ceoinsight.md';
-                if (mdFile) loadContent(mdFile);
+                const mdFile = targetLink.dataset.mdfile;
+                loadContent(mdFile);
               }
             });
         }
