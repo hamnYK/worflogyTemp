@@ -7,12 +7,14 @@
 
     {{ content }}
 
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         const contentArea = document.getElementById('content-area');
-        const subMenu = document.getElementById('content-section');
-        const subMenuLinks = subMenu ? subMenu.querySelectorAll('a') : [];
+        // [수정됨] 감지 범위를 전체 nav(.unified-nav)로 확장
+        const unifiedNav = document.querySelector('.unified-nav');
+        // [수정됨] 활성 메뉴를 토글할 링크 범위를 전체 nav의 링크로 확장
+        const navLinks = unifiedNav ? unifiedNav.querySelectorAll('a[data-mdfile]') : [];
         
         const siteBaseUrl = '{{ site.baseurl }}';
 
@@ -59,7 +61,8 @@
         }
 
         function updateActiveMenu(activeId) {
-          subMenuLinks.forEach(link => {
+          // [수정됨] navLinks 변수를 사용
+          navLinks.forEach(link => {
             link.classList.toggle('active-menu', link.id === activeId);
           });
         }
@@ -87,9 +90,11 @@
             });
         }
 
-        if (subMenu) {
-            subMenu.addEventListener('click', function(e) {
+        // [수정됨] 이벤트 리스너를 unifiedNav에 연결
+        if (unifiedNav) {
+            unifiedNav.addEventListener('click', function(e) {
               const targetLink = e.target.closest('a');
+              // data-mdfile 속성이 있는 링크만 내부 로딩 처리
               if (targetLink && targetLink.dataset.mdfile && !targetLink.classList.contains('active-menu')) {
                 e.preventDefault();
                 const mdFile = targetLink.dataset.mdfile;
