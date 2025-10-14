@@ -1,6 +1,8 @@
 ## 투자 참조
 > - 2025.10.14 Revision
 
+<a href="https://drive.google.com/file/d/1tgK9Kl2X68F4IIMqCcvfpUHWYIeBZyCQ/view?usp=sharing" target="_blank">한국어 IR 참조</a>
+
 ![IR Cover Page](/IR/1_cover.PNG)
 ![Company Information](/IR/2_company_info.PNG)
 ![Target Market](/IR/3_markets.PNG)
