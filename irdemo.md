@@ -1,5 +1,5 @@
 ## 투자 참조
-> - 2025.10.14 Revision
+> - 2025.10.10 Revision
 > - <a href="https://drive.google.com/file/d/1tgK9Kl2X68F4IIMqCcvfpUHWYIeBZyCQ/view?usp=sharing" target="_blank">한국어 IR 자료 다운로드</a>
 
 ![IR Cover Page](/IR/1_cover.PNG)
@@ -21,4 +21,4 @@
 ---
 
 ## 데모
-> - 2025.10.14 준비중입니다.
+> - 2025.10.10 준비중입니다.
