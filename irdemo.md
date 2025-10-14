@@ -1,8 +1,8 @@
-# 투자 참조
+## 투자 참조
 > - 2025.10.14 Revision
 
 ![IR Cover Page](/IR/1_cover.PNG)
-![Company Information](/IR/2_company_info.PNG)]
+![Company Information](/IR/2_company_info.PNG)
 ![Target Market](/IR/3_markets.PNG)
 ![Market Opportunities and Capabilities](/IR/4_market_opp.PNG)
 ![Market Opportunity: Domain Expert's Pain Point ‘AX of Decision Making with xAI on Human-factor’](/IR/5_market_opp_ev1.PNG)
@@ -19,5 +19,5 @@
 
 ---
 
-# 데모
+## 데모
 > - 2025.10.14 준비중입니다.
