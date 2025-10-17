@@ -1,7 +1,6 @@
 ## 투자 참조
 > - 2025.10.10 Revision
 > - <a href="https://drive.google.com/file/d/1tgK9Kl2X68F4IIMqCcvfpUHWYIeBZyCQ/view?usp=sharing" target="_blank">한국어 IR 자료 다운로드</a>
-> - 「투자 의향, IP 실시, 기술 이전」에 대해 자유롭게 문의하세요.
 
 ![IR Cover Page](/IR/1_cover.PNG)
 ![Company Information](/IR/2_company_info.PNG)
@@ -23,3 +22,4 @@
 
 ## 데모
 > - 2025.10.10 준비중입니다.
+> - 투자 의향, IP 실시, 기술 이전에 대해 자유롭게 문의하세요.
