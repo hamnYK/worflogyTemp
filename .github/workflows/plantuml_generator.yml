@@ -1,8 +1,8 @@
-# PlantUML 파일을 다이어그램 이미지로 자동 생성하는 GitHub Action
-# (외부 액션 의존성 제거 버전)
+# PlantUML 파일을 다이어그램 이미지로 자동 생성하는 GitHub Action 입니다.
+# (외부 액션 의존성 제거, Graphviz 설치 포함 최종 버전)
 name: Generate PlantUML Diagrams
 
-# main 브랜치의 'diagrams' 폴더에 있는 .puml 파일이 변경될 때마다 실행
+# main 브랜치의 'diagrams' 폴더에 있는 .puml 파일이 변경될 때마다 실행됩니다.
 on:
   push:
     branches:
@@ -25,17 +25,19 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      # 3. PlantUML 공식 .jar 파일을 직접 다운로드합니다.
+      # 3. Graphviz(dot)를 설치합니다. (이것이 핵심 수정 사항입니다!)
+      - name: Install Graphviz
+        run: sudo apt-get update && sudo apt-get install -y graphviz
+
+      # 4. PlantUML 공식 .jar 파일을 직접 다운로드합니다.
       - name: Download PlantUML
-        run: |
-          wget https://github.com/plantuml/plantuml/releases/download/v1.2024.3/plantuml-1.2024.3.jar -O plantuml.jar
+        run: wget https://github.com/plantuml/plantuml/releases/download/v1.2024.3/plantuml-1.2024.3.jar -O plantuml.jar
 
-      # 4. 다운로드한 PlantUML을 직접 실행하여 다이어그램을 생성합니다.
+      # 5. 다운로드한 PlantUML을 직접 실행하여 다이어그램을 생성합니다.
       - name: Generate Diagrams
-        run: |
-          java -jar plantuml.jar -tsvg "diagrams" -o "diagrams/output"
+        run: java -jar plantuml.jar -tsvg "diagrams" -o "diagrams/output"
 
-      # 5. 생성된 이미지 파일들을 리포지토리에 자동으로 커밋합니다.
+      # 6. 생성된 이미지 파일들을 리포지토리에 자동으로 커밋합니다.
       - name: Commit Generated Diagrams
         run: |
           git config --local user.email "action@github.com"
