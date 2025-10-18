@@ -1,8 +1,7 @@
 # PlantUML 파일을 다이어그램 이미지로 자동 생성하는 GitHub Action 입니다.
-# (외부 액션 의존성 제거, Graphviz 설치 포함 최종 버전)
+# (최종 권한 수정 버전)
 name: Generate PlantUML Diagrams
 
-# main 브랜치의 'diagrams' 폴더에 있는 .puml 파일이 변경될 때마다 실행됩니다.
 on:
   push:
     branches:
@@ -13,6 +12,11 @@ on:
 jobs:
   generate_diagrams:
     runs-on: ubuntu-latest
+    
+    # [핵심 수정 사항] Action이 리포지토리에 커밋할 수 있도록 쓰기 권한을 부여합니다.
+    permissions:
+      contents: write
+      
     steps:
       # 1. 리포지토리 코드를 내려받습니다.
       - name: Checkout Repository
@@ -25,7 +29,7 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      # 3. Graphviz(dot)를 설치합니다. (이것이 핵심 수정 사항입니다!)
+      # 3. Graphviz(dot)를 설치합니다.
       - name: Install Graphviz
         run: sudo apt-get update && sudo apt-get install -y graphviz
 
@@ -43,7 +47,6 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add diagrams/output/
-          # 변경사항이 있을 때만 커밋을 진행합니다.
           if ! git diff --staged --quiet; then
             git commit -m "docs: Generate PlantUML diagrams"
             git push
