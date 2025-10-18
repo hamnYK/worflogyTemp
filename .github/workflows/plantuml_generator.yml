@@ -5,7 +5,7 @@ name: Generate PlantUML Diagrams
 on:
   push:
     branches:
-      - main # 사용하는 브랜치 이름이 main이 아니라면 수정
+      - main
     paths:
       - 'diagrams/**.puml'
 
@@ -13,18 +13,18 @@ jobs:
   generate_diagrams:
     runs-on: ubuntu-latest
     steps:
-      # 1. 리포지토리 코드 내려받기
+      # 1. 리포지토리 코드를 내려받습니다.
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # 2. PlantUML 렌더링 액션을 사용하여 이미지를 생성
+      # 2. PlantUML 렌더링 액션을 사용하여 이미지를 생성합니다.
       - name: Generate PlantUML Diagrams
-        uses: cloudbees-github-actions/plantuml-render@v1.1.0
+        uses: gavinbunney/plantuml-render@v1 # <-- 이 부분이 수정되었습니다!
         with:
-          source: "diagrams/" # .puml 소스 파일이 있는 폴더
-          output: "diagrams/output/%filename%.svg" # 생성된 이미지를 저장할 위치
+          source: "diagrams/" 
+          output: "diagrams/output/%filename%.svg"
 
-      # 3. 생성된 이미지 파일들을 리포지토리에 자동으로 커밋
+      # 3. 생성된 이미지 파일들을 리포지토리에 자동으로 커밋합니다.
       - name: Commit Generated Diagrams
         run: |
           git config --local user.email "action@github.com"
