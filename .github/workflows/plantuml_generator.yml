@@ -17,12 +17,13 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # 2. PlantUML 렌더링 액션을 사용하여 이미지를 생성
+      # 2. Docker 기반의 PlantUML 렌더링 액션을 사용하여 이미지를 생성
+      # 이 액션은 PlantUML을 직접 실행하므로 더 안정적
       - name: Generate PlantUML Diagrams
-        uses: local-plantuml/actions-plantuml@v1 # <-- Github Action 지원 Repo.에 요청
+        uses: miyox/plantuml-action@v1.1.0 # <-- 안정적인 Docker 기반 액션으로 교체
         with:
-          source: "diagrams/" 
-          output: "diagrams/output/%filename%.svg"
+          path: diagrams # .puml 소스 파일이 있는 폴더
+          output_dir: diagrams/output # 생성된 이미지를 저장할 폴더
 
       # 3. 생성된 이미지 파일들을 리포지토리에 자동으로 커밋
       - name: Commit Generated Diagrams
