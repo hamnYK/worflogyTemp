@@ -1,6 +1,7 @@
 ## 인사이트
 
 <div id="giscus-container"></div>
+<br>
 
 ## CEO 리서치
 
