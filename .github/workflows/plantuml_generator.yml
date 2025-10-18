@@ -1,4 +1,5 @@
 # PlantUML 파일을 다이어그램 이미지로 자동 생성하는 GitHub Action
+# (외부 액션 의존성 제거 버전)
 name: Generate PlantUML Diagrams
 
 # main 브랜치의 'diagrams' 폴더에 있는 .puml 파일이 변경될 때마다 실행
@@ -13,19 +14,28 @@ jobs:
   generate_diagrams:
     runs-on: ubuntu-latest
     steps:
-      # 1. 리포지토리 코드 내려받기
+      # 1. 리포지토리 코드를 내려받습니다.
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # 2. Docker 기반의 PlantUML 렌더링 액션을 사용하여 이미지를 생성
-      # 이 액션은 PlantUML을 직접 실행하므로 더 안정적
-      - name: Generate PlantUML Diagrams
-        uses: miyox/plantuml-action@v1.1.0 # <-- 안정적인 Docker 기반 액션으로 교체 (개인개발자 오픈소스)
+      # 2. Java(PlantUML 실행 환경)를 설치합니다.
+      - name: Setup Java
+        uses: actions/setup-java@v3
         with:
-          path: diagrams # .puml 소스 파일이 있는 폴더
-          output_dir: diagrams/output # 생성된 이미지를 저장할 폴더
+          distribution: 'temurin'
+          java-version: '17'
 
-      # 3. 생성된 이미지 파일들을 리포지토리에 자동으로 커밋
+      # 3. PlantUML 공식 .jar 파일을 직접 다운로드합니다.
+      - name: Download PlantUML
+        run: |
+          wget https://github.com/plantuml/plantuml/releases/download/v1.2024.3/plantuml-1.2024.3.jar -O plantuml.jar
+
+      # 4. 다운로드한 PlantUML을 직접 실행하여 다이어그램을 생성합니다.
+      - name: Generate Diagrams
+        run: |
+          java -jar plantuml.jar -tsvg "diagrams" -o "diagrams/output"
+
+      # 5. 생성된 이미지 파일들을 리포지토리에 자동으로 커밋합니다.
       - name: Commit Generated Diagrams
         run: |
           git config --local user.email "action@github.com"
