@@ -22,4 +22,5 @@
 
 ## 데모
 > - 2025.10.10 준비중입니다.
+> - <a href="https://drive.google.com/file/d/1Nsm9IdolCJ3Vi6HguaNp3o6vA1YL-AZE/view?usp=sharing" target="_blank">기술 문서 다운로드</a>
 > - **투자 의향 & IP 기술 이전** | 자유롭게 문의하세요.
