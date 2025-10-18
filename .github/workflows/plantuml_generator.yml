@@ -1,0 +1,37 @@
+# PlantUML 파일을 다이어그램 이미지로 자동 생성하는 GitHub Action
+name: Generate PlantUML Diagrams
+
+# main 브랜치의 'diagrams' 폴더에 있는 .puml 파일이 변경될 때마다 실행
+on:
+  push:
+    branches:
+      - main # 사용하는 브랜치 이름이 main이 아니라면 수정
+    paths:
+      - 'diagrams/**.puml'
+
+jobs:
+  generate_diagrams:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. 리포지토리 코드 내려받기
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # 2. PlantUML 렌더링 액션을 사용하여 이미지를 생성
+      - name: Generate PlantUML Diagrams
+        uses: cloudbees-github-actions/plantuml-render@v1.1.0
+        with:
+          source: "diagrams/" # .puml 소스 파일이 있는 폴더
+          output: "diagrams/output/%filename%.svg" # 생성된 이미지를 저장할 위치
+
+      # 3. 생성된 이미지 파일들을 리포지토리에 자동으로 커밋
+      - name: Commit Generated Diagrams
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add diagrams/output/
+          # 변경사항이 있을 때만 커밋을 진행합니다.
+          if ! git diff --staged --quiet; then
+            git commit -m "docs: Generate PlantUML diagrams"
+            git push
+          fi
