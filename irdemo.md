@@ -21,6 +21,22 @@
 ---
 
 ## 데모
-> - 2025.10.10 준비중입니다.
-> - <a href="https://drive.google.com/file/d/1Nsm9IdolCJ3Vi6HguaNp3o6vA1YL-AZE/view?usp=sharing" target="_blank">기술 문서 다운로드</a>
+> - In Progress (2025.10.10 Revision)
+> - <a href="https://drive.google.com/file/d/1Nsm9IdolCJ3Vi6HguaNp3o6vA1YL-AZE/view?usp=sharing" target="_blank">Docs 다운로드</a>
 > - **투자 의향 & IP 기술 이전** | 자유롭게 문의하세요.
+
+![0. Overall Flow](/confidential/0.%20Overall%20Flow.png)
+![1. Overall System](/confidential/1.%20Overall%20System%20P1.png)
+![2. Overall System with Components](/confidential/2.%20Overall%20System%20P2.png)
+![3. Status Transformation](/confidential/3.%20Status%20Transformation.png)
+![4. Atomic Link Object Data Structure](/confidential/4.%20Atomic%20Link%20Object%20DS.png)
+![5. Hypothesis Feedback](/confidential/5.%20Hypothesis%20Feedback.png)
+![6. Workflow Forced Modes](/confidential/6.%20Workflow%20Forced%20Modes.png)
+![7. Cognitive Inference Model](/confidential/7.%20Cognitive%20Inference%20Model.png)
+![8. AI Subkeys Generation](/confidential/8.%20AI%20Subkeys%20Generation.png)
+![9. Terminology Nominalisation](/confidential/9.%20Terminology%20Nominalisation.png)
+![10. Event Audit](/confidential/10.%20Event%20Audit.png)
+![11. Cross T-Box Recommendation](/confidential/11.%20Cross%20T-Box%20Recommendation.png)
+![12. Voting Governance Procedure](/confidential/12.%20Voting%20Governance%20Procedure.png)
+![13. Context Fork EM](/confidential/13.%20Context%20Fork%20EM.png)
+![14. A-Box and T-Box Life Cycle](/confidential/14.%20A-Box%20and%20T-Box%20Life%20Cycle.png)
