@@ -1,9 +1,6 @@
 @startuml
 
-' Set the main direction to vertical
-top to bottom direction
-
-title 도 1. 전체 시스템 구성도 1/2 (2025-10-18)
+title 도 1. 전체 시스템 구성도 1/2 (2025-10-18 Confidential)
 
 '================================================================
 ' Worflogy.com Website Theme for PlantUML

@@ -1,9 +1,6 @@
 @startuml
 
-title 도 2. 상태 머신 상태 전이도 (2025-10-18)
-
-' Set the main direction to vertical
-top to bottom direction
+title 도 2. 상태 머신 상태 전이도 (2025-10-18 Confidential)
 
 '================================================================
 ' Worflogy.com Website Theme for PlantUML
