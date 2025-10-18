@@ -1,0 +1,110 @@
+@startuml
+
+title 도 4. 잠재 가설 처리 및 환류 흐름도 (2025-10-18 Sync)
+
+'================================================================
+' Worflogy.com Website Theme for PlantUML
+'================================================================
+
+'// 1. 전역 스타일 (Global Style & Fonts) //
+skinparam backgroundColor #ffffff
+skinparam defaultFontName "Pretendard"
+skinparam defaultFontSize 13
+skinparam defaultFontColor #2D3748
+skinparam shadowing false
+skinparam roundCorner 16
+
+'// 2. 화살표 및 연결선 스타일 (Arrow & Connector Style) //
+skinparam ArrowColor #718096
+skinparam ArrowThickness 1.5
+skinparam ArrowFontColor #718096
+skinparam ArrowFontSize 12
+skinparam linetype ortho
+
+'// 3. 기본 요소 스타일 (Standard Elements Style) //
+skinparam card {
+  BackgroundColor #ffffff
+  BorderColor #718096
+}
+skinparam note {
+  BackgroundColor #ffffff
+  BorderColor #718096
+  FontColor #2D3748
+}
+skinparam component {
+  BackgroundColor #ffffff
+  BorderColor #718096
+}
+skinparam package {
+  BackgroundColor #ffffff
+  BorderColor #718096
+}
+skinparam database {
+  BackgroundColor #ffffff
+  BorderColor #718096
+}
+' [추가] 파티션(Partition) 스타일 정의
+skinparam partition {
+  BackgroundColor #F4F6F8 ' 웹사이트의 연한 배경색으로 구분감 부여
+  BorderColor #718096
+  FontColor #2D3748
+}
+
+'// 4. 강조 요소 스타일 (Accent Elements Style) //
+skinparam actor {
+  BackgroundColor #4338CA
+  BorderColor #4338CA
+  FontColor #ffffff
+}
+skinparam participant {
+  BackgroundColor #4338CA
+  BorderColor #4338CA
+  FontColor #ffffff
+}
+skinparam usecase {
+  BackgroundColor #ffffff
+  BorderColor #4338CA
+  ArrowColor #4338CA
+}
+skinparam activity {
+  BackgroundColor #ffffff
+  BorderColor #4338CA
+  FontColor #2D3748
+}
+
+'// 5. 클래스 다이어그램 스타일 (Class Diagram Style) //
+skinparam class {
+  BackgroundColor #ffffff
+  BorderColor #718096 ' [수정] 테두리 색상 변경
+  HeaderBackgroundColor #4338CA
+  FontColor #ffffff
+  AttributeFontColor #2D3748
+  AttributeFontSize 12
+}
+
+'================================================================
+
+start
+:회의(`Meeting_Minutes`);
+note right
+스테이지 4 환류
+  - 보류/기각은 잠재 가설 장부에 보존 후 재노출
+end note
+if (경로가 채택되었는가?) then (yes)
+  :링크 상태를 'selected'로 변경;
+else (no)
+  :링크 상태를 'deferred' 또는 'rejected'로 변경;
+  note right
+  **잠재 가설(Latent Hypothesis)**로 분류
+  end note
+  :잠재 가설 관리자(700)로 전달;
+  :잠재 가설 장부에 보존;
+  :정렬/태깅 (표시 전용);
+  note right
+  자동 채택 금지
+  end note
+  :다음 의제 설정 시('AgendaGenerating')\n후보로 재노출 (환류);
+endif
+stop
+
+@enduml

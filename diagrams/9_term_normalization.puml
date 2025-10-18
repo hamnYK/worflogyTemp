@@ -1,0 +1,120 @@
+@startuml
+
+title 도 8. 용어집/정규화 및 버전 관리 (2025-10-18 Sync)
+
+'================================================================
+' Worflogy.com Website Theme for PlantUML
+'================================================================
+
+'// 1. 전역 스타일 (Global Style & Fonts) //
+skinparam backgroundColor #ffffff
+skinparam defaultFontName "Pretendard"
+skinparam defaultFontSize 13
+skinparam defaultFontColor #2D3748
+skinparam shadowing false
+skinparam roundCorner 16
+
+'// 2. 화살표 및 연결선 스타일 (Arrow & Connector Style) //
+skinparam ArrowColor #718096
+skinparam ArrowThickness 1.5
+skinparam ArrowFontColor #718096
+skinparam ArrowFontSize 12
+skinparam linetype ortho
+
+'// 3. 기본 요소 스타일 (Standard Elements Style) //
+skinparam card {
+  BackgroundColor #ffffff
+  BorderColor #718096
+}
+skinparam note {
+  BackgroundColor #ffffff
+  BorderColor #718096
+  FontColor #2D3748
+}
+skinparam component {
+  BackgroundColor #ffffff
+  BorderColor #718096
+}
+skinparam package {
+  BackgroundColor #ffffff
+  BorderColor #718096
+}
+skinparam database {
+  BackgroundColor #ffffff
+  BorderColor #718096
+}
+' [추가] 파티션(Partition) 스타일 정의
+skinparam partition {
+  BackgroundColor #F4F6F8 ' 웹사이트의 연한 배경색으로 구분감 부여
+  BorderColor #718096
+  FontColor #2D3748
+}
+
+'// 4. 강조 요소 스타일 (Accent Elements Style) //
+skinparam actor {
+  BackgroundColor #4338CA
+  BorderColor #4338CA
+  FontColor #ffffff
+}
+skinparam participant {
+  BackgroundColor #4338CA
+  BorderColor #4338CA
+  FontColor #ffffff
+}
+skinparam usecase {
+  BackgroundColor #ffffff
+  BorderColor #4338CA
+  ArrowColor #4338CA
+}
+skinparam activity {
+  BackgroundColor #ffffff
+  BorderColor #4338CA
+  FontColor #2D3748
+}
+
+'// 5. 클래스 다이어그램 스타일 (Class Diagram Style) //
+skinparam class {
+  BackgroundColor #ffffff
+  BorderColor #718096 ' [수정] 테두리 색상 변경
+  HeaderBackgroundColor #4338CA
+  FontColor #ffffff
+  AttributeFontColor #2D3748
+  AttributeFontSize 12
+}
+
+'================================================================
+
+start
+
+:표준 용어집 인스턴스 조회;
+note right
+독립 인스턴스/이중화
+보안 분리
+end note
+
+:라벨/속성 매핑 뷰 생성;
+note right
+표준 용어 뷰 매핑
+표시는 채택과 다름, display ≠ adopt
+end note
+
+:용어 갱신 제안 생성;
+:승인 워크플로 시작;
+note right
+거버넌스 승인 후 버전 배포
+소급 금지, 과거 데이터는 뷰로 해석
+end note
+
+:표준 용어집 인스턴스 조회; -> :라벨/속성 매핑 뷰 생성;
+:용어 갱신 제안 생성; -> :승인 워크플로 시작;
+
+stop
+
+legend left
+적용 위치 (전체 서비스 흐름도_updated 기준)
+- 스테이지 1: 링크/노드 라벨 표준화(뷰 매핑)
+- 스테이지 4: 보고서 용어 정규화, 갱신 제안/승인
+- 정책: 소급 금지, 승인 후 버전 배포, 독립 인스턴스/이중화
+end legend
+
+@enduml

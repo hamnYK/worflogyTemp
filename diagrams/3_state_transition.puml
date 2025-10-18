@@ -1,0 +1,144 @@
+@startuml
+
+title 도 2. 상태 머신 상태 전이도 (2025-10-18 Sync)
+
+' Set the main direction to vertical
+top to bottom direction
+
+'================================================================
+' Worflogy.com Website Theme for PlantUML
+'================================================================
+
+'// 1. 전역 스타일 (Global Style & Fonts) //
+skinparam backgroundColor #ffffff
+skinparam defaultFontName "Pretendard"
+skinparam defaultFontSize 13
+skinparam defaultFontColor #2D3748
+skinparam shadowing false
+skinparam roundCorner 16
+
+'// 2. 화살표 및 연결선 스타일 (Arrow & Connector Style) //
+skinparam ArrowColor #718096
+skinparam ArrowThickness 1.5
+skinparam ArrowFontColor #718096
+skinparam ArrowFontSize 12
+skinparam linetype ortho
+
+'// 3. 기본 요소 스타일 (Standard Elements Style) //
+skinparam card {
+  BackgroundColor #ffffff
+  BorderColor #718096
+}
+skinparam note {
+  BackgroundColor #ffffff
+  BorderColor #718096
+  FontColor #2D3748
+}
+skinparam component {
+  BackgroundColor #ffffff
+  BorderColor #718096
+}
+skinparam package {
+  BackgroundColor #ffffff
+  BorderColor #718096
+}
+skinparam database {
+  BackgroundColor #ffffff
+  BorderColor #718096
+}
+' [추가] 파티션(Partition) 스타일 정의
+skinparam partition {
+  BackgroundColor #F4F6F8 ' 웹사이트의 연한 배경색으로 구분감 부여
+  BorderColor #718096
+  FontColor #2D3748
+}
+
+'// 4. 강조 요소 스타일 (Accent Elements Style) //
+skinparam actor {
+  BackgroundColor #4338CA
+  BorderColor #4338CA
+  FontColor #ffffff
+}
+skinparam participant {
+  BackgroundColor #4338CA
+  BorderColor #4338CA
+  FontColor #ffffff
+}
+skinparam usecase {
+  BackgroundColor #ffffff
+  BorderColor #4338CA
+  ArrowColor #4338CA
+}
+skinparam activity {
+  BackgroundColor #ffffff
+  BorderColor #4338CA
+  FontColor #2D3748
+}
+
+'// 5. 클래스 다이어그램 스타일 (Class Diagram Style) //
+skinparam class {
+  BackgroundColor #ffffff
+  BorderColor #718096 ' [수정] 테두리 색상 변경
+  HeaderBackgroundColor #4338CA
+  FontColor #ffffff
+  AttributeFontColor #2D3748
+  AttributeFontSize 12
+}
+
+'================================================================
+
+' States
+state "준비\n(ProblemStructuring ~)" as Prep
+state "회의/결정\n(Meeting_Minutes)" as MM
+state "갱신\n(ProcessUpdating)" as PU
+state "실행\n(Execution_Monitoring)" as EM
+state "평가/환류\n(Assessment ~)" as Report
+
+' Transitions - Use '-down->' to enforce vertical flow
+[*] -down-> Prep : 이슈 발생
+Prep -down-> MM : (B1-B4) 준비 완료
+MM -down-> PU : (B5) 경로 채택 ('Wrap up')
+PU -down-> EM : (B6) 릴리즈 승인
+EM -down-> Report : (B7-B9) 실행 완료
+Report -down-> [*] : 종료
+
+' Feedback loop transition
+Report -> Prep : 다음 이슈 (환류)
+
+' Nested State for Context Lock
+state EM {
+  state "**컨텍스트 잠금**" as Locked
+  note right of Locked
+    contextId
+    변경 금지
+  end note
+}
+
+' General Note
+note "상태 전이는 사전 정의된 게이트(B#)를 통과해야만 허용됨" as N1
+
+' Notes for each state
+note right of MM
+[도11] 투표/거버넌스
+- 1인1표
+- 복수 동의 가능
+- 반대는 사유 필수
+end note
+
+note right of PU
+[도2] 채택(adopt)·보류(deferred)·기각(rejected) 확정
+[도4] 보류/기각은 잠재 가설로 환류(자동 채택 금지)
+end note
+
+note right of Report
+[도8] 표준 용어 정규화(뷰 매핑)
+[도9] 감사/히스토리 뷰 포함
+end note
+
+note right of EM
+[도12] 컨텍스트 잠금, 변경 시 CONTEXT_FORK로 분기
+  복제 후 신규 등록
+[도9] 실행 이벤트 감사(append-only)
+end note
+
+@enduml

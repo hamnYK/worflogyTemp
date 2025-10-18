@@ -1,0 +1,119 @@
+@startuml
+
+title 도 6. 인지 부하 추정 모델 개념도 (2025-10-18 Sync)
+
+'================================================================
+' Worflogy.com Website Theme for PlantUML
+'================================================================
+
+'// 1. 전역 스타일 (Global Style & Fonts) //
+skinparam backgroundColor #ffffff
+skinparam defaultFontName "Pretendard"
+skinparam defaultFontSize 13
+skinparam defaultFontColor #2D3748
+skinparam shadowing false
+skinparam roundCorner 16
+
+'// 2. 화살표 및 연결선 스타일 (Arrow & Connector Style) //
+skinparam ArrowColor #718096
+skinparam ArrowThickness 1.5
+skinparam ArrowFontColor #718096
+skinparam ArrowFontSize 12
+skinparam linetype ortho
+
+'// 3. 기본 요소 스타일 (Standard Elements Style) //
+skinparam card {
+  BackgroundColor #ffffff
+  BorderColor #718096
+}
+skinparam note {
+  BackgroundColor #ffffff
+  BorderColor #718096
+  FontColor #2D3748
+}
+skinparam component {
+  BackgroundColor #ffffff
+  BorderColor #718096
+}
+skinparam package {
+  BackgroundColor #ffffff
+  BorderColor #718096
+}
+skinparam database {
+  BackgroundColor #ffffff
+  BorderColor #718096
+}
+' [추가] 파티션(Partition) 스타일 정의
+skinparam partition {
+  BackgroundColor #F4F6F8 ' 웹사이트의 연한 배경색으로 구분감 부여
+  BorderColor #718096
+  FontColor #2D3748
+}
+
+'// 4. 강조 요소 스타일 (Accent Elements Style) //
+skinparam actor {
+  BackgroundColor #4338CA
+  BorderColor #4338CA
+  FontColor #ffffff
+}
+skinparam participant {
+  BackgroundColor #4338CA
+  BorderColor #4338CA
+  FontColor #ffffff
+}
+skinparam usecase {
+  BackgroundColor #ffffff
+  BorderColor #4338CA
+  ArrowColor #4338CA
+}
+skinparam activity {
+  BackgroundColor #ffffff
+  BorderColor #4338CA
+  FontColor #2D3748
+}
+
+'// 5. 클래스 다이어그램 스타일 (Class Diagram Style) //
+skinparam class {
+  BackgroundColor #ffffff
+  BorderColor #718096 ' [수정] 테두리 색상 변경
+  HeaderBackgroundColor #4338CA
+  FontColor #ffffff
+  AttributeFontColor #2D3748
+  AttributeFontSize 12
+}
+
+'================================================================
+
+' Diagram content
+rectangle "시스템 로그 데이터" as Logs {
+  rectangle "업무 처리 시간 패턴" as T1
+  rectangle "수정/재작업 빈도" as T2
+  rectangle "접속 시간대/주기" as T3
+  rectangle "협업 응답 속도" as T4
+  
+' Align items vertically within the cloud
+  T1 -[hidden]down- T2
+  T2 -[hidden]down- T3
+  T3 -[hidden]down- T4
+}
+
+rectangle "<b>인지 부하 추정 모델\n(선택적 모듈)</b>" as Model
+
+rectangle "Assessment 단계\n(평가 정보)" as Assess
+
+' Define layout and connections
+Logs -down-> Model
+Model -down-> Assess : "추정된 인지 부하 지표\n(e.g., 높음/보통/낮음)"
+
+note right of Model
+  - ML/통계 분석 기반
+  - 익명 동료검토의
+    보조 정보로 활용
+end note
+
+note right of Assess
+  보고 단계에서
+  참고 지표로만 활용
+end note
+
+@enduml

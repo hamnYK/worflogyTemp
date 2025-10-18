@@ -1,0 +1,130 @@
+@startuml
+
+title 도 7. AI 기반 중간 목표(Subkeys) 자동 생성 흐름도 (2025-10-18 Sync)
+
+'================================================================
+' Worflogy.com Website Theme for PlantUML
+'================================================================
+
+'// 1. 전역 스타일 (Global Style & Fonts) //
+skinparam backgroundColor #ffffff
+skinparam defaultFontName "Pretendard"
+skinparam defaultFontSize 13
+skinparam defaultFontColor #2D3748
+skinparam shadowing false
+skinparam roundCorner 16
+
+'// 2. 화살표 및 연결선 스타일 (Arrow & Connector Style) //
+skinparam ArrowColor #718096
+skinparam ArrowThickness 1.5
+skinparam ArrowFontColor #718096
+skinparam ArrowFontSize 12
+skinparam linetype ortho
+
+'// 3. 기본 요소 스타일 (Standard Elements Style) //
+skinparam card {
+  BackgroundColor #ffffff
+  BorderColor #718096
+}
+skinparam note {
+  BackgroundColor #ffffff
+  BorderColor #718096
+  FontColor #2D3748
+}
+skinparam component {
+  BackgroundColor #ffffff
+  BorderColor #718096
+}
+skinparam package {
+  BackgroundColor #ffffff
+  BorderColor #718096
+}
+skinparam database {
+  BackgroundColor #ffffff
+  BorderColor #718096
+}
+' [추가] 파티션(Partition) 스타일 정의
+skinparam partition {
+  BackgroundColor #F4F6F8 ' 웹사이트의 연한 배경색으로 구분감 부여
+  BorderColor #718096
+  FontColor #2D3748
+}
+
+'// 4. 강조 요소 스타일 (Accent Elements Style) //
+skinparam actor {
+  BackgroundColor #4338CA
+  BorderColor #4338CA
+  FontColor #ffffff
+}
+skinparam participant {
+  BackgroundColor #4338CA
+  BorderColor #4338CA
+  FontColor #ffffff
+}
+skinparam usecase {
+  BackgroundColor #ffffff
+  BorderColor #4338CA
+  ArrowColor #4338CA
+}
+skinparam activity {
+  BackgroundColor #ffffff
+  BorderColor #4338CA
+  FontColor #2D3748
+}
+
+'// 5. 클래스 다이어그램 스타일 (Class Diagram Style) //
+skinparam class {
+  BackgroundColor #ffffff
+  BorderColor #718096 ' [수정] 테두리 색상 변경
+  HeaderBackgroundColor #4338CA
+  FontColor #ffffff
+  AttributeFontColor #2D3748
+  AttributeFontSize 12
+}
+
+'================================================================
+
+' Actor and Participants
+actor 사용자 as User
+participant "이해/RAG 모듈\n(200)" as RAG
+participant "<b>중간 목표 생성 모듈</b>\n(210)" as SubkeyGen
+database "온톨로지 DB\n(500)" as DB
+
+' Sequence Flow
+User -> RAG : 1. As-Is, To-Be 자연어 입력
+activate RAG
+
+RAG -> SubkeyGen : 2. 구조화된 As-Is, To-Be 전달
+activate SubkeyGen
+
+SubkeyGen -> SubkeyGen : 3. 의미론적 관계 분석\n(e.g., NLP, 그래프 추론)
+SubkeyGen -> DB : 4. 기존 유사 경로 조회 (Optional)
+activate DB
+
+DB -> SubkeyGen : 5. 유사 경로 정보 반환
+deactivate DB
+
+SubkeyGen -> RAG : 6. 생성/제안된 Subkeys 목록 전달
+deactivate SubkeyGen
+
+RAG -> User : 7. 사용자에게 Subkeys 목록 제시 및 검토 요청
+deactivate RAG
+
+note right of SubkeyGen
+[도7] Subkeys 자동 생성(표시≠채택)
+조직 데이터 우선, 동의 시 범위 확장
+end note
+
+note right of RAG
+[도10] 교차 T-Box 후보 표시
+end note
+
+note right of DB
+[도9] 감사/이력 기반 유사 경로 조회
+end note
+
+note right of User
+AI는 제안만, 결정은 인간(거버넌스/투표)
+end note
+
+@enduml

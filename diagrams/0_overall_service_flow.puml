@@ -1,0 +1,271 @@
+@startuml
+
+title WORFLOGY 솔루션 업무 흐름 (2025-10-18 Sync)
+
+'================================================================
+' Worflogy.com Website Theme for PlantUML
+'================================================================
+
+'// 1. 전역 스타일 (Global Style & Fonts) //
+skinparam backgroundColor #ffffff
+skinparam defaultFontName "Pretendard"
+skinparam defaultFontSize 13
+skinparam defaultFontColor #2D3748
+skinparam shadowing false
+skinparam roundCorner 16
+
+'// 2. 화살표 및 연결선 스타일 (Arrow & Connector Style) //
+skinparam ArrowColor #718096
+skinparam ArrowThickness 1.5
+skinparam ArrowFontColor #718096
+skinparam ArrowFontSize 12
+skinparam linetype ortho
+
+'// 3. 기본 요소 스타일 (Standard Elements Style) //
+skinparam card {
+  BackgroundColor #ffffff
+  BorderColor #718096
+}
+skinparam note {
+  BackgroundColor #ffffff
+  BorderColor #718096
+  FontColor #2D3748
+}
+skinparam component {
+  BackgroundColor #ffffff
+  BorderColor #718096
+}
+skinparam package {
+  BackgroundColor #ffffff
+  BorderColor #718096
+}
+skinparam database {
+  BackgroundColor #ffffff
+  BorderColor #718096
+}
+' [추가] 파티션(Partition) 스타일 정의
+skinparam partition {
+  BackgroundColor #F4F6F8 ' 웹사이트의 연한 배경색으로 구분감 부여
+  BorderColor #718096
+  FontColor #2D3748
+}
+
+'// 4. 강조 요소 스타일 (Accent Elements Style) //
+skinparam actor {
+  BackgroundColor #4338CA
+  BorderColor #4338CA
+  FontColor #ffffff
+}
+skinparam participant {
+  BackgroundColor #4338CA
+  BorderColor #4338CA
+  FontColor #ffffff
+}
+skinparam usecase {
+  BackgroundColor #ffffff
+  BorderColor #4338CA
+  ArrowColor #4338CA
+}
+skinparam activity {
+  BackgroundColor #ffffff
+  BorderColor #4338CA
+  FontColor #2D3748
+}
+
+'// 5. 클래스 다이어그램 스타일 (Class Diagram Style) //
+skinparam class {
+  BackgroundColor #ffffff
+  BorderColor #718096 ' [수정] 테두리 색상 변경
+  HeaderBackgroundColor #4338CA
+  FontColor #ffffff
+  AttributeFontColor #2D3748
+  AttributeFontSize 12
+}
+
+'================================================================
+
+' =============================================
+' 스테이지 1: 로그인 및 가상 룸(워크플로) 생성
+' =============================================
+partition "스테이지 1: 로그인 및 워크플로 생성" {
+    start
+        :사용자(100)가 로그인;
+    if (!--로그인 성공) then ([Yes])
+        :환영 메시지 표시;
+        note left
+        <b>[도 1: 전체 시스템 구성]</b>
+        사용자(100)가
+        시스템에 접근
+        endnote
+        :<b>이해/RAG 모듈(200)</b>을 통해 AI 인터뷰 진행
+        (As-Is, To-Be 정의);
+        :<b>[방법론 1] 중간 목표 생성 모듈</b>이
+        As-Is와 To-Be를 분석하여
+        <b>중간 목표(Subkeys) 자동 생성/제안</b>;
+        note right
+        <b>[도 7: AI 기반 중간 목표(Subkeys) 자동 생성]</b>
+        AI가 시작점과 도착점 사이의
+        합리적인 경유지를 추천하는 핵심 기술
+        endnote
+    repeat
+        :생성/제안된 구조로 ProblemBrief 생성;
+        note right
+        <b>[도 8: 용어집/정규화]</b>
+        - 표준 용어 조회/적용(뷰 매핑)
+        - 과거 데이터 소급 금지(정책/뷰로 해석)
+        endnote
+        :생성된 구조 사용자에게 표시;
+        :유사 이슈 후보 탐색(과거 A-Box/T-Box);
+        note right
+        <b>[도 10: 교차 T-Box 추천]</b>
+        - 추천은 표시(display)일 뿐이며 채택(adopt)과 다름
+        - 동일 T-Box에서 EM까지 수행한 A-Box는 '기본 추천'으로 노출
+        - 거버넌스가 공식 채택하면 '공식 기본 A-Box' 라벨이 부여
+        - 유사성이 충분하면 교차 T-Box에도 추천이 허용
+        endnote
+        if (!--추가 인터뷰 또는 수정 필요) then ([Yes])
+            :추가 인터뷰 진행 및 구조 보완;
+            else ([No])
+                break
+        endif
+    repeat while (!--구조 확정) is ([No])
+        if (!--워크플로 생성) then ([Yes])
+            :<b>온톨로지 데이터베이스(500)</b>에
+            초기 노드(As-Is, To-Be, Subkeys) 저장;
+            else ([No])
+                :종료 및 로그아웃;
+            stop
+        endif
+    else ([No])
+        :로그인 실패 안내;
+        :로그인 재시도 계속;
+        end
+    endif
+}
+
+' =============================================
+' 스테이지 2: 워크플로 세팅 (상태머신: 준비 단계)
+' =============================================
+partition "스테이지 2: 워크플로 세팅" {
+    :User에게 관리자 권한 부여;
+    if (!--워크플로 프로파일 선택) then ([Agile-Light])
+        :핵심 단계 위주로 프로세스 구성;
+    else ([Strict-Audit])
+        :모든 단계 및 승인 절차 구성;
+    endif
+    note right
+    <b>[도 5: 워크플로 프로파일]</b>
+    프로젝트 성격에 맞게 프로세스 복잡도 선택
+    endnote
+}
+
+' =============================================
+' 스테이지 3: 회의 진행 (상태머신: 회의/결정 단계)
+' =============================================
+partition "스테이지 3: 의사결정 절차 진행 및 시각화" {
+    note right
+    <b>[도 6: 인지 부하 추정 모델]</b> 적용
+    - 보조 신호, 자동 채택 유발 금지
+    end note
+    :User가 <회의 시작>이벤트 요청;
+    :참여자 참여 확인;
+    :<b>회의 기록 모듈(300)</b>을 통해 (회의)시작;
+    while (!--회의를 종료하겠습니까) is ([아니요, 계속 진행])
+        :User가 <시각화 갱신>이벤트 요청;
+        :회의 내용을 분석하여
+        <b>링크 객체</b> 후보 생성;
+        note left
+        <b>[도 3: 원자적 링크 객체]</b>
+        사용자 발언은
+        설명(rationale)과 증거(evidence)로
+        구조화되어 링크 객체로 저장
+        endnote
+        :스토리텔링 시각화 업데이트;
+        if (!--AI 개입으로 누락된 내용 확인) then ([Yes])
+            :누락 내용 목록화 및 보고;
+            :User가 반영할 내용 선택;
+            :선택된 내용으로 구조 추가 갱신;
+        endif
+    endwhile ([예, Wrap-Up])
+    note
+        <b>[도 2: 상태 머신 상태 전이]</b>
+        Wrap up 이벤트 요청 시
+        회의/결정 단계(MM)가 종료되고
+        갱신 단계(PU)로 전이
+    endnote
+}
+
+' =============================================
+' 스테이지 4: 회의 종료 및 후처리 (상태머신: 갱신, 평가/환류 단계)
+' =============================================
+partition "스테이지 4: 회의 종료 및 후처리" {
+    :최종 구조에 대한 참여자 투표 진행;
+    note left
+    <b>[도 11: 투표/거버넌스 절차 상세]</b>
+    - 1인1표, 복수 동의, 반대 사유 필수
+    <b>[도 9: 이벤트 소싱/감사]</b>
+    - 투표 이벤트 append-only 기록/조회
+    endnote
+    note right
+    <b>투표 규칙:</b>
+    - 전원 1인1표, 가중치 없음
+    - 한 사람은 여러 링크에 동시 동의 가능
+    - 반대 표결은 사유 입력이 필수
+    endnote
+    if (!--동점/교착) then ([Yes])
+        :재투표를 실시하여 최소 1개 링크 채택;
+    endif
+        note right
+        <b>[도 3: 원자적 링크 객체]</b>
+        투표 결과와 사유는
+        의사결정(decision) 정보로
+        링크 객체에 원자적으로 결속
+    endnote
+    if (!--투표를 종료) then ([아니요, 계속 투표])
+        :참여자 투표 진행 계속;
+        end
+    else ([예, 투표 종료])
+        :투표 종료 확정;
+        :<b>잠재 가설 관리자(700)</b>가
+        미채택 경로/노드를 **잠재 가설**로 처리;
+        note right
+        <b>[도 4: 잠재 가설 처리]</b>
+        - deferred, rejected 상태로 변경
+        - 잠재 가설 장부에 보존
+        - 자동 채택은 금지
+        endnote
+    :실행 단계(EM) 진입 시 컨텍스트 잠금(불변);
+    note right
+    <b>[도 12: 컨텍스트 포크]</b>
+    - 변경은 분기(복제 후 신규 등록)
+    <b>[도 9: 이벤트 소싱/감사]</b>
+    - 실행 이벤트 감사(append-only)
+    endnote
+    if (!--변경 필요) then ([Yes])
+        :거버넌스 승인 후 CONTEXT_FORK;
+        :A-Box/T-Box 원자적 복제 → 신규 등록;
+    endif
+    if (!--최종 보고서를 생성) then ([Yes])
+        :<b>리포팅 인터페이스(800)</b>를 통해 최종 보고서 생성;
+    note right
+    <b>[도 8: 용어집/정규화]</b>
+    - 표준 용어 뷰 적용
+    <b>[도 9: 이벤트 소싱/감사]</b>
+    - 히스토리/감사 뷰 생성
+    endnote
+    note right
+    거버넌스 판단을 위해
+    가능한 모든 근거, 출처, 투표기록을 포함
+    endnote
+    note left
+    보고서에는 선택적으로
+    <b>[도 6: 인지 부하 추정 모델]</b>의
+    분석 결과가 포함될 수 있음
+    endnote
+        else ([No])
+        endif
+            :종료 및 로그아웃;
+        stop
+    endif
+}
+@enduml
