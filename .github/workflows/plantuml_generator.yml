@@ -20,7 +20,7 @@ jobs:
       # 2. Docker 기반의 PlantUML 렌더링 액션을 사용하여 이미지를 생성
       # 이 액션은 PlantUML을 직접 실행하므로 더 안정적
       - name: Generate PlantUML Diagrams
-        uses: miyox/plantuml-action@v1.1.0 # <-- 안정적인 Docker 기반 액션으로 교체
+        uses: miyox/plantuml-action@v1.1.0 # <-- 안정적인 Docker 기반 액션으로 교체 (개인개발자 오픈소스)
         with:
           path: diagrams # .puml 소스 파일이 있는 폴더
           output_dir: diagrams/output # 생성된 이미지를 저장할 폴더
