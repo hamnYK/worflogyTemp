@@ -2,7 +2,7 @@
 
 <div id="giscus-container"></div>
 
-## CEO 리서치
+## CEO의 미래 도메인
 
 ![CEO 기술 서사 및 IP](/assets/articles/CI_research.png)
 
