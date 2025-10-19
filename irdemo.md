@@ -18,8 +18,6 @@
 ![Plan](/IR/14_plan.PNG)
 ![Q&A](/IR/15_contact.PNG)
 
----
-
 ## 데모 PoC
 > - In Progress (2025.10.10 Revision)
 > - <a href="https://drive.google.com/file/d/1Nsm9IdolCJ3Vi6HguaNp3o6vA1YL-AZE/view?usp=sharing" target="_blank">Docs 다운로드</a>
