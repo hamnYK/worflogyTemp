@@ -126,7 +126,7 @@ title: 주식회사 워플로지 (WORFLOGY Inc.)
     </address>
 </section>
 
-<iframe src="https://app.dante-ai.com/embed/?kb_id=29f3a764-b5a9-4888-9553-82ca6ecd4ad3&token=e0f7826a-9cbf-4e81-97d2-249c62e3e76e&modeltype=gemini-2.0-flash-lite&tabs=false" allow="clipboard-write; clipboard-read; *;microphone *" width="80%" height="500"></iframe>
+    <iframe src="https://app.dante-ai.com/embed/?kb_id=29f3a764-b5a9-4888-9553-82ca6ecd4ad3&token=71500fe3-364c-406f-bba6-0dafdc0a985f&modeltype=gemini-2.0-flash-lite&tabs=false" allow="clipboard-write; clipboard-read; *;microphone *" width="80%" height="500"></iframe>
 
   <footer>
       <p>&copy; 2025 WORFLOGY Inc. All rights reserved.</p>
