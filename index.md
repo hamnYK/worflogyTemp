@@ -32,6 +32,7 @@ title: 주식회사 워플로지 (WORFLOGY Inc.)
       <div id="current-time"></div>
       <script src="{{ site.baseurl }}/timeSync.js"></script>
       <ul>
+        <li><strong>2025.10.10</strong>: 주식회사 워플로지 IR & 기술 Docs 업데이트 [데모 In-Progress]</li>
         <li><strong>2025.09.25</strong>: 경기도 의왕시 유니콘로드 CEO 워크숍</li>
         <li><strong>2025.09.24</strong>: IRM: Rethinking GRC (Governance, Risk and Compliance) in the AI Era 세미나·PoC 참여</li>
         <li><strong>2025.09.23</strong>: 경기도 의왕시 IP 지원 사업 선정</li>
