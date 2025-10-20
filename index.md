@@ -124,9 +124,10 @@ title: 주식회사 워플로지 (WORFLOGY Inc.)
             대표: 함영국 (Hamn, YoungKuk)
         </p>
     </address>
-</section>
 
-<iframe src="https://app.dante-ai.com/embed/?kb_id=29f3a764-b5a9-4888-9553-82ca6ecd4ad3&token=6f0801ab-d7bc-4818-bbb4-d3ce8024b735&modeltype=gpt-4.1-nano&tabs=false" allow="clipboard-write; clipboard-read; *;microphone *" width="75%" height="500px"></iframe>
+    <iframe src="https://app.dante-ai.com/embed/?kb_id=29f3a764-b5a9-4888-9553-82ca6ecd4ad3&token=6f0801ab-d7bc-4818-bbb4-d3ce8024b735&modeltype=gpt-4.1-nano&tabs=false" allow="clipboard-write; clipboard-read; *;microphone *" width="75%" height="500px"></iframe>
+
+</section>
 
   <footer>
       <p>&copy; 2025 WORFLOGY Inc. All rights reserved.</p>
