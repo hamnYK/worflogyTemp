@@ -1,7 +1,6 @@
 ## 투자 참조
 > - 2025.10.10 Revision
 > - <a href="https://drive.google.com/file/d/1tgK9Kl2X68F4IIMqCcvfpUHWYIeBZyCQ/view?usp=sharing" target="_blank">한국어 IR 자료 다운로드</a>
-
 ![IR Cover Page](/IR/1_cover.PNG)
 ![Company Information](/IR/2_company_info.PNG)
 ![Target Market](/IR/3_markets.PNG)
@@ -21,7 +20,6 @@
 ## 데모 PoC
 > - In Progress (2025.10.10 Revision)
 > - <a href="https://drive.google.com/file/d/1Nsm9IdolCJ3Vi6HguaNp3o6vA1YL-AZE/view?usp=sharing" target="_blank">Docs 다운로드</a>
-
 ![0. Overall Flow](/confidential/0.%20Overall%20Flow.png)
 ![1. Overall System](/confidential/1.%20Overall%20System%20P1.png)
 ![2. Overall System with Components](/confidential/2.%20Overall%20System%20P2.png)
@@ -37,5 +35,4 @@
 ![12. Voting Governance Procedure](/confidential/12.%20Voting%20Governance%20Procedure.png)
 ![13. Context Fork EM](/confidential/13.%20Context%20Fork%20EM.png)
 ![14. A-Box and T-Box Life Cycle](/confidential/14.%20A-Box%20and%20T-Box%20Life%20Cycle.png)
-
 > - **투자 의향 & IP 기술 이전** | 자유롭게 문의하세요.
