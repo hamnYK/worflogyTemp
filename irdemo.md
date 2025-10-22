@@ -35,4 +35,4 @@
 ![12. Voting Governance Procedure](/confidential/12.%20Voting%20Governance%20Procedure.png)
 ![13. Context Fork EM](/confidential/13.%20Context%20Fork%20EM.png)
 ![14. A-Box and T-Box Life Cycle](/confidential/14.%20A-Box%20and%20T-Box%20Life%20Cycle.png)
-> - **투자 의향 & IP(Know-How) 기술 이전** | 자유롭게 문의하세요.
+> - **투자 의향 & IP•Know-How 기술 이전** | 자유롭게 문의하세요.
