@@ -1,6 +1,8 @@
 ## 투자 참조
-> - 2025.10.10 Revision
-> - <a href="https://drive.google.com/file/d/1tgK9Kl2X68F4IIMqCcvfpUHWYIeBZyCQ/view?usp=sharing" target="_blank">한국어 IR 자료 다운로드</a>
+
+- 2025.10.10 Revision
+- <a href="https://drive.google.com/file/d/1tgK9Kl2X68F4IIMqCcvfpUHWYIeBZyCQ/view?usp=sharing" target="_blank">한국어 IR 자료 다운로드</a>
+
 ![IR Cover Page](/IR/1_cover.PNG)
 ![Company Information](/IR/2_company_info.PNG)
 ![Target Market](/IR/3_markets.PNG)
@@ -18,8 +20,10 @@
 ![Q&A](/IR/15_contact.PNG)
 
 ## 데모 PoC
-> - In Progress (2025.10.10 Revision) | <a href="https://worflogy.com" target="_blank">Demo Link</a><br>기술 스택 검증 | IF·BM·DB 개발·테스트 환경 설정 (2025.10.23)
-> - <a href="https://drive.google.com/file/d/1Nsm9IdolCJ3Vi6HguaNp3o6vA1YL-AZE/view?usp=sharing" target="_blank">Docs 다운로드</a>
+
+- In Progress (2025.10.10 Revision) | <a href="https://worflogy.com" target="_blank">Demo Link</a><br>기술 스택 검증 | IF·BM·DB 개발·테스트 환경 설정 (2025.10.23)
+- <a href="https://drive.google.com/file/d/1Nsm9IdolCJ3Vi6HguaNp3o6vA1YL-AZE/view?usp=sharing" target="_blank">Docs 다운로드</a>
+
 ![0. Overall Flow](/demo/0.%20Overall%20Flow.png)
 ![1. Overall System](/demo/1.%20Overall%20System%20P1.png)
 ![2. Overall System with Components](/demo/2.%20Overall%20System%20P2.png)
@@ -35,4 +39,5 @@
 ![12. Voting Governance Procedure](/demo/12.%20Voting%20Governance%20Procedure.png)
 ![13. Context Fork EM](/demo/13.%20Context%20Fork%20EM.png)
 ![14. A-Box and T-Box Life Cycle](/demo/14.%20A-Box%20and%20T-Box%20Life%20Cycle.png)
-> - **투자 의향 & IP · Know-How 기술 이전** | 자유롭게 문의하세요.
+
+- **투자 의향 & IP · Know-How 기술 이전** | 자유롭게 문의하세요.
