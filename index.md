@@ -13,13 +13,13 @@ title: 주식회사 워플로지 (WORFLOGY Inc.)
   <nav class="unified-nav">
     <div class="nav-group-top">
       <a href="{{ site.baseurl }}/">초기화면</a> |
-      <a href="#" id="menu-irdemo" data-mdfile="irdemo.md">투자·데모</a> |
+      <a href="#" id="menu-irdemo" data-mdfile="irdemo.md">투자데모</a> |
       <a href="https://docs.google.com/spreadsheets/d/1lVdA_YIePXFhofIH-OcDZaNUQbtxsbenwas8LmVE8uA/edit?usp=sharing" target="_blank">관리자</a>
     </div>
     <hr class="nav-divider">
     <div id="content-section">
-      <a href="#" id="menu-servicesolution" data-mdfile="servicesolution.md">서비스·솔루션</a> |
-      <a href="#" id="menu-techvision" data-mdfile="techvision.md">기술·비전</a> |
+      <a href="#" id="menu-servicesolution" data-mdfile="servicesolution.md">서비스솔루션</a> |
+      <a href="#" id="menu-techvision" data-mdfile="techvision.md">기술비전</a> |
       <a href="#" id="menu-ceoinsight" data-mdfile="ceoinsight.md">인사이트</a>
     </div>
   </nav>
