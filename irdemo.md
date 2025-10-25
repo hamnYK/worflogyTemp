@@ -21,7 +21,7 @@
 
 ## 데모 PoC
 
-- In Progress (2025.10.10 Revision) | <a href="https://worflogy.com" target="_blank">Demo Link</a><br>기술 스택 검증 | IF·BM·DB 개발·테스트 환경 설정 (2025.10.23)
+- In Progress (2025.10.10 Revision) | <a href="#" id="start-demo-link">Demo Link</a><br>기술 스택 검증 | IF·BM·DB 개발·테스트 환경 설정 (2025.10.23)
 - <a href="https://drive.google.com/file/d/1Nsm9IdolCJ3Vi6HguaNp3o6vA1YL-AZE/view?usp=sharing" target="_blank">Docs 다운로드</a>
 
 ![0. Overall Flow](/demo/0.%20Overall%20Flow.png)
