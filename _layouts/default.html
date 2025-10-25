@@ -4,14 +4,19 @@
   <body>
 
     <!-- Google Tag Manager (noscript) -->
-      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCBVCCTX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCBVCCTX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
     <div class="gtranslate_wrapper"></div>
 
     {{ content }}
 
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <button id="floating-demo-btn" class="floating-demo-btn">UI</button>
+    <div id="mobile-ui-container" class="mobile-ui-container">
+      <p>모바일 인터페이스 영역</p>
+      <p>(클라이언트 연결 작업 중)</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         const contentArea = document.getElementById('content-area');
@@ -21,6 +26,13 @@
         const navLinks = unifiedNav ? unifiedNav.querySelectorAll('a[data-mdfile]') : [];
         
         const siteBaseUrl = '{{ site.baseurl }}';
+
+        // ====================================================
+        //  [추가] 데모용 UI 요소 참조
+        // ====================================================
+        const floatingBtn = document.getElementById('floating-demo-btn');
+        const mobileUiContainer = document.getElementById('mobile-ui-container');
+        // ====================================================
 
         const walkTokens = (token) => {
           if (token.type === 'image' && !token.href.startsWith('http')) {
@@ -93,19 +105,37 @@
               if(contentArea) contentArea.innerHTML = "<p>콘텐츠를 불러오는 데 실패했습니다. 파일 경로를 확인해주세요.</p>";
             });
         }
+        
+        // ====================================================
+        //  [수정] 이벤트 리스너 통합 관리
+        // ====================================================
+        document.body.addEventListener('click', function(e) {
+            const targetLink = e.target.closest('a');
 
-        // [수정됨] 이벤트 리스너를 unifiedNav에 연결
-        if (unifiedNav) {
-            unifiedNav.addEventListener('click', function(e) {
-              const targetLink = e.target.closest('a');
-              // data-mdfile 속성이 있는 링크만 내부 로딩 처리
-              if (targetLink && targetLink.dataset.mdfile && !targetLink.classList.contains('active-menu')) {
+            // 1. MD파일 로드 로직 (기존 기능)
+            if (targetLink && targetLink.dataset.mdfile && !targetLink.classList.contains('active-menu')) {
                 e.preventDefault();
                 const mdFile = targetLink.dataset.mdfile;
                 loadContent(mdFile);
-              }
-            });
-        }
+            }
+
+            // 2. 'Demo Link' 클릭 처리 로직 (요청 기능)
+            if (targetLink && targetLink.id === 'start-demo-link') {
+                e.preventDefault();
+                if (floatingBtn) {
+                  floatingBtn.style.display = 'block';
+                }
+            }
+
+            // 3. 플로팅 버튼 클릭 처리 로직 (요청 기능)
+            if (e.target.id === 'floating-demo-btn') {
+                if (mobileUiContainer) {
+                    const isDisplayed = mobileUiContainer.style.display === 'flex';
+                    mobileUiContainer.style.display = isDisplayed ? 'none' : 'flex';
+                }
+            }
+        });
+        // ====================================================
         
         if (contentArea) {
             loadContent('servicesolution.md');

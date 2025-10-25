@@ -4,14 +4,14 @@
   <title>{{ page.title | default: site.title }}</title>
   
   <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-KCBVCCTX');</script>
   <!-- End Google Tag Manager -->
   <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WN1V0G6RJ0"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WN1V0G6RJ0"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -405,6 +405,48 @@
       html[lang="en"] #content-area td:nth-of-type(3)::before {
         content: 'Plus (with execution plan)';
       }
+    }
+
+    /* --- 데모용 플로팅 버튼 및 UI 스타일 --- */
+    .floating-demo-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      font-size: 16px;
+      cursor: pointer;
+      display: none; /* 기본적으로 숨김 */
+      z-index: 1000;
+      transition: background-color 0.3s ease;
+    }
+    .floating-demo-btn:hover {
+      background-color: var(--accent-color);
+    }
+
+    .mobile-ui-container {
+      position: fixed;
+      bottom: 100px;
+      right: 30px;
+      width: 375px;
+      height: 70vh; /* 화면 높이의 70% */
+      max-height: 812px;
+      background-color: var(--card-bg-color);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      display: none; /* 기본적으로 숨김 */
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      padding: 1em;
+      box-sizing: border-box;
     }
   </style>
 
