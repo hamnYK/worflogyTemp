@@ -14,7 +14,7 @@
     <button id="floating-demo-btn" class="floating-demo-btn">Contexton</button>
     <div id="mobile-ui-container" class="mobile-ui-container">
       <p>사용자 인터페이스 영역</p>
-      <p>(클라이언트 연결 작업 중)</p>
+      <p>(클라이언트 연결 작업 중)</p> <!--mobile-ui-container에 연결-->
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -29,12 +29,12 @@
         
         const siteBaseUrl = '{{ site.baseurl }}';
 
-        // ====================================================
+        //==================================================
         //  [추가] 데모용 UI 요소 참조
-        // ====================================================
+        //==================================================
         const floatingBtn = document.getElementById('floating-demo-btn');
         const mobileUiContainer = document.getElementById('mobile-ui-container');
-        // ====================================================
+        //==================================================
 
         const walkTokens = (token) => {
           if (token.type === 'image' && !token.href.startsWith('http')) {
@@ -108,9 +108,9 @@
             });
         }
         
-        // ====================================================
+        //==================================================
         //  [수정] 이벤트 리스너 통합 관리
-        // ====================================================
+        //==================================================
         document.body.addEventListener('click', function(e) {
             const targetLink = e.target.closest('a');
 
@@ -137,7 +137,7 @@
                 }
             }
         });
-        // ====================================================
+        //==================================================
         
         if (contentArea) {
             loadContent('servicesolution.md');
