@@ -22,20 +22,16 @@
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         const contentArea = document.getElementById('content-area');
-        // [수정됨] 감지 범위를 전체 nav(.unified-nav)로 확장
+        //감지 범위를 전체 nav(.unified-nav)로 확장
         const unifiedNav = document.querySelector('.unified-nav');
-        // [수정됨] 활성 메뉴를 토글할 링크 범위를 전체 nav의 링크로 확장
+        //활성 메뉴를 토글할 링크 범위를 전체 nav의 링크로 확장
         const navLinks = unifiedNav ? unifiedNav.querySelectorAll('a[data-mdfile]') : [];
         
         const siteBaseUrl = '{{ site.baseurl }}';
 
-        //==================================================
-        //  [추가] 데모용 UI 요소 참조
-        //==================================================
+        //Gtranslate로 인해 참조가 유실될 수 있으므로, 이벤트 핸들러 외부에서는 변수 선언 Only
         const floatingBtn = document.getElementById('floating-demo-btn');
-        const mobileUiContainer = document.getElementById('mobile-ui-container');
-        //==================================================
-
+        
         const walkTokens = (token) => {
           if (token.type === 'image' && !token.href.startsWith('http')) {
             if (token.href.startsWith('/')) {
@@ -79,7 +75,7 @@
         }
 
         function updateActiveMenu(activeId) {
-          // [수정됨] navLinks 변수를 사용
+          //navLinks 변수 사용
           navLinks.forEach(link => {
             link.classList.toggle('active-menu', link.id === activeId);
           });
@@ -108,20 +104,17 @@
             });
         }
         
-        //==================================================
-        //  [수정] 이벤트 리스너 통합 관리
-        //==================================================
         document.body.addEventListener('click', function(e) {
             const targetLink = e.target.closest('a');
 
-            // 1. MD파일 로드 로직 (기존 기능)
+            // 1. MD파일 로드 로직
             if (targetLink && targetLink.dataset.mdfile && !targetLink.classList.contains('active-menu')) {
                 e.preventDefault();
                 const mdFile = targetLink.dataset.mdfile;
                 loadContent(mdFile);
             }
 
-            // 2. 'Demo Link' 클릭 처리 로직 (요청 기능)
+            // 2. 'Demo Link' 클릭 처리 로직
             if (targetLink && targetLink.id === 'start-demo-link') {
                 e.preventDefault();
                 if (floatingBtn) {
@@ -129,15 +122,18 @@
                 }
             }
 
-            // 3. 플로팅 버튼 클릭 처리 로직 (요청 기능)
+            // 3. 플로팅 버튼 클릭 처리 로직
             if (e.target.id === 'floating-demo-btn') {
+                //==================================================
+                //UI 컨테이너를 클릭 시점에 다시 찾도록 변경 - Gtranslate가 DOM을 변경한 후에도 올바른 요소를 참조
+                //==================================================
+                const mobileUiContainer = document.getElementById('mobile-ui-container');
                 if (mobileUiContainer) {
                     const isDisplayed = mobileUiContainer.style.display === 'flex';
                     mobileUiContainer.style.display = isDisplayed ? 'none' : 'flex';
                 }
             }
         });
-        //==================================================
         
         if (contentArea) {
             loadContent('servicesolution.md');
