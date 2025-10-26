@@ -1,7 +1,7 @@
 ## 투자 자료
 
-- 2025.10.10 리뷰 (2025.08.11 작성)
-- <a href="https://drive.google.com/file/d/1tgK9Kl2X68F4IIMqCcvfpUHWYIeBZyCQ/view?usp=sharing" target="_blank">한국어 IR 자료 다운로드</a>
+- 2025.10.10 리뷰 (2025.08.11 작성)<br>- 2025.10.10 고려대학교 AI 연구원 협력 방안 반영
+- <a href="https://drive.google.com/file/d/1tgK9Kl2X68F4IIMqCcvfpUHWYIeBZyCQ/view?usp=sharing" target="_blank">한국어 IR 자료 다운로드 (2025.10.10 리뷰)</a>
 
 ![IR Cover Page](/IR/1_cover.PNG)
 ![Company Information](/IR/2_company_info.PNG)
