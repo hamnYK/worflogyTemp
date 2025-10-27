@@ -14,7 +14,7 @@
 > - **생명공학 및 신소재 연구개발**: 실증 및 경험 연구(Empirical Study) 중심의 도메인에서 **의사결정 과정을 구조화**하여, 가설부터 결과까지의 **효율적인 연구 경로를 구축**합니다.
 > - **워플로지(WORFLOGY)의 핵심 가치**: 눈에 보이지 않던 의사결정 과정을 **구조화된 워크플로 그래프로 시각화**하여 명확한 솔루션을 제공합니다.
 
-<video width="100%" style="max-width: 1280px; height: auto;" autoplay loop muted playsinline>
+<video width="100%" style="max-width: 1504px; height: auto;" autoplay loop muted playsinline>
   <source src="/assets/videos/worflogy_solution_film.mp4" type="video/mp4">
 </video>
 

@@ -11,6 +11,10 @@ RiskMgt.Workflow = {ProblemSolving: {Communication: () => {<br>
         Execution_Monitoring(); Assessment(); Reporting(); Feedback();<br>
         }}};
 
+<video width="100%" style="max-width: 1280px; height: auto;" autoplay loop muted playsinline>
+  <source src="/assets/videos/worflogy_solution_video.mp4" type="video/mp4">
+</video>
+
 ## 걸어온 길, 그리고 현재와 미래
 
 ### 2007년 - 2010년 : 문제 인식과 연구
