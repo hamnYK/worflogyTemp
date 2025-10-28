@@ -2,11 +2,11 @@
 
 <div id="giscus-container"></div>
 
+## 미래 도메인
+
 <video width="100%" style="max-width: 1504px; height: auto;" autoplay loop muted playsinline>
   <source src="/assets/videos/worflogy_solution_application.mp4" type="video/mp4">
 </video>
-
-## 미래 도메인
 
 ![CEO 현재 연구 소개](/assets/articles/CI_future.png)
 ![CEO IP 소개](/assets/articles/CI_research.png)
