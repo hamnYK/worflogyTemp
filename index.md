@@ -19,8 +19,8 @@ title: 주식회사 워플로지 (WORFLOGY Inc.)
     <div id="content-section">
       <a href="#" id="menu-servicesolution" data-mdfile="servicesolution.md">서비스솔루션</a>
       <a href="#" id="menu-techvision" data-mdfile="techvision.md">기술비전</a>
-      <a href="#" id="menu-irdemo" data-mdfile="irdemo.md">투자데모</a>
       <a href="#" id="menu-ceoinsight" data-mdfile="ceoinsight.md">인사이트</a>
+      <a href="#" id="menu-irdemo" data-mdfile="irdemo.md">투자데모</a>
     </div>
   </nav>
 
