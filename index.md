@@ -32,6 +32,7 @@ title: 주식회사 워플로지 (WORFLOGY Inc.)
       <div id="current-time"></div>
       <script src="{{ site.baseurl }}/timeSync.js"></script>
       <ul>
+        <li><strong>2025.10.29</strong>: 2025 지역창업특화 경기권 입주기업 네트워킹</li>
         <li><strong>2025.10.24</strong>: 2026 Global Risk Trend 퍼블리싱 참여</li>
         <li><strong>2025.10.10</strong>: 주식회사 워플로지 IR & 기술 Docs 업데이트 [데모 In-Progress]</li>
         <li><strong>2025.09.25</strong>: 경기도 의왕시 유니콘로드 CEO 워크숍</li>
@@ -64,6 +65,14 @@ title: 주식회사 워플로지 (WORFLOGY Inc.)
           <video src="{{ site.baseurl }}/assets/audios/2025.09_Podcast_English.m4a" controls width="100%" height="80px"></video>
           <figcaption>
             <p>오디오 팟캐스트 (영어)</p>
+          </figcaption>
+        </figure>
+      </article>
+      <article>
+        <figure>
+          <img src="{{ site.baseurl }}/assets/images/2025.10_Startup_Networking_Region.jpg" alt="2025년 경기권 지역특화창업 입주기업 네트워킹">
+          <figcaption>
+            <p>경기권 지역특화창업 입주기업 네트워킹 | 창업보육협회·하이퍼웨이브</p>
           </figcaption>
         </figure>
       </article>
