@@ -3,14 +3,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ page.title | default: site.title }}</title>
   
-  <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-KCBVCCTX');</script>
-  <!-- End Google Tag Manager -->
-  <!-- Google tag (gtag.js) -->
+
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-WN1V0G6RJ0"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -19,16 +17,13 @@
       gtag('config', 'G-WN1V0G6RJ0');
     </script>
 
-  <!--SEO stratgy-->
   <meta name="description" content="주식회사 워플로지는 온톨로지와 AI 기술을 융합하여 프로세스 개선 및 의사결정 품질 평가(Human-factor Assessment)를 통해 조직의 문제 해결(Risk Management)을 지원하는 시맨틱 워크플로 디자인 솔루션을 연구개발하는 딥테크 기업입니다.">
   <meta name="keywords" content="AI, 온톨로지, 시맨틱 워크플로, 리스크 관리, GRC, 지능형 솔루션">
-
   <meta property="og:type" content="website">
   <meta property="og:url" content="{{ site.url }}{{ page.url }}">
   <meta property="og:title" content="{{ page.title | default: site.title }}">
   <meta property="og:description" content="{{ page.description | default: site.description }}">
   <meta property="og:image" content="{{ site.url }}/assets/images/worflogy_logo.svg">
-
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="{{ site.url }}{{ page.url }}">
   <meta property="twitter:title" content="{{ page.title | default: site.title }}">
@@ -60,10 +55,8 @@
   </script>
 
   <style>
-    /* Pretendard 폰트 불러오기 */
     @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
-    /* 색상 테마: Academic Blue & Minimalism */
     :root {
       --primary-color: #4338CA;
       --accent-color: #6366F1;
@@ -74,7 +67,6 @@
       --border-color: #E3E8ED;
     }
 
-    /* 고정 배경 이미지 */
     body {
       font-family: 'Pretendard', sans-serif;
       font-weight: 400;
@@ -131,7 +123,6 @@
       z-index: 1;
     }
 
-    /* [수정] 카드 간격 조정 */
     section, article, aside {
       background-color: var(--card-bg-color);
       border: 1px solid var(--border-color);
@@ -141,33 +132,27 @@
       box-shadow: none;
     }
 
-    /* [수정] 통합 nav 카드 스타일 */
     nav.unified-nav, footer {
-      /* 글래스모피즘 효과 */
       background: rgba(244, 246, 248, 0.8);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       
-      /* 카드 형태 디자인 */
       border-radius: 16px;
       padding: 1em 2em;
       border: 1px solid rgba(244, 246, 248, 0.2);
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 
-      /* 레이아웃 */
       margin-bottom: 1.5em;
       width: 100%;
       box-sizing: border-box;
     }
 
-    /* nav 내부 구분선 스타일 */
     hr.nav-divider {
       border: none;
       border-top: 1px solid rgba(0, 0, 0, 0.1);
       margin: 0.8em 0;
     }
 
-    /* 듀얼 그리드 레이아웃 */
     .dual-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -180,7 +165,6 @@
         margin-bottom: 0;
     }
 
-    /* --- 타이포그래피 위계 강화 --- */
     h1, h2, h3 { color: var(--text-color); }
     h1 { font-size: 2.5em; font-weight: 700; margin-bottom: 0.5em; }
     h2 { 
@@ -205,10 +189,8 @@
     a { color: var(--primary-color); text-decoration: none; font-weight: 500; transition: color 0.2s ease; }
     a:hover { color: var(--accent-color); text-decoration: none; }
 
-    /* 이미지 기본 스타일 */
     img { max-width: 100%; height: auto; border-radius: 8px; display: block; margin: 1.5em auto; }
 
-    /* --- 컴포넌트별 스타일 정제 --- */
     #content-section a {
       margin: 0 0.5em;
       padding: 0.7em 1.4em;
@@ -248,7 +230,6 @@
 
     #current-time { text-align: center; margin-bottom: 2em; font-size: 1em; color: var(--text-muted-color); }
     
-    /* 로고 슬라이더 */
     .slider { width: 100%; overflow: hidden; padding: 2em 0; margin-top: 1em; }
     .slider-track { 
       display: flex; 
@@ -276,20 +257,17 @@
     @keyframes slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     .slider-track:hover { animation-play-state: paused; }
 
-    /* Giscus 위젯 너비 */
     #giscus-container {
       width: auto;
       padding-bottom: 20px;
     }
 
-    /* --- #content-area 내부 콘텐츠 스타일 --- */
     #content-area { text-align: left; }
     #content-area h2, #content-area h3 { text-align: left; }
     #content-area ul { list-style: none; padding-left: 0; }
     #content-area li { margin-bottom: 0.8em; padding-left: 1.5em; position: relative; }
     #content-area { align-items: center; }
 
-    /* 불릿 포인트 스타일 (수정된 부분) */
     #content-area li::before {
       content: '';
       position: absolute;
@@ -302,7 +280,6 @@
       border-radius: 50%;
     }
 
-    /* --- #content-area 내부 테이블 스타일 --- */
     #content-area table { width: 100%; margin-top: 2em; border-collapse: collapse; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; }
     #content-area th, #content-area td { padding: 0.8em 1em; border-bottom: 1px solid var(--border-color); }
     #content-area th { background-color: var(--bg-color); font-weight: 600; text-align: center; }
@@ -310,7 +287,6 @@
     #content-area tbody tr:last-child th,
     #content-area tbody tr:last-child td { border-bottom: 0; }
 
-    /* --- 반응형 디자인을 위한 미디어 쿼리 --- */
     @media (max-width: 768px) {
       body {
         padding: 1.5em;
@@ -321,12 +297,10 @@
       h1 { font-size: 2em; }
       h2 { font-size: 1.5em; }
     
-      /* 듀얼 그리드 모바일 스타일 */
       .dual-grid {
-        grid-template-columns: 1fr; /* 1열로 변경 */
+        grid-template-columns: 1fr;
       }
 
-      /* 모바일 메뉴 스타일 (언어 변경 시 줄바꿈 방지) */
       #content-section {
         display: flex;
         flex-direction: column;
@@ -337,7 +311,6 @@
         text-align: center;
       }
       
-      /* 모바일 파트너 로고 스타일 */
       .partners-grid {
         flex-direction: column;
       }
@@ -348,7 +321,6 @@
         margin-bottom: 0;
       }
 
-      /* 모바일용 테이블 스타일 */
       #content-area table, 
       #content-area thead, 
       #content-area tbody, 
@@ -398,7 +370,6 @@
         margin-top: 1em;
       }
 
-      /* 언어가 영어일 때 레이블을 변경하는 코드 */
       html[lang="en"] #content-area td:nth-of-type(2)::before {
         content: 'Basic (Core Diagnostics)';
       }
@@ -407,7 +378,6 @@
       }
     }
 
-    /* --- 데모용 플로팅 버튼 및 UI 스타일 --- */
     .floating-demo-btn {
       position: fixed;
       bottom: 30px;
@@ -421,7 +391,7 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       font-size: 16px;
       cursor: pointer;
-      display: none; /* 기본적으로 숨김 */
+      display: none;
       z-index: 1000;
       transition: background-color 0.3s ease;
     }
@@ -434,13 +404,13 @@
       bottom: 120px;
       right: 30px;
       width: 375px;
-      height: 70vh; /* 화면 높이의 70% */
+      height: 70vh;
       max-height: 812px;
       background-color: var(--card-bg-color);
       border: 1px solid var(--border-color);
       border-radius: 16px;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-      display: none; /* 기본적으로 숨김 */
+      display: none;
       flex-direction: column;
       justify-content: center;
       align-items: center;
@@ -453,6 +423,5 @@
 <script>window.gtranslateSettings = {"default_language":"ko","native_language_names":true,"detect_browser_language":true,"languages":["ko","en"],"wrapper_selector":".gtranslate_wrapper","switcher_horizontal_position":"right","switcher_vertical_position":"top","float_switcher_open_direction":"bottom"}</script>
 <script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
 <script src="https://app.dante-ai.com/dante-helper.js" defer></script>
-<!--<script src="https://app.dante-ai.com/bubble-embed.js?kb_id=29f3a764-b5a9-4888-9553-82ca6ecd4ad3&token=4ad4fcc7-818f-4c76-884e-60f423b6914c&modeltype=gpt-4.1-nano&tabs=false"></script>-->
 
 </head>
