@@ -12,7 +12,7 @@ RiskMgt.Workflow = {ProblemSolving: {Communication: () => {<br>
         }}};
 
 <video width="100%" style="max-width: 1280px; height: auto;" autoplay loop muted playsinline>
-  <source src="/assets/videos/worflogy_solution_video.mp4" type="video/mp4">
+  <source src="/assets/videos/worflogy_solution_workflow.mp4" type="video/mp4">
 </video>
 
 ## 걸어온 길, 그리고 현재와 미래

@@ -4,7 +4,7 @@
 - <a href="https://drive.google.com/file/d/1tgK9Kl2X68F4IIMqCcvfpUHWYIeBZyCQ/view?usp=sharing" target="_blank">한국어 IR 자료 다운로드 (2025.10.10 리뷰)</a>
 
 <video width="100%" style="max-width: 1280px; height: auto;" autoplay loop muted playsinline>
-  <source src="/assets/videos/worflogy_solution_value.mp4" type="video/mp4">
+  <source src="/assets/videos/worflogy_solution_feature.mp4" type="video/mp4">
 </video>
 
 ![IR Cover Page](/IR/1_cover.PNG)
