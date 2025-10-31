@@ -21,6 +21,31 @@
     
     <script>
       document.addEventListener('DOMContentLoaded', function() {
+
+      //==================================================
+      //관리자 링크 보안 게이트 설정 | 
+      //==================================================
+      // base64 : 구글 시트 URL
+      const ADMIN_ENC = "aHR0cHM6Ly9kb2NzLmdvb2dsZS5jb20vc3ByZWFkc2hlZXRzL2QvMWxWZEFfWUllUFhGaG9mSUgtT2NEWmFOVVFidHhzYmVud2FzOExtVkU4dUEvZWRpdD91c3A9c2hhcmluZw==";
+
+      // 내부 간단 접근 코드 (비활성화 가능)
+      const REQUIRE_CODE = true;
+      const ACCESS_CODE  = "worflogy"; // 내부 Only 공유 키워드
+
+      function openAdminSheet() {
+        if (REQUIRE_CODE) {
+          const userInput = prompt("사내 전용입니다. 접근 코드를 입력하세요.");
+          if (userInput !== ACCESS_CODE) {
+            alert("권한이 없습니다.");
+            return;
+          }
+        }
+        const decodedUrl = atob(ADMIN_ENC); // from base64 to 구글 시트 URL
+        window.open(decodedUrl, "_blank", "noopener,noreferrer");
+      }
+      //==================================================
+
+      
         const contentArea = document.getElementById('content-area');
         //감지 범위를 전체 nav(.unified-nav)로 확장
         const unifiedNav = document.querySelector('.unified-nav');
