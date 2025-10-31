@@ -21,12 +21,12 @@
       document.addEventListener('DOMContentLoaded', function() {
 
       const ADMIN_ENC = "aHR0cHM6Ly9kb2NzLmdvb2dsZS5jb20vc3ByZWFkc2hlZXRzL2QvMWxWZEFfWUllUFhGaG9mSUgtT2NEWmFOVVFidHhzYmVud2FzOExtVkU4dUEvZWRpdD91c3A9c2hhcmluZw==";
-      const REQUIRE_CODE = false;
+      const REQUIRE_CODE = true;
       const ACCESS_CODE  = "worflogy";
 
       function openAdminSheet() {
         if (REQUIRE_CODE) {
-          const userInput = prompt("사내 전용입니다. 접근 코드를 입력하세요.");
+          const userInput = prompt("코드를 입력하세요.");
           if (userInput !== ACCESS_CODE) {
             alert("권한이 없습니다.");
             return;
