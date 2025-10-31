@@ -114,6 +114,12 @@
         document.body.addEventListener('click', function(e) {
             const targetLink = e.target.closest('a');
 
+            if (targetLink && targetLink.id === 'admin-link') {
+              e.preventDefault();
+              openAdminSheet();
+              return;
+            }
+
             if (targetLink && targetLink.dataset.mdfile && !targetLink.classList.contains('active-menu')) {
                 e.preventDefault();
                 const mdFile = targetLink.dataset.mdfile;
