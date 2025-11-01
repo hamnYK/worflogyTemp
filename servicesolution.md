@@ -3,14 +3,14 @@
 - AI LLM 기반 프로세스 개선과 의사결정 품질 평가(**Human-factor Assessment**)를 통해 조직의 문제 해결(**Risk Management**)을 지원하는 딥테크 기업입니다.
 - 온톨로지와 AI 기술을 융합한 **시맨틱 워크플로 디자인 솔루션**을 연구개발 및 서비스하고 있습니다.
 
-<video width="100%" style="max-width: 1920px; height: auto;" autoplay loop muted playsinline>
-  <source src="/assets/videos/worflogy_risk_ops.mp4" type="video/mp4">
-</video>
-
 ### 연구개발·사업 영역
 
 > - 업무 프로세스 디자인 및 리스크 평가를 위한 지능형 회의(Semantic Workflow) 솔루션 연구개발
 > - 리스크관리를 위한 워크플로 디자인 컨설팅
+
+<video width="100%" style="max-width: 1920px; height: auto;" autoplay loop muted playsinline>
+  <source src="/assets/videos/worflogy_risk_ops.mp4" type="video/mp4">
+</video>
 
 ### 고객 가치
 
