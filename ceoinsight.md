@@ -1,6 +1,6 @@
 ## 인사이트
 
-<video width="100%" style="max-width: 1504px; height: auto;" autoplay loop muted playsinline>
+<video width="100%" style="max-width: 1920px; height: auto;" autoplay loop muted playsinline>
   <source src="/assets/videos/worflogy_risk_ops_2nd.mp4" type="video/mp4">
 </video>
 
