@@ -11,7 +11,7 @@ RiskMgt.Workflow = {ProblemSolving: {Communication: () => {<br>
         Execution_Monitoring(); Assessment(); Reporting(); Feedback();<br>
         }}};
 
-<video width="100%" style="max-width: 1280px; height: auto;" autoplay loop muted playsinline>
+<video width="100%" style="max-width: 1920px; height: auto;" autoplay loop muted playsinline>
   <source src="/assets/videos/worflogy_solution_workflow.mp4" type="video/mp4">
 </video>
 
