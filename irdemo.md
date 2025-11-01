@@ -3,7 +3,7 @@
 - 2025.10.10 리뷰 (2025.08.11 작성)<br>- 2025.10.10 고려대학교 AI 연구원 협력 방안 반영
 - <a href="https://drive.google.com/file/d/1tgK9Kl2X68F4IIMqCcvfpUHWYIeBZyCQ/view?usp=sharing" target="_blank">한국어 IR 자료 다운로드 (2025.10.10 리뷰)</a>
 
-<video width="100%" style="max-width: 1280px; height: auto;" autoplay loop muted playsinline>
+<video width="100%" style="max-width: 1920px; height: auto;" autoplay loop muted playsinline>
   <source src="/assets/videos/worflogy_solution_feature.mp4" type="video/mp4">
 </video>
 
