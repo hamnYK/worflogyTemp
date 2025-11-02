@@ -132,7 +132,12 @@
       box-shadow: none;
     }
 
-    nav.unified-nav, footer {
+    nav.unified-nav {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+
       background: rgba(244, 246, 248, 0.8);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
@@ -151,6 +156,21 @@
       border: none;
       border-top: 1px solid rgba(0, 0, 0, 0.1);
       margin: 0.8em 0;
+    }
+
+    footer {
+      background: rgba(244, 246, 248, 0.8);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      
+      border-radius: 16px;
+      padding: 1em 2em;
+      border: none;
+      box-shadow: none;
+
+      margin-bottom: 1.5em;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .dual-grid {
