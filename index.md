@@ -101,28 +101,28 @@ title: 주식회사 워플로지 (WORFLOGY Inc.)
     <div class="slider">
       <div class="slider-track">
         <div class="slide-item"><img src="{{ site.baseurl }}/assets/partners/KU_HiAI.png" alt="고려대학교 AI 연구원">
-          <span class="slide-caption">고려대학교 AI 연구원</span>
+          <span class="slide-caption">고려대 AI 연구원</span>
         </div>
         <div class="slide-item"><img src="{{ site.baseurl }}/assets/partners/UiWang_City.png" alt="의왕시 스타트업지원센터">
           <span class="slide-caption">의왕시 스타트업지원센터</span>
         </div>
         <div class="slide-item"><img src="{{ site.baseurl }}/assets/partners/KHU_CBAM.png" alt="경희대학교 융합바이오신소재공학">
-          <span class="slide-caption">나노융합그린소재연구실</span>
+          <span class="slide-caption">경희대 융합바이오신소재공학<br>나노융합그린소재연구실</span>
         </div>
         <div class="slide-item"><img src="{{ site.baseurl }}/assets/partners/IRM.png" alt="리스크관리 협회 (IRM)">
-          <span class="slide-caption">리스크관리 협회 (IRM | 1986)</span>
+          <span class="slide-caption">IRM 리스크관리 협회 (Since 1986)</span>
         </div>
         <div class="slide-item"><img src="{{ site.baseurl }}/assets/partners/KU_HiAI.png" alt="고려대학교 AI 연구원">
-          <span class="slide-caption">고려대학교 AI 연구원</span>
+          <span class="slide-caption">고려대 AI 연구원</span>
         </div>
         <div class="slide-item"><img src="{{ site.baseurl }}/assets/partners/UiWang_City.png" alt="의왕시 스타트업지원센터">
           <span class="slide-caption">의왕시 스타트업지원센터</span>
         </div>
         <div class="slide-item"><img src="{{ site.baseurl }}/assets/partners/KHU_CBAM.png" alt="경희대학교 융합바이오신소재공학">
-          <span class="slide-caption">나노융합그린소재연구실</span>
+          <span class="slide-caption">경희대 융합바이오신소재공학<br>나노융합그린소재연구실</span>
         </div>
         <div class="slide-item"><img src="{{ site.baseurl }}/assets/partners/IRM.png" alt="리스크관리 협회 (IRM)">
-          <span class="slide-caption">리스크관리 협회 (IRM | 1986)</span>
+          <span class="slide-caption">IRM 리스크관리 협회 (Since 1986)</span>
         </div>
       </div>
     </div>
