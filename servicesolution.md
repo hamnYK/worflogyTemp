@@ -46,6 +46,8 @@
 
 - 베이직 진행 후 30일 내 플러스 진행 시 차액만 결제
 
+![Meeting Minutes](/assets/images/meeting_minutes.png)
+
 ## 진행 절차 및 공통 사항
 
 ### 진행 절차
