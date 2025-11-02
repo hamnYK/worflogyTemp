@@ -106,6 +106,9 @@ title: 주식회사 워플로지 (WORFLOGY Inc.)
         <div class="slide-item"><img src="{{ site.baseurl }}/assets/partners/UiWang_City.png" alt="의왕시 스타트업지원센터">
           <span class="slide-caption">의왕시 스타트업지원센터</span>
         </div>
+        <div class="slide-item"><img src="{{ site.baseurl }}/assets/partners/KHU_CBAM.png" alt="경희대학교 융합바이오신소재공학">
+          <span class="slide-caption">나노융합그린소재연구실</span>
+        </div>
         <div class="slide-item"><img src="{{ site.baseurl }}/assets/partners/IRM.png" alt="리스크관리 협회 (IRM)">
           <span class="slide-caption">리스크관리 협회 (IRM | 1986)</span>
         </div>
@@ -114,6 +117,9 @@ title: 주식회사 워플로지 (WORFLOGY Inc.)
         </div>
         <div class="slide-item"><img src="{{ site.baseurl }}/assets/partners/UiWang_City.png" alt="의왕시 스타트업지원센터">
           <span class="slide-caption">의왕시 스타트업지원센터</span>
+        </div>
+        <div class="slide-item"><img src="{{ site.baseurl }}/assets/partners/KHU_CBAM.png" alt="경희대학교 융합바이오신소재공학">
+          <span class="slide-caption">나노융합그린소재연구실</span>
         </div>
         <div class="slide-item"><img src="{{ site.baseurl }}/assets/partners/IRM.png" alt="리스크관리 협회 (IRM)">
           <span class="slide-caption">리스크관리 협회 (IRM | 1986)</span>
