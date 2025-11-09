@@ -32,7 +32,7 @@ title: 주식회사 워플로지 (WORFLOGY Inc.)
       <div id="current-time"></div>
       <script src="{{ site.baseurl }}/timeSync.js"></script>
       <ul>
-        <li><strong>2025.11.03</strong>: 바이오·신소재 융합 R&D 네트워크 참여</li>
+        <li><strong>2025.11.03</strong>: 바이오·신소재 융합 R&D 기술 협력 네트워크 참여</li>
         <li><strong>2025.10.31</strong>: IRM: Managing Risk Complexity with New Technologies 세미나·PoC 참여</li>
         <li><strong>2025.10.29</strong>: 2025 지역창업특화 경기권 입주기업 네트워킹</li>
         <li><strong>2025.10.24</strong>: 2026 Global Risk Trend 퍼블리싱 참여</li>
