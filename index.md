@@ -77,7 +77,7 @@ title: 주식회사 워플로지 (WORFLOGY Inc.)
         <figure>
           <img src="{{ site.baseurl }}/assets/images/2025.10_Startup_Networking_Region.jpg" alt="2025년 경기권 지역특화창업 입주기업 네트워킹">
           <figcaption>
-            <p>경기권 지역특화창업 입주기업 네트워킹 | 창업보육협회·(주)하이퍼웨이브 한향원 대표</p>
+            <p>경기권 지역특화창업 입주기업 네트워킹 | 창업보육협회·(주)하이퍼웨이브 한향원 대표와 함께</p>
           </figcaption>
         </figure>
       </article>
