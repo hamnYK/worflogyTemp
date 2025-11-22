@@ -8,7 +8,7 @@ title: 주식회사 워플로지 (WORFLOGY Inc.)
     <img src="{{ site.baseurl }}/assets/images/worflogy_logo.svg" alt="워플로지 로고" style="max-height: 80px; margin-bottom: 1.5em;">
     <h1>주식회사 워플로지 (WORFLOGY Inc.)</h1>
     <p>
-      <a href="#" data-mdfile="thestory.md">Worflogy: 리스크 관리 (소통) {AI 솔루션 (시맨틱 워크플로 디자인);}</a>
+      <a href="#" data-mdfile="thestory.md">Worflogy: 문제해결 (소통) {언어모델 (시맨틱 워크플로 생성);}</a>
     </p>
   </header>
 
