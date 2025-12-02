@@ -35,7 +35,7 @@ title: 주식회사 워플로지 (WORFLOGY Inc.)
       <script src="{{ site.baseurl }}/timeSync.js"></script>
       <ul>
         <li><strong>2025.12.04</strong>: IRM(UK HQ): 총회(18:30 KST) 참여 및 주요 의제 투표</li>
-        <li><strong>2025.12.02</strong>: 10-2025-0187777 특허 출원 [이슈 기반 워크플로 온톨로지 관리 방법 및 이러한 방법을 수행하는 장치]</li>
+        <li><strong>2025.12.02</strong>: 10-2025-0187777 특허 출원 [이슈 기반 워크플로 온톨로지 관리 방법 및 이러한 방법을 수행하는 장치] : 데모 솔루션 핵심 프로세스 구현 (11/23) | 데모 솔루션 UX 요소 추가 개발 중 (12/02)</li>
         <li><strong>2025.11.03</strong>: 바이오·신소재 융합 R&D 기술 협력 네트워크 참여</li>
         <li><strong>2025.10.31</strong>: IRM: Managing Risk Complexity with New Technologies 세미나·PoC 참여</li>
         <li><strong>2025.10.29</strong>: 2025 지역창업특화 경기권 입주기업 네트워킹</li>
