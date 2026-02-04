@@ -34,6 +34,8 @@ title: 주식회사 워플로지 (WORFLOGY Inc.)
       <div id="current-time"></div>
       <script src="{{ site.baseurl }}/timeSync.js"></script>
       <ul>
+        <li><strong>2026.0204</strong>: 솔루션 데모 PoC 3종 R&D 진행 사항 "투자데모" 참조</li>
+        <li><strong>2026.0204</strong>: 솔루션 데모 PoC 현장 적용 컨설팅 클로즈베타</li>
         <li><strong>2026.01월 부터</strong>: 솔루션 데모 PoC 적용 컨설팅 준비</li>
         <li><strong>2025.12.04</strong>: IRM(UK HQ): 총회(18:30 KST) 참여 및 주요 의제 투표</li>
         <li><strong>2025.12.02</strong>: 10-2025-0187777 특허 출원 [이슈 기반 워크플로 온톨로지 관리 방법 및 이러한 방법을 수행하는 장치] | 우선 심사</li>

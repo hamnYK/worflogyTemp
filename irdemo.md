@@ -1,8 +1,7 @@
 ## 데모 PoC
 
 - Docs 2025.10.10 리뷰 (2024.10.22 작성 - 2025.07.10 사용계약) | <a href="https://drive.google.com/file/d/1Nsm9IdolCJ3Vi6HguaNp3o6vA1YL-AZE/view?usp=sharing" target="_blank">Docs 다운로드</a>
-- <a href="#" id="start-demo-link">데모 링크</a><br>- 2025.10.23 기술 스택 검증<br>- 2025.10.24 IF·BM·DB 개발·테스트 환경 설정<br>- 2025.10.25 데모 UI (Contexton) 준비 중<br>- 2025.11.23 데모 핵심 프로세스 기본 구현 완료<br>- 2025.11.23 로컬 특화 LLM 개발 중<br>- 2025.12.02 UX 요소 기능 추가 개발 중
-
+- <a href="#" id="start-demo-link">데모 링크</a><br>- 2025.10.23 기술 스택 검증<br>- 2025.10.24 IF·BM·DB 개발·테스트 환경 설정<br>- 2025.10.25 데모 UI (Contexton) 준비 중<br>- 2025.11.23 데모 핵심 프로세스 기본 구현 완료<br>- 2025.11.23 로컬 특화 LLM 개발 중<br>- 2025.12.02 UX 요소 기능 추가 개발 중<br>- 2026.02.04 스타트업 PoC 데모 현장 적용 컨설팅 클로즈베타<br>- 2025.02.04 멀티 클라이언트 지원 온톨로지 엔진<br>- 現 고도화 개발 중 : 멀티 AI 에이전트 지원 온톨로지 엔진 | 컨텍스트 RAG 온톨로지 엔진 | 컨텍스트 RAG 온톨로지 게임 엔진
 
 <video width="100%" style="max-width: 1920px; height: auto;" autoplay loop muted playsinline>
   <source src="/assets/videos/worflogy_solution_feature.mp4" type="video/mp4">
