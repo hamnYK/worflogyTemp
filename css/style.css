@@ -47,7 +47,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
-  font-family: 'Pretendard Variable', 'Outfit', -apple-system, sans-serif;
+  font-family: 'Outfit', 'Pretendard Variable', -apple-system, sans-serif;
   font-size: 16px;
   color: var(--text);
   background: var(--bg);
@@ -138,7 +138,7 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 12px;
 }
 .section-title {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Outfit', 'Pretendard Variable', -apple-system, sans-serif;
   font-size: 36px;
   font-weight: 700;
   line-height: 1.25;
@@ -203,7 +203,7 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 16px;
 }
 .hero-title {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Outfit', 'Pretendard Variable', -apple-system, sans-serif;
   font-size: 52px;
   font-weight: 800;
   line-height: 1.15;
@@ -369,9 +369,9 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 12px;
 }
 .vision-text {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Outfit', 'Pretendard Variable', -apple-system, sans-serif;
   font-size: 22px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.4;
   letter-spacing: -0.3px;
 }
@@ -413,7 +413,7 @@ a { color: inherit; text-decoration: none; }
 .breadcrumb a:hover { color: var(--primary); }
 .breadcrumb-sep { color: var(--border); }
 .project-hero-title {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Outfit', 'Pretendard Variable', -apple-system, sans-serif;
   font-size: 42px;
   font-weight: 800;
   letter-spacing: -0.5px;
@@ -514,7 +514,7 @@ a { color: inherit; text-decoration: none; }
   border: 1px solid var(--border);
 }
 .feature-num {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Outfit', 'Pretendard Variable', -apple-system, sans-serif;
   font-size: 28px;
   font-weight: 800;
   color: var(--blue-100);
