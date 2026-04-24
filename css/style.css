@@ -415,28 +415,70 @@ a { color: inherit; text-decoration: none; }
 .gallery {
   padding: 64px;
 }
-.gallery-track {
-  display: flex;
-  gap: 16px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: 16px;
-  scrollbar-width: thin;
-  scrollbar-color: var(--border) transparent;
-}
-.gallery-item {
-  flex: 0 0 75%;
-  scroll-snap-align: start;
+.slider-container {
+  position: relative;
+  width: 100%;
   border-radius: var(--r-lg);
   overflow: hidden;
   border: 1px solid var(--border);
   box-shadow: var(--shadow-sm);
+  background: var(--bg);
 }
-.gallery-item img {
+.slider-track {
+  display: flex;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.slider-item {
+  flex: 0 0 100%;
+  width: 100%;
+}
+.slider-item img {
   width: 100%;
   height: auto;
   display: block;
+}
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid var(--border);
+  color: var(--text);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--t);
+  backdrop-filter: blur(4px);
+}
+.slider-btn:hover {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+.slider-btn.prev { left: 16px; }
+.slider-btn.next { right: 16px; }
+.slider-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+.slider-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  cursor: pointer;
+  transition: background var(--t);
+}
+.slider-dot.active {
+  background: var(--primary);
 }
 
 /* ── Feature List ── */
@@ -550,7 +592,6 @@ a { color: inherit; text-decoration: none; }
   .page-header { padding: 80px 28px 40px; }
   .project-hero { padding: 80px 28px 40px; }
   .gallery { padding: 40px 28px; }
-  .gallery-item { flex: 0 0 90%; }
   .features { padding: 40px 28px; }
   .vision-grid,
   .company-grid { grid-template-columns: 1fr; }
