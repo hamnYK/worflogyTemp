@@ -1,0 +1,6 @@
+{
+  // 상위 OneDrive 회사 문서 폴더의 git 저장소를 소스 제어에서 제외
+  "git.ignoredRepositories": [
+    "c:\\Users\\alchera\\OneDrive\\[주식회사 워플로지]"
+  ]
+}
