@@ -47,7 +47,7 @@ function initGraph() {
   const R  = 170; // orbit radius
 
   const nodes = [
-    { id: 'root', label: '프렉탈\n온톨로지', sublabel: '핵심 기술', href: null,
+    { id: 'root', label: '프렉탈\n온톨로지', sublabel: '디자인 기술', href: null,
       x: cx, y: cy, r: 68, primary: true },
     { id: 'p1', label: '조직지식', sublabel: '팀 지식 자산화', href: 'project-1.html',
       x: cx, y: cy - R, r: 52 },
