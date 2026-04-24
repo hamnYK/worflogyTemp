@@ -158,7 +158,7 @@ a { color: inherit; text-decoration: none; }
 .hero {
   display: flex;
   align-items: flex-start;
-  padding: 80px 64px 48px;
+  padding: 28px 64px 48px;
   background: linear-gradient(150deg, #fff 0%, #EFF6FF 55%, #FFF7ED 100%);
   position: relative;
   overflow: hidden;
@@ -365,7 +365,7 @@ a { color: inherit; text-decoration: none; }
 
 /* ── Node Graph (Projects) ── */
 .graph-section {
-  padding: 80px 64px 32px;
+  padding: 28px 64px 32px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -385,7 +385,7 @@ a { color: inherit; text-decoration: none; }
 
 /* ── Project Detail ── */
 .project-hero {
-  padding: 80px 64px 32px;
+  padding: 28px 64px 32px;
   background: linear-gradient(135deg, var(--primary-light) 0%, #fff 60%);
   border-bottom: 1px solid var(--border);
 }
@@ -552,7 +552,7 @@ a { color: inherit; text-decoration: none; }
 
 /* ── Page Header ── */
 .page-header {
-  padding: 80px 64px 32px;
+  padding: 28px 64px 32px;
   border-bottom: 1px solid var(--border);
 }
 
