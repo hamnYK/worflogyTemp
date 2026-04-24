@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+  {%- include head.html -%}
+  <body>
+
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCBVCCTX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <div class="gtranslate_wrapper"></div>
+
+    {{ content }}
+
+    <button id="floating-demo-btn" class="floating-demo-btn">Contexton</button>
+    <div id="mobile-ui-container" class="mobile-ui-container">
+      <p>사용자 인터페이스 영역</p>
+      <p>특허 출원(12월) 후 데모 공개</p>
+      <p>[알림] 서버&클라이언트 이관 중 2025.11.29</p>
+      <p>[알림] 특화 언어모델 개발 중 2025.11.29</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+
+      const ADMIN_ENC = "aHR0cHM6Ly9kb2NzLmdvb2dsZS5jb20vc3ByZWFkc2hlZXRzL2QvMWxWZEFfWUllUFhGaG9mSUgtT2NEWmFOVVFidHhzYmVud2FzOExtVkU4dUEvZWRpdD91c3A9c2hhcmluZw==";
+      const REQUIRE_CODE = true;
+      const ACCESS_CODE  = "worflogy";
+
+      function openAdminSheet() {
+        if (REQUIRE_CODE) {
+          const userInput = prompt("코드를 입력하세요.");
+          if (userInput !== ACCESS_CODE) {
+            alert("권한이 없습니다.");
+            return;
+          }
+        }
+        const decodedUrl = atob(ADMIN_ENC);
+        window.open(decodedUrl, "_blank", "noopener,noreferrer");
+      }
+
+        const contentArea = document.getElementById('content-area');
+        const unifiedNav = document.querySelector('.unified-nav');
+        const navLinks = unifiedNav ? unifiedNav.querySelectorAll('a[data-mdfile]') : [];
+        
+        const siteBaseUrl = '{{ site.baseurl }}';
+
+        const floatingBtn = document.getElementById('floating-demo-btn');
+        
+        const walkTokens = (token) => {
+          if (token.type === 'image' && !token.href.startsWith('http')) {
+            if (token.href.startsWith('/')) {
+              token.href = siteBaseUrl + token.href;
+            }
+          }
+        };
+        marked.use({ walkTokens });
+
+        function loadGiscus() {
+          const giscusContainer = document.getElementById('giscus-container');
+          if (!giscusContainer) return;
+
+          const existingScript = document.getElementById('giscus-script');
+          if (existingScript) {
+            existingScript.remove();
+          }
+          
+          const script = document.createElement('script');
+          script.id = 'giscus-script';
+          script.src = "https://giscus.app/client.js";
+          script.setAttribute('data-repo', "hamnYK/WorfBS");
+          script.setAttribute('data-repo-id', "R_kgDOP1voKQ");
+          script.setAttribute('data-category', "Announcements");
+          script.setAttribute('data-category-id', "DIC_kwDOP1voKc4Cv0rD");
+          script.setAttribute('data-mapping', "pathname");
+          script.setAttribute('data-strict', "0");
+          script.setAttribute('data-reactions-enabled', "1");
+          script.setAttribute('data-emit-metadata', "0");
+          script.setAttribute('data-input-position', "bottom");
+          script.setAttribute('data-theme', "light");
+          script.setAttribute('data-lang', "ko");
+          script.setAttribute('crossorigin', "anonymous");
+          script.async = true;
+          
+          giscusContainer.appendChild(script);
+        }
+
+        function updateActiveMenu(activeId) {
+          navLinks.forEach(link => {
+            link.classList.toggle('active-menu', link.id === activeId);
+          });
+        }
+
+        function loadContent(mdFile) {
+          const menuId = 'menu-' + mdFile.replace('.md', '');
+          fetch(siteBaseUrl + "/" + mdFile)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('파일 로딩 실패: ' + response.statusText);
+              }
+              return response.text();
+            })
+            .then(markdownText => {
+              if (contentArea) {
+                const contentOnly = markdownText.replace(/^---[\s\S]*?---\s*/, '').trim();
+                contentArea.innerHTML = marked.parse(contentOnly);
+                updateActiveMenu(menuId);
+                loadGiscus(); 
+              }
+            })
+            .catch(error => {
+              console.error('콘텐츠 로딩 오류:', error);
+              if(contentArea) contentArea.innerHTML = "<p>콘텐츠를 불러오는 데 실패했습니다. 파일 경로를 확인해주세요.</p>";
+            });
+        }
+        
+        document.body.addEventListener('click', function(e) {
+            const targetLink = e.target.closest('a');
+
+            if (targetLink && targetLink.id === 'admin-link') {
+              e.preventDefault();
+              openAdminSheet();
+              return;
+            }
+
+            if (targetLink && targetLink.dataset.mdfile && !targetLink.classList.contains('active-menu')) {
+                e.preventDefault();
+                const mdFile = targetLink.dataset.mdfile;
+                loadContent(mdFile);
+            }
+
+            if (targetLink && targetLink.id === 'start-demo-link') {
+                e.preventDefault();
+                if (floatingBtn) {
+                  floatingBtn.style.display = 'block';
+                }
+            }
+
+            if (e.target.id === 'floating-demo-btn') {
+                const mobileUiContainer = document.getElementById('mobile-ui-container');
+                if (mobileUiContainer) {
+                    const isDisplayed = mobileUiContainer.style.display === 'flex';
+                    mobileUiContainer.style.display = isDisplayed ? 'none' : 'flex';
+                }
+            }
+        });
+        
+        if (contentArea) {
+            loadContent('servicesolution.md');
+        }
+      });
+    </script>
+  </body>
+</html>
