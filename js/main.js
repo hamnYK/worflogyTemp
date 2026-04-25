@@ -59,10 +59,10 @@ function initGraph() {
       x: cx - R, y: cy, r: 52 },
   ];
 
-  const PRIMARY = '#18181B';
-  const ACCENT  = '#EA580C';
-  const LIGHT   = '#F4F4F5';
-  const BORDER  = '#E4E4E7';
+  const PRIMARY = '#000000';
+  const ACCENT  = '#06B6D4';
+  const LIGHT   = '#ECFEFF';
+  const BORDER  = 'rgba(0,0,0,0.08)';
   const TEXT_MUTED = '#71717A';
 
   // defs
