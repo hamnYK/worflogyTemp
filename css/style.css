@@ -462,6 +462,11 @@ a { color: inherit; text-decoration: none; }
   width: 100%;
   height: auto;
   display: block;
+  filter: grayscale(100%);
+  transition: filter var(--t);
+}
+.slider-item img:hover {
+  filter: grayscale(0%);
 }
 .slider-btn {
   position: absolute;
