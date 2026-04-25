@@ -53,7 +53,7 @@ function initGraph() {
       x: cx, y: cy - R, r: 52 },
     { id: 'p2', label: '지식 기반 진단', sublabel: '스타트업 진단', href: 'project-2.html',
       x: cx + R, y: cy, r: 52 },
-    { id: 'p3', label: '개인 지식', sublabel: '리서치노트', href: 'project-3.html',
+    { id: 'p3', label: '개인 지식', sublabel: '리서치 노트', href: 'project-3.html',
       x: cx, y: cy + R, r: 52 },
     { id: 'p4', label: '게임 엔진', sublabel: '지능형 서사 엔진', href: 'project-4.html',
       x: cx - R, y: cy, r: 52 },
