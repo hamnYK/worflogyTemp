@@ -111,19 +111,42 @@ h1, h2, h3, h4, h5, h6 {
   flex-shrink: 0;
 }
 .sidebar-logo {
-  padding: 28px 24px 20px;
+  padding: 24px 20px 18px;
   border-bottom: 1px solid var(--border);
-}
-.sidebar-logo img { height: 32px; width: auto; }
-.sidebar-logo a {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+}
+.sidebar-logo img { height: 28px; width: auto; flex-shrink: 0; }
+.sidebar-logo a {
+  display: flex;
+  flex-shrink: 0;
+  line-height: 0;
+}
+.sidebar-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+.brand-ko {
   font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 700;
   color: var(--text);
-  letter-spacing: -0.1px;
+  letter-spacing: -0.3px;
+  line-height: 1.35;
+  white-space: nowrap;
+}
+.brand-en {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--text-muted);
+  letter-spacing: 0.2px;
+  line-height: 1.35;
+  white-space: nowrap;
 }
 
 .sidebar-nav {
