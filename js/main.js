@@ -59,9 +59,11 @@ function initGraph() {
       x: cx - R, y: cy, r: 52 },
   ];
 
-  const BLUE   = '#1D4ED8';
-  const ORANGE = '#F97316';
-  const LIGHT  = '#EFF6FF';
+  const PRIMARY = '#18181B';
+  const ACCENT  = '#EA580C';
+  const LIGHT   = '#F4F4F5';
+  const BORDER  = '#E4E4E7';
+  const TEXT_MUTED = '#71717A';
 
   // defs
   const defs = svgEl('defs');
@@ -78,17 +80,58 @@ function initGraph() {
 
   // edges
   const edgeGroup = svgEl('g', { class: 'edges' });
-  nodes.slice(1).forEach((n, i) => {
+
+  // 1. Interconnected Web (Outer Ring)
+  const childNodes = nodes.slice(1);
+  for (let i = 0; i < childNodes.length; i++) {
+    let nextNode = childNodes[(i + 1) % childNodes.length];
+    const webLine = svgEl('line', {
+      x1: childNodes[i].x, y1: childNodes[i].y, 
+      x2: nextNode.x, y2: nextNode.y,
+      stroke: BORDER, 'stroke-width': '1.5',
+      'stroke-dasharray': '4 4',
+      opacity: '0.6'
+    });
+    edgeGroup.appendChild(webLine);
+  }
+
+  // 2. Main Spokes (Root to Children)
+  childNodes.forEach((n, i) => {
     const line = svgEl('line', {
       x1: cx, y1: cy, x2: n.x, y2: n.y,
-      stroke: BLUE, 'stroke-width': '2',
+      stroke: PRIMARY, 'stroke-width': '2',
       'stroke-dasharray': '6 4',
-      opacity: '0.35',
+      opacity: '0.25',
       class: 'edge-line'
     });
     line.style.animation = `dashAnim 2s linear infinite ${i * 0.5}s`;
     edgeGroup.appendChild(line);
   });
+  
+  // 3. Fractal Micro Nodes
+  nodes.forEach(n => {
+    for (let j = 0; j < 3; j++) {
+      let angle = Math.random() * Math.PI * 2;
+      let dist = n.r + 15 + Math.random() * 25;
+      let mx = n.x + Math.cos(angle) * dist;
+      let my = n.y + Math.sin(angle) * dist;
+      
+      const link = svgEl('line', {
+        x1: n.x, y1: n.y, x2: mx, y2: my,
+        stroke: PRIMARY, 'stroke-width': '1',
+        opacity: '0.15'
+      });
+      edgeGroup.appendChild(link);
+      
+      const dot = svgEl('circle', {
+        cx: mx, cy: my, r: 2 + Math.random() * 3,
+        fill: PRIMARY,
+        opacity: '0.3'
+      });
+      edgeGroup.appendChild(dot);
+    }
+  });
+
   svg.appendChild(edgeGroup);
 
   // nodes
@@ -103,9 +146,9 @@ function initGraph() {
     // circle
     const circle = svgEl('circle', {
       r: n.r,
-      fill: n.primary ? BLUE : '#fff',
-      stroke: n.primary ? 'transparent' : BLUE,
-      'stroke-width': '2.5',
+      fill: n.primary ? PRIMARY : '#fff',
+      stroke: n.primary ? 'transparent' : PRIMARY,
+      'stroke-width': '2',
     });
     g.appendChild(circle);
 
@@ -115,7 +158,7 @@ function initGraph() {
       const t = svgEl('text', {
         'text-anchor': 'middle',
         'dominant-baseline': 'middle',
-        fill: n.primary ? '#fff' : BLUE,
+        fill: n.primary ? '#fff' : PRIMARY,
         'font-size': n.primary ? '15' : '13',
         'font-weight': '700',
         'font-family': 'Pretendard Variable, Outfit, sans-serif',
@@ -129,7 +172,7 @@ function initGraph() {
     const sub = svgEl('text', {
       'text-anchor': 'middle',
       'dominant-baseline': 'middle',
-      fill: n.primary ? 'rgba(255,255,255,0.75)' : '#6B7280',
+      fill: n.primary ? 'rgba(255,255,255,0.7)' : TEXT_MUTED,
       'font-size': '10',
       'font-weight': '500',
       'font-family': 'Pretendard Variable, Outfit, sans-serif',
@@ -141,15 +184,15 @@ function initGraph() {
     // hover + click
     if (n.href) {
       g.addEventListener('mouseenter', () => {
-        circle.setAttribute('stroke', ORANGE);
+        circle.setAttribute('stroke', ACCENT);
         circle.setAttribute('stroke-width', '3');
         circle.setAttribute('fill', LIGHT);
         g.style.filter = 'url(#glow)';
         g.style.transform = `translate(${n.x}px,${n.y}px) scale(1.06)`;
       });
       g.addEventListener('mouseleave', () => {
-        circle.setAttribute('stroke', BLUE);
-        circle.setAttribute('stroke-width', '2.5');
+        circle.setAttribute('stroke', PRIMARY);
+        circle.setAttribute('stroke-width', '2');
         circle.setAttribute('fill', '#fff');
         g.style.filter = '';
         g.style.transform = `translate(${n.x}px,${n.y}px) scale(1)`;
