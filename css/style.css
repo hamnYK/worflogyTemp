@@ -620,7 +620,19 @@ a { color: inherit; text-decoration: none; }
   .project-hero { padding: 100px 28px 40px; }
   .gallery { padding: 40px 28px; }
   .features { padding: 40px 28px; }
+  .card-grid,
+  .feature-grid,
   .vision-grid,
   .company-grid { grid-template-columns: 1fr; }
+
+  /* 설명 글 자동 줄 바꾸기 개선: PC용 줄바꿈(br)을 모바일에서는 자연스럽게 텍스트 래핑으로 처리 */
+  .hero-title br,
+  .hero-sub br,
+  .section-title br,
+  .section-desc br,
+  .project-hero-title br,
+  .project-hero-desc br {
+    display: none;
+  }
   .graph-section { padding: 100px 28px 48px; }
 }
