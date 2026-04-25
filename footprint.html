@@ -1,123 +1,141 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.gtranslate.net https://translate.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https://cdn.gtranslate.net https://translate.googleapis.com https://www.google.com; connect-src 'self' https://translate.googleapis.com;" />
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.gtranslate.net https://translate.googleapis.com https://translate.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https://cdn.gtranslate.net https://translate.googleapis.com https://www.google.com; connect-src 'self' https://translate.googleapis.com https://translate.google.com;" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>발자국 — 워플로지</title>
   <meta name="description" content="워플로지의 연혁과 비전을 소개합니다." />
   <link rel="stylesheet" href="css/style.css" />
 </head>
+
 <body>
 
-<button class="hamburger" aria-label="메뉴 열기">
-  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
-</button>
-<div class="sidebar-overlay"></div>
+  <button class="hamburger" aria-label="메뉴 열기">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+  </button>
+  <div class="sidebar-overlay"></div>
 
-<aside class="sidebar">
-  <div class="sidebar-logo">
-    <a href="index.html"><img src="assets/worflogy_logo.svg" alt="워플로지" />주식회사 워플로지</a>
-  </div>
-  <nav class="sidebar-nav">
-    <a href="index.html" class="nav-item">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 9.75L12 3l9 6.75V21a.75.75 0 01-.75.75H15.75v-6h-7.5v6H3.75A.75.75 0 013 21V9.75z"/></svg>
-      랜딩
-    </a>
-    <a href="footprint.html" class="nav-item">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2m6-2a10 10 0 11-20 0 10 10 0 0120 0z"/></svg>
-      발자국
-    </a>
-    <a href="projects.html" class="nav-item">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zm0 9.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zm9.75-9.75A2.25 2.25 0 0115.75 3.75H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zm0 9.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/></svg>
-      프로젝트
-    </a>
-    <a href="company.html" class="nav-item">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5M9 7.5h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6h1.5m-1.5 3h1.5m-1.5 3h1.5M6.75 21V6.375c0-.621.504-1.125 1.125-1.125h8.25c.621 0 1.125.504 1.125 1.125V21M3.375 21h17.25"/></svg>
-      회사
-    </a>
-  </nav>
-  <div class="sidebar-footer">© 2025 워플로지<br />worflogy.com</div>
-</aside>
-
-<main class="main">
-
-  <div class="page-header">
-    <div class="section-label">Footprint</div>
-    <h1 class="section-title">발자국</h1>
-    <p class="section-desc">워플로지가 걸어온 길과 앞으로 나아갈 방향을 소개합니다.</p>
-  </div>
-
-  <!-- Timeline -->
-  <section class="section">
-    <div class="section-label">History</div>
-    <h2 class="section-title">연혁</h2>
-    <div class="timeline" style="margin-top:40px;">
-      <div class="timeline-item">
-        <div class="timeline-year">2026. 04</div>
-        <div class="timeline-title">솔루션 연구개발 (진행 중)</div>
-        <div class="timeline-desc">프로젝트 참조</div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-year">2025.12</div>
-        <div class="timeline-title">보유 IP 강화</div>
-        <div class="timeline-desc">10-2025-018777 워크플로 온톨로지 특허 출원</div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-year">2025.08</div>
-        <div class="timeline-title">고려대학교 AI 연구원 파트너 등록 (<a href="https://ai.korea.ac.kr/ai/index.do" target="_blank">링크</a>)</div>
-        <div class="timeline-desc">협력 방안 수립</div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-year">2025.08</div>
-        <div class="timeline-title">경기도 의왕시 스타트업 지원 센터 입주</div>
-        <div class="timeline-desc">경기도 판교테크노벨리에서 사무소 이전</div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-year">2025.08</div>
-        <div class="timeline-title">상표 사용 계약</div>
-        <div class="timeline-desc">CONTEXTON 상표</div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-year">2025.07</div>
-        <div class="timeline-title">상표 사용 및 특허 실시 계약</div>
-        <div class="timeline-desc">WORFLOGY 상표 및 워크플로 온톨로지 등록 특허</div>
-      </div>
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <a href="index.html"><img src="assets/worflogy_logo.svg" alt="워플로지" />주식회사 워플로지</a>
     </div>
-  </section>
+    <nav class="sidebar-nav">
+      <a href="index.html" class="nav-item">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M3 9.75L12 3l9 6.75V21a.75.75 0 01-.75.75H15.75v-6h-7.5v6H3.75A.75.75 0 013 21V9.75z" />
+        </svg>
+        랜딩
+      </a>
+      <a href="footprint.html" class="nav-item">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2m6-2a10 10 0 11-20 0 10 10 0 0120 0z" />
+        </svg>
+        발자국
+      </a>
+      <a href="projects.html" class="nav-item">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zm0 9.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zm9.75-9.75A2.25 2.25 0 0115.75 3.75H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zm0 9.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+        </svg>
+        프로젝트
+      </a>
+      <a href="company.html" class="nav-item">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M2.25 21h19.5M9 7.5h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6h1.5m-1.5 3h1.5m-1.5 3h1.5M6.75 21V6.375c0-.621.504-1.125 1.125-1.125h8.25c.621 0 1.125.504 1.125 1.125V21M3.375 21h17.25" />
+        </svg>
+        회사
+      </a>
+    </nav>
+    <div class="sidebar-footer">© 2025 워플로지<br />worflogy.com</div>
+  </aside>
 
-  <!-- Vision -->
-  <section class="section">
-    <div class="section-label">Vision & Mission</div>
-    <h2 class="section-title">비전과 미션</h2>
-    <div class="vision-grid">
-      <div class="vision-card accent-card">
-        <div class="vision-label">Vision</div>
-        <div class="vision-text">생각을 맥락으로 기록하고 공유하는 패러다임 정착</div>
-      </div>
-      <div class="vision-card">
-        <div class="vision-label">Mission</div>
-        <div class="vision-text" style="color:var(--text);">인공지능 리스크를 최적화하는 지식 소통 기술 리딩</div>
-      </div>
-      <div class="vision-card" style="grid-column: span 2;">
-        <div class="vision-label">Core Technology</div>
-        <div class="vision-text" style="color:var(--text); font-size:18px; line-height:1.6;">
-          1. 워크플로 온톨로지: 사람의 활동과 지식을 문제 해결 중심으로 연결<br />
-          2. 프렉탈 온톨로지: 지식의 자기 유사적 구조를 표현하는 온톨로지 그래프<br />
-          3. 지능형 서사 엔진: 생각을 맥락으로 기록하고 공유하는 지식공유 기술
+  <main class="main">
+
+    <div class="page-header">
+      <div class="section-label">Footprint</div>
+      <h1 class="section-title">발자국</h1>
+      <p class="section-desc">워플로지가 걸어온 길과 앞으로 나아갈 방향을 소개합니다.</p>
+    </div>
+
+    <!-- Timeline -->
+    <section class="section">
+      <div class="section-label">History</div>
+      <h2 class="section-title">연혁</h2>
+      <div class="timeline" style="margin-top:40px;">
+        <div class="timeline-item">
+          <div class="timeline-year">2026. 04</div>
+          <div class="timeline-title">솔루션 연구개발 (진행 중)</div>
+          <div class="timeline-desc">프로젝트 참조</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2025.12</div>
+          <div class="timeline-title">보유 IP 강화</div>
+          <div class="timeline-desc">10-2025-018777 워크플로 온톨로지 특허 출원</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2025.08</div>
+          <div class="timeline-title">고려대학교 AI 연구원 파트너 등록 (<a href="https://hiai.korea.ac.kr" target="_blank">관련 링크</a>)
+          </div>
+          <div class="timeline-desc">협력 방안 수립</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2025.08</div>
+          <div class="timeline-title">경기도 의왕시 스타트업 지원 센터 입주</div>
+          <div class="timeline-desc">경기도 판교테크노벨리에서 사무소 이전</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2025.08</div>
+          <div class="timeline-title">상표 사용 계약</div>
+          <div class="timeline-desc">CONTEXTON 상표</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2025.07</div>
+          <div class="timeline-title">상표 사용 및 특허 실시 계약</div>
+          <div class="timeline-desc">WORFLOGY 상표 및 워크플로 온톨로지 등록 특허</div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-</main>
+    <!-- Vision -->
+    <section class="section">
+      <div class="section-label">Vision & Mission</div>
+      <h2 class="section-title">비전과 미션</h2>
+      <div class="vision-grid">
+        <div class="vision-card accent-card">
+          <div class="vision-label">Vision</div>
+          <div class="vision-text">생각을 맥락으로 기록하고 공유하는 패러다임 정착</div>
+        </div>
+        <div class="vision-card">
+          <div class="vision-label">Mission</div>
+          <div class="vision-text" style="color:var(--text);">인공지능 리스크를 최적화하는 지식 소통 기술 리딩</div>
+        </div>
+        <div class="vision-card" style="grid-column: span 2;">
+          <div class="vision-label">Core Technology</div>
+          <div class="vision-text" style="color:var(--text); font-size:18px; line-height:1.6;">
+            1. 워크플로 온톨로지: 사람의 활동과 지식을 문제 해결 중심으로 연결<br />
+            2. 프렉탈 온톨로지: 지식의 자기 유사적 구조를 표현하는 온톨로지 그래프<br />
+            3. 지능형 서사 엔진: 생각을 맥락으로 기록하고 공유하는 지식공유 기술
+          </div>
+        </div>
+      </div>
+    </section>
 
-<!-- GTranslate -->
-<div class="gtranslate_wrapper"></div>
-<script>window.gtranslateSettings = {"default_language":"ko","native_language_names":true,"detect_browser_language":true,"languages":["ko","en"],"wrapper_selector":".gtranslate_wrapper","switcher_horizontal_position":"right","switcher_vertical_position":"top","float_switcher_open_direction":"bottom"}</script>
-<script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
+  </main>
 
-<script src="js/main.js"></script>
+  <!-- GTranslate -->
+  <div class="gtranslate_wrapper"></div>
+  <script>window.gtranslateSettings = { "default_language": "ko", "native_language_names": true, "detect_browser_language": true, "languages": ["ko", "en"], "wrapper_selector": ".gtranslate_wrapper", "switcher_horizontal_position": "right", "switcher_vertical_position": "top", "float_switcher_open_direction": "bottom" }</script>
+  <script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
+
+  <script src="js/main.js"></script>
 </body>
+
 </html>
