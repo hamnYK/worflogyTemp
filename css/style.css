@@ -58,6 +58,8 @@ body {
   margin: 0 auto;
   position: relative;
   box-shadow: 0 0 40px rgba(0,0,0,0.02);
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 img { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
@@ -145,6 +147,7 @@ a { color: inherit; text-decoration: none; }
   color: var(--text);
   margin-bottom: 32px;
   letter-spacing: -0.5px;
+  text-wrap: balance;
 }
 .section-title + .section-desc {
   margin-top: -20px;
@@ -210,6 +213,7 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: -1px;
   color: var(--text);
   margin-bottom: 20px;
+  text-wrap: balance;
 }
 .hero-title .primary { color: var(--primary); }
 .hero-title .accent  { color: var(--accent); }
@@ -254,16 +258,19 @@ a { color: inherit; text-decoration: none; }
 /* ── Project Cards (Landing preview) ── */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
 }
 .card {
+  display: flex;
+  flex-direction: column;
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
-  padding: 20px;
+  padding: 32px;
   transition: box-shadow var(--t), transform var(--t), border-color var(--t);
   cursor: pointer;
+  height: 100%;
 }
 .card:hover {
   box-shadow: var(--shadow-md);
@@ -293,10 +300,11 @@ a { color: inherit; text-decoration: none; }
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--primary);
-  margin-top: 16px;
+  margin-top: auto;
+  padding-top: 20px;
 }
 
 /* ── Timeline (Footprint) ── */
@@ -345,8 +353,8 @@ a { color: inherit; text-decoration: none; }
 /* ── Vision Block ── */
 .vision-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
 }
 .vision-card {
   background: var(--surface);
@@ -504,14 +512,17 @@ a { color: inherit; text-decoration: none; }
 }
 .feature-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
 }
 .feature-item {
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 28px;
   background: var(--surface);
   border-radius: var(--r-md);
   border: 1px solid var(--border);
+  height: 100%;
 }
 .feature-num {
   font-family: 'Outfit', 'Pretendard Variable', -apple-system, sans-serif;
@@ -535,14 +546,14 @@ a { color: inherit; text-decoration: none; }
 /* ── Company Page ── */
 .company-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
 }
 .info-card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
-  padding: 20px 24px;
+  padding: 28px 32px;
 }
 .info-label {
   font-size: 11px;
