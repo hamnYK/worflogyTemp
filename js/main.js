@@ -204,15 +204,8 @@ function svgEl(tag, attrs = {}) {
   return el;
 }
 
-/* ── CSS animation for dash ── */
-const style = document.createElement('style');
-style.textContent = `
-@keyframes dashAnim {
-  to { stroke-dashoffset: -20; }
-}
-.edge-line { stroke-dashoffset: 0; }
-`;
-document.head.appendChild(style);
+/* @keyframes dashAnim + .edge-line → css/style.css 에 정의됨 */
+
 
 /* ── Image Slider ── */
 document.addEventListener('DOMContentLoaded', () => {

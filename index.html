@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.gtranslate.net https://translate.googleapis.com https://translate.google.com https://translate-pa.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://www.gstatic.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https://cdn.gtranslate.net https://translate.googleapis.com https://www.google.com https://fonts.gstatic.com https://www.gstatic.com https://translate.google.com; connect-src 'self' https://translate.googleapis.com https://translate.google.com https://cdn.jsdelivr.net https://translate-pa.googleapis.com;" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-GMDREuNQNJynOQvCXFCl/JLp3JtjQWFHx+V4UdEFI34=' https://cdn.gtranslate.net https://translate.googleapis.com https://translate.google.com https://translate-pa.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://www.gstatic.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https://cdn.gtranslate.net https://translate.googleapis.com https://www.google.com https://fonts.gstatic.com https://www.gstatic.com https://translate.google.com; connect-src 'self' https://translate.googleapis.com https://translate.google.com https://translate-pa.googleapis.com https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests;" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>워플로지 — 생각을 맥락으로 전환하는 디자인 기술 스타트업</title>
   <meta name="description" content="워플로지는 프랙털 온톨로지 기반의 지식 자동화 플랫폼을 개발합니다. 사람이 인공지능과 협업하는 진화된 방법을 만듭니다." />
@@ -24,7 +24,7 @@
 <aside class="sidebar">
   <div class="sidebar-logo">
     <a href="index.html"><img src="assets/worflogy_logo.svg" alt="워플로지"></a>
-    <div class="sidebar-brand">
+    <div class="sidebar-brand notranslate" translate="no">
       <span class="brand-ko">(주)워플로지</span>
       <span class="brand-en">Worflogy Inc.</span>
     </div>
@@ -57,6 +57,56 @@
 
   <!-- Hero -->
   <section class="hero">
+    <!-- 정체성 아이콘: 헥사고날 프랙털 지식 그래프 -->
+    <div class="hero-bg-icon" aria-hidden="true">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none">
+        <!-- 2차 프랙털 분기 (최외곽) -->
+        <line x1="200" y1="88" x2="200" y2="28" stroke="#1A1F36" stroke-width="1" opacity="0.08"/>
+        <circle cx="200" cy="28" r="4.5" fill="#1A1F36" opacity="0.10"/>
+        <line x1="297" y1="143" x2="357" y2="108" stroke="#1A1F36" stroke-width="1" opacity="0.08"/>
+        <circle cx="357" cy="108" r="4.5" fill="#1A1F36" opacity="0.10"/>
+        <line x1="297" y1="257" x2="357" y2="292" stroke="#1A1F36" stroke-width="1" opacity="0.08"/>
+        <circle cx="357" cy="292" r="4.5" fill="#1A1F36" opacity="0.10"/>
+        <line x1="200" y1="312" x2="200" y2="372" stroke="#1A1F36" stroke-width="1" opacity="0.08"/>
+        <circle cx="200" cy="372" r="4.5" fill="#1A1F36" opacity="0.10"/>
+        <line x1="103" y1="257" x2="43" y2="292" stroke="#1A1F36" stroke-width="1" opacity="0.08"/>
+        <circle cx="43" cy="292" r="4.5" fill="#1A1F36" opacity="0.10"/>
+        <line x1="103" y1="143" x2="43" y2="108" stroke="#1A1F36" stroke-width="1" opacity="0.08"/>
+        <circle cx="43" cy="108" r="4.5" fill="#1A1F36" opacity="0.10"/>
+        <!-- 외곽 헥사곤 웹 연결선 (점선) -->
+        <line x1="200" y1="88" x2="297" y2="143" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.11"/>
+        <line x1="297" y1="143" x2="297" y2="257" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.11"/>
+        <line x1="297" y1="257" x2="200" y2="312" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.11"/>
+        <line x1="200" y1="312" x2="103" y2="257" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.11"/>
+        <line x1="103" y1="257" x2="103" y2="143" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.11"/>
+        <line x1="103" y1="143" x2="200" y2="88" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.11"/>
+        <!-- 중심 → 외곽 스포크 -->
+        <line x1="200" y1="200" x2="200" y2="88"  stroke="#1A1F36" stroke-width="1.5" opacity="0.14"/>
+        <line x1="200" y1="200" x2="297" y2="143" stroke="#1A1F36" stroke-width="1.5" opacity="0.14"/>
+        <line x1="200" y1="200" x2="297" y2="257" stroke="#1A1F36" stroke-width="1.5" opacity="0.14"/>
+        <line x1="200" y1="200" x2="200" y2="312" stroke="#1A1F36" stroke-width="1.5" opacity="0.14"/>
+        <line x1="200" y1="200" x2="103" y2="257" stroke="#1A1F36" stroke-width="1.5" opacity="0.14"/>
+        <line x1="200" y1="200" x2="103" y2="143" stroke="#1A1F36" stroke-width="1.5" opacity="0.14"/>
+        <!-- 외곽 6개 노드 -->
+        <circle cx="200" cy="88"  r="10" fill="#1A1F36" opacity="0.18"/>
+        <circle cx="297" cy="143" r="10" fill="#1A1F36" opacity="0.18"/>
+        <circle cx="297" cy="257" r="10" fill="#1A1F36" opacity="0.18"/>
+        <circle cx="200" cy="312" r="10" fill="#1A1F36" opacity="0.18"/>
+        <circle cx="103" cy="257" r="10" fill="#1A1F36" opacity="0.18"/>
+        <circle cx="103" cy="143" r="10" fill="#1A1F36" opacity="0.18"/>
+        <!-- 스포크 중간 서브노드 -->
+        <circle cx="200" cy="144" r="5" fill="#1A1F36" opacity="0.12"/>
+        <circle cx="249" cy="172" r="5" fill="#1A1F36" opacity="0.12"/>
+        <circle cx="249" cy="228" r="5" fill="#1A1F36" opacity="0.12"/>
+        <circle cx="200" cy="256" r="5" fill="#1A1F36" opacity="0.12"/>
+        <circle cx="151" cy="228" r="5" fill="#1A1F36" opacity="0.12"/>
+        <circle cx="151" cy="172" r="5" fill="#1A1F36" opacity="0.12"/>
+        <!-- 중앙 허브 노드 (더블 링) -->
+        <circle cx="200" cy="200" r="20" fill="#1A1F36" opacity="0.07"/>
+        <circle cx="200" cy="200" r="12" fill="#1A1F36" opacity="0.20"/>
+        <circle cx="200" cy="200" r="6"  fill="#1A1F36" opacity="0.30"/>
+      </svg>
+    </div>
     <div class="hero-content">
       <div class="hero-badge">
         <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
@@ -123,7 +173,7 @@
 
 <!-- GTranslate -->
 <div class="gtranslate_wrapper"></div>
-<script>window.gtranslateSettings = {"default_language":"ko","native_language_names":true,"detect_browser_language":true,"languages":["ko","en"],"wrapper_selector":".gtranslate_wrapper","switcher_horizontal_position":"right","switcher_vertical_position":"top","float_switcher_open_direction":"bottom"}</script>
+<script src="js/gtranslate-config.js"></script>
 <script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
 
 <script src="js/main.js"></script>
