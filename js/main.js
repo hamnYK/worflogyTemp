@@ -59,11 +59,9 @@ function initGraph() {
       x: cx - R, y: cy, r: 52 },
   ];
 
-  const PRIMARY = '#000000';
-  const ACCENT  = '#06B6D4';
-  const LIGHT   = '#ECFEFF';
-  const BORDER  = 'rgba(0,0,0,0.08)';
-  const TEXT_MUTED = '#71717A';
+  const PRIMARY    = '#1A1F36';   // Ink Navy
+  const BORDER     = 'rgba(26,31,54,0.10)';
+  const TEXT_MUTED = '#6B7280';
 
   // defs
   const defs = svgEl('defs');
@@ -143,12 +141,13 @@ function initGraph() {
       style: n.href ? 'cursor:pointer' : 'cursor:default'
     });
 
-    // circle
+    // circle – CSS transition으로 hover 부드럽게
     const circle = svgEl('circle', {
       r: n.r,
       fill: n.primary ? PRIMARY : '#fff',
       stroke: n.primary ? 'transparent' : PRIMARY,
-      'stroke-width': '2',
+      'stroke-width': '1.5',
+      style: 'transition: fill 0.22s ease, stroke-width 0.22s ease;'
     });
     g.appendChild(circle);
 
@@ -161,7 +160,7 @@ function initGraph() {
         fill: n.primary ? '#fff' : PRIMARY,
         'font-size': n.primary ? '15' : '13',
         'font-weight': '700',
-        'font-family': 'Pretendard Variable, Outfit, sans-serif',
+        'font-family': 'Noto Serif KR, Pretendard Variable, serif',
         y: (i - (lines.length - 1) / 2) * 18 - 8,
       });
       t.textContent = line;
@@ -175,7 +174,7 @@ function initGraph() {
       fill: n.primary ? 'rgba(255,255,255,0.7)' : TEXT_MUTED,
       'font-size': '10',
       'font-weight': '500',
-      'font-family': 'Pretendard Variable, Outfit, sans-serif',
+      'font-family': 'Pretendard Variable, DM Sans, sans-serif',
       y: lines.length * 10,
     });
     sub.textContent = n.sublabel;
@@ -184,18 +183,12 @@ function initGraph() {
     // hover + click
     if (n.href) {
       g.addEventListener('mouseenter', () => {
-        circle.setAttribute('stroke', ACCENT);
-        circle.setAttribute('stroke-width', '3');
-        circle.setAttribute('fill', LIGHT);
-        g.style.filter = 'url(#glow)';
-        g.style.transform = `translate(${n.x}px,${n.y}px) scale(1.06)`;
+        circle.setAttribute('stroke-width', '2.5');
+        circle.setAttribute('fill', '#F5F0E8');   // Warm Sand – 깔끔한 hover
       });
       g.addEventListener('mouseleave', () => {
-        circle.setAttribute('stroke', PRIMARY);
-        circle.setAttribute('stroke-width', '2');
+        circle.setAttribute('stroke-width', '1.5');
         circle.setAttribute('fill', '#fff');
-        g.style.filter = '';
-        g.style.transform = `translate(${n.x}px,${n.y}px) scale(1)`;
       });
       g.addEventListener('click', () => { location.href = n.href; });
     }
