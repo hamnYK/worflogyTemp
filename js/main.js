@@ -206,6 +206,26 @@ function svgEl(tag, attrs = {}) {
 
 /* @keyframes dashAnim + .edge-line → css/style.css 에 정의됨 */
 
+/* ── Platform Node Entrance Animation ── */
+document.addEventListener('DOMContentLoaded', () => {
+  const nodes = document.querySelectorAll('.pm-anim');
+  if (!nodes.length) return;
+  if (!('IntersectionObserver' in window)) {
+    nodes.forEach(n => n.classList.add('visible'));
+    return;
+  }
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const delay = parseInt(e.target.dataset.delay || 0, 10);
+        setTimeout(() => e.target.classList.add('visible'), delay);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  nodes.forEach(n => obs.observe(n));
+});
+
 
 /* ── Image Slider ── */
 document.addEventListener('DOMContentLoaded', () => {

@@ -59,6 +59,166 @@
     @media (max-width: 768px) {
       .project-list { grid-template-columns: 1fr; padding: 0 28px 48px; }
     }
+
+    /* ── Platform Layered Architecture Section ── */
+    .platform-section {
+      padding: 48px 64px 72px;
+      border-top: 1px solid var(--border);
+    }
+    .platform-map {
+      position: relative;
+      margin-top: 36px;
+      border: 1.5px dashed var(--border-sand);
+      border-radius: var(--r-lg);
+      background: var(--sand);
+      padding: 52px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    /* 플랫폼명 배지 (우상단) */
+    .pm-outer-badge {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--text-muted);
+      letter-spacing: 0.3px;
+      opacity: 0.75;
+      white-space: nowrap;
+    }
+    /* L3: 애플리케이션 레이어 (4개 카드) */
+    .pm-apps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .pm-app-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 20px 14px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      text-decoration: none;
+      transition: all var(--t);
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
+    .pm-app-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 0;
+      background: var(--ink);
+      border-radius: 0 0 2px 0;
+      transition: height var(--t-slow);
+    }
+    .pm-app-card:hover::before { height: 100%; }
+    .pm-app-card:hover {
+      border-color: rgba(26,31,54,0.22);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+    .pm-card-name {
+      font-family: var(--font-serif-ko);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.35;
+    }
+    .pm-card-tech {
+      font-family: var(--font-body);
+      font-size: 10.5px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+    /* L2: 프랙털 온톨로지 엔진 (전체 너비 바) */
+    .pm-engine-bar {
+      background: var(--ink);
+      border-radius: var(--r-md);
+      padding: 18px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      box-shadow: 0 8px 28px rgba(26,31,54,0.22);
+      animation: enginePulse 3s ease-in-out infinite;
+    }
+    @keyframes enginePulse {
+      0%, 100% { box-shadow: 0 8px 28px rgba(26,31,54,0.22); }
+      50%       { box-shadow: 0 8px 36px rgba(26,31,54,0.38); }
+    }
+    .pm-engine-icon { width: 22px; height: 22px; opacity: 0.6; flex-shrink: 0; }
+    .pm-engine-name {
+      font-family: var(--font-serif-ko);
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.3px;
+    }
+    .pm-engine-en {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: 11px;
+      color: rgba(255,255,255,0.45);
+      margin-left: 4px;
+    }
+    /* L1: 인프라 서비스 (3개) */
+    .pm-infra-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .pm-infra-chip {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 12px 14px;
+      text-align: center;
+      font-family: var(--font-body);
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    /* L0: 운영 (전체 너비 바) */
+    .pm-ops-bar {
+      background: rgba(26,31,54,0.05);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 13px 28px;
+      text-align: center;
+      font-family: var(--font-body);
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    /* 진입 애니메이션 */
+    .pm-anim {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .pm-anim.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @media (max-width: 900px) {
+      .platform-section { padding: 36px 28px 48px; }
+      .pm-apps { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 540px) {
+      .pm-apps { grid-template-columns: 1fr; }
+      .pm-infra-row { grid-template-columns: repeat(3, 1fr); }
+    }
   </style>
 </head>
 <body>
@@ -140,6 +300,72 @@
       </div>
     </a>
   </div>
+
+  <!-- ── Platform Convergence Section ── -->
+  <section class="platform-section" id="platform" aria-labelledby="platform-title">
+    <div class="section-label">Platform</div>
+    <h2 class="section-title" id="platform-title">하나의 플랫폼으로</h2>
+    <p class="section-desc">서로 다른 도메인을, 하나의 구조화 기술로 연결합니다.</p>
+
+    <div class="platform-map" role="figure" aria-label="워플로지 온톨로지 플랫폼 구조도">
+
+      <!-- 우상단 플랫폼 명칭 -->
+      <div class="pm-outer-badge">워플로지 온톨로지 플랫폼</div>
+
+      <!-- L3: 애플리케이션 레이어 (4개 동급 솔루션) -->
+      <div class="pm-apps pm-anim" data-delay="0">
+        <a href="project-1.html" class="pm-app-card">
+          <div class="pm-card-name">팀 지식</div>
+          <div class="pm-card-tech">팀 워크플로 구조화</div>
+        </a>
+        <a href="project-2.html" class="pm-app-card">
+          <div class="pm-card-name">지식 기반 진단</div>
+          <div class="pm-card-tech">리스크 시뮬레이터</div>
+        </a>
+        <a href="project-3.html" class="pm-app-card">
+          <div class="pm-card-name">개인 지식</div>
+          <div class="pm-card-tech">개인 연구 구조화</div>
+        </a>
+        <a href="project-4.html" class="pm-app-card">
+          <div class="pm-card-name">게임 엔진</div>
+          <div class="pm-card-tech">서사 엔진 · 게임 콘텐츠</div>
+        </a>
+      </div>
+
+      <!-- L2: 프랙털 온톨로지 엔진 (전체 너비 바) -->
+      <div class="pm-engine-bar pm-anim" data-delay="100" aria-label="프랙털 온톨로지 엔진">
+        <div class="pm-engine-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+            <circle cx="12" cy="12" r="6"  stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/>
+            <circle cx="12" cy="12" r="2.5" fill="rgba(255,255,255,0.5)"/>
+            <line x1="12" y1="2"  x2="12" y2="6"  stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
+            <line x1="12" y1="18" x2="12" y2="22" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
+            <line x1="2"  y1="12" x2="6"  y2="12" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
+            <line x1="18" y1="12" x2="22" y2="12" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
+          </svg>
+        </div>
+        <span class="pm-engine-name">프랙털 온톨로지 엔진</span>
+        <span class="pm-engine-en">Fractal Ontology Engine</span>
+      </div>
+
+      <!-- L1: 인프라 서비스 (보안 / 자원 / 인증) -->
+      <div class="pm-infra-row pm-anim" data-delay="200">
+        <div class="pm-infra-chip">보안</div>
+        <div class="pm-infra-chip">자원</div>
+        <div class="pm-infra-chip">인증</div>
+      </div>
+
+      <!-- L0: 운영 (전체 너비 바) -->
+      <div class="pm-ops-bar pm-anim" data-delay="300">운영</div>
+
+    </div><!-- /.platform-map -->
+
+    <p style="margin-top:20px; font-family:var(--font-body); font-size:13px; color:var(--text-muted); text-align:center;">
+      각 솔루션 박스를 클릭하면 상세 소개로 이동합니다.
+    </p>
+  </section>
+
 
 </main>
 
