@@ -42,21 +42,32 @@ document.addEventListener("DOMContentLoaded", () => {
       el.textContent = data.currency;
     });
 
-    // SVG 벤다이어그램 원 크기 애니메이션 트리거
+    // SVG 벤다이어그램 원 크기 및 텍스트 위치 애니메이션 트리거
     const tamCircle = document.getElementById("circle-tam");
     const samCircle = document.getElementById("circle-sam");
     const somCircle = document.getElementById("circle-som");
+    const tamLabel = document.getElementById("label-tam");
+    const samLabel = document.getElementById("label-sam");
+    const somLabel = document.getElementById("label-som");
 
     if (tabKey === "ko") {
       // 국내 시장 스케일
       if (tamCircle) tamCircle.setAttribute("r", "140");
       if (samCircle) samCircle.setAttribute("r", "90");
       if (somCircle) somCircle.setAttribute("r", "50");
+      // 국내 시장 텍스트 위치 정렬 (경계선과 겹치지 않게 조절)
+      if (tamLabel) tamLabel.setAttribute("y", "90");
+      if (samLabel) samLabel.setAttribute("y", "135");
+      if (somLabel) somLabel.setAttribute("y", "205");
     } else {
       // 글로벌 시장 스케일
       if (tamCircle) tamCircle.setAttribute("r", "150");
       if (samCircle) samCircle.setAttribute("r", "100");
       if (somCircle) somCircle.setAttribute("r", "60");
+      // 글로벌 시장 텍스트 위치 정렬 (원 크기 팽창에 따라 위로 이동)
+      if (tamLabel) tamLabel.setAttribute("y", "75");
+      if (samLabel) samLabel.setAttribute("y", "120");
+      if (somLabel) somLabel.setAttribute("y", "205");
     }
 
     // 기본 가이드 설명 노출
