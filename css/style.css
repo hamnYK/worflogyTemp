@@ -330,7 +330,6 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-body);
   font-size: var(--fs-body-sub);
   color: var(--text-muted);
-  max-width: 560px;
   line-height: var(--lh-body-sub);
   margin-bottom: 32px;
 }
@@ -721,7 +720,6 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-body);
   font-size: var(--fs-body-sub);
   color: var(--text-muted);
-  max-width: 560px;
   line-height: var(--lh-body-sub);
 }
 
