@@ -5,7 +5,7 @@
    ================================================ */
 
 /* ── Fonts ── */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Outfit:wght@400;600;800&display=swap');
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
 
 /* ── Tokens ── */
@@ -60,10 +60,8 @@
   /* Typography */
   --font-serif-ko: 'Noto Serif KR', 'Pretendard Variable', serif;
   --font-serif-en: 'DM Serif Display', serif;
-  --font-sans-en:  'DM Sans', 'Pretendard Variable', -apple-system, sans-serif;
+  --font-sans-en:  'Outfit', 'DM Sans', 'Pretendard Variable', -apple-system, sans-serif;
   --font-body:     'Pretendard Variable', 'DM Sans', -apple-system, sans-serif;
-
-  /* Transition */
   --t: 0.22s ease;
   --t-slow: 0.38s ease;
 }
@@ -139,7 +137,7 @@ h1, h2, h3, h4, h5, h6 {
   white-space: nowrap;
 }
 .brand-en {
-  font-family: 'DM Serif Display', serif;
+  font-family: var(--font-serif-en);
   font-style: italic;
   font-size: 10px;
   font-weight: 400;
@@ -210,7 +208,7 @@ h1, h2, h3, h4, h5, h6 {
 /* 섹션 레이블 – Ink Navy italic 스타일 */
 .section-label {
   display: inline-block;
-  font-family: 'DM Serif Display', serif;
+  font-family: var(--font-serif-en);
   font-style: italic;
   font-size: 13px;
   font-weight: 400;
@@ -255,7 +253,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 17px;
   color: var(--text-muted);
   max-width: 560px;
-  line-height: 1.8;
+  line-height: 1.85;
   margin-bottom: 32px;
 }
 
@@ -320,7 +318,7 @@ h1, h2, h3, h4, h5, h6 {
   background: rgba(26,31,54,0.07);
   color: var(--ink);
   border-radius: var(--r-xs);
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--font-sans-en);
   font-size: 11.5px;
   font-weight: 600;
   letter-spacing: 0.3px;
@@ -361,7 +359,7 @@ h1, h2, h3, h4, h5, h6 {
   gap: 8px;
   padding: 13px 28px;
   border-radius: var(--r-xs);   /* 더 단단하고 명료한 느낌 */
-  font-family: var(--font-body);
+  font-family: var(--font-sans-en);
   font-size: 14.5px;
   font-weight: 600;
   cursor: pointer;
@@ -452,6 +450,8 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   color: var(--text);
   margin-bottom: 8px;
+  letter-spacing: -0.3px;
+  line-height: 1.4;
 }
 .card-desc {
   font-family: var(--font-body);
@@ -463,7 +463,7 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  font-family: var(--font-body);
+  font-family: var(--font-sans-en);
   font-size: 12.5px;
   font-weight: 600;
   color: var(--text-muted);
@@ -504,7 +504,7 @@ h1, h2, h3, h4, h5, h6 {
   border-color: var(--ink);
 }
 .timeline-year {
-  font-family: 'DM Serif Display', serif;
+  font-family: var(--font-serif-en);
   font-style: italic;
   font-size: 12.5px;
   font-weight: 400;
@@ -519,6 +519,8 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   color: var(--text);
   margin-bottom: 6px;
+  letter-spacing: -0.3px;
+  line-height: 1.4;
 }
 .timeline-desc {
   font-family: var(--font-body);
@@ -548,7 +550,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .vision-card.accent-card .vision-label { color: rgba(255,255,255,0.8); }
 .vision-label {
-  font-family: 'DM Serif Display', serif;
+  font-family: var(--font-serif-en);
   font-style: italic;
   font-size: 12px;
   font-weight: 400;
@@ -730,7 +732,7 @@ h1, h2, h3, h4, h5, h6 {
   border-color: rgba(26,31,54,0.18);
 }
 .feature-num {
-  font-family: 'DM Serif Display', serif;
+  font-family: var(--font-serif-en);
   font-size: 32px;
   font-weight: 400;
   font-style: italic;
@@ -739,10 +741,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 .feature-title {
   font-family: var(--font-serif-ko);
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--text);
   margin-bottom: 6px;
+  letter-spacing: -0.3px;
+  line-height: 1.4;
 }
 .feature-desc {
   font-family: var(--font-body);
@@ -765,7 +769,7 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: var(--shadow-sm);
 }
 .info-label {
-  font-family: 'DM Serif Display', serif;
+  font-family: var(--font-serif-en);
   font-style: italic;
   font-size: 11.5px;
   font-weight: 400;
