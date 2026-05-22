@@ -247,23 +247,10 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 14px 6px;
   text-transform: uppercase;
 }
-.nav-item-badge {
-  font-family: var(--font-sans-en);
-  font-size: 9px;
-  font-weight: 700;
-  color: var(--coral);
-  background-color: rgba(232, 97, 58, 0.08);
-  border: 1px solid rgba(232, 97, 58, 0.18);
-  padding: 1px 5px;
-  border-radius: 3px;
-  margin-left: auto;
-  letter-spacing: 0.2px;
-  text-transform: uppercase;
-}
 .nav-item-outlink {
   width: 10px;
   height: 10px;
-  margin-left: 4px;
+  margin-left: auto;
   opacity: 0.45;
   transition: opacity var(--t);
 }
