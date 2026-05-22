@@ -3,6 +3,8 @@
    Sidebar active state, mobile menu, project graph
    ================================================ */
 
+window.name = "worflogy_main";
+
 /* ── Active nav item ── */
 document.addEventListener('DOMContentLoaded', () => {
   const path = location.pathname.split('/').pop() || 'index.html';
