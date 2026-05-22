@@ -231,6 +231,46 @@ h1, h2, h3, h4, h5, h6 {
 }
 .nav-item svg { width: 16px; height: 16px; flex-shrink: 0; }
 
+/* ── Sidebar Nav Divider & Service Group ── */
+.nav-divider {
+  height: 1px;
+  background-color: var(--border);
+  margin: 16px 14px;
+  opacity: 0.65;
+}
+.nav-group-title {
+  font-family: var(--font-sans-en);
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--text-light);
+  letter-spacing: 0.8px;
+  margin: 0 14px 6px;
+  text-transform: uppercase;
+}
+.nav-item-badge {
+  font-family: var(--font-sans-en);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--coral);
+  background-color: rgba(232, 97, 58, 0.08);
+  border: 1px solid rgba(232, 97, 58, 0.18);
+  padding: 1px 5px;
+  border-radius: 3px;
+  margin-left: auto;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+}
+.nav-item-outlink {
+  width: 10px;
+  height: 10px;
+  margin-left: 4px;
+  opacity: 0.45;
+  transition: opacity var(--t);
+}
+.nav-item:hover .nav-item-outlink {
+  opacity: 0.85;
+}
+
 .sidebar-footer {
   padding: 16px 24px;
   border-top: 1px solid var(--border);
