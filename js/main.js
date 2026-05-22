@@ -44,19 +44,19 @@ function initGraph() {
   const W = svg.viewBox.baseVal.width  || 680;
   const H = svg.viewBox.baseVal.height || 580;
   const cx = W / 2, cy = H / 2;
-  const R  = 170; // orbit radius
+  const R  = 190; // orbit radius
 
   const nodes = [
     { id: 'root', label: '프랙털\n온톨로지', sublabel: '디자인 기술', href: null,
-      x: cx, y: cy, r: 68, primary: true },
+      x: cx, y: cy, r: 80, primary: true },
     { id: 'p1', label: '팀 지식', sublabel: '팀 지식 자산화', href: 'project-1.html',
-      x: cx, y: cy - R, r: 52 },
+      x: cx, y: cy - R, r: 64 },
     { id: 'p2', label: '지식 기반 진단', sublabel: '스타트업 진단', href: 'project-2.html',
-      x: cx + R, y: cy, r: 52 },
+      x: cx + R, y: cy, r: 64 },
     { id: 'p3', label: '개인 지식', sublabel: '리서치 노트', href: 'project-3.html',
-      x: cx, y: cy + R, r: 52 },
+      x: cx, y: cy + R, r: 64 },
     { id: 'p4', label: '게임 엔진', sublabel: '지능형 서사 엔진', href: 'project-4.html',
-      x: cx - R, y: cy, r: 52 },
+      x: cx - R, y: cy, r: 64 },
   ];
 
   const PRIMARY    = '#1A1F36';   // Ink Navy
@@ -158,10 +158,10 @@ function initGraph() {
         'text-anchor': 'middle',
         'dominant-baseline': 'middle',
         fill: n.primary ? '#fff' : PRIMARY,
-        'font-size': n.primary ? '15' : '13',
+        'font-size': n.primary ? '18' : '15',
         'font-weight': '700',
         'font-family': 'var(--font-serif-ko)',
-        y: (i - (lines.length - 1) / 2) * 18 - 8,
+        y: (i - (lines.length - 1) / 2) * 21 - 10,
       });
       t.textContent = line;
       g.appendChild(t);
@@ -172,10 +172,10 @@ function initGraph() {
       'text-anchor': 'middle',
       'dominant-baseline': 'middle',
       fill: n.primary ? 'rgba(255,255,255,0.7)' : TEXT_MUTED,
-      'font-size': '10',
+      'font-size': '12',
       'font-weight': '500',
       'font-family': 'var(--font-body)',
-      y: lines.length * 10,
+      y: lines.length * 12,
     });
     sub.textContent = n.sublabel;
     g.appendChild(sub);
