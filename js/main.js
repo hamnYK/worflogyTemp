@@ -160,7 +160,7 @@ function initGraph() {
         fill: n.primary ? '#fff' : PRIMARY,
         'font-size': n.primary ? '15' : '13',
         'font-weight': '700',
-        'font-family': 'Noto Serif KR, Pretendard Variable, serif',
+        'font-family': 'var(--font-serif-ko)',
         y: (i - (lines.length - 1) / 2) * 18 - 8,
       });
       t.textContent = line;
@@ -174,7 +174,7 @@ function initGraph() {
       fill: n.primary ? 'rgba(255,255,255,0.7)' : TEXT_MUTED,
       'font-size': '10',
       'font-weight': '500',
-      'font-family': 'Pretendard Variable, DM Sans, sans-serif',
+      'font-family': 'var(--font-body)',
       y: lines.length * 10,
     });
     sub.textContent = n.sublabel;
