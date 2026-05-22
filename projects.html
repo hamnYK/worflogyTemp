@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="css/style.css" />
   <style>
     .graph-hint {
-      font-size: 13px;
+      font-size: var(--fs-body-min);
       color: var(--text-muted);
       margin-top: 8px;
     }
@@ -41,7 +41,7 @@
     .proj-num {
       font-family: var(--font-serif-en);
       font-style: italic;
-      font-size: 26px;
+      font-size: var(--fs-h3);
       font-weight: 400;
       color: var(--sand-dark);
       min-width: 36px;
@@ -49,13 +49,13 @@
     .proj-info { flex: 1; }
     .proj-name {
       font-family: var(--font-serif-ko);
-      font-size: 15px;
+      font-size: var(--fs-body);
       font-weight: 600;
       color: var(--text);
       margin-bottom: 3px;
     }
-    .proj-desc { font-family: var(--font-body); font-size: 12px; color: var(--text-muted); }
-    .proj-arrow { color: var(--coral); font-size: 18px; }
+    .proj-desc { font-family: var(--font-body); font-size: var(--fs-body-min); color: var(--text-muted); }
+    .proj-arrow { color: var(--coral); font-size: var(--fs-body-sub); }
     @media (max-width: 768px) {
       .project-list { grid-template-columns: 1fr; padding: 0 28px 48px; }
     }
@@ -83,7 +83,7 @@
       right: 20px;
       font-family: var(--font-serif-en);
       font-style: italic;
-      font-size: 12px;
+      font-size: var(--fs-label);
       font-weight: 400;
       color: var(--text-muted);
       letter-spacing: 0.3px;
@@ -130,14 +130,14 @@
     }
     .pm-card-name {
       font-family: var(--font-serif-ko);
-      font-size: 13px;
+      font-size: var(--fs-body-min);
       font-weight: 700;
       color: var(--text);
       line-height: 1.35;
     }
     .pm-card-tech {
       font-family: var(--font-body);
-      font-size: 10.5px;
+      font-size: calc(var(--fs-body-min) - 2px);
       color: var(--text-muted);
       line-height: 1.4;
     }
@@ -160,7 +160,7 @@
     .pm-engine-icon { width: 22px; height: 22px; opacity: 0.6; flex-shrink: 0; }
     .pm-engine-name {
       font-family: var(--font-serif-ko);
-      font-size: 14px;
+      font-size: calc(var(--fs-ui) - 0.5px);
       font-weight: 700;
       color: #fff;
       letter-spacing: -0.3px;
@@ -168,7 +168,7 @@
     .pm-engine-en {
       font-family: var(--font-serif-en);
       font-style: italic;
-      font-size: 11px;
+      font-size: calc(var(--fs-badge) - 0.5px);
       color: rgba(255,255,255,0.45);
       margin-left: 4px;
     }
@@ -185,7 +185,7 @@
       padding: 12px 14px;
       text-align: center;
       font-family: var(--font-body);
-      font-size: 12.5px;
+      font-size: calc(var(--fs-ui) - 2px);
       font-weight: 500;
       color: var(--text-muted);
     }
@@ -197,7 +197,7 @@
       padding: 13px 28px;
       text-align: center;
       font-family: var(--font-body);
-      font-size: 12.5px;
+      font-size: calc(var(--fs-ui) - 2px);
       font-weight: 500;
       color: var(--text-muted);
     }
@@ -365,7 +365,7 @@
 
     </div><!-- /.platform-map -->
 
-    <p style="margin-top:20px; font-family:var(--font-body); font-size:13px; color:var(--text-muted); text-align:center;">
+    <p style="margin-top:20px; font-family:var(--font-body); font-size:var(--fs-body-min); color:var(--text-muted); text-align:center;">
       각 솔루션 박스를 클릭하면 상세 소개로 이동합니다.
     </p>
   </section>
