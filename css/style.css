@@ -848,6 +848,82 @@ h1, h2, h3, h4, h5, h6 {
   line-height: var(--lh-body-min);
 }
 
+/* ── Tech Highlight Card (핵심 기능 섹션 내 기술 설명 카드) ── */
+.tech-highlight {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 28px 28px 28px 32px;
+  background: var(--coral-light);
+  border-radius: var(--r-md);
+  border: 1px solid rgba(232, 97, 58, 0.18);
+  border-left: 4px solid var(--coral);
+  height: 100%;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--t), border-color var(--t);
+  position: relative;
+  overflow: hidden;
+}
+.tech-highlight::before {
+  content: '';
+  position: absolute;
+  top: -30px; right: -30px;
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  background: rgba(232, 97, 58, 0.06);
+  pointer-events: none;
+}
+.tech-highlight:hover {
+  box-shadow: var(--shadow-md);
+  border-color: rgba(232, 97, 58, 0.35);
+  border-left-color: var(--coral);
+}
+.tech-highlight-label {
+  font-family: var(--font-sans-en);
+  font-size: var(--fs-badge);
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--coral);
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+.tech-highlight-title {
+  font-family: var(--font-serif-ko);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-h4);
+  color: var(--coral);
+  letter-spacing: var(--ls-h4);
+  line-height: var(--lh-h4);
+  margin-bottom: 12px;
+}
+.tech-highlight-desc {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-min);
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+.tech-highlight-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 16px;
+}
+.tech-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  background: rgba(232, 97, 58, 0.10);
+  border: 1px solid rgba(232, 97, 58, 0.22);
+  border-radius: 20px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--coral);
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+
 /* ── Company Page ── */
 .company-grid {
   display: grid;
