@@ -1581,7 +1581,7 @@ h1, h2, h3, h4, h5, h6 {
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
   gap: 48px;
-  align-items: center;
+  align-items: start;
   margin-top: 8px;
 }
 
@@ -2008,7 +2008,7 @@ h1, h2, h3, h4, h5, h6 {
 /* ── Semantic Assetization Pipeline ── */
 .pipeline-flow {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   gap: 16px;
   margin-top: 36px;
 }
@@ -2083,6 +2083,7 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  align-self: center;
 }
 .pipeline-arrow svg {
   width: 20px;
