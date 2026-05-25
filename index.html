@@ -208,17 +208,19 @@
 
             <!-- ── TOP: 뇌/생각 아이콘 ── -->
             <g transform="translate(210, 52)">
-              <!-- 뇌 외곽 실루엣 (단순화) -->
-              <ellipse cx="0" cy="-4" rx="30" ry="26" fill="#E8F0FB" stroke="#4A90E2" stroke-width="1.5"
-                opacity="0.9" />
-              <path
-                d="M-18,-8 C-22,-14 -20,-22 -12,-22 C-8,-22 -4,-18 0,-18 C4,-18 8,-22 12,-22 C20,-22 22,-14 18,-8 C22,-4 22,6 16,10 C16,16 10,20 4,18 C2,22 -2,22 -4,18 C-10,20 -16,16 -16,10 C-22,6 -22,-4 -18,-8Z"
-                fill="#C8DCF5" stroke="#4A90E2" stroke-width="1" opacity="0.85" />
-              <!-- 뇌 신경 라인 -->
-              <path d="M-8,-10 C-4,-6 4,-6 8,-10" stroke="#4A90E2" stroke-width="1" stroke-linecap="round"
-                opacity="0.7" />
-              <path d="M-10,0 C-4,4 4,4 10,0" stroke="#4A90E2" stroke-width="1" stroke-linecap="round" opacity="0.7" />
-              <path d="M-6,8 C0,10 6,8 8,6" stroke="#4A90E2" stroke-width="1" stroke-linecap="round" opacity="0.6" />
+              <!-- 뇌 외곽 실루엣 및 좌우 반구 (뇌 형태 픽토그램 보완) -->
+              <!-- 뇌 좌반구 -->
+              <path d="M-2,-24 C-12,-24 -22,-18 -24,-8 C-28,-8 -30,-2 -27,6 C-29,10 -27,18 -18,20 C-15,24 -8,26 -2,22 C0,18 0,10 0,0 Z" 
+                    fill="#C8DCF5" stroke="#4A90E2" stroke-width="1.5" opacity="0.9" />
+              <!-- 뇌 우반구 -->
+              <path d="M2,-24 C12,-24 22,-18 24,-8 C28,-8 30,-2 27,6 C29,10 27,18 18,20 C15,24 8,26 2,22 C0,18 0,10 0,0 Z" 
+                    fill="#C8DCF5" stroke="#4A90E2" stroke-width="1.5" opacity="0.9" />
+
+              <!-- 뇌 내부 주름 및 신경망 라인 (좌우 대칭형 주름 표현) -->
+              <path d="M-10,-14 C-16,-12 -16,-6 -10,-4 M-14,2 C-20,4 -18,10 -10,8 M-6,14 C-10,16 -8,20 -2,18" 
+                    stroke="#4A90E2" stroke-width="1.2" stroke-linecap="round" fill="none" opacity="0.8" />
+              <path d="M10,-14 C16,-12 16,-6 10,-4 M14,2 C20,4 18,10 10,8 M6,14 C10,16 8,20 2,18" 
+                    stroke="#4A90E2" stroke-width="1.2" stroke-linecap="round" fill="none" opacity="0.8" />
               <!-- 아이디어 방울들 -->
               <circle cx="-38" cy="-18" r="8" fill="#FDF0EC" stroke="#E8613A" stroke-width="1.2" opacity="0.9" />
               <path d="M-38,-21 L-35,-18 L-38,-15 L-41,-18Z" fill="#E8613A" opacity="0.5"
