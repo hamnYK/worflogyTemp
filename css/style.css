@@ -1567,3 +1567,239 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+
+/* ── Concept Section (Landing – "생각을 맥락으로 전환") ── */
+
+/* 배경 – 미묘한 Sand 그러데이션
+   ※ 구분선은 .section + .section { border-top } 규칙이 자동 처리하므로 별도 지정 불필요 */
+.concept-section {
+  background: linear-gradient(160deg, var(--bg) 0%, var(--sand) 55%, var(--bg) 100%);
+}
+
+/* 2열 레이아웃: SVG | 솔루션 카드 */
+.concept-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 48px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+/* ── SVG 래퍼 ── */
+.concept-svg-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.concept-svg {
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  filter: drop-shadow(0 4px 24px rgba(74, 144, 226, 0.10));
+  transition: filter var(--t-slow);
+}
+.concept-svg-wrap:hover .concept-svg {
+  filter: drop-shadow(0 8px 36px rgba(74, 144, 226, 0.18));
+}
+
+/* 흐름 경로 – 미묘한 dash 애니메이션 */
+.concept-flow-path {
+  stroke-dasharray: 6 4;
+  animation: conceptFlowDash 3s linear infinite;
+}
+@keyframes conceptFlowDash {
+  to { stroke-dashoffset: -40; }
+}
+
+/* ── 솔루션 패널 ── */
+.concept-solutions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.concept-solutions-label {
+  font-family: var(--font-serif-en);
+  font-style: italic;
+  font-size: var(--fs-label);
+  font-weight: var(--fw-label);
+  letter-spacing: var(--ls-label);
+  color: var(--ink);
+  opacity: 0.6;
+  margin-bottom: 4px;
+  padding-left: 16px;
+  position: relative;
+}
+.concept-solutions-label::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--ink);
+  opacity: 0.5;
+}
+
+/* 솔루션 카드 */
+.concept-sol-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 20px 22px;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--t), transform var(--t), border-color var(--t);
+  position: relative;
+  overflow: hidden;
+}
+/* 좌측 컬러 액센트 라인 */
+.concept-sol-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 0;
+  background: linear-gradient(to bottom, #4A90E2, var(--coral));
+  border-radius: 0 0 2px 0;
+  transition: height var(--t-slow);
+}
+.concept-sol-card:hover::before {
+  height: 100%;
+}
+.concept-sol-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+  border-color: rgba(74, 144, 226, 0.20);
+}
+
+/* 솔루션 아이콘 */
+.concept-sol-icon {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: var(--r-sm);
+  background: var(--sand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  transition: background var(--t);
+}
+.concept-sol-icon svg {
+  width: 36px;
+  height: 36px;
+}
+.concept-sol-card:hover .concept-sol-icon {
+  background: rgba(74, 144, 226, 0.10);
+}
+
+/* 솔루션 텍스트 */
+.concept-sol-body {
+  flex: 1;
+  min-width: 0;
+}
+.concept-sol-title {
+  font-family: var(--font-serif-ko);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-h4);
+  color: var(--text);
+  margin-bottom: 6px;
+  letter-spacing: var(--ls-h4);
+  line-height: var(--lh-h4);
+}
+.concept-sol-desc {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-min);
+  color: var(--text-muted);
+  line-height: var(--lh-body-min);
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .concept-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .concept-svg-wrap {
+    order: -1;
+  }
+  .concept-svg {
+    max-width: 320px;
+  }
+}
+@media (max-width: 600px) {
+  .concept-svg {
+    max-width: 280px;
+  }
+  .concept-sol-card {
+    padding: 16px 18px;
+  }
+  .concept-sol-icon {
+    width: 44px;
+    height: 44px;
+    padding: 6px;
+  }
+  .concept-sol-icon svg {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* ================================================
+   SVG Concept Diagram Typography Styling (디자인 가이드라인 준수)
+   ================================================ */
+
+/* SVG 내부 공통 텍스트 스타일 */
+.concept-svg text {
+  font-family: var(--font-body);
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 헤드라인 타이틀 공통 */
+.concept-svg .concept-svg-title {
+  font-weight: 800;
+  fill: var(--ink);
+}
+
+/* 주요 타이틀 공통 (뇌 상단, 프랙털 온톨로지, AI 고도화) */
+.concept-svg .primary-title,
+.concept-svg .tree-title,
+.concept-svg .ai-title {
+  font-family: var(--font-serif-ko);
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: -0.3px;
+}
+
+/* 본문 설명글 공통 */
+.concept-svg .concept-svg-desc {
+  fill: #555C6E; /* Ink Navy 계열의 선명하고 차분한 어두운 그레이 */
+  font-size: 11px; /* 설명글 크기를 11px로 일관되게 통일 */
+}
+
+/* 주 설명글 (뇌 상단) */
+.concept-svg .primary-desc {
+  /* 공통 스타일 상속 */
+}
+
+/* 보조 설명글 (프랙털 온톨로지, AI 고도화) */
+.concept-svg .tree-desc,
+.concept-svg .ai-desc {
+  /* 공통 스타일 상속 */
+}
+
+/* AI 헥사곤 노드 내부 텍스트 */
+.concept-svg .concept-svg-ai-core {
+  font-family: var(--font-sans-en);
+  font-size: 14px;
+  font-weight: 800;
+  fill: #ffffff;
+  letter-spacing: 1px;
+}
+
+.concept-svg .concept-svg-ai-sub {
+  font-size: 9.5px;
+  fill: rgba(255, 255, 255, 0.9);
+}

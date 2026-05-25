@@ -1,197 +1,484 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-GMDREuNQNJynOQvCXFCl/JLp3JtjQWFHx+V4UdEFI34=' https://cdn.gtranslate.net https://translate.googleapis.com https://translate.google.com https://translate-pa.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://www.gstatic.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https://cdn.gtranslate.net https://translate.googleapis.com https://www.google.com https://fonts.gstatic.com https://www.gstatic.com https://translate.google.com; connect-src 'self' https://translate.googleapis.com https://translate.google.com https://translate-pa.googleapis.com https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests;" />
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' 'sha256-GMDREuNQNJynOQvCXFCl/JLp3JtjQWFHx+V4UdEFI34=' https://cdn.gtranslate.net https://translate.googleapis.com https://translate.google.com https://translate-pa.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://www.gstatic.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https://cdn.gtranslate.net https://translate.googleapis.com https://www.google.com https://fonts.gstatic.com https://www.gstatic.com https://translate.google.com; connect-src 'self' https://translate.googleapis.com https://translate.google.com https://translate-pa.googleapis.com https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests;" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>워플로지 — 생각을 맥락으로 전환하는 디자인 기술 스타트업</title>
   <meta name="description" content="워플로지는 프랙털 온톨로지 기반의 지식 자동화 플랫폼을 개발합니다. 사람이 인공지능과 협업하는 진화된 방법을 만듭니다." />
   <link rel="icon" href="assets/worflogy_logo.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
+
 <body>
 
-<!-- Hamburger (mobile) -->
-<button class="hamburger" aria-label="메뉴 열기">
-  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
-  </svg>
-</button>
-<div class="sidebar-overlay"></div>
+  <!-- Hamburger (mobile) -->
+  <button class="hamburger" aria-label="메뉴 열기">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+  </button>
+  <div class="sidebar-overlay"></div>
 
-<!-- Sidebar -->
-<aside class="sidebar">
-  <div class="sidebar-logo">
-    <a href="index.html"><img src="assets/worflogy_logo.svg" alt="워플로지"></a>
-    <div class="sidebar-brand notranslate" translate="no">
-      <span class="brand-ko">(주)워플로지</span>
-      <span class="brand-en">Worflogy Inc.</span>
-    </div>
-  </div>
-  <nav class="sidebar-nav">
-    <a href="index.html" class="nav-item">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 9.75L12 3l9 6.75V21a.75.75 0 01-.75.75H15.75v-6h-7.5v6H3.75A.75.75 0 013 21V9.75z"/></svg>
-      랜딩
-    </a>
-    <a href="footprint.html" class="nav-item">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2m6-2a10 10 0 11-20 0 10 10 0 0120 0z"/></svg>
-      발자국
-    </a>
-    <a href="projects.html" class="nav-item">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zm0 9.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zm9.75-9.75A2.25 2.25 0 0115.75 3.75H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zm0 9.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/></svg>
-      프로젝트
-    </a>
-    <a href="market.html" class="nav-item">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" />
-        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z" />
-      </svg>
-      시장 참조
-    </a>
-    <a href="company.html" class="nav-item">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5M9 7.5h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6h1.5m-1.5 3h1.5m-1.5 3h1.5M6.75 21V6.375c0-.621.504-1.125 1.125-1.125h8.25c.621 0 1.125.504 1.125 1.125V21M3.375 21h17.25"/></svg>
-      회사
-    </a>
-    <div class="nav-divider"></div>
-    <div class="nav-group-title">Services</div>
-    <a href="https://edu.contextonai.com" class="nav-item" target="worflogy_edu" rel="opener">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
-      교육 브랜드 홈
-      <svg class="nav-item-outlink" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-      </svg>
-    </a>
-  </nav>
-  <div class="sidebar-footer">
-    © 2025 워플로지<br />worflogy.com
-  </div>
-</aside>
-
-<!-- Main -->
-<main class="main">
-
-  <!-- Hero -->
-  <section class="hero">
-    <!-- 정체성 아이콘: 헥사고날 프랙털 지식 그래프 -->
-    <div class="hero-bg-icon" aria-hidden="true">
-      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none">
-        <!-- 2차 프랙털 분기 (최외곽) -->
-        <line x1="200" y1="88" x2="200" y2="28" stroke="#1A1F36" stroke-width="1" opacity="0.08"/>
-        <circle cx="200" cy="28" r="4.5" fill="#1A1F36" opacity="0.10"/>
-        <line x1="297" y1="143" x2="357" y2="108" stroke="#1A1F36" stroke-width="1" opacity="0.08"/>
-        <circle cx="357" cy="108" r="4.5" fill="#1A1F36" opacity="0.10"/>
-        <line x1="297" y1="257" x2="357" y2="292" stroke="#1A1F36" stroke-width="1" opacity="0.08"/>
-        <circle cx="357" cy="292" r="4.5" fill="#1A1F36" opacity="0.10"/>
-        <line x1="200" y1="312" x2="200" y2="372" stroke="#1A1F36" stroke-width="1" opacity="0.08"/>
-        <circle cx="200" cy="372" r="4.5" fill="#1A1F36" opacity="0.10"/>
-        <line x1="103" y1="257" x2="43" y2="292" stroke="#1A1F36" stroke-width="1" opacity="0.08"/>
-        <circle cx="43" cy="292" r="4.5" fill="#1A1F36" opacity="0.10"/>
-        <line x1="103" y1="143" x2="43" y2="108" stroke="#1A1F36" stroke-width="1" opacity="0.08"/>
-        <circle cx="43" cy="108" r="4.5" fill="#1A1F36" opacity="0.10"/>
-        <!-- 외곽 헥사곤 웹 연결선 (점선) -->
-        <line x1="200" y1="88" x2="297" y2="143" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.11"/>
-        <line x1="297" y1="143" x2="297" y2="257" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.11"/>
-        <line x1="297" y1="257" x2="200" y2="312" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.11"/>
-        <line x1="200" y1="312" x2="103" y2="257" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.11"/>
-        <line x1="103" y1="257" x2="103" y2="143" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.11"/>
-        <line x1="103" y1="143" x2="200" y2="88" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.11"/>
-        <!-- 중심 → 외곽 스포크 -->
-        <line x1="200" y1="200" x2="200" y2="88"  stroke="#1A1F36" stroke-width="1.5" opacity="0.14"/>
-        <line x1="200" y1="200" x2="297" y2="143" stroke="#1A1F36" stroke-width="1.5" opacity="0.14"/>
-        <line x1="200" y1="200" x2="297" y2="257" stroke="#1A1F36" stroke-width="1.5" opacity="0.14"/>
-        <line x1="200" y1="200" x2="200" y2="312" stroke="#1A1F36" stroke-width="1.5" opacity="0.14"/>
-        <line x1="200" y1="200" x2="103" y2="257" stroke="#1A1F36" stroke-width="1.5" opacity="0.14"/>
-        <line x1="200" y1="200" x2="103" y2="143" stroke="#1A1F36" stroke-width="1.5" opacity="0.14"/>
-        <!-- 외곽 6개 노드 -->
-        <circle cx="200" cy="88"  r="10" fill="#1A1F36" opacity="0.18"/>
-        <circle cx="297" cy="143" r="10" fill="#1A1F36" opacity="0.18"/>
-        <circle cx="297" cy="257" r="10" fill="#1A1F36" opacity="0.18"/>
-        <circle cx="200" cy="312" r="10" fill="#1A1F36" opacity="0.18"/>
-        <circle cx="103" cy="257" r="10" fill="#1A1F36" opacity="0.18"/>
-        <circle cx="103" cy="143" r="10" fill="#1A1F36" opacity="0.18"/>
-        <!-- 스포크 중간 서브노드 -->
-        <circle cx="200" cy="144" r="5" fill="#1A1F36" opacity="0.12"/>
-        <circle cx="249" cy="172" r="5" fill="#1A1F36" opacity="0.12"/>
-        <circle cx="249" cy="228" r="5" fill="#1A1F36" opacity="0.12"/>
-        <circle cx="200" cy="256" r="5" fill="#1A1F36" opacity="0.12"/>
-        <circle cx="151" cy="228" r="5" fill="#1A1F36" opacity="0.12"/>
-        <circle cx="151" cy="172" r="5" fill="#1A1F36" opacity="0.12"/>
-        <!-- 중앙 허브 노드 (더블 링) -->
-        <circle cx="200" cy="200" r="20" fill="#1A1F36" opacity="0.07"/>
-        <circle cx="200" cy="200" r="12" fill="#1A1F36" opacity="0.20"/>
-        <circle cx="200" cy="200" r="6"  fill="#1A1F36" opacity="0.30"/>
-      </svg>
-    </div>
-    <div class="hero-content">
-      <div class="hero-badge">
-        <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
-        Design Technology Startup
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <a href="index.html"><img src="assets/worflogy_logo.svg" alt="워플로지"></a>
+      <div class="sidebar-brand notranslate" translate="no">
+        <span class="brand-ko">(주)워플로지</span>
+        <span class="brand-en">Worflogy Inc.</span>
       </div>
-      <h1 class="hero-title">
-        생각을 맥락으로<br/><span class="primary">전환</span>하고, <span class="accent">소통</span>하는<br/>디자인 기술 스타트업
-      </h1>
-      <p class="hero-sub">
-        인공지능과 협업하는 진화된 맥락 전달 방식,<br />
-        프랙털 온톨로지 기술 기반 지식 자산화 솔루션.
-      </p>
-      <div class="btn-group">
-        <a href="projects.html" class="btn btn-primary">
-          프로젝트 보기
+    </div>
+    <nav class="sidebar-nav">
+      <a href="index.html" class="nav-item">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M3 9.75L12 3l9 6.75V21a.75.75 0 01-.75.75H15.75v-6h-7.5v6H3.75A.75.75 0 013 21V9.75z" />
+        </svg>
+        랜딩
+      </a>
+      <a href="footprint.html" class="nav-item">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2m6-2a10 10 0 11-20 0 10 10 0 0120 0z" />
+        </svg>
+        발자국
+      </a>
+      <a href="projects.html" class="nav-item">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zm0 9.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zm9.75-9.75A2.25 2.25 0 0115.75 3.75H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zm0 9.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+        </svg>
+        프로젝트
+      </a>
+      <a href="market.html" class="nav-item">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z" />
+        </svg>
+        시장 참조
+      </a>
+      <a href="company.html" class="nav-item">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M2.25 21h19.5M9 7.5h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6h1.5m-1.5 3h1.5m-1.5 3h1.5M6.75 21V6.375c0-.621.504-1.125 1.125-1.125h8.25c.621 0 1.125.504 1.125 1.125V21M3.375 21h17.25" />
+        </svg>
+        회사
+      </a>
+      <div class="nav-divider"></div>
+      <div class="nav-group-title">Services</div>
+      <a href="https://edu.contextonai.com" class="nav-item" target="worflogy_edu" rel="opener">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+        </svg>
+        교육 브랜드 홈
+        <svg class="nav-item-outlink" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+        </svg>
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      © 2025 워플로지<br />worflogy.com
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="main">
+
+    <!-- Hero -->
+    <section class="hero">
+      <!-- 정체성 아이콘: 헥사고날 프랙털 지식 그래프 -->
+      <div class="hero-bg-icon" aria-hidden="true">
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <!-- 2차 프랙털 분기 (최외곽) -->
+          <line x1="200" y1="88" x2="200" y2="28" stroke="#1A1F36" stroke-width="1" opacity="0.08" />
+          <circle cx="200" cy="28" r="4.5" fill="#1A1F36" opacity="0.10" />
+          <line x1="297" y1="143" x2="357" y2="108" stroke="#1A1F36" stroke-width="1" opacity="0.08" />
+          <circle cx="357" cy="108" r="4.5" fill="#1A1F36" opacity="0.10" />
+          <line x1="297" y1="257" x2="357" y2="292" stroke="#1A1F36" stroke-width="1" opacity="0.08" />
+          <circle cx="357" cy="292" r="4.5" fill="#1A1F36" opacity="0.10" />
+          <line x1="200" y1="312" x2="200" y2="372" stroke="#1A1F36" stroke-width="1" opacity="0.08" />
+          <circle cx="200" cy="372" r="4.5" fill="#1A1F36" opacity="0.10" />
+          <line x1="103" y1="257" x2="43" y2="292" stroke="#1A1F36" stroke-width="1" opacity="0.08" />
+          <circle cx="43" cy="292" r="4.5" fill="#1A1F36" opacity="0.10" />
+          <line x1="103" y1="143" x2="43" y2="108" stroke="#1A1F36" stroke-width="1" opacity="0.08" />
+          <circle cx="43" cy="108" r="4.5" fill="#1A1F36" opacity="0.10" />
+          <!-- 외곽 헥사곤 웹 연결선 (점선) -->
+          <line x1="200" y1="88" x2="297" y2="143" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4"
+            opacity="0.11" />
+          <line x1="297" y1="143" x2="297" y2="257" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4"
+            opacity="0.11" />
+          <line x1="297" y1="257" x2="200" y2="312" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4"
+            opacity="0.11" />
+          <line x1="200" y1="312" x2="103" y2="257" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4"
+            opacity="0.11" />
+          <line x1="103" y1="257" x2="103" y2="143" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4"
+            opacity="0.11" />
+          <line x1="103" y1="143" x2="200" y2="88" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4"
+            opacity="0.11" />
+          <!-- 중심 → 외곽 스포크 -->
+          <line x1="200" y1="200" x2="200" y2="88" stroke="#1A1F36" stroke-width="1.5" opacity="0.14" />
+          <line x1="200" y1="200" x2="297" y2="143" stroke="#1A1F36" stroke-width="1.5" opacity="0.14" />
+          <line x1="200" y1="200" x2="297" y2="257" stroke="#1A1F36" stroke-width="1.5" opacity="0.14" />
+          <line x1="200" y1="200" x2="200" y2="312" stroke="#1A1F36" stroke-width="1.5" opacity="0.14" />
+          <line x1="200" y1="200" x2="103" y2="257" stroke="#1A1F36" stroke-width="1.5" opacity="0.14" />
+          <line x1="200" y1="200" x2="103" y2="143" stroke="#1A1F36" stroke-width="1.5" opacity="0.14" />
+          <!-- 외곽 6개 노드 -->
+          <circle cx="200" cy="88" r="10" fill="#1A1F36" opacity="0.18" />
+          <circle cx="297" cy="143" r="10" fill="#1A1F36" opacity="0.18" />
+          <circle cx="297" cy="257" r="10" fill="#1A1F36" opacity="0.18" />
+          <circle cx="200" cy="312" r="10" fill="#1A1F36" opacity="0.18" />
+          <circle cx="103" cy="257" r="10" fill="#1A1F36" opacity="0.18" />
+          <circle cx="103" cy="143" r="10" fill="#1A1F36" opacity="0.18" />
+          <!-- 스포크 중간 서브노드 -->
+          <circle cx="200" cy="144" r="5" fill="#1A1F36" opacity="0.12" />
+          <circle cx="249" cy="172" r="5" fill="#1A1F36" opacity="0.12" />
+          <circle cx="249" cy="228" r="5" fill="#1A1F36" opacity="0.12" />
+          <circle cx="200" cy="256" r="5" fill="#1A1F36" opacity="0.12" />
+          <circle cx="151" cy="228" r="5" fill="#1A1F36" opacity="0.12" />
+          <circle cx="151" cy="172" r="5" fill="#1A1F36" opacity="0.12" />
+          <!-- 중앙 허브 노드 (더블 링) -->
+          <circle cx="200" cy="200" r="20" fill="#1A1F36" opacity="0.07" />
+          <circle cx="200" cy="200" r="12" fill="#1A1F36" opacity="0.20" />
+          <circle cx="200" cy="200" r="6" fill="#1A1F36" opacity="0.30" />
+        </svg>
+      </div>
+      <div class="hero-content">
+        <div class="hero-badge">
+          <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" />
+          </svg>
+          Design Technology Startup
+        </div>
+        <h1 class="hero-title">
+          생각을 맥락으로<br /><span class="primary">전환</span>하고, <span class="accent">소통</span>하는<br />디자인 기술 스타트업
+        </h1>
+        <p class="hero-sub">
+          인공지능과 협업하는 진화된 맥락 전달 방식,<br />
+          프랙털 온톨로지 기술 기반 지식 자산화 솔루션.
+        </p>
+        <div class="btn-group">
+          <a href="projects.html" class="btn btn-primary">
+            프로젝트 보기
+          </a>
+          <a href="footprint.html" class="btn btn-outline">발자국</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Concept Visual Section -->
+    <section class="section concept-section">
+      <div class="section-label">What We Do</div>
+      <h2 class="section-title">생각을 맥락으로 전환하는<br /><span class="em">디자인 테크놀로지</span></h2>
+      <p class="section-desc">파편화된 정보를 의미 있는 맥락으로 구조화하는 독창적인 프랙털 온톨로지 기술로 체계적인 지식 자산을 구축합니다.</p>
+
+      <div class="concept-layout">
+        <!-- LEFT: SVG Flow Diagram -->
+        <div class="concept-svg-wrap" aria-label="워플로지 핵심 기술 다이어그램">
+          <svg viewBox="0 0 420 520" xmlns="http://www.w3.org/2000/svg" fill="none" class="concept-svg">
+            <defs>
+              <linearGradient id="flowGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#4A90E2" stop-opacity="0.85" />
+                <stop offset="40%" stop-color="#7B6CF6" stop-opacity="0.75" />
+                <stop offset="100%" stop-color="#1A1F36" stop-opacity="0.9" />
+              </linearGradient>
+              <linearGradient id="branchGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#1A1F36" stop-opacity="0.7" />
+                <stop offset="100%" stop-color="#E8613A" stop-opacity="0.4" />
+              </linearGradient>
+              <linearGradient id="aiGlow" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#4A90E2" />
+                <stop offset="100%" stop-color="#7B6CF6" />
+              </linearGradient>
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                <feMerge>
+                  <feMergeNode in="coloredBlur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <filter id="softBlur">
+                <feGaussianBlur stdDeviation="1.5" />
+              </filter>
+            </defs>
+
+            <!-- ── TOP: 뇌/생각 아이콘 ── -->
+            <g transform="translate(210, 52)">
+              <!-- 뇌 외곽 실루엣 (단순화) -->
+              <ellipse cx="0" cy="-4" rx="30" ry="26" fill="#E8F0FB" stroke="#4A90E2" stroke-width="1.5"
+                opacity="0.9" />
+              <path
+                d="M-18,-8 C-22,-14 -20,-22 -12,-22 C-8,-22 -4,-18 0,-18 C4,-18 8,-22 12,-22 C20,-22 22,-14 18,-8 C22,-4 22,6 16,10 C16,16 10,20 4,18 C2,22 -2,22 -4,18 C-10,20 -16,16 -16,10 C-22,6 -22,-4 -18,-8Z"
+                fill="#C8DCF5" stroke="#4A90E2" stroke-width="1" opacity="0.85" />
+              <!-- 뇌 신경 라인 -->
+              <path d="M-8,-10 C-4,-6 4,-6 8,-10" stroke="#4A90E2" stroke-width="1" stroke-linecap="round"
+                opacity="0.7" />
+              <path d="M-10,0 C-4,4 4,4 10,0" stroke="#4A90E2" stroke-width="1" stroke-linecap="round" opacity="0.7" />
+              <path d="M-6,8 C0,10 6,8 8,6" stroke="#4A90E2" stroke-width="1" stroke-linecap="round" opacity="0.6" />
+              <!-- 아이디어 방울들 -->
+              <circle cx="-38" cy="-18" r="8" fill="#FDF0EC" stroke="#E8613A" stroke-width="1.2" opacity="0.9" />
+              <path d="M-38,-21 L-35,-18 L-38,-15 L-41,-18Z" fill="#E8613A" opacity="0.5"
+                transform="rotate(20, -38, -18)" />
+              <circle cx="38" cy="-10" r="7" fill="#F5F0E8" stroke="#1A1F36" stroke-width="1" opacity="0.8" />
+              <line x1="34" y1="-10" x2="42" y2="-10" stroke="#1A1F36" stroke-width="1" opacity="0.6" />
+              <line x1="38" y1="-14" x2="38" y2="-6" stroke="#1A1F36" stroke-width="1" opacity="0.6" />
+              <!-- 라벨 -->
+              <text x="0" y="38" text-anchor="middle" class="concept-svg-title primary-title">생각을 맥락으로 디자인하다</text>
+              <text x="0" y="55" text-anchor="middle" class="concept-svg-desc primary-desc">흩어진 생각들을 의미 있는 맥락으로 전환</text>
+            </g>
+
+            <!-- ── 흐르는 중심 흐름선 (뇌 → 프랙털 허브) ── -->
+            <path d="M210,106 C210,130 200,145 195,165 C188,188 192,200 205,215" stroke="url(#flowGrad)"
+              stroke-width="4" stroke-linecap="round" opacity="0.7" class="concept-flow-path" />
+            <!-- 보조 흐름 -->
+            <path d="M210,106 C218,128 225,148 222,170 C218,192 212,205 205,215" stroke="url(#flowGrad)"
+              stroke-width="2.5" stroke-linecap="round" opacity="0.4" class="concept-flow-path" />
+            <path d="M210,106 C202,125 190,140 188,162 C186,182 192,200 205,215" stroke="url(#flowGrad)"
+              stroke-width="2" stroke-linecap="round" opacity="0.3" class="concept-flow-path" />
+
+            <!-- 흐름선 위 작은 의미 노드들 -->
+            <circle cx="207" cy="140" r="4" fill="#7B6CF6" opacity="0.65" filter="url(#glow)" />
+            <circle cx="212" cy="175" r="3" fill="#4A90E2" opacity="0.6" />
+            <circle cx="196" cy="158" r="3.5" fill="#7B6CF6" opacity="0.5" />
+
+            <!-- ── MIDDLE: 프랙털 온톨로지 트리 ── -->
+            <!-- 중심 허브 -->
+            <circle cx="210" cy="228" r="14" fill="#1A1F36" opacity="0.95" />
+            <circle cx="210" cy="228" r="9" fill="#F5F0E8" />
+            <circle cx="210" cy="228" r="5" fill="#1A1F36" opacity="0.85" />
+
+            <!-- 1차 브랜치 (6방향) -->
+            <line x1="210" y1="228" x2="148" y2="268" stroke="url(#branchGrad)" stroke-width="2.5"
+              stroke-linecap="round" opacity="0.8" />
+            <line x1="210" y1="228" x2="210" y2="280" stroke="url(#branchGrad)" stroke-width="2.5"
+              stroke-linecap="round" opacity="0.8" />
+            <line x1="210" y1="228" x2="272" y2="268" stroke="url(#branchGrad)" stroke-width="2.5"
+              stroke-linecap="round" opacity="0.8" />
+            <line x1="210" y1="228" x2="124" y2="240" stroke="url(#branchGrad)" stroke-width="2" stroke-linecap="round"
+              opacity="0.6" />
+            <line x1="210" y1="228" x2="296" y2="240" stroke="url(#branchGrad)" stroke-width="2" stroke-linecap="round"
+              opacity="0.6" />
+
+            <!-- 1차 노드 -->
+            <circle cx="148" cy="268" r="7" fill="#E8613A" opacity="0.85" />
+            <circle cx="210" cy="280" r="7" fill="#1A1F36" opacity="0.8" />
+            <circle cx="272" cy="268" r="7" fill="#E8613A" opacity="0.85" />
+            <circle cx="124" cy="240" r="5" fill="#1A1F36" opacity="0.6" />
+            <circle cx="296" cy="240" r="5" fill="#1A1F36" opacity="0.6" />
+
+            <!-- 2차 브랜치 (잎사귀) -->
+            <line x1="148" y1="268" x2="120" y2="295" stroke="#1A1F36" stroke-width="1.5" opacity="0.45" />
+            <line x1="148" y1="268" x2="148" y2="300" stroke="#1A1F36" stroke-width="1.5" opacity="0.45" />
+            <line x1="148" y1="268" x2="172" y2="292" stroke="#1A1F36" stroke-width="1.5" opacity="0.45" />
+            <line x1="210" y1="280" x2="195" y2="310" stroke="#1A1F36" stroke-width="1.5" opacity="0.45" />
+            <line x1="210" y1="280" x2="225" y2="310" stroke="#1A1F36" stroke-width="1.5" opacity="0.45" />
+            <line x1="272" y1="268" x2="252" y2="295" stroke="#1A1F36" stroke-width="1.5" opacity="0.45" />
+            <line x1="272" y1="268" x2="272" y2="300" stroke="#1A1F36" stroke-width="1.5" opacity="0.45" />
+            <line x1="272" y1="268" x2="298" y2="290" stroke="#1A1F36" stroke-width="1.5" opacity="0.45" />
+
+            <!-- 2차 잎 노드 -->
+            <circle cx="120" cy="295" r="4" fill="#6B7280" opacity="0.5" />
+            <circle cx="148" cy="300" r="4" fill="#6B7280" opacity="0.5" />
+            <circle cx="172" cy="292" r="4" fill="#6B7280" opacity="0.5" />
+            <circle cx="195" cy="310" r="4" fill="#6B7280" opacity="0.5" />
+            <circle cx="225" cy="310" r="4" fill="#6B7280" opacity="0.5" />
+            <circle cx="252" cy="295" r="4" fill="#6B7280" opacity="0.5" />
+            <circle cx="272" cy="300" r="4" fill="#6B7280" opacity="0.5" />
+            <circle cx="298" cy="290" r="4" fill="#6B7280" opacity="0.5" />
+
+            <!-- 3차 미세 잎 -->
+            <line x1="120" y1="295" x2="106" y2="315" stroke="#1A1F36" stroke-width="1" opacity="0.25" />
+            <line x1="120" y1="295" x2="120" y2="318" stroke="#1A1F36" stroke-width="1" opacity="0.25" />
+            <line x1="298" y1="290" x2="310" y2="310" stroke="#1A1F36" stroke-width="1" opacity="0.25" />
+            <line x1="298" y1="290" x2="298" y2="315" stroke="#1A1F36" stroke-width="1" opacity="0.25" />
+            <line x1="195" y1="310" x2="186" y2="328" stroke="#1A1F36" stroke-width="1" opacity="0.25" />
+            <line x1="225" y1="310" x2="232" y2="328" stroke="#1A1F36" stroke-width="1" opacity="0.25" />
+
+            <!-- 프랙털 라벨 -->
+            <text x="22" y="212" class="concept-svg-title tree-title">프랙털 온톨로지 기술</text>
+            <text x="22" y="229" class="concept-svg-title tree-title">체계적인 지식 자산화</text>
+
+            <!-- ── 프랙털 → AI 흐름선 (렌즈형) ── -->
+            <!-- 주 흐름: 왼쪽으로 완만하게 -->
+            <path d="M210,242 C200,280 195,330 210,372"
+              stroke="url(#flowGrad)" stroke-width="4" stroke-linecap="round" opacity="0.7" class="concept-flow-path" />
+            <!-- 보조 흐름 1: 오른쪽으로 벌어짐 -->
+            <path d="M210,242 C236,280 242,330 210,372"
+              stroke="url(#flowGrad)" stroke-width="2.5" stroke-linecap="round" opacity="0.4" class="concept-flow-path" />
+            <!-- 보조 흐름 2: 더 왼쪽으로 벌어짐 -->
+            <path d="M210,242 C178,280 172,330 210,372"
+              stroke="url(#flowGrad)" stroke-width="2" stroke-linecap="round" opacity="0.3" class="concept-flow-path" />
+            <!-- 흐름선 위 의미 노드 -->
+            <circle cx="200" cy="290" r="4" fill="#7B6CF6" opacity="0.65" filter="url(#glow)" />
+            <circle cx="235" cy="300" r="3" fill="#4A90E2" opacity="0.6" />
+            <circle cx="178" cy="320" r="3.5" fill="#7B6CF6" opacity="0.5" />
+
+            <!-- ── BOTTOM: AI 협업 노드 ── -->
+            <g transform="translate(210, 400)">
+              <!-- AI 배경 글로우 -->
+              <circle cx="0" cy="0" r="34" fill="url(#aiGlow)" opacity="0.12" filter="url(#softBlur)" />
+              <!-- AI 헥사곤 -->
+              <polygon points="0,-28 24,-14 24,14 0,28 -24,14 -24,-14" fill="#1A1F36" stroke="url(#aiGlow)"
+                stroke-width="2" opacity="0.95" />
+              <!-- AI 텍스트 -->
+              <text x="0" y="-3" text-anchor="middle" class="concept-svg-ai-core">AI</text>
+              <text x="0" y="11" text-anchor="middle" class="concept-svg-ai-sub">협업 엔진</text>
+              <!-- 방향 화살 장식 -->
+              <circle cx="34" cy="0" r="3" fill="#4A90E2" opacity="0.7" />
+              <circle cx="-34" cy="0" r="3" fill="#4A90E2" opacity="0.7" />
+            </g>
+
+            <!-- AI 라벨 -->
+            <text x="256" y="392" class="concept-svg-title ai-title">AI 협업 솔루션 고도화</text>
+            <text x="256" y="410" class="concept-svg-desc ai-desc">체계적인 맥락 전달, 온톨로지 경량화 운영</text>
+
+            <!-- 흐름 애니메이션 점 -->
+            <circle r="4" fill="#4A90E2" opacity="0.8" filter="url(#glow)">
+              <animateMotion dur="5s" repeatCount="indefinite"
+                path="M210,106 C210,130 200,145 195,165 C188,188 192,200 205,215 C208,228 210,235 210,242 C200,280 195,330 210,372" />
+            </circle>
+          </svg>
+
+        </div>
+
+        <!-- RIGHT: 비즈니스 솔루션 카드 -->
+        <div class="concept-solutions">
+          <div class="concept-solutions-label">주요 비즈니스 솔루션</div>
+
+          <div class="concept-sol-card">
+            <div class="concept-sol-icon">
+              <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- 큐브 묶음 (지식 자산화) -->
+                <rect x="4" y="14" width="12" height="12" rx="2" fill="#C8DCF5" stroke="#4A90E2" stroke-width="1.5" />
+                <rect x="12" y="8" width="12" height="12" rx="2" fill="#E8F0FB" stroke="#4A90E2" stroke-width="1.5" />
+                <rect x="20" y="14" width="12" height="12" rx="2" fill="#C8DCF5" stroke="#4A90E2" stroke-width="1.5" />
+                <!-- 상승 화살표 -->
+                <path d="M28,6 L32,2 L36,6" stroke="#E8613A" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" transform="translate(-8, 2)" />
+                <line x1="28" y1="2" x2="28" y2="10" stroke="#E8613A" stroke-width="2" stroke-linecap="round"
+                  transform="translate(-4, 2)" />
+              </svg>
+            </div>
+            <div class="concept-sol-body">
+              <div class="concept-sol-title">조직 지식 자산화 및 리스크 진단</div>
+              <div class="concept-sol-desc">팀의 업무 수행 경험을 지식 자산화하고 리스크를 진단하여 해결책을 제시합니다.</div>
+            </div>
+          </div>
+
+          <div class="concept-sol-card">
+            <div class="concept-sol-icon">
+              <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- 노트 + 뇌 -->
+                <rect x="3" y="4" width="20" height="26" rx="3" fill="#F5F0E8" stroke="#1A1F36" stroke-width="1.5" />
+                <line x1="8" y1="11" x2="18" y2="11" stroke="#6B7280" stroke-width="1.2" stroke-linecap="round" />
+                <line x1="8" y1="16" x2="18" y2="16" stroke="#6B7280" stroke-width="1.2" stroke-linecap="round" />
+                <line x1="8" y1="21" x2="14" y2="21" stroke="#6B7280" stroke-width="1.2" stroke-linecap="round" />
+                <!-- 뇌 아이콘 (우측) -->
+                <ellipse cx="28" cy="22" rx="7" ry="6" fill="#E8F0FB" stroke="#4A90E2" stroke-width="1.5" />
+                <path d="M24,20 C26,18 30,18 32,20" stroke="#4A90E2" stroke-width="1" stroke-linecap="round" />
+                <path d="M24,24 C26,25 30,25 32,24" stroke="#4A90E2" stroke-width="1" stroke-linecap="round" />
+                <!-- 연결 화살표 -->
+                <path d="M23,17 L19,14" stroke="#E8613A" stroke-width="1.5" stroke-linecap="round"
+                  marker-end="url(#arr)" />
+              </svg>
+            </div>
+            <div class="concept-sol-body">
+              <div class="concept-sol-title">연구 및 개인 지식 관리</div>
+              <div class="concept-sol-desc">연구 노트를 지식 자산으로 전환하여 개인과 팀이 공유할 수 있도록 지원합니다.</div>
+            </div>
+          </div>
+
+          <div class="concept-sol-card">
+            <div class="concept-sol-icon">
+              <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- 게임 컨트롤러 -->
+                <rect x="4" y="10" width="28" height="18" rx="9" fill="#F5F0E8" stroke="#1A1F36" stroke-width="1.5" />
+                <circle cx="22" cy="17" r="2" fill="#E8613A" opacity="0.8" />
+                <circle cx="26" cy="21" r="2" fill="#4A90E2" opacity="0.8" />
+                <circle cx="22" cy="25" r="2" fill="#7B6CF6" opacity="0.8" />
+                <circle cx="18" cy="21" r="2" fill="#1A1F36" opacity="0.7" />
+                <line x1="10" y1="19" x2="14" y2="19" stroke="#1A1F36" stroke-width="1.5" stroke-linecap="round" />
+                <line x1="12" y1="17" x2="12" y2="21" stroke="#1A1F36" stroke-width="1.5" stroke-linecap="round" />
+                <!-- 전략 화살표 -->
+                <path d="M30,6 L36,6 L36,12" stroke="#E8613A" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+                <line x1="30" y1="6" x2="34" y2="10" stroke="#E8613A" stroke-width="1.5" stroke-linecap="round" />
+              </svg>
+            </div>
+            <div class="concept-sol-body">
+              <div class="concept-sol-title">지능형 서사 엔진</div>
+              <div class="concept-sol-desc">플레이어의 선택에 따라 스토리텔링을 세계관에 맞춰 생성하는 지능형 서사 엔진 기술을 제공합니다.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Project Preview Cards -->
+    <section class="section">
+      <div class="section-label">Projects</div>
+      <h2 class="section-title">주요 프로젝트</h2>
+      <p class="section-desc">프랙털 온톨로지 기술 기반의 문제 해결 솔루션</p>
+      <div class="card-grid">
+        <a href="project-1.html" class="card">
+          <div class="card-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" />
+            </svg>
+          </div>
+          <div class="card-title">팀 지식</div>
+          <div class="card-desc">팀의 활동을 지원하면서 그 경험을 지식 자산으로 만들기</div>
+          <div class="card-arrow">자세히 보기</div>
         </a>
-        <a href="footprint.html" class="btn btn-outline">발자국</a>
+        <a href="project-2.html" class="card">
+          <div class="card-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
+            </svg>
+          </div>
+          <div class="card-title">지식 기반 진단</div>
+          <div class="card-desc">스타트업의 문제를 진단하고 무엇을 해야 할 지 함께 고민하기</div>
+          <div class="card-arrow">자세히 보기</div>
+        </a>
+        <a href="project-3.html" class="card">
+          <div class="card-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+            </svg>
+          </div>
+          <div class="card-title">개인 지식</div>
+          <div class="card-desc">연구자들이 연구 노트를 작성하고 지식을 자산으로 공유하기</div>
+          <div class="card-arrow">자세히 보기</div>
+        </a>
+        <a href="project-4.html" class="card">
+          <div class="card-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+            </svg>
+          </div>
+          <div class="card-title">게임 엔진</div>
+          <div class="card-desc">액션 게임을 지능형 서사 엔진을 탑재한 전략 게임으로 전환하기</div>
+          <div class="card-arrow">자세히 보기</div>
+        </a>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Project Preview Cards -->
-  <section class="section">
-    <div class="section-label">Projects</div>
-    <h2 class="section-title">주요 프로젝트</h2>
-    <p class="section-desc">프랙털 온톨로지 기술 기반의 문제 해결 솔루션</p>
-    <div class="card-grid">
-      <a href="project-1.html" class="card">
-        <div class="card-icon">
-          <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" /></svg>
-        </div>
-        <div class="card-title">팀 지식</div>
-        <div class="card-desc">팀의 활동을 지원하면서 그 경험을 지식 자산으로 만들기</div>
-        <div class="card-arrow">자세히 보기</div>
-      </a>
-      <a href="project-2.html" class="card">
-        <div class="card-icon">
-          <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" /></svg>
-        </div>
-        <div class="card-title">지식 기반 진단</div>
-        <div class="card-desc">스타트업의 문제를 진단하고 무엇을 해야 할 지 함께 고민하기</div>
-        <div class="card-arrow">자세히 보기</div>
-      </a>
-      <a href="project-3.html" class="card">
-        <div class="card-icon">
-          <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" /></svg>
-        </div>
-        <div class="card-title">개인 지식</div>
-        <div class="card-desc">연구자들이 연구 노트를 작성하고 지식을 자산으로 공유하기</div>
-        <div class="card-arrow">자세히 보기</div>
-      </a>
-      <a href="project-4.html" class="card">
-        <div class="card-icon">
-          <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" /></svg>
-        </div>
-        <div class="card-title">게임 엔진</div>
-        <div class="card-desc">액션 게임을 지능형 서사 엔진을 탑재한 전략 게임으로 전환하기</div>
-        <div class="card-arrow">자세히 보기</div>
-      </a>
-    </div>
-  </section>
+  </main>
 
-</main>
+  <!-- GTranslate -->
+  <div class="gtranslate_wrapper"></div>
+  <script src="js/gtranslate-config.js"></script>
+  <script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
 
-<!-- GTranslate -->
-<div class="gtranslate_wrapper"></div>
-<script src="js/gtranslate-config.js"></script>
-<script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
-
-<script src="js/main.js"></script>
+  <script src="js/main.js"></script>
 </body>
+
 </html>
