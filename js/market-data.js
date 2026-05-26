@@ -9,51 +9,101 @@ const marketData = {
   // TAM-SAM-SOM 데이터 (국내 및 글로벌)
   marketSize: {
     ko: {
-      title: "국내 목표 시장 (Korea Market)",
-      currency: "원",
-      tam: {
-        value: "2,000억 ~ 5,000억",
-        label: "TAM (전체시장)",
-        desc: "국내 스타트업, AC/VC 투자 생태계, 대기업 PI(Process Innovation) 부서 및 중소·벤처기업의 비즈니스 리스크 진단 수요 총합"
+      ko: {
+        title: "국내 목표 시장 (Korea Market)",
+        currency: "원",
+        tam: {
+          value: "2,000억 ~ 5,000억",
+          label: "TAM (전체시장)",
+          desc: "국내 스타트업, AC/VC 투자 생태계, 대기업 PI(Process Innovation) 부서 및 중소·벤처기업의 비즈니스 리스크 진단 수요 총합"
+        },
+        sam: {
+          value: "200억 ~ 600억",
+          label: "SAM (유효시장)",
+          desc: "초기 스타트업 보육 기관, VC 포트폴리오 관리팀, 대기업 오픈이노베이션 프로그램 및 혁신 진단 솔루션 도입을 우선 고려하는 핵심 시장"
+        },
+        som: {
+          value: "10억 ~ 30억",
+          label: "SOM (수익시장)",
+          desc: "출시 1~3년 차 이내 확보 가능한 타깃 시장. 대기업 오픈이노베이션 프로그램 연계 및 주요 액셀러레이터(AC) 파트너십을 통한 즉각 진입 시장"
+        }
       },
-      sam: {
-        value: "200억 ~ 600억",
-        label: "SAM (유효시장)",
-        desc: "초기 스타트업 보육 기관, VC 포트폴리오 관리팀, 대기업 오픈이노베이션 프로그램 및 혁신 진단 솔루션 도입을 우선 고려하는 핵심 시장"
-      },
-      som: {
-        value: "10억 ~ 30억",
-        label: "SOM (수익시장)",
-        desc: "출시 1~3년 차 이내 확보 가능한 타깃 시장. 대기업 오픈이노베이션 프로그램 연계 및 주요 액셀러레이터(AC) 파트너십을 통한 즉각 진입 시장"
+      global: {
+        title: "글로벌 목표 시장 (Global Market)",
+        currency: "USD",
+        tam: {
+          value: "2.0B ~ 5.0B",
+          label: "TAM (전체시장)",
+          desc: "글로벌 지식 그래프 및 AI 기반 비즈니스 시뮬레이션/지식 자동화 솔루션 시장 규모의 총합 (2032년까지 약 37억 달러로 고성장 예상)"
+        },
+        sam: {
+          value: "300M ~ 1.0B",
+          label: "SAM (유효시장)",
+          desc: "스타트업 역량 진단, 시나리오 시뮬레이션 및 데이터 기반 보고서 도구 도입을 희망하는 글로벌 테크 기업 및 전문 경영 컨설팅 분야"
+        },
+        som: {
+          value: "500K ~ 50M",
+          label: "SOM (수익시장)",
+          desc: "글로벌 AC/VC 파트너십 네트워크 및 180개국 IRM(영국 리스크관리협회) 네트워크를 통해 즉각 확보 가능한 글로벌 타깃 시장"
+        }
       }
     },
-    global: {
-      title: "글로벌 목표 시장 (Global Market)",
-      currency: "USD",
-      tam: {
-        value: "2.0B ~ 5.0B",
-        label: "TAM (Total Addressable Market)",
-        desc: "Sum of global knowledge graph and AI-based business simulation/knowledge automation solution markets (Expected to grow highly to about $3.7B by 2032)"
+    en: {
+      ko: {
+        title: "Korea Market",
+        currency: "KRW",
+        tam: {
+          value: "200B ~ 500B",
+          label: "TAM (Total Addressable Market)",
+          desc: "Total demand for business risk diagnosis from domestic startups, AC/VC investment ecosystems, corporate PI (Process Innovation) departments, and SMEs/venture companies"
+        },
+        sam: {
+          value: "20B ~ 60B",
+          label: "SAM (Serviceable Available Market)",
+          desc: "Early-stage startup incubators, VC portfolio management teams, corporate open innovation programs, and key markets that prioritize adopting innovative diagnosis solutions"
+        },
+        som: {
+          value: "1B ~ 3B",
+          label: "SOM (Serviceable Obtainable Market)",
+          desc: "Target market share obtainable within 1–3 years of launch. Immediate entry markets through corporate open innovation program alignments and key accelerator (AC) partnerships"
+        }
       },
-      sam: {
-        value: "300M ~ 1.0B",
-        label: "SAM (Serviceable Available Market)",
-        desc: "Global tech companies and professional management consulting domains looking to adopt startup capability diagnosis, scenario simulation, and data-driven report tools"
-      },
-      som: {
-        value: "500K ~ 50M",
-        label: "SOM (Serviceable Obtainable Market)",
-        desc: "Target markets reachable immediately through global AC/VC partnership networks and the IRM (Institute of Risk Management, UK) networks in 180 countries"
+      global: {
+        title: "Global Market",
+        currency: "USD",
+        tam: {
+          value: "2.0B ~ 5.0B",
+          label: "TAM (Total Addressable Market)",
+          desc: "Sum of global knowledge graph and AI-based business simulation/knowledge automation solution markets (Expected to grow highly to about $3.7B by 2032)"
+        },
+        sam: {
+          value: "300M ~ 1.0B",
+          label: "SAM (Serviceable Available Market)",
+          desc: "Global tech companies and professional management consulting domains looking to adopt startup capability diagnosis, scenario simulation, and data-driven report tools"
+        },
+        som: {
+          value: "500K ~ 50M",
+          label: "SOM (Serviceable Obtainable Market)",
+          desc: "Target markets reachable immediately through global AC/VC partnership networks and the IRM (Institute of Risk Management, UK) networks in 180 countries"
+        }
       }
     }
   },
   
   // CAGR 성장률 지표
   growthRate: {
-    value: "24.2%",
-    period: "2032년까지",
-    source: "GMI Market Report (2025.10)",
-    desc: "Annual growth rate (CAGR) of the AI utilization market within global corporate diagnosis and decision-making domains"
+    ko: {
+      value: "24.2%",
+      period: "2032년까지",
+      source: "GMI Market Report (2025.10)",
+      desc: "글로벌 기업 진단 및 의사결정 분야 내 AI 활용 시장의 연평균 성장률(CAGR)"
+    },
+    en: {
+      value: "24.2%",
+      period: "by 2032",
+      source: "GMI Market Report (2025.10)",
+      desc: "Annual growth rate (CAGR) of the AI utilization market within global corporate diagnosis and decision-making domains"
+    }
   },
   
   // 2026년 하반기 마일스톤 (다국어 분리)

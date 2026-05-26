@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function updateMarketTab(tabKey) {
     currentTab = tabKey;
-    const data = marketData.marketSize[tabKey];
+    const data = marketData.marketSize[currentLang][tabKey];
     if (!data) return;
 
     // 활성 탭 버튼 스타일
@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 상세 카드 정보 표출 함수
   function showMetricDetail(type) {
-    const data = marketData.marketSize[currentTab];
+    const data = marketData.marketSize[currentLang][currentTab];
     if (!data || !data[type]) return;
 
     const metric = data[type];
@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 성장률 값 매핑 (24.2%)
     const cagrValEl = document.getElementById("cagr-value");
     if (cagrValEl && marketData.growthRate) {
-      cagrValEl.textContent = marketData.growthRate.value;
+      cagrValEl.textContent = marketData.growthRate[currentLang].value;
     }
 
     // 화면 스크롤이나 로딩 시 게이지 슬라이드 애니메이션
