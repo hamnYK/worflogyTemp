@@ -2103,3 +2103,157 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
   }
 }
+
+/* ── Development Progress Card ── */
+.progress-card {
+  margin-top: 20px;
+  padding: 24px 28px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-sm);
+}
+.progress-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.progress-card-title {
+  font-family: var(--font-serif-ko);
+  font-size: var(--fs-ui);
+  font-weight: 600;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.progress-card-title span {
+  font-family: var(--font-sans-en);
+  font-size: var(--fs-badge);
+  color: var(--text-muted);
+  font-weight: 400;
+}
+.progress-card-date {
+  font-family: var(--font-sans-en);
+  font-size: var(--fs-badge);
+  color: var(--text-light);
+}
+.progress-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.progress-step-item {
+  display: flex;
+  flex-direction: column;
+}
+.progress-step-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+  gap: 4px;
+}
+.progress-step-label {
+  font-family: var(--font-body);
+  font-size: var(--fs-badge);
+  color: var(--text-muted);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.progress-step-label.active {
+  color: var(--text);
+}
+.progress-step-val {
+  font-family: var(--font-sans-en);
+  font-size: var(--fs-label);
+  font-weight: 700;
+  color: var(--text-light);
+}
+.progress-step-val.active {
+  color: var(--coral);
+}
+.progress-step-val.done {
+  color: var(--ink);
+}
+.progress-bar-bg {
+  height: 4px;
+  background: var(--sand-dark);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+}
+.progress-bar-fill.done {
+  background: var(--ink);
+}
+.progress-bar-fill.active {
+  background: var(--coral);
+}
+.progress-bar-fill.tbc {
+  background: var(--text-light);
+  opacity: 0.3;
+}
+
+@media (max-width: 768px) {
+  .progress-steps-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+}
+
+/* ── Solution Demonstration Policy Notice ── */
+.demo-security-notice {
+  margin-top: 32px;
+  padding: 20px 24px;
+  background: var(--sand);
+  border: 1px solid var(--border-sand);
+  border-radius: var(--r-md);
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.demo-security-notice svg {
+  width: 16px;
+  height: 16px;
+  color: var(--text-light);
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+.demo-security-notice-content {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-min);
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+.demo-security-notice-title {
+  display: block;
+  font-size: var(--fs-ui);
+  color: var(--text);
+  margin-bottom: 4px;
+  font-family: var(--font-serif-ko);
+  font-weight: 600;
+}
+
+/* 현재 진행 단계 표시용 마커 컨테이너 및 삼각형 (상태바 하단 배치용) */
+.progress-step-marker-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 6px;
+  min-height: 10px; /* 마커가 없을 때도 동일한 높이를 확보하여 레이아웃 어긋남 방지 */
+}
+.progress-step-current-marker {
+  color: var(--coral);
+  font-size: 8px;
+  line-height: 1;
+  display: inline-block;
+}
+
+
+
+
