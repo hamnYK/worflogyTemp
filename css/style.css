@@ -750,6 +750,16 @@ h1, h2, h3, h4, h5, h6 {
   display: block;
   filter: grayscale(100%);
   transition: filter var(--t-slow);
+
+  /* GPU 하드웨어 가속 시 서브픽셀 렌더링 왜곡 보정 */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+
+  /* 브라우저별 이미지 렌더링 선명도 최적화 */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
 }
 .slider-item img:hover {
   filter: grayscale(0%);
