@@ -730,6 +730,7 @@ h1, h2, h3, h4, h5, h6 {
 .slider-container {
   position: relative;
   width: 100%;
+  aspect-ratio: 2548 / 1397;
   border-radius: var(--r-md);
   overflow: hidden;
   border: 1px solid var(--border);
