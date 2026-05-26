@@ -1,9 +1,9 @@
 /**
  * Worflogy Market Metrics & IR Data
- * 최종 업데이트: 2026-05-22
+ * 최종 업데이트: 2026-05-26
  */
 const marketData = {
-  lastUpdated: "2026.05.22",
+  lastUpdated: "2026.05.26",
   
   // TAM-SAM-SOM 데이터 (국내 및 글로벌)
   marketSize: {
