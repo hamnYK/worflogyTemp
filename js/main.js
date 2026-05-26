@@ -1,6 +1,6 @@
 /* ================================================
    WORFLOGY — main.js
-   Sidebar active state, mobile menu, project graph
+   Sidebar active state, mobile menu, project graph (Multi-language Supported)
    ================================================ */
 
 window.name = "worflogy_main";
@@ -48,7 +48,21 @@ function initGraph() {
   const cx = W / 2, cy = H / 2;
   const R  = 190; // orbit radius
 
-  const nodes = [
+  const isEnglish = window.location.href.includes('/en/');
+
+  // 국문/영문에 따른 그래프 텍스트 다국어화
+  const nodes = isEnglish ? [
+    { id: 'root', label: 'Fractal\nOntology', sublabel: 'Design Tech', href: null,
+      x: cx, y: cy, r: 80, primary: true },
+    { id: 'p1', label: 'Team\nKnowledge', sublabel: 'Collab Sync', href: 'project-1.html',
+      x: cx, y: cy - R, r: 64 },
+    { id: 'p2', label: 'Strategic Pivot\n& Diagnosis', sublabel: 'Risk Diagnosis', href: 'project-2.html',
+      x: cx + R, y: cy, r: 64 },
+    { id: 'p3', label: 'Research &\nCore IP', sublabel: 'Asset Protection', href: 'project-3.html',
+      x: cx, y: cy + R, r: 64 },
+    { id: 'p4', label: 'Intelligent\nNarrative', sublabel: 'Responsive Narrative', href: 'project-4.html',
+      x: cx - R, y: cy, r: 64 },
+  ] : [
     { id: 'root', label: '프랙털\n온톨로지', sublabel: '디자인 기술', href: null,
       x: cx, y: cy, r: 80, primary: true },
     { id: 'p1', label: '팀 지식\n자산화', sublabel: '협업 지능 동기화', href: 'project-1.html',
@@ -77,7 +91,7 @@ function initGraph() {
   filter.appendChild(merge);
   defs.appendChild(filter);
   svg.appendChild(defs);
-
+  
   // edges
   const edgeGroup = svgEl('g', { class: 'edges' });
 
@@ -143,7 +157,7 @@ function initGraph() {
       style: n.href ? 'cursor:pointer' : 'cursor:default'
     });
 
-    // circle – CSS transition으로 hover 부드럽게
+    // circle – CSS transition
     const circle = svgEl('circle', {
       r: n.r,
       fill: n.primary ? PRIMARY : '#fff',
@@ -186,7 +200,7 @@ function initGraph() {
     if (n.href) {
       g.addEventListener('mouseenter', () => {
         circle.setAttribute('stroke-width', '2.5');
-        circle.setAttribute('fill', '#F5F0E8');   // Warm Sand – 깔끔한 hover
+        circle.setAttribute('fill', '#F5F0E8');
       });
       g.addEventListener('mouseleave', () => {
         circle.setAttribute('stroke-width', '1.5');
@@ -205,8 +219,6 @@ function svgEl(tag, attrs = {}) {
   Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
   return el;
 }
-
-/* @keyframes dashAnim + .edge-line → css/style.css 에 정의됨 */
 
 /* ── Platform Node Entrance Animation ── */
 document.addEventListener('DOMContentLoaded', () => {
@@ -227,7 +239,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.15 });
   nodes.forEach(n => obs.observe(n));
 });
-
 
 /* ── Image Slider ── */
 document.addEventListener('DOMContentLoaded', () => {

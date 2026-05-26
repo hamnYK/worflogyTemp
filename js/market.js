@@ -1,15 +1,20 @@
 /**
  * Worflogy Market Metrics & IR Dashboard Logic
+ * 다국어(국문/영문) 렌더링 지원 수정
  */
 document.addEventListener("DOMContentLoaded", () => {
-  // 1. 마지막 업데이트 일자 표출
+  // 1. 현재 언어 환경 감지
+  const isEnglish = window.location.href.includes('/en/');
+  const currentLang = isEnglish ? 'en' : 'ko';
+
+  // 2. 마지막 업데이트 일자 표출
   const updatedEl = document.getElementById("last-updated");
   if (updatedEl && marketData.lastUpdated) {
     updatedEl.textContent = marketData.lastUpdated;
   }
 
-  // 2. TAM-SAM-SOM 탭 토글 및 데이터 제어
-  let currentTab = "ko"; // 기본값: 국내 시장
+  // 3. TAM-SAM-SOM 탭 토글 및 데이터 제어
+  let currentTab = isEnglish ? "global" : "ko"; // 영문 페이지는 글로벌 탭 기본 활성화
   const tabButtons = document.querySelectorAll(".market-tab-btn");
   const tamValEl = document.getElementById("tam-val");
   const samValEl = document.getElementById("sam-val");
@@ -130,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // 3. CAGR 링 차트 로드 애니메이션
+  // 4. CAGR 링 차트 로드 애니메이션
   const progressCircle = document.querySelector(".progress-ring-circle");
   if (progressCircle) {
     const radius = progressCircle.r.baseVal.value;
@@ -154,12 +159,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 400);
   }
 
-  // 4. 2026 하반기 마일스톤 타임라인 렌더링
+  // 5. 마일스톤 타임라인 렌더링 (다국어 분할 지원)
   const milestoneTimeline = document.getElementById("milestone-timeline");
-  if (milestoneTimeline && marketData.milestones) {
+  const milestonesList = marketData.milestones[currentLang];
+  if (milestoneTimeline && milestonesList) {
     milestoneTimeline.innerHTML = ""; // 기존 내용 초기화
     
-    marketData.milestones.forEach((m, idx) => {
+    milestonesList.forEach((m, idx) => {
       const step = document.createElement("div");
       step.className = "timeline-step";
       step.innerHTML = `
@@ -191,12 +197,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 5. 지식재산권(IP) 그리드 렌더링
+  // 6. 지식재산권(IP) 그리드 렌더링 (다국어 분할 지원)
   const ipGrid = document.getElementById("ip-grid");
-  if (ipGrid && marketData.intellectualProperties) {
+  const ipList = marketData.intellectualProperties[currentLang];
+  if (ipGrid && ipList) {
     ipGrid.innerHTML = "";
     
-    marketData.intellectualProperties.forEach(ip => {
+    ipList.forEach(ip => {
       const card = document.createElement("div");
       card.className = "ip-card";
       
@@ -219,6 +226,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 6. 초기 실행
+  // 7. 초기 실행
   updateMarketTab(currentTab);
 });

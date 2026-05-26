@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-GMDREuNQNJynOQvCXFCl/JLp3JtjQWFHx+V4UdEFI34='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://www.gstatic.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https://www.google.com https://fonts.gstatic.com https://www.gstatic.com; connect-src 'self' https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests;" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>프로젝트 — 워플로지</title>
-  <meta name="description" content="프랙털 온톨로지 기반의 주요 프로젝트를 소개합니다." />
-  <link rel="icon" href="assets/worflogy_logo.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/language-switcher.css" />
+  <title>Projects — Worflogy</title>
+  <meta name="description" content="Introduction of main projects based on fractal ontology." />
+  <link rel="icon" href="../assets/worflogy_logo.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/language-switcher.css" />
   <style>
     .graph-hint {
       font-size: var(--fs-body-min);
@@ -77,7 +77,7 @@
       flex-direction: column;
       gap: 12px;
     }
-    /* 플랫폼명 배지 (우상단) */
+    /* Platform Title Badge (top-right) */
     .pm-outer-badge {
       position: absolute;
       top: 16px;
@@ -91,7 +91,7 @@
       opacity: 0.75;
       white-space: nowrap;
     }
-    /* L3: 애플리케이션 레이어 (4개 카드) */
+    /* L3: Application Layer (4 cards) */
     .pm-apps {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -142,7 +142,7 @@
       color: var(--text-muted);
       line-height: 1.4;
     }
-    /* L2: 프랙털 온톨로지 엔진 (전체 너비 바) */
+    /* L2: Fractal Ontology Engine */
     .pm-engine-bar {
       background: var(--ink);
       border-radius: var(--r-md);
@@ -173,7 +173,7 @@
       color: rgba(255,255,255,0.45);
       margin-left: 4px;
     }
-    /* L1: 인프라 서비스 (3개) */
+    /* L1: Infra Services */
     .pm-infra-row {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -190,7 +190,7 @@
       font-weight: 500;
       color: var(--text-muted);
     }
-    /* L0: 운영 (전체 너비 바) */
+    /* L0: Operations */
     .pm-ops-bar {
       background: rgba(26,31,54,0.05);
       border: 1px solid var(--border);
@@ -202,7 +202,7 @@
       font-weight: 500;
       color: var(--text-muted);
     }
-    /* 진입 애니메이션 */
+    /* Entrance Animation */
     .pm-anim {
       opacity: 0;
       transform: translateY(10px);
@@ -224,14 +224,14 @@
 </head>
 <body>
 
-<button class="hamburger" aria-label="메뉴 열기">
+<button class="hamburger" aria-label="Open Menu">
   <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
 </button>
 <div class="sidebar-overlay"></div>
 
 <aside class="sidebar">
   <div class="sidebar-logo">
-    <a href="index.html"><img src="assets/worflogy_logo.svg" alt="워플로지"></a>
+    <a href="index.html"><img src="../assets/worflogy_logo.svg" alt="Worflogy"></a>
     <div class="sidebar-brand notranslate" translate="no">
       <span class="brand-ko">주식회사 워플로지</span>
       <span class="brand-en">Worflogy Inc.</span>
@@ -240,46 +240,46 @@
   <nav class="sidebar-nav">
     <a href="index.html" class="nav-item">
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 9.75L12 3l9 6.75V21a.75.75 0 01-.75.75H15.75v-6h-7.5v6H3.75A.75.75 0 013 21V9.75z"/></svg>
-      랜딩
+      Home
     </a>
     <a href="footprint.html" class="nav-item">
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2m6-2a10 10 0 11-20 0 10 10 0 0120 0z"/></svg>
-      히스토리
+      History
     </a>
     <a href="projects.html" class="nav-item">
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zm0 9.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zm9.75-9.75A2.25 2.25 0 0115.75 3.75H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zm0 9.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/></svg>
-      프로젝트
+      Projects
     </a>
     <a href="market.html" class="nav-item">
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" />
         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z" />
       </svg>
-      시장 참조
+      Market Reference
     </a>
     <a href="company.html" class="nav-item">
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5M9 7.5h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6h1.5m-1.5 3h1.5m-1.5 3h1.5M6.75 21V6.375c0-.621.504-1.125 1.125-1.125h8.25c.621 0 1.125.504 1.125 1.125V21M3.375 21h17.25"/></svg>
-      회사
+      Company
     </a>
     <div class="nav-divider"></div>
     <div class="nav-group-title">Services</div>
     <a href="https://edu.contextonai.com" class="nav-item" target="worflogy_edu" rel="opener">
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
-      교육 브랜드 홈
+      Education Brand Home
       <svg class="nav-item-outlink" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
       </svg>
     </a>
   </nav>
-  <div class="sidebar-footer">© 2025 워플로지<br />worflogy.com</div>
+  <div class="sidebar-footer">© 2025 Worflogy<br />worflogy.com</div>
 </aside>
 
 <main class="main">
 
   <div class="graph-section">
     <div class="section-label">Projects</div>
-    <h1 class="section-title">프로젝트</h1>
-    <p class="section-desc">프랙털 온톨로지 원천 기술을 기반으로 설계된 네 가지 핵심 솔루션입니다. 그래프 노드를 선택하여 각 영역의 상세 정보를 탐색해 보세요.</p>
+    <h1 class="section-title">Projects</h1>
+    <p class="section-desc">Four core solutions designed based on fractal ontology proprietary technology. Select graph nodes to explore detailed information in each area.</p>
 
     <div class="graph-container">
       <svg id="project-graph" viewBox="0 0 680 580" xmlns="http://www.w3.org/2000/svg"></svg>
@@ -291,29 +291,29 @@
     <a href="project-1.html" class="proj-row">
       <div class="proj-num">01</div>
       <div class="proj-info">
-        <div class="proj-name">팀 지식 자산화 (Team Knowledge)</div>
-        <div class="proj-desc">실무 노하우의 지식 그래프 축적을 통한 공백 없는 협업 지능 동기화</div>
+        <div class="proj-name">Team Knowledge Assetization (Team Knowledge)</div>
+        <div class="proj-desc">Accumulating practical know-how into knowledge graphs to enable seamless collaboration and synchronization of intelligence.</div>
       </div>
     </a>
     <a href="project-2.html" class="proj-row">
       <div class="proj-num">02</div>
       <div class="proj-info">
-        <div class="proj-name">전략적 피봇 및 문제 진단 (Strategic Pivot Support)</div>
-        <div class="proj-desc">비즈니스 리스크의 정밀 진단과 맥락 기반 피봇 경로 설계</div>
+        <div class="proj-name">Strategic Pivot Support & Problem Diagnosis</div>
+        <div class="proj-desc">Precise diagnosis of business risks and context-based design of pivot paths.</div>
       </div>
     </a>
     <a href="project-3.html" class="proj-row">
       <div class="proj-num">03</div>
       <div class="proj-info">
-        <div class="proj-name">연구 및 핵심 IP 보호 (IP & Research Assetization)</div>
-        <div class="proj-desc">연구 과정의 가설 및 아이디어 구조화를 통한 핵심 지식재산(IP) 보호</div>
+        <div class="proj-name">Research & Core IP Protection (IP & Research Assetization)</div>
+        <div class="proj-desc">Protection of core intellectual property (IP) through structuring of research hypotheses and ideas.</div>
       </div>
     </a>
     <a href="project-4.html" class="proj-row">
       <div class="proj-num">04</div>
       <div class="proj-info">
-        <div class="proj-name">지능형 내러티브 엔진 (Intelligent Narrative Engine)</div>
-        <div class="proj-desc">행동 데이터와 세계관의 연결을 통한 반응형 서사 및 복잡계 설계</div>
+        <div class="proj-name">Intelligent Narrative Engine</div>
+        <div class="proj-desc">Designing reactive narratives and complex systems by connecting behavioral data with world settings.</div>
       </div>
     </a>
   </div>
@@ -321,39 +321,39 @@
   <!-- ── Platform Convergence Section ── -->
   <section class="platform-section" id="platform" aria-labelledby="platform-title">
     <div class="section-label">Platform</div>
-    <h2 class="section-title" id="platform-title">하나의 플랫폼으로</h2>
-    <p class="section-desc">파편화된 다양한 분야의 지식을 프랙털 온톨로지 엔진 하나로 연결하여 상호운용성을 극대화합니다.</p>
+    <h2 class="section-title" id="platform-title">Unified Platform</h2>
+    <p class="section-desc">Maximize interoperability by integrating fragmented knowledge across diverse domains into a single fractal ontology engine.</p>
 
-    <div class="platform-map" role="figure" aria-label="워플로지 온톨로지 플랫폼 구조도">
+    <div class="platform-map" role="figure" aria-label="Worflogy Ontology Platform Architecture">
 
-      <!-- 우상단 플랫폼 명칭 -->
-      <div class="pm-outer-badge">워플로지 온톨로지 플랫폼</div>
+      <!-- top-right platform badge -->
+      <div class="pm-outer-badge">Worflogy Ontology Platform</div>
 
-      <!-- 신규 레이어: 지식 기반 리스크 & 의사결정 지원 -->
-      <div class="pm-ops-bar pm-anim" data-delay="0">지식 기반 리스크 & 의사결정 지원</div>
+      <!-- L3: Business Decision Layer -->
+      <div class="pm-ops-bar pm-anim" data-delay="0">Knowledge-based Risk & Decision Support</div>
 
-      <!-- L3: 애플리케이션 레이어 (4개 동급 솔루션) -->
+      <!-- L3: Application Layer (4 equal solutions) -->
       <div class="pm-apps pm-anim" data-delay="100">
         <a href="project-1.html" class="pm-app-card">
-          <div class="pm-card-name">팀 지식 자산화</div>
-          <div class="pm-card-tech">협업 지능 동기화 (Team Knowledge)</div>
+          <div class="pm-card-name">Team Knowledge Assetization</div>
+          <div class="pm-card-tech">Collaboration Intelligence Sync</div>
         </a>
         <a href="project-2.html" class="pm-app-card">
-          <div class="pm-card-name">전략적 피봇 및 문제 진단</div>
-          <div class="pm-card-tech">의사결정 고도화 (Strategic Pivot)</div>
+          <div class="pm-card-name">Strategic Pivot Support & Problem Diagnosis</div>
+          <div class="pm-card-tech">Decision Optimization</div>
         </a>
         <a href="project-3.html" class="pm-app-card">
-          <div class="pm-card-name">연구 및 핵심 IP 보호</div>
-          <div class="pm-card-tech">R&D 암묵지 자산화 (IP Assetization)</div>
+          <div class="pm-card-name">Research & Core IP Protection</div>
+          <div class="pm-card-tech">R&D Tacit Assetization</div>
         </a>
         <a href="project-4.html" class="pm-app-card">
-          <div class="pm-card-name">지능형 내러티브 엔진</div>
-          <div class="pm-card-tech">운영 데이터 서사 변환 (Narrative Engine)</div>
+          <div class="pm-card-name">Intelligent Narrative Engine</div>
+          <div class="pm-card-tech">Operational Data Narrative Translation</div>
         </a>
       </div>
 
-      <!-- L2: 프랙털 온톨로지 엔진 (전체 너비 바) -->
-      <div class="pm-engine-bar pm-anim" data-delay="200" aria-label="프랙털 온톨로지 엔진">
+      <!-- L2: Fractal Ontology Engine (full width bar) -->
+      <div class="pm-engine-bar pm-anim" data-delay="200" aria-label="Fractal Ontology Engine">
         <div class="pm-engine-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
@@ -365,31 +365,30 @@
             <line x1="18" y1="12" x2="22" y2="12" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
           </svg>
         </div>
-        <span class="pm-engine-name">프랙털 온톨로지 엔진</span>
+        <span class="pm-engine-name">Fractal Ontology Engine</span>
         <span class="pm-engine-en">Fractal Ontology Engine</span>
       </div>
 
-      <!-- L1: 인프라 서비스 (보안 / 자원 / 인증) -->
+      <!-- L1: Infra Services -->
       <div class="pm-infra-row pm-anim" data-delay="300">
-        <div class="pm-infra-chip">보안</div>
-        <div class="pm-infra-chip">자원</div>
-        <div class="pm-infra-chip">인증</div>
+        <div class="pm-infra-chip">Security</div>
+        <div class="pm-infra-chip">Resources</div>
+        <div class="pm-infra-chip">Auth</div>
       </div>
 
-      <!-- L0: 운영 (전체 너비 바) -->
-      <div class="pm-ops-bar pm-anim" data-delay="400">운영</div>
+      <!-- L0: Operations -->
+      <div class="pm-ops-bar pm-anim" data-delay="400">Ops</div>
 
     </div><!-- /.platform-map -->
 
     <p style="margin-top:20px; font-family:var(--font-body); font-size:var(--fs-body-min); color:var(--text-muted); text-align:center;">
-      각 솔루션 박스를 클릭하면 상세 소개로 이동합니다.
+      Click each solution box to navigate to the detailed introduction.
     </p>
   </section>
 
-
 </main>
 
-  <script src="js/main.js"></script>
-  <script src="js/language-switcher.js" defer></script>
+<script src="../js/main.js"></script>
+<script src="../js/language-switcher.js" defer></script>
 </body>
 </html>
