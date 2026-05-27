@@ -102,7 +102,20 @@
 
   <!-- Main -->
   <main class="main">
-    <div class="page-header">
+    <div class="page-header video-header">
+      <!-- 개념 영상 배경 -->
+      <video
+        class="header-video-bg"
+        src="assets/worflogy_concept_film_market.mp4"
+        autoplay
+        muted
+        loop
+        playsinline
+        aria-hidden="true"
+        preload="auto"
+      ></video>
+      <!-- 오버레이: 텍스트 가독성 확보 -->
+      <div class="header-video-overlay" aria-hidden="true"></div>
       <div class="section-label">Market Metrics & IR</div>
       <h1 class="section-title">시장 참조 지표</h1>
       <p class="section-desc">워플로지 리스크 진단 솔루션의 목표 시장 규모(TAM-SAM-SOM) 및 비즈니스 마일스톤입니다.</p>
