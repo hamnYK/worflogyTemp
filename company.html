@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; script-src 'self' 'sha256-GMDREuNQNJynOQvCXFCl/JLp3JtjQWFHx+V4UdEFI34='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://www.gstatic.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https://www.google.com https://fonts.gstatic.com https://www.gstatic.com; connect-src 'self' https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests;" />
+    content="default-src 'self'; script-src 'self' 'sha256-GMDREuNQNJynOQvCXFCl/JLp3JtjQWFHx+V4UdEFI34='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://www.gstatic.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https://www.google.com https://fonts.gstatic.com https://www.gstatic.com; connect-src 'self' https://cdn.jsdelivr.net https://script.google.com https://script.googleusercontent.com; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests;" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>회사 소개 — 주식회사 워플로지</title>
@@ -252,13 +252,60 @@
       <p class="section-desc" style="margin-bottom:32px;">
         지식 아키텍처 혁신을 위한 공동 R&D, 프로젝트 협업, 투자 유치 등 워플로지와의 파트너십에 관한 제안은 언제든 편하게 연락해 주세요.
       </p>
-      <a href="mailto:worflogy@gmail.com" class="btn btn-primary" id="contact-email-btn">
+      <button type="button" id="open-contact-modal" class="btn btn-primary">
         이메일 보내기
-      </a>
+      </button>
     </section>
   </main>
 
+  <!-- General Inquiry Modal Backdrop -->
+  <div id="ir-modal-backdrop" class="ir-modal-backdrop">
+    <div class="ir-modal-content">
+      <div class="ir-modal-header">
+        <h3 class="ir-modal-title">일반 비즈니스 문의</h3>
+        <button type="button" id="close-ir-modal" class="ir-modal-close-btn" aria-label="모달 닫기">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <form id="ir-proposal-form">
+        <div class="ir-form-group">
+          <label for="ir-name">문의자 이름</label>
+          <input type="text" id="ir-name" name="name" required placeholder="성함을 입력해 주세요" autocomplete="name" />
+        </div>
+        <div class="ir-form-group">
+          <label for="ir-company">회사명 / 소속</label>
+          <input type="text" id="ir-company" name="company" required placeholder="회사명 또는 기관명을 입력해 주세요" />
+        </div>
+        <div class="ir-form-group">
+          <label for="ir-email">이메일 주소</label>
+          <input type="email" id="ir-email" name="email" required placeholder="답변을 받으실 이메일을 입력해 주세요" autocomplete="email" />
+        </div>
+        <div class="ir-form-group">
+          <label for="ir-message">문의 및 제안 내용</label>
+          <textarea id="ir-message" name="message" required placeholder="협업 제안 또는 일반 문의 내용을 상세히 작성해 주세요"></textarea>
+        </div>
+        <div class="ir-modal-footer">
+          <button type="button" id="cancel-ir-modal" class="btn btn-outline">취소</button>
+          <button type="submit" id="submit-ir-modal" class="btn btn-primary">문의 제출하기</button>
+        </div>
+      </form>
+      <div id="ir-success-screen" class="ir-success-screen" style="display: none;">
+        <div class="ir-success-icon">
+          <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+          </svg>
+        </div>
+        <h4 class="ir-success-title">문의 제출 완료</h4>
+        <p class="ir-success-desc">일반 비즈니스 문의가 성공적으로 접수되었습니다.<br>보내주신 제안 내용을 검토한 후 신속하게 연락드리겠습니다.</p>
+        <button type="button" id="success-close-btn" class="btn btn-primary" style="border-radius: var(--r-sm);">확인</button>
+      </div>
+    </div>
+  </div>
+
   <script src="js/main.js"></script>
+  <script src="js/company.js" defer></script>
   <script src="js/language-switcher.js" defer></script>
 </body>
 

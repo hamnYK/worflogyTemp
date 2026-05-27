@@ -324,6 +324,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const formData = {
+        type: "ir",
         name: document.getElementById("ir-name").value,
         company: document.getElementById("ir-company").value,
         email: document.getElementById("ir-email").value,
