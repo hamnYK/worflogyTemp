@@ -2265,6 +2265,143 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-block;
 }
 
+/* ── IR Inquiry Modal ── */
+.ir-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 31, 54, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.ir-modal-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.ir-modal-content {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  width: 90%;
+  max-width: 520px;
+  padding: 36px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  position: relative;
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+}
+.ir-modal-backdrop.active .ir-modal-content {
+  transform: translateY(0);
+}
+.ir-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.ir-modal-title {
+  font-family: var(--font-serif-ko);
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+}
+.ir-modal-close-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--t);
+}
+.ir-modal-close-btn:hover {
+  color: var(--ink);
+}
+.ir-modal-close-btn svg {
+  width: 24px;
+  height: 24px;
+}
+.ir-form-group {
+  margin-bottom: 20px;
+}
+.ir-form-group label {
+  display: block;
+  font-family: var(--font-serif-ko);
+  font-size: var(--fs-ui);
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.ir-form-group input,
+.ir-form-group textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--border-sand);
+  border-radius: var(--r-sm);
+  background: var(--bg);
+  font-family: var(--font-body);
+  font-size: var(--fs-body-min);
+  color: var(--text);
+  box-sizing: border-box;
+  transition: border-color var(--t), outline var(--t);
+}
+.ir-form-group input:focus,
+.ir-form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.ir-form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+.ir-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 28px;
+}
+.ir-modal-footer .btn {
+  padding: 12px 24px;
+  font-size: var(--fs-ui);
+  font-weight: 600;
+  cursor: pointer;
+}
+.ir-modal-footer .btn-outline {
+  background: transparent;
+  border: 1px solid var(--border-sand);
+  color: var(--text-muted);
+  border-radius: var(--r-sm);
+}
+.ir-modal-footer .btn-outline:hover {
+  background: var(--sand);
+  color: var(--text);
+}
+.ir-modal-footer .btn-primary {
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  color: #fff;
+  border-radius: var(--r-sm);
+  transition: background var(--t), border-color var(--t);
+}
+.ir-modal-footer .btn-primary:hover {
+  background: var(--coral);
+  border-color: var(--coral);
+}
+.ir-modal-footer .btn-primary:disabled {
+  background: var(--text-light);
+  border-color: var(--text-light);
+  cursor: not-allowed;
+}
+
 
 
 

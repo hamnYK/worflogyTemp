@@ -321,12 +321,48 @@
         "개인과 팀의 사유를 유기적인 지식 맥락으로 연동하고, 모든 연구 경험을 대체 불가능한 지적 자본으로 설계하십시오. 워플로지가 그 여정을 함께하겠습니다."
       </p>
       <div class="btn-group">
-        <a href="mailto:worflogy@gmail.com?subject=[Worflogy IR 문의] 투자 검토를 위한 미팅 제안" class="btn btn-primary">
+        <button type="button" id="open-ir-modal" class="btn btn-primary">
           IR 미팅 제안하기
-        </a>
+        </button>
       </div>
     </section>
   </main>
+
+  <!-- IR Inquiry Modal Backdrop -->
+  <div id="ir-modal-backdrop" class="ir-modal-backdrop">
+    <div class="ir-modal-content">
+      <div class="ir-modal-header">
+        <h3 class="ir-modal-title">IR 미팅 제안</h3>
+        <button type="button" id="close-ir-modal" class="ir-modal-close-btn" aria-label="모달 닫기">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <form id="ir-proposal-form">
+        <div class="ir-form-group">
+          <label for="ir-name">제안자 이름</label>
+          <input type="text" id="ir-name" name="name" required placeholder="성함을 입력해 주세요" autocomplete="name" />
+        </div>
+        <div class="ir-form-group">
+          <label for="ir-company">회사명 / 소속</label>
+          <input type="text" id="ir-company" name="company" required placeholder="회사명 또는 기관명을 입력해 주세요" />
+        </div>
+        <div class="ir-form-group">
+          <label for="ir-email">이메일 주소</label>
+          <input type="email" id="ir-email" name="email" required placeholder="답변을 받으실 이메일을 입력해 주세요" autocomplete="email" />
+        </div>
+        <div class="ir-form-group">
+          <label for="ir-message">제안 및 문의 내용</label>
+          <textarea id="ir-message" name="message" required placeholder="IR 미팅 목적 및 제안 내용을 구체적으로 기술해 주세요"></textarea>
+        </div>
+        <div class="ir-modal-footer">
+          <button type="button" id="cancel-ir-modal" class="btn btn-outline">취소</button>
+          <button type="submit" id="submit-ir-modal" class="btn btn-primary">제안 제출하기</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <!-- Data & Logic Scripts -->
   <script src="js/market-data.js"></script>

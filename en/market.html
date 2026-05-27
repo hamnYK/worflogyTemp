@@ -321,12 +321,48 @@
         "Organically linking the thoughts of individuals and teams into a knowledge context, and transforming all research experiences into irreplaceable intellectual capital—Worflogy will be with you on that journey."
       </p>
       <div class="btn-group">
-        <a href="mailto:worflogy@gmail.com?subject=[Worflogy IR inquiry] Meeting proposal for investment review" class="btn btn-primary">
+        <button type="button" id="open-ir-modal" class="btn btn-primary">
           Propose an IR Meeting
-        </a>
+        </button>
       </div>
     </section>
   </main>
+
+  <!-- IR Inquiry Modal Backdrop -->
+  <div id="ir-modal-backdrop" class="ir-modal-backdrop">
+    <div class="ir-modal-content">
+      <div class="ir-modal-header">
+        <h3 class="ir-modal-title">Propose an IR Meeting</h3>
+        <button type="button" id="close-ir-modal" class="ir-modal-close-btn" aria-label="Close modal">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <form id="ir-proposal-form">
+        <div class="ir-form-group">
+          <label for="ir-name">Name</label>
+          <input type="text" id="ir-name" name="name" required placeholder="Enter your full name" autocomplete="name" />
+        </div>
+        <div class="ir-form-group">
+          <label for="ir-company">Company / Affiliation</label>
+          <input type="text" id="ir-company" name="company" required placeholder="Enter your company or organization name" />
+        </div>
+        <div class="ir-form-group">
+          <label for="ir-email">Email Address</label>
+          <input type="email" id="ir-email" name="email" required placeholder="Enter email to receive reply" autocomplete="email" />
+        </div>
+        <div class="ir-form-group">
+          <label for="ir-message">Proposal & Message</label>
+          <textarea id="ir-message" name="message" required placeholder="Describe the purpose of the IR meeting and details of your proposal"></textarea>
+        </div>
+        <div class="ir-modal-footer">
+          <button type="button" id="cancel-ir-modal" class="btn btn-outline">Cancel</button>
+          <button type="submit" id="submit-ir-modal" class="btn btn-primary">Submit Proposal</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <!-- Data & Logic Scripts -->
   <script src="../js/market-data.js"></script>

@@ -228,4 +228,116 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 7. 초기 실행
   updateMarketTab(currentTab);
+
+  // 8. IR 미팅 제안 모달 제어 및 API 연동
+  const openModalBtn = document.getElementById("open-ir-modal");
+  const closeModalBtn = document.getElementById("close-ir-modal");
+  const cancelModalBtn = document.getElementById("cancel-ir-modal");
+  const modalBackdrop = document.getElementById("ir-modal-backdrop");
+  const proposalForm = document.getElementById("ir-proposal-form");
+  const submitBtn = document.getElementById("submit-ir-modal");
+
+  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxBsuTAuC2SE0CXE6ycda-AdzGGXeZfQ75Pz0qINdvStz6wVXay1df65IuI62-eL97Qmg/exec";
+
+  const messages = {
+    ko: {
+      success: "IR 미팅 제안이 성공적으로 접수되었습니다. 감사합니다.",
+      error: "제안 전송 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.",
+      submitting: "전송 중...",
+      submit: "제안 제출하기"
+    },
+    en: {
+      success: "Your IR meeting proposal has been submitted successfully. Thank you.",
+      error: "An error occurred during submission. Please try again later.",
+      submitting: "Submitting...",
+      submit: "Submit Proposal"
+    }
+  };
+
+  const msg = messages[currentLang] || messages.ko;
+
+  function openModal() {
+    if (modalBackdrop) {
+      modalBackdrop.classList.add("active");
+      document.body.style.overflow = "hidden"; // 배경 스크롤 방지
+      // 포커스를 첫 인풋으로 자동 이동
+      const firstInput = document.getElementById("ir-name");
+      if (firstInput) firstInput.focus();
+    }
+  }
+
+  function closeModal() {
+    if (modalBackdrop) {
+      modalBackdrop.classList.remove("active");
+      document.body.style.overflow = "";
+      if (proposalForm) proposalForm.reset();
+    }
+  }
+
+  if (openModalBtn) {
+    openModalBtn.addEventListener("click", openModal);
+  }
+
+  if (closeModalBtn) {
+    closeModalBtn.addEventListener("click", closeModal);
+  }
+
+  if (cancelModalBtn) {
+    cancelModalBtn.addEventListener("click", closeModal);
+  }
+
+  if (modalBackdrop) {
+    modalBackdrop.addEventListener("click", (e) => {
+      if (e.target === modalBackdrop) {
+        closeModal();
+      }
+    });
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modalBackdrop && modalBackdrop.classList.contains("active")) {
+      closeModal();
+    }
+  });
+
+  if (proposalForm) {
+    proposalForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = msg.submitting;
+      }
+
+      const formData = {
+        name: document.getElementById("ir-name").value,
+        company: document.getElementById("ir-company").value,
+        email: document.getElementById("ir-email").value,
+        message: document.getElementById("ir-message").value
+      };
+
+      fetch(WEB_APP_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(() => {
+        alert(msg.success);
+        closeModal();
+      })
+      .catch((error) => {
+        console.error("Submission error:", error);
+        alert(msg.error);
+      })
+      .finally(() => {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = msg.submit;
+        }
+      });
+    });
+  }
 });
