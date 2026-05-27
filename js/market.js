@@ -236,18 +236,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalBackdrop = document.getElementById("ir-modal-backdrop");
   const proposalForm = document.getElementById("ir-proposal-form");
   const submitBtn = document.getElementById("submit-ir-modal");
+  const successScreen = document.getElementById("ir-success-screen");
+  const successCloseBtn = document.getElementById("success-close-btn");
 
   const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxBsuTAuC2SE0CXE6ycda-AdzGGXeZfQ75Pz0qINdvStz6wVXay1df65IuI62-eL97Qmg/exec";
 
   const messages = {
     ko: {
-      success: "IR 미팅 제안이 성공적으로 접수되었습니다. 감사합니다.",
       error: "제안 전송 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.",
       submitting: "전송 중...",
       submit: "제안 제출하기"
     },
     en: {
-      success: "Your IR meeting proposal has been submitted successfully. Thank you.",
       error: "An error occurred during submission. Please try again later.",
       submitting: "Submitting...",
       submit: "Submit Proposal"
@@ -258,9 +258,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function openModal() {
     if (modalBackdrop) {
+      // 폼은 보이게, 성공 화면은 숨긴 상태로 초기화
+      if (proposalForm) proposalForm.style.display = "block";
+      if (successScreen) successScreen.style.display = "none";
+      
       modalBackdrop.classList.add("active");
       document.body.style.overflow = "hidden"; // 배경 스크롤 방지
-      // 포커스를 첫 인풋으로 자동 이동
+      
       const firstInput = document.getElementById("ir-name");
       if (firstInput) firstInput.focus();
     }
@@ -270,7 +274,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (modalBackdrop) {
       modalBackdrop.classList.remove("active");
       document.body.style.overflow = "";
-      if (proposalForm) proposalForm.reset();
+      setTimeout(() => {
+        if (proposalForm) {
+          proposalForm.reset();
+          proposalForm.style.display = "block";
+        }
+        if (successScreen) successScreen.style.display = "none";
+      }, 300); // 닫기 애니메이션(0.3s)이 완료된 후 원복하여 깜빡임 방지
     }
   }
 
@@ -284,6 +294,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (cancelModalBtn) {
     cancelModalBtn.addEventListener("click", closeModal);
+  }
+
+  if (successCloseBtn) {
+    successCloseBtn.addEventListener("click", closeModal);
   }
 
   if (modalBackdrop) {
@@ -325,8 +339,9 @@ document.addEventListener("DOMContentLoaded", () => {
         body: JSON.stringify(formData)
       })
       .then(() => {
-        alert(msg.success);
-        closeModal();
+        // 성공 시 폼을 숨기고 성공 완료 화면 노출
+        if (proposalForm) proposalForm.style.display = "none";
+        if (successScreen) successScreen.style.display = "flex";
       })
       .catch((error) => {
         console.error("Submission error:", error);
