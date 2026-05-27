@@ -389,7 +389,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* 배경 – Sand warm gradient (캔버스 위에 살짝 덧댐) */
-.hero::after {
+.hero::after,
+.graph-section::after {
   content: '';
   position: absolute;
   inset: 0;
