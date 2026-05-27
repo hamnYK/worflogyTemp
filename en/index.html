@@ -127,62 +127,8 @@
 
     <!-- Hero -->
     <section class="hero">
-      <!-- identity icon: hexagonal fractal knowledge graph -->
-      <div class="hero-bg-icon" aria-hidden="true">
-        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none">
-          <!-- 2nd Fractal Branching (outermost) -->
-          <line x1="200" y1="88" x2="200" y2="28" stroke="#1A1F36" stroke-width="1" opacity="0.08" />
-          <circle cx="200" cy="28" r="4.5" fill="#1A1F36" opacity="0.10" />
-          <line x1="297" y1="143" x2="357" y2="108" stroke="#1A1F36" stroke-width="1" opacity="0.08" />
-          <circle cx="357" cy="108" r="4.5" fill="#1A1F36" opacity="0.10" />
-          <line x1="297" y1="257" x2="357" y2="292" stroke="#1A1F36" stroke-width="1" opacity="0.08" />
-          <circle cx="357" cy="292" r="4.5" fill="#1A1F36" opacity="0.10" />
-          <line x1="200" y1="312" x2="200" y2="372" stroke="#1A1F36" stroke-width="1" opacity="0.08" />
-          <circle cx="200" cy="372" r="4.5" fill="#1A1F36" opacity="0.10" />
-          <line x1="103" y1="257" x2="43" y2="292" stroke="#1A1F36" stroke-width="1" opacity="0.08" />
-          <circle cx="43" cy="292" r="4.5" fill="#1A1F36" opacity="0.10" />
-          <line x1="103" y1="143" x2="43" y2="108" stroke="#1A1F36" stroke-width="1" opacity="0.08" />
-          <circle cx="43" cy="108" r="4.5" fill="#1A1F36" opacity="0.10" />
-          <!-- Outer hexagon web connection lines (dotted) -->
-          <line x1="200" y1="88" x2="297" y2="143" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4"
-            opacity="0.11" />
-          <line x1="297" y1="143" x2="297" y2="257" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4"
-            opacity="0.11" />
-          <line x1="297" y1="257" x2="200" y2="312" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4"
-            opacity="0.11" />
-          <line x1="200" y1="312" x2="103" y2="257" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4"
-            opacity="0.11" />
-          <line x1="103" y1="257" x2="103" y2="143" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4"
-            opacity="0.11" />
-          <line x1="103" y1="143" x2="200" y2="88" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4"
-            opacity="0.11" />
-          <!-- Center to outer spokes -->
-          <line x1="200" y1="200" x2="200" y2="88" stroke="#1A1F36" stroke-width="1.5" opacity="0.14" />
-          <line x1="200" y1="200" x2="297" y2="143" stroke="#1A1F36" stroke-width="1.5" opacity="0.14" />
-          <line x1="200" y1="200" x2="297" y2="257" stroke="#1A1F36" stroke-width="1.5" opacity="0.14" />
-          <line x1="200" y1="200" x2="200" y2="312" stroke="#1A1F36" stroke-width="1.5" opacity="0.14" />
-          <line x1="200" y1="200" x2="103" y2="257" stroke="#1A1F36" stroke-width="1.5" opacity="0.14" />
-          <line x1="200" y1="200" x2="103" y2="143" stroke="#1A1F36" stroke-width="1.5" opacity="0.14" />
-          <!-- Outer 6 nodes -->
-          <circle cx="200" cy="88" r="10" fill="#1A1F36" opacity="0.18" />
-          <circle cx="297" cy="143" r="10" fill="#1A1F36" opacity="0.18" />
-          <circle cx="297" cy="257" r="10" fill="#1A1F36" opacity="0.18" />
-          <circle cx="200" cy="312" r="10" fill="#1A1F36" opacity="0.18" />
-          <circle cx="103" cy="257" r="10" fill="#1A1F36" opacity="0.18" />
-          <circle cx="103" cy="143" r="10" fill="#1A1F36" opacity="0.18" />
-          <!-- Spokes intermediate subnodes -->
-          <circle cx="200" cy="144" r="5" fill="#1A1F36" opacity="0.12" />
-          <circle cx="249" cy="172" r="5" fill="#1A1F36" opacity="0.12" />
-          <circle cx="249" cy="228" r="5" fill="#1A1F36" opacity="0.12" />
-          <circle cx="200" cy="256" r="5" fill="#1A1F36" opacity="0.12" />
-          <circle cx="151" cy="228" r="5" fill="#1A1F36" opacity="0.12" />
-          <circle cx="151" cy="172" r="5" fill="#1A1F36" opacity="0.12" />
-          <!-- Central hub node (double rings) -->
-          <circle cx="200" cy="200" r="20" fill="#1A1F36" opacity="0.07" />
-          <circle cx="200" cy="200" r="12" fill="#1A1F36" opacity="0.20" />
-          <circle cx="200" cy="200" r="6" fill="#1A1F36" opacity="0.30" />
-        </svg>
-      </div>
+      <!-- Fractal knowledge graph particle canvas background -->
+      <canvas id="hero-canvas" class="hero-canvas" aria-hidden="true"></canvas>
       <div class="hero-content">
         <div class="hero-badge">
           <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24">
@@ -603,6 +549,7 @@
   </main>
 
   <script src="../js/main.js"></script>
+  <script src="../js/hero-canvas.js" defer></script>
   <script src="../js/language-switcher.js" defer></script>
 </body>
 

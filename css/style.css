@@ -345,6 +345,14 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 0 !important;
 }
 
+/* ── Graph Section (Projects 페이지) ── */
+.graph-section {
+  padding: 52px 64px 56px;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+
 /* ── Hero (Landing) ── */
 .hero {
   display: flex;
@@ -449,6 +457,12 @@ h1, h2, h3, h4, h5, h6 {
 .page-header > *:not(.header-video-bg):not(.header-video-overlay):not(.hero-bg-icon) {
   position: relative;
   z-index: 2;
+}
+
+/* graph-section 텍스트·컨테이너를 canvas 위로 */
+.graph-section > *:not(.hero-canvas) {
+  position: relative;
+  z-index: 1;
 }
 
 .hero-content { max-width: 580px; position: relative; z-index: 1; }
