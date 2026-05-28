@@ -2532,6 +2532,56 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
 }
 
+/* ── IR 모달 모바일 반응형 ── */
+@media (max-width: 768px) {
+  /* 모달 컨테이너 */
+  .ir-modal-content {
+    width: 95%;
+    padding: 24px 20px;
+    max-height: 90dvh;        /* 뷰포트 90% 초과 시 스크롤 */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* 제목: "일반 비즈니스 문의"(8자) 기준 한 줄 확보 */
+  .ir-modal-title {
+    font-size: 20px;
+    letter-spacing: -0.5px;
+    padding-right: 32px;      /* X버튼 영역 확보 */
+  }
+
+  /* X버튼 위치 고정 */
+  .ir-modal-close-btn {
+    top: 0;
+    transform: none;
+    padding: 2px;
+  }
+
+  /* 헤더 최소 높이 자동 */
+  .ir-modal-header {
+    min-height: unset;
+    margin-bottom: 20px;
+  }
+
+  /* 폼 그룹 간격 축소 */
+  .ir-form-group {
+    margin-bottom: 14px;
+  }
+
+  /* 하단 버튼: 세로 스택 (주 버튼 위 → 취소 아래) */
+  .ir-modal-footer {
+    flex-direction: column-reverse;
+    gap: 8px;
+    margin-top: 20px;
+  }
+  .ir-modal-footer .btn {
+    width: 100%;
+    text-align: center;
+    padding: 13px 16px;
+    box-sizing: border-box;
+  }
+}
+
 
 
 
