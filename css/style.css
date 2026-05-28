@@ -1867,16 +1867,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 11px; /* 설명글 크기를 11px로 일관되게 통일 */
 }
 
-/* 주 설명글 (뇌 상단) */
-.concept-svg .primary-desc {
-  /* 공통 스타일 상속 */
-}
 
-/* 보조 설명글 (프랙털 온톨로지, AI 고도화) */
-.concept-svg .tree-desc,
-.concept-svg .ai-desc {
-  /* 공통 스타일 상속 */
-}
 
 /* AI 헥사곤 노드 내부 텍스트 */
 .concept-svg .concept-svg-ai-core {
