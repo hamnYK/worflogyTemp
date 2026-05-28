@@ -33,6 +33,18 @@
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/language-switcher.css" />
   <style>
+    .projects-slogan {
+      font-family: var(--font-serif-ko);
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.4;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      margin-top: -12px;
+      margin-bottom: 28px;
+    }
+    .projects-slogan .primary { color: var(--ink); }
+    .projects-slogan .accent { color: var(--coral); font-style: italic; }
     .graph-hint {
       font-size: var(--fs-body-min);
       color: var(--text-muted);
@@ -304,6 +316,7 @@
     <div class="section-label">Projects</div>
     <h1 class="section-title">프로젝트</h1>
     <p class="section-desc">프랙털 온톨로지 원천 기술을 기반으로 설계된 네 가지 핵심 솔루션입니다. 그래프 노드를 선택하여 각 영역의 상세 정보를 탐색해 보세요.</p>
+    <div class="projects-slogan">Bottom-Up <span class="accent">디자인</span> : 사용할수록 쌓이는 <span class="primary">맥락</span></div>
 
     <div class="graph-container">
       <svg id="project-graph" viewBox="0 0 680 580" xmlns="http://www.w3.org/2000/svg"></svg>
