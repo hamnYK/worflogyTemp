@@ -40,11 +40,12 @@
       line-height: 1.4;
       letter-spacing: -0.3px;
       color: var(--text);
-      margin-top: -12px;
+      margin-top: 8px;
       margin-bottom: 28px;
     }
     .projects-slogan .primary { color: var(--ink); }
     .projects-slogan .accent { color: var(--coral); font-style: italic; }
+    .graph-section { padding-top: 0; }
     .graph-hint {
       font-size: var(--fs-body-min);
       color: var(--text-muted);
@@ -310,13 +311,69 @@
 
 <main class="main">
 
-  <div class="graph-section">
-    <!-- Fractal knowledge graph particle canvas background -->
-    <canvas id="hero-canvas" class="hero-canvas" aria-hidden="true"></canvas>
+  <div class="page-header">
+    <div class="hero-bg-icon" aria-hidden="true">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none">
+        <!-- 2차 프랙털 분기 (최외곽) -->
+        <line x1="200" y1="88" x2="200" y2="28" stroke="#1A1F36" stroke-width="1" opacity="0.08" />
+        <circle cx="200" cy="28" r="4.5" fill="#1A1F36" opacity="0.10" />
+        <line x1="297" y1="143" x2="357" y2="108" stroke="#1A1F36" stroke-width="1" opacity="0.08" />
+        <circle cx="357" cy="108" r="4.5" fill="#1A1F36" opacity="0.10" />
+        <line x1="297" y1="257" x2="357" y2="292" stroke="#1A1F36" stroke-width="1" opacity="0.08" />
+        <circle cx="357" cy="292" r="4.5" fill="#1A1F36" opacity="0.10" />
+        <line x1="200" y1="312" x2="200" y2="372" stroke="#1A1F36" stroke-width="1" opacity="0.08" />
+        <circle cx="200" cy="372" r="4.5" fill="#1A1F36" opacity="0.10" />
+        <line x1="103" y1="257" x2="43" y2="292" stroke="#1A1F36" stroke-width="1" opacity="0.08" />
+        <circle cx="43" cy="292" r="4.5" fill="#1A1F36" opacity="0.10" />
+        <line x1="103" y1="143" x2="43" y2="108" stroke="#1A1F36" stroke-width="1" opacity="0.08" />
+        <circle cx="43" cy="108" r="4.5" fill="#1A1F36" opacity="0.10" />
+        <!-- 외곽 헥사곤 웹 연결선 (점선) -->
+        <line x1="200" y1="88" x2="297" y2="143" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.11" />
+        <line x1="297" y1="143" x2="297" y2="257" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.11" />
+        <line x1="297" y1="257" x2="200" y2="312" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.11" />
+        <line x1="200" y1="312" x2="103" y2="257" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.11" />
+        <line x1="103" y1="257" x2="103" y2="143" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.11" />
+        <line x1="103" y1="143" x2="200" y2="88" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.11" />
+        <!-- 중심 → 외곽 스포크 -->
+        <line x1="200" y1="200" x2="200" y2="88" stroke="#1A1F36" stroke-width="1.5" opacity="0.14" />
+        <line x1="200" y1="200" x2="297" y2="143" stroke="#1A1F36" stroke-width="1.5" opacity="0.14" />
+        <line x1="200" y1="200" x2="297" y2="257" stroke="#1A1F36" stroke-width="1.5" opacity="0.14" />
+        <line x1="200" y1="200" x2="200" y2="312" stroke="#1A1F36" stroke-width="1.5" opacity="0.14" />
+        <line x1="200" y1="200" x2="103" y2="257" stroke="#1A1F36" stroke-width="1.5" opacity="0.14" />
+        <line x1="200" y1="200" x2="103" y2="143" stroke="#1A1F36" stroke-width="1.5" opacity="0.14" />
+        <!-- 외곽 6개 노드 -->
+        <circle cx="200" cy="88"  r="10" fill="#1A1F36" opacity="0.18" />
+        <circle cx="297" cy="143" r="10" fill="#1A1F36" opacity="0.18" />
+        <circle cx="297" cy="257" r="10" fill="#1A1F36" opacity="0.18" />
+        <circle cx="200" cy="312" r="10" fill="#1A1F36" opacity="0.18" />
+        <circle cx="103" cy="257" r="10" fill="#1A1F36" opacity="0.18" />
+        <circle cx="103" cy="143" r="10" fill="#1A1F36" opacity="0.18" />
+        <!-- 스포크 중간 서브노드 -->
+        <circle cx="200" cy="144" r="5" fill="#1A1F36" opacity="0.12" />
+        <circle cx="249" cy="172" r="5" fill="#1A1F36" opacity="0.12" />
+        <circle cx="249" cy="228" r="5" fill="#1A1F36" opacity="0.12" />
+        <circle cx="200" cy="256" r="5" fill="#1A1F36" opacity="0.12" />
+        <circle cx="151" cy="228" r="5" fill="#1A1F36" opacity="0.12" />
+        <circle cx="151" cy="172" r="5" fill="#1A1F36" opacity="0.12" />
+        <!-- 중앙 허브 노드 (더블 링) -->
+        <circle cx="200" cy="200" r="20" fill="#1A1F36" opacity="0.07" />
+        <circle cx="200" cy="200" r="12" fill="#1A1F36" opacity="0.20" />
+        <circle cx="200" cy="200" r="6"  fill="#1A1F36" opacity="0.30" />
+        <!-- 코랄 포인트 노드 -->
+        <circle cx="200" cy="88"  r="4" fill="#E8613A" opacity="0.35" />
+        <circle cx="297" cy="257" r="4" fill="#E8613A" opacity="0.30" />
+        <circle cx="103" cy="143" r="4" fill="#E8613A" opacity="0.30" />
+      </svg>
+    </div>
     <div class="section-label">Projects</div>
     <h1 class="section-title">Projects</h1>
     <p class="section-desc">Four core solutions designed based on fractal ontology proprietary technology. Select graph nodes to explore detailed information in each area.</p>
-    <div class="projects-slogan">Bottom-Up <span class="accent">Design</span> : <span class="primary">Context</span> that builds with use</div>
+  </div>
+
+  <div class="graph-section">
+    <!-- Fractal knowledge graph particle canvas background -->
+    <canvas id="hero-canvas" class="hero-canvas" aria-hidden="true"></canvas>
+    <div class="projects-slogan">Bottom-Up <span class="accent">Design</span> : Experience the <span class="primary">context</span> of knowledge that builds with use.</div>
 
     <div class="graph-container">
       <svg id="project-graph" viewBox="0 0 680 580" xmlns="http://www.w3.org/2000/svg"></svg>
