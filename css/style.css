@@ -1682,6 +1682,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   max-width: 480px;
   height: auto;
+  overflow: visible;    /* viewBox 경계 밖 텍스트 클리핑 방지 */
   filter: drop-shadow(0 4px 24px rgba(74, 144, 226, 0.10));
   transition: filter var(--t-slow);
 }
