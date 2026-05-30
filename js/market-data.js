@@ -159,14 +159,14 @@ const marketData = {
     ko: [
       {
         type: "patent-reg",
-        status: "특허 등록 · PCT 및 수상 (GBSA, GCON)",
-        name: "관점 데이터 간의 링크를 이용한 마인드 마이닝 분석 방법 (시맨틱 온톨로지 기반 RISK 솔루션)",
-        number: "제 10-1791086 호 (등록일: 2017.05.18) / PCT: WO2018212398A1",
+        status: "특허 등록 완료 (국내)",
+        name: "관점 데이터 간의 링크를 이용한 마인드 마이닝 분석 방법",
+        number: "제 10-1791086 호 (등록일: 2017.05.18)",
         holder: "발명자: 함영국 대표"
       },
       {
         type: "patent-app-global",
-        status: "국제 특허 출원 (PCT) · GBSA/GCON 수상 기술",
+        status: "국제 특허 출원 (PCT)",
         name: "Mind-mining analysis method using link between view data",
         number: "WO2018212398A1 (출원일: 2017.06.12)",
         holder: "발명자: 함영국 대표"
@@ -196,14 +196,14 @@ const marketData = {
     en: [
       {
         type: "patent-reg",
-        status: "Patent & PCT Registered (GBSA, GCON Awarded)",
-        name: "Mind mining analysis method using link between view data (Semantic Ontology-based RISK Solution)",
-        number: "No. 10-1791086 (Registered: 2017.05.18) / PCT: WO2018212398A1",
+        status: "Patent Registered (KR)",
+        name: "Mind mining analysis method using link between view data",
+        number: "No. 10-1791086 (Registered: 2017.05.18)",
         holder: "Inventor: CEO Youngkuk Hamn"
       },
       {
         type: "patent-app-global",
-        status: "International Patent Applied (PCT) · Awarded Tech",
+        status: "International Patent Applied (PCT)",
         name: "Mind-mining analysis method using link between view data",
         number: "WO2018212398A1 (Applied: 2017.06.12)",
         holder: "Inventor: CEO Youngkuk Hamn"
