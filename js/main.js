@@ -5,35 +5,8 @@
 
 window.name = "worflogy_main";
 
-/* ── Active nav item ── */
+/* ── Active nav item & Mobile sidebar (sidebar.js로 이관됨) ── */
 document.addEventListener('DOMContentLoaded', () => {
-  const path = location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.nav-item').forEach(a => {
-    const href = a.getAttribute('href');
-    if (href === path || (path === '' && href === 'index.html')) {
-      a.classList.add('active');
-    }
-    // projects active for project-N.html
-    if (href === 'projects.html' && path.startsWith('project-')) {
-      a.classList.add('active');
-    }
-  });
-
-  /* ── Mobile sidebar ── */
-  const sidebar  = document.querySelector('.sidebar');
-  const overlay  = document.querySelector('.sidebar-overlay');
-  const hamburger = document.querySelector('.hamburger');
-  if (hamburger) {
-    hamburger.addEventListener('click', () => {
-      sidebar.classList.toggle('open');
-      overlay.classList.toggle('show');
-    });
-    overlay?.addEventListener('click', () => {
-      sidebar.classList.remove('open');
-      overlay.classList.remove('show');
-    });
-  }
-
   /* ── Project Graph ── */
   initGraph();
 });
