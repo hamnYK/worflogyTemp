@@ -1,15 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
   const btn = document.getElementById('btn-bkgsor-platform');
-  if (!btn) return;
+  const toast = document.getElementById('bkgsor-toast');
+  if (!btn || !toast) return;
 
-  const isEnglish = window.location.pathname.includes('/en/') || window.location.href.includes('/en/');
+  let isAnimating = false;
 
   btn.addEventListener('click', (e) => {
     e.preventDefault();
-    if (isEnglish) {
-      alert('The BKGSoR platform is currently preparing for service launch. We will do our best to meet you as soon as possible.');
-    } else {
-      alert('현재 BKGSoR 플랫폼 서비스 론칭을 준비하고 있습니다. 빠른 시일 내에 만나보실 수 있도록 최선을 다하겠습니다.');
-    }
+    if (isAnimating) return;
+
+    isAnimating = true;
+    toast.classList.add('show');
+
+    // 1.5초(1500ms) 동안 완전히 보여준 뒤, 클래스를 제거하여 0.5초(500ms) 동안 서서히 fade-out 시킵니다 (총 2초)
+    setTimeout(() => {
+      toast.classList.remove('show');
+      setTimeout(() => {
+        isAnimating = false;
+      }, 500);
+    }, 1500);
   });
 });
