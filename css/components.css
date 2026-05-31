@@ -1509,7 +1509,10 @@
   letter-spacing: 1px;
 }
 .concept-svg .concept-svg-ai-sub {
-  font-size: 9.5px;
+  font-family: var(--font-sans-en);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
   fill: rgba(255, 255, 255, 0.9);
 }
 
