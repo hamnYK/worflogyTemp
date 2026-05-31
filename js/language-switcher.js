@@ -32,12 +32,29 @@
       
       // 1. 영문 -> 국문 전환 (KO 클릭)
       if (targetLang === 'ko' && isEnglish) {
-        // '/en/'을 제거하여 상위 폴더의 동일한 파일로 리다이렉트
-        const parts = href.split('/en/');
-        // 뒤에서부터 첫번째 나오는 /en/ 만 제거하는 안전한 로직
-        const targetHref = parts.slice(0, parts.length - 1).join('/en/') + '/' + parts[parts.length - 1];
+        let newUrl;
+        const protocol = window.location.protocol;
+        const host = window.location.host;
+        
+        if (protocol === 'file:') {
+          const lastEnIdx = href.lastIndexOf('/en/');
+          if (lastEnIdx !== -1) {
+            newUrl = href.substring(0, lastEnIdx) + '/' + href.substring(lastEnIdx + 4);
+          } else {
+            newUrl = href;
+          }
+        } else {
+          let targetPathname = window.location.pathname;
+          if (targetPathname.startsWith('/en/')) {
+            targetPathname = '/' + targetPathname.substring(4);
+          } else {
+            targetPathname = targetPathname.replace(/\/en\//i, '/');
+          }
+          newUrl = protocol + '//' + host + targetPathname + window.location.search + window.location.hash;
+        }
+        
         // 중복 슬래시 정제
-        const cleanedHref = targetHref.replace(/([^:]\/)\/+/g, "$1");
+        const cleanedHref = newUrl.replace(/([^:]\/)\/+/g, "$1");
         window.location.href = cleanedHref;
       } 
       // 2. 국문 -> 영문 전환 (EN 클릭)
