@@ -74,17 +74,17 @@ const marketData = {
         tam: {
           value: "2.0B ~ 5.0B",
           label: "TAM (Total Addressable Market)",
-          desc: "Sum of global knowledge graph and AI-based business simulation/knowledge automation solution markets (Expected to grow highly to about $3.7B by 2032)"
+          desc: "Sum of global knowledge graph and AI-based business simulation/knowledge automation solution markets (Projected to reach approximately $3.7B by 2032)"
         },
         sam: {
           value: "300M ~ 1.0B",
           label: "SAM (Serviceable Available Market)",
-          desc: "Global tech companies and professional management consulting domains looking to adopt startup capability diagnosis, scenario simulation, and data-driven report tools"
+          desc: "Global tech enterprises and management consulting sectors seeking to adopt startup capability diagnostics, scenario simulations, and data-driven reporting systems"
         },
         som: {
           value: "500K ~ 50M",
           label: "SOM (Serviceable Obtainable Market)",
-          desc: "Target markets reachable immediately through global AC/VC partnership networks and the IRM (Institute of Risk Management, UK) networks in 180 countries"
+          desc: "Target markets immediately accessible through global AC/VC partnership networks and the IRM (Institute of Risk Management, UK) networks in 180 countries"
         }
       }
     }
@@ -102,7 +102,7 @@ const marketData = {
       value: "24.2%",
       period: "by 2032",
       source: "GMI Market Report (2025.10)",
-      desc: "Annual growth rate (CAGR) of the AI utilization market within global corporate diagnosis and flexible decision-making domains"
+      desc: "Compound annual growth rate (CAGR) of the AI-driven market within global corporate diagnosis and adaptive decision support domains"
     }
   },
   
@@ -139,7 +139,7 @@ const marketData = {
       {
         period: "September ~ October",
         title: "Official Solution Launch & Technology Certification",
-        desc: "Officially launch 1 to 3 ontology-based business solutions, and obtain technology-innovative venture business certification based on secured registered patents."
+        desc: "Officially launch 1 to 3 ontology-based business solutions, and obtain Venture Business Certification based on secured registered patents."
       },
       {
         period: "October ~ December",
