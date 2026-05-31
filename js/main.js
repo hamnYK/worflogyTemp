@@ -147,10 +147,10 @@ function initGraph() {
         'text-anchor': 'middle',
         'dominant-baseline': 'middle',
         fill: n.primary ? '#fff' : PRIMARY,
-        'font-size': n.primary ? '18' : '15',
+        'font-size': n.primary ? '18' : (isEnglish ? '12' : '15'),
         'font-weight': '700',
         'font-family': 'var(--font-serif-ko)',
-        y: (i - (lines.length - 1) / 2) * 21 - 10,
+        y: (i - (lines.length - 1) / 2) * (isEnglish ? 17 : 21) - 10,
       });
       t.textContent = line;
       g.appendChild(t);
