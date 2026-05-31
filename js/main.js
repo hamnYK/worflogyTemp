@@ -33,7 +33,7 @@ function initGraph() {
       x: cx + R, y: cy, r: 64 },
     { id: 'p3', label: 'R&D Context\n& IP Protection', sublabel: 'IP Value Proof', href: 'project-3.html',
       x: cx, y: cy + R, r: 64 },
-    { id: 'p4', label: 'Contextual\nNarrative Engine', sublabel: 'AI Narrative Translation', href: 'project-4.html',
+    { id: 'p4', label: 'Contextual\nNarrative Engine', sublabel: 'Narrative Translation', href: 'project-4.html',
       x: cx - R, y: cy, r: 64 },
   ] : [
     { id: 'root', label: '프랙털\n온톨로지', sublabel: '디자인 기술', href: null,
@@ -161,10 +161,10 @@ function initGraph() {
       'text-anchor': 'middle',
       'dominant-baseline': 'middle',
       fill: n.primary ? 'rgba(255,255,255,0.7)' : TEXT_MUTED,
-      'font-size': '12',
+      'font-size': isEnglish ? '10' : '12',
       'font-weight': '500',
       'font-family': 'var(--font-body)',
-      y: lines.length * 12,
+      y: lines.length * (isEnglish ? 10 : 12) + (isEnglish ? 3 : 0),
     });
     sub.textContent = n.sublabel;
     g.appendChild(sub);
