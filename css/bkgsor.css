@@ -1,0 +1,158 @@
+/* ================================================
+   WORFLOGY — BKGSoR Platform Page Styles
+   ================================================ */
+
+.bkgsor-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 24px;
+  margin-top: 20px;
+}
+
+.coming-soon-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 48px 40px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: border-color var(--t), box-shadow var(--t);
+}
+
+.coming-soon-card:hover {
+  border-color: rgba(26, 31, 54, 0.15);
+  box-shadow: var(--shadow-lg);
+}
+
+/* 인라인 스타일 이관: 버튼 그룹 중앙 정렬 및 여백 */
+.coming-soon-card .btn-group {
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.coming-soon-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(232, 97, 58, 0.08);
+  color: var(--coral);
+  padding: 5px 14px 5px 10px;
+  border-radius: 100px;
+  font-family: var(--font-sans-en);
+  font-size: var(--fs-badge);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  margin-bottom: 24px;
+  border: 1px solid rgba(232, 97, 58, 0.15);
+  animation: badgePulse 2s infinite;
+}
+
+/* 인라인 스타일 이관: 배지 내 SVG 마진 */
+.coming-soon-badge svg {
+  margin-right: 2px;
+}
+
+@keyframes badgePulse {
+  0%, 100% { opacity: 0.9; }
+  50% { opacity: 0.6; }
+}
+
+.coming-soon-title {
+  font-family: var(--font-serif-ko);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-h3);
+  line-height: var(--lh-h3);
+  letter-spacing: var(--ls-h3);
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+/* 영문 페이지 타이틀 스타일 다형성 (DM Serif Display + Italic) */
+html[lang="en"] .coming-soon-title {
+  font-family: var(--font-serif-en);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.coming-soon-desc {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sub);
+  font-weight: var(--fw-body-sub);
+  color: var(--text-muted);
+  line-height: var(--lh-body-sub);
+  margin-bottom: 32px;
+  word-break: keep-all;
+}
+
+.decor-sphere {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(74, 144, 226, 0.1) 0%, rgba(123, 108, 246, 0) 70%);
+  top: -20px;
+  left: -20px;
+  border-radius: 50%;
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+.bkgsor-toast {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.4s ease;
+  pointer-events: none;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.bkgsor-toast.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.toast-text {
+  font-family: var(--font-serif-en);
+  font-style: italic;
+  font-size: 52px;
+  font-weight: 700;
+  color: var(--coral);
+  letter-spacing: 2px;
+  text-shadow: 0 6px 24px rgba(232, 97, 58, 0.25);
+  user-select: none;
+  white-space: nowrap;
+  display: inline-block;
+  transform: scale(0.92);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.bkgsor-toast.show .toast-text {
+  transform: scale(1);
+}
+
+.bkgsor-features {
+  margin-top: 80px;
+}
+
+@media (max-width: 768px) {
+  .toast-text {
+    font-size: 38px;
+  }
+  .coming-soon-card {
+    padding: 36px 24px;
+  }
+}

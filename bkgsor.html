@@ -34,156 +34,7 @@
   <link rel="stylesheet" href="css/layout.css" />
   <link rel="stylesheet" href="css/components.css" />
   <link rel="stylesheet" href="css/language-switcher.css" />
-
-  <style>
-    .bkgsor-hero {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 60px 24px;
-      margin-top: 20px;
-    }
-
-    .coming-soon-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--r-lg);
-      padding: 48px 40px;
-      max-width: 600px;
-      width: 100%;
-      box-shadow: var(--shadow-md);
-      position: relative;
-      overflow: hidden;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      transition: border-color var(--t), box-shadow var(--t);
-    }
-
-    .coming-soon-card:hover {
-      border-color: rgba(26,31,54,0.15);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .coming-soon-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(232, 97, 58, 0.08);
-      color: var(--coral);
-      padding: 5px 14px 5px 10px;
-      border-radius: 100px;
-      font-family: var(--font-sans-en);
-      font-size: var(--fs-badge);
-      font-weight: 600;
-      letter-spacing: 0.3px;
-      margin-bottom: 24px;
-      border: 1px solid rgba(232, 97, 58, 0.15);
-      animation: badgePulse 2s infinite;
-    }
-
-    @keyframes badgePulse {
-      0%, 100% { opacity: 0.9; }
-      50% { opacity: 0.6; }
-    }
-
-    .coming-soon-title {
-      font-family: var(--font-serif-ko);
-      font-size: var(--fs-h3);
-      font-weight: var(--fw-h3);
-      line-height: var(--lh-h3);
-      letter-spacing: var(--ls-h3);
-      color: var(--text);
-      margin-bottom: 16px;
-    }
-
-    .coming-soon-desc {
-      font-family: var(--font-body);
-      font-size: var(--fs-body-sub);
-      font-weight: var(--fw-body-sub);
-      color: var(--text-muted);
-      line-height: var(--lh-body-sub);
-      margin-bottom: 32px;
-      word-break: keep-all;
-    }
-
-    .btn-bkgsor-platform {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .bkgsor-features {
-      margin-top: 80px;
-      padding: 0 64px 80px;
-    }
-
-    .decor-sphere {
-      position: absolute;
-      width: 120px;
-      height: 120px;
-      background: radial-gradient(circle, rgba(74,144,226,0.1) 0%, rgba(123,108,246,0) 70%);
-      top: -20px;
-      left: -20px;
-      border-radius: 50%;
-      filter: blur(10px);
-      pointer-events: none;
-    }
-
-    .bkgsor-toast {
-      position: absolute;
-      inset: 0;
-      background: rgba(255, 255, 255, 0.92);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 10;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.4s ease;
-      pointer-events: none;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-    }
-
-    .bkgsor-toast.show {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .toast-text {
-      font-family: var(--font-serif-en);
-      font-style: italic;
-      font-size: 52px;
-      font-weight: 700;
-      color: var(--coral);
-      letter-spacing: 2px;
-      text-shadow: 0 6px 24px rgba(232, 97, 58, 0.25);
-      user-select: none;
-      white-space: nowrap;
-      display: inline-block;
-      transform: scale(0.92);
-      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    .bkgsor-toast.show .toast-text {
-      transform: scale(1);
-    }
-
-    @media (max-width: 768px) {
-      .toast-text {
-        font-size: 38px;
-      }
-      .bkgsor-features {
-        padding: 0 24px 60px;
-      }
-      .coming-soon-card {
-        padding: 36px 24px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="css/bkgsor.css" />
 </head>
 <body>
 
@@ -244,7 +95,7 @@
       <div class="coming-soon-card">
         <div class="decor-sphere"></div>
         <div class="coming-soon-badge">
-          <svg width="8" height="8" fill="currentColor" viewBox="0 0 24 24" style="margin-right:2px;">
+          <svg width="8" height="8" fill="currentColor" viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="10" />
           </svg>
           COMING SOON
@@ -253,7 +104,7 @@
         <p class="coming-soon-desc">
           2008년 시맨틱 의사결정 연구로부터 축적한 지식을 바탕으로, '맥락은 오케스트레이션이 아닌 상향식으로 구조화되는 생물'이라는 본질적 가치를 실현하기 위해 노력하고 있습니다.
         </p>
-        <div class="btn-group" style="justify-content: center; margin-top: 8px;">
+        <div class="btn-group">
           <a href="#" class="btn btn-primary btn-bkgsor-platform" id="btn-bkgsor-platform">
             BKGSoR 플랫폼 바로가기
             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="16" height="16">
@@ -270,7 +121,7 @@
     </div>
 
     <!-- BKGSoR Core Values -->
-    <section class="bkgsor-features">
+    <section class="features bkgsor-features">
       <div class="section-label">Core Integration</div>
       <h2 class="section-title">플랫폼 핵심 연동 기술</h2>
       <p class="section-desc">BKGSoR 플랫폼이 지식을 자산화하고 의사결정을 지원하는 네 가지 핵심 기둥입니다.</p>
@@ -278,7 +129,7 @@
       <div class="feature-grid">
         <!-- Feature 1 -->
         <div class="feature-item">
-          <div class="card-icon" style="margin-bottom: 16px;">
+          <div class="card-icon">
             <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" />
             </svg>
@@ -289,7 +140,7 @@
 
         <!-- Feature 2 -->
         <div class="feature-item">
-          <div class="card-icon" style="margin-bottom: 16px;">
+          <div class="card-icon">
             <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
             </svg>
@@ -300,7 +151,7 @@
 
         <!-- Feature 3 -->
         <div class="feature-item">
-          <div class="card-icon" style="margin-bottom: 16px;">
+          <div class="card-icon">
             <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
             </svg>
@@ -311,7 +162,7 @@
 
         <!-- Feature 4 -->
         <div class="feature-item">
-          <div class="card-icon" style="margin-bottom: 16px;">
+          <div class="card-icon">
             <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
             </svg>
