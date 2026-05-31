@@ -133,15 +133,19 @@
     }
 
     .bkgsor-toast {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 1000;
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
       opacity: 0;
       visibility: hidden;
-      transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.5s ease;
+      transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.4s ease;
       pointer-events: none;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
 
     .bkgsor-toast.show {
@@ -152,16 +156,16 @@
     .toast-text {
       font-family: var(--font-serif-en);
       font-style: italic;
-      font-size: 68px;
+      font-size: 52px;
       font-weight: 700;
       color: var(--coral);
       letter-spacing: 2px;
-      text-shadow: 0 8px 32px rgba(232, 97, 58, 0.35);
+      text-shadow: 0 6px 24px rgba(232, 97, 58, 0.25);
       user-select: none;
       white-space: nowrap;
       display: inline-block;
-      transform: scale(0.95);
-      transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transform: scale(0.92);
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     .bkgsor-toast.show .toast-text {
@@ -170,7 +174,7 @@
 
     @media (max-width: 768px) {
       .toast-text {
-        font-size: 44px;
+        font-size: 38px;
       }
       .bkgsor-features {
         padding: 0 24px 60px;
@@ -257,6 +261,11 @@
             </svg>
           </a>
         </div>
+
+        <!-- BKGSoR Coming Soon Toast Overlay inside the card -->
+        <div id="bkgsor-toast" class="bkgsor-toast" aria-live="polite">
+          <span class="toast-text">COMING SOON</span>
+        </div>
       </div>
     </div>
 
@@ -314,11 +323,6 @@
     </section>
 
   </main>
-
-  <!-- BKGSoR Coming Soon Toast Overlay -->
-  <div id="bkgsor-toast" class="bkgsor-toast" aria-live="polite">
-    <span class="toast-text">COMING SOON</span>
-  </div>
 
   <script src="js/sidebar.js" defer></script>
   <script src="js/main.js"></script>
