@@ -2388,6 +2388,7 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text);
   margin: 0;
   text-align: center;
+  padding: 0 40px; /* 우측 닫기(X) 버튼과의 겹침 방지 여백 추가 */
 }
 .ir-modal-close-btn {
   position: absolute;

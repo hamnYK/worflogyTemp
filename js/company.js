@@ -78,14 +78,8 @@ document.addEventListener("DOMContentLoaded", () => {
     successCloseBtn.addEventListener("click", closeModal);
   }
 
-  if (modalBackdrop) {
-    modalBackdrop.addEventListener("click", (e) => {
-      if (e.target === modalBackdrop) {
-        closeModal();
-      }
-    });
-  }
-
+  // ESC 키를 누르면 닫히는 기능은 접근성 및 기본 모달 동작을 위해 유지하되,
+  // 마우스 실수 클릭으로 인한 입력 소실 방지를 위해 백드롭 클릭 시 닫히는 로직은 의도적으로 제거하였습니다.
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && modalBackdrop && modalBackdrop.classList.contains("active")) {
       closeModal();
