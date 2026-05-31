@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const platformItem = {
     textKo: "BKGSoR (준비 중)",
     textEn: "BKGSoR (Coming Soon)",
-    icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 01-3-3V7.5a3 3 0 013-3h13.5a3 3 0 013 3v3.75a3 3 0 01-3 3zm-13.5 6h13.5m-13.5 0a3 3 0 01-3-3V15a3 3 0 013-3h13.5a3 3 0 013 3v3.75a3 3 0 01-3 3z" />`
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M12 3.75l7.794 4.5v9L12 21.75l-7.794-4.5v-9L12 3.75z" />`
   };
 
   const servicesTitle = "Services";
