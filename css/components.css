@@ -2316,6 +2316,10 @@
   flex-grow: 1;
 }
 
+.diff-card-body .diff-group:first-child {
+  flex-grow: 1;
+}
+
 .diff-group {
   display: flex;
   flex-direction: column;
