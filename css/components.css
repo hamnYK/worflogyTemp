@@ -2239,7 +2239,7 @@
 .differentiation-card {
   display: flex;
   flex-direction: column;
-  height: 400px;
+  min-height: 400px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--r-md);
@@ -2386,6 +2386,7 @@
   }
   .differentiation-card {
     height: auto;
+    min-height: auto;
   }
 }
 
