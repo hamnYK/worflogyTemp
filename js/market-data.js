@@ -15,12 +15,12 @@ const marketData = {
         tam: {
           value: "2,000억 ~ 5,000억",
           label: "TAM (전체시장)",
-          desc: "국내 스타트업, AC/VC 투자 생태계, 대기업 PI(Process Innovation) 부서 및 중소·벤처기업의 비즈니스 리스크 진단 수요 총합"
+          desc: "국내 스타트업, AC/VC 투자 생태계, 대기업 PI(Process Innovation) 부서 및 중소·벤처기업의 비즈니스 리스크 및 관점 링킹 진단 수요 총합"
         },
         sam: {
           value: "200억 ~ 600억",
           label: "SAM (유효시장)",
-          desc: "초기 스타트업 보육 기관, VC 포트폴리오 관리팀, 대기업 오픈이노베이션 프로그램 및 혁신 진단 솔루션 도입을 우선 고려하는 핵심 시장"
+          desc: "초기 스타트업 보육 기관, VC 포트폴리오 관리팀, 대기업 오픈이노베이션 프로그램 및 유연한 피봇/관점 링킹 솔루션 도입을 우선 고려하는 핵심 시장"
         },
         som: {
           value: "10억 ~ 30억",
@@ -55,12 +55,12 @@ const marketData = {
         tam: {
           value: "200B ~ 500B",
           label: "TAM (Total Addressable Market)",
-          desc: "Total demand for business risk diagnosis from domestic startups, AC/VC investment ecosystems, corporate PI (Process Innovation) departments, and SMEs/venture companies"
+          desc: "Total demand for business risk diagnosis and perspective linking from domestic startups, AC/VC investment ecosystems, corporate PI (Process Innovation) departments, and SMEs/venture companies"
         },
         sam: {
           value: "20B ~ 60B",
           label: "SAM (Serviceable Available Market)",
-          desc: "Early-stage startup incubators, VC portfolio management teams, corporate open innovation programs, and key markets that prioritize adopting innovative diagnosis solutions"
+          desc: "Early-stage startup incubators, VC portfolio management teams, corporate open innovation programs, and key markets that prioritize adopting innovative pivot and perspective linking solutions"
         },
         som: {
           value: "1B ~ 3B",
@@ -96,13 +96,13 @@ const marketData = {
       value: "24.2%",
       period: "2032년까지",
       source: "GMI Market Report (2025.10)",
-      desc: "글로벌 기업 진단 및 의사결정 분야 내 AI 활용 시장의 연평균 성장률(CAGR)"
+      desc: "글로벌 기업 진단 및 유연한 의사결정 지원 분야 내 AI 활용 시장의 연평균 성장률(CAGR)"
     },
     en: {
       value: "24.2%",
       period: "by 2032",
       source: "GMI Market Report (2025.10)",
-      desc: "Annual growth rate (CAGR) of the AI utilization market within global corporate diagnosis and decision-making domains"
+      desc: "Annual growth rate (CAGR) of the AI utilization market within global corporate diagnosis and flexible decision-making domains"
     }
   },
   
