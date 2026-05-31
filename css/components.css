@@ -2233,11 +2233,13 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
   margin-top: 32px;
+  align-items: stretch;
 }
 
 .differentiation-card {
   display: flex;
   flex-direction: column;
+  height: 100%;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--r-md);
