@@ -123,13 +123,16 @@ class WorflogyModal {
 
     fetch(this.WEB_APP_URL, {
       method: "POST",
-      mode: "no-cors",
+      mode: "cors",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(formData)
     })
-    .then(() => {
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       // 성공 시 폼 숨기고 성공 화면 활성화
       if (this.form) this.form.style.display = "none";
       if (this.successScreen) this.successScreen.style.display = "flex";
