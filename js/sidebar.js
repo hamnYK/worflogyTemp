@@ -109,9 +109,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 3. Mobile Hamburger & Overlay Controller
-  const overlay = document.querySelector('.sidebar-overlay');
-  const hamburger = document.querySelector('.hamburger');
+  // 3. Dynamic Mobile Hamburger & Overlay Injection
+  let hamburger = document.querySelector('.hamburger');
+  let overlay = document.querySelector('.sidebar-overlay');
+
+  if (!hamburger) {
+    hamburger = document.createElement('button');
+    hamburger.className = 'hamburger';
+    hamburger.setAttribute('aria-label', isEnglish ? 'Open Menu' : '메뉴 열기');
+    hamburger.innerHTML = `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>`;
+    document.body.prepend(hamburger);
+  }
+
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.className = 'sidebar-overlay';
+    document.body.prepend(overlay);
+  }
+
+  // 4. Mobile Hamburger & Overlay Controller
   if (hamburger && overlay) {
     hamburger.addEventListener('click', () => {
       sidebar.classList.toggle('open');
