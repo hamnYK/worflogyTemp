@@ -18,7 +18,7 @@ class WorflogyModal {
     this.isEnglish = window.location.href.includes('/en/');
     this.currentLang = this.isEnglish ? 'en' : 'ko';
 
-    this.WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxBsuTAuC2SE0CXE6ycda-AdzGGXeZfQ75Pz0qINdvStz6wVXay1df65IuI62-eL97Qmg/exec";
+    this.WEB_APP_URL = options.webAppUrl || window.WorflogyConfig?.WEB_APP_URL || "https://script.google.com/macros/s/AKfycbxBsuTAuC2SE0CXE6ycda-AdzGGXeZfQ75Pz0qINdvStz6wVXay1df65IuI62-eL97Qmg/exec";
 
     this.messages = {
       ko: {
