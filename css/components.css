@@ -2248,6 +2248,28 @@
   overflow: hidden;
 }
 
+/* 첫 번째 카드 (워플로지) 특화 상시 하이라이트 스타일 */
+.differentiation-card:nth-child(1) {
+  border-color: rgba(232, 97, 58, 0.18);
+  box-shadow: var(--shadow-sm), 0 2px 8px rgba(232, 97, 58, 0.03);
+}
+
+.differentiation-card:nth-child(1):hover {
+  border-color: var(--coral);
+  box-shadow: var(--shadow-coral);
+}
+
+.differentiation-card-glow {
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, rgba(232, 97, 58, 0.12) 0%, rgba(232, 97, 58, 0) 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
 .differentiation-card::before {
   content: '';
   position: absolute;
@@ -2256,6 +2278,11 @@
   background: linear-gradient(90deg, var(--ink), var(--coral));
   opacity: 0;
   transition: opacity var(--t);
+}
+
+.differentiation-card:nth-child(1)::before {
+  opacity: 0.55;
+  background: linear-gradient(90deg, var(--coral), var(--coral-light));
 }
 
 .differentiation-card:hover {
@@ -2310,7 +2337,7 @@
   text-transform: uppercase;
 }
 
-.differentiation-card:nth-child(2) .diff-group-label {
+.differentiation-card:nth-child(1) .diff-group-label {
   background: rgba(232, 97, 58, 0.08);
   color: var(--coral);
 }
@@ -2339,6 +2366,10 @@
   content: '•';
   position: absolute;
   left: 0;
+  color: rgba(26, 31, 54, 0.35);
+}
+
+.differentiation-card:nth-child(1) .diff-group-content li::before {
   color: var(--coral);
 }
 
