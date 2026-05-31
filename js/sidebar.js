@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
   navHtml += `<div class="nav-divider"></div>`;
   navHtml += `<div class="nav-group-title">${platformTitle}</div>`;
   navHtml += `
-    <a href="javascript:void(0)" class="nav-item disabled" style="pointer-events: none; opacity: 0.6;">
+    <a href="bkgsor.html" class="nav-item">
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         ${platformItem.icon}
       </svg>
