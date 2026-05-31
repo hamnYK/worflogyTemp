@@ -131,13 +131,7 @@
   z-index: 0;
 }
 
-/* ── Page Header (서브 페이지 공통 헤더) ── */
-.page-header {
-  padding: 52px 64px 48px;
-  background: var(--bg);
-  position: relative;
-  overflow: hidden;
-}
+/* ── Page Header (서브 페이지 공통 헤더) — 아래 L756 선언으로 통합됨 ── */
 
 /* 영상 배경 헤더 */
 .video-header {
@@ -733,6 +727,8 @@
   padding: 26px 30px;
   box-shadow: var(--shadow-sm);
 }
+.info-card--full { grid-column: 1 / -1; }
+.info-card--ceo  { margin-top: 24px; }
 .info-label {
   font-family: var(--font-serif-en);
   font-style: italic;
@@ -753,10 +749,75 @@
 .info-value a { color: var(--ink); text-decoration: underline; }
 .info-value a:hover { text-decoration: underline; }
 
-/* ── Page Header ── */
+/* ── Page Header (서브 페이지 공통 헤더) ── */
 .page-header {
   padding: 28px 64px 40px;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
   border-bottom: 1px solid var(--border);
+}
+
+/* ── Company / CEO Profile (company.html) ── */
+.ceo-name-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+.ceo-name {
+  font-size: var(--fs-body);
+  font-weight: 700;
+  color: var(--text);
+  font-family: var(--font-body);
+}
+.ceo-name-en {
+  font-size: var(--fs-label);
+  color: var(--text-muted);
+  font-family: var(--font-sans-en);
+}
+.ceo-role {
+  margin-left: auto;
+  font-size: var(--fs-label);
+  color: var(--accent);
+  font-weight: 600;
+  font-family: var(--font-body);
+}
+.ceo-history {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.ceo-history-item {
+  display: flex;
+  gap: 12px;
+  font-size: var(--fs-body-min);
+  line-height: var(--lh-body-min);
+  font-family: var(--font-body);
+}
+.ceo-history-item--section-top {
+  padding-top: 12px;
+  margin-top: 5px;
+  border-top: 1px solid var(--border);
+}
+.ceo-history-period {
+  color: var(--accent);
+  font-weight: 600;
+  white-space: nowrap;
+  min-width: 100px;
+  font-family: var(--font-sans-en);
+}
+.ceo-history-period--achievement {
+  color: var(--text);
+  font-family: var(--font-body);
+}
+.ceo-history-desc {
+  color: var(--text-muted);
 }
 
 /* ── Mobile Responsive Overrides ── */
@@ -1094,7 +1155,7 @@
 }
 .cagr-number {
   font-family: var(--font-sans-en);
-  font-size: 28px;
+  font-size: var(--fs-h2-5);
   font-weight: 800;
   color: var(--ink);
   line-height: 1;
@@ -1248,7 +1309,7 @@
   flex-wrap: wrap;
 }
 .ip-badge {
-  font-size: 10px;
+  font-size: var(--fs-micro);
   padding: 3px 8px;
   border-radius: var(--r-xs);
   font-weight: 600;
@@ -1258,7 +1319,7 @@
 .badge-trademark { background: var(--sand); color: var(--text-muted); }
 
 .ip-holder {
-  font-size: 10.5px;
+  font-size: var(--fs-small);
   color: var(--text-light);
   font-weight: 500;
 }
@@ -1271,7 +1332,7 @@
 }
 .ip-number {
   font-family: var(--font-sans-en);
-  font-size: 11px;
+  font-size: var(--fs-small);
   color: var(--text-light);
   margin-top: auto;
 }
@@ -1627,7 +1688,7 @@
 }
 .metric-num {
   font-family: var(--font-sans-en);
-  font-size: 48px;
+  font-size: var(--fs-display);
   font-weight: 800;
   color: var(--coral);
   line-height: 1;
@@ -1685,7 +1746,7 @@
 }
 .brand-vision-quote {
   font-family: var(--font-serif-ko);
-  font-size: 22px;
+  font-size: var(--fs-quote);
   font-weight: 700;
   line-height: 1.45;
   color: #ffffff;
@@ -1737,7 +1798,7 @@
 }
 .pipeline-step .step-num {
   font-family: var(--font-sans-en);
-  font-size: 13px;
+  font-size: var(--fs-small);
   font-weight: 800;
   color: var(--coral);
   margin-bottom: 12px;

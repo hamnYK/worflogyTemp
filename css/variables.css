@@ -112,4 +112,11 @@
   /* Additional components typography */
   --fs-badge: 11.5px;
   --fs-feat-num: 32px;
+
+  /* Additional components typography — extended scale */
+  --fs-display: 48px;    /* 히어로 지표 강조 숫자 (.metric-num 등) */
+  --fs-quote:   22px;    /* 인용구·비전 카드 제목 (.brand-vision-quote) */
+  --fs-h2-5:    28px;    /* h2~h3 사이 중간 강조 (마일스톤 카드 등) */
+  --fs-small:   11px;    /* 아이피 넘버·극소 레이블 (.ip-number 등) */
+  --fs-micro:   10px;    /* 최소 레이블 (데이터 테이블 단위 표기 등) */
 }
