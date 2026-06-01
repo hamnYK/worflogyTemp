@@ -47,6 +47,19 @@ document.addEventListener("DOMContentLoaded", () => {
       el.textContent = data.currency;
     });
 
+    // 시장 데이터 출처 표기 (동적 렌더링)
+    const metricDetails = document.querySelector(".metric-details");
+    if (metricDetails && data.source) {
+      let sourceCite = metricDetails.querySelector(".market-source-cite");
+      if (!sourceCite) {
+        sourceCite = document.createElement("p");
+        sourceCite.className = "market-source-cite";
+        metricDetails.appendChild(sourceCite);
+      }
+      const sourceLabel = currentLang === "en" ? "Source" : "출처";
+      sourceCite.textContent = `${sourceLabel}: ${data.source}`;
+    }
+
     // SVG 벤다이어그램 원 크기 및 텍스트 위치 애니메이션 트리거
     const tamCircle = document.getElementById("circle-tam");
     const samCircle = document.getElementById("circle-sam");

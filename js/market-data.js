@@ -12,6 +12,7 @@ const marketData = {
       ko: {
         title: "국내 목표 시장 (Korea Market)",
         currency: "원",
+        source: "KOTRA, 2025.02",
         tam: {
           value: "2,000억 ~ 5,000억",
           label: "TAM (전체시장)",
@@ -31,6 +32,7 @@ const marketData = {
       global: {
         title: "글로벌 목표 시장 (Global Market)",
         currency: "USD",
+        source: "GMI Insight, 2025.10",
         tam: {
           value: "2.0B ~ 5.0B",
           label: "TAM (전체시장)",
@@ -52,6 +54,7 @@ const marketData = {
       ko: {
         title: "Korea Market",
         currency: "KRW",
+        source: "KOTRA, 2025.02",
         tam: {
           value: "200B ~ 500B",
           label: "TAM (Total Addressable Market)",
@@ -71,6 +74,7 @@ const marketData = {
       global: {
         title: "Global Market",
         currency: "USD",
+        source: "GMI Insight, 2025.10",
         tam: {
           value: "2.0B ~ 5.0B",
           label: "TAM (Total Addressable Market)",
@@ -95,13 +99,13 @@ const marketData = {
     ko: {
       value: "24.2%",
       period: "2032년까지",
-      source: "GMI Market Report (2025.10)",
+      source: "IDC Korea, 2024.11",
       desc: "글로벌 기업 진단 및 유연한 의사결정 지원 분야 내 AI 활용 시장의 연평균 성장률(CAGR)"
     },
     en: {
       value: "24.2%",
       period: "by 2032",
-      source: "GMI Market Report (2025.10)",
+      source: "IDC Korea, 2024.11",
       desc: "Compound annual growth rate (CAGR) of the AI-driven market within global corporate diagnosis and adaptive decision support domains"
     }
   },

@@ -1184,6 +1184,21 @@
   color: var(--text-muted);
   line-height: 1.7;
 }
+.market-source-cite {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: var(--fs-badge);
+  color: var(--text-light);
+  font-family: var(--font-sans-en);
+  font-style: italic;
+  font-weight: 500;
+  padding: 3px 8px 3px 10px;
+  background: var(--sand);
+  border-left: 2px solid var(--border-sand);
+  border-radius: 0 var(--r-xs) var(--r-xs) 0;
+  margin-top: -4px;
+}
 
 /* ── Roadmap (Timeline Horizontal) ── */
 .milestone-timeline-container {
