@@ -2,6 +2,39 @@
    WORFLOGY — BKGSoR Platform Page Styles
    ================================================ */
 
+/* ── 데모 시나리오 가이드라인 문구 ── */
+.bkgsor-scenario {
+  margin: 0 64px;
+  padding: 14px 20px;
+  border-left: 2.5px solid var(--coral);
+  background: rgba(232, 97, 58, 0.04);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.scenario-label {
+  font-family: var(--font-serif-en);   /* Point Label 규격 */
+  font-style: italic;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--coral);
+  letter-spacing: 0.3px;
+  line-height: 1.35;
+}
+.scenario-text {
+  font-family: var(--font-body);       /* Body-Min 규격 */
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-muted);
+  line-height: 1.7;
+  word-break: keep-all;
+}
+
+@media (max-width: 768px) {
+  .bkgsor-scenario { margin: 0 24px; }
+}
+
 .bkgsor-hero {
   display: flex;
   flex-direction: column;

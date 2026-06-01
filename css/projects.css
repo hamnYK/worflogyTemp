@@ -251,9 +251,11 @@
 }
 
 /* ── English (en/) 전용 오버라이드 ── */
+/* DM Serif Display는 가이드라인상 weight 400(Italic) 포인트 폰트 — 600은 과중 */
 :root:lang(en) .projects-slogan {
   font-family: var(--font-serif-en);
-  font-size: 21px;
-  font-weight: 600;
-  letter-spacing: -0.3px;
+  font-size: 19px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0px;
 }
