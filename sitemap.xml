@@ -180,4 +180,25 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
+  <!-- 10. BKGSoR 플랫폼 -->
+  <url>
+    <loc>https://worflogy.com/bkgsor.html</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://worflogy.com/bkgsor.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://worflogy.com/en/bkgsor.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://worflogy.com/bkgsor.html"/>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://worflogy.com/en/bkgsor.html</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://worflogy.com/bkgsor.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://worflogy.com/en/bkgsor.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://worflogy.com/bkgsor.html"/>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>
