@@ -265,6 +265,7 @@ html[lang="en"] .coming-soon-title {
   display: block;
 }
 
+
 @media (max-width: 768px) {
   .toast-text {
     font-size: 38px;
@@ -274,6 +275,6 @@ html[lang="en"] .coming-soon-title {
   }
   .bkgsor-video-float {
     padding: 0 16px;
-    margin-top: -20px;
+    margin-top: 20px;
   }
 }
