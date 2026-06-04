@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-GMDREuNQNJynOQvCXFCl/JLp3JtjQWFHx+V4UdEFI34=' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://www.gstatic.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https://www.google.com https://fonts.gstatic.com https://www.gstatic.com; connect-src 'self' https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests;" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-GMDREuNQNJynOQvCXFCl/JLp3JtjQWFHx+V4UdEFI34=' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://www.gstatic.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https://www.google.com https://fonts.gstatic.com https://www.gstatic.com; connect-src 'self' https://cdn.jsdelivr.net; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests;" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>BKGSoR Platform — Worflogy Inc.</title>
@@ -122,6 +122,29 @@
         <!-- BKGSoR Coming Soon Toast Overlay inside the card -->
         <div id="bkgsor-toast" class="bkgsor-toast" aria-live="polite">
           <span class="toast-text">COMING SOON</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- BKGSoR Demo Video Floating Card -->
+    <div class="bkgsor-video-float" id="bkgsor-video-float">
+      <div class="video-float-card">
+        <div class="video-float-header">
+          <span class="video-float-label">Demo Preview</span>
+          <span class="video-float-dot"></span>
+        </div>
+        <div class="video-float-body">
+          <video
+            id="bkgsor-demo-video"
+            src="../assets/13ECRA_BKGSoR.mp4"
+            autoplay
+            muted
+            loop
+            playsinline
+            controlslist="nodownload nofullscreen noremoteplayback"
+            oncontextmenu="return false"
+            aria-label="BKGSoR Platform Demo Video"
+          ></video>
         </div>
       </div>
     </div>
