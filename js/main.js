@@ -222,7 +222,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const prevBtn = container.querySelector('.slider-btn.prev');
     const nextBtn = container.querySelector('.slider-btn.next');
     const dotsContainer = container.nextElementSibling;
-    
+
+    // 슬라이더 이미지 우클릭·드래그 저장 차단
+    track.querySelectorAll('img').forEach(img => {
+      img.addEventListener('contextmenu', (e) => e.preventDefault());
+      img.addEventListener('dragstart',   (e) => e.preventDefault());
+    });
+
     if (items.length <= 1) {
       if (prevBtn) prevBtn.style.display = 'none';
       if (nextBtn) nextBtn.style.display = 'none';

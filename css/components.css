@@ -536,8 +536,14 @@
   /* 브라우저별 이미지 렌더링 선명도 최적화 */
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
+
+  /* 이미지 저장 보호: 모바일 롱프레스 · 드래그 차단 */
+  -webkit-touch-callout: none;
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
 }
-.slider-item img:hover {
+.slider-item:hover img {
   filter: grayscale(0%);
 }
 .slider-btn {
