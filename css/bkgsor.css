@@ -263,6 +263,23 @@ html[lang="en"] .coming-soon-title {
   height: 100%;
   object-fit: cover;
   display: block;
+  /* 모바일 롱프레스 저장 메뉴 차단 */
+  -webkit-touch-callout: none;
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
+}
+
+/* 비디오 위 투명 인터랙션 차단 오버레이 */
+.video-float-body::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  /* 우클릭/롱프레스/드래그 등 모든 사용자 인터랙션 차단 */
+  -webkit-touch-callout: none;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 

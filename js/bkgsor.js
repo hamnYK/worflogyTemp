@@ -20,4 +20,10 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 500);
     }, 1000);
   });
+
+  // 비디오 우클릭·컨텍스트 메뉴 JS 이중 차단
+  const video = document.getElementById('bkgsor-demo-video');
+  if (video) {
+    video.addEventListener('contextmenu', (e) => e.preventDefault());
+  }
 });
