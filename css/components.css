@@ -1922,9 +1922,9 @@
   font-size: var(--fs-badge);
   color: var(--text-muted);
   font-weight: 500;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 .progress-step-label.active {
   color: var(--text);
@@ -2359,7 +2359,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .progress-steps-grid {
     grid-template-columns: 1fr 1fr;
     gap: 16px;
