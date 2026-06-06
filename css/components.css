@@ -1962,6 +1962,98 @@
   opacity: 0.3;
 }
 
+/* ── Progress History (날짜별 진행 이력 표시) ── */
+.progress-card-legend {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.progress-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-sans-en);
+  font-size: var(--fs-badge);
+  color: var(--text-muted);
+}
+.progress-legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.progress-legend-dot.past {
+  background: var(--sand-dark);
+  border: 1.5px solid var(--border-sand);
+}
+.progress-legend-dot.current {
+  background: var(--coral);
+}
+
+/* 단계별 이중 바 래퍼 */
+.progress-bar-history {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.progress-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.progress-bar-row-label {
+  font-family: var(--font-sans-en);
+  font-size: 9px;
+  color: var(--text-light);
+  width: 32px;
+  flex-shrink: 0;
+  text-align: right;
+}
+.progress-bar-row-track {
+  flex: 1;
+  height: 4px;
+  background: var(--sand-dark);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.progress-bar-row-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.progress-bar-row-fill.past {
+  background: var(--border-sand);
+}
+.progress-bar-row-fill.current-done {
+  background: var(--ink);
+}
+.progress-bar-row-fill.current-active {
+  background: var(--coral);
+}
+.progress-bar-row-fill.current-tbc {
+  background: var(--text-light);
+  opacity: 0.3;
+}
+/* 단계 info 내 수치 두 개 나란히 */
+.progress-step-vals {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  flex-shrink: 0;
+}
+.progress-step-val-past {
+  font-family: var(--font-sans-en);
+  font-size: 9px;
+  color: var(--text-light);
+  font-weight: 500;
+  text-decoration: line-through;
+  text-decoration-color: var(--border-sand);
+}
+.progress-step-val-arrow {
+  font-size: 9px;
+  color: var(--border-sand);
+}
+
 /* ── Solution Demonstration Policy Notice ── */
 .demo-security-notice {
   margin-top: 32px;

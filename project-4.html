@@ -111,52 +111,103 @@
       </div>
     </div>
 
-    <!-- 개발 진척 현황 (Progress Card) -->
+    <!-- 개발 진척 현황 (Progress Card) — 날짜별 이력 -->
     <div class="progress-card">
       <div class="progress-card-header">
         <h3 class="progress-card-title">솔루션 빌드 현황 <span>Solution Build Status</span></h3>
-        <span class="progress-card-date">As of 2026.05.26</span>
+        <div class="progress-card-legend">
+          <span class="progress-legend-item"><span class="progress-legend-dot past"></span>2026.05.26</span>
+          <span class="progress-legend-item"><span class="progress-legend-dot current"></span>2026.06.06</span>
+        </div>
       </div>
       <div class="progress-steps-grid">
+        <!-- 1. 비즈니스 로직 및 기능 -->
         <div class="progress-step-item">
           <div class="progress-step-info">
             <span class="progress-step-label active" title="비즈니스 로직 및 기능">1. 비즈니스 로직 및 기능</span>
-            <span class="progress-step-val active">70%</span>
+            <div class="progress-step-vals">
+              <span class="progress-step-val-past">70%</span>
+              <span class="progress-step-val-arrow">→</span>
+              <span class="progress-step-val done">100%</span>
+            </div>
           </div>
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill active" style="width: 70%;"></div>
+          <div class="progress-bar-history">
+            <div class="progress-bar-row">
+              <span class="progress-bar-row-label">05.26</span>
+              <div class="progress-bar-row-track"><div class="progress-bar-row-fill past" style="width:70%;"></div></div>
+            </div>
+            <div class="progress-bar-row">
+              <span class="progress-bar-row-label">06.06</span>
+              <div class="progress-bar-row-track"><div class="progress-bar-row-fill current-done" style="width:100%;"></div></div>
+            </div>
+          </div>
+          <div class="progress-step-marker-container"></div>
+        </div>
+        <!-- 2. 솔루션 안정화 -->
+        <div class="progress-step-item">
+          <div class="progress-step-info">
+            <span class="progress-step-label active" title="솔루션 안정화">2. 솔루션 안정화</span>
+            <div class="progress-step-vals">
+              <span class="progress-step-val-past">TBC</span>
+              <span class="progress-step-val-arrow">→</span>
+              <span class="progress-step-val active">35%</span>
+            </div>
+          </div>
+          <div class="progress-bar-history">
+            <div class="progress-bar-row">
+              <span class="progress-bar-row-label">05.26</span>
+              <div class="progress-bar-row-track"><div class="progress-bar-row-fill past" style="width:0%;"></div></div>
+            </div>
+            <div class="progress-bar-row">
+              <span class="progress-bar-row-label">06.06</span>
+              <div class="progress-bar-row-track"><div class="progress-bar-row-fill current-active" style="width:35%;"></div></div>
+            </div>
           </div>
           <div class="progress-step-marker-container">
             <span class="progress-step-current-marker">▲</span>
           </div>
         </div>
+        <!-- 3. 통합 플랫폼 연동 -->
         <div class="progress-step-item">
           <div class="progress-step-info">
-            <span class="progress-step-label" title="솔루션 안정화">2. 솔루션 안정화</span>
-            <span class="progress-step-val">TBC</span>
+            <span class="progress-step-label active" title="통합 플랫폼 연동">3. 통합 플랫폼 연동</span>
+            <div class="progress-step-vals">
+              <span class="progress-step-val-past">TBD</span>
+              <span class="progress-step-val-arrow">→</span>
+              <span class="progress-step-val active">8%</span>
+            </div>
           </div>
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill tbc" style="width: 0%;"></div>
+          <div class="progress-bar-history">
+            <div class="progress-bar-row">
+              <span class="progress-bar-row-label">05.26</span>
+              <div class="progress-bar-row-track"><div class="progress-bar-row-fill past" style="width:0%;"></div></div>
+            </div>
+            <div class="progress-bar-row">
+              <span class="progress-bar-row-label">06.06</span>
+              <div class="progress-bar-row-track"><div class="progress-bar-row-fill current-active" style="width:8%;"></div></div>
+            </div>
           </div>
           <div class="progress-step-marker-container"></div>
         </div>
+        <!-- 4. SaaS 상용화 준비 -->
         <div class="progress-step-item">
           <div class="progress-step-info">
-            <span class="progress-step-label" title="통합 플랫폼 연동">3. 통합 플랫폼 연동</span>
-            <span class="progress-step-val">TBD</span>
+            <span class="progress-step-label active" title="SaaS 상용화 준비">4. SaaS 상용화 준비</span>
+            <div class="progress-step-vals">
+              <span class="progress-step-val-past">TBD</span>
+              <span class="progress-step-val-arrow">→</span>
+              <span class="progress-step-val active">5%</span>
+            </div>
           </div>
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill tbc" style="width: 0%;"></div>
-          </div>
-          <div class="progress-step-marker-container"></div>
-        </div>
-        <div class="progress-step-item">
-          <div class="progress-step-info">
-            <span class="progress-step-label" title="SaaS 상용화 준비">4. SaaS 상용화 준비</span>
-            <span class="progress-step-val">TBD</span>
-          </div>
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill tbc" style="width: 0%;"></div>
+          <div class="progress-bar-history">
+            <div class="progress-bar-row">
+              <span class="progress-bar-row-label">05.26</span>
+              <div class="progress-bar-row-track"><div class="progress-bar-row-fill past" style="width:0%;"></div></div>
+            </div>
+            <div class="progress-bar-row">
+              <span class="progress-bar-row-label">06.06</span>
+              <div class="progress-bar-row-track"><div class="progress-bar-row-fill current-active" style="width:5%;"></div></div>
+            </div>
           </div>
           <div class="progress-step-marker-container"></div>
         </div>
