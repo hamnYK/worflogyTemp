@@ -108,49 +108,88 @@
     <div class="progress-card">
       <div class="progress-card-header">
         <h3 class="progress-card-title">Solution Build Status</h3>
-        <span class="progress-card-date">As of 2026.05.26</span>
+        <div class="progress-card-legend">
+          <span class="progress-legend-item"><span class="progress-legend-dot past"></span>2026.05.26</span>
+          <span class="progress-legend-item"><span class="progress-legend-dot current"></span>2026.06.06</span>
+        </div>
       </div>
       <div class="progress-steps-grid">
+        <!-- 1. Business Logic & Features -->
         <div class="progress-step-item">
           <div class="progress-step-info">
             <span class="progress-step-label active" title="Business Logic & Features">1. Business Logic & Features</span>
-            <span class="progress-step-val done">100%</span>
+            <div class="progress-step-vals">
+              <span class="progress-step-val-past">100%</span>
+              <span class="progress-step-val-arrow">→</span>
+              <span class="progress-step-val done">100%</span>
+            </div>
           </div>
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill done" style="width: 100%;"></div>
-          </div>
+          <svg class="progress-sparkline" viewBox="0 0 200 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <line x1="30" y1="5" x2="170" y2="5" stroke="#D4CBC0" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="30" cy="5" r="3" fill="white" stroke="#1A1F36" stroke-width="1.5"/>
+            <circle cx="170" cy="5" r="4" fill="#1A1F36"/>
+            <text x="30" y="44" text-anchor="middle" font-size="8" fill="#B0A89C" font-family="'DM Sans',system-ui,sans-serif">05.26</text>
+            <text x="170" y="44" text-anchor="middle" font-size="8" fill="#B0A89C" font-family="'DM Sans',system-ui,sans-serif">06.06</text>
+          </svg>
           <div class="progress-step-marker-container"></div>
         </div>
+        <!-- 2. Solution Stabilization -->
         <div class="progress-step-item">
           <div class="progress-step-info">
             <span class="progress-step-label active" title="Solution Stabilization">2. Solution Stabilization</span>
-            <span class="progress-step-val active">72%</span>
+            <div class="progress-step-vals">
+              <span class="progress-step-val-past">72%</span>
+              <span class="progress-step-val-arrow">→</span>
+              <span class="progress-step-val active">55%</span>
+            </div>
           </div>
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill active" style="width: 72%;"></div>
-          </div>
+          <svg class="progress-sparkline" viewBox="0 0 200 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <line x1="30" y1="14.2" x2="170" y2="19.8" stroke="#D4CBC0" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="30" cy="14.2" r="3" fill="white" stroke="#C8BFB4" stroke-width="1.5"/>
+            <circle cx="170" cy="19.8" r="4" fill="#E8613A"/>
+            <text x="30" y="44" text-anchor="middle" font-size="8" fill="#B0A89C" font-family="'DM Sans',system-ui,sans-serif">05.26</text>
+            <text x="170" y="44" text-anchor="middle" font-size="8" fill="#B0A89C" font-family="'DM Sans',system-ui,sans-serif">06.06</text>
+          </svg>
           <div class="progress-step-marker-container">
             <span class="progress-step-current-marker">▲</span>
           </div>
         </div>
+        <!-- 3. Integrated Platform Linkage -->
         <div class="progress-step-item">
           <div class="progress-step-info">
             <span class="progress-step-label active" title="Integrated Platform Linkage">3. Integrated Platform Linkage</span>
-            <span class="progress-step-val active">55%</span>
+            <div class="progress-step-vals">
+              <span class="progress-step-val-past">55%</span>
+              <span class="progress-step-val-arrow">→</span>
+              <span class="progress-step-val active">15%</span>
+            </div>
           </div>
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill active" style="width: 55%;"></div>
-          </div>
+          <svg class="progress-sparkline" viewBox="0 0 200 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <line x1="30" y1="19.8" x2="170" y2="33.1" stroke="#D4CBC0" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="30" cy="19.8" r="3" fill="white" stroke="#C8BFB4" stroke-width="1.5"/>
+            <circle cx="170" cy="33.1" r="4" fill="#E8613A"/>
+            <text x="30" y="44" text-anchor="middle" font-size="8" fill="#B0A89C" font-family="'DM Sans',system-ui,sans-serif">05.26</text>
+            <text x="170" y="44" text-anchor="middle" font-size="8" fill="#B0A89C" font-family="'DM Sans',system-ui,sans-serif">06.06</text>
+          </svg>
           <div class="progress-step-marker-container"></div>
         </div>
+        <!-- 4. SaaS Commercialization Prep -->
         <div class="progress-step-item">
           <div class="progress-step-info">
             <span class="progress-step-label active" title="SaaS Commercialization Prep">4. SaaS Commercialization Prep</span>
-            <span class="progress-step-val active">57%</span>
+            <div class="progress-step-vals">
+              <span class="progress-step-val-past">57%</span>
+              <span class="progress-step-val-arrow">→</span>
+              <span class="progress-step-val active">16%</span>
+            </div>
           </div>
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill active" style="width: 57%;"></div>
-          </div>
+          <svg class="progress-sparkline" viewBox="0 0 200 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <line x1="30" y1="19.2" x2="170" y2="32.7" stroke="#D4CBC0" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="30" cy="19.2" r="3" fill="white" stroke="#C8BFB4" stroke-width="1.5"/>
+            <circle cx="170" cy="32.7" r="4" fill="#E8613A"/>
+            <text x="30" y="44" text-anchor="middle" font-size="8" fill="#B0A89C" font-family="'DM Sans',system-ui,sans-serif">05.26</text>
+            <text x="170" y="44" text-anchor="middle" font-size="8" fill="#B0A89C" font-family="'DM Sans',system-ui,sans-serif">06.06</text>
+          </svg>
           <div class="progress-step-marker-container"></div>
         </div>
       </div>

@@ -82,8 +82,8 @@
 /* 모바일 모드 최적화 */
 @media (max-width: 768px) {
   .lang-switcher-container {
-    top: 20px;
-    right: 20px;
+    top: 16px;
+    right: 16px;
     padding: 3px;
   }
   .lang-switcher-btn {
