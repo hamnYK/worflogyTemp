@@ -2054,7 +2054,8 @@
 /* 현재 진행 단계 표시용 마커 컨테이너 및 삼각형 */
 .progress-step-marker-container {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
+  padding-right: 15%; /* 30/200 이므로 15% 여백으로 그래프의 06.06 위치와 정렬 */
   margin-top: 6px;
   min-height: 10px;
 }
@@ -2362,6 +2363,49 @@
   .progress-steps-grid {
     grid-template-columns: 1fr 1fr;
     gap: 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .progress-card {
+    padding: 20px 16px;
+  }
+  .progress-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .progress-card-title {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    width: 100%;
+  }
+  .progress-card-title span {
+    display: block;
+    margin-left: 0;
+  }
+  .progress-card-date {
+    margin-top: 4px;
+  }
+  .progress-card-legend {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 16px;
+  }
+  .progress-steps-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .progress-step-info {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .progress-step-label {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    max-width: 100%;
   }
 }
 
