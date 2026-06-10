@@ -2,14 +2,14 @@
 $OutputEncoding = [System.Text.Encoding]::UTF8
 
 # Set current directory to script root using .NET to avoid path issues
-$PSScriptRoot = [System.IO.Path]::GetDirectoryName($MyInvocation.MyCommand.Path)
-[System.IO.Directory]::SetCurrentDirectory($PSScriptRoot)
+$ScriptRootDir = [System.IO.Path]::GetDirectoryName($MyInvocation.MyCommand.Path)
+[System.IO.Directory]::SetCurrentDirectory($ScriptRootDir)
 
 Write-Host "==========================================" -ForegroundColor Cyan
 Write-Host " Starting static website build minify ... " -ForegroundColor Cyan
 Write-Host "==========================================" -ForegroundColor Cyan
 
-$SourceDir = $PSScriptRoot
+$SourceDir = $ScriptRootDir
 $DestDir = [System.IO.Path]::Combine($SourceDir, "dist")
 
 # 1. Initialize dist directory using .NET API
@@ -85,7 +85,7 @@ if ([System.IO.Directory]::Exists($JsDir)) {
 # =========================================================
 
 # HTML Minification
-function Minify-Html($content) {
+function Optimize-Html($content) {
     # Remove HTML comments <!-- ... -->
     $content = [System.Text.RegularExpressions.Regex]::Replace($content, "(?s)<!--.*?-->", "")
     # Remove empty lines
@@ -94,7 +94,7 @@ function Minify-Html($content) {
 }
 
 # CSS Minification
-function Minify-Css($content) {
+function Optimize-Css($content) {
     # Remove CSS comments /* ... */
     $content = [System.Text.RegularExpressions.Regex]::Replace($content, "(?s)/\*.*?\*/", "")
     # Remove spaces around delimiters
@@ -107,7 +107,7 @@ function Minify-Css($content) {
 }
 
 # JS Minification (Safe comment removal only)
-function Minify-Js($content) {
+function Optimize-Js($content) {
     # Remove JS block comments /* ... */
     $content = [System.Text.RegularExpressions.Regex]::Replace($content, "(?s)/\*.*?\*/", "")
     # Remove single line comments // ... safely (ignores inside URLs or quotes)
@@ -134,7 +134,7 @@ foreach ($filePath in $HtmlFiles) {
     $destFilePath = [System.IO.Path]::Combine($destFileDir, $fileName)
     
     $rawContent = [System.IO.File]::ReadAllText($filePath, [System.Text.Encoding]::UTF8)
-    $minified = Minify-Html $rawContent
+    $minified = Optimize-Html $rawContent
     [System.IO.File]::WriteAllText($destFilePath, $minified, [System.Text.Encoding]::UTF8)
     Write-Host "  -> Minified: $relativeSub/$fileName" -ForegroundColor Gray
 }
@@ -146,7 +146,7 @@ if ($CssFiles.Count -gt 0) {
         $fileName = [System.IO.Path]::GetFileName($filePath)
         $destFilePath = [System.IO.Path]::Combine($CssDestDir, $fileName)
         $rawContent = [System.IO.File]::ReadAllText($filePath, [System.Text.Encoding]::UTF8)
-        $minified = Minify-Css $rawContent
+        $minified = Optimize-Css $rawContent
         [System.IO.File]::WriteAllText($destFilePath, $minified, [System.Text.Encoding]::UTF8)
         Write-Host "  -> Minified: css/$fileName" -ForegroundColor Gray
     }
@@ -159,7 +159,7 @@ if ($JsFiles.Count -gt 0) {
         $fileName = [System.IO.Path]::GetFileName($filePath)
         $destFilePath = [System.IO.Path]::Combine($JsDestDir, $fileName)
         $rawContent = [System.IO.File]::ReadAllText($filePath, [System.Text.Encoding]::UTF8)
-        $minified = Minify-Js $rawContent
+        $minified = Optimize-Js $rawContent
         [System.IO.File]::WriteAllText($destFilePath, $minified, [System.Text.Encoding]::UTF8)
         Write-Host "  -> Minified: js/$fileName" -ForegroundColor Gray
     }
