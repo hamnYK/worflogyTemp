@@ -300,6 +300,37 @@
 
 </main>
 
+  <!-- ── Brochure Lightbox Modal ── -->
+  <div id="brochure-modal" class="brochure-modal-backdrop" aria-hidden="true">
+    <div class="brochure-modal-content">
+      <img src="assets/Brochure_Korean.jpg" alt="워플로지 국문 소개서 브로셔" class="brochure-modal-img" />
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const brochureBtn = document.querySelector('.brochure-btn');
+      const brochureModal = document.getElementById('brochure-modal');
+
+      if (brochureBtn && brochureModal) {
+        // 모달 열기
+        brochureBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          brochureModal.classList.add('active');
+          brochureModal.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden'; // 뒷배경 스크롤 방지
+        });
+
+        // 클릭 시 닫기
+        brochureModal.addEventListener('click', function() {
+          brochureModal.classList.remove('active');
+          brochureModal.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = ''; // 스크롤 복원
+        });
+      }
+    });
+  </script>
+
   <script src="js/sidebar.js" defer></script>
   <script src="js/main.js"></script>
   <script src="js/hero-canvas.js" defer></script>
