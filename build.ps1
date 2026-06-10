@@ -4,6 +4,7 @@ $OutputEncoding = [System.Text.Encoding]::UTF8
 # Set current directory to script root using .NET to avoid path issues
 $ScriptRootDir = [System.IO.Path]::GetDirectoryName($MyInvocation.MyCommand.Path)
 [System.IO.Directory]::SetCurrentDirectory($ScriptRootDir)
+Set-Location -LiteralPath $ScriptRootDir
 
 Write-Host "==========================================" -ForegroundColor Cyan
 Write-Host " Starting static website build minify ... " -ForegroundColor Cyan
@@ -180,6 +181,7 @@ $OrigDir = [System.IO.Directory]::GetCurrentDirectory()
 try {
     # Move to dist folder using .NET API
     [System.IO.Directory]::SetCurrentDirectory($DestDir)
+    Set-Location -LiteralPath $DestDir
     
     # Initialize temporary local repository and configure local email/name
     Write-Host "  -> Initializing temporary git repo..." -ForegroundColor Gray
@@ -207,5 +209,6 @@ catch {
 finally {
     # Revert to original directory
     [System.IO.Directory]::SetCurrentDirectory($OrigDir)
+    Set-Location -LiteralPath $OrigDir
 }
 
