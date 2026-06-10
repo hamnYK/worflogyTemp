@@ -433,6 +433,10 @@
   border-color: var(--coral);
   color: #fff !important;
 }
+.brochure-btn svg {
+  margin-right: 6px;
+  vertical-align: -3.5px; /* 미세 정렬 조정 */
+}
 
 @media (max-width: 768px) {
   .brochure-banner {
