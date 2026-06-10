@@ -307,35 +307,6 @@
     </div>
   </div>
 
-  <!-- 리얼 종이 구김 & 미세 질감 융합 필터 (화면 비노출) -->
-  <svg style="display:none;" xmlns="http://www.w3.org/2000/svg">
-    <filter id="paper-texture">
-      <!-- 1. 굵고 완만한 구김 패턴 노이즈 생성 -->
-      <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="3" result="crumple-noise" />
-      
-      <!-- 2. 구김 노이즈 기반으로 빛(음영) 연산 (각도 55도 설정으로 자연스러운 그림자) -->
-      <feDiffuseLighting in="crumple-noise" lighting-color="#ffffff" surfaceScale="2" result="light">
-        <feDistantLight azimuth="55" elevation="55" />
-      </feDiffuseLighting>
-      
-      <!-- 3. 고운 종이 입자 노이즈 생성 및 흑백 3% 연산 -->
-      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" result="grain-noise" />
-      <feColorMatrix type="matrix" values="0 0 0 0 0.5
-                                           0 0 0 0 0.5
-                                           0 0 0 0 0.5
-                                           0 0 0 0.03 0" in="grain-noise" result="gray-grain" />
-
-      <!-- 4. 이미지 원본에 고운 입자 1차 합성 -->
-      <feBlend mode="multiply" in="SourceGraphic" in2="gray-grain" result="with-grain" />
-      
-      <!-- 5. 질감이 입혀진 이미지에 구김 음영(빛) 2차 합성 -->
-      <feBlend mode="multiply" in="with-grain" in2="light" result="with-light" />
-      
-      <!-- 6. 최종적으로 구김 형상을 따라 이미지 픽셀/윤곽을 미세하게(3px 스케일) 구부림 -->
-      <feDisplacementMap in="with-light" in2="crumple-noise" scale="3" xChannelSelector="R" yChannelSelector="G" />
-    </filter>
-  </svg>
-
   <script src="js/sidebar.js" defer></script>
   <script src="js/main.js"></script>
   <script src="js/hero-canvas.js" defer></script>
