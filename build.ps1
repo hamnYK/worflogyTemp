@@ -169,3 +169,43 @@ Write-Host "==========================================" -ForegroundColor Green
 Write-Host " Build Completed Successfully! " -ForegroundColor Green
 Write-Host " Destination: $DestDir " -ForegroundColor Green
 Write-Host "==========================================" -ForegroundColor Green
+
+# =========================================================
+# 7. Auto Deploy to GitHub Pages (gh-pages)
+# =========================================================
+Write-Host " Starting Auto Deployment to GitHub Pages..." -ForegroundColor Cyan
+
+$OrigDir = [System.IO.Directory]::GetCurrentDirectory()
+
+try {
+    # Move to dist folder using .NET API
+    [System.IO.Directory]::SetCurrentDirectory($DestDir)
+    
+    # Initialize temporary local repository and configure local email/name
+    Write-Host "  -> Initializing temporary git repo..." -ForegroundColor Gray
+    & git init | Out-Null
+    & git config user.email "worflogy@gmail.com" | Out-Null
+    & git config user.name "worflogy" | Out-Null
+    
+    # Stage and commit optimized resources
+    & git add . | Out-Null
+    $commitMsg = "deploy: Auto-build Optimization Deployment ($(Get-Date -Format 'yyyy-MM-dd HH:mm:ss'))"
+    & git commit -m "$commitMsg" | Out-Null
+    
+    # Force Push to GitHub Pages
+    Write-Host "  -> Force pushing to Remote gh-pages branch..." -ForegroundColor Yellow
+    $pushResult = & git push -f "https://github.com/hamnYK/worflogyTemp.git" master:gh-pages 2>&1
+    Write-Host "  $pushResult" -ForegroundColor Gray
+    
+    Write-Host "==========================================" -ForegroundColor Green
+    Write-Host " Deploy Completed Successfully! " -ForegroundColor Green
+    Write-Host "==========================================" -ForegroundColor Green
+}
+catch {
+    Write-Host " Error occurred during deployment: $_" -ForegroundColor Red
+}
+finally {
+    # Revert to original directory
+    [System.IO.Directory]::SetCurrentDirectory($OrigDir)
+}
+
