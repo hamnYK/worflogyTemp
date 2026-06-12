@@ -52,3 +52,4 @@
         2. 왼쪽 사이드바 메뉴에서 **Pages**를 선택합니다.
         3. **Build and deployment** 섹션의 Branch 항목에서 **`gh-pages`** 브랜치와 **`/ (root)`** 폴더를 지정한 후 **Save** 버튼을 누릅니다.
 
+Set-Location -LiteralPath 'c:\Users\alchera\OneDrive\[주식회사 워플로지]\02. 법인 홈페이지 (도메인 사용권)\2026.04.24_워플로지 홈페이지 개편\2026'
