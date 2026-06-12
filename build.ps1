@@ -16,10 +16,22 @@ $DestDir = [System.IO.Path]::Combine($SourceDir, "dist")
 # 1. Initialize dist directory using .NET API
 if ([System.IO.Directory]::Exists($DestDir)) {
     Write-Host " Removing existing dist directory..." -ForegroundColor Yellow
-    # Literal directory deletion via shell commands to prevent permission/wildcard issue
-    Remove-Item -LiteralPath $DestDir -Recurse -Force
+    try {
+        Remove-Item -LiteralPath $DestDir -Recurse -Force -ErrorAction Stop
+    }
+    catch {
+        Write-Host " Warning: Could not remove dist directory completely ($_.Exception.Message). Cleaning contents..." -ForegroundColor Orange
+        # If folder deletion failed (due to OneDrive lock), delete contents individually
+        Get-ChildItem -LiteralPath $DestDir -Force | ForEach-Object {
+            try {
+                Remove-Item -LiteralPath $_.FullName -Recurse -Force -ErrorAction SilentlyContinue
+            } catch {}
+        }
+    }
 }
-[System.IO.Directory]::CreateDirectory($DestDir) | Out-Null
+if (-not [System.IO.Directory]::Exists($DestDir)) {
+    [System.IO.Directory]::CreateDirectory($DestDir) | Out-Null
+}
 
 # 2. Define static resources
 $StaticDirs = @("assets", "images", "images_original")
@@ -31,9 +43,15 @@ foreach ($dir in $StaticDirs) {
     $destPath = [System.IO.Path]::Combine($DestDir, $dir)
     if ([System.IO.Directory]::Exists($srcPath)) {
         Write-Host " Copying directory: $dir" -ForegroundColor Gray
-        # Ensure target parent folder exists
-        [System.IO.Directory]::CreateDirectory($destPath) | Out-Null
-        Copy-Item -LiteralPath $srcPath -Destination $DestDir -Recurse -Force
+        # Ensure destination folder exists safely
+        if (-not [System.IO.Directory]::Exists($destPath)) {
+            [System.IO.Directory]::CreateDirectory($destPath) | Out-Null
+        }
+        # Copy each item inside the directory individually to avoid PowerShell's Copy-Item nesting bug
+        Get-ChildItem -LiteralPath $srcPath -Force | ForEach-Object {
+            $itemDest = [System.IO.Path]::Combine($destPath, $_.Name)
+            Copy-Item -LiteralPath $_.FullName -Destination $itemDest -Recurse -Force
+        }
     }
 }
 
@@ -50,12 +68,21 @@ foreach ($file in $StaticFiles) {
 $EnSourceDir = [System.IO.Path]::Combine($SourceDir, "en")
 $EnDestDir = [System.IO.Path]::Combine($DestDir, "en")
 if ([System.IO.Directory]::Exists($EnSourceDir)) {
-    [System.IO.Directory]::CreateDirectory($EnDestDir) | Out-Null
+    if (-not [System.IO.Directory]::Exists($EnDestDir)) {
+        [System.IO.Directory]::CreateDirectory($EnDestDir) | Out-Null
+    }
     $EnAssetsSrc = [System.IO.Path]::Combine($EnSourceDir, "assets")
     $EnAssetsDest = [System.IO.Path]::Combine($EnDestDir, "assets")
     if ([System.IO.Directory]::Exists($EnAssetsSrc)) {
-        [System.IO.Directory]::CreateDirectory($EnAssetsDest) | Out-Null
-        Copy-Item -LiteralPath $EnAssetsSrc -Destination $EnDestDir -Recurse -Force
+        # Ensure destination assets folder exists safely
+        if (-not [System.IO.Directory]::Exists($EnAssetsDest)) {
+            [System.IO.Directory]::CreateDirectory($EnAssetsDest) | Out-Null
+        }
+        # Copy contents individually to prevent nesting
+        Get-ChildItem -LiteralPath $EnAssetsSrc -Force | ForEach-Object {
+            $itemDest = [System.IO.Path]::Combine($EnAssetsDest, $_.Name)
+            Copy-Item -LiteralPath $_.FullName -Destination $itemDest -Recurse -Force
+        }
     }
 }
 
@@ -177,14 +204,34 @@ Write-Host "==========================================" -ForegroundColor Green
 Write-Host " Starting Auto Deployment to GitHub Pages..." -ForegroundColor Cyan
 
 $OrigDir = [System.IO.Directory]::GetCurrentDirectory()
+$TempDeployDir = [System.IO.Path]::Combine($env:TEMP, "worflogy_gh_pages_deploy")
+
+# STRICT SYSTEM SAFETY GUARD: Refuse to execute if the path is invalid or potentially matches system root directories
+if ($TempDeployDir -notlike "*worflogy_gh_pages_deploy" -or $TempDeployDir -like "*C:\Windows*" -or $TempDeployDir -like "*System32*") {
+    throw "Fatal: Path validation failed for temporary directory to protect system files."
+}
 
 try {
-    # Move to dist folder using .NET API
-    [System.IO.Directory]::SetCurrentDirectory($DestDir)
-    Set-Location -LiteralPath $DestDir
+    # 1. Clean up any leftover folder from previous runs in Temp
+    if ([System.IO.Directory]::Exists($TempDeployDir)) {
+        Write-Host "  -> Cleaning up old temporary deploy folder..." -ForegroundColor Gray
+        Remove-Item -LiteralPath $TempDeployDir -Recurse -Force -ErrorAction SilentlyContinue
+    }
+    [System.IO.Directory]::CreateDirectory($TempDeployDir) | Out-Null
     
-    # Initialize temporary local repository and configure local email/name
-    Write-Host "  -> Initializing temporary git repo..." -ForegroundColor Gray
+    # 2. Copy optimized files from dist to local Temp directory (prevents OneDrive locks during git operations)
+    Write-Host "  -> Preparing deployment files in local Temp folder..." -ForegroundColor Gray
+    Get-ChildItem -LiteralPath $DestDir -Force | ForEach-Object {
+        $tempDestPath = [System.IO.Path]::Combine($TempDeployDir, $_.Name)
+        Copy-Item -LiteralPath $_.FullName -Destination $tempDestPath -Recurse -Force
+    }
+    
+    # Move process location to Temp directory
+    [System.IO.Directory]::SetCurrentDirectory($TempDeployDir)
+    Set-Location -LiteralPath $TempDeployDir
+    
+    # 3. Initialize Git repository and commit files in Temp directory
+    Write-Host "  -> Initializing temporary git repo in local Temp..." -ForegroundColor Gray
     & git init | Out-Null
     & git config user.email "worflogy@gmail.com" | Out-Null
     & git config user.name "worflogy" | Out-Null
@@ -210,5 +257,11 @@ finally {
     # Revert to original directory
     [System.IO.Directory]::SetCurrentDirectory($OrigDir)
     Set-Location -LiteralPath $OrigDir
+    
+    # Clean up local Temp folder immediately
+    if ([System.IO.Directory]::Exists($TempDeployDir) -and $TempDeployDir -like "*worflogy_gh_pages_deploy") {
+        Write-Host "  -> Removing local temporary deploy folder..." -ForegroundColor Gray
+        Remove-Item -LiteralPath $TempDeployDir -Recurse -Force -ErrorAction SilentlyContinue
+    }
 }
 
