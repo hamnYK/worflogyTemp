@@ -299,7 +299,7 @@
 
 .project-video-label {
   font-family: var(--font-sans-en);
-  font-size: 11px;
+  font-size: var(--fs-small, 11px);
   font-weight: 600;
   letter-spacing: 0.8px;
   color: var(--text-muted);
@@ -347,7 +347,7 @@
 .project-video-desc {
   font-family: var(--font-serif-en);
   font-style: italic;
-  font-size: 14px;
+  font-size: var(--fs-body-min, 13px);
   font-weight: 400;
   color: var(--text-muted);
   text-align: center;
@@ -360,9 +360,6 @@
   .project-video-section {
     padding: 0 28px;
     margin-bottom: 36px;
-  }
-  .project-video-desc {
-    font-size: 13px;
   }
 }
 

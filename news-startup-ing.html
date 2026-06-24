@@ -46,6 +46,8 @@
       font-family: var(--font-sans-en);
       font-size: var(--fs-ui, 14.5px);
       font-weight: var(--fw-ui, 600);
+      letter-spacing: var(--ls-ui, 0.2px);
+      line-height: var(--lh-ui, normal);
       color: var(--text-muted);
       text-decoration: none;
       transition: color var(--transition-smooth);
@@ -76,6 +78,7 @@
       font-style: italic;
       font-weight: 400;
       font-size: var(--fs-label, 12px);
+      line-height: var(--lh-label, 1.35);
       color: var(--coral);
       text-transform: uppercase;
       letter-spacing: var(--ls-label, 0.5px);
@@ -123,7 +126,7 @@
 
     .visual-caption {
       padding: 12px 16px;
-      background: rgba(0, 0, 0, 0.2);
+      background: rgba(26, 31, 54, 0.03);
       font-family: var(--font-body);
       font-size: var(--fs-body-min, 13px);
       line-height: var(--lh-body-min, 1.7);
@@ -134,7 +137,8 @@
     .article-content {
       font-family: var(--font-serif-ko);
       font-size: var(--fs-body, 16px);
-      line-height: var(--lh-body-sub, 1.85);
+      line-height: var(--lh-body, 1.65);
+      letter-spacing: var(--ls-body, normal);
       color: var(--text);
     }
 
@@ -244,6 +248,7 @@
       gap: 12px;
       font-family: var(--font-body);
       font-size: var(--fs-body-min, 13px);
+      line-height: var(--lh-body-min, 1.7);
       background: rgba(26, 31, 54, 0.03);
       padding: 10px 14px;
       border-radius: 4px;
@@ -266,10 +271,6 @@
     @media (max-width: 600px) {
       .article-container {
         padding: 24px 16px 60px 16px;
-      }
-      .article-content {
-        font-size: 1.05rem;
-        line-height: 1.75;
       }
       .diagram-row {
         flex-direction: column;
@@ -342,17 +343,17 @@
             <div class="diagram-row">
               <div class="diagram-node">
                 <strong>세종대왕</strong><br>
-                <span style="font-size: 11px; color: var(--text-muted);">[개념: 15세기 조선의 왕]</span>
+                <span style="font-size: var(--fs-small, 11px); color: var(--text-muted);">[개념: 15세기 조선의 왕]</span>
               </div>
               <div class="diagram-arrow">➔</div>
               <div class="diagram-node" style="border-color: var(--coral);">
                 <strong>불일치 감지 (오류)</strong><br>
-                <span style="font-size: 11px; color: var(--coral);">[15세기 vs 21세기]</span>
+                <span style="font-size: var(--fs-small, 11px); color: var(--coral);">[15세기 vs 21세기]</span>
               </div>
               <div class="diagram-arrow">➔</div>
               <div class="diagram-node">
                 <strong>맥북 프로</strong><br>
-                <span style="font-size: 11px; color: var(--text-muted);">[개념: 21세기 컴퓨터]</span>
+                <span style="font-size: var(--fs-small, 11px); color: var(--text-muted);">[개념: 21세기 컴퓨터]</span>
               </div>
             </div>
             <div class="diagram-caption">
@@ -377,17 +378,17 @@
             <div class="diagram-row">
               <div class="diagram-node">
                 <strong>방대한 로우 데이터</strong><br>
-                <span style="font-size: 11px; color: var(--text-muted);">전사 비정형 데이터</span>
+                <span style="font-size: var(--fs-small, 11px); color: var(--text-muted);">전사 비정형 데이터</span>
               </div>
               <div class="diagram-arrow">➔</div>
               <div class="diagram-node" style="background: rgba(235, 94, 85, 0.05); border-color: var(--coral);">
                 <strong>맥락 & 목적 필터</strong><br>
-                <span style="font-size: 11px; color: var(--coral);">온톨로지 스키마 매핑</span>
+                <span style="font-size: var(--fs-small, 11px); color: var(--coral);">온톨로지 스키마 매핑</span>
               </div>
               <div class="diagram-arrow">➔</div>
               <div class="diagram-node">
                 <strong>최적화 연산 데이터</strong><br>
-                <span style="font-size: 11px; color: var(--text-muted);">고효율 의사결정 추론</span>
+                <span style="font-size: var(--fs-small, 11px); color: var(--text-muted);">고효율 의사결정 추론</span>
               </div>
             </div>
             <div class="diagram-caption">
@@ -412,17 +413,17 @@
             <div class="diagram-row">
               <div class="diagram-node">
                 <strong>구성원 프로필 & 이력</strong><br>
-                <span style="font-size: 11px; color: var(--text-muted);">실무 산출물 노드</span>
+                <span style="font-size: var(--fs-small, 11px); color: var(--text-muted);">실무 산출물 노드</span>
               </div>
               <div class="diagram-arrow">➔</div>
               <div class="diagram-node" style="border-color: var(--coral);">
                 <strong>지식 그래프 연결 (유기화)</strong><br>
-                <span style="font-size: 11px; color: var(--coral);">역량-프로젝트 매핑</span>
+                <span style="font-size: var(--fs-small, 11px); color: var(--coral);">역량-프로젝트 매핑</span>
               </div>
               <div class="diagram-arrow">➔</div>
               <div class="diagram-node">
                 <strong>최적 역할 추천 & 시나리오</strong><br>
-                <span style="font-size: 11px; color: var(--text-muted);">성장 경로 자동 제안</span>
+                <span style="font-size: var(--fs-small, 11px); color: var(--text-muted);">성장 경로 자동 제안</span>
               </div>
             </div>
             <div class="diagram-caption">

@@ -16,7 +16,7 @@
 .scenario-label {
   font-family: var(--font-serif-en);   /* Point Label 규격 */
   font-style: italic;
-  font-size: 12px;
+  font-size: var(--fs-label, 12px);
   font-weight: 400;
   color: var(--coral);
   letter-spacing: 0.3px;
@@ -24,7 +24,7 @@
 }
 .scenario-text {
   font-family: var(--font-body);       /* Body-Min 규격 */
-  font-size: 13px;
+  font-size: var(--fs-body-min, 13px);
   font-weight: 400;
   color: var(--text-muted);
   line-height: 1.7;
