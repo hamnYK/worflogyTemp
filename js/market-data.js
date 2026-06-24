@@ -176,11 +176,11 @@ const marketData = {
         holder: "발명자: 함영국 대표"
       },
       {
-        type: "patent-app",
-        status: "우선심사 진행 중 (국내)",
+        type: "patent-reg",
+        status: "특허 등록 완료 (국내)",
         name: "이슈 기반 워크플로우 온톨로지 관리 방법 및 이러한 방법을 수행하는 장치",
         number: "제 10-2025-0187777 호 (출원일: 2025.12.02)",
-        holder: "출원인: 주식회사 워플로지"
+        holder: "출원인: 주식회사 워플로지 / 발명자: 함영국 대표"
       },
       {
         type: "trademark",
@@ -213,11 +213,11 @@ const marketData = {
         holder: "Inventor: CEO Youngkuk Hamn"
       },
       {
-        type: "patent-app",
-        status: "Under Prioritized Examination (KR)",
+        type: "patent-reg",
+        status: "Patent Registered (KR)",
         name: "Issue-based workflow ontology management method and apparatus performing the same",
-        number: "No. 10-2025-0187777 (Applied: 2025.12.02)",
-        holder: "Applicant: Worflogy Inc."
+        number: "No. 10-2025-0187777 (Filing Date: 2025.12.02)",
+        holder: "Applicant: Worflogy Inc. / Inventor: CEO Youngkuk Hamn"
       },
       {
         type: "trademark",
