@@ -107,6 +107,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (href === 'projects.html' && path.startsWith('project-')) {
       a.classList.add('active');
     }
+    if (href === 'footprint.html' && path.startsWith('news-')) {
+      a.classList.add('active');
+    }
   });
 
   // 3. Dynamic Mobile Hamburger & Overlay Injection

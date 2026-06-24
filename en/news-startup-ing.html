@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-GMDREuNQNJynOQvCXFCl/JLp3JtjQWFHx+V4UdEFI34=' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://www.gstatic.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https://www.google.com https://fonts.gstatic.com https://www.gstatic.com https://www.google-analytics.com; connect-src 'self' https://cdn.jsdelivr.net https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests;" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>[Archive] Worflogy “Semantic & Ontology, Simultaneously Solving Corporate Troubles and Boosting Growth” — Worflogy Inc.</title>
+  <meta name="description" content="Article archive of Worflogy CEO Youngkuk Hamn's interview by IT Donga. Learn about the value and vision of semantic ontology-based knowledge architecture R&D." />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="[Archive] Worflogy “Semantic & Ontology, Simultaneously Solving Corporate Troubles and Boosting Growth”" />
+  <meta property="og:description" content="Interview regarding the value of semantic ontology-based knowledge architecture R&D and Worflogy's business vision." />
+  <meta property="og:image" content="https://worflogy.com/assets/media_it_donga.jpg" />
+  <meta property="og:url" content="https://worflogy.com/en/news-startup-ing.html" />
+
+  <link rel="icon" href="../assets/worflogy_logo.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/language-switcher.css" />
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WN1V0G6RJ0"></script>
+  <script src="../js/ga4-init.js"></script>
+
+  <style>
+    /* ── Archive Column Reader Style ── */
+    .article-container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 40px 24px 80px 24px;
+    }
+
+    .back-btn-container {
+      margin-bottom: 32px;
+    }
+
+    .back-to-footprint {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-size: var(--fs-sm, 14px);
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color var(--transition-smooth);
+    }
+
+    .back-to-footprint:hover {
+      color: var(--coral);
+    }
+
+    .back-to-footprint svg {
+      width: 16px;
+      height: 16px;
+      transition: transform var(--transition-smooth);
+    }
+
+    .back-to-footprint:hover svg {
+      transform: translateX(-4px);
+    }
+
+    .article-header {
+      border-bottom: 1px solid var(--border-sand);
+      padding-bottom: 24px;
+      margin-bottom: 40px;
+    }
+
+    .archive-tag {
+      font-family: var(--font-body);
+      font-size: var(--fs-xs, 12px);
+      font-weight: 700;
+      color: var(--coral);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .article-title {
+      font-family: var(--font-serif-ko);
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 700;
+      line-height: 1.35;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+      font-family: var(--font-body);
+      font-size: var(--fs-sm, 14px);
+      color: var(--text-muted);
+    }
+
+    .meta-separator {
+      color: var(--border-sand);
+    }
+
+    .article-main-visual {
+      margin: 40px 0;
+      border-radius: var(--r-md, 8px);
+      overflow: hidden;
+      border: 1px solid var(--border-sand);
+    }
+
+    .article-main-visual img {
+      width: 100%;
+      display: block;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .visual-caption {
+      padding: 12px 16px;
+      background: rgba(0, 0, 0, 0.2);
+      font-family: var(--font-body);
+      font-size: var(--fs-xs, 12px);
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-sand);
+    }
+
+    .article-content {
+      font-family: var(--font-serif-ko), Georgia, serif;
+      font-size: 1.125rem;
+      line-height: 1.85;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .article-content p {
+      margin-bottom: 28px;
+      text-align: justify;
+    }
+
+    .article-content strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    /* Diagram Card Style */
+    .concept-diagram {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px dashed var(--border-sand);
+      border-radius: var(--r-sm, 6px);
+      padding: 24px;
+      margin: 40px 0;
+    }
+
+    .diagram-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+      padding-bottom: 10px;
+      margin-bottom: 16px;
+    }
+
+    .diagram-title {
+      font-family: var(--font-body);
+      font-size: var(--fs-xs, 12px);
+      font-weight: 700;
+      color: var(--coral);
+      letter-spacing: 0.05em;
+    }
+
+    .diagram-source {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .diagram-box {
+      font-family: var(--font-body);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 8px 0;
+    }
+
+    .diagram-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .diagram-node {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-sand);
+      border-radius: var(--r-sm, 4px);
+      padding: 12px;
+      flex: 1;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text);
+      transition: background var(--transition-smooth);
+    }
+
+    .diagram-node:hover {
+      background: rgba(235, 94, 85, 0.08);
+      border-color: var(--coral);
+    }
+
+    .diagram-arrow {
+      color: var(--coral);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .diagram-caption {
+      font-family: var(--font-body);
+      font-size: var(--fs-xs, 12px);
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-top: 14px;
+      border-left: 2px solid var(--coral);
+      padding-left: 10px;
+    }
+
+    /* Agent Debate Flow Style */
+    .flow-step-container {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .flow-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 13px;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 10px 14px;
+      border-radius: 4px;
+    }
+
+    .flow-num {
+      color: var(--coral);
+      font-weight: 700;
+    }
+
+    .flow-text {
+      color: var(--text-muted);
+    }
+
+    .flow-text strong {
+      color: var(--text);
+    }
+
+    @media (max-width: 600px) {
+      .article-container {
+        padding: 24px 16px 60px 16px;
+      }
+      .article-content {
+        font-size: 1.05rem;
+        line-height: 1.75;
+      }
+      .diagram-row {
+        flex-direction: column;
+        gap: 8px;
+      }
+      .diagram-arrow {
+        transform: rotate(90deg);
+        margin: 2px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <aside class="sidebar"></aside>
+
+  <main class="main">
+
+    <div class="article-container">
+      
+      <!-- Back Button -->
+      <div class="back-btn-container">
+        <a href="footprint.html" class="back-to-footprint">
+          <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+          </svg>
+          Back to History & Footprint
+        </a>
+      </div>
+
+      <!-- Article Header -->
+      <header class="article-header">
+        <span class="archive-tag">Media & Press Archive (KR Article)</span>
+        <h1 class="article-title">[Startup-ing] Worflogy “Semantic & Ontology, Simultaneously Solving Corporate Troubles and Boosting Growth”</h1>
+        <div class="article-meta">
+          <span class="meta-reporter">IT Donga Reporter Jookyung Cha</span>
+          <span class="meta-separator">|</span>
+          <span class="meta-email">racingcar@itdonga.com</span>
+          <span class="meta-separator">|</span>
+          <span class="meta-date">Published: 2026.06.17</span>
+        </div>
+      </header>
+
+      <!-- Main Visual -->
+      <div class="article-main-visual">
+        <img src="../assets/media_it_donga.jpg" alt="Worflogy CEO Youngkuk Hamn introducing ontology tools" />
+        <div class="visual-caption">Worflogy CEO & founder Youngkuk Hamn explaining ontology tools. (Photo Source: IT Donga)</div>
+      </div>
+
+      <!-- Article Content -->
+      <article class="article-content">
+        <p>Many companies introduce artificial intelligence expecting various utilities, such as increasing business efficiency and expanding their business scale. However, contrary to expectations, AI often fails to bring utility to companies. In some cases, AI even gives incorrect advice during crisis management or decision-making, driving the company into crisis.</p>
+
+        <p>Why does this happen? Usually, it's because of hallucination, a limitation of AI. When contaminated or unnecessary data is used, or when interpretation, reasoning, and application of data are done incorrectly, AI falls into hallucination and produces conclusions that are completely different from facts. Consequently, the industry is focusing on researching and developing technologies to reduce AI's hallucinations and produce accurate conclusions.</p>
+
+        <p>Among them, CEO Youngkuk Hamn, who leads the startup Worflogy, found a clue to the solution in ontology, a branch of ancient philosophy. It goes without saying that he actively utilizes semantic data, which is essential for building ontology AI.</p>
+
+        <p>Ontology and semantic data are technologies that help AI understand the true meaning of words and sentences, allowing it to think like a human. First, ontology is a map of knowledge and an encyclopedia structured for AI to understand various concepts and relations in reality. Semantic data is created using this ontology. As the name suggests, it is data that gives 'meaning' and 'relations' to data, helping AI read, understand, and infer.</p>
+
+        <p>AI equipped with these technologies understands and infers various concepts and relations in reality like a human. Thanks to this, the possibility of falling into hallucination is low. Let's recall a representative hallucination case of AI: 'The incident where King Sejong threw a MacBook Pro laptop.' Semantic data assigns the concept of '15th-century King of Joseon' to 'King Sejong' and the concept of 'a new computer released in the 21st century' to 'MacBook Pro laptop.' In this case, since the concepts of '15th century' and '21st century' do not match, the AI would have judged this sentence as an error.</p>
+
+        <!-- Concept Diagram 1 -->
+        <div class="concept-diagram">
+          <div class="diagram-header">
+            <span class="diagram-title">Knowledge Verification Mechanism via Semantic Web & Ontology</span>
+            <span class="diagram-source">Source: Worflogy R&D Archive</span>
+          </div>
+          <div class="diagram-box">
+            <div class="diagram-row">
+              <div class="diagram-node">
+                <strong>King Sejong</strong><br>
+                <span style="font-size: 11px; color: var(--text-muted);">[Concept: 15c Joseon King]</span>
+              </div>
+              <div class="diagram-arrow">➔</div>
+              <div class="diagram-node" style="border-color: var(--coral);">
+                <strong>Mismatch Detected (Error)</strong><br>
+                <span style="font-size: 11px; color: var(--coral);">[15c vs 21c Temporal Error]</span>
+              </div>
+              <div class="diagram-arrow">L</div>
+              <div class="diagram-node">
+                <strong>MacBook Pro</strong><br>
+                <span style="font-size: 11px; color: var(--text-muted);">[Concept: 21c Computer]</span>
+              </div>
+            </div>
+            <div class="diagram-caption">
+              <strong>Causal Logic Verification on Semantic Layer</strong>: By explicitly defining conceptual attributes (domain rules) of words, AI can verify spatial and temporal causality on its own, preventing hallucinations in advance.
+            </div>
+          </div>
+        </div>
+
+        <p>Ontology and semantic data not only reduce AI's hallucinations but also help trace back the reasoning process to advance the overall process. Even without new data, it utilizes concepts and relations of existing data to lead AI to think on its own and expand its range. Naturally, only accurate data is utilized, demonstrating the utility of reducing operation costs and resources.</p>
+
+        <p>Thanks to these advantages, ontology and semantic data have already shown great power in the global AI market. Palantir, a global big data processing company, is an example. Palantir is considered a company that collects big data, reflects ontology, and coordinates AI to make the most appropriate decision under a clear purpose.</p>
+
+        <p>This is also where Worflogy focuses the most: ensuring that ontology and semantic data operate under the user's clear goal. CEO Youngkuk Hamn said that it is practically impossible and inefficient to perform AI calculations using all data, and designed an ontology tool that derives context and clear goals using data, and then uses only the data matching them.</p>
+
+        <!-- Concept Diagram 2 -->
+        <div class="concept-diagram">
+          <div class="diagram-header">
+            <span class="diagram-title">Goal-Aligned Data Filtering Tool Concept</span>
+            <span class="diagram-source">Source: Worflogy R&D Archive</span>
+          </div>
+          <div class="diagram-box">
+            <div class="diagram-row">
+              <div class="diagram-node">
+                <strong>Vast Raw Data</strong><br>
+                <span style="font-size: 11px; color: var(--text-muted);">Unstructured Enterprise Data</span>
+              </div>
+              <div class="diagram-arrow">➔</div>
+              <div class="diagram-node" style="background: rgba(235, 94, 85, 0.05); border-color: var(--coral);">
+                <strong>Context & Goal Filter</strong><br>
+                <span style="font-size: 11px; color: var(--coral);">Ontology Schema Mapping</span>
+              </div>
+              <div class="diagram-arrow">➔</div>
+              <div class="diagram-node">
+                <strong>Optimized Compute Data</strong><br>
+                <span style="font-size: 11px; color: var(--text-muted);">High-Efficiency Decision Logic</span>
+              </div>
+            </div>
+            <div class="diagram-caption">
+              <strong>Goal Alignment</strong>: Instead of calculating all raw data randomly, the system filters semantic knowledge nodes that align with business objectives, drastically cutting costs and boosting accuracy.
+            </div>
+          </div>
+        </div>
+
+        <p>CEO Youngkuk Hamn's background is quite unique. He majored in Japanese Area Studies and gained experience in web development, then moved to the UK to study corporate business strategy, crisis management, and security theories. At this time, he researched semantic data design and decision-making theory using it, learning semantic data and design-based crisis simulation, corporate decision-making cases and techniques, project risk, and execution process standardization.</p>
+
+        <p>Returning to Korea, he worked on business planning, feasibility analysis, and crisis management at an aerospace company. At this time, he witnessed that Korean companies were particularly negligent in crisis management and did not collect and manage the vast amount of data generated within the company, which prevented them from making correct decisions, causing both companies and employees to decline. Accordingly, he created an ontology tool to solve corporate troubles by utilizing the ontology and semantic data technologies he researched.</p>
+
+        <p>Worflogy first introduced an ontology tool suitable for companies or research institutes. This tool first connects and organizes vast amounts of data generated from employees' capabilities, careers, and practical processes into a knowledge graph. Based on this outcome, it analyzes overall corporate topics such as hiring employees, increasing sales, overseas expansion, and business advancement, sets start and end points, and suggests the process to reach them to managers. Thanks to this, it leads members to best demonstrate their capabilities and increase work efficiency.</p>
+
+        <!-- Concept Diagram 3 -->
+        <div class="concept-diagram">
+          <div class="diagram-header">
+            <span class="diagram-title">Employee Capabilities & Business Goal Linked Knowledge Graph</span>
+            <span class="diagram-source">Source: Worflogy R&D Archive</span>
+          </div>
+          <div class="diagram-box">
+            <div class="diagram-row">
+              <div class="diagram-node">
+                <strong>Employee Profiles & History</strong><br>
+                <span style="font-size: 11px; color: var(--text-muted);">Deliverables & Skill Nodes</span>
+              </div>
+              <div class="diagram-arrow">➔</div>
+              <div class="diagram-node" style="border-color: var(--coral);">
+                <strong>Knowledge Graph (Organic)</strong><br>
+                <span style="font-size: 11px; color: var(--coral);">Skill-Project Mapping</span>
+              </div>
+              <div class="diagram-arrow">➔</div>
+              <div class="diagram-node">
+                <strong>Optimized Role & Scenario</strong><br>
+                <span style="font-size: 11px; color: var(--text-muted);">Auto-Suggested Career Path</span>
+              </div>
+            </div>
+            <div class="diagram-caption">
+              <strong>Talent Matching via Knowledge Graph</strong>: Beyond flat resumes, Worflogy merges practical output files with ontology schemas to organically deduce roles optimized for strategic corporate goals.
+            </div>
+          </div>
+        </div>
+
+        <p>Furthermore, it helps in overall corporate decision-making and crisis management. For a company to make correct decisions, it must use clear data and causal analysis results rather than experience or guesses. Ontology is the most suitable for this. It is a principle of defining members' behaviors and achievements, and organizational and market data in detail, and allocating and interpreting the relations among them under the company's goal. Crisis management is also possible using the same principle. It is like shaping various crises that will approach the company and diagnosing logic blind spots in the business structure.</p>
+
+        <p>Worflogy's ontology tool can also play an active role in research institutes. It structures researchers' histories, careers, research processes, and achievements, as well as the research data and ideas they generated, into node and link structures. Then, it preserves, organizes, and interprets these research data and ideas under a clear purpose set by the research institute.</p>
+
+        <p>In today's market, there are many AI tools that analyze information of companies and members to increase work efficiency. CEO Youngkuk Hamn emphasizes that the operation principle and structure of Worflogy's ontology tool are clearly different from these AI tools. AI tools utilize general-purpose architectures to merely interpret data. On the other hand, Worflogy fuses field data with ontology to create a knowledge graph. Then, it utilizes the knowledge graph using the philosophy of domain-specific knowledge as a tool. Being tailored rather than general-purpose, and field data-fused, is the biggest advantage and technical moat of Worflogy's ontology tool.</p>
+
+        <!-- Concept Diagram 4 -->
+        <div class="concept-diagram">
+          <div class="diagram-header">
+            <span class="diagram-title">Intelligent Agent & Issue Debate Workflow (RAG-Focused)</span>
+            <span class="diagram-source">Source: Worflogy R&D Archive</span>
+          </div>
+          <div class="flow-step-container">
+            <div class="flow-step">
+              <span class="flow-num">1.</span>
+              <span class="flow-text"><strong>Issue Identification & Ontology Query</strong>: Traverses related knowledge graph nodes when a business issue arises.</span>
+            </div>
+            <div class="flow-step" style="border-left: 2px solid var(--coral); background: rgba(235, 94, 85, 0.02);">
+              <span class="flow-num">2.</span>
+              <span class="flow-text"><strong>RAG-based Context Extraction</strong>: Combines external regulations, internal achievements, and ontology rules to generate context.</span>
+            </div>
+            <div class="flow-step">
+              <span class="flow-num">3.</span>
+              <span class="flow-text"><strong>Dialectical Debate between Agents</strong>: AI agents verify validity and logic errors from different perspectives.</span>
+            </div>
+            <div class="flow-step">
+              <span class="flow-num">4.</span>
+              <span class="flow-text"><strong>Final Recommendation</strong>: Reports verified scenarios to human managers with minimized risk factors.</span>
+            </div>
+          </div>
+          <div class="diagram-caption" style="margin-top: 14px;">
+            <strong>Dialectical Knowledge Verification</strong>: Shifting away from merely summarizing inputs, the AI automatically sets hypotheses and debates based on rules predefined in ontology schemas to deliver near-flawless decisions.
+          </div>
+        </div>
+
+        <p>Worflogy provides the ontology tool in two types: on-premise (installing and operating services on the company's own server) and SaaS (utilizing services on the cloud or online). Thanks to this, it can play an active role in environments requiring high security, such as defense or space science, as well as general companies and research institutes.</p>
+
+        <p>Before building the ontology tool, CEO Youngkuk Hamn completed registration of patents related to semantic data and ontology. Although it is in an early stage, verification tests with Korean defense companies and research institutes are also planned. After creating a technical barrier and completing verification tests by August, Worflogy plans to officially launch the corporate ontology tool.</p>
+
+        <p>For this, Worflogy attempts to advance and distribute the ontology tool, which is a challenge. By improving the UI and UX, it helps anyone easily set semantic data and ontologize. It also set a plan to lower the entry barrier of the ontology tool to welcome more diverse companies and research institutes as customers. It is also raising investment funds. Based on the registered patents, it plans to obtain a technology-innovative venture company certification and participate in national R&D projects to promote the utility of ontology.</p>
+
+        <p>CEO Youngkuk Hamn said, "By utilizing semantic data and ontology, you can connect various knowledge data of a company into organic contexts to make it an irreplaceable knowledge asset. We will establish ourselves as a place that implements these technologies most accurately, utilizes them most usefully, and helps the growth of Korean companies and research institutes."</p>
+        
+        <p style="margin-top: 50px; font-family: var(--font-body); font-size: var(--fs-sm, 14px); color: var(--text-muted);">
+          IT Donga Reporter Jookyung Cha (racingcar@itdonga.com) <br>
+          Copyright ⓒ IT Donga. All rights reserved. <br>
+          <span style="font-size: 12px; display: inline-block; margin-top: 10px;">This archive page has been backed up for long-term preservation of the article on the official company website. The original links are accessible via the outlinks on the History page.</span>
+        </p>
+      </article>
+
+    </div>
+
+  </main>
+
+  <script src="../js/sidebar.js" defer></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/language-switcher.js" defer></script>
+</body>
+
+</html>

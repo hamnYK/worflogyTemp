@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 2. 국문 소개서 브로셔 모달 제어 핸들러
+  // 2. 핵심 솔루션 인포그래픽 모달 제어 핸들러
   const brochureBtn = document.querySelector('.brochure-btn');
   const brochureModal = document.getElementById('brochure-modal');
 
