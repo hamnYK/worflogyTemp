@@ -181,7 +181,27 @@
     <priority>0.8</priority>
   </url>
 
-  <!-- 10. BKGSoR 플랫폼 -->
+  <!-- 10. 철학 (Philosophy) -->
+  <url>
+    <loc>https://worflogy.com/philosophy.html</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://worflogy.com/philosophy.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://worflogy.com/en/philosophy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://worflogy.com/philosophy.html"/>
+    <lastmod>2026-06-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://worflogy.com/en/philosophy.html</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://worflogy.com/philosophy.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://worflogy.com/en/philosophy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://worflogy.com/philosophy.html"/>
+    <lastmod>2026-06-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- 11. BKGSoR 플랫폼 -->
   <url>
     <loc>https://worflogy.com/bkgsor.html</loc>
     <xhtml:link rel="alternate" hreflang="ko" href="https://worflogy.com/bkgsor.html"/>

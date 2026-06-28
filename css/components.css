@@ -45,6 +45,22 @@
 }
 .section-title .em { color: var(--ink); }
 
+.section-title + .section-subtitle {
+  margin-top: -20px;
+}
+.section-subtitle {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: 500;
+  color: var(--text-muted);
+  line-height: var(--lh-body);
+  margin-bottom: 14px;
+  letter-spacing: 0.01em;
+}
+.section-subtitle + .section-desc {
+  margin-top: 0;
+}
+
 .section-desc {
   font-family: var(--font-body);
   font-size: var(--fs-body-sub);
@@ -451,7 +467,7 @@
   max-width: 680px;
   aspect-ratio: 1 / 0.85;
   position: relative;
-  margin: 0;
+  margin: 0 auto;
 }
 #project-graph {
   width: 100%;
