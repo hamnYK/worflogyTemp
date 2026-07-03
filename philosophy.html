@@ -283,6 +283,24 @@
       display: block;
       margin-bottom: 0.45rem;
     }
+
+    /* ── Philosophy Article Header Meta ── */
+    .philosophy-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.1rem;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+    .philosophy-meta .section-label { margin: 0; }
+    .philosophy-date {
+      font-family: var(--font-body);
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
   </style>
 
   <!-- Google Analytics 4 -->
@@ -353,7 +371,10 @@
           <circle cx="103" cy="143" r="4" fill="#E8613A" opacity="0.30" />
         </svg>
       </div>
-      <div class="section-label">Platform · Philosophy</div>
+      <div class="philosophy-meta">
+        <span class="section-label">Platform · Philosophy</span>
+        <span class="philosophy-date">작성일: 2026.06.28</span>
+      </div>
       <h1 class="section-title">5차원의 심연에서 기계와 인간을 잇는<br>'<em class="em">의미론적 끈</em>'</h1>
       <p class="section-subtitle">온톨로지의 프랙털 차원 의미와 불확실성 관리의 관점에서</p>
       <p class="section-desc">프랙털 온톨로지와 대화 담론 이론의 나선형 정렬 — 워플로지 솔루션 철학의 학술적·공학적 근간.</p>
