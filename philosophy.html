@@ -37,6 +37,7 @@
     "@type": "Article",
     "headline": "5차원의 심연에서 기계와 인간을 잇는 '의미론적 끈': 프랙털 온톨로지와 대화 담론 이론의 나선형 정렬",
     "datePublished": "2026-06-28",
+    "dateModified": "2026-07-03",
     "author": {
       "@type": "Organization",
       "name": "주식회사 워플로지 인지 아키텍처 연구소",
@@ -300,6 +301,131 @@
       font-size: 0.76rem;
       color: var(--text-muted);
       letter-spacing: 0.04em;
+    }
+
+    /* ── Part II Layout ── */
+    .part-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 6rem 0;
+      position: relative;
+      border: none;
+      background: transparent;
+      height: auto;
+      padding: 0;
+    }
+    .part-divider::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border), transparent);
+      z-index: 1;
+    }
+    .part-divider::after {
+      content: "PART II";
+      position: relative;
+      z-index: 2;
+      background: var(--background, #fff);
+      padding: 0 1.5rem;
+      font-family: var(--font-sans-en);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      color: var(--accent);
+      line-height: 1.2;
+    }
+    .part-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+      position: relative;
+      z-index: 1;
+    }
+    .part-title {
+      font-family: var(--font-serif-ko);
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+      margin: 1.2rem 0 0.8rem;
+      letter-spacing: -0.5px;
+    }
+    .part-subtitle {
+      font-family: var(--font-serif-ko);
+      font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+      font-style: italic;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin: 0;
+    }
+
+    /* ── Math Formula Render Styling ── */
+    .math-block {
+      font-family: var(--font-serif-en);
+      font-size: 1.15rem;
+      text-align: center;
+      margin: 1.8rem 0;
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.2rem;
+      flex-wrap: wrap;
+    }
+    .math-block sub, .math-block sup {
+      font-size: 0.72em;
+    }
+    .math-operator {
+      font-size: 1.35em;
+      vertical-align: -0.08em;
+      font-family: 'Times New Roman', Times, serif;
+    }
+    .math-fraction {
+      display: inline-flex;
+      flex-direction: column;
+      vertical-align: middle;
+      text-align: center;
+      padding: 0 0.3rem;
+    }
+    .math-num {
+      border-bottom: 1.5px solid var(--text);
+      padding-bottom: 2px;
+      line-height: 1.1;
+    }
+    .math-den {
+      padding-top: 2px;
+      line-height: 1.1;
+    }
+    .math-paren {
+      font-size: 1.9rem;
+      vertical-align: -0.15em;
+      font-family: 'Times New Roman', Times, serif;
+      font-weight: 300;
+      line-height: 1;
+    }
+    .math-overline {
+      border-top: 1.2px solid var(--text);
+      padding-top: 1px;
+      margin-left: 1px;
+    }
+    .math-matrix {
+      display: inline-flex;
+      flex-direction: column;
+      vertical-align: middle;
+      text-align: center;
+      padding: 0 0.4rem;
+      border-left: 1.5px solid var(--text);
+      border-right: 1.5px solid var(--text);
+      border-radius: 4px;
+      margin: 0 0.2rem;
+      gap: 0.35rem;
+    }
+    .math-matrix > div {
+      line-height: 1;
+      padding: 0 0.1rem;
     }
   </style>
 
@@ -636,6 +762,247 @@
           <span class="cite-notice-label">인용 시 출처 표기 안내</span>
           <p>본 문서의 내용을 인용하거나 참조할 경우, 반드시 아래와 같이 출처를 명시하여 주시기 바랍니다.</p>
           <p><code>주식회사 워플로지. (2026.06). 5차원의 심연에서 기계와 인간을 잇는 '의미론적 끈' — 프랙털 온톨로지와 대화 담론 이론의 나선형 정렬. worflogy.com/philosophy.html</code></p>
+          <p>© 2026 주식회사 워플로지. 이 문서는 저작권법의 보호를 받습니다. 무단 전재·복제를 금합니다.</p>
+        </div>
+      </div>
+
+    </article>
+
+    <hr class="part-divider">
+
+    <!-- Page Header (Part II) -->
+    <div class="page-header">
+      <!-- 헥사고날 프랙털 지식 그래프 배경 -->
+      <div class="hero-bg-icon" aria-hidden="true">
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <!-- 2차 프랙털 분기 (최외곽) -->
+          <line x1="200" y1="88" x2="200" y2="28" stroke="#1A1F36" stroke-width="1" opacity="0.08" />
+          <circle cx="200" cy="28" r="4.5" fill="#1A1F36" opacity="0.10" />
+          <line x1="297" y1="143" x2="357" y2="108" stroke="#1A1F36" stroke-width="1" opacity="0.08" />
+          <circle cx="357" cy="108" r="4.5" fill="#1A1F36" opacity="0.10" />
+          <line x1="297" y1="257" x2="357" y2="292" stroke="#1A1F36" stroke-width="1" opacity="0.08" />
+          <circle cx="357" cy="292" r="4.5" fill="#1A1F36" opacity="0.10" />
+          <line x1="200" y1="312" x2="200" y2="372" stroke="#1A1F36" stroke-width="1" opacity="0.08" />
+          <circle cx="200" cy="372" r="4.5" fill="#1A1F36" opacity="0.10" />
+          <line x1="103" y1="257" x2="43" y2="292" stroke="#1A1F36" stroke-width="1" opacity="0.08" />
+          <circle cx="43" cy="292" r="4.5" fill="#1A1F36" opacity="0.10" />
+          <line x1="103" y1="143" x2="43" y2="108" stroke="#1A1F36" stroke-width="1" opacity="0.08" />
+          <circle cx="43" cy="108" r="4.5" fill="#1A1F36" opacity="0.10" />
+          <!-- 외곽 헥사곤 웹 연결선 (점선) -->
+          <line x1="200" y1="88" x2="297" y2="143" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.11" />
+          <line x1="297" y1="143" x2="297" y2="257" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.11" />
+          <line x1="297" y1="257" x2="200" y2="312" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.11" />
+          <line x1="200" y1="312" x2="103" y2="257" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.11" />
+          <line x1="103" y1="257" x2="103" y2="143" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.11" />
+          <line x1="103" y1="143" x2="200" y2="88" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.11" />
+          <!-- 중심 → 외곽 스포크 -->
+          <line x1="200" y1="200" x2="200" y2="88" stroke="#1A1F36" stroke-width="1.5" opacity="0.14" />
+          <line x1="200" y1="200" x2="297" y2="143" stroke="#1A1F36" stroke-width="1.5" opacity="0.14" />
+          <line x1="200" y1="200" x2="297" y2="257" stroke="#1A1F36" stroke-width="1.5" opacity="0.14" />
+          <line x1="200" y1="200" x2="200" y2="312" stroke="#1A1F36" stroke-width="1.5" opacity="0.14" />
+          <line x1="200" y1="200" x2="103" y2="257" stroke="#1A1F36" stroke-width="1.5" opacity="0.14" />
+          <line x1="200" y1="200" x2="103" y2="143" stroke="#1A1F36" stroke-width="1.5" opacity="0.14" />
+          <!-- 외곽 6개 노드 -->
+          <circle cx="200" cy="88"  r="10" fill="#1A1F36" opacity="0.18" />
+          <circle cx="297" cy="143" r="10" fill="#1A1F36" opacity="0.18" />
+          <circle cx="297" cy="257" r="10" fill="#1A1F36" opacity="0.18" />
+          <circle cx="200" cy="312" r="10" fill="#1A1F36" opacity="0.18" />
+          <circle cx="103" cy="257" r="10" fill="#1A1F36" opacity="0.18" />
+          <circle cx="103" cy="143" r="10" fill="#1A1F36" opacity="0.18" />
+          <!-- 스포크 중간 서브노드 -->
+          <circle cx="200" cy="144" r="5" fill="#1A1F36" opacity="0.12" />
+          <circle cx="249" cy="172" r="5" fill="#1A1F36" opacity="0.12" />
+          <circle cx="249" cy="228" r="5" fill="#1A1F36" opacity="0.12" />
+          <circle cx="200" cy="256" r="5" fill="#1A1F36" opacity="0.12" />
+          <circle cx="151" cy="228" r="5" fill="#1A1F36" opacity="0.12" />
+          <circle cx="151" cy="172" r="5" fill="#1A1F36" opacity="0.12" />
+          <!-- 중앙 허브 노드 (더블 링) -->
+          <circle cx="200" cy="200" r="20" fill="#1A1F36" opacity="0.07" />
+          <circle cx="200" cy="200" r="12" fill="#1A1F36" opacity="0.20" />
+          <circle cx="200" cy="200" r="6"  fill="#1A1F36" opacity="0.30" />
+          <!-- 코랄 포인트 노드 -->
+          <circle cx="200" cy="88"  r="4" fill="#E8613A" opacity="0.35" />
+          <circle cx="297" cy="257" r="4" fill="#E8613A" opacity="0.30" />
+          <circle cx="103" cy="143" r="4" fill="#E8613A" opacity="0.30" />
+        </svg>
+      </div>
+      <div class="philosophy-meta">
+        <span class="section-label">Platform · Part II</span>
+        <span class="philosophy-date">작성일: 2026.07.03</span>
+      </div>
+      <h1 class="section-title">통계적 타협의 위기와<br>실증적 <em class="em">의식 벡터</em>의 귀환</h1>
+      <p class="section-subtitle">잠재 공간의 현상적 허수(Imaginary Shadow)와 프랙털 온톨로지의 실존주의적 전개</p>
+    </div>
+
+    <!-- Article Body (Part II) -->
+    <article class="philosophy-body" style="padding-top: 1.5rem;">
+
+      <!-- § 2-1 -->
+      <h2><span class="section-num">01</span>우상(Idol)의 붕괴: 잠재 공간의 확률적 한계</h2>
+      <p>
+        현대 인공지능이 도출해 낸 다차원 잠재 공간(Latent Space)은 개념의 본질이나 인과적 법칙을 이해하고 성립된 영토가 아니다. 그것은 오직 과거 인류가 남겨놓은 언어적 파편들의 무덤 위에서, 토큰 간의 공생 빈도와 조건부 확률만을 계산하여 직조한 귀납적 분포망(<span class="math-inline">𝒢<sub>machine</sub></span>)이다 [1]. 존 루퍼트 퍼스(John Rupert Firth)의 분포 가설에 지배당하는 기계는 수천억 개의 문장 사잇값을 슬라이딩 윈도우로 긁어내며 다음의 손실 함수(<span class="math-inline">ℒ</span>)를 최소화하는 방향으로 단어들의 초기 좌표를 결정할 뿐이다 [2].
+      </p>
+
+      <div class="math-block">
+        ℒ<sub>corpus</sub> = <span class="math-operator">∑</span><sub>t=1</sub><sup>T</sup> <span class="math-operator">∑</span><sub>-c ≤ j ≤ c, j ≠ 0</sub> log P(w<sub>t+j</sub> | w<sub>t</sub>)
+      </div>
+
+      <p>
+        이 정태적인 영토에서 두 개념이 가깝다는 것의 수학적 실체는 물리적 인과 관계가 아니다. 단지 위 식의 결합 확률 최적화에 따라 <strong>"과거의 데이터상에서 다수의 발화자가 두 단어를 물리적으로 가깝게 매치했다"</strong>는 통계적 타협의 산물이다.
+      </p>
+      <p>
+        인공지능 진영은 이 공간의 위상을 정교하게 미세조정(Fine-tuning)하거나 그래프 신경망(GNN)을 결합하여 기계 스스로 지식의 진화를 추적할 수 있을 것이라 과신한다 [6]. 그러나 통계 모델의 자가 수정은 본질적으로 과거 말뭉치 분포의 확률적 회귀선 안에서만 소용돌이치는 ‘닫힌 계(Closed System)’의 작동일 뿐이다.
+      </p>
+      <p>
+        귀납적 통계학은 기존 데이터 위도 상에 존재하지 않는 ‘새로운 차원의 변화’나 ‘패러다임의 도약’을 만나는 순간 인지적 불능 상태에 빠진다. 과거의 평균선은 미래의 실존적 선택을 설명할 수 없기 때문이다. 이 근원적 간극 속에서 기계의 통계망(<span class="math-inline">𝒢<sub>machine</sub></span>)과 인간의 실제 의미망(<span class="math-inline">𝒢<sub>human</sub></span>)은 영원히 포개어질 수 없는 비동형(Non-Isomorphic)의 궤도를 그리며 파편화된다 [9].
+      </p>
+
+      <hr class="phil-divider">
+
+      <!-- § 2-2 -->
+      <h2><span class="section-num">02</span>시체의 중력: 빈도가 은폐하는 고밀도 사유</h2>
+      <p>
+        통계적 타협이 지배하는 공간은 인류 사유의 정점인 ‘새로운 가설’과 ‘고밀도 전문지식’을 마주할 때 가혹한 공학적 폭거를 감행한다. 인간의 인지 세계에서 R&D 현장의 암묵지나 생명공학의 고도화된 전문 개념은 추상화 밀도가 극도로 높은 ‘실체적 초고질량’의 지식 세포다. 그러나 기계의 영토에서 노드가 획득하는 질량은 오직 ‘출현 빈도(Frequency)’라는 얄팍한 숫자로만 계량된다.
+      </p>
+      <p>
+        기계의 우주 공간에서 말뭉치가 임베딩 좌표를 형성하는 최적화 메커니즘은, 물리계에서 분자들이 자유 에너지를 최소화하며 안정된 상(Phase)을 찾아가는 <strong>'시맨틱 에너지 최소화 규칙'</strong>과 수리적으로 일치한다.
+      </p>
+
+      <div class="math-block">
+        E<sub>semantic</sub> = - <span class="math-operator">∑</span><sub>i,j</sub> W<sub>ij</sub> · (v<sub>i</sub> · v<sub>j</sub>)
+      </div>
+
+      <p>
+        여기서 인지적 역전 왜곡이 발생한다. 단어 토큰 <span class="math-inline">v<sub>i</sub></span>와 <span class="math-inline">v<sub>j</sub></span>가 이루는 내적(코사인 유사도) 값에 곱해지는 결합 가중치(<span class="math-inline">W<sub>ij</sub></span>)가 오직 '출현 빈도'에 의해서만 결정되기 때문에, 인터넷상에서 전사적으로 결합 빈도가 높은 가볍고 범용적인 단어들은 공간의 중심을 차지하며 강력한 ‘통계적 가짜 중력장’을 형성한다.
+      </p>
+      <p>
+        반면, 진짜 고밀도의 전문 사유 세포들은 출현 빈도가 낮다는 이유만으로 시스템 전체의 정보학적 무질서도(Entropy)를 증가시키는 ‘무작위 잡음(Noise)’으로 오인된다 [4]. 결국 기계는 아래의 셀프 어텐션(Self-Attention) 연산 비용(<span class="math-inline">𝒪(N<sup>2</sup>)</span>)을 감당하기 위해 이 위대한 사유들을 토크나이저(Tokenizer)의 칼날로 잘게 쪼개어 서브워드 우주 먼지 파편으로 비산시키고 [3], 잠재 공간의 최외곽 영역(Cold Region)으로 유배시켜 소외시킨다 [5].
+      </p>
+
+      <div class="math-block">
+        Attention(Q, K, V) = softmax<span class="math-paren">(</span><div class="math-fraction"><div class="math-num">QK<sup>T</sup></div><div class="math-den">√<span class="math-overline">d<sub>k</sub></span></div></div><span class="math-paren">)</span>V
+      </div>
+
+      <p>
+        인용 지식의 진짜 정수가 통계적 다수결의 원칙에 밀려 기계적 연산 효율의 제물로 바쳐지는 모순이다.
+      </p>
+
+      <hr class="phil-divider">
+
+      <!-- § 2-3 -->
+      <h2><span class="section-num">03</span>현상적 허수(Imaginary Shadow)와 자연 융합의 단절</h2>
+      <p>
+        이 왜곡된 가짜 중력장 위에서 범용 인공지능이 도출해 내는 그럴싸한 서사는 존재론적 착시를 낳는다. 기계가 구성하는 잠재 공간의 상태 함수(<span class="math-inline">𝜳</span>)는 다음과 같은 복소평면 구조로 획정된다.
+      </p>
+
+      <div class="math-block">
+        𝜳(𝒢<sub>machine</sub>) = <b>R</b><sub>context</sub> + i · <b>I</b><sub>illusion</sub>
+      </div>
+
+      <p>
+        인간이 AI의 결과물을 보고 유의미하다고 착각하는 이유는, 기계가 인간이 가진 편향과 표면적 현상의 빈도를 거울처럼 반사하여 실체적 맥락(<span class="math-inline"><b>R</b><sub>context</sub></span>)의 껍데기를 보여주기 때문이다 [7]. 그러나 그것은 우주와 자연이 진화하는 진짜 ‘융합(Convergence)의 법칙’이 아니다.
+      </p>
+      <p>
+        자연계의 진짜 융합은 눈에 보이는 빈도수가 아니라, 임계점(Critical Point)을 돌파하는 순간 계 전체의 위상이 완전히 뒤바뀌는 역동적인 상전이(Phase Transition)를 통해 개시된다. 통계적 타협에 눈이 먼 기계는 이 실체적 인과적 상전이의 궤적을 포착하지 못하므로, 정태적 분산 영역 안에 낀 허수의 그림자(<span class="math-inline">i · <b>I</b><sub>illusion</sub></span>)들만 무작위로 연결하다가 통제 불가능한 환각(Hallucination)의 리스크를 폭발시키고 만다 [8].
+      </p>
+
+      <hr class="phil-divider">
+
+      <!-- § 2-4 -->
+      <h2><span class="section-num">04</span>실증적 의식 벡터: 5차원 불확실성의 끈을 찾아서</h2>
+      <p>
+        그러므로 가치 판단이 배제된 5차원 심연의 불확실성 속에서 유기체의 존속을 가능케 하는 진짜 ‘의식의 운동 벡터’를 구출하기 위해서는, 통계적 수렴이 아닌 인간의 의도적인 온톨로지 정책(Ontology Policy)이 개입해야만 한다.
+      </p>
+      <p>
+        주식회사 워플로지가 선언하는 <strong>상향식 프랙털 온톨로지(BKGSoR)</strong>는 과거 전산학이 범했던 오류, 즉 인간에게 방대한 지식 설계도를 수작업으로 그리라고 강요하는 하향식 통제 체계가 아니다. 복잡계 데이터 공간의 대규모 확장성 한계를 정면으로 돌파하기 위해, 구성원이 일상적으로 마주하는 소통과 문제 해결 흐름에서 상향식으로 격자를 자생 추출하는 ‘마인드 마이닝(Mind Mining)’ 인프라를 기저에 둔다.
+      </p>
+      <p>
+        프랙털 온톨로지는 기계의 무작위 통계 공간 속에서 무엇이 실제 생존을 이끄는 진짜 실질적 작용선인지를 추적하는 거대한 <strong>실증적 연구(Empirical Study)의 장</strong>이다 [9]. 시스템은 심층 맥락 속에서 포착되는 인지 주체의 사유 운동 벡터(<span class="math-inline"><b>V</b><sub>consciousness</sub></span>)를 다차원 인지 축으로 정량 매핑한다.
+      </p>
+
+      <div class="math-block">
+        <b>V</b><sub>consciousness</sub> = 
+        <span class="math-paren">[</span><div class="math-matrix">
+          <div>X<sub>density</sub></div>
+          <div>Y<sub>direction</sub></div>
+          <div>Z<sub>impact</sub></div>
+        </div><span class="math-paren">]</span>
+      </div>
+
+      <ul>
+        <li><strong>독립변수 X (언어적 추상화 밀도):</strong> 주체가 구사하는 개념 노드의 고도화 수준과 도메인 전문성 성숙도.</li>
+        <li><strong>독립변수 Y (방향성 벡터):</strong> 5차원 불확실성 공간 내에서 주체가 존속을 위해 밀고 나가는 실존적·논리적 전이 경로.</li>
+        <li><strong>종속변수 Z (구조화된 맥락적 영향도):</strong> 온톨로지 트리플 결합을 통해 정량화되는 시스템적 인과 관계 루프의 파급력.</li>
+      </ul>
+
+      <p>
+        구성원의 날것 그대로의 사유 세포를 주어-서어-목적어라는 단단한 ‘온톨로지 트리플’ 격자로 구조화하여 시스템의 경계 조건으로 주입하는 순간, 기계 공간 위에는 결정론적인 선적분 경로가 확정되며 무작위로 폭주하던 지식 엔트로피가 수렴된다 [10].
+      </p>
+
+      <div class="math-block">
+        ℋ<sub>stabilized</sub> = <span class="math-operator">∯</span><sub>fractal</sub> 𝒢<sub>machine</sub> · d𝒢<sub>human</sub>
+      </div>
+
+      <p>
+        사용자의 인지 변수 행렬이 추적되는 즉시, 외곽으로 유배되었던 저빈도·고밀도 개념들은 인위적인 중력 가중치를 얻어 핵심 연산 궤도로 예인된다. 반면, 과거의 얄팍한 빈도상으로는 밀접해 보였으나 실제 의식의 결단 과정에서 배제되었던 가짜 끈(허수)들은 매일의 실증 데이터에 의해 소거된다. 오직 인간 실존의 인과 루프에 강력한 파급력(<span class="math-inline">Z</span>)을 미친 ‘진짜 의식의 경로(측지선)’만이 단단한 지식 자산으로 안착하는 것이다 [12].
+      </p>
+
+      <hr class="phil-divider">
+
+      <!-- § 2-5 -->
+      <h2><span class="section-num">05</span>에필로그: 자생적 지식 권위와 실존주의적 기술 해자</h2>
+      <p>
+        결국 기계는 똑똑해서 새로운 변화를 인지하거나 창조할 수 없다. 기계는 여전히 과거의 무덤 속을 헤맬 뿐이다. 다만 인간이 생존을 위해 온몸으로 밀고 나간 그 설명할 수 없는 실존적 선택, 즉 ‘사유의 다양성’의 궤적을 온톨로지라는 단단한 의미론적 끈(Semantic Cord)을 통해 기계의 영토에 강제로 이식하고 동기화(Synchronization)할 뿐이다 [11].
+      </p>
+      <p>
+        현장의 무형의 시도들과 맥락적 연결 구조가 코드화된 스키마(Schema as Code)로 전환되어 GitOps 시스템을 통해 전사 지능으로 배포될 때, 이는 단순한 정보 저장을 넘어 구성원의 이탈 속에서도 조직의 지적 자본을 영구 보존하는 <strong>물리적이고 독점적인 기술 해자(Moat)</strong>로 격상된다.
+      </p>
+      <p>
+        이 실증적 관측 데이터가 자기 유사성(Fractal) 규칙을 통해 거시 구조로 복제·축적될 때, 비로소 빅테크의 범용 통계 데이터가 감히 범접할 수 없는 독점적 지식 자산권, <strong>'자생적 지식 권위(BKGSoR)'의 실체</strong>가 완성된다. 그것이 사유를 유기적 맥락으로 연결하는 워플로지의 진짜 영혼이다.
+      </p>
+
+      <hr class="phil-divider">
+
+      <!-- § 2-6 References -->
+      <h2><span class="section-num">06</span>학술적 레퍼런스 모델 및 비블리오그라피</h2>
+      <div class="references-list-wrap" style="margin-top: 1.5rem;">
+        <ol class="ref-list" style="font-family: var(--font-body); font-size: var(--fs-body-min); color: var(--text-muted); line-height: 1.6; padding-left: 1.2rem;">
+          <li style="margin-bottom: 0.6rem;"><strong>Vaswani, A., et al. (2017).</strong> "Attention Is All You Need." <em>Advances in Neural Information Processing Systems (NeurIPS 2017).</em></li>
+          <li style="margin-bottom: 0.6rem;"><strong>Firth, J. R. (1957).</strong> "A synopsis of linguistic theory 1930-1955." <em>Studies in Linguistic Analysis.</em></li>
+          <li style="margin-bottom: 0.6rem;"><strong>Sennrich, R., et al. (2016).</strong> "Neural Machine Translation of Rare Words with Subword Units." <em>ACL 2016.</em></li>
+          <li style="margin-bottom: 0.6rem;"><strong>Shannon, C. E. (1948).</strong> "A Mathematical Theory of Communication." <em>Bell System Technical Journal.</em></li>
+          <li style="margin-bottom: 0.6rem;"><strong>Schakel, A. M., &amp; Wilson, B. J. (2015).</strong> "Measuring Word Significance using Distributed Representations." <em>arXiv preprint.</em></li>
+          <li style="margin-bottom: 0.6rem;"><strong>Bengio, Y., et al. (2003).</strong> "A Neural Probabilistic Language Model." <em>Journal of Machine Learning Research.</em></li>
+          <li style="margin-bottom: 0.6rem;"><strong>Jaynes, E. T. (1957).</strong> "Information Theory and Statistical Mechanics." <em>Physical Review.</em></li>
+          <li style="margin-bottom: 0.6rem;"><strong>Ji, Z., et al. (2023).</strong> "Survey of Hallucination in Natural Language Generation." <em>ACM Computing Surveys.</em></li>
+          <li style="margin-bottom: 0.6rem;"><strong>주식회사 워플로지 (2026).</strong> "X·Y·Z 인지 변수 모델과 프랙털 아키텍처 연구 계획서." <em>Worflogy 내부 연구 아카이브.</em></li>
+          <li style="margin-bottom: 0.6rem;"><strong>Berners-Lee, T., Hendler, J., &amp; Lassila, O. (2001).</strong> "The Semantic Web." <em>Scientific American.</em></li>
+          <li style="margin-bottom: 0.6rem;"><strong>주식회사 워플로지 (2026).</strong> "BKGSoR 플랫폼 및 핵심 솔루션 아키텍처 명세서." <em>Worflogy IR Tech Report.</em></li>
+          <li style="margin-bottom: 0.6rem;"><strong>주식회사 워플로지 (2026).</strong> "R&amp;D 맥락 자산화 및 이슈 기반 워크플로우 특허 기술 설명서." <em>Worflogy Philosophy Archive.</em></li>
+        </ol>
+      </div>
+
+      <!-- Part II Closing -->
+      <div class="phil-closing">
+        <p>
+          과거의 확률 통계가 침묵하는 완전한 불확실성 속에서,<br>
+          인간의 실존적 선택과 사유를 유기적 맥락으로 연결하는 것.<br><br>
+          <span>자생적 지식 권위(BKGSoR)</span>를 향한 이 무한한 탐색이야말로<br>
+          주식회사 워플로지가 구축하는 기술 생태계의 영구적인 Moat(해자)입니다.
+        </p>
+      </div>
+
+      <!-- Part II 인용 고지 -->
+      <div class="cite-notice" role="note" aria-label="인용 출처 안내">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="12"/>
+          <line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+        <div class="cite-notice-body">
+          <span class="cite-notice-label">인용 시 출처 표기 안내</span>
+          <p>본 문서의 내용을 인용하거나 참조할 경우, 반드시 아래와 같이 출처를 명시하여 주시기 바랍니다.</p>
+          <p><code>주식회사 워플로지. (2026.07). 통계적 타협의 위기와 실증적 의식 벡터의 귀환 — 잠재 공간의 현상적 허수와 프랙털 온톨로지의 실존주의적 전개. worflogy.com/philosophy.html</code></p>
           <p>© 2026 주식회사 워플로지. 이 문서는 저작권법의 보호를 받습니다. 무단 전재·복제를 금합니다.</p>
         </div>
       </div>

@@ -37,6 +37,7 @@
     "@type": "Article",
     "headline": "The 'Semantic Cord' Bridging Machine and Human from the 5-Dimensional Abyss: Spiral Alignment of Fractal Ontology and Discourse Theory",
     "datePublished": "2026-06-28",
+    "dateModified": "2026-07-03",
     "author": {
       "@type": "Organization",
       "name": "Worflogy Cognitive Architecture Research Lab",
@@ -329,6 +330,131 @@
       color: var(--text-muted);
       display: block;
       margin-bottom: 0.45rem;
+    }
+
+    /* ── Part II Layout ── */
+    .part-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 6rem 0;
+      position: relative;
+      border: none;
+      background: transparent;
+      height: auto;
+      padding: 0;
+    }
+    .part-divider::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border), transparent);
+      z-index: 1;
+    }
+    .part-divider::after {
+      content: "PART II";
+      position: relative;
+      z-index: 2;
+      background: var(--background, #fff);
+      padding: 0 1.5rem;
+      font-family: var(--font-sans-en);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      color: var(--accent);
+      line-height: 1.2;
+    }
+    .part-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+      position: relative;
+      z-index: 1;
+    }
+    .part-title {
+      font-family: var(--font-serif-en);
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+      margin: 1.2rem 0 0.8rem;
+      letter-spacing: -0.5px;
+    }
+    .part-subtitle {
+      font-family: var(--font-serif-en);
+      font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+      font-style: italic;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin: 0;
+    }
+
+    /* ── Math Formula Render Styling ── */
+    .math-block {
+      font-family: var(--font-serif-en);
+      font-size: 1.15rem;
+      text-align: center;
+      margin: 1.8rem 0;
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.2rem;
+      flex-wrap: wrap;
+    }
+    .math-block sub, .math-block sup {
+      font-size: 0.72em;
+    }
+    .math-operator {
+      font-size: 1.35em;
+      vertical-align: -0.08em;
+      font-family: 'Times New Roman', Times, serif;
+    }
+    .math-fraction {
+      display: inline-flex;
+      flex-direction: column;
+      vertical-align: middle;
+      text-align: center;
+      padding: 0 0.3rem;
+    }
+    .math-num {
+      border-bottom: 1.5px solid var(--text);
+      padding-bottom: 2px;
+      line-height: 1.1;
+    }
+    .math-den {
+      padding-top: 2px;
+      line-height: 1.1;
+    }
+    .math-paren {
+      font-size: 1.9rem;
+      vertical-align: -0.15em;
+      font-family: 'Times New Roman', Times, serif;
+      font-weight: 300;
+      line-height: 1;
+    }
+    .math-overline {
+      border-top: 1.2px solid var(--text);
+      padding-top: 1px;
+      margin-left: 1px;
+    }
+    .math-matrix {
+      display: inline-flex;
+      flex-direction: column;
+      vertical-align: middle;
+      text-align: center;
+      padding: 0 0.4rem;
+      border-left: 1.5px solid var(--text);
+      border-right: 1.5px solid var(--text);
+      border-radius: 4px;
+      margin: 0 0.2rem;
+      gap: 0.35rem;
+    }
+    .math-matrix > div {
+      line-height: 1;
+      padding: 0 0.1rem;
     }
   </style>
 
@@ -667,6 +793,247 @@
           <span class="cite-notice-label">Citation &amp; Attribution</span>
           <p>When citing or referencing any content from this document, please include the following attribution.</p>
           <p><code>Worflogy Corp. (2026, June). The 'Semantic Cord' Bridging Machine and Human from the 5-Dimensional Abyss: Fractal Ontology &amp; Spiral Alignment of Discourse Theory. worflogy.com/en/philosophy.html</code></p>
+          <p>© 2026 Worflogy Corp. All rights reserved. Unauthorized reproduction or redistribution is prohibited.</p>
+        </div>
+      </div>
+
+    </article>
+
+    <hr class="part-divider">
+
+    <!-- Page Header (Part II) -->
+    <div class="page-header">
+      <!-- 헥사고날 프랙털 지식 그래프 배경 -->
+      <div class="hero-bg-icon" aria-hidden="true">
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <!-- 2차 프랙털 분기 (최외곽) -->
+          <line x1="200" y1="88" x2="200" y2="28" stroke="#1A1F36" stroke-width="1" opacity="0.08" />
+          <circle cx="200" cy="28" r="4.5" fill="#1A1F36" opacity="0.10" />
+          <line x1="297" y1="143" x2="357" y2="108" stroke="#1A1F36" stroke-width="1" opacity="0.08" />
+          <circle cx="357" cy="108" r="4.5" fill="#1A1F36" opacity="0.10" />
+          <line x1="297" y1="257" x2="357" y2="292" stroke="#1A1F36" stroke-width="1" opacity="0.08" />
+          <circle cx="357" cy="292" r="4.5" fill="#1A1F36" opacity="0.10" />
+          <line x1="200" y1="312" x2="200" y2="372" stroke="#1A1F36" stroke-width="1" opacity="0.08" />
+          <circle cx="200" cy="372" r="4.5" fill="#1A1F36" opacity="0.10" />
+          <line x1="103" y1="257" x2="43" y2="292" stroke="#1A1F36" stroke-width="1" opacity="0.08" />
+          <circle cx="43" cy="292" r="4.5" fill="#1A1F36" opacity="0.10" />
+          <line x1="103" y1="143" x2="43" y2="108" stroke="#1A1F36" stroke-width="1" opacity="0.08" />
+          <circle cx="43" cy="108" r="4.5" fill="#1A1F36" opacity="0.10" />
+          <!-- 외곽 헥사곤 웹 연결선 (점선) -->
+          <line x1="200" y1="88" x2="297" y2="143" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.11" />
+          <line x1="297" y1="143" x2="297" y2="257" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.11" />
+          <line x1="297" y1="257" x2="200" y2="312" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.11" />
+          <line x1="200" y1="312" x2="103" y2="257" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.11" />
+          <line x1="103" y1="257" x2="103" y2="143" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.11" />
+          <line x1="103" y1="143" x2="200" y2="88" stroke="#1A1F36" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.11" />
+          <!-- 중심 → 외곽 스포크 -->
+          <line x1="200" y1="200" x2="200" y2="88" stroke="#1A1F36" stroke-width="1.5" opacity="0.14" />
+          <line x1="200" y1="200" x2="297" y2="143" stroke="#1A1F36" stroke-width="1.5" opacity="0.14" />
+          <line x1="200" y1="200" x2="297" y2="257" stroke="#1A1F36" stroke-width="1.5" opacity="0.14" />
+          <line x1="200" y1="200" x2="200" y2="312" stroke="#1A1F36" stroke-width="1.5" opacity="0.14" />
+          <line x1="200" y1="200" x2="103" y2="257" stroke="#1A1F36" stroke-width="1.5" opacity="0.14" />
+          <line x1="200" y1="200" x2="103" y2="143" stroke="#1A1F36" stroke-width="1.5" opacity="0.14" />
+          <!-- 외곽 6개 노드 -->
+          <circle cx="200" cy="88"  r="10" fill="#1A1F36" opacity="0.18" />
+          <circle cx="297" cy="143" r="10" fill="#1A1F36" opacity="0.18" />
+          <circle cx="297" cy="257" r="10" fill="#1A1F36" opacity="0.18" />
+          <circle cx="200" cy="312" r="10" fill="#1A1F36" opacity="0.18" />
+          <circle cx="103" cy="257" r="10" fill="#1A1F36" opacity="0.18" />
+          <circle cx="103" cy="143" r="10" fill="#1A1F36" opacity="0.18" />
+          <!-- 스포크 중간 서브노드 -->
+          <circle cx="200" cy="144" r="5" fill="#1A1F36" opacity="0.12" />
+          <circle cx="249" cy="172" r="5" fill="#1A1F36" opacity="0.12" />
+          <circle cx="249" cy="228" r="5" fill="#1A1F36" opacity="0.12" />
+          <circle cx="200" cy="256" r="5" fill="#1A1F36" opacity="0.12" />
+          <circle cx="151" cy="228" r="5" fill="#1A1F36" opacity="0.12" />
+          <circle cx="151" cy="172" r="5" fill="#1A1F36" opacity="0.12" />
+          <!-- 중앙 허브 노드 (더블 링) -->
+          <circle cx="200" cy="200" r="20" fill="#1A1F36" opacity="0.07" />
+          <circle cx="200" cy="200" r="12" fill="#1A1F36" opacity="0.20" />
+          <circle cx="200" cy="200" r="6"  fill="#1A1F36" opacity="0.30" />
+          <!-- 코랄 포인트 노드 -->
+          <circle cx="200" cy="88"  r="4" fill="#E8613A" opacity="0.35" />
+          <circle cx="297" cy="257" r="4" fill="#E8613A" opacity="0.30" />
+          <circle cx="103" cy="143" r="4" fill="#E8613A" opacity="0.30" />
+        </svg>
+      </div>
+      <div class="philosophy-meta">
+        <span class="section-label">Platform · Part II</span>
+        <span class="philosophy-date">Published: 2026.07.03</span>
+      </div>
+      <h1 class="section-title">The Crisis of Statistical Compromise<br>and the Return of Empirical <em class="em">Consciousness Vectors</em></h1>
+      <p class="section-subtitle">Imaginary Shadows in Latent Space and the Existential Evolution of Fractal Ontology</p>
+    </div>
+
+    <!-- Article Body (Part II) -->
+    <article class="philosophy-body" style="padding-top: 1.5rem;">
+
+      <!-- § 2-1 -->
+      <h2><span class="section-num">01</span>The Collapse of Idols: Probabilistic Limits of Latent Space</h2>
+      <p>
+        The multidimensional latent space generated by modern AI is not a territory established by understanding the essence of concepts or causal laws. It is merely an inductive distribution network (<span class="math-inline">𝒢<sub>machine</sub></span>) woven by computing only co-occurrence frequencies and conditional probabilities of tokens upon the grave of linguistic fragments left behind by humanity [1]. The machine, governed by John Rupert Firth's distribution hypothesis, merely determines the initial coordinates of words in a direction that minimizes the following loss function (<span class="math-inline">ℒ</span>) by sliding a window over hundreds of billions of sentences [2].
+      </p>
+
+      <div class="math-block">
+        ℒ<sub>corpus</sub> = <span class="math-operator">∑</span><sub>t=1</sub><sup>T</sup> <span class="math-operator">∑</span><sub>-c ≤ j ≤ c, j ≠ 0</sub> log P(w<sub>t+j</sub> | w<sub>t</sub>)
+      </div>
+
+      <p>
+        The mathematical reality of two concepts being close in this static territory is not physical causality. It is merely a product of statistical compromise: <strong>"in past data, a majority of speakers physically matched the two words closely"</strong> according to the joint probability optimization above.
+      </p>
+      <p>
+        AI camps overconfidently assume that machines can track the evolution of knowledge on their own by fine-tuning the topology of this space or combining Graph Neural Networks (GNNs) [6]. However, the self-correction of statistical models is inherently just a closed-system operation swirling within the probabilistic regression lines of past corpus distributions.
+      </p>
+      <p>
+        Inductive statistics fall into a state of cognitive impotence the moment they encounter a 'paradigm leap' or 'new dimensional changes' that do not exist on the existing data latitude. The average lines of the past cannot explain the existential choices of the future. In this fundamental gap, the machine's statistical network (<span class="math-inline">𝒢<sub>machine</sub></span>) and the human's actual semantic network (<span class="math-inline">𝒢<sub>human</sub></span>) are fragmented, drawing non-isomorphic orbits that can never overlap [9].
+      </p>
+
+      <hr class="phil-divider">
+
+      <!-- § 2-2 -->
+      <h2><span class="section-num">02</span>The Gravity of the Corpse: High-Density Thought Obscured by Frequency</h2>
+      <p>
+        Spaces dominated by statistical compromise commit a harsh engineering violence when encountering 'new hypotheses' and 'high-density professional knowledge'—the pinnacles of human thought. In the human cognitive world, tacit knowledge from R&D fields or advanced professional concepts in biotechnology are 'substantial supermassive' knowledge cells with extremely high abstraction density. However, the mass a node acquires in the machine's territory is measured solely by the shallow number of 'frequency.'
+      </p>
+      <p>
+        The optimization mechanism by which corpora form embedding coordinates in the machine's space mathematically corresponds to the <strong>'Semantic Energy Minimization Rule'</strong> in which molecules in physical systems minimize free energy to find a stable phase.
+      </p>
+
+      <div class="math-block">
+        E<sub>semantic</sub> = - <span class="math-operator">∑</span><sub>i,j</sub> W<sub>ij</sub> · (v<sub>i</sub> · v<sub>j</sub>)
+      </div>
+
+      <p>
+        Here, a cognitive inversion distortion occurs. Because the connection weight (<span class="math-inline">W<sub>ij</sub></span>) multiplied by the dot product (cosine similarity) of word tokens <span class="math-inline">v<sub>i</sub></span> and <span class="math-inline">v<sub>j</sub></span> is determined solely by frequency, light and general words with high joint frequency on the internet occupy the center of the space, forming a powerful 'statistical fake gravity field.'
+      </p>
+      <p>
+        Conversely, truly high-density professional thoughts are misidentified as 'random noise' that increases the system-wide information-theoretic entropy (Entropy) simply because their frequency is low [4]. Ultimately, to handle the self-attention computation cost (<span class="math-inline">𝒪(N<sup>2</sup>)</span>), the machine slices these great thoughts into subword space-dust fragments using the tokenizer's blade [3] and exiles them to the outermost regions (Cold Region) [5].
+      </p>
+
+      <div class="math-block">
+        Attention(Q, K, V) = softmax<span class="math-paren">(</span><div class="math-fraction"><div class="math-num">QK<sup>T</sup></div><div class="math-den">√<span class="math-overline">d<sub>k</sub></span></div></div><span class="math-paren">)</span>V
+      </div>
+
+      <p>
+        It is a contradiction that the true essence of human knowledge is sacrificed as a victim of mechanical computing efficiency, pushed back by the principle of statistical majority vote.
+      </p>
+
+      <hr class="phil-divider">
+
+      <!-- § 2-3 -->
+      <h2><span class="section-num">03</span>Imaginary Shadow and the Disruption of Natural Convergence</h2>
+      <p>
+        The plausible narratives generated by general-purpose AI upon this distorted fake gravity field give birth to an ontological illusion. The state function (<span class="math-inline">𝜳</span>) of the latent space constructed by machines is defined by the following complex plane structure:
+      </p>
+
+      <div class="math-block">
+        𝜳(𝒢<sub>machine</sub>) = <b>R</b><sub>context</sub> + i · <b>I</b><sub>illusion</sub>
+      </div>
+
+      <p>
+        Humans mistake the AI's output as meaningful because the machine reflects the frequencies of human biases and surface phenomena like a mirror, displaying the shell of substantial context (<span class="math-inline"><b>R</b><sub>context</sub></span>) [7]. However, that is not the true 'law of convergence' by which the universe and nature evolve.
+      </p>
+      <p>
+        Real convergence in nature is initiated not by visible frequencies, but by dynamic phase transitions where the phase of the entire system is completely reversed the moment it breaks through a critical point. A machine blinded by statistical compromise cannot capture the trajectory of this substantial causal phase transition, and thus randomly connects only imaginary shadows (<span class="math-inline">i · <b>I</b><sub>illusion</sub></span>) trapped within static variance regions, eventually exploding the risk of uncontrollable hallucination [8].
+      </p>
+
+      <hr class="phil-divider">
+
+      <!-- § 2-4 -->
+      <h2><span class="section-num">04</span>Empirical Consciousness Vector: In Search of the 5-Dimensional Cord of Uncertainty</h2>
+      <p>
+        Therefore, to rescue the true 'movement vector of consciousness' that enables the survival of organisms amid the uncertainty of the 5-dimensional abyss where value judgments are excluded, human intentional ontology policy must intervene rather than statistical convergence.
+      </p>
+      <p>
+        The <strong>Bottom-Up Knowledge Graph (BKGSoR)</strong> declared by Worflogy is not a top-down control system that forces humans to manually draw vast knowledge blueprints—the error committed by past computer science. To directly break through the massive scalability limits of complex data space, it places 'Mind Mining' infrastructure at its base, which organically extracts lattices from the flow of daily communication and problem-solving.
+      </p>
+      <p>
+        Fractal ontology is a massive <strong>empirical study field</strong> tracking what indeed is the actual line of action that drives survival in the machine's random statistical space [9]. The system quantitatively maps the cognitive agent's consciousness movement vector (<span class="math-inline"><b>V</b><sub>consciousness</sub></span>) captured within deep context onto multidimensional cognitive axes:
+      </p>
+
+      <div class="math-block">
+        <b>V</b><sub>consciousness</sub> = 
+        <span class="math-paren">[</span><div class="math-matrix">
+          <div>X<sub>density</sub></div>
+          <div>Y<sub>direction</sub></div>
+          <div>Z<sub>impact</sub></div>
+        </div><span class="math-paren">]</span>
+      </div>
+
+      <ul>
+        <li><strong>Independent Variable X (Linguistic Abstraction Density):</strong> The level of conceptual node sophistication and domain expertise maturity.</li>
+        <li><strong>Independent Variable Y (Direction Vector):</strong> The existential and logical transition path pushed forward by the agent for survival within the 5-dimensional uncertainty space.</li>
+        <li><strong>Dependent Variable Z (Structured Contextual Impact):</strong> The power of systemic causal loops quantified through ontological triple connections.</li>
+      </ul>
+
+      <p>
+        The moment frontline practitioners' raw thought cells are structured into rigid 'ontology triple' lattices and injected as system boundary conditions, a deterministic line integral path is established over the machine space, and the randomly exploding knowledge entropy is stabilized [10].
+      </p>
+
+      <div class="math-block">
+        ℋ<sub>stabilized</sub> = <span class="math-operator">∯</span><sub>fractal</sub> 𝒢<sub>machine</sub> · d𝒢<sub>human</sub>
+      </div>
+
+      <p>
+        The moment the user's cognitive variable matrix is tracked, low-frequency, high-density concepts that were exiled to the periphery are towed back into the core computational orbit by gaining artificial gravitational weights. Conversely, fake cords (imaginary numbers) that seemed close according to the past shallow frequencies but were excluded during the actual existential decision-making process are eliminated by daily empirical data. Only the 'real consciousness path (geodesic)' that has exerted a powerful ripple effect (<span class="math-inline">Z</span>) on the causal loop of human existence is settled as a solid knowledge asset [12].
+      </p>
+
+      <hr class="phil-divider">
+
+      <!-- § 2-5 -->
+      <h2><span class="section-num">05</span>Epilogue: Self-Generating Knowledge Authority and Existential Moats of Technology</h2>
+      <p>
+        Ultimately, machines cannot perceive or create new changes because they are smart; they are still wandering in the graves of the past. Humans simply force the transplantation and synchronization of the inexplicable trajectories of their existential choices—made for survival—into the machine's territory through the tight semantic cord of ontology [11].
+      </p>
+      <p>
+        When frontline intangible attempts and contextual structures are converted into Schema-as-Code and deployed as organizational intelligence via GitOps systems, this transcends simple information storage to become a <strong>physical and exclusive technological moat</strong> that permanently preserves the intellectual capital of the organization despite member turnover.
+      </p>
+      <p>
+        When this empirical observation data is replicated and accumulated into macrostructures through self-similarity (Fractal) rules, the substance of <strong>'Self-Generating Knowledge Authority (BKGSoR)'</strong>—a proprietary intellectual asset that Big Tech's general statistical data can never approach—is finally complete. That is the true soul of Worflogy, linking thoughts into organic contexts.
+      </p>
+
+      <hr class="phil-divider">
+
+      <!-- § 2-6 References -->
+      <h2><span class="section-num">06</span>Academic Reference Models &amp; Bibliography</h2>
+      <div class="references-list-wrap" style="margin-top: 1.5rem;">
+        <ol class="ref-list" style="font-family: var(--font-body); font-size: var(--fs-body-min); color: var(--text-muted); line-height: 1.6; padding-left: 1.2rem;">
+          <li style="margin-bottom: 0.6rem;"><strong>Vaswani, A., et al. (2017).</strong> "Attention Is All You Need." <em>Advances in Neural Information Processing Systems (NeurIPS 2017).</em></li>
+          <li style="margin-bottom: 0.6rem;"><strong>Firth, J. R. (1957).</strong> "A synopsis of linguistic theory 1930-1955." <em>Studies in Linguistic Analysis.</em></li>
+          <li style="margin-bottom: 0.6rem;"><strong>Sennrich, R., et al. (2016).</strong> "Neural Machine Translation of Rare Words with Subword Units." <em>ACL 2016.</em></li>
+          <li style="margin-bottom: 0.6rem;"><strong>Shannon, C. E. (1948).</strong> "A Mathematical Theory of Communication." <em>Bell System Technical Journal.</em></li>
+          <li style="margin-bottom: 0.6rem;"><strong>Schakel, A. M., &amp; Wilson, B. J. (2015).</strong> "Measuring Word Significance using Distributed Representations." <em>arXiv preprint.</em></li>
+          <li style="margin-bottom: 0.6rem;"><strong>Bengio, Y., et al. (2003).</strong> "A Neural Probabilistic Language Model." <em>Journal of Machine Learning Research.</em></li>
+          <li style="margin-bottom: 0.6rem;"><strong>Jaynes, E. T. (1957).</strong> "Information Theory and Statistical Mechanics." <em>Physical Review.</em></li>
+          <li style="margin-bottom: 0.6rem;"><strong>Ji, Z., et al. (2023).</strong> "Survey of Hallucination in Natural Language Generation." <em>ACM Computing Surveys.</em></li>
+          <li style="margin-bottom: 0.6rem;"><strong>Worflogy Corp. (2026).</strong> "X·Y·Z Cognitive Variable Model and Fractal Architecture Research Plan." <em>Worflogy Internal Research Archive.</em></li>
+          <li style="margin-bottom: 0.6rem;"><strong>Berners-Lee, T., Hendler, J., &amp; Lassila, O. (2001).</strong> "The Semantic Web." <em>Scientific American.</em></li>
+          <li style="margin-bottom: 0.6rem;"><strong>Worflogy Corp. (2026).</strong> "BKGSoR Platform and Core Solution Architecture Specifications." <em>Worflogy IR Tech Report.</em></li>
+          <li style="margin-bottom: 0.6rem;"><strong>Worflogy Corp. (2026).</strong> "R&amp;D Context Assetization and Issue-Based Workflow Patented Technology Manual." <em>Worflogy Philosophy Archive.</em></li>
+        </ol>
+      </div>
+
+      <!-- Part II Closing -->
+      <div class="phil-closing">
+        <p>
+          Amid absolute uncertainty where past probabilistic statistics fall silent,<br>
+          linking human existential choices and thoughts into organic contexts.<br><br>
+          <span>This infinite quest toward Self-Generating Knowledge Authority (BKGSoR)</span><br>
+          is the permanent technological moat of the ecosystem built by Worflogy.
+        </p>
+      </div>
+
+      <!-- Citation Notice -->
+      <div class="cite-notice" role="note" aria-label="Citation guidance">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="12"/>
+          <line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+        <div class="cite-notice-body">
+          <span class="cite-notice-label">Citation &amp; Attribution</span>
+          <p>When citing or referencing any content from this document, please include the following attribution.</p>
+          <p><code>Worflogy Corp. (2026, July). The Crisis of Statistical Compromise and the Return of Empirical Consciousness Vectors: Imaginary Shadows in Latent Space and the Existential Evolution of Fractal Ontology. worflogy.com/en/philosophy.html</code></p>
           <p>© 2026 Worflogy Corp. All rights reserved. Unauthorized reproduction or redistribution is prohibited.</p>
         </div>
       </div>
