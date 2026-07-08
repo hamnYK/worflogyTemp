@@ -64,10 +64,24 @@
     .philosophy-body {
       max-width: 860px;
       margin: 0 auto;
-      padding: 2.5rem 64px 5rem;
+      padding: 1rem 64px 5rem;
+    }
+    .philosophy-body:first-of-type,
+    .philosophy-body:nth-of-type(2) {
+      padding-bottom: 2rem;
+    }
+    .philosophy-body > .section:first-of-type {
+      margin-top: 0;
+      padding-top: 0;
+    }
+    .philosophy-body > .section:first-of-type h2:first-of-type {
+      margin-top: 0.5rem;
+    }
+    .accent-card strong {
+      color: #fff !important;
     }
     @media (max-width: 640px) {
-      .philosophy-body { padding: 2rem 1.25rem 4rem; }
+      .philosophy-body { padding: 1.5rem 1.25rem 4rem; }
     }
 
     .philosophy-body h2 {
@@ -303,12 +317,12 @@
       letter-spacing: 0.04em;
     }
 
-    /* ── Part II Layout ── */
+    /* ── Part II & III Layout ── */
     .part-divider {
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 3.5rem 0;
+      margin: 2rem 0;
       position: relative;
       border: none;
       background: transparent;
@@ -326,7 +340,7 @@
       z-index: 1;
     }
     .part-divider::after {
-      content: "PART II";
+      content: attr(data-text);
       position: relative;
       z-index: 2;
       background: var(--background, #fff);
@@ -423,9 +437,71 @@
       margin: 0 0.2rem;
       gap: 0.35rem;
     }
-    .math-matrix > div {
-      line-height: 1;
-      padding: 0 0.1rem;
+    /* ── Education Brand (Contexton) Styles ── */
+    .vision-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 640px) {
+      .vision-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .vision-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 24px 28px;
+      box-shadow: var(--shadow-sm);
+    }
+    .vision-card-body {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: normal;
+      line-height: 1.75;
+      color: var(--text-muted);
+    }
+    .accent-card .vision-card-body {
+      color: rgba(255, 255, 255, 0.9);
+    }
+    .vision-card.accent-card {
+      background: var(--ink);
+      color: var(--surface);
+      border-color: transparent;
+      box-shadow: var(--shadow-md);
+    }
+    .vision-card.accent-card .vision-label { color: rgba(255,255,255,0.8); }
+    .vision-label {
+      font-family: var(--font-serif-en);
+      font-style: italic;
+      font-size: var(--fs-label);
+      font-weight: var(--fw-label);
+      letter-spacing: var(--ls-label);
+      color: var(--ink);
+      opacity: 0.6;
+      margin-bottom: 10px;
+    }
+    .card-center {
+      text-align: center;
+      cursor: default;
+      padding: 20px;
+    }
+    .card-center:hover {
+      transform: none;
+      box-shadow: var(--shadow-sm);
+      border-color: var(--border);
+    }
+    .card-center::before {
+      display: none;
+    }
+    .card-img-fit {
+      width: 100%;
+      max-width: 320px;
+      height: auto;
+      border-radius: var(--r-sm);
+      margin: 0 auto 12px;
+      display: block;
     }
   </style>
 
@@ -441,8 +517,67 @@
   <!-- Main -->
   <main class="main">
 
-    <!-- Page Header -->
-    <div class="page-header">
+    <!-- Page Header (Part I) -->
+    <div class="page-header video-header">
+      <!-- 개념 영상 배경 -->
+      <video
+        class="header-video-bg"
+        src="assets/Worflogy_Opening.mp4"
+        autoplay
+        muted
+        loop
+        playsinline
+        aria-hidden="true"
+        preload="auto"
+      ></video>
+      <!-- 오버레이: 텍스트 가독성 확보 -->
+      <div class="header-video-overlay" aria-hidden="true"></div>
+      <div class="philosophy-meta">
+        <span class="section-label">Platform · Philosophy</span>
+      </div>
+      <h1 class="section-title">사유의 맥락 설계와<br>인지 토폴로지(Topology)의 복원</h1>
+      <p class="section-subtitle" style="color: var(--text-muted); margin-top: 8px !important;">프랙털 온톨로지 기반의 의미론적 디자인 철학</p>
+    </div>
+
+    <!-- Article Body (Part I) -->
+    <article class="philosophy-body">
+
+      <!-- 2. 철학적 질문 (생각의 논리 구조) -->
+      <h2 class="section-title">맥락 디자인적 사고의 중요성</h2>
+      
+      <div class="vision-grid" style="margin-top: 24px;">
+        <div class="vision-card">
+          <div class="vision-label">The Paradox of Information</div>
+          <div class="vision-card-body">
+            <p>두 명의 관찰자에게 동일한 대상 A에 대해 설명을 요청한다.</p>
+            <ul style="margin-top: 8px; margin-left: 20px; list-style-type: disc;">
+              <li>한 명은 <strong>D</strong>라 설명하고,</li>
+              <li>다른 한 명은 <strong>C</strong>라 설명한다.</li>
+            </ul>
+            <p style="margin-top: 8px;">대다수의 인지 주체는 단순 노출 빈도가 높고 익숙한 정보인 <strong>D</strong>를 수용하는 경향을 보인다.</p>
+          </div>
+        </div>
+        <div class="vision-card accent-card">
+          <div class="vision-label">The Core of Thinking</div>
+          <div class="vision-card-body">
+            우리는 <strong>A를 C라고 설명한 '그 왜'</strong>에 집중한다. 질문과 성찰을 통해 생각의 고유한 논리 구조(온톨로지)를 직접 그려보고, 가려진 새로운 가능성(Weak Signal)을 발견하여 더 설득력 있는 의사결정을 내릴 수 있는 사고 체계를 구축한다.
+          </div>
+        </div>
+      </div>
+      <p class="section-desc" style="margin-top: 24px;">
+        인공지능(AI)이라는 거대한 귀납적 기계 지능의 출현 속에서 실존적 주체가 직면하는 본질적 과제는, 기계적 출력을 맹목적으로 수용하는 것을 넘어 그 지적 사유의 조건과 인과론적 맥락을 주체적으로 검증하는 질문의 힘을 복원하는 데 있다.
+      </p>
+
+      <div class="card card-center" style="max-width: 480px; margin: 32px auto 0;">
+        <img src="images/process.png" alt="프로세스" class="card-img-fit">
+        <span style="font-family: var(--font-serif-ko); font-weight: 600; font-size: var(--fs-h4); color: var(--text);">디자인 프로세스</span>
+      </div>
+    </article>
+
+    <hr class="part-divider" data-text="PART II">
+
+    <!-- Page Header (Part II) -->
+    <div class="page-header" id="philosophy-body">
       <!-- 헥사고날 프랙털 지식 그래프 배경 -->
       <div class="hero-bg-icon" aria-hidden="true">
         <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none">
@@ -747,7 +882,7 @@
           인간 고유의 사유 구조를 디지털 공간에 맥락으로 복원하여,<br>
           정보의 무질서도(지식 엔트로피)에 저항하는 것.<br><br>
           <span>5차원의 심연</span>에서 묵묵히 철학적 신념을 밀고 나가는<br>
-          주식회사 워플로지 지식 아키텍처의 진정한 본질이자 존재 이유입니다.
+          주식회사 워플로지 지식 아키텍처의 진정한 본질이자 존재 이유다.
         </p>
       </div>
 
@@ -768,9 +903,9 @@
 
     </article>
 
-    <hr class="part-divider">
+    <hr class="part-divider" data-text="PART III">
 
-    <!-- Page Header (Part II) -->
+    <!-- Page Header (Part III) -->
     <div class="page-header">
       <!-- 헥사고날 프랙털 지식 그래프 배경 -->
       <div class="hero-bg-icon" aria-hidden="true">
@@ -827,7 +962,7 @@
         </svg>
       </div>
       <div class="philosophy-meta">
-        <span class="section-label">Platform · Part II</span>
+        <span class="section-label">Platform · Part III</span>
         <span class="philosophy-date">작성일: 2026.07.03</span>
       </div>
       <h1 class="section-title">통계적 타협의 위기와<br>실증적 <em class="em">의식 벡터</em>의 귀환</h1>
@@ -955,7 +1090,7 @@
         결국 기계는 똑똑해서 새로운 변화를 인지하거나 창조할 수 없다. 기계는 여전히 과거의 무덤 속을 헤맬 뿐이다. 다만 인간이 생존을 위해 온몸으로 밀고 나간 그 설명할 수 없는 실존적 선택, 즉 ‘사유의 다양성’의 궤적을 온톨로지라는 단단한 의미론적 끈(Semantic Cord)을 통해 기계의 영토에 강제로 이식하고 동기화(Synchronization)할 뿐이다 [11].
       </p>
       <p>
-        현장의 무형의 시도들과 맥락적 연결 구조가 코드화된 스키마(Schema as Code)로 전환되어 GitOps 시스템을 통해 전사 지능으로 배포될 때, 이는 단순한 정보 저장을 넘어 구성원의 이탈 속에서도 조직의 지적 자본을 영구 보존하는 <strong>물리적이고 독점적인 기술 해자(Moat)</strong>로 격상된다.
+        개별 주체가 온몸으로 겪어낸 무형의 맥락과 시도의 흔적이 구조화된 시맨틱 그래프로 전환되어 시스템의 공유 기반으로 정렬될 때, 이는 파편적인 기억의 소실에 대항하여 조직의 실존적 사유를 연속적으로 보존하는 <strong>존재론적 아키텍처(Ontological Architecture)</strong>로 격상된다.
       </p>
       <p>
         이 실증적 관측 데이터가 자기 유사성(Fractal) 규칙을 통해 거시 구조로 복제·축적될 때, 비로소 빅테크의 범용 통계 데이터가 감히 범접할 수 없는 독점적 지식 자산권, <strong>'자생적 지식 권위(BKGSoR)'의 실체</strong>가 완성된다. 그것이 사유를 유기적 맥락으로 연결하는 워플로지의 진짜 영혼이다.
@@ -975,20 +1110,20 @@
           <li style="margin-bottom: 0.6rem;"><strong>Bengio, Y., et al. (2003).</strong> "A Neural Probabilistic Language Model." <em>Journal of Machine Learning Research.</em></li>
           <li style="margin-bottom: 0.6rem;"><strong>Jaynes, E. T. (1957).</strong> "Information Theory and Statistical Mechanics." <em>Physical Review.</em></li>
           <li style="margin-bottom: 0.6rem;"><strong>Ji, Z., et al. (2023).</strong> "Survey of Hallucination in Natural Language Generation." <em>ACM Computing Surveys.</em></li>
-          <li style="margin-bottom: 0.6rem;"><strong>주식회사 워플로지 (2026).</strong> "X·Y·Z 인지 변수 모델과 프랙털 아키텍처 연구 계획서." <em>Worflogy 내부 연구 아카이브.</em></li>
+          <li style="margin-bottom: 0.6rem;"><strong>주식회사 워플로지 (2026).</strong> "X·Y·Z 인지 변수 모델과 프랙털 아키텍처 연구 계획서." <em>Worflogy 인지 아키텍처 연구소 학술 백서.</em></li>
           <li style="margin-bottom: 0.6rem;"><strong>Berners-Lee, T., Hendler, J., &amp; Lassila, O. (2001).</strong> "The Semantic Web." <em>Scientific American.</em></li>
-          <li style="margin-bottom: 0.6rem;"><strong>주식회사 워플로지 (2026).</strong> "BKGSoR 플랫폼 및 핵심 솔루션 아키텍처 명세서." <em>Worflogy IR Tech Report.</em></li>
-          <li style="margin-bottom: 0.6rem;"><strong>주식회사 워플로지 (2026).</strong> "R&amp;D 맥락 자산화 및 이슈 기반 워크플로우 특허 기술 설명서." <em>Worflogy Philosophy Archive.</em></li>
+          <li style="margin-bottom: 0.6rem;"><strong>주식회사 워플로지 (2026).</strong> "BKGSoR 인지 토폴로지 플랫폼 및 분산 지식 그래프 아키텍처 명세서." <em>Worflogy 인지 아키텍처 연구소 기술 백서.</em></li>
+          <li style="margin-bottom: 0.6rem;"><strong>주식회사 워플로지 (2026).</strong> "R&amp;D 맥락 자산화 및 인과론적 워크플로우에 관한 특허 기술 명세서." <em>워플로지 사상 아카이브 보고서.</em></li>
         </ol>
       </div>
 
       <!-- Part II Closing -->
       <div class="phil-closing">
         <p>
-          과거의 확률 통계가 침묵하는 완전한 불확실성 속에서,<br>
-          인간의 실존적 선택과 사유를 유기적 맥락으로 연결하는 것.<br><br>
-          <span>자생적 지식 권위(BKGSoR)</span>를 향한 이 무한한 탐색이야말로<br>
-          주식회사 워플로지가 구축하는 기술 생태계의 영구적인 Moat(해자)입니다.
+          인간 고유의 사유 구조를 디지털 공간에 맥락으로 복원하여,<br>
+          정보의 무질서도(지식 엔트로피)에 저항하는 것.<br><br>
+          5차원의 심연에서 묵묵히 철학적 신념을 밀고 나가는<br>
+          <span>주식회사 워플로지 지식 아키텍처</span>의 진정한 본질이자 존재 이유다.
         </p>
       </div>
 
@@ -1015,6 +1150,7 @@
   <div id="language-switcher-container"></div>
 
   <script src="js/sidebar.js"></script>
+  <script src="js/main.js"></script>
   <script src="js/language-switcher.js"></script>
 </body>
 </html>

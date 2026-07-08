@@ -121,10 +121,24 @@
     .philosophy-body {
       max-width: 860px;
       margin: 0 auto;
-      padding: 2.5rem 2.5rem 5rem;
+      padding: 1rem 2.5rem 5rem;
+    }
+    .philosophy-body:first-of-type,
+    .philosophy-body:nth-of-type(2) {
+      padding-bottom: 2rem;
+    }
+    .philosophy-body > .section:first-of-type {
+      margin-top: 0;
+      padding-top: 0;
+    }
+    .philosophy-body > .section:first-of-type h2:first-of-type {
+      margin-top: 0.5rem;
+    }
+    .accent-card strong {
+      color: #fff !important;
     }
     @media (max-width: 640px) {
-      .philosophy-body { padding: 2rem 1.25rem 4rem; }
+      .philosophy-body { padding: 1.5rem 1.25rem 4rem; }
       .philosophy-header { padding: 2.5rem 1.25rem 2rem; }
     }
 
@@ -332,12 +346,12 @@
       margin-bottom: 0.45rem;
     }
 
-    /* ── Part II Layout ── */
+    /* ── Part II & III Layout ── */
     .part-divider {
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 3.5rem 0;
+      margin: 2rem 0;
       position: relative;
       border: none;
       background: transparent;
@@ -355,7 +369,7 @@
       z-index: 1;
     }
     .part-divider::after {
-      content: "PART II";
+      content: attr(data-text);
       position: relative;
       z-index: 2;
       background: var(--background, #fff);
@@ -454,7 +468,73 @@
     }
     .math-matrix > div {
       line-height: 1;
-      padding: 0 0.1rem;
+      padding: 0 0 0.1rem;
+    }
+    /* ── Education Brand (Contexton) Styles ── */
+    .vision-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 640px) {
+      .vision-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .vision-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 24px 28px;
+      box-shadow: var(--shadow-sm);
+    }
+    .vision-card-body {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: normal;
+      line-height: 1.75;
+      color: var(--text-muted);
+    }
+    .accent-card .vision-card-body {
+      color: rgba(255, 255, 255, 0.9);
+    }
+    .vision-card.accent-card {
+      background: var(--ink);
+      color: var(--surface);
+      border-color: transparent;
+      box-shadow: var(--shadow-md);
+    }
+    .vision-card.accent-card .vision-label { color: rgba(255,255,255,0.8); }
+    .vision-label {
+      font-family: var(--font-serif-en);
+      font-style: italic;
+      font-size: var(--fs-label);
+      font-weight: var(--fw-label);
+      letter-spacing: var(--ls-label);
+      color: var(--ink);
+      opacity: 0.6;
+      margin-bottom: 10px;
+    }
+    .card-center {
+      text-align: center;
+      cursor: default;
+      padding: 20px;
+    }
+    .card-center:hover {
+      transform: none;
+      box-shadow: var(--shadow-sm);
+      border-color: var(--border);
+    }
+    .card-center::before {
+      display: none;
+    }
+    .card-img-fit {
+      width: 100%;
+      max-width: 320px;
+      height: auto;
+      border-radius: var(--r-sm);
+      margin: 0 auto 12px;
+      display: block;
     }
   </style>
 
@@ -470,8 +550,67 @@
   <!-- Main -->
   <main class="main">
 
-    <!-- Page Header -->
-    <div class="page-header">
+    <!-- Page Header (Part I) -->
+    <div class="page-header video-header">
+      <!-- 개념 영상 배경 -->
+      <video
+        class="header-video-bg"
+        src="../assets/Worflogy_Opening.mp4"
+        autoplay
+        muted
+        loop
+        playsinline
+        aria-hidden="true"
+        preload="auto"
+      ></video>
+      <!-- 오버레이: 텍스트 가독성 확보 -->
+      <div class="header-video-overlay" aria-hidden="true"></div>
+      <div class="philosophy-meta">
+        <span class="section-label">Platform · Philosophy</span>
+      </div>
+      <h1 class="section-title">The Design of Thought Contexts and<br>the Restoration of Cognitive Topology</h1>
+      <p class="section-subtitle" style="color: var(--text-muted); margin-top: 8px !important;">Semantic Design Philosophy Based on Fractal Ontology</p>
+    </div>
+
+    <!-- Article Body (Part I) -->
+    <article class="philosophy-body">
+
+      <!-- 2. Philosophical Questions (Logical Structure of Thought) -->
+      <h2 class="section-title">The Importance of Context-Designing Thought</h2>
+      
+      <div class="vision-grid" style="margin-top: 24px;">
+        <div class="vision-card">
+          <div class="vision-label">The Paradox of Information</div>
+          <div class="vision-card-body">
+            <p>Suppose we ask two individuals to explain concept A.</p>
+            <ul style="margin-top: 8px; margin-left: 20px; list-style-type: disc;">
+              <li>One explains it as <strong>D</strong>,</li>
+              <li>while the other explains it as <strong>C</strong>.</li>
+            </ul>
+            <p style="margin-top: 8px;">Most people readily accept information <strong>D</strong> due to its familiarity and high frequency of exposure.</p>
+          </div>
+        </div>
+        <div class="vision-card accent-card">
+          <div class="vision-label">The Core of Thinking</div>
+          <div class="vision-card-body">
+            We focus on <strong>"the Why behind the Why"</strong> of explaining A as C. Through systematic questioning, we cultivate a cognitive framework to map the logical structure (ontology) of thoughts, discover hidden possibilities (Weak Signals), and make more persuasive decisions.
+          </div>
+        </div>
+      </div>
+      <p class="section-desc" style="margin-top: 24px;">
+        In the face of the emergence of generative machine intelligence, the essential task for existential subjects is to restore the power of questioning that critically evaluates the conditions of cognitive reasoning and causal contexts, rather than blindly accepting statistical outputs.
+      </p>
+
+      <div class="card card-center" style="max-width: 480px; margin: 32px auto 0;">
+        <img src="../images/process.png" alt="Process" class="card-img-fit">
+        <span style="font-family: var(--font-serif-en); font-weight: 600; font-size: var(--fs-h4); color: var(--text);">Design Process</span>
+      </div>
+    </article>
+
+    <hr class="part-divider" data-text="PART II">
+
+    <!-- Page Header (Part II) -->
+    <div class="page-header" id="philosophy-body">
       <!-- 헥사고날 프랙털 지식 그래프 배경 -->
       <div class="hero-bg-icon" aria-hidden="true">
         <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none">
@@ -799,9 +938,9 @@
 
     </article>
 
-    <hr class="part-divider">
+    <hr class="part-divider" data-text="PART III">
 
-    <!-- Page Header (Part II) -->
+    <!-- Page Header (Part III) -->
     <div class="page-header">
       <!-- 헥사고날 프랙털 지식 그래프 배경 -->
       <div class="hero-bg-icon" aria-hidden="true">
@@ -858,7 +997,7 @@
         </svg>
       </div>
       <div class="philosophy-meta">
-        <span class="section-label">Platform · Part II</span>
+        <span class="section-label">Platform · Part III</span>
         <span class="philosophy-date">Published: 2026.07.03</span>
       </div>
       <h1 class="section-title">The Crisis of Statistical Compromise<br>and the Return of Empirical <em class="em">Consciousness Vectors</em></h1>
@@ -986,7 +1125,7 @@
         Ultimately, machines cannot perceive or create new changes because they are smart; they are still wandering in the graves of the past. Humans simply force the transplantation and synchronization of the inexplicable trajectories of their existential choices—made for survival—into the machine's territory through the tight semantic cord of ontology [11].
       </p>
       <p>
-        When frontline intangible attempts and contextual structures are converted into Schema-as-Code and deployed as organizational intelligence via GitOps systems, this transcends simple information storage to become a <strong>physical and exclusive technological moat</strong> that permanently preserves the intellectual capital of the organization despite member turnover.
+        When frontline intangible attempts and contextual structures are converted into structured semantic graphs and aligned as a shared foundation of the system, this transcends simple information storage, elevating into an <strong>ontological architecture</strong> that continuously preserves the organization's existential reasoning against the loss of fragmented memory.
       </p>
       <p>
         When this empirical observation data is replicated and accumulated into macrostructures through self-similarity (Fractal) rules, the substance of <strong>'Self-Generating Knowledge Authority (BKGSoR)'</strong>—a proprietary intellectual asset that Big Tech's general statistical data can never approach—is finally complete. That is the true soul of Worflogy, linking thoughts into organic contexts.
@@ -1006,20 +1145,20 @@
           <li style="margin-bottom: 0.6rem;"><strong>Bengio, Y., et al. (2003).</strong> "A Neural Probabilistic Language Model." <em>Journal of Machine Learning Research.</em></li>
           <li style="margin-bottom: 0.6rem;"><strong>Jaynes, E. T. (1957).</strong> "Information Theory and Statistical Mechanics." <em>Physical Review.</em></li>
           <li style="margin-bottom: 0.6rem;"><strong>Ji, Z., et al. (2023).</strong> "Survey of Hallucination in Natural Language Generation." <em>ACM Computing Surveys.</em></li>
-          <li style="margin-bottom: 0.6rem;"><strong>Worflogy Corp. (2026).</strong> "X·Y·Z Cognitive Variable Model and Fractal Architecture Research Plan." <em>Worflogy Internal Research Archive.</em></li>
+          <li style="margin-bottom: 0.6rem;"><strong>Worflogy Corp. (2026).</strong> "X·Y·Z Cognitive Variable Model and Fractal Architecture Research Plan." <em>Worflogy Cognitive Architecture Lab Technical Whitepaper.</em></li>
           <li style="margin-bottom: 0.6rem;"><strong>Berners-Lee, T., Hendler, J., &amp; Lassila, O. (2001).</strong> "The Semantic Web." <em>Scientific American.</em></li>
-          <li style="margin-bottom: 0.6rem;"><strong>Worflogy Corp. (2026).</strong> "BKGSoR Platform and Core Solution Architecture Specifications." <em>Worflogy IR Tech Report.</em></li>
-          <li style="margin-bottom: 0.6rem;"><strong>Worflogy Corp. (2026).</strong> "R&amp;D Context Assetization and Issue-Based Workflow Patented Technology Manual." <em>Worflogy Philosophy Archive.</em></li>
+          <li style="margin-bottom: 0.6rem;"><strong>Worflogy Corp. (2026).</strong> "BKGSoR Cognitive Topology Platform and Distributed Knowledge Graph Architecture Specifications." <em>Worflogy Cognitive Architecture Lab Technical Whitepaper.</em></li>
+          <li style="margin-bottom: 0.6rem;"><strong>Worflogy Corp. (2026).</strong> "Patent Specifications for R&amp;D Contextual Assetization and Causal Workflows." <em>Worflogy Philosophy Archive Report.</em></li>
         </ol>
       </div>
 
       <!-- Part II Closing -->
       <div class="phil-closing">
         <p>
-          Amid absolute uncertainty where past probabilistic statistics fall silent,<br>
-          linking human existential choices and thoughts into organic contexts.<br><br>
-          <span>This infinite quest toward Self-Generating Knowledge Authority (BKGSoR)</span><br>
-          is the permanent technological moat of the ecosystem built by Worflogy.
+          Restoring the unique cognitive structures of humans into digital contexts<br>
+          to resist the entropy of random information.<br><br>
+          This is the true essence and reason for existence of<br>
+          <span>Worflogy's knowledge architecture</span>, silently pushing forward philosophical convictions within the 5-dimensional abyss.
         </p>
       </div>
 
@@ -1046,6 +1185,7 @@
   <div id="language-switcher-container"></div>
 
   <script src="../js/sidebar.js"></script>
+  <script src="../js/main.js"></script>
   <script src="../js/language-switcher.js"></script>
 </body>
 </html>

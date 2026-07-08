@@ -89,15 +89,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
   navHtml += `<div class="nav-divider"></div>`;
   navHtml += `<div class="nav-group-title">${servicesTitle}</div>`;
+  const isExternal = servicesItem.href.startsWith('http');
+  const targetAttr = isExternal ? ' target="worflogy_edu" rel="opener"' : '';
+  const outlinkIcon = isExternal ? `
+    <svg class="nav-item-outlink" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+    </svg>
+  ` : '';
+
   navHtml += `
-    <a href="${servicesItem.href}" class="nav-item" target="worflogy_edu" rel="opener">
+    <a href="${servicesItem.href}" class="nav-item"${targetAttr}>
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         ${servicesItem.icon}
       </svg>
       ${isEnglish ? servicesItem.textEn : servicesItem.textKo}
-      <svg class="nav-item-outlink" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-      </svg>
+      ${outlinkIcon}
     </a>
   `;
 
@@ -114,17 +120,15 @@ document.addEventListener('DOMContentLoaded', () => {
   // 2. Active Nav Item Highlighting
   const path = location.pathname.split('/').pop() || 'index.html';
   sidebar.querySelectorAll('.nav-item').forEach(a => {
-    const href = a.getAttribute('href');
-    if (href === path || (path === '' && href === 'index.html')) {
+    const href = a.getAttribute('href') || '';
+    const hrefBase = href.split('#')[0];
+    if (hrefBase === path || (path === '' && hrefBase === 'index.html')) {
       a.classList.add('active');
     }
-    if (href === 'projects.html' && path.startsWith('project-')) {
+    if (hrefBase === 'projects.html' && path.startsWith('project-')) {
       a.classList.add('active');
     }
-    if (href === 'footprint.html' && path.startsWith('news-')) {
-      a.classList.add('active');
-    }
-    if (href === 'philosophy.html' && path === 'philosophy.html') {
+    if (hrefBase === 'footprint.html' && path.startsWith('news-')) {
       a.classList.add('active');
     }
   });
