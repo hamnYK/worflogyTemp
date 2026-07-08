@@ -2016,6 +2016,22 @@
 }
 .progress-sparkline text {
   font-family: var(--font-sans-en);
+  fill: var(--text-muted);
+}
+.progress-sparkline line {
+  stroke: var(--border-sand);
+}
+.progress-sparkline circle {
+  fill: var(--surface);
+  stroke: var(--border-sand);
+}
+.progress-sparkline circle[fill="#1A1F36"] {
+  fill: var(--ink);
+  stroke: none;
+}
+.progress-sparkline circle[fill="#E8613A"] {
+  fill: var(--coral);
+  stroke: none;
 }
 /* 단계 info 내 수치 두 개 나란히 */
 .progress-step-vals {
