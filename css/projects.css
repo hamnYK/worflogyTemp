@@ -254,6 +254,7 @@
 /* DM Serif Display는 가이드라인상 weight 400(Italic) 포인트 폰트 — 600은 과중 */
 :root:lang(en) .projects-slogan {
   font-family: var(--font-serif-en);
+  font-style: italic;
   font-size: 19px;
   font-weight: 400;
   line-height: 1.5;

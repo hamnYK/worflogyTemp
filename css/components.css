@@ -2014,6 +2014,9 @@
   overflow: visible;
   margin-top: 4px;
 }
+.progress-sparkline text {
+  font-family: var(--font-sans-en);
+}
 /* 단계 info 내 수치 두 개 나란히 */
 .progress-step-vals {
   display: flex;
