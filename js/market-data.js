@@ -1,10 +1,10 @@
 /**
  * Worflogy Market Metrics & IR Data
- * 최종 업데이트: 2026-05-26
+ * 최종 업데이트: 2026-07-08
  * 다국어(국문/영문) 지원 구조 확장
  */
 const marketData = {
-  lastUpdated: "2026.05.26",
+  lastUpdated: "2026.07.08",
   
   // TAM-SAM-SOM 데이터 (국내 및 글로벌)
   marketSize: {
@@ -179,7 +179,7 @@ const marketData = {
         type: "patent-reg",
         status: "특허 등록 완료 (국내)",
         name: "이슈 기반 워크플로우 온톨로지 관리 방법 및 이러한 방법을 수행하는 장치",
-        number: "제 10-2025-0187777 호 (출원일: 2025.12.02)",
+        number: "제 10-2985783 호 (등록일: 2026.06.30)",
         holder: "출원인: 주식회사 워플로지 / 발명자: 함영국 대표"
       },
       {
@@ -216,7 +216,7 @@ const marketData = {
         type: "patent-reg",
         status: "Patent Registered (KR)",
         name: "Issue-based workflow ontology management method and apparatus performing the same",
-        number: "No. 10-2025-0187777 (Filing Date: 2025.12.02)",
+        number: "No. 10-2985783 (Registration Date: 2026.06.30)",
         holder: "Applicant: Worflogy Inc. / Inventor: CEO Youngkuk Hamn"
       },
       {
