@@ -51,7 +51,7 @@
   <link rel="stylesheet" href="../css/layout.css" />
   <link rel="stylesheet" href="../css/components.css" />
   <link rel="stylesheet" href="../css/language-switcher.css" />
-  <link rel="stylesheet" href="../css/bkgsor.css" />
+  <link rel="stylesheet" href="../css/bkgsor.css?v=1.2" />
 
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-WN1V0G6RJ0"></script>
@@ -152,31 +152,50 @@
 
         <!-- BKGSoR Coming Soon Toast Overlay inside the card -->
         <div id="bkgsor-toast" class="bkgsor-toast" aria-live="polite">
-          <span class="toast-text">COMING SOON</span>
+          <div class="bkgsor-notice-content">
+            <h3 class="toast-title">Solution Demonstration Policy</h3>
+            <p class="toast-desc">
+              For security and value sharing, platform demonstrations are conducted via <span class="highlight">Live Demo</span> during official meetings.<br/>
+              Please request a demo via email.
+            </p>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- BKGSoR Demo Video Floating Card -->
+    <!-- BKGSoR Demo Preview Slider -->
     <div class="bkgsor-video-float" id="bkgsor-video-float">
       <div class="video-float-card">
         <div class="video-float-header">
           <span class="video-float-label">Demo Preview</span>
           <span class="video-float-dot"></span>
         </div>
-        <div class="video-float-body">
-          <video
-            id="bkgsor-demo-video"
-            src="../assets/13ECRA_BKGSoR.mp4"
-            autoplay
-            muted
-            loop
-            playsinline
-            controlslist="nodownload nofullscreen noremoteplayback"
-            oncontextmenu="return false"
-            aria-label="BKGSoR Platform Demo Video"
-          ></video>
+        <div class="slider-container" style="border: none; box-shadow: none; border-radius: 0;">
+          <div class="slider-track">
+            <div class="slider-item"><img src="../images/platform-landing_1.png" alt="BKGSoR platform landing introduction screen" loading="lazy" /></div>
+            <div class="slider-item"><img src="../images/platform-authentication with MFA_2.png" alt="MFA multi-factor authentication secure login screen" loading="lazy" /></div>
+            <div class="slider-item"><img src="../images/platform-account configuration_3.png" alt="User account settings and permission configuration screen" loading="lazy" /></div>
+            <div class="slider-item"><img src="../images/platform-file management_4.png" alt="Knowledge file upload and data management screen" loading="lazy" /></div>
+            <div class="slider-item"><img src="../images/platform-profile management_5.png" alt="Profile information management and detailed history input screen" loading="lazy" /></div>
+            <div class="slider-item"><img src="../images/platform-carrer analysis with NCS_6.png" alt="NCS national competency standards based career analysis results screen" loading="lazy" /></div>
+            <div class="slider-item"><img src="../images/platform-work process sumulation_7.png" alt="Work process simulation and flow analysis control screen" loading="lazy" /></div>
+            <div class="slider-item"><img src="../images/platform-position analysis with NCS_8.png" alt="NCS job based position requirements analysis screen" loading="lazy" /></div>
+            <div class="slider-item"><img src="../images/platform-communication guide with WBS_9.png" alt="WBS work breakdown structure based communication guide and task linking screen" loading="lazy" /></div>
+            <div class="slider-item"><img src="../images/platform-communication load_10.png" alt="Communication load and collaboration bottleneck diagnosis charts in the organization" loading="lazy" /></div>
+            <div class="slider-item"><img src="../images/platform-enterprise administration for work_11.png" alt="Enterprise work management and workflow administration settings screen" loading="lazy" /></div>
+            <div class="slider-item"><img src="../images/platform-engineering process ontology graph_12.png" alt="Engineering process ontology knowledge graph analysis screen" loading="lazy" /></div>
+            <div class="slider-item"><img src="../images/platform-security audit and report_13.png" alt="Security audit reports and regulatory compliance status report" loading="lazy" /></div>
+            <div class="slider-item"><img src="../images/platform-ontology solution run and monitor_14.png" alt="Ontology solution execution and real-time monitoring console" loading="lazy" /></div>
+            <div class="slider-item"><img src="../images/platform-applied ontology technology guide_15.png" alt="Fractal ontology applied technology linkage guide and manual screen" loading="lazy" /></div>
+          </div>
+          <button class="slider-btn prev" aria-label="Previous Image">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <button class="slider-btn next" aria-label="Next Image">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+          </button>
         </div>
+        <div class="slider-dots" style="margin-bottom: 20px;"></div>
       </div>
     </div>
 

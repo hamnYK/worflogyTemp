@@ -158,23 +158,53 @@ html[lang="en"] .coming-soon-title {
   visibility: visible;
 }
 
-.toast-text {
-  font-family: var(--font-serif-en);
-  font-style: italic;
-  font-size: 52px;
-  font-weight: 700;
-  color: var(--coral);
-  letter-spacing: 2px;
-  text-shadow: 0 6px 24px rgba(232, 97, 58, 0.25);
-  user-select: none;
-  white-space: nowrap;
+.bkgsor-notice-content {
+  max-width: 520px;
+  width: 90%;
+  text-align: center;
+  word-break: keep-all;
   display: inline-block;
   transform: scale(0.92);
   transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.bkgsor-toast.show .toast-text {
+.bkgsor-toast.show .bkgsor-notice-content {
   transform: scale(1);
+}
+
+.toast-title {
+  font-family: var(--font-serif-ko);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--coral);
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+}
+
+.toast-desc {
+  font-family: var(--font-serif-ko);
+  font-size: var(--fs-body-sub, 15px);
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.75;
+  letter-spacing: -0.2px;
+}
+
+.toast-desc .highlight {
+  font-family: var(--font-serif-en);
+  font-style: italic;
+  font-weight: 700;
+  color: var(--coral);
+  margin: 0 2px;
+}
+
+/* 영문 페이지 팝업 서체 튜닝 */
+html[lang="en"] .toast-title {
+  font-family: var(--font-serif-en);
+  font-style: italic;
+}
+html[lang="en"] .toast-desc {
+  font-family: var(--font-sans-en);
 }
 
 .bkgsor-features {
@@ -184,11 +214,11 @@ html[lang="en"] .coming-soon-title {
 /* ── 플로팅 비디오 카드 ── */
 .bkgsor-video-float {
   width: 100%;
-  max-width: 600px;
-  margin: 24px auto 0;
+  max-width: 100%;
+  margin: 40px auto 0;
   position: relative;
   z-index: 5;
-  padding: 0 24px;
+  padding: 0 64px;
   box-sizing: border-box;
 }
 
@@ -287,11 +317,22 @@ html[lang="en"] .coming-soon-title {
   .toast-text {
     font-size: 38px;
   }
+  .toast-card {
+    padding: 0;
+  }
+  .toast-title {
+    font-size: 17px;
+    margin-bottom: 10px;
+  }
+  .toast-desc {
+    font-size: var(--fs-body-min, 13.5px);
+    line-height: 1.6;
+  }
   .coming-soon-card {
     padding: 36px 24px;
   }
   .bkgsor-video-float {
-    padding: 0 16px;
+    padding: 0 28px;
     margin-top: 20px;
   }
 }

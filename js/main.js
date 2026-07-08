@@ -236,13 +236,58 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     let currentIndex = 0;
+    let autoplayTimer = null;
+    let userInteractionTimeout = null;
+    let isHovered = false;
+
+    function startAutoplay() {
+      stopAutoplay();
+      if (isHovered) return;
+      autoplayTimer = setInterval(() => {
+        currentIndex = (currentIndex < items.length - 1) ? currentIndex + 1 : 0;
+        updateSlider();
+      }, 3000);
+    }
+
+    function stopAutoplay() {
+      if (autoplayTimer) {
+        clearInterval(autoplayTimer);
+        autoplayTimer = null;
+      }
+    }
+
+    function handleUserInteraction() {
+      stopAutoplay();
+      if (userInteractionTimeout) {
+        clearTimeout(userInteractionTimeout);
+      }
+      userInteractionTimeout = setTimeout(() => {
+        startAutoplay();
+      }, 5000);
+    }
+
+    container.addEventListener('mouseenter', () => {
+      isHovered = true;
+      stopAutoplay();
+      if (userInteractionTimeout) {
+        clearTimeout(userInteractionTimeout);
+      }
+    });
+
+    container.addEventListener('mouseleave', () => {
+      isHovered = false;
+      startAutoplay();
+    });
 
     if (dotsContainer && dotsContainer.classList.contains('slider-dots')) {
       items.forEach((_, i) => {
         const dot = document.createElement('div');
         dot.classList.add('slider-dot');
         if (i === 0) dot.classList.add('active');
-        dot.addEventListener('click', () => goToSlide(i));
+        dot.addEventListener('click', () => {
+          goToSlide(i);
+          handleUserInteraction();
+        });
         dotsContainer.appendChild(dot);
       });
     }
@@ -266,6 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
       prevBtn.addEventListener('click', () => {
         currentIndex = (currentIndex > 0) ? currentIndex - 1 : items.length - 1;
         updateSlider();
+        handleUserInteraction();
       });
     }
 
@@ -273,7 +319,11 @@ document.addEventListener('DOMContentLoaded', () => {
       nextBtn.addEventListener('click', () => {
         currentIndex = (currentIndex < items.length - 1) ? currentIndex + 1 : 0;
         updateSlider();
+        handleUserInteraction();
       });
     }
+
+    // 최초 로드 시 자동 롤링 시작
+    startAutoplay();
   });
 });
