@@ -122,18 +122,18 @@ class WorflogyModal {
     };
 
     fetch(this.WEB_APP_URL, {
-      method: "POST",
-      mode: "no-cors",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(formData)
-    })
-    .then(() => {
-      // 성공 시 폼 숨기고 성공 화면 활성화
-      if (this.form) this.form.style.display = "none";
-      if (this.successScreen) this.successScreen.style.display = "flex";
-    })
+       method: "POST",
+       mode: "no-cors",
+       headers: {
+         "Content-Type": "application/json"
+       },
+       body: JSON.stringify(formData)
+     })
+     .then(() => {
+       // 성공 시 폼 숨기고 성공 화면 활성화
+       if (this.form) this.form.style.display = "none";
+       if (this.successScreen) this.successScreen.style.display = "flex";
+     })
     .catch((error) => {
       console.error("Submission error:", error);
       alert(msg.error);

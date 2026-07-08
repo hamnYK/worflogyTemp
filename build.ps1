@@ -34,7 +34,7 @@ if (-not [System.IO.Directory]::Exists($DestDir)) {
 }
 
 # 2. Define static resources
-$StaticDirs = @("assets", "images", "images_original")
+$StaticDirs = @("assets", "images")
 $StaticFiles = @("robots.txt", "sitemap.xml", "CNAME", ".nojekyll", "typography_guidelines.md")
 
 # 3. Copy static dirs and files using Robust PowerShell LiteralPath Copying
