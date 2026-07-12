@@ -9,6 +9,12 @@ window.name = "worflogy_main";
 document.addEventListener('DOMContentLoaded', () => {
   /* ── Project Graph ── */
   initGraph();
+
+  /* ── 전역 이미지 보호: 우클릭(탭에서 열기 / 이미지 복사) · 드래그 저장 차단 ── */
+  document.querySelectorAll('img').forEach(img => {
+    img.addEventListener('contextmenu', (e) => e.preventDefault());
+    img.addEventListener('dragstart',   (e) => e.preventDefault());
+  });
 });
 
 /* ── SVG Node-Link Graph ── */
@@ -223,11 +229,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextBtn = container.querySelector('.slider-btn.next');
     const dotsContainer = container.nextElementSibling;
 
-    // 슬라이더 이미지 우클릭·드래그 저장 차단
-    track.querySelectorAll('img').forEach(img => {
-      img.addEventListener('contextmenu', (e) => e.preventDefault());
-      img.addEventListener('dragstart',   (e) => e.preventDefault());
-    });
 
     if (items.length <= 1) {
       if (prevBtn) prevBtn.style.display = 'none';
