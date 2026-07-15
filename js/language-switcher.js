@@ -4,6 +4,18 @@
    ================================================ */
 
 (function() {
+  // 1. 페이지 로드 시 저장된 스크롤 위치 복원
+  const savedScroll = sessionStorage.getItem('lang_switcher_scroll');
+  if (savedScroll !== null) {
+    window.scrollTo(0, parseInt(savedScroll, 10));
+    
+    // 이미지나 다이어그램(Mermaid) 렌더링에 따른 레이아웃 지연 복원
+    setTimeout(function() {
+      window.scrollTo(0, parseInt(savedScroll, 10));
+      sessionStorage.removeItem('lang_switcher_scroll');
+    }, 150);
+  }
+
   document.addEventListener("DOMContentLoaded", function() {
     const href = window.location.href;
     // URL에 '/en/'이 포함되어 있는지 확인하여 영문 모드인지 여부 판단
@@ -29,6 +41,9 @@
       if (!btn) return;
       
       const targetLang = btn.getAttribute('data-lang');
+      
+      // 전환 직전 현재 스크롤 위치 기록
+      sessionStorage.setItem('lang_switcher_scroll', window.scrollY);
       
       // 1. 영문 -> 국문 전환 (KO 클릭)
       if (targetLang === 'ko' && isEnglish) {
