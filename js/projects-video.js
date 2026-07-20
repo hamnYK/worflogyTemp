@@ -51,4 +51,38 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.style.overflow = ''; // 스크롤 복원
     });
   }
+
+  // 3. 프랙털 온톨로지 엔진 — 아코디언 토글
+  const engineTrigger = document.getElementById('engine-accordion-trigger');
+  const enginePanel   = document.getElementById('engine-accordion-panel');
+
+  if (engineTrigger && enginePanel) {
+    engineTrigger.addEventListener('click', () => {
+      const isOpen = engineTrigger.getAttribute('aria-expanded') === 'true';
+
+      if (isOpen) {
+        // 닫기: .open 제거 → transition 완료 후 hidden 복원
+        enginePanel.classList.remove('open');
+        engineTrigger.setAttribute('aria-expanded', 'false');
+
+        // max-height transition 시간(450ms)이 끝난 뒤 hidden 처리
+        enginePanel.addEventListener('transitionend', () => {
+          if (!enginePanel.classList.contains('open')) {
+            enginePanel.hidden = true;
+          }
+        }, { once: true });
+
+      } else {
+        // 열기: hidden 해제 → 다음 프레임에서 .open 추가 (CSS transition 발동)
+        enginePanel.hidden = false;
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            enginePanel.classList.add('open');
+            engineTrigger.setAttribute('aria-expanded', 'true');
+          });
+        });
+      }
+    });
+  }
 });
+

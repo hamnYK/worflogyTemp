@@ -158,8 +158,16 @@
   line-height: 1.4;
 }
 
-/* L2: 프랙털 온톨로지 엔진 (전체 너비 바) */
+/* L2: 프랙털 온톨로지 엔진 (전체 너비 바 — 아코디언 버튼) */
 .pm-engine-bar {
+  /* button 기본 스타일 초기화 */
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+
   background: var(--ink);
   border-radius: var(--r-md);
   padding: 18px 28px;
@@ -169,6 +177,14 @@
   gap: 12px;
   box-shadow: 0 8px 28px rgba(26,31,54,0.22);
   animation: enginePulse 3s ease-in-out infinite;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+.pm-engine-bar:hover {
+  background: rgba(26,31,54,0.88);
+}
+.pm-engine-bar:focus-visible {
+  outline: 2px solid rgba(255,255,255,0.5);
+  outline-offset: 2px;
 }
 @keyframes enginePulse {
   0%, 100% { box-shadow: 0 8px 28px rgba(26,31,54,0.22); }
@@ -188,6 +204,75 @@
   font-size: var(--fs-badge);
   color: rgba(255,255,255,0.45);
   margin-left: 4px;
+  flex: 1; /* 체브론을 오른쪽으로 밀기 */
+}
+
+/* 체브론 아이콘 */
+.pm-engine-chevron {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  transition: transform 0.35s ease;
+  margin-left: auto;
+}
+.pm-engine-bar[aria-expanded="true"] .pm-engine-chevron {
+  transform: rotate(180deg);
+}
+
+/* ── 아코디언 패널 ── */
+.engine-accordion-panel {
+  overflow: hidden;
+  max-height: 0;
+  /* hidden 속성 해제 후 전환 적용 */
+  transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity    0.35s ease;
+  opacity: 0;
+}
+/* JS가 hidden 제거 후 .open 클래스를 추가하면 펼쳐짐 */
+.engine-accordion-panel.open {
+  max-height: 800px; /* 이미지 카드 2장이 들어갈 충분한 높이 */
+  opacity: 1;
+}
+
+/* 이미지 카드 그리드 */
+.engine-img-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding-top: 16px;
+}
+.engine-img-card {
+  margin: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.engine-img-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+.engine-img-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+.engine-img-card figcaption {
+  padding: 10px 14px 12px;
+  font-family: var(--font-body);
+  font-size: var(--fs-badge);
+  color: var(--text-muted);
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 600px) {
+  .engine-img-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* L1: 인프라 서비스 (3개) */

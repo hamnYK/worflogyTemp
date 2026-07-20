@@ -239,8 +239,14 @@
         </a>
       </div>
 
-      <!-- L2: Fractal Ontology Engine (full width bar) -->
-      <div class="pm-engine-bar pm-anim" data-delay="200" aria-label="Fractal Ontology Engine">
+      <!-- L2: Fractal Ontology Engine (full width bar — click to expand accordion) -->
+      <button
+        class="pm-engine-bar pm-anim"
+        data-delay="200"
+        id="engine-accordion-trigger"
+        aria-expanded="false"
+        aria-controls="engine-accordion-panel"
+      >
         <div class="pm-engine-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
@@ -254,6 +260,37 @@
         </div>
         <span class="pm-engine-name">Fractal Ontology Engine</span>
         <span class="pm-engine-en">Fractal Ontology Engine</span>
+        <svg class="pm-engine-chevron" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <polyline points="4,6 8,10 12,6" stroke="rgba(255,255,255,0.55)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <!-- Accordion panel: 2 image cards -->
+      <div
+        id="engine-accordion-panel"
+        class="engine-accordion-panel"
+        role="region"
+        aria-labelledby="engine-accordion-trigger"
+        hidden
+      >
+        <div class="engine-img-grid">
+          <figure class="engine-img-card">
+            <img
+              src="../images/engine-fractal ontology engine Algorithm_1.png"
+              alt="Fractal Ontology Engine Algorithm"
+              loading="lazy"
+            />
+            <figcaption>Fractal Ontology Engine Algorithm</figcaption>
+          </figure>
+          <figure class="engine-img-card">
+            <img
+              src="../images/engine-fractal ontology engine for the dynamic expansion of the ontology standard_2.png"
+              alt="Fractal Ontology Engine for Dynamic Expansion of the Ontology Standard"
+              loading="lazy"
+            />
+            <figcaption>Dynamic Expansion of Ontology Standard</figcaption>
+          </figure>
+        </div>
       </div>
 
       <!-- L1: Infra Services -->
