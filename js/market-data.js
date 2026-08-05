@@ -114,12 +114,12 @@ const marketData = {
   milestones: {
     ko: [
       {
-        period: "7월 ~ 8월",
+        period: "8월 ~ 10월",
         title: "핵심 기술 장벽 구축 및 솔루션 테스트",
         desc: "프랙털 온톨로지 핵심 특허(IP) 등록을 마무리하고, 출시 예정인 3개 솔루션의 UX/안정성 테스트 및 파일럿 검증을 집중적으로 수행합니다."
       },
       {
-        period: "9월 ~ 10월",
+        period: "10월 ~ 11월",
         title: "솔루션 공식 론칭 및 기술 인증 획득",
         desc: "온톨로지 기반 비즈니스 솔루션 1~3종을 공식 출시하며, 기 확보된 등록 특허를 기반으로 기술 혁신형 벤처기업 인증을 획득합니다."
       },
@@ -136,12 +136,12 @@ const marketData = {
     ],
     en: [
       {
-        period: "July ~ August",
+        period: "August ~ October",
         title: "Core Technology Barrier & Solution Testing",
         desc: "Finalize registration of core fractal ontology patents (IP), and conduct intensive UX/stability testing and pilot verification of the three upcoming solutions."
       },
       {
-        period: "September ~ October",
+        period: "October ~ November",
         title: "Official Solution Launch & Technology Certification",
         desc: "Officially launch 1 to 3 ontology-based business solutions, and obtain Venture Business Certification based on secured registered patents."
       },
