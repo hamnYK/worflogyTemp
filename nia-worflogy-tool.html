@@ -1,4 +1,4 @@
-<!--
+﻿<!--
   행정 혁신 온톨로지 워크숍 & NIA 프로젝트
   © 2026 Worflogy Inc. All Rights Reserved.
   
@@ -18,12 +18,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>행정 혁신 온톨로지 워크숍 & Graph RAG</title>
     <meta name="description" content="행정 혁신 온톨로지 스키마 추출, 추론 규칙 도출, 지식 그래프 시각화 및 A/B 비교 검증 도구">
-    <!-- 타이포그래피: Noto Sans KR(한글) + Inter(영문/숫자) + JetBrains Mono(코드) -->
+    <!-- 타이포그래피: Pretendard Variable(한글+영문 단일 폰트) + JetBrains Mono(코드) -->
+    <!-- Pretendard: Inter 계승, 한글·영문 모두 커버, Variable Font -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+    <!-- JetBrains Mono: 코드 전용 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <!-- 문서 파서: pdf.js (PDF) + mammoth.js (DOCX) -->
     <!-- pdf.js: type=module 태그 제거 - file:// 보안 제한으로 에러 발생. parsePDF() 내부 import(경로가 CDN으로 대체) -->
     <script src="lib/mammoth.browser.min.js"></script>
@@ -186,6 +189,11 @@
             /* ── Transition ── */
             --transition-base:  all 0.2s ease;
             --transition-panel: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+
+            /* ── Font Family ── */
+            --font-sans: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont,
+                         system-ui, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
         }
 
         /* ────────────────────────────────────────────────────────────────
@@ -198,7 +206,7 @@
         }
 
         body {
-            font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', system-ui, -apple-system, sans-serif;
+            font-family: var(--font-sans);
             font-size: var(--fs-base);
             font-weight: var(--fw-regular);
             line-height: var(--lh-relaxed);
@@ -211,7 +219,7 @@
         }
 
         :lang(ko) {
-            font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', system-ui, -apple-system, sans-serif;
+            font-family: var(--font-sans);
         }
 
         /* 배경 광원 */
@@ -228,6 +236,149 @@
             pointer-events: none;
             z-index: 0;
         }
+
+        /* ────────────────────────────────────────────────────────────────
+           LAYER 3 · TYPOGRAPHY
+           ─ 폰트 코어, 헤딩, 레이블, 아이콘, SVG 텍스트 를 여기에 모으세요.
+           ─ 색상/폰트를 바꿼 때 이 섹션 하나만 편집하면 됩니다.
+           ──────────────────────────────────────────────────────────────── */
+
+        /* 3-1 ── Links & Inline Code ── */
+        a {
+            color: var(--nia-blue);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        code {
+            font-family: var(--font-mono);
+            font-size: .82em;
+            color: var(--nia-navy);
+            background: var(--c-navy-08);
+            padding: .1em .35em;
+            border-radius: var(--r-sm);
+        }
+
+        /* 3-2 ── Page Headings (.ph > .pt + .pd) ── */
+        .ph {
+            margin-bottom: 1.5rem;
+        }
+
+        .pt { /* Page Title */
+            font-family: var(--font-sans);
+            font-size: var(--fs-xl);
+            font-weight: var(--fw-extrabold);
+            line-height: var(--lh-tight);
+            letter-spacing: var(--ls-tight);
+            margin-bottom: 0.45rem;
+            color: var(--text);
+        }
+
+        .pd { /* Page Description */
+            font-size: var(--fs-base);
+            font-weight: var(--fw-regular);
+            line-height: var(--lh-loose);
+            color: var(--text2);
+        }
+
+        /* 3-3 ── Card Title (.ct) ── */
+        .ct {
+            font-family: var(--font-sans);
+            font-size: var(--fs-sm);
+            font-weight: var(--fw-semibold);
+            letter-spacing: var(--ls-wide);
+            text-transform: uppercase;
+            color: var(--text2);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* 3-4 ── Form Label (.lbl) ── */
+        .lbl {
+            display: block;
+            font-family: var(--font-sans);
+            font-size: var(--fs-xs);
+            font-weight: var(--fw-semibold);
+            letter-spacing: var(--ls-wider);
+            text-transform: uppercase;
+            color: var(--text2);
+            margin-bottom: 0.45rem;
+        }
+
+        /* 3-5 ── Icon System (.ico) ── */
+        .ico {
+            display: inline-flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .ico svg {
+            width: 1em;
+            height: 1em;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* 코텍스트별 아이콘 크기 */
+        .btn .ico svg,
+        .chip .ico svg   { width: 15px; height: 15px; }
+        .ct  .ico svg    { width: 14px; height: 14px; }
+        .pt  .ico svg    { width: 22px; height: 22px; }
+        .logo-icon .ico svg { width: 18px; height: 18px; stroke: #fff; }
+
+        /* 3-6 ── SVG Text Roles ── */
+        /* 전체 SVG 기본 폰트 */
+        svg {
+            font-family: 'Pretendard Variable', Pretendard, sans-serif;
+        }
+
+        /* .nia-t   : 다이어그램 제목  (fw800, ls-tight) */
+        svg text.nia-t {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            letter-spacing: var(--ls-tight);
+            fill: var(--nia-navy);
+        }
+
+        /* .nia-lbl : 섬션 레이블 / 배지 (fw700, ls-wider) */
+        svg text.nia-lbl {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            letter-spacing: var(--ls-wider);
+            fill: var(--nia-blue);
+        }
+
+        /* .nia-cap : 캐프션 / 주석  (fw400, text3 색) */
+        svg text.nia-cap {
+            font-family: var(--font-sans);
+            font-weight: 400;
+            fill: var(--text3);
+        }
+
+        /* .nia-node: 노드 내부 텍스트 (fw600, text 색) */
+        svg text.nia-node {
+            font-family: var(--font-sans);
+            font-weight: 600;
+            fill: var(--text);
+        }
+
+        /* 3-7 ── Scrollbar ── */
+        ::-webkit-scrollbar       { width: 5px; height: 5px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(0,0,0,.15); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,.25); }
+
+        /* ────────────────────────────────────────────────────────────────
+           LAYER 4 · LAYOUT  (그리드 / 패널)
+           ──────────────────────────────────────────────────────────────── */
 
         /* ────────────────────────────────────────────────────────────────
            LAYER 5 · COMPONENTS
@@ -271,7 +422,7 @@
         }
 
         .logo-txt {
-            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            font-family: var(--font-sans);
             font-size: var(--fs-sm);
             font-weight: var(--fw-extrabold);
             letter-spacing: var(--ls-tight);
@@ -302,7 +453,7 @@
             background: none;
             border: none;
             cursor: pointer;
-            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            font-family: var(--font-sans);
             font-size: var(--fs-sm);
             font-weight: var(--fw-medium);
             letter-spacing: var(--ls-wide);
@@ -370,7 +521,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Inter', sans-serif;
+            font-family: var(--font-sans);
             font-size: 0.6rem;
             font-weight: var(--fw-bold);
             transition: all .2s;
@@ -413,28 +564,6 @@
             }
         }
 
-        /* titles */
-        .ph {
-            margin-bottom: 1.5rem;
-        }
-
-        .pt {
-            font-family: 'Inter', 'Noto Sans KR', sans-serif;
-            font-size: var(--fs-xl);
-            font-weight: var(--fw-extrabold);
-            line-height: var(--lh-tight);
-            letter-spacing: var(--ls-tight);
-            margin-bottom: 0.45rem;
-            color: var(--text);
-        }
-
-        .pd {
-            font-size: var(--fs-base);
-            font-weight: var(--fw-regular);
-            line-height: var(--lh-loose);
-            color: var(--text2);
-        }
-
         /* 5-2 ── CARDS ── */
         .card {
             background: var(--bg-card);
@@ -449,19 +578,6 @@
         .card:hover {
             box-shadow: var(--shadow-card-h);
             border-color: var(--c-blue-18);
-        }
-
-        .ct {
-            font-family: 'Inter', 'Noto Sans KR', sans-serif;
-            font-size: var(--fs-sm);
-            font-weight: var(--fw-semibold);
-            letter-spacing: var(--ls-wide);
-            text-transform: uppercase;
-            color: var(--text2);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
         }
 
         /* ────────────────────────────────────────────────────────────────
@@ -616,16 +732,6 @@
             margin-bottom: 1.1rem;
         }
 
-        .lbl {
-            display: block;
-            font-family: 'Inter', 'Noto Sans KR', sans-serif;
-            font-size: var(--fs-xs);
-            font-weight: var(--fw-semibold);
-            letter-spacing: var(--ls-wider);
-            text-transform: uppercase;
-            color: var(--text2);
-            margin-bottom: 0.45rem;
-        }
 
         .inp {
             width: 100%;
@@ -633,7 +739,7 @@
             background: var(--bg-primary);
             border: 1px solid var(--border);
             border-radius: var(--r-md);
-            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            font-family: var(--font-sans);
             font-size: var(--fs-base);
             line-height: var(--lh-snug);
             transition: border-color .2s, box-shadow .2s;
@@ -647,7 +753,7 @@
         }
 
         .inp[type=password] {
-            font-family: 'JetBrains Mono', monospace;
+            font-family: var(--font-mono);
             letter-spacing: .1em;
         }
 
@@ -668,6 +774,8 @@
             gap: 0.45rem;
             padding: .63rem 1.35rem;
             border-radius: var(--r-md);
+            font-family: var(--font-sans);
+            font-size: var(--fs-sm);
             font-weight: var(--fw-semibold);
             letter-spacing: var(--ls-wide);
             cursor: pointer;
@@ -836,6 +944,7 @@
             padding: .62rem .88rem;
             border: 1px solid var(--border);
             border-radius: var(--r-md);
+            margin-bottom: .4rem;
             cursor: pointer;
             transition: all .2s;
         }
@@ -893,7 +1002,7 @@
             border-radius: 10px;
             padding: 1rem;
             color: var(--nia-navy);
-            font-family: 'JetBrains Mono', monospace;
+            font-family: var(--font-mono);
             font-size: var(--fs-xs);
             resize: vertical;
             line-height: 1.65;
@@ -954,12 +1063,14 @@
         .cmpb {
             border: 1px solid var(--border);
             border-radius: var(--r-lg);
+            overflow: hidden;
         }
 
         .cmph {
             padding: .68rem 1rem;
             font-size: var(--fs-sm);
             font-weight: var(--fw-bold);
+            display: flex;
             align-items: center;
             gap: .45rem;
         }
@@ -1037,7 +1148,7 @@
             align-items: center;
             padding: .2rem .65rem;
             border-radius: 20px;
-            font-family: 'Inter', sans-serif;
+            font-family: var(--font-sans);
             font-size: var(--fs-xs);
             font-weight: var(--fw-bold);
             letter-spacing: var(--ls-wide);
@@ -1292,7 +1403,7 @@
             color: var(--text2);
             line-height: 1.65;
             white-space: pre-wrap;
-            font-family: 'JetBrains Mono', monospace;
+            font-family: var(--font-mono);
             margin-top: .6rem;
         }
 
@@ -1303,86 +1414,9 @@
             transition: width .5s ease;
         }
 
-        /* ────────────────────────────────────────────────────────────────
-           LAYER 3 · TYPOGRAPHY  (.ico, a, code …)
-           ──────────────────────────────────────────────────────────────── */
         /* util */
         .gap {
             margin-top: 1.2rem;
-        }
-
-        ::-webkit-scrollbar {
-            width: 5px;
-            height: 5px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: rgba(0, 0, 0, .15);
-            border-radius: 3px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(0, 0, 0, .25);
-        }
-
-        a {
-            color: var(--nia-blue);
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        code {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: .82em;
-            color: var(--nia-navy);
-            background: var(--c-navy-08);
-            padding: .1em .35em;
-            border-radius: var(--r-sm);
-        }
-
-        .ico {
-            display: inline-flex;
-            align-items: center;
-            flex-shrink: 0;
-        }
-
-        .ico svg {
-            width: 1em;
-            height: 1em;
-            stroke: currentColor;
-            fill: none;
-            stroke-width: 1.8;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-
-        .btn .ico svg,
-        .chip .ico svg {
-            width: 15px;
-            height: 15px;
-        }
-
-        .ct .ico svg {
-            width: 14px;
-            height: 14px;
-        }
-
-        .pt .ico svg {
-            width: 22px;
-            height: 22px;
-        }
-
-        .logo-icon .ico svg {
-            width: 18px;
-            height: 18px;
-            stroke: #fff;
         }
 
         /* 5-9 ── PANELS (HELP / GLOSSARY / CONCEPT) ── */
@@ -1558,7 +1592,7 @@
             font-size: var(--fs-xs);
             font-weight: 700;
             letter-spacing: .6em;
-            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            font-family: var(--font-sans);
         }
 
         .help-toggle:hover {
@@ -1617,7 +1651,7 @@
         }
 
         .ld-brand-name {
-            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            font-family: var(--font-sans);
             font-size: var(--fs-base);
             font-weight: 800;
             color: var(--nia-navy, #243B7C);
@@ -1627,7 +1661,7 @@
         .ld-contact {
             font-size: var(--fs-xs);
             color: var(--text3, #8FA3BE);
-            font-family: 'Inter', sans-serif;
+            font-family: var(--font-sans);
         }
 
         .ld-hero {
@@ -1637,7 +1671,7 @@
         }
 
         .ld-tagline {
-            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            font-family: var(--font-sans);
             font-size: 1.45rem;
             font-weight: 700;
             color: var(--nia-navy, #243B7C);
@@ -1698,7 +1732,7 @@
         }
 
         .ld-cosmos-svg .node-text {
-            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            font-family: var(--font-sans);
             font-size: var(--fs-xs);
             font-weight: 600;
             fill: var(--nia-navy, #243B7C);
@@ -1741,7 +1775,7 @@
         }
 
         .ld-workshop h2 {
-            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            font-family: var(--font-sans);
             font-size: var(--fs-md);
             font-weight: 700;
             color: var(--nia-navy, #243B7C);
@@ -1766,7 +1800,7 @@
             color: #fff;
             font-size: var(--fs-base);
             font-weight: var(--fw-bold);
-            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            font-family: var(--font-sans);
             transition: all .2s;
             box-shadow: 0 4px 18px var(--c-blue-28);
         }
@@ -1857,7 +1891,7 @@
         }
 
         .cm-formula {
-            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            font-family: var(--font-sans);
             font-size: var(--fs-xl);
             font-weight: 700;
             color: var(--nia-navy, #243B7C);
@@ -1908,52 +1942,13 @@
             margin-bottom: 0.1rem;
         }
 
-        /* ── NIA SVG 디자인 시스템 ─────────────────────────────── */
-        /* 폰트: Inter(숫자/영문 우선) + Noto Sans KR(한글) 혼합 */
-        svg {
-            font-family: 'Inter', 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif;
-        }
-
-        /* SVG 텍스트 역할별 CSS 클래스 */
-        /* .nia-t  : 다이어그램 제목  (fw800, ls-tight)  */
-        svg text.nia-t {
-            font-family: 'Inter', 'Noto Sans KR', sans-serif;
-            font-weight: 800;
-            letter-spacing: var(--ls-tight);
-            fill: var(--nia-navy);
-        }
-
-        /* .nia-lbl : 섹션 레이블 / 배지  (fw700, ls-wide) */
-        svg text.nia-lbl {
-            font-family: 'Inter', 'Noto Sans KR', sans-serif;
-            font-weight: 700;
-            letter-spacing: var(--ls-wider);
-            fill: var(--nia-blue);
-        }
-
-        /* .nia-cap : 캡션 / 주석  (fw400, text3 색) */
-        svg text.nia-cap {
-            font-family: 'Noto Sans KR', sans-serif;
-            font-weight: 400;
-            fill: var(--text3);
-        }
-
-        /* .nia-node: 노드 내부 텍스트  (fw600, text 색) */
-        svg text.nia-node {
-            font-family: 'Noto Sans KR', sans-serif;
-            font-weight: 600;
-            fill: var(--text);
-        }
-
-        /* ── NIA SVG 디자인 시스템 end ──────────────────────────── */
-
         /* ══════════════════════════════════════════════════════════════
            SVG DESIGN STANDARD  ① 랜딩 노드 타이포그라피 계층
            비중(importance %)에 따른 레이블 크기·굵기·투명도
            ══════════════════════════════════════════════════════════════ */
         /* 항성(A) - 최상위, 상시 강조 */
         .ld-cosmos-svg .nd-star {
-            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            font-family: var(--font-sans);
             font-size: var(--fs-sm);
             font-weight: 800;
             fill: var(--nia-blue, #0367B0);
@@ -1964,7 +1959,7 @@
 
         /* Tier L - 25% : B 목성 */
         .ld-cosmos-svg .nd-label-l {
-            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            font-family: var(--font-sans);
             font-size: var(--fs-sm);
             font-weight: 700;
             fill: var(--nia-navy, #243B7C);
@@ -1975,7 +1970,7 @@
 
         /* Tier M - 15-20% : C·D·E */
         .ld-cosmos-svg .nd-label-m {
-            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            font-family: var(--font-sans);
             font-size: var(--fs-xs);
             font-weight: 700;
             fill: var(--nia-navy, #243B7C);
@@ -1986,7 +1981,7 @@
 
         /* Tier S - 5-10% : F·G·H */
         .ld-cosmos-svg .nd-label-s {
-            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            font-family: var(--font-sans);
             font-size: 10px;
             font-weight: 600;
             fill: var(--nia-navy, #243B7C);
@@ -1997,7 +1992,7 @@
 
         /* 타입 서브레이블 - 목성형·해왕성형… */
         .ld-cosmos-svg .nd-type {
-            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            font-family: var(--font-sans);
             font-size: 9px;
             font-weight: 500;
             fill: var(--nia-navy, #243B7C);
@@ -2007,7 +2002,7 @@
 
         /* 퍼센트 배지 텍스트 */
         .ld-cosmos-svg .nd-pct {
-            font-family: 'Inter', sans-serif;
+            font-family: var(--font-sans);
             font-size: 9px;
             font-weight: 800;
             fill: var(--nia-blue, #0367B0);
@@ -2044,7 +2039,7 @@
             font-size: var(--fs-xs);
             cursor: pointer;
             transition: all .22s;
-            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+            font-family: var(--font-sans);
             white-space: nowrap;
         }
 
@@ -2332,7 +2327,7 @@
         #license-gate .lg-copy {
             font-size: .7rem;
             color: rgba(255, 255, 255, .38);
-            font-family: 'Inter', sans-serif;
+            font-family: var(--font-sans);
         }
 
         #license-gate .lg-tabs {
@@ -2513,7 +2508,7 @@
             font-size: var(--fs-xs);
             font-weight: 700;
             letter-spacing: .6em;
-            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            font-family: var(--font-sans);
         }
 
         #glossary-toggle:hover {
@@ -2553,7 +2548,7 @@
         }
 
         .schema-guide-key {
-            font-family: 'JetBrains Mono', monospace;
+            font-family: var(--font-mono);
             font-weight: 700;
             color: var(--nia-navy);
             min-width: 118px;
@@ -2585,7 +2580,7 @@
             cursor: pointer;
             background: none;
             color: var(--text3);
-            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            font-family: var(--font-sans);
             transition: all .18s;
             display: inline-flex;
             align-items: center;
@@ -2632,7 +2627,7 @@
             border: 1px solid var(--c-navy-12);
             border-radius: 7px;
             padding: .6rem .85rem;
-            font-family: 'JetBrains Mono', monospace;
+            font-family: var(--font-mono);
             font-size: var(--fs-xs);
             color: var(--nia-navy);
             line-height: 1.8;
@@ -3120,7 +3115,7 @@
         justify-content:center;
         gap:20px;
         background:linear-gradient(to top, rgba(3,8,20,0.82) 0%, rgba(3,8,20,0) 100%);
-        font-family:'Inter','Noto Sans KR',sans-serif;
+        font-family:Pretendard,sans-serif;
         font-size:11px;
         letter-spacing:-0.015em;
         color:rgba(255,255,255,0.85);
@@ -4295,7 +4290,7 @@
                             <circle cx="5.5" cy="18.5" r="2.5" />
                             <circle cx="18.5" cy="18.5" r="2.5" />
                         </svg><span
-                            style="font-family:'Inter','Noto Sans KR',sans-serif;font-size:.65rem;font-weight:700;color:var(--nia-blue);letter-spacing:.06em;text-transform:uppercase;">교통
+                            style="font-family:Pretendard,sans-serif;font-size:.65rem;font-weight:700;color:var(--nia-blue);letter-spacing:.06em;text-transform:uppercase;">교통
                             · 도로</span><span style="font-size:.65rem;color:var(--text3);font-style:italic;">한국도로교통공단 ·
                             화성특례시 · SR</span>
                     </div>
@@ -4338,7 +4333,7 @@
                             <line x1="12" y1="9" x2="12" y2="13" />
                             <line x1="12" y1="17" x2="12.01" y2="17" />
                         </svg><span
-                            style="font-family:'Inter','Noto Sans KR',sans-serif;font-size:.65rem;font-weight:700;color:var(--nia-blue);letter-spacing:.06em;text-transform:uppercase;">안전
+                            style="font-family:Pretendard,sans-serif;font-size:.65rem;font-weight:700;color:var(--nia-blue);letter-spacing:.06em;text-transform:uppercase;">안전
                             · 재난</span><span style="font-size:.65rem;color:var(--text3);font-style:italic;">소방청 · 경찰청 ·
                             화성특례시</span>
                     </div>
@@ -4367,7 +4362,7 @@
                             style="width:13px;height:13px;stroke:var(--nia-blue);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;">
                             <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
                         </svg><span
-                            style="font-family:'Inter','Noto Sans KR',sans-serif;font-size:.65rem;font-weight:700;color:var(--nia-blue);letter-spacing:.06em;text-transform:uppercase;">복지
+                            style="font-family:Pretendard,sans-serif;font-size:.65rem;font-weight:700;color:var(--nia-blue);letter-spacing:.06em;text-transform:uppercase;">복지
                             · 의료 · 고용</span><span
                             style="font-size:.65rem;color:var(--text3);font-style:italic;">건강보험심사평가원 · 한국사회보장정보원 ·
                             고용노동부</span>
@@ -4400,7 +4395,7 @@
                             style="width:13px;height:13px;stroke:var(--nia-blue);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;">
                             <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
                         </svg><span
-                            style="font-family:'Inter','Noto Sans KR',sans-serif;font-size:.65rem;font-weight:700;color:var(--nia-blue);letter-spacing:.06em;text-transform:uppercase;">에너지
+                            style="font-family:Pretendard,sans-serif;font-size:.65rem;font-weight:700;color:var(--nia-blue);letter-spacing:.06em;text-transform:uppercase;">에너지
                             · 환경 · 산림</span><span style="font-size:.65rem;color:var(--text3);font-style:italic;">한전KDN ·
                             한국산림복지진흥원 · 해양수산부</span>
                     </div>
@@ -4433,7 +4428,7 @@
                             <line x1="16" y1="13" x2="8" y2="13" />
                             <line x1="16" y1="17" x2="8" y2="17" />
                         </svg><span
-                            style="font-family:'Inter','Noto Sans KR',sans-serif;font-size:.65rem;font-weight:700;color:var(--nia-blue);letter-spacing:.06em;text-transform:uppercase;">행정
+                            style="font-family:Pretendard,sans-serif;font-size:.65rem;font-weight:700;color:var(--nia-blue);letter-spacing:.06em;text-transform:uppercase;">행정
                             · 민원 일반</span><span style="font-size:.65rem;color:var(--text3);font-style:italic;">국민권익위원회 ·
                             국가데이터처 · 서울특별시</span>
                     </div>
@@ -4457,7 +4452,7 @@
                             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
                             <polyline points="9 22 9 12 15 12 15 22" />
                         </svg><span
-                            style="font-family:'Inter','Noto Sans KR',sans-serif;font-size:.65rem;font-weight:700;color:var(--nia-blue);letter-spacing:.06em;text-transform:uppercase;">지자체
+                            style="font-family:Pretendard,sans-serif;font-size:.65rem;font-weight:700;color:var(--nia-blue);letter-spacing:.06em;text-transform:uppercase;">지자체
                             행정</span><span style="font-size:.65rem;color:var(--text3);font-style:italic;">서울특별시 · 대전광역시
                             · 화성특례시 · 의정부시 · 부천시 · 광양시</span>
                     </div>
@@ -4476,7 +4471,7 @@
                             style="width:13px;height:13px;stroke:var(--nia-blue);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;">
                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                         </svg><span
-                            style="font-family:'Inter','Noto Sans KR',sans-serif;font-size:.65rem;font-weight:700;color:var(--nia-blue);letter-spacing:.06em;text-transform:uppercase;">산업
+                            style="font-family:Pretendard,sans-serif;font-size:.65rem;font-weight:700;color:var(--nia-blue);letter-spacing:.06em;text-transform:uppercase;">산업
                             · 국방 · 기술</span><span style="font-size:.65rem;color:var(--text3);font-style:italic;">국방부 ·
                             한국광해광업공단 · 국가데이터처 · 기술보증기금</span>
                     </div>
@@ -6253,7 +6248,7 @@ for r in results:
 
     <div class="stbar">
         <span class="stbar-nia"
-            style="font-family:'Inter','Noto Sans KR',sans-serif;font-size:.7rem;color:var(--text3);letter-spacing:0;line-height:1.4;flex-shrink:0;">
+            style="font-family:Pretendard,sans-serif;font-size:.7rem;color:var(--text3);letter-spacing:0;line-height:1.4;flex-shrink:0;">
             <span class="stbar-nia-full"
                 style="font-weight:700;color:var(--nia-navy);font-size:.72rem;">한국지능정보사회진흥원</span><br>
             <span class="stbar-nia-full" style="font-size:.67rem;">National Information Society Agency (NIA)</span>
@@ -6273,7 +6268,7 @@ for r in results:
                 badge: '중심 항성 · 온톨로지',
                 formula: '온톨로지 := 지식의 우주를 만드는 언어',
                 explain: '민원·정책·담당자·처리기한. 이 개념들이 서로 어떻게 연결되는지를 컴퓨터가 이해할 수 있는 구조로 표현한 것이 온톨로지입니다. 단순 분류와 달리 관계와 규칙까지 담습니다. 온톨로지는 철학의 존재론에서 출발했습니다. Gruber(1993)가 그 철학을 시맨틱으로 구현했고, W3C 표준이 그 구현의 경로를 정의했습니다. 그러나 온톨로지는 표준 하나에 갇히지 않습니다. 실제 데이터가 쌓이면서 개념 구조는 끊임없이 재형성됩니다.',
-                svg: `<svg viewBox="0 0 840 310" xmlns="http://www.w3.org/2000/svg" style="font-family:'Inter','Noto Sans KR',sans-serif;">
+                svg: `<svg viewBox="0 0 840 310" xmlns="http://www.w3.org/2000/svg" style="font-family:Pretendard,sans-serif;">
             <defs>
                 <marker id="ma" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#0367B0"/></marker>
                 <marker id="mared" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#e11d48"/></marker>
@@ -6399,7 +6394,7 @@ for r in results:
                 badge: '목성형 · 전체론적 관점',
                 formula: '전체 = 부분의 합 이상',
                 explain: '한 시민이 출산 지원금을 신청하고, 아이 돌봄 서비스를 등록하고, 양육수당을 수령할 때 각 부서는 자기 업무만 처리합니다. 그러나 이 세 흐름은 하나의 육아 지원 여정으로 연결됩니다. 전체론적 관점은 이 연결을 하나의 시민 맥락으로 읽어내며, 개별 신호를 따로 처리하는 것이 아니라 전체 구조 속에서 위치시킵니다. 이 해석의 틀 없이는 아무리 데이터가 쌓여도 새로운 개념 구조는 출현하지 않습니다.',
-                svg: `<svg viewBox="0 0 840 496" xmlns="http://www.w3.org/2000/svg" style="font-family:'Inter','Noto Sans KR',sans-serif;">
+                svg: `<svg viewBox="0 0 840 496" xmlns="http://www.w3.org/2000/svg" style="font-family:Pretendard,sans-serif;">
             <defs>
                 <marker id="mb" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#0367B0"/></marker>
                 <marker id="mb2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#243B7C"/></marker>
@@ -6505,7 +6500,7 @@ for r in results:
                 badge: '해왕성형 · Weak Signal',
                 formula: '반복되는 예외 = 새로운 규칙의 신호',
                 explain: '매주 반복되는 처리 지연이 있습니다. 하나씩 보면 우연처럼 보이지만, 전체를 놓고 보면 특정 지역·요일·민원 유형에 일관된 패턴이 나타납니다. 이 패턴은 기존 개념 구조 어디에도 없는 새로운 범주의 씨앗입니다. 아직 이름이 없어서 통계에서는 잡음으로 처리되지만, Ansoff(1975)는 이를 Weak Signal이라 불렀습니다. 이것을 감지하지 못하면 아무리 데이터가 쌓여도 온톨로지는 스스로 갱신되지 않습니다.',
-                svg: `<svg viewBox="0 0 500 190" xmlns="http://www.w3.org/2000/svg" style="font-family:'Inter','Noto Sans KR',sans-serif;">
+                svg: `<svg viewBox="0 0 500 190" xmlns="http://www.w3.org/2000/svg" style="font-family:Pretendard,sans-serif;">
             <defs><marker id="mc" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#0367B0"/></marker></defs>
             <!-- 타이틀: y=16 -->
             <text x="250" y="16" text-anchor="middle" font-size="11" font-weight="800" fill="#0367B0" letter-spacing="-0.025em">위크 시그널 - 전체 맥락에서만 보이는 변화의 신호</text>
@@ -6564,7 +6559,7 @@ for r in results:
                 badge: '토성형 · 시스템 다이나믹스',
                 formula: '정책 변화 → 시스템 구조 변화 매핑',
                 explain: '행정 정책 하나가 바뀌면, 그 영향은 예상치 못한 곳까지 번집니다. 시스템 다이나믹스는 이 인과 구조를 피드백 루프로 그려냅니다. 강화 루프는 변화가 스스로 증폭되는 경로를, 균형 루프는 그 변화를 억제하는 경로를 보여줍니다. 루프를 그리다 보면 현장에서 쌓이는 데이터가 개념 구조의 어느 부분을 바꿔야 하는지가 드러납니다.',
-                svg: `<svg viewBox="0 0 500 190" xmlns="http://www.w3.org/2000/svg" style="font-family:'Inter','Noto Sans KR',sans-serif;">
+                svg: `<svg viewBox="0 0 500 190" xmlns="http://www.w3.org/2000/svg" style="font-family:Pretendard,sans-serif;">
             <defs>
                 <marker id="md1" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#243B7C"/></marker>
                 <marker id="md2" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#C05621"/></marker>
@@ -6633,7 +6628,7 @@ for r in results:
                 badge: '화성형 · 시맨틱 재료',
                 formula: '문서 → 주어·서술어·목적어 자동 추출',
                 explain: '문서 속 문장을 구조화된 관계로 바꾸는 것이 시맨틱 재료 추출입니다. \'민원인이 주민등록등본을 제출한다\'에서 주어(민원인)·행위(제출)·대상(주민등록등본)을 자동으로 뽑아내고, 담당부서와의 관계까지 연결합니다. 개념 구조를 먼저 설계하지 않아도 문서로부터 직접 관계를 추출할 수 있다는 점이 핵심입니다. LLM 이후 이 역할의 비중이 5%에서 20%로 가장 크게 성장한 이유입니다.',
-                svg: `<svg viewBox="0 0 760 200" xmlns="http://www.w3.org/2000/svg" style="font-family:'Inter','Noto Sans KR',sans-serif;">
+                svg: `<svg viewBox="0 0 760 200" xmlns="http://www.w3.org/2000/svg" style="font-family:Pretendard,sans-serif;">
             <defs>
                 <marker id="me1" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#C05621"/></marker>
                 <marker id="me2" markerWidth="12" markerHeight="9" refX="10" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L0,9 L12,4.5 z" fill="#0367B0"/></marker>
@@ -6720,7 +6715,7 @@ for r in results:
                 badge: '지구형 · 시맨틱',
                 formula: '의미의 안정적 토대',
                 explain: '민원인, 담당부서, 처리기한 - 행정 어디에서나 반복되는 불변의 기본 개념들입니다. 온톨로지가 달라져도, 시스템이 바뀌어도 이 개념들은 흔들리지 않습니다. 이런 안정적 시맨틱 앵커가 없으면, LLM이 아무리 동적으로 개념을 재구성해도 의미 드리프트(Contextual Drift)가 발생합니다. 비중이 9%에서 10%로 거의 변하지 않는 것은 이 역할이 언제나 필요하기 때문입니다.',
-                svg: `<svg viewBox="0 0 500 224" xmlns="http://www.w3.org/2000/svg" style="font-family:'Inter','Noto Sans KR',sans-serif;">
+                svg: `<svg viewBox="0 0 500 224" xmlns="http://www.w3.org/2000/svg" style="font-family:Pretendard,sans-serif;">
             <defs><marker id="mf" markerWidth="12" markerHeight="9" refX="10" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L0,9 L12,4.5 z" fill="#0E7A52"/></marker></defs>
             <!-- 타이틀 -->
             <text x="250" y="16" text-anchor="middle" font-size="11" font-weight="800" fill="#0E7A52" letter-spacing="-0.025em">시맨틱 = 의미를 명확하게 약속하는 것</text>
@@ -6785,7 +6780,7 @@ for r in results:
                 badge: '수성형 · 하향식 정적 구현체',
                 formula: '전문가 T-Box 설계 → 하향식 적용',
                 explain: '지금까지 온톨로지는 이렇게 만들었습니다. 법률·정책 전문가가 OWL·RDF로 개념을 설계하고, 그 구조에 데이터를 맞춥니다. 행정은 이미 표준화된 영역이기 때문에 이 방식이 아직 유효합니다. 비중이 68%였다는 것은 온톨로지 구축이 사실상 전문가 설계와 동의어였다는 뜻입니다. 5%로의 이동은 이 방식의 소멸이 아니라, 다른 역할들이 충분히 성숙했을 때 전문가 설계 없이도 개념 구조가 출현할 수 있다는 방향을 의미합니다.',
-                svg: `<svg viewBox="0 0 500 196" xmlns="http://www.w3.org/2000/svg" style="font-family:'Inter','Noto Sans KR',sans-serif;">
+                svg: `<svg viewBox="0 0 500 196" xmlns="http://www.w3.org/2000/svg" style="font-family:Pretendard,sans-serif;">
             <defs><marker id="mg" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#3C3463"/></marker></defs>
             <!-- 타이틀 -->
             <text x="250" y="16" text-anchor="middle" font-size="11" font-weight="800" fill="#3C3463" letter-spacing="-0.025em">하향식 정적 구현 - 전문가가 미리 설계하는 방식</text>
@@ -6843,7 +6838,7 @@ for r in results:
                 badge: '적색왜성형 · 온톨로지 회귀',
                 formula: 'A-Box 학습 → T-Box 자동 갱신 → 다시 A-Box',
                 explain: '1,000건의 민원 처리 데이터가 쌓이면, 기존에 없던 민원 유형이 새 개념으로 자동 등록되고, 그 개념이 다음 민원 처리에 반영됩니다. 온톨로지가 스스로 자라는 것입니다. 이것은 신호 감지·관계 추출·인과 모델링·시맨틱 변환이 하나의 순환으로 연결될 때 비로소 가능합니다. 2%에서 10%로의 이동은 그 순환이 조금씩 완성되고 있다는 뜻입니다. SHACL 같은 제약 검증도 머지않아 A-Box 패턴에서 자동 생성될 것입니다.',
-                svg: `<svg viewBox="0 0 500 190" xmlns="http://www.w3.org/2000/svg" style="font-family:'Inter','Noto Sans KR',sans-serif;">
+                svg: `<svg viewBox="0 0 500 190" xmlns="http://www.w3.org/2000/svg" style="font-family:Pretendard,sans-serif;">
             <defs>
                 <marker id="mh1" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#B91C1C"/></marker>
                 <marker id="mh2" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#C05621"/></marker>
@@ -8788,7 +8783,7 @@ for r in results:
             spec.innerHTML = `<div style="background:rgba(3,103,176,.04);border:1px solid rgba(3,103,176,.14);border-left:3px solid ${stepColor};border-radius:10px;padding:.85rem 1rem;font-size:var(--fs-sm);">
         <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem;flex-wrap:wrap;">
             <span style="font-weight:700;font-size:var(--fs-md);color:var(--text1);">${d.label}</span>
-            <span style="background:${stepColor};color:#fff;font-size:.64rem;font-weight:700;padding:.12rem .45rem;border-radius:4px;font-family:'Inter',sans-serif;letter-spacing:.04em;">${d.step}</span>
+            <span style="background:${stepColor};color:#fff;font-size:.64rem;font-weight:700;padding:.12rem .45rem;border-radius:4px;font-family:Pretendard,sans-serif;letter-spacing:.04em;">${d.step}</span>
         </div>
         <div style="margin-bottom:.55rem;"><span class="lbl">데이터 출처</span><div style="color:var(--text2);margin-top:.2rem;">${d.src}</div></div>
         <div style="margin-bottom:.55rem;"><span class="lbl">주요 필드</span>
@@ -9795,7 +9790,7 @@ for r in results:
                 btn.className = 'chip';
                 btn.dataset.idx = i;
                 const shortTitle = sc.title.length > 14 ? sc.title.slice(0, 14) + '…' : sc.title;
-                btn.innerHTML = `<span style="flex-shrink:0;width:16px;height:16px;border-radius:50%;background:var(--nia-blue);color:#fff;font-size:.6rem;font-weight:700;display:inline-flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;">${i + 1}</span> ${shortTitle}`;
+                btn.innerHTML = `<span style="flex-shrink:0;width:16px;height:16px;border-radius:50%;background:var(--nia-blue);color:#fff;font-size:.6rem;font-weight:700;display:inline-flex;align-items:center;justify-content:center;font-family:Pretendard,sans-serif;">${i + 1}</span> ${shortTitle}`;
                 btn.onclick = () => { _currentHintIdx = i; selectScenHint(i, btn); };
                 chipsCt.appendChild(btn);
             });
@@ -9895,11 +9890,11 @@ for r in results:
             if (empty) empty.style.display = 'none';
             list.innerHTML = matched.map(h => `
         <div style="border-left:3px solid var(--nia-blue);padding:.45rem .75rem;background:rgba(3,103,176,.03);border-radius:0 7px 7px 0;">
-            <div style="font-family:'Inter','Noto Sans KR',sans-serif;font-size:.69rem;font-weight:700;color:var(--nia-blue);letter-spacing:.03em;margin-bottom:.35rem;">${h.label}</div>
+            <div style="font-family:Pretendard,sans-serif;font-size:.69rem;font-weight:700;color:var(--nia-blue);letter-spacing:.03em;margin-bottom:.35rem;">${h.label}</div>
             <div style="margin-bottom:.3rem;">
                 <span style="font-size:.65rem;font-weight:700;color:var(--text2);letter-spacing:.04em;text-transform:uppercase;">추천 법령 검색어</span>
                 <div style="display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.25rem;">
-                    ${h.laws.map(l => `<button onclick="document.getElementById('law-q').value='${l}';searchLaw();" style="display:inline-flex;align-items:center;gap:.28rem;padding:.22rem .6rem;background:rgba(3,103,176,.08);border:1px solid rgba(3,103,176,.22);border-radius:14px;font-size:.67rem;font-weight:500;color:var(--nia-blue);cursor:pointer;font-family:'Noto Sans KR',sans-serif;transition:all .15s;" onmouseover="this.style.background='var(--nia-blue)';this.style.color='#fff';this.querySelector('svg').style.stroke='#fff';" onmouseout="this.style.background='rgba(3,103,176,.08)';this.style.color='var(--nia-blue)';this.querySelector('svg').style.stroke='var(--nia-blue)';" ><svg viewBox='0 0 24 24' style='width:10px;height:10px;stroke:var(--nia-blue);fill:none;stroke-width:2.5;stroke-linecap:round;flex-shrink:0;transition:stroke .15s;'><circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg>${l}</button>`).join('')}
+                    ${h.laws.map(l => `<button onclick="document.getElementById('law-q').value='${l}';searchLaw();" style="display:inline-flex;align-items:center;gap:.28rem;padding:.22rem .6rem;background:rgba(3,103,176,.08);border:1px solid rgba(3,103,176,.22);border-radius:14px;font-size:.67rem;font-weight:500;color:var(--nia-blue);cursor:pointer;font-family:Pretendard,sans-serif;transition:all .15s;" onmouseover="this.style.background='var(--nia-blue)';this.style.color='#fff';this.querySelector('svg').style.stroke='#fff';" onmouseout="this.style.background='rgba(3,103,176,.08)';this.style.color='var(--nia-blue)';this.querySelector('svg').style.stroke='var(--nia-blue)';" ><svg viewBox='0 0 24 24' style='width:10px;height:10px;stroke:var(--nia-blue);fill:none;stroke-width:2.5;stroke-linecap:round;flex-shrink:0;transition:stroke .15s;'><circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg>${l}</button>`).join('')}
                 </div>
             </div>
             <div>
@@ -9981,13 +9976,13 @@ for r in results:
             list.innerHTML = results.map(h => `
         <div style="border-left:3px solid var(--green,#0e7a52);padding:.45rem .75rem;background:rgba(14,122,82,.03);border-radius:0 7px 7px 0;">
             <div style="display:flex;align-items:center;gap:.4rem;margin-bottom:.35rem;">
-                <span style="font-family:'Inter','Noto Sans KR',sans-serif;font-size:.69rem;font-weight:700;color:var(--green,#0e7a52);letter-spacing:.03em;">${h.label}</span>
+                <span style="font-family:Pretendard,sans-serif;font-size:.69rem;font-weight:700;color:var(--green,#0e7a52);letter-spacing:.03em;">${h.label}</span>
                 <span style="font-size:.58rem;font-weight:700;padding:.1rem .35rem;background:rgba(14,122,82,.12);color:var(--green,#0e7a52);border-radius:4px;letter-spacing:.03em;">AI 추천</span>
             </div>
             <div style="margin-bottom:.3rem;">
                 <span style="font-size:.65rem;font-weight:700;color:var(--text2);letter-spacing:.04em;text-transform:uppercase;">추천 법령 검색어</span>
                 <div style="display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.25rem;">
-                    ${(h.laws || []).map(l => `<button onclick="document.getElementById('law-q').value='${l}';searchLaw();" style="display:inline-flex;align-items:center;gap:.28rem;padding:.22rem .6rem;background:rgba(14,122,82,.08);border:1px solid rgba(14,122,82,.22);border-radius:14px;font-size:.67rem;font-weight:500;color:var(--green,#0e7a52);cursor:pointer;font-family:'Noto Sans KR',sans-serif;transition:all .15s;" onmouseover="this.style.background='var(--green,#0e7a52)';this.style.color='#fff';" onmouseout="this.style.background='rgba(14,122,82,.08)';this.style.color='var(--green,#0e7a52)';" ><svg viewBox='0 0 24 24' style='width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;flex-shrink:0;'><circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg>${l}</button>`).join('')}
+                    ${(h.laws || []).map(l => `<button onclick="document.getElementById('law-q').value='${l}';searchLaw();" style="display:inline-flex;align-items:center;gap:.28rem;padding:.22rem .6rem;background:rgba(14,122,82,.08);border:1px solid rgba(14,122,82,.22);border-radius:14px;font-size:.67rem;font-weight:500;color:var(--green,#0e7a52);cursor:pointer;font-family:Pretendard,sans-serif;transition:all .15s;" onmouseover="this.style.background='var(--green,#0e7a52)';this.style.color='#fff';" onmouseout="this.style.background='rgba(14,122,82,.08)';this.style.color='var(--green,#0e7a52)';" ><svg viewBox='0 0 24 24' style='width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;flex-shrink:0;'><circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg>${l}</button>`).join('')}
                 </div>
             </div>
             <div>
@@ -10109,7 +10104,7 @@ for r in results:
                 row.onmouseleave = () => row.style.borderColor = 'var(--border)';
                 row.innerHTML = `
           <div style="display:flex;align-items:center;gap:.6rem;padding:.6rem .8rem;">
-            <span style="flex-shrink:0;width:20px;height:20px;border-radius:50%;background:var(--nia-blue);color:#fff;font-size:.65rem;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;">${i + 1}</span>
+            <span style="flex-shrink:0;width:20px;height:20px;border-radius:50%;background:var(--nia-blue);color:#fff;font-size:.65rem;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:Pretendard,sans-serif;">${i + 1}</span>
             <span style="flex:1;font-size:.82rem;font-weight:600;color:var(--text1,#111);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${s.title}</span>
             <span style="flex-shrink:0;padding:.12rem .45rem;border-radius:6px;font-size:.63rem;font-weight:700;background:rgba(3,103,176,.1);color:var(--nia-blue);">${lv}</span>
             <button aria-label="시나리오 편집" onclick="loadScenarioToEditor(${s.id})" style="background:none;border:none;cursor:pointer;color:var(--text3);padding:.1rem .3rem;border-radius:3px;" title="편집하기 (텍스트·엔터티·질의·수준 복원)"><svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" fill="none" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
@@ -13020,7 +13015,7 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
                 { cx: 524, cy: 424, lb: ['UC10 결과 내보내기'], st: '#0367B0', bg: 'rgba(3,103,176,.09)' },
             ];
             var ax = 56, ay = 285, llx = 878, lly = 192, gwx = 878, gwy = 420;
-            var s = '<svg width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg" style="font-family:Inter,Noto Sans KR,sans-serif;max-width:100%;display:block;">'
+            var s = '<svg width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg" style="font-family:Pretendard,sans-serif;max-width:100%;display:block;">'
                 + '<defs>'
                 + '<marker id="ucma" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#243B7C"/></marker>'
                 + '<marker id="ucmg" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#0E7A52"/></marker>'
@@ -13339,7 +13334,7 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
             const H = layers.reduce((s, l) => s + l.lh, 0) + (layers.length - 1) * arrowH + sidePad * 2;
 
             // defs 선행 배치 (화살표 마커 forward-reference 버그 방지)
-            let svg = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="font-family:'Inter','Noto Sans KR',sans-serif;">`;
+            let svg = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="font-family:Pretendard,sans-serif;">`;
             svg += `<defs><marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#0367B0"/></marker></defs>`;
 
             let curY = sidePad;
@@ -13401,7 +13396,7 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
             ];
             const H = hTop + msgs.length * hGap + 40;
             const colW = W / actors.length, lineX = actors.map((_, i) => colW / 2 + i * colW);
-            let svg = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="font-family:\'Inter\',\'Noto Sans KR\',sans-serif;">`;
+            let svg = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="font-family:Pretendard,sans-serif;">`;
             svg += `<defs><marker id="ra" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="var(--nia-blue)"/></marker><marker id="rr" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="var(--text3)"/></marker></defs>`;
             // actor boxes
             actors.forEach((a, i) => {
@@ -13467,7 +13462,7 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
             const chartW = LW + (TOTAL_WEEKS * CW) + PAD * 2;
             const W = chartW + ANNOTW;
             const H = PAD + PH + totalRows * (TH + 3) + PAD + 10;
-            let svg = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="font-family:'Inter','Noto Sans KR',sans-serif;">`;
+            let svg = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="font-family:Pretendard,sans-serif;">`;
             // clipPath: 레이블 열 텍스트 쳨 범 완전 차단 (LW 경계 이상 블리드없)
             svg += `<defs><clipPath id="wbs_lc"><rect x="0" y="0" width="${LW - 2}" height="${H}"/></clipPath></defs>`;
             svg += `<rect x="0" y="0" width="${chartW}" height="${PH}" rx="4" fill="rgba(36,59,124,.07)" stroke="rgba(36,59,124,.15)" stroke-width="0.8"/>`;
