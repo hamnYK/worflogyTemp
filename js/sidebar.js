@@ -47,12 +47,26 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const servicesTitle = "Services";
-  const servicesItem = {
-    href: "https://contents.contextonai.com",
-    textKo: "컨텍스톤 콘텐츠",
-    textEn: "Contexton Contents",
-    icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />`
-  };
+  const servicesItems = [
+    {
+      href: "https://contents.contextonai.com",
+      textKo: "컨텍스톤 콘텐츠",
+      textEn: "Contexton Contents",
+      target: "worflogy_edu",
+      rel: "opener",
+      showOutlink: true,
+      icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />`
+    },
+    {
+      href: `${prefix}nia-ontology-workshop-with-worflogy.html`,
+      textKo: "온톨로지 워크숍",
+      textEn: "Ontology Workshop",
+      target: "_blank",
+      rel: "noopener noreferrer",
+      showOutlink: true,
+      icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" />`
+    }
+  ];
 
   let navHtml = `<nav class="sidebar-nav">`;
 
@@ -89,23 +103,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
   navHtml += `<div class="nav-divider"></div>`;
   navHtml += `<div class="nav-group-title">${servicesTitle}</div>`;
-  const isExternal = servicesItem.href.startsWith('http');
-  const targetAttr = isExternal ? ' target="worflogy_edu" rel="opener"' : '';
-  const outlinkIcon = isExternal ? `
-    <svg class="nav-item-outlink" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-    </svg>
-  ` : '';
 
-  navHtml += `
-    <a href="${servicesItem.href}" class="nav-item"${targetAttr}>
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        ${servicesItem.icon}
+  servicesItems.forEach(item => {
+    const targetAttr = item.target ? ` target="${item.target}"` : '';
+    const relAttr = item.rel ? ` rel="${item.rel}"` : '';
+    const outlinkIcon = item.showOutlink ? `
+      <svg class="nav-item-outlink" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
       </svg>
-      ${isEnglish ? servicesItem.textEn : servicesItem.textKo}
-      ${outlinkIcon}
-    </a>
-  `;
+    ` : '';
+
+    navHtml += `
+      <a href="${item.href}" class="nav-item"${targetAttr}${relAttr}>
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          ${item.icon}
+        </svg>
+        ${isEnglish ? item.textEn : item.textKo}
+        ${outlinkIcon}
+      </a>
+    `;
+  });
 
   navHtml += `</nav>`;
 
