@@ -1808,6 +1808,20 @@
             max-height: 100%;
         }
 
+        .svg-icon-sm {
+            width: 14px;
+            height: 14px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            display: inline-block;
+            vertical-align: middle;
+            flex-shrink: 0;
+            margin-right: 0.25rem;
+            margin-bottom: 0.1rem;
+        }
 
         /* ── NIA SVG 디자인 시스템 ─────────────────────────────── */
         /* 폰트: Inter(숫자/영문 우선) + Noto Sans KR(한글) 혼합 */
@@ -5332,11 +5346,11 @@ WSL2 Ubuntu + Docker 환경에서 GraphDB Free를 설치하고, 워크숍 도구
                         트리플(주어-서술어-목적어)을 Python 코드로 불러와 분석하거나, GraphDB 같은 외부 데이터베이스로 내보낼 수 있습니다. Python이 처음이어도 아래 코드를
                         <strong>복사·붙여넣기로 바로 실행</strong>할 수 있습니다. 터미널에서 <code>pip install rdflib</code>를 먼저 실행하세요.
                     </div>
-                    <div class="int-concept-analogy"><svg viewBox="0 0 24 24" class="svg-icon-sm">
-                            <line x1="9" y1="18" x2="15" y2="18" />
-                            <line x1="10" y1="22" x2="14" y2="22" />
-                            <path
-                                d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14" />
+                    <div class="int-concept-analogy"><svg viewBox="0 0 24 24"
+                            style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;margin-top:1px;">
+                            <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
+                            <path d="M9 18h6" />
+                            <path d="M10 22h4" />
                         </svg><span>Excel이 스프레드시트를 여는 것처럼, rdflib는 온톨로지(지식 그래프)를 여는 도구입니다. 데이터의 "형태"만 다를 뿐, 읽고·쓰고·검색하는
                             개념은 동일합니다.</span></div>
                 </div>
@@ -5406,19 +5420,18 @@ for r in matched:
                     <div class="int-concept-body">RAG(Retrieval-Augmented Generation)는 AI(LLM)가 답변하기 전에 관련 지식을 먼저 제공하는
                         방법입니다. 일반 RAG가 문서의 텍스트를 보여준다면, <strong>Graph RAG는 온톨로지 지식 그래프 - 즉 개념 간의 연결 구조 - 를
                             보여줍니다.</strong> 덕분에 AI가 "민원인이 제출한다 → 담당 부서 → 처리 기한" 같은 관계의 흐름을 이해하고 훨씬 정확하게 답변합니다.
-                        LangChain은 이 과정을 쉽게 구현하는 Python 프레임워크입니다.<br><br><strong><svg viewBox="0 0 24 24" class="svg-icon-sm">
+                        LangChain은 이 과정을 쉽게 구현하는 Python 프레임워크입니다.<br><br><strong><svg viewBox="0 0 24 24" class="svg-icon-sm" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;display:inline-block;vertical-align:middle;margin-right:.25rem;margin-bottom:.1rem;">
                                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                                 <circle cx="12" cy="10" r="3" />
-                            </svg> 이 도구의 구현 방식:</strong> 아래 코드는 추출한 스키마 전체를 텍스트로 변환해 시스템 프롬프트에 주입하는 <em>컨텍스트 주입(Context
+                            </svg>이 도구의 구현 방식:</strong> 아래 코드는 추출한 스키마 전체를 텍스트로 변환해 시스템 프롬프트에 주입하는 <em>컨텍스트 주입(Context
                             Injection)</em> 방식입니다. 실제 Graph RAG는 GraphDB 등 트리플 스토어에서 SPARQL 질의로 관련 서브그래프만 동적으로 탐색·주입하며,
                         대규모 데이터에서 더 효율적입니다. GraphDB 연동 후 실제 Graph RAG가 동작하는 흐름(SPARQL 조회 → 관련 트리플 반환 → LLM 주입)은 Step 10
                         &gt; 시퀀스 다이어그램에서 확인할 수 있습니다.</div>
                     <div class="int-concept-analogy"><svg viewBox="0 0 24 24"
                             style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;margin-top:1px;">
-                            <line x1="9" y1="18" x2="15" y2="18" />
-                            <line x1="10" y1="22" x2="14" y2="22" />
-                            <path
-                                d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14" />
+                            <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
+                            <path d="M9 18h6" />
+                            <path d="M10 22h4" />
                         </svg><span>시험 전 교과서 텍스트(일반 RAG)를 보여주는 것과 개념 지도(Graph RAG)를 보여주는 것의 차이입니다. 개념 지도를 보면 연결 관계가 보여 더
                             정확한 답이 나옵니다.</span></div>
                 </div>
@@ -5517,10 +5530,9 @@ load_triples_to_neo4j('extracted_schema.json')</textarea>
                         GraphDB, Apache Jena, Blazegraph 같은 트리플 스토어에서 바로 실행됩니다.</div>
                     <div class="int-concept-analogy"><svg viewBox="0 0 24 24"
                             style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;margin-top:1px;">
-                            <line x1="9" y1="18" x2="15" y2="18" />
-                            <line x1="10" y1="22" x2="14" y2="22" />
-                            <path
-                                d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14" />
+                            <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
+                            <path d="M9 18h6" />
+                            <path d="M10 22h4" />
                         </svg><span>SQL이 관계형 DB(Excel 같은 표)의 언어라면, SPARQL은 지식 그래프의 언어입니다. SELECT · WHERE · FILTER 구조가
                             SQL과 비슷해 익숙해지기 쉽습니다.</span></div>
                 </div>
@@ -5592,10 +5604,9 @@ for r in results['results']['bindings']:
                     </div>
                     <div class="int-concept-analogy"><svg viewBox="0 0 24 24"
                             style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;margin-top:1px;">
-                            <line x1="9" y1="18" x2="15" y2="18" />
-                            <line x1="10" y1="22" x2="14" y2="22" />
-                            <path
-                                d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14" />
+                            <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
+                            <path d="M9 18h6" />
+                            <path d="M10 22h4" />
                         </svg><span>기존 RDB는 "창고 선반 목록(표)", 온톨로지는 "창고 지도(연결망)"입니다. R2RML은 목록을 지도로 번역하는 규칙집입니다.</span>
                     </div>
                 </div>
@@ -5613,10 +5624,9 @@ for r in results['results']['bindings']:
                         가능합니다.</div>
                     <div class="int-concept-analogy"><svg viewBox="0 0 24 24"
                             style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;margin-top:1px;">
-                            <line x1="9" y1="18" x2="15" y2="18" />
-                            <line x1="10" y1="22" x2="14" y2="22" />
-                            <path
-                                d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14" />
+                            <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
+                            <path d="M9 18h6" />
+                            <path d="M10 22h4" />
                         </svg><span>워크숍 도구는 스케치북(임시 작업 공간)이고, GraphDB는 금고(영구 보관)입니다. REST API는 스케치북의 그림을 금고로 옮기는
                             문(인터페이스)입니다.</span></div>
                 </div>
