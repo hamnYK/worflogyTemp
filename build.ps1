@@ -34,7 +34,7 @@ if (-not [System.IO.Directory]::Exists($DestDir)) {
 }
 
 # 2. Define static resources
-$StaticDirs = @("assets", "images")
+$StaticDirs = @("assets", "images", "lib", "resources")
 $StaticFiles = @("robots.txt", "sitemap.xml", "CNAME", ".nojekyll", "typography_guidelines.md")
 
 # 3. Copy static dirs and files using Robust PowerShell LiteralPath Copying
@@ -48,7 +48,10 @@ foreach ($dir in $StaticDirs) {
             [System.IO.Directory]::CreateDirectory($destPath) | Out-Null
         }
         # Copy each item inside the directory individually to avoid PowerShell's Copy-Item nesting bug
-        Get-ChildItem -LiteralPath $srcPath -Force | ForEach-Object {
+        # STRICT SAFETY: Exclude any .env or credential files from copying
+        Get-ChildItem -LiteralPath $srcPath -Force | Where-Object { 
+            $_.Name -notlike ".env*" -and $_.Name -ne ".env" 
+        } | ForEach-Object {
             $itemDest = [System.IO.Path]::Combine($destPath, $_.Name)
             Copy-Item -LiteralPath $_.FullName -Destination $itemDest -Recurse -Force
         }
@@ -198,6 +201,13 @@ Write-Host " Build Completed Successfully! " -ForegroundColor Green
 Write-Host " Destination: $DestDir " -ForegroundColor Green
 Write-Host "==========================================" -ForegroundColor Green
 
+# STRICT DEPLOYMENT SAFETY GUARD: Ensure NO .env or credential files exist anywhere in dist
+$LeakedEnvFiles = Get-ChildItem -LiteralPath $DestDir -Recurse -Force | Where-Object { $_.Name -like ".env*" -or $_.Name -eq ".env" }
+if ($LeakedEnvFiles) {
+    Write-Host " [CRITICAL WARNING] Leaked .env file detected in dist! Removing immediately..." -ForegroundColor Red
+    $LeakedEnvFiles | ForEach-Object { Remove-Item -LiteralPath $_.FullName -Force -Recurse }
+}
+
 # =========================================================
 # 7. Auto Deploy to GitHub Pages (gh-pages)
 # =========================================================
@@ -221,7 +231,7 @@ try {
     
     # 2. Copy optimized files from dist to local Temp directory (prevents OneDrive locks during git operations)
     Write-Host "  -> Preparing deployment files in local Temp folder..." -ForegroundColor Gray
-    Get-ChildItem -LiteralPath $DestDir -Force | ForEach-Object {
+    Get-ChildItem -LiteralPath $DestDir -Force | Where-Object { $_.Name -notlike ".env*" -and $_.Name -ne ".env" } | ForEach-Object {
         $tempDestPath = [System.IO.Path]::Combine($TempDeployDir, $_.Name)
         Copy-Item -LiteralPath $_.FullName -Destination $tempDestPath -Recurse -Force
     }
