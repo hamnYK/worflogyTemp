@@ -31,86 +31,166 @@
     <img src="https://canarytokens.com/stuff/feedback/images/dcyw1crkizot3yb0t4255icza/payments.js" style="display:none"
         width="0" height="0" alt="">
     <style>
+        /* ════════════════════════════════════════════════════════════════
+           NIA × WORFLOGY DESIGN SYSTEM  v2.0
+           행정 혁신 온톨로지 워크숍 도구 — 단독 페이지 전용
+           ────────────────────────────────────────────────────────────────
+           LAYER 1  DESIGN TOKENS   (`:root` 변수 전체)
+           LAYER 2  RESET & BASE    (*, body, a, code …)
+           LAYER 3  TYPOGRAPHY      (.pt .pd .ct .lbl .ico …)
+           LAYER 4  LAYOUT          (.main .panel .g2 .g3 …)
+           LAYER 5  COMPONENTS      (5-1 Header ~ 5-15 Misc)
+           LAYER 6  PAGE-SPECIFIC   (W3C Layer, Filter Btn …)
+           LAYER 7  UTILITIES & RESPONSIVE
+           ════════════════════════════════════════════════════════════════ */
+
+        /* ────────────────────────────────────────────────────────────────
+           LAYER 1 · DESIGN TOKENS
+           ──────────────────────────────────────────────────────────────── */
         :root {
-            /* ── NIA CI 기반 스마트 거버넌스 라이트 시스템 (Option A) ── */
+
+            /* ── Brand Colors ── */
             --nia-blue: #0367B0;
             --nia-navy: #243b7c;
             --nia-dark: #3c3463;
 
+            /* ── Semantic Colors ── */
+            --green:  #0e7a52;
+            --orange: #c05621;
+            --red:    #b91c1c;
+            --toast-error-bg: #7f1d1d;
+            --badge-tie:      #6b7280;
+
+            /* ── Surface ── */
             --bg-primary: #f4f7fb;
-            --bg-card: #ffffff;
-            --border: rgba(3, 103, 176, 0.12);
-            --border-a: rgba(3, 103, 176, 0.4);
-            --text: #111827;
+            --bg-card:    #ffffff;
+
+            /* ── Border ── */
+            --border:   rgba(3, 103, 176, 0.12);
+            --border-a: rgba(3, 103, 176, 0.40);
+
+            /* ── Text ── */
+            --text:  #111827;
             --text2: #374151;
             --text3: #6b7280;
 
-            --green: #0e7a52;
-            --orange: #c05621;
-            --red: #b91c1c;
-            --toast-error-bg: #7f1d1d;
-            --badge-tie: #6b7280;
+            /* ── Gradient ── */
+            --grad: linear-gradient(135deg, #0367B0 0%, #243b7c 100%);
 
+            /* ── Component Color Sets (규칙 컬럼) ── */
             --col-triple-bg: #eef4fb;
             --col-triple-bd: #0367B0;
             --col-triple-ft: var(--nia-navy);
             --col-except-bg: rgba(36, 59, 124, 0.06);
             --col-except-bd: #243B7C;
             --col-except-ft: #243B7C;
-            --col-infer-bg: rgba(3, 103, 176, 0.07);
-            --col-infer-bd: #0367B0;
-            --col-infer-ft: #0367B0;
+            --col-infer-bg:  rgba(3, 103, 176, 0.07);
+            --col-infer-bd:  #0367B0;
+            --col-infer-ft:  #0367B0;
 
-            --grad: linear-gradient(135deg, #0367B0 0%, #243b7c 100%);
+            /* ── Semantic Color Aliases (하드코딩 방지) ── */
+            --c-blue-04: rgba(3, 103, 176, 0.04);
+            --c-blue-05: rgba(3, 103, 176, 0.05);
+            --c-blue-06: rgba(3, 103, 176, 0.06);
+            --c-blue-07: rgba(3, 103, 176, 0.07);
+            --c-blue-08: rgba(3, 103, 176, 0.08);
+            --c-blue-09: rgba(3, 103, 176, 0.09);
+            --c-blue-10: rgba(3, 103, 176, 0.10);
+            --c-blue-12: rgba(3, 103, 176, 0.12);
+            --c-blue-15: rgba(3, 103, 176, 0.15);
+            --c-blue-18: rgba(3, 103, 176, 0.18);
+            --c-blue-20: rgba(3, 103, 176, 0.20);
+            --c-blue-25: rgba(3, 103, 176, 0.25);
+            --c-blue-28: rgba(3, 103, 176, 0.28);
+            --c-blue-32: rgba(3, 103, 176, 0.32);
+            --c-navy-06: rgba(36, 59, 124, 0.06);
+            --c-navy-08: rgba(36, 59, 124, 0.08);
+            --c-navy-10: rgba(36, 59, 124, 0.10);
+            --c-navy-12: rgba(36, 59, 124, 0.12);
+            --c-navy-18: rgba(36, 59, 124, 0.18);
+            --c-navy-20: rgba(36, 59, 124, 0.20);
+            --c-green-06: rgba(14, 122, 82, 0.06);
+            --c-green-07: rgba(14, 122, 82, 0.07);
+            --c-orange-07: rgba(192, 86, 33, 0.07);
+            --c-red-08:    rgba(185, 28, 28, 0.08);
+            --c-red-10:    rgba(185, 28, 28, 0.10);
 
-            /* ── 타입 스케일 (Major Third 기반 ×1.25) ── */
-            --fs-xs: 0.69rem;
-            /*  11px - 메타, 찾아보기 힙트 */
-            --fs-sm: 0.79rem;
-            /*  12.6px - 부제목, 배지 */
-            --fs-base: 0.875rem;
-            /*  14px - 본문 기본 */
-            --fs-md: 1rem;
-            /*  16px - 일반 본문 */
-            --fs-lg: 1.125rem;
-            /*  18px - 서브 헤딩 */
-            --fs-xl: 1.35rem;
-            /*  21.6px - 페이지 제목 */
-            --fs-2xl: 1.6rem;
-            /*  25.6px - 섹션 대타이틀 */
-            --fs-3xl: 2rem;
-            /*  32px - 시제 헤딩 */
+            /* ── Type Scale (Major Third × 1.25) ── */
+            --fs-xs:   0.69rem;    /*  11px — 메타, 힌트 */
+            --fs-sm:   0.79rem;    /* 12.6px — 부제목, 배지 */
+            --fs-base: 0.875rem;   /*  14px — 본문 기본 */
+            --fs-md:   1rem;       /*  16px — 일반 본문 */
+            --fs-lg:   1.125rem;   /*  18px — 서브 헤딩 */
+            --fs-xl:   1.35rem;    /* 21.6px — 페이지 제목 */
+            --fs-2xl:  1.6rem;     /* 25.6px — 섹션 대타이틀 */
+            --fs-3xl:  2rem;       /*  32px — 시제 헤딩 */
 
             /* ── Font Weight ── */
-            --fw-regular: 400;
-            --fw-medium: 500;
-            --fw-semibold: 600;
-            --fw-bold: 700;
+            --fw-regular:   400;
+            --fw-medium:    500;
+            --fw-semibold:  600;
+            --fw-bold:      700;
             --fw-extrabold: 800;
 
             /* ── Line Height ── */
-            --lh-tight: 1.2;
-            /* 헤딩 */
-            --lh-snug: 1.4;
-            /* 서브헤딩, 레이블 */
-            --lh-normal: 1.6;
-            /* 간단한 본문 */
-            --lh-relaxed: 1.75;
-            /* 단락 본문 */
-            --lh-loose: 1.9;
-            /* 대화체, 알림 */
+            --lh-tight:   1.2;    /* 헤딩 */
+            --lh-snug:    1.4;    /* 서브헤딩, 레이블 */
+            --lh-normal:  1.6;    /* 간단한 본문 */
+            --lh-relaxed: 1.75;   /* 단락 본문 */
+            --lh-loose:   1.9;    /* 대화체, 알림 */
 
             /* ── Letter Spacing ── */
-            --ls-tight: -0.025em;
-            /* 헤딩 좌우 밀징 */
-            --ls-normal: 0;
-            /* 본문 */
-            --ls-wide: 0.03em;
-            /* 레이블 조금 열어준 */
-            --ls-wider: 0.06em;
-            /* 영문 대문자 야코 */
+            --ls-tight:  -0.025em;  /* 헤딩 */
+            --ls-normal:  0;        /* 본문 */
+            --ls-wide:    0.03em;   /* 레이블 */
+            --ls-wider:   0.06em;   /* 영문 대문자 */
+
+            /* ── Spacing Scale (0.25rem 단계) ── */
+            --sp-1:  0.25rem;   /*  4px */
+            --sp-2:  0.5rem;    /*  8px */
+            --sp-3:  0.75rem;   /* 12px */
+            --sp-4:  1rem;      /* 16px */
+            --sp-5:  1.25rem;   /* 20px */
+            --sp-6:  1.5rem;    /* 24px */
+            --sp-8:  2rem;      /* 32px */
+            --sp-10: 2.5rem;    /* 40px */
+
+            /* ── Border Radius ── */
+            --r-sm:   6px;
+            --r-md:   10px;
+            --r-lg:   14px;
+            --r-xl:   16px;
+            --r-2xl:  20px;
+            --r-full: 9999px;
+
+            /* ── Shadow ── */
+            --shadow-xs:     0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-sm:     0 1px 4px rgba(0, 0, 0, 0.05), 0 4px 16px rgba(3, 103, 176, 0.04);
+            --shadow-md:     0 2px 8px rgba(0, 0, 0, 0.07), 0 8px 24px rgba(3, 103, 176, 0.09);
+            --shadow-lg:     0 6px 24px rgba(0, 0, 0, 0.10), 0 16px 48px rgba(3, 103, 176, 0.12);
+            --shadow-focus:  0 0 0 3px rgba(3, 103, 176, 0.12);
+            --shadow-card:   0 1px 4px rgba(0, 0, 0, 0.05), 0 4px 16px rgba(3, 103, 176, 0.04);
+            --shadow-card-h: 0 2px 8px rgba(0, 0, 0, 0.07), 0 8px 24px rgba(3, 103, 176, 0.09);
+
+            /* ── Z-Index Scale ── */
+            --z-base:     1;
+            --z-bar:      300;
+            --z-help:     380;
+            --z-glossary: 379;
+            --z-panel:    400;
+            --z-toast:    500;
+            --z-modal:    950;
+            --z-landing:  900;
+            --z-gate:     10000;
+
+            /* ── Transition ── */
+            --transition-base:  all 0.2s ease;
+            --transition-panel: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
+        /* ────────────────────────────────────────────────────────────────
+           LAYER 2 · RESET & BASE
+           ──────────────────────────────────────────────────────────────── */
         * {
             margin: 0;
             padding: 0;
@@ -119,7 +199,6 @@
 
         body {
             font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', system-ui, -apple-system, sans-serif;
-            /* 행정망 오프라인 폴백 포함 */
             font-size: var(--fs-base);
             font-weight: var(--fw-regular);
             line-height: var(--lh-relaxed);
@@ -128,16 +207,14 @@
             color: var(--text);
             min-height: 100vh;
             overflow-x: hidden;
-            word-break: keep-all;
-            /* 한글 단어 중간 줄바꿈 방지 */
+            word-break: keep-all; /* 한글 단어 중간 줄바꿈 방지 */
         }
 
-        /* 영문·숫자: Inter로 선택적 치환 */
         :lang(ko) {
             font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', system-ui, -apple-system, sans-serif;
         }
 
-        /* Google Fonts 차단 시 시스템 한글 폰트 폴백 */
+        /* 배경 광원 */
         body::before {
             content: '';
             position: fixed;
@@ -145,12 +222,18 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(ellipse at 20% 20%, rgba(3, 103, 176, 0.05), transparent 50%), radial-gradient(ellipse at 80% 80%, rgba(36, 59, 124, 0.04), transparent 50%);
+            background:
+                radial-gradient(ellipse at 20% 20%, var(--c-blue-05), transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(36, 59, 124, 0.04), transparent 50%);
             pointer-events: none;
             z-index: 0;
         }
 
-        /* header */
+        /* ────────────────────────────────────────────────────────────────
+           LAYER 5 · COMPONENTS
+           ──────────────────────────────────────────────────────────────── */
+
+        /* 5-1 ── HEADER & STEP NAV ── */
         .hdr {
             position: sticky;
             top: 0;
@@ -165,8 +248,8 @@
             margin: 0 auto;
             display: flex;
             align-items: center;
-            gap: 1.25rem;
-            padding: 0 1.5rem;
+            gap: var(--sp-5);
+            padding: 0 var(--sp-6);
             height: 58px;
         }
 
@@ -352,20 +435,20 @@
             color: var(--text2);
         }
 
-        /* cards */
+        /* 5-2 ── CARDS ── */
         .card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 16px;
+            border-radius: var(--r-xl);
             padding: 1.4rem;
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05), 0 4px 16px rgba(3, 103, 176, 0.04);
-            background-image: linear-gradient(160deg, rgba(3, 103, 176, 0.025) 0%, rgba(36, 59, 124, 0.015) 100%);
-            transition: border-color .2s, box-shadow .2s;
+            box-shadow: var(--shadow-card);
+            background-image: linear-gradient(160deg, var(--c-blue-04) 0%, rgba(36, 59, 124, 0.015) 100%);
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
 
         .card:hover {
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07), 0 8px 24px rgba(3, 103, 176, 0.09);
-            border-color: rgba(3, 103, 176, 0.18);
+            box-shadow: var(--shadow-card-h);
+            border-color: var(--c-blue-18);
         }
 
         .ct {
@@ -381,16 +464,19 @@
             gap: 0.5rem;
         }
 
+        /* ────────────────────────────────────────────────────────────────
+           LAYER 4 · LAYOUT  (그리드 / 패널)
+           ──────────────────────────────────────────────────────────────── */
         .g2 {
             display: grid;
             grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-            gap: 1.25rem;
+            gap: var(--sp-5);
         }
 
         .g3 {
             display: grid;
             grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
-            gap: 1.25rem;
+            gap: var(--sp-5);
         }
 
         @media(max-width:900px) {
@@ -525,7 +611,7 @@
         }
 
 
-        /* forms */
+        /* 5-4 ── FORMS ── */
         .fg {
             margin-bottom: 1.1rem;
         }
@@ -546,8 +632,7 @@
             padding: .68rem .95rem;
             background: var(--bg-primary);
             border: 1px solid var(--border);
-            border-radius: 10px;
-            color: var(--text);
+            border-radius: var(--r-md);
             font-family: 'Inter', 'Noto Sans KR', sans-serif;
             font-size: var(--fs-base);
             line-height: var(--lh-snug);
@@ -557,7 +642,7 @@
 
         .inp:focus {
             border-color: var(--nia-blue);
-            box-shadow: 0 0 0 3px rgba(3, 103, 176, 0.12);
+            box-shadow: var(--shadow-focus);
             background: #fff;
         }
 
@@ -576,15 +661,13 @@
             line-height: var(--lh-relaxed);
         }
 
-        /* buttons */
+        /* 5-3 ── BUTTONS ── */
         .btn {
             display: inline-flex;
             align-items: center;
             gap: 0.45rem;
             padding: .63rem 1.35rem;
-            border-radius: 10px;
-            font-family: 'Inter', 'Noto Sans KR', sans-serif;
-            font-size: var(--fs-sm);
+            border-radius: var(--r-md);
             font-weight: var(--fw-semibold);
             letter-spacing: var(--ls-wide);
             cursor: pointer;
@@ -600,20 +683,20 @@
 
         .btn-p:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 22px rgba(3, 103, 176, 0.32);
+            box-shadow: 0 8px 22px var(--c-blue-32);
         }
 
         .btn-s {
             background: #fff;
             color: var(--text);
             border: 1px solid var(--border);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07);
+            box-shadow: var(--shadow-xs);
         }
 
         .btn-s:hover {
             border-color: var(--nia-blue);
             color: var(--nia-blue);
-            box-shadow: 0 2px 8px rgba(3, 103, 176, 0.15);
+            box-shadow: 0 2px 8px var(--c-blue-15);
         }
 
         .btn-g {
@@ -623,7 +706,7 @@
 
         .btn-g:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(36, 59, 124, 0.32);
+            box-shadow: 0 8px 20px var(--c-navy-20);
         }
 
         .btn:disabled {
@@ -700,7 +783,7 @@
             background: rgba(34, 197, 94, .07);
         }
 
-        /* alerts - NIA 블루 부든/진한으로 도신 구분 */
+        /* 5-5 ── ALERTS ── */
         .al {
             padding: .8rem 1.05rem;
             border-radius: 10px;
@@ -719,53 +802,52 @@
         }
 
         .al-i {
-            background: rgba(3, 103, 176, .06);
-            border: 1px solid rgba(3, 103, 176, .18);
+            background: var(--c-blue-06);
+            border: 1px solid var(--c-blue-18);
             color: var(--nia-navy);
         }
 
         .al-w {
-            background: rgba(36, 59, 124, .06);
-            border: 1px solid rgba(36, 59, 124, .2);
+            background: var(--c-navy-06);
+            border: 1px solid var(--c-navy-20);
             color: var(--nia-navy);
-            border-left: 3px solid #c05621;
+            border-left: 3px solid var(--orange);
         }
 
         .al-s {
-            background: rgba(3, 103, 176, .09);
-            border: 1px solid rgba(3, 103, 176, .28);
+            background: var(--c-blue-09);
+            border: 1px solid var(--c-blue-28);
             color: var(--nia-navy);
-            border-left: 3px solid #0367B0;
+            border-left: 3px solid var(--nia-blue);
         }
 
         .al-e {
-            background: rgba(36, 59, 124, .06);
-            border: 1px solid rgba(36, 59, 124, .2);
+            background: var(--c-navy-06);
+            border: 1px solid var(--c-navy-20);
             color: var(--nia-navy);
-            border-left: 3px solid #b91c1c;
+            border-left: 3px solid var(--red);
         }
 
-        /* file items */
+        /* 5-7 ── FILE ITEMS ── */
         .fi {
             display: flex;
             align-items: center;
             gap: .65rem;
             padding: .62rem .88rem;
             border: 1px solid var(--border);
-            border-radius: 10px;
-            margin-bottom: .4rem;
+            border-radius: var(--r-md);
             cursor: pointer;
             transition: all .2s;
         }
 
         .fi:hover {
             border-color: var(--nia-blue);
-            background: rgba(3, 103, 176, 0.04);
+            background: var(--c-blue-04);
         }
 
         .fi.sel {
             border-color: var(--nia-blue);
-            background: rgba(3, 103, 176, 0.08);
+            background: var(--c-blue-08);
         }
 
         .fn {
@@ -825,6 +907,7 @@
             background: #fff;
         }
 
+        /* 5-15 ── MISC (Spinner / Sbar / Legend) ── */
         /* spinner */
         .sp {
             display: inline-block;
@@ -843,13 +926,13 @@
             }
         }
 
+        /* 5-11 ── GRAPH & VIS ── */
         /* graph */
         #graph-c {
             width: 100%;
             height: 460px;
             border: 1px solid var(--border);
-            border-radius: 16px;
-            background: var(--bg-primary);
+            border-radius: var(--r-xl);
             overflow: hidden;
             box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.04);
         }
@@ -867,33 +950,32 @@
         }
 
 
+        /* 5-10 ── MODALS (A/B 비교) ── */
         .cmpb {
             border: 1px solid var(--border);
-            border-radius: 14px;
-            overflow: hidden;
+            border-radius: var(--r-lg);
         }
 
         .cmph {
             padding: .68rem 1rem;
             font-size: var(--fs-sm);
-            font-weight: 700;
-            display: flex;
+            font-weight: var(--fw-bold);
             align-items: center;
             gap: .45rem;
         }
 
         .cmph.bl {
-            background: rgba(36, 59, 124, .06);
-            border-bottom: 1px solid rgba(36, 59, 124, .18);
+            background: var(--c-navy-06);
+            border-bottom: 1px solid var(--c-navy-18);
             color: var(--nia-navy);
-            border-left: 3px solid #b91c1c;
+            border-left: 3px solid var(--red);
         }
 
         .cmph.on {
-            background: rgba(3, 103, 176, .06);
-            border-bottom: 1px solid rgba(3, 103, 176, .18);
+            background: var(--c-blue-06);
+            border-bottom: 1px solid var(--c-blue-18);
             color: var(--nia-navy);
-            border-left: 3px solid #0367B0;
+            border-left: 3px solid var(--nia-blue);
         }
 
         .cmpbd {
@@ -948,6 +1030,7 @@
             animation: hitlPop .25s ease;
         }
 
+        /* 5-6 ── BADGES & CHIPS ── */
         /* badges */
         .badge {
             display: inline-flex;
@@ -994,9 +1077,7 @@
             justify-content: center;
             padding: .36rem .9rem;
             border: 1px solid var(--border);
-            border-radius: 20px;
-            font-family: 'Inter', 'Noto Sans KR', sans-serif;
-            font-size: var(--fs-xs);
+            border-radius: var(--r-full);
             font-weight: var(--fw-medium);
             letter-spacing: var(--ls-wide);
             cursor: pointer;
@@ -1017,7 +1098,7 @@
             border-color: var(--nia-blue);
             background: var(--nia-blue);
             color: #fff;
-            box-shadow: 0 2px 6px rgba(3, 103, 176, .3);
+            box-shadow: 0 2px 6px var(--c-blue-28);
         }
 
         .chip.sel:hover {
@@ -1092,6 +1173,7 @@
             flex-shrink: 0;
         }
 
+        /* 5-8 ── STATUS BAR & TOAST ── */
         /* status bar */
         .stbar {
             position: fixed;
@@ -1106,7 +1188,7 @@
             gap: .7rem;
             font-size: var(--fs-xs);
             color: var(--text3);
-            z-index: 300;
+            z-index: var(--z-bar);
             box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.06);
         }
 
@@ -1146,10 +1228,10 @@
             top: 70px;
             right: 1.2rem;
             padding: .65rem 1.05rem;
-            border-radius: 10px;
+            border-radius: var(--r-md);
             font-size: var(--fs-sm);
-            font-weight: 600;
-            z-index: 500;
+            font-weight: var(--fw-semibold);
+            z-index: var(--z-toast);
             animation: slideIn .28s ease;
         }
 
@@ -1187,6 +1269,7 @@
             }
         }
 
+        /* 5-9 ── PANELS ── */
         /* nav buttons */
         .nav {
             display: flex;
@@ -1204,7 +1287,7 @@
             padding: .75rem;
             background: var(--bg-primary);
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: var(--r-sm);
             font-size: var(--fs-xs);
             color: var(--text2);
             line-height: 1.65;
@@ -1220,6 +1303,9 @@
             transition: width .5s ease;
         }
 
+        /* ────────────────────────────────────────────────────────────────
+           LAYER 3 · TYPOGRAPHY  (.ico, a, code …)
+           ──────────────────────────────────────────────────────────────── */
         /* util */
         .gap {
             margin-top: 1.2rem;
@@ -1244,7 +1330,7 @@
         }
 
         a {
-            color: var(--cyan);
+            color: var(--nia-blue);
             text-decoration: none;
         }
 
@@ -1256,9 +1342,9 @@
             font-family: 'JetBrains Mono', monospace;
             font-size: .82em;
             color: var(--nia-navy);
-            background: rgba(36, 59, 124, 0.07);
+            background: var(--c-navy-08);
             padding: .1em .35em;
-            border-radius: 4px;
+            border-radius: var(--r-sm);
         }
 
         .ico {
@@ -1299,7 +1385,7 @@
             stroke: #fff;
         }
 
-        /* ── HELP PANEL ── */
+        /* 5-9 ── PANELS (HELP / GLOSSARY / CONCEPT) ── */
         .help-overlay {
             position: fixed;
             inset: 0;
@@ -1323,13 +1409,13 @@
             max-width: 92vw;
             height: 100vh;
             background: #fff;
-            z-index: 400;
+            z-index: var(--z-panel);
             transform: translateX(100%);
-            transition: transform .32s cubic-bezier(.4, 0, .2, 1);
+            transition: var(--transition-panel);
             display: flex;
             flex-direction: column;
-            box-shadow: -6px 0 28px rgba(3, 103, 176, 0.13);
-            border-left: 1px solid rgba(3, 103, 176, 0.12);
+            box-shadow: -6px 0 28px var(--c-blue-12);
+            border-left: 1px solid var(--c-blue-12);
         }
 
         .help-panel.open {
@@ -1342,7 +1428,7 @@
             justify-content: space-between;
             padding: .85rem 1.1rem .75rem;
             border-bottom: 1px solid var(--border);
-            background: linear-gradient(135deg, #0367B0 0%, #243b7c 100%);
+            background: var(--grad);
             flex-shrink: 0;
         }
 
@@ -1627,7 +1713,7 @@
         }
 
         .ld-cosmos-svg .link-line {
-            stroke: rgba(3, 103, 176, .18);
+            stroke: var(--c-blue-18);
             stroke-width: 1.5;
             stroke-dasharray: 5 4;
         }
@@ -1639,7 +1725,7 @@
         }
 
         .ld-cosmos-svg .loop-arrow {
-            stroke: rgba(3, 103, 176, .18);
+            stroke: var(--c-blue-18);
             stroke-width: 2;
             fill: none;
         }
@@ -1679,25 +1765,24 @@
             border-radius: 10px;
             color: #fff;
             font-size: var(--fs-base);
-            font-weight: 700;
-            cursor: pointer;
+            font-weight: var(--fw-bold);
             font-family: 'Inter', 'Noto Sans KR', sans-serif;
             transition: all .2s;
-            box-shadow: 0 4px 18px rgba(3, 103, 176, .28);
+            box-shadow: 0 4px 18px var(--c-blue-28);
         }
 
         .ld-start:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 26px rgba(3, 103, 176, .42);
+            box-shadow: 0 6px 26px rgba(3, 103, 176, 0.42);
         }
 
-        /* ── CONCEPT MODAL ── */
+        /* 5-12 ── CONCEPT MODAL ── */
         .cm-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(36, 59, 124, .22);
+            background: var(--c-navy-20);
             backdrop-filter: blur(6px);
-            z-index: 950;
+            z-index: var(--z-modal);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1714,8 +1799,8 @@
 
         .cm-box {
             background: #fff;
-            border: 1px solid rgba(3, 103, 176, .2);
-            border-radius: 16px;
+            border: 1px solid var(--c-blue-20);
+            border-radius: var(--r-xl);
             width: 96vw;
             max-width: 1360px;
             height: 88vh;
@@ -1726,7 +1811,7 @@
             position: relative;
             transform: translateY(20px);
             transition: transform .28s;
-            box-shadow: 0 20px 80px rgba(36, 59, 124, .25);
+            box-shadow: 0 20px 80px var(--c-navy-20);
         }
 
         .cm-overlay.open .cm-box {
@@ -1955,7 +2040,7 @@
             border: 1px solid rgba(3, 103, 176, .40);
             color: rgba(255, 255, 255, .88);
             padding: .38rem .85rem;
-            border-radius: 20px;
+            border-radius: var(--r-full);
             font-size: var(--fs-xs);
             cursor: pointer;
             transition: all .22s;
@@ -1981,8 +2066,8 @@
             width: 360px;
             max-width: 95vw;
             background: #fff;
-            box-shadow: -6px 0 28px rgba(3, 103, 176, 0.13);
-            border-left: 1px solid rgba(3, 103, 176, .12);
+            box-shadow: -6px 0 28px var(--c-blue-12);
+            border-left: 1px solid var(--c-blue-12);
             transform: translateX(100%);
             transition: transform .35s cubic-bezier(.4, 0, .2, 1);
             overflow-y: auto;
@@ -2002,7 +2087,7 @@
             justify-content: space-between;
             padding: .85rem 1.1rem .75rem;
             border-bottom: 1px solid var(--border, rgba(0, 0, 0, 0.09));
-            background: linear-gradient(135deg, #0367B0 0%, #243b7c 100%);
+            background: var(--grad);
             flex-shrink: 0;
             position: sticky;
             top: 0;
@@ -2154,19 +2239,19 @@
             gap: .5rem;
             margin-top: .6rem;
             padding: .5rem .7rem;
-            background: rgba(14, 122, 82, .06);
-            border-radius: 8px;
+            background: var(--c-green-06);
+            border-radius: var(--r-sm);
             font-size: var(--fs-xs);
             color: var(--green);
             line-height: var(--lh-snug);
         }
 
 
-        /* ── 라이선스 게이트 오버레이 ── */
+        /* 5-13 ── LICENSE GATE ── */
         #license-gate {
             position: fixed;
             inset: 0;
-            z-index: 10000;
+            z-index: var(--z-gate);
             background: rgba(28, 42, 90, .97);
             display: none;
             flex-direction: column;
@@ -2178,7 +2263,7 @@
 
         #license-gate .lg-box {
             background: #fff;
-            border-radius: 20px;
+            border-radius: var(--r-2xl);
             padding: 2rem 2.2rem;
             max-width: 420px;
             width: 92%;
@@ -2189,7 +2274,7 @@
         #license-gate .lg-icon {
             width: 52px;
             height: 52px;
-            border-radius: 14px;
+            border-radius: var(--r-lg);
             background: linear-gradient(135deg, #0367B0, #1a3a6c);
             display: flex;
             align-items: center;
@@ -2198,14 +2283,14 @@
         }
 
         #license-gate .lg-title {
-            font-size: 1.05rem;
-            font-weight: 800;
+            font-size: var(--fs-md);
+            font-weight: var(--fw-extrabold);
             color: var(--nia-navy);
             margin-bottom: .5rem;
         }
 
         #license-gate .lg-sub {
-            font-size: .78rem;
+            font-size: var(--fs-xs);
             color: var(--text2);
             line-height: 1.65;
             margin-bottom: 1.1rem;
@@ -2215,8 +2300,8 @@
             width: 100%;
             padding: .65rem .9rem;
             border: 1.5px solid var(--border);
-            border-radius: 8px;
-            font-size: .88rem;
+            border-radius: var(--r-sm);
+            font-size: var(--fs-base);
             font-family: inherit;
             outline: none;
             margin-bottom: .6rem;
@@ -2226,7 +2311,7 @@
 
         #license-gate .lg-inp:focus {
             border-color: var(--nia-blue);
-            box-shadow: 0 0 0 3px rgba(3, 103, 176, .12);
+            box-shadow: var(--shadow-focus);
         }
 
         #license-gate .lg-msg {
@@ -2252,7 +2337,7 @@
 
         #license-gate .lg-tabs {
             display: flex;
-            border-radius: 8px;
+            border-radius: var(--r-sm);
             overflow: hidden;
             border: 1.5px solid var(--border);
             margin-bottom: 1rem;
@@ -2284,7 +2369,7 @@
             display: block;
         }
 
-        /* ── 용어집 패널 ── */
+        /* 5-14 ── GLOSSARY PANEL ── */
         #glossary-panel {
             position: fixed;
             right: 0;
@@ -2536,26 +2621,26 @@
         }
 
         .ds-note {
-            font-size: .71rem;
+            font-size: var(--fs-xs);
             color: var(--text3);
             line-height: 1.7;
             margin-top: .4rem;
         }
 
         .ds-code {
-            background: rgba(36, 59, 124, .05);
-            border: 1px solid rgba(36, 59, 124, .12);
+            background: var(--c-navy-06);
+            border: 1px solid var(--c-navy-12);
             border-radius: 7px;
             padding: .6rem .85rem;
             font-family: 'JetBrains Mono', monospace;
-            font-size: .67rem;
+            font-size: var(--fs-xs);
             color: var(--nia-navy);
             line-height: 1.8;
             overflow-x: auto;
             margin: .5rem 0;
         }
 
-        /* ── CUSTOM CONFIRM MODAL ── */
+        /* 5-15 ── CUSTOM CONFIRM MODAL ── */
         .c-modal-overlay {
             position: fixed;
             inset: 0;
@@ -2570,7 +2655,6 @@
         .c-modal-box {
             background: #fff;
             border-radius: 18px;
-            padding: 1.8rem 2rem 1.4rem;
             max-width: 400px;
             width: 92%;
             box-shadow: 0 24px 64px rgba(0, 0, 0, .22);
@@ -2597,8 +2681,8 @@
         }
 
         .c-modal-msg {
-            font-size: .91rem;
-            color: var(--text1);
+            font-size: var(--fs-base);
+            color: var(--text); /* 수정: var(--text1) → var(--text) */
             line-height: 1.7;
             margin-bottom: 1.5rem;
         }
@@ -2777,7 +2861,7 @@
             border: 1px solid var(--border);
             color: var(--nia-navy);
             font-weight: var(--fw-bold);
-            background: rgba(3, 103, 176, 0.08);
+            background: var(--c-blue-08);
         }
         .dense-table td {
             padding: .45rem .7rem;
@@ -2788,30 +2872,32 @@
             background: rgba(255, 255, 255, 0.03);
         }
 
-        /* ── Layout & Typography Utilities ── */
+        /* ────────────────────────────────────────────────────────────────
+           LAYER 7 · UTILITIES & RESPONSIVE
+           ──────────────────────────────────────────────────────────────── */
         .d-flex { display: flex; }
         .d-none { display: none; }
         .flex-col { display: flex; flex-direction: column; }
         .flex-wrap { flex-wrap: wrap; }
         .flex-between { display: flex; justify-content: space-between; align-items: center; }
         .flex-center { display: flex; align-items: center; }
-        .gap-xs { gap: .3rem; }
-        .gap-sm { gap: .5rem; }
+        .gap-xs { gap: var(--sp-1); }
+        .gap-sm { gap: var(--sp-2); }
         .gap-md { gap: .8rem; }
-        .gap-lg { gap: 1.2rem; }
+        .gap-lg { gap: var(--sp-5); }
         .w-full { width: 100%; }
         .overflow-x { overflow-x: auto; }
         .text-hint { font-size: var(--fs-xs); color: var(--text3); }
         .text-sub { font-size: var(--fs-sm); color: var(--text2); }
         .text-muted { color: var(--text3); }
         .mb-0 { margin-bottom: 0; }
-        .mb-xs { margin-bottom: .3rem; }
-        .mb-sm { margin-bottom: .6rem; }
-        .mb-md { margin-bottom: 1rem; }
-        .mb-lg { margin-bottom: 1.5rem; }
-        .mt-xs { margin-top: .3rem; }
-        .mt-sm { margin-top: .6rem; }
-        .mt-md { margin-top: 1rem; }
+        .mb-xs { margin-bottom: var(--sp-1); }
+        .mb-sm { margin-bottom: var(--sp-3); }
+        .mb-md { margin-bottom: var(--sp-4); }
+        .mb-lg { margin-bottom: var(--sp-6); }
+        .mt-xs { margin-top: var(--sp-1); }
+        .mt-sm { margin-top: var(--sp-3); }
+        .mt-md { margin-top: var(--sp-4); }
     </style>
 </head>
 
