@@ -11728,6 +11728,16 @@ ${domainCtx}${upperCtx}
             window._graphLayerEdges = { l2: [], l3: [], l4: [], l4a: [], l5: [], l5s: [], casc: [] };
             window._graphLayerVis = { l2: true, l3: true, l4: true, l4a: true, l5: true, l5s: true, casc: true };
 
+            // ── Graph Design System (GDS) — 캔버스 디자인 토큰 ──
+            const GDS = {
+                size:   { abstract: 34, concept: 26, property: 18, instance: 22,
+                           ruleXL: 36, ruleL: 30, ruleM: 26, ruleS: 22, shacl: 22, exception: 20 },
+                border: { abstract: 3, concept: 2.5, property: 2, instance: 1.5,
+                           critical: 3, rule: 2, selected: 3.5 },
+                font:   { lg: 12, md: 11, sm: 10, xs: 9 },
+                shadow: { lg: 14, md: 8, sm: 5, y: 2 },
+                edge:   { xl: 2.5, md: 1.5, sm: 1, ghost: 0.5 }
+            };
             // ── W3C Layer 색상 팔레트 ──
             const COL = {
                 owlClass: { bg: '#eff6ff', bd: '#2563eb', ft: '#1e40af' },
@@ -11768,7 +11778,7 @@ ${domainCtx}${upperCtx}
                             highlight: { background: isHL ? '#fde68a' : '#dbeafe', border: isHL ? '#b45309' : '#0367B0' }
                         },
                         font: { color: isHL ? '#78350f' : c.ft, size: 11, bold: isHL },
-                        borderWidth: isHL ? 4 : 1.5,
+                        borderWidth: isHL ? 4 : GDS.border.instance,
                         shadow: { enabled: true, color: c.bd + '44', size: 6, x: 0, y: 2 },
                         group: type, ...(extra || {})
                     };
@@ -11883,7 +11893,7 @@ ${domainCtx}${upperCtx}
                 const lbl = cl.label || cl.id || ''; if (!lbl || seenCl.has(lbl)) return; seenCl.add(lbl);
                 const n = gn('C: ' + lbl, 'owlClass', 'hexagon',
                     _mkTip('owlClass', cl),
-                    { font: { size: 10, bold: true, color: '#1e40af' }, size: 24, borderWidth: 2 }, 'l2');
+                    { font: { size: GDS.font.sm, bold: true, color: '#1e40af' }, size: GDS.size.concept, borderWidth: GDS.border.concept }, 'l2');
                 nodes.update({ id: n, _classData: cl });
             });
             // rdfs:subClassOf
@@ -11906,8 +11916,8 @@ ${domainCtx}${upperCtx}
                     const n = gn('U: ' + lbl, 'upperClass', 'hexagon',
                         _mkTip('upperClass', uc),
                         {
-                            font: { size: 12, bold: true, color: '#5b21b6' }, size: 32,
-                            borderWidth: 3, shadow: { enabled: true, color: '#7c3aed66', size: 14, x: 0, y: 2 }
+                            font: { size: GDS.font.lg, bold: true, color: '#5b21b6' }, size: GDS.size.abstract,
+                            borderWidth: GDS.border.abstract, shadow: { enabled: true, color: '#7c3aed55', size: GDS.shadow.lg, x: 0, y: GDS.shadow.y }
                         }, 'l2');
                     nodes.update({ id: n, _upperData: uc });
                 });
@@ -11930,13 +11940,13 @@ ${domainCtx}${upperCtx}
                 const ck = isObj ? 'objProp' : 'dataProp', pk = (isObj ? 'OP: ' : 'DP: ') + lbl;
                 const n = gn(pk, ck, 'triangle',
                     _mkTip(ck, p),
-                    { font: { size: 9, color: isObj ? '#15803d' : '#0e7490' }, size: 16 }, 'l3');
+                    { font: { size: GDS.font.xs, color: isObj ? '#15803d' : '#0e7490' }, size: GDS.size.property, borderWidth: GDS.border.property }, 'l3');
                 nodes.update({ id: n, _propData: p });
                 const domK = 'C: ' + p.domain + '|owlClass', ranK = 'C: ' + p.range + '|owlClass';
                 if (p.domain && nMap.has(domK)) ge({
                     from: nMap.get(domK), to: n,
                     label: 'rdfs:domain', color: { color: '#16a34a', opacity: .6 },
-                    font: { color: '#16a34a', size: 8 }, arrows: 'to', dashes: [3, 3]
+                    font: { color: '#16a34a', size: 8 }, width: GDS.edge.sm, arrows: 'to', dashes: [3, 3]
                 }, 'l3');
                 if (p.range && nMap.has(ranK)) ge({
                     from: n, to: nMap.get(ranK),
@@ -11966,7 +11976,7 @@ ${domainCtx}${upperCtx}
                     from: s, to: o, label: t.predicate, _tripleData: t,
                     color: { color: '#0367B0', opacity: .7 },
                     font: { color: '#3c5278', size: 10, align: 'middle' },
-                    arrows: 'to', smooth: { type: 'curvedCW', roundness: .15 }
+                    width: GDS.edge.md, arrows: 'to', smooth: { type: 'curvedCW', roundness: .15 }
                 }, 'l4');
             });
             Object.entries(entityTripleMap).forEach(([name, data]) => {
@@ -12087,10 +12097,10 @@ ${domainCtx}${upperCtx}
                             hover: { background: c.bg, border: c.bd },
                             highlight: { background: c.bg, border: c.bd }
                         },
-                        font: { color: c.ft, size: 10, bold: true },
-                        borderWidth: r.risk_level === 'CRITICAL' ? 3 : 2,
-                        shadow: { enabled: true, color: c.bd + '55', size: r.risk_level === 'CRITICAL' ? 14 : 8, x: 0, y: 2 },
-                        size: r.risk_level === 'CRITICAL' ? 38 : r.risk_level === 'HIGH' ? 32 : 26
+                        font: { color: c.ft, size: GDS.font.sm, bold: true },
+                        borderWidth: _rBw,
+                        shadow: { enabled: true, color: c.bd + '55', size: _rSh, x: 0, y: GDS.shadow.y },
+                        size: _rSz
                     }, 'l5');
                 nodes.update({ id: rn, _ruleData: r });
                 infNodeMap.set(r.inference_id, rn);
@@ -12107,7 +12117,7 @@ ${domainCtx}${upperCtx}
                     ge({
                         from: sn, to: rn, label: 'COND', _ruleData: r,
                         color: { color: c.bd, opacity: .65 }, font: { color: c.ft, size: 9 },
-                        arrows: 'to', dashes: [4, 3]
+                        width: GDS.edge.md, arrows: 'to', dashes: [4, 3]
                     }, 'l5');
                 });
                 const actM = (r.action || '').match(/^([^\s(?∧]+)/);
@@ -12130,7 +12140,7 @@ ${domainCtx}${upperCtx}
                             from: fromN, to: toN, label: 'cascade',
                             color: { color: '#7c3aed', opacity: .85 },
                             font: { color: '#5b21b6', size: 9, bold: true },
-                            arrows: 'to', dashes: [6, 3], width: 2,
+                            arrows: 'to', dashes: [6, 3], width: GDS.edge.xl,
                             smooth: { type: 'curvedCW', roundness: .3 }
                         }, 'casc');
                 });
@@ -12168,7 +12178,7 @@ ${domainCtx}${upperCtx}
                     hover: true, navigationButtons: true, tooltipDelay: 200,
                     hideEdgesOnDrag: false, keyboard: { enabled: true, bindToWindow: false }
                 },
-                nodes: { margin: 10, borderWidthSelected: 3 },
+                nodes: { margin: 10, borderWidthSelected: GDS.border.selected },
                 edges: { smooth: { type: 'dynamic' }, arrowStrikethrough: false }
             });
             _net.once('stabilizationIterationsDone', () => { _net.fit({ animation: { duration: 600, easingFunction: 'easeInOutQuad' } }); });
@@ -12190,7 +12200,7 @@ ${domainCtx}${upperCtx}
             let _detailEl = document.getElementById('graph-node-detail');
             if (!_detailEl) {
                 _detailEl = document.createElement('div'); _detailEl.id = 'graph-node-detail';
-                _detailEl.style.cssText = 'display:none;margin-top:.65rem;padding:.9rem 1.15rem;border-radius:14px;font-size:.8rem;line-height:1.65;border:1.5px solid var(--border);background:var(--bg-card);position:relative;box-shadow:0 2px 12px rgba(0,0,0,.15);transition:border-color .2s,background .2s;';
+                _detailEl.style.cssText = 'display:none;margin-top:.65rem;padding:.9rem 1.15rem 1rem 1.25rem;border-radius:14px;font-size:.8rem;line-height:1.65;border:1px solid var(--border);border-left:4px solid var(--nia-blue);background:var(--bg-card);position:relative;box-shadow:0 2px 12px rgba(0,0,0,.15);transition:border-left-color .2s,background .2s;';
                 if (_pane) _pane.appendChild(_detailEl);
             }
             // ── 배지/공통 헬퍼 ──
@@ -12209,7 +12219,7 @@ ${domainCtx}${upperCtx}
             };
             function _wb(std) { const [b, c] = W3C[std] || ['#f1f5f9', '#475569']; return _badge('W3C ' + std, b, c); }
             function _lb(l) { const [b, c] = LY[l] || ['#f8fafc', '#475569']; return _badge(l, b, c); }
-            function _sps(bc, bg) { _detailEl.style.borderColor = bc; _detailEl.style.background = bg; }
+            function _sps(bc, bg) { _detailEl.style.borderLeftColor = bc; _detailEl.style.background = bg; }
             function _hdr(badges, id, name) {
                 return `<div style="display:flex;align-items:center;gap:.38rem;flex-wrap:wrap;margin-bottom:.65rem;padding-bottom:.5rem;border-bottom:1px solid var(--border);">
                 ${badges.join('')}
