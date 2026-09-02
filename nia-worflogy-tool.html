@@ -665,10 +665,11 @@
             }
 
             /* 도움말·용어집: 아이콘만 남기는 소형 원형 버튼 (콘텐츠 가림 최소화) */
+            /* sticky nav(bottom:3.5rem, 높이~68px) 위에 위치하도록 bottom 조정 */
             .help-toggle {
                 top: auto !important;
                 transform: none !important;
-                bottom: 4.5rem !important;
+                bottom: calc(3.5rem + 76px) !important;   /* nav 상단 + 8px 여백 */
                 right: 10px !important;
                 width: 40px !important;
                 height: 40px !important;
@@ -686,7 +687,7 @@
             #glossary-toggle {
                 top: auto !important;
                 transform: none !important;
-                bottom: calc(4.5rem + 48px) !important;
+                bottom: calc(3.5rem + 76px + 48px) !important;   /* help 위 48px */
                 right: 10px !important;
                 width: 40px !important;
                 height: 40px !important;
@@ -695,6 +696,30 @@
                 font-size: 0 !important;
                 letter-spacing: 0 !important;
                 writing-mode: horizontal-tb !important;
+            }
+
+            /* 이전/다음 nav: 모바일에서 fixed로 항상 표시 (sticky는 이 파일 구조에서 작동 안 함) */
+            .nav {
+                position: fixed !important;
+                bottom: 3.5rem !important;        /* stbar 위 */
+                left: .875rem !important;
+                right: .875rem !important;
+                margin-top: 0 !important;
+                padding: .8rem 0 .7rem !important;
+                border-top: 1px solid var(--border) !important;
+                background: var(--bg-card) !important;
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+                z-index: 250 !important;          /* stbar(300) 아래, 일반 콘텐츠 위 */
+                border-radius: var(--r-xl) !important;
+                box-shadow: 0 -4px 16px rgba(0,0,0,.08) !important;
+                padding-left: .5rem !important;
+                padding-right: .5rem !important;
+            }
+
+            /* fixed nav가 마지막 콘텐츠를 가리지 않도록 스텝 패널 하단 여백 */
+            .panel {
+                padding-bottom: calc(3.5rem + 68px) !important;
             }
 
             /* 코드 블록 수평 오버플로 방지 */
@@ -1433,17 +1458,8 @@
             justify-content: space-between;
             align-items: center;
             margin-top: 1.65rem;
-            padding: 1rem 0 .75rem;
+            padding-top: 1.2rem;
             border-top: 1px solid var(--border);
-            /* 콘텐츠가 길어도 이전/다음 버튼이 항상 보임 */
-            position: sticky;
-            bottom: 3.5rem;
-            background: var(--bg-card);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            z-index: 50;
-            border-radius: 0 0 var(--r-xl) var(--r-xl);
-            box-shadow: 0 -4px 16px rgba(0,0,0,.06);
         }
 
         /* doc preview */
