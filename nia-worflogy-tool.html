@@ -676,6 +676,19 @@
                 gap: .4rem !important;
             }
 
+            /* 모바일 전용 안내 (기본 hidden, 768px 이하만 표시) */
+            .ld-mobile-notice {
+                display: block !important;
+                text-align: center;
+                font-size: var(--fs-xs);
+                color: var(--text3);
+                margin-top: .7rem;
+                line-height: 1.6;
+                padding: .5rem .75rem;
+                border-radius: 8px;
+                background: rgba(3, 103, 176, .06);
+            }
+
             .ld-hero {
                 padding: 1.25rem 1rem .2rem;
             }
@@ -1915,6 +1928,13 @@
         .ld-start:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 26px rgba(3, 103, 176, 0.42);
+        }
+
+        /* 모바일 전용 안내 문구 - 기본은 숨김, 768px 이하에서만 표시 */
+        .ld-mobile-notice {
+            display: none;
+            margin: 0 auto;
+            max-width: 340px;
         }
 
         /* 5-12 ── CONCEPT MODAL ── */
@@ -3216,6 +3236,9 @@
             </svg>
             워크숍 시작하기
         </button>
+
+        <!-- 모바일 전용 안내 (768px 이하에서만 표시) -->
+        <p class="ld-mobile-notice">이 도구는 <strong>PC 웹 환경</strong>에 최적화되어 있습니다.<br>모바일에서는 기능이 정상 동작하지 않을 수 있습니다.</p>
 
         <!-- ── 랜딩 저작권 푸터 ── -->
         <footer style="
