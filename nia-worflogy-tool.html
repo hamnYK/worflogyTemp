@@ -738,6 +738,17 @@
                 -webkit-overflow-scrolling: touch;
                 word-break: keep-all;
             }
+
+            /* ─── 핵심 수정 ───────────────────────────────────────────────────
+               body { overflow-x: hidden } 이 body를 scroll container로 만들어
+               position:fixed 요소들이 viewport 기준이 아닌 body 기준으로 위치됨.
+               결과: 헤더/도움말/용어집/nav 모두 viewport 오른쪽 바깥으로 밀림.
+               overflow-x: clip = 스크롤 컨테이너 생성 없이 클리핑만 수행
+               → fixed/sticky 요소가 viewport 기준으로 정상 작동.
+               ────────────────────────────────────────────────────────────── */
+            html, body {
+                overflow-x: clip !important;
+            }
         }
 
         /* ── RESPONSIVE : Mobile ≤ 480px ── */
