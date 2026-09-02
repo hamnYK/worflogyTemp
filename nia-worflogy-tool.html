@@ -1,4 +1,4 @@
-﻿<!--
+<!--
   행정 혁신 온톨로지 워크숍 & NIA 프로젝트
   © 2026 Worflogy Inc. All Rights Reserved.
   
@@ -670,6 +670,21 @@
                 transform: none;
                 padding: 1rem 0;
             }
+
+            /* 용어집 버튼 - 도움말 위에 쌓기 (겹침 방지) */
+            #glossary-toggle {
+                top: auto;
+                bottom: 12.5rem;
+                transform: none;
+                padding: 1rem 0;
+            }
+
+            /* 코드 블록 수평 오버플로 방지 */
+            pre, code {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                word-break: keep-all;
+            }
         }
 
         /* ── RESPONSIVE : Mobile ≤ 480px ── */
@@ -724,6 +739,18 @@
             .cm-explain {
                 font-size: var(--fs-base);
                 line-height: var(--lh-relaxed);
+            }
+
+            /* iOS Safari 입력상자 탭 시 자동 확대 방지 (16px 미만 시 진동) */
+            .inp,
+            textarea {
+                font-size: 1rem;
+            }
+
+            /* 용어집 패널 - 도움말 패널과 100vw 동일하게 적용 */
+            #glossary-panel {
+                width: 100vw;
+                max-width: 100vw;
             }
         }
 
