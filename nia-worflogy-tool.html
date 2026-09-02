@@ -629,6 +629,7 @@
 
             .main {
                 padding: 1.25rem .875rem 4.5rem;
+                padding-top: calc(50px + 1.25rem) !important; /* fixed 헤더(50px) 높이만큼 상단 여백 추가 */
             }
 
             .card {
@@ -638,6 +639,15 @@
             .stbar {
                 padding: .35rem .875rem;
                 font-size: var(--fs-xs);
+            }
+
+            /* 헤더: sticky가 body{overflow-x:hidden}에서 오작동 → fixed로 전환 */
+            .hdr {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                z-index: 220 !important; /* 콘텐츠 위, stbar(300) 아래 */
             }
 
             .stbar-nia-full {
@@ -710,7 +720,7 @@
                 background: var(--bg-card) !important;
                 backdrop-filter: blur(8px);
                 -webkit-backdrop-filter: blur(8px);
-                z-index: 250 !important;          /* stbar(300) 아래, 일반 콘텐츠 위 */
+                z-index: 310 !important;          /* stbar(300) 위 */
                 border-radius: var(--r-xl) !important;
                 box-shadow: 0 -4px 16px rgba(0,0,0,.08) !important;
                 padding-left: .5rem !important;
@@ -755,6 +765,7 @@
 
             .main {
                 padding: .875rem .65rem 4.5rem;
+                padding-top: calc(46px + .875rem) !important; /* fixed 헤더(46px) 높이 보정 */
             }
 
             .card {
