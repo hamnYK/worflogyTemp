@@ -3641,6 +3641,16 @@
                 <div class="gls-def">LLM이 사실에 근거하지 않고 그럴듯하게 보이는 잘못된 정보를 생성하는 현상. 학습 데이터에 없는 내용을 추론만으로 만들어 내기 때문에 발생합니다. 온톨로지를 시스템 프롬프트에 주입하면 LLM이 참조할 수 있는 명시적 지식이 제공되어 할루시네이션을 줄이는 데 도움이 됩니다.</div>
                 <div class="gls-eg">예) Step 8 A/B/C 비교에서 실험 C(순수 LLM)가 실험 B(온톨로지 주입)보다 오답·허위 정보를 더 많이 생성하는 경우</div>
             </div>
+            <div class="gls-item">
+                <div class="gls-term">Docker <span class="gls-abbr">Container Platform</span></div>
+                <div class="gls-def">애플리케이션과 그 실행 환경(라이브러리·설정 포함)을 이미지로 패키징해 어느 PC에서나 동일하게 실행할 수 있도록 하는 컨테이너 플랫폼. Step 9 Extra Exercise(Tier 2)에서 GraphDB를 로컬 PC에 설치 없이 바로 실행할 때 사용합니다. <code>docker compose up</code> 한 줄로 GraphDB 서버가 구동됩니다.</div>
+                <div class="gls-eg">예) Step 9 Extra Exercise ② — docker-compose.yml로 GraphDB 컨테이너 실행</div>
+            </div>
+            <div class="gls-item">
+                <div class="gls-term">WSL <span class="gls-abbr">Windows Subsystem for Linux</span></div>
+                <div class="gls-def">Windows 위에서 Linux 명령어 환경을 네이티브로 실행하는 Microsoft 기능. Docker Desktop 없이도 WSL2 + Docker Engine 조합으로 GraphDB를 구동할 수 있어 Step 9 Extra Exercise(Tier 2)의 기본 환경으로 권장됩니다. Windows 10(2004 이상) 또는 Windows 11에서 지원합니다.</div>
+                <div class="gls-eg">예) Step 9 Extra Exercise ① — WSL2 설치 후 Ubuntu에서 Docker 실행</div>
+            </div>
         </div>
     </div>
 
@@ -13823,13 +13833,13 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
                     // [W3C 표준] A-Z
                     'JSON-LD', 'R2RML', 'SPARQL', 'Turtle (.ttl)',
                     // [연동/인프라] A-Z
-                    'Context Injection (컨텍스트 주입)', 'Direct Mapping', 'Graph RAG',
+                    'Context Injection (컨텍스트 주입)', 'Direct Mapping', 'Docker', 'Graph RAG',
                     'GraphDB', 'LangChain', 'Ontop / Ontop-VKG', 'rdflib',
-                    'SPARQLWrapper', 'Triple Store (트리플 스토어)'
+                    'SPARQLWrapper', 'Triple Store (트리플 스토어)', 'WSL (Windows Subsystem for Linux)'
                 ],
-                steps: ['이 단계는 참고 가이드입니다 - 교육 중에는 지금 당장 구현하지 않아도 됩니다', '연동 방식 탭(내보내기 · Python · LangChain · SPARQL · REST API · 보안)에서 원하는 방식을 선택합니다', '각 탭의 단계별 체크리스트를 순서대로 따라갑니다', '코드 스니펫을 복사해 로컬 Python 환경에서 실행합니다', 'GraphDB와 SPARQL을 연결하면 실제 Graph RAG 시스템으로 확장됩니다'],
+                steps: ['이 단계는 참고 가이드입니다 - 교육 중에는 지금 당장 구현하지 않아도 됩니다', '연동 방식 탭(내보내기 · Python · LangChain · SPARQL · REST API · 보안)에서 원하는 방식을 선택합니다', '각 탭의 단계별 체크리스트를 순서대로 따라갑니다', '코드 스니펫을 복사해 로컬 Python 환경에서 실행합니다', 'GraphDB와 SPARQL을 연결하면 실제 Graph RAG 시스템으로 확장됩니다', '바이브 코딩 프롬프트(Tier 1 로컬 / Tier 2 GraphDB) 카드를 복사해 Cursor·Claude Code에 붙여넣으면 맞춤 연동 코드를 자동 생성할 수 있습니다', 'Extra Exercise(GraphDB Docker 연동) ①~④ 단계를 따라가면 WSL + Docker로 GraphDB 풀 스택을 직접 구성할 수 있습니다'],
 
-                tip: '이 단계는 실제 시스템 운영 연동을 위한 참고 가이드입니다. 교육 실습 중에는 지금 당장 구현하지 않아도 됩니다. 향후 실무 적용 시, 화면의 체크리스트 6단계를 순서대로 따라가면 처음 접하는 분도 GraphDB 적재 + LangChain 컨텍스트 주입 체인까지 완료할 수 있습니다.'
+                tip: '이 단계는 실제 시스템 운영 연동을 위한 참고 가이드입니다. 교육 실습 중에는 지금 당장 구현하지 않아도 됩니다. 향후 실무 적용 시, 바이브 코딩 프롬프트(이 페이지 하단 카드)를 Cursor·Claude Code에 붙여넣으면 환경에 맞는 연동 코드를 자동 생성할 수 있습니다. Tier 1(로컬 Python·LangChain)과 Tier 2(WSL + Docker + GraphDB) 중 환경에 맞게 선택하세요.'
             },
             10: {
                 title: '부록 - 시스템 아키텍처 & 프로젝트 가이드',
