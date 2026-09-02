@@ -1,4 +1,4 @@
-<!--
+﻿<!--
   행정 혁신 온톨로지 워크숍 & NIA 프로젝트
   © 2026 Worflogy Inc. All Rights Reserved.
   
@@ -3164,11 +3164,12 @@
                     <p class="ldh-text">LLM 등장 이전, 온톨로지 실무의 <strong style="color:var(--nia-navy,#243B7C)">68%는
                             수성형(G)</strong> - 전문가가 OWL·RDF·SWRL을 손으로 설계하는 하향식 방식이었습니다. 해왕성형(C)·적색왜성형(H)은 기술적 구현이 사실상
                         불가능한 이론적 영역이었습니다.</p>
-                    <p class="ldh-text">LLM은 세 가지 혁신으로 이 구도를 바꿨습니다:</p>
+                    <p class="ldh-text">LLM은 <strong style="color:var(--nia-navy,#243B7C)">네 가지 혁신</strong>으로 이 구도를 바꿨습니다:</p>
                     <div class="ldh-text" style="padding-left:.6rem;border-left:2px solid rgba(3,103,176,.4);">
                         ① <strong style="color:var(--nia-navy,#243B7C)">자연어 → 트리플 직접 추출</strong> - 수성형 단독 지배 종료<br>
                         ② <strong style="color:var(--nia-navy,#243B7C)">맥락 내 패턴 인식</strong> - 해왕성형(Weak Signal) 실용화<br>
-                        ③ <strong style="color:var(--nia-navy,#243B7C)">문서 기반 자동 갱신</strong> - 적색왜성형(온톨로지 회귀) 실용화
+                        ③ <strong style="color:var(--nia-navy,#243B7C)">문서 기반 자동 갱신</strong> - 적색왜성형(온톨로지 회귀) 실용화<br>
+                        ④ <strong style="color:var(--nia-navy,#243B7C)">다중 도메인 맥락 종합</strong> - 목성형(전체론적 관점) 실질적 지원 가능화
                     </div>
                 </div>
                 <div class="ldh-divider"></div>
@@ -3229,7 +3230,11 @@
         <div class="ld-help-panel" id="ld-purpose-panel">
             <div class="ldh-head">
                 <span class="ldh-title">AI가 맥락을 이해하려면</span>
-                <button class="ldh-close" aria-label="패널 닫기" onclick="toggleLdPurpose()">&#x2715;</button>
+                <button class="ldh-close" aria-label="패널 닫기" onclick="toggleLdPurpose()"><svg viewBox="0 0 24 24"
+                        style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg></button>
             </div>
             <div class="ldh-body">
                 <div class="ldh-section">
@@ -3402,7 +3407,7 @@
                 단계별 도움말
                 <span class="help-step-badge" id="help-step-label">Step 1</span>
             </div>
-            <button class="help-close" aria-label="도움말 닫기" onclick="toggleHelp()" title="닫기">&times;</button>
+            <button class="help-close" aria-label="도움말 닫기" onclick="toggleHelp()" title="닫기"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg></button>
         </div>
         <div class="help-body" id="help-body"></div>
     </div>
@@ -3427,6 +3432,9 @@
         용어집
     </button>
 
+    <!-- GLOSSARY OVERLAY -->
+    <div class="help-overlay" id="gls-overlay" onclick="toggleGlossary()"></div>
+
     <!-- GLOSSARY PANEL -->
     <div id="glossary-panel">
         <div class="gls-head">
@@ -3437,7 +3445,7 @@
                 </svg>
                 온톨로지 핵심 용어집
             </span>
-            <button class="gls-close" aria-label="용어집 닫기" onclick="toggleGlossary()">&#x2715;</button>
+            <button class="gls-close" aria-label="용어집 닫기" onclick="toggleGlossary()"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg></button>
         </div>
         <div class="gls-body">
             <p class="gls-intro">모르는 용어가 나오면 여기서 바로 확인하세요. 처음 접하는 분도 이 36개 용어만 알면 전체 워크플로를 따라갈 수 있습니다.</p>
@@ -4029,36 +4037,6 @@
 
                     <div id="loaded-list" style="margin-top:.6rem;"></div>
                 </div>
-                <div class="card">
-                    <div class="ct"><span class="ico"><svg viewBox="0 0 24 24">
-                                <circle cx="11" cy="11" r="8" />
-                                <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                            </svg></span> 법령정보센터 검색</div>
-
-                    <div class="fg" style="display:flex;gap:.5rem;">
-                        <input spellcheck="false" type="text" class="inp" id="law-q"
-                            placeholder="법령명 입력 (예: 도로교통법, 주정차 조례)" style="flex:1"
-                            onkeydown="if(event.key==='Enter')searchLaw()">
-                        <button class="btn btn-p btn-sm" onclick="searchLaw()" id="law-search-btn">검색</button>
-                    </div>
-                    <div class="fg">
-                        <label class="lbl">범위</label>
-                        <select class="inp" id="law-target" style="margin-bottom:.5rem;">
-                            <option value="law">법령 (법률/대통령령/부령)</option>
-                            <option value="ordin">자치법규 (조례/규칙)</option>
-                            <option value="admrul">행정규칙</option>
-                        </select>
-                    </div>
-                    <div id="law-results" style="max-height:280px;overflow-y:auto;"></div>
-                    <div class="al al-i" style="margin-top:.6rem;margin-bottom:0;"><span class="ico"><svg
-                                viewBox="0 0 24 24">
-                                <circle cx="12" cy="12" r="10" />
-                                <line x1="12" y1="8" x2="12" y2="12" />
-                                <line x1="12" y1="16" x2="12.01" y2="16" />
-                            </svg></span> OC 키는 환경설정(Step 1)에서 설정 - 미설정 시 <code>test</code> 키로 제한 호출</div>
-                </div>
-
-
                 <!-- 실제 데이터 소스 연결 카드 -->
                 <div class="card">
                     <div class="ct"><span class="ico"><svg viewBox="0 0 24 24">
@@ -4202,6 +4180,50 @@
                     </div>
                 </div>
 
+                <div class="card">
+                    <div class="ct"><span class="ico"><svg viewBox="0 0 24 24">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg></span> 문서 미리보기</div>
+                    <div style="font-size:.77rem;color:var(--text3);" id="prev-fn">파일을 선택하면 내용이 표시됩니다</div>
+                    <div class="dprev" id="doc-prev">-</div>
+                    <div style="margin-top:.7rem;display:flex;align-items:center;gap:.45rem;flex-wrap:wrap;">
+                        <span style="font-size:.79rem;color:var(--text3);">로드된 문서:</span>
+                        <span class="badge bb" id="doc-cnt">0개</span>
+                        <span style="font-size:.71rem;color:var(--text3);" id="doc-chars"></span>
+                    </div>
+                    <div id="dummy-spec" style="display:none;margin-top:.8rem;"></div>
+                </div>
+
+                <div class="card">
+                    <div class="ct"><span class="ico"><svg viewBox="0 0 24 24">
+                                <circle cx="11" cy="11" r="8" />
+                                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                            </svg></span> 법령정보센터 검색</div>
+
+                    <div class="fg" style="display:flex;gap:.5rem;">
+                        <input spellcheck="false" type="text" class="inp" id="law-q"
+                            placeholder="법령명 입력 (예: 도로교통법, 주정차 조례)" style="flex:1"
+                            onkeydown="if(event.key==='Enter')searchLaw()">
+                        <button class="btn btn-p btn-sm" onclick="searchLaw()" id="law-search-btn">검색</button>
+                    </div>
+                    <div class="fg">
+                        <label class="lbl">범위</label>
+                        <select class="inp" id="law-target" style="margin-bottom:.5rem;">
+                            <option value="law">법령 (법률/대통령령/부령)</option>
+                            <option value="ordin">자치법규 (조례/규칙)</option>
+                            <option value="admrul">행정규칙</option>
+                        </select>
+                    </div>
+                    <div id="law-results" style="max-height:280px;overflow-y:auto;"></div>
+                    <div class="al al-i" style="margin-top:.6rem;margin-bottom:0;"><span class="ico"><svg
+                                viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" />
+                                <line x1="12" y1="8" x2="12" y2="12" />
+                                <line x1="12" y1="16" x2="12.01" y2="16" />
+                            </svg></span> OC 키는 환경설정(Step 1)에서 설정 - 미설정 시 <code>test</code> 키로 제한 호출</div>
+                </div>
+
                 <!-- 시나리오 기반 법령 검색 가이드 카드 (Step 3 시나리오 등록 시 표시) -->
                 <div id="scen-hint-box" style="display:none;">
                     <div class="card">
@@ -4235,21 +4257,6 @@
                             도메인을 찾을 수 없습니다.</div>
                         <div id="scen-hint-list" style="display:flex;flex-direction:column;gap:.8rem;"></div>
                     </div>
-                </div>
-
-                <div class="card">
-                    <div class="ct"><span class="ico"><svg viewBox="0 0 24 24">
-                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                                <circle cx="12" cy="12" r="3" />
-                            </svg></span> 문서 미리보기</div>
-                    <div style="font-size:.77rem;color:var(--text3);" id="prev-fn">파일을 선택하면 내용이 표시됩니다</div>
-                    <div class="dprev" id="doc-prev">-</div>
-                    <div style="margin-top:.7rem;display:flex;align-items:center;gap:.45rem;flex-wrap:wrap;">
-                        <span style="font-size:.79rem;color:var(--text3);">로드된 문서:</span>
-                        <span class="badge bb" id="doc-cnt">0개</span>
-                        <span style="font-size:.71rem;color:var(--text3);" id="doc-chars"></span>
-                    </div>
-                    <div id="dummy-spec" style="display:none;margin-top:.8rem;"></div>
                 </div>
             </div>
             <div class="nav"><button class="btn btn-s" onclick="goStep(1)">이전</button><button class="btn btn-p"
@@ -13267,15 +13274,18 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
         function toggleGlossary() {
             const p = document.getElementById('glossary-panel');
             const b = document.getElementById('glossary-toggle');
+            const overlay = document.getElementById('gls-overlay');
             const isOpen = p.classList.contains('open');
             p.classList.toggle('open', !isOpen);
             b.classList.toggle('panel-open', !isOpen);
+            if (overlay) overlay.classList.toggle('open', !isOpen);
             // 도움말 패널과 동시에 열리면 닫기
             if (!isOpen) {
                 const hp = document.getElementById('help-panel');
                 if (hp && hp.classList.contains('open')) {
                     hp.classList.remove('open');
-                    document.getElementById('help-overlay').style.display = 'none';
+                    const ho = document.getElementById('help-overlay');
+                    if (ho) ho.classList.remove('open');
                     document.getElementById('help-toggle-btn').classList.remove('panel-open');
                 }
             }
