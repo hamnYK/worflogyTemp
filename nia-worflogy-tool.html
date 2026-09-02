@@ -662,6 +662,20 @@
                 padding: .85rem 1rem;
             }
 
+            /* 모바일: topbar 공간 부족으로 "비중 변화 해설" 버튼이 잘림
+               → contact 숨김, 버튼 간격 축소, brand 폰트 축소 */
+            .ld-contact {
+                display: none !important;
+            }
+
+            .ld-brand-name {
+                font-size: var(--fs-sm) !important;
+            }
+
+            .ld-topbar > div[style*="gap"] {
+                gap: .4rem !important;
+            }
+
             .ld-hero {
                 padding: 1.25rem 1rem .2rem;
             }
