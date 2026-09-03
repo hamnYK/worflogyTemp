@@ -5552,29 +5552,39 @@ ${domainCtx}${upperCtx}
             const consts = schema?.constraints || [];
             if (!classes.length && !triples.length && !rules.length)
                 return 'graph TD\n  A["데이터 없음"]';
-            const lbl = s => String(s || '').replace(/"/g, "'").replace(/[\[\]{}|>]/g, '').trim().substring(0, 16);
+            const lbl = s => String(s || '').replace(/"/g, "'").replace(/[\[\]{}|>]/g, '').trim().substring(0, 22);
             const nodeIds = new Map(); let nid = 0;
             const gn = label => {
                 const k = String(label || '').trim(); if (!k) return null;
                 if (!nodeIds.has(k)) nodeIds.set(k, 'N' + (nid++));
                 return nodeIds.get(k);
             };
+            // 루트 클래스 vs 서브 클래스 구분
+            const rootClsSet = new Set(classes.filter(c => !c.subClassOf).map(c => String(c.label || '').trim()));
             const total = classes.length + triples.length + rules.length + consts.length;
             const dir = total > 14 ? 'LR' : 'TD';
             const lines = ['flowchart ' + dir];
-            // ① 클래스 노드 + subClassOf 계층
+            // ① 클래스 노드 + rdfs:subClassOf 계층 (루트=타원, 서브=사각형)
             if (classes.length) {
                 lines.push('  subgraph CLS["owl:Class 계층"]');
-                classes.forEach(c => { const id = gn(c.label); if (id) lines.push(`    ${id}["${lbl(c.label)}"]`); });
+                classes.forEach(c => {
+                    const id = gn(c.label); if (!id) return;
+                    if (rootClsSet.has(String(c.label || '').trim())) {
+                        lines.push(`    ${id}(["${lbl(c.label)}"])`); // 타원 = 루트/추상
+                    } else {
+                        lines.push(`    ${id}["${lbl(c.label)}"]`); // 사각형 = 서브클래스
+                    }
+                });
                 lines.push('  end');
+                // rdfs:subClassOf → 굵은 화살표
                 classes.forEach(c => {
                     if (c.subClassOf) {
                         const cid = gn(c.label), pid = gn(c.subClassOf);
-                        if (cid && pid) lines.push(`  ${cid} -->|"sub"| ${pid}`);
+                        if (cid && pid) lines.push(`  ${cid} ==>|"rdfs:subClassOf"| ${pid}`);
                     }
                 });
             }
-            // ② 트리플 → 실선 화살표 (classes 노드 재사용)
+            // ② owl:ObjectProperty 트리플 → 실선 화살표 (리터럴/xsd 제외)
             const seen = new Set();
             triples.forEach(t => {
                 if (!t.subject || !t.object) return;
@@ -5587,47 +5597,58 @@ ${domainCtx}${upperCtx}
                 const key = `${s}|${o}|${p}`;
                 if (!seen.has(key)) { seen.add(key); lines.push(`  ${s} -->|"${p}"| ${o}`); }
             });
-            // ③ SHACL constraints → stadium shape
+            // ③ SHACL NodeShape → stadium shape + 별도 subgraph
             if (consts.length) {
                 lines.push('  subgraph SHA["SHACL 제약"]');
                 consts.forEach((c, i) => {
-                    const mc = c.min_count != null ? ' min>=' + c.min_count : '';
-                    lines.push(`    SH${i}[["${lbl(c.target_class || 'Shape')}${mc}"]]`);
+                    const mc = c.min_count != null ? ' minCount≥' + c.min_count : '';
+                    lines.push(`    SH${i}[["${lbl(c.target_class || 'Shape')}${mc}"]];`);
                 });
                 lines.push('  end');
                 consts.forEach((c, i) => {
                     const tid = gn(c.target_class);
-                    if (tid && c.path) lines.push(`  ${tid} -.->|"${lbl(c.path)}"| SH${i}`);
+                    if (tid && c.path) lines.push(`  ${tid} -.->|"sh:${lbl(c.path)}"| SH${i}`);
                 });
             }
-            // ④ SWRL 예외 규칙 → 다이아몬드
+            // ④ SWRL 예외규칙 → 다이아몬드 + IF 점선/THEN 굵은 화살표
             let rid = 0;
             rules.forEach(r => {
                 const ri = rid++;
                 const rn = 'R' + ri;
-                lines.push(`  ${rn}{"${lbl((r.rule_name || r.rule_id || 'RULE'))}"}`);
+                const ruleLabel = lbl((r.rule_id || 'RULE') + ': ' + (r.rule_name || ''));
+                lines.push(`  ${rn}{"${ruleLabel}"}`);
+                // IF 연결: 점선
                 if (r.if?.subject && !String(r.if.subject).startsWith('?')) {
-                    // 일반 주체(클래스명) → 기존 방식대로 연결
-                    const sn = gn(r.if.subject); if (sn) lines.push(`  ${sn} -.->|"IF"| ${rn}`);
+                    const sn = gn(r.if.subject); if (sn) lines.push(`  ${sn} -.->|"swrl:IF"| ${rn}`);
                 } else if (r.if?.conditions?.length) {
-                    // SWRL 변수(?p, ?c 등)는 노드 생성 금지 → conditions에서 첫 번째 실제 클래스명 추출
-                    // 예: "민원인(?민원인)" → "민원인", "swrlb:greaterThan(...)" → skip
-                    const firstMatch = (r.if.conditions[0] || '').match(/^([^(?\\s]+)\s*\(/);
+                    const firstMatch = (r.if.conditions[0] || '').match(/^([^(?\s]+)\s*\(/);
                     const firstCls = firstMatch?.[1];
                     if (firstCls && !firstCls.startsWith('?') && !firstCls.startsWith('swrlb')) {
-                        const sn = gn(firstCls); if (sn) lines.push(`  ${sn} -.->|"IF"| ${rn}`);
+                        const sn = gn(firstCls); if (sn) lines.push(`  ${sn} -.->|"swrl:IF"| ${rn}`);
                     }
                 }
-                if (r.then) { lines.push(`  TH${ri}["${lbl(r.then)}"]`); lines.push(`  ${rn} -.->|"THEN"| TH${ri}`); }
+                // THEN 연결: 굵은 화살표 + 원형 결과 노드
+                if (r.then) {
+                    lines.push(`  TH${ri}(["${lbl(r.then)}"])`);
+                    lines.push(`  ${rn} ==>|"swrl:THEN"| TH${ri}`);
+                }
             });
-            // classDef 스타일
-            if (consts.length) {
-                lines.push('  classDef shacl fill:#fffbeb,stroke:#d97706,color:#92400e');
-                consts.forEach((_, i) => lines.push(`  class SH${i} shacl`));
+            // classDef 스타일 — OWL 표준 색상 체계
+            lines.push('  classDef owlRoot fill:#0367b0,stroke:#024a7a,color:#fff,font-weight:bold');
+            lines.push('  classDef owlSub fill:#dbeafe,stroke:#3b82f6,color:#1e3a5f,font-weight:600');
+            lines.push('  classDef swrlRule fill:#fff7ed,stroke:#c05621,color:#9a3412,font-weight:700');
+            lines.push('  classDef swrlThen fill:#ecfdf5,stroke:#0E7A52,color:#064e3b,font-weight:600');
+            lines.push('  classDef shacl fill:#fffbeb,stroke:#d97706,color:#92400e');
+            classes.forEach(c => {
+                const id = gn(c.label); if (!id) return;
+                lines.push(`  class ${id} ${rootClsSet.has(String(c.label || '').trim()) ? 'owlRoot' : 'owlSub'}`);
+            });
+            for (let i = 0; i < rules.length; i++) {
+                lines.push(`  class R${i} swrlRule`);
+                lines.push(`  class TH${i} swrlThen`);
             }
-            if (rules.length) {
-                lines.push('  classDef rule fill:#fff3ec,stroke:#c05621,color:#9a3412');
-                for (let i = 0; i < rules.length; i++) lines.push(`  class R${i} rule`);
+            if (consts.length) {
+                consts.forEach((_, i) => lines.push(`  class SH${i} shacl`));
             }
             return lines.join('\n');
         }
@@ -5635,62 +5656,69 @@ ${domainCtx}${upperCtx}
         function upperToMermaid(result) {
             const groups = normalizeUpperGroups(result);
             const allMappings = groups.flatMap(g => g.subclass_mappings || []);
-            const domainSchemas = result?.domain_schemas || {};
-            if (!allMappings.length) return 'graph TD\n  A["\ub370\uc774\ud130 \uc5c6\uc74c"]';
-            const lbl = s => String(s || '').replace(/"/g, "'").replace(/[\[\]{}]/g, '').trim().substring(0, 20);
-            const clean = s => String(s || '').replace(/^base:/, '').trim();
+            if (!allMappings.length) return 'graph TD\n  A["데이터 없음"]';
+            const lbl = s => String(s || '').replace(/"/g, "'").replace(/[\[\]{}]/g, '').trim().substring(0, 22);
+            const clean = s => String(s || '').replace(/^base:|^ont:/, '').trim();
+            // 그룹별 색상
+            const GC = ['#0367b0','#0E7A52','#c05621','#7c3aed','#be185d'];
+            const GCL = ['#dbeafe','#d1fae5','#fff7ed','#ede9fe','#fce7f3'];
+            // 노드 맵
             const nodeMap = new Map(); let idx = 0;
-            const ruleMap = new Map(); let ridx = 0;
-            const getNode = label => { const k = clean(label); if (!k) return null; if (!nodeMap.has(k)) nodeMap.set(k, 'N' + (idx++)); return nodeMap.get(k); };
-            const getRule = label => { const k = String(label || '').trim(); if (!k) return null; if (!ruleMap.has(k)) ruleMap.set(k, 'R' + (ridx++)); return ruleMap.get(k); };
-            const edges = []; const seen = new Set();
-            // 1계층: 상위 클래스 → 도메인 클래스 (subClassOf, 점선)
+            const getNode = label => { const k = clean(label); if (!k) return null; if (!nodeMap.has(k)) nodeMap.set(k, 'UN' + (idx++)); return nodeMap.get(k); };
+            // 상위 클래스 집합
+            const upperClassNames = new Set(groups.flatMap(g => (g.upper_classes || []).map(c => clean(c.name || ''))));
+            // equivalent_to 쌍 수집
+            const equivPairs = new Set();
+            groups.forEach(g => (g.upper_classes || []).forEach(c => {
+                if (c.equivalent_to) {
+                    const k = [clean(c.name || ''), clean(c.equivalent_to)].sort().join('|');
+                    equivPairs.add(k);
+                }
+            }));
+            const lines = ['flowchart TD'];
+            // 그룹별 subgraph
+            groups.forEach((g, gi) => {
+                const col = GC[gi % GC.length];
+                const colL = GCL[gi % GCL.length];
+                const gid = 'GRP' + gi;
+                const gname = lbl(g.group_name || ('그룹' + (gi + 1)));
+                lines.push(`  subgraph ${gid}["${gname}"]`);
+                // 상위 클래스 → 타원
+                (g.upper_classes || []).forEach(c => {
+                    const id = getNode(c.name);
+                    if (id) lines.push(`    ${id}(["${lbl(c.name)}"])`);
+                });
+                // 도메인 클래스 → 사각형
+                const domSet = new Set();
+                (g.subclass_mappings || []).forEach(m => {
+                    const k = clean(m.domain_class);
+                    if (!k || upperClassNames.has(k) || domSet.has(k)) return;
+                    domSet.add(k);
+                    const id = getNode(m.domain_class);
+                    if (id) lines.push(`    ${id}["${lbl(m.domain_class)}"]`);
+                });
+                lines.push('  end');
+                lines.push(`  style ${gid} fill:${colL},stroke:${col},color:#111`);
+            });
+            // rdfs:subClassOf 엣지 (굵은 화살표, 아래→위)
+            const seen = new Set();
             allMappings.forEach(m => {
-                const up = getNode(m.upper_class), dc = getNode(m.domain_class); if (!up || !dc) return;
-                const k = up + '>' + dc; if (!seen.has(k)) { seen.add(k); edges.push({ from: up, to: dc, label: 'subClassOf', type: 'sub' }); }
+                const up = getNode(m.upper_class), dc = getNode(m.domain_class);
+                if (!up || !dc) return;
+                const k = dc + '>' + up;
+                if (!seen.has(k)) { seen.add(k); lines.push(`  ${dc} ==>|"rdfs:subClassOf"| ${up}`); }
             });
-            // 2계층: 도메인 트리플 전체 (실선, 제한 없음)
-            Object.entries(domainSchemas).forEach(([, sc]) => {
-                (sc.triples || []).forEach(t => {
-                    const s = getNode(t.subject), o = getNode(t.object), p = lbl(clean(t.predicate));
-                    if (!s || !o || !p) return;
-                    const k = s + '>' + o + '>' + p;
-                    if (!seen.has(k)) { seen.add(k); edges.push({ from: s, to: o, label: p, type: 'domain' }); }
-                });
-                // 3계층: 예외 규칙  -  W3C SWRL swrl:body(IF) + swrl:head(THEN)
-                (sc.exception_rules || []).forEach(r => {
-                    const rLabel = lbl('! ' + (r.rule_name || r.rule_id || 'RULE'));
-                    const rn = getRule(rLabel);
-                    if (r.then) { const tn = getNode(lbl(r.then)); const k = rn + '|THEN|' + tn; if (!seen.has(k)) { seen.add(k); edges.push({ from: rn, to: tn, label: 'THEN', type: 'then' }); } }
-                    if (r.if?.subject && !String(r.if.subject).startsWith('?')) {
-                        // 일반 클래스명인 경우만 노드 연결
-                        const sn = getNode(r.if.subject); const k = sn + '|IF|' + rn; if (!seen.has(k)) { seen.add(k); edges.push({ from: sn, to: rn, label: 'IF', type: 'if' }); }
-                    } else if (r.if?.conditions?.length) {
-                        // SWRL 변수(?p, ?c 등) → conditions[0]에서 실제 클래스명 파싱
-                        const firstMatch = (r.if.conditions[0] || '').match(/^([^\s(?]+)\s*\(/);
-                        const firstCls = firstMatch?.[1];
-                        if (firstCls && !firstCls.startsWith('?') && !firstCls.startsWith('swrlb')) {
-                            const sn = getNode(firstCls); if (sn) { const k = sn + '|IF|' + rn; if (!seen.has(k)) { seen.add(k); edges.push({ from: sn, to: rn, label: 'IF', type: 'if' }); } }
-                        }
-                    }
-                });
+            // owl:equivalentClass 엣지 (양방향 점선)
+            equivPairs.forEach(pair => {
+                const [a, b] = pair.split('|');
+                const na = getNode(a), nb = getNode(b);
+                if (na && nb) lines.push(`  ${na} <-.->|"owl:≡"| ${nb}`);
             });
-            if (!edges.length) return 'graph TD\n  A["\ub9e4\ud551 \uc5c6\uc74c"]';
-            const upperSet = new Set(allMappings.map(m => getNode(m.upper_class)).filter(Boolean));
-            // 노드 수 > 20이면 LR으로 자동 전환
-            const dir = 'LR'; // 상위 온톨로지는 항상 LR  -  계층 흐름이 명확
-            const lines = ['flowchart ' + dir];
+            // classDef
+            lines.push('  classDef upperCls fill:#0367b0,stroke:#024a7a,color:#fff,font-weight:bold,font-size:13px');
+            lines.push('  classDef domainCls fill:#fff,stroke:#94a3b8,color:#1e293b,font-size:12px');
             nodeMap.forEach((id, label) => {
-                if (upperSet.has(id)) lines.push(`  ${id}(["${lbl(label)}"])`);
-                else lines.push(`  ${id}["${lbl(label)}"]`);
-            });
-            ruleMap.forEach((id, label) => lines.push(`  ${id}{"${lbl(label)}"}`));
-            upperSet.forEach(id => lines.push(`  style ${id} fill:#0367b0,color:#fff,stroke:#024a7a,font-weight:bold`));
-            edges.forEach(({ from, to, label, type }) => {
-                if (type === 'sub') lines.push(`  ${from} -.->|"${label}"| ${to}`);
-                else if (type === 'if') lines.push(`  ${from} -.->|"IF"| ${to}`);
-                else if (type === 'then') lines.push(`  ${from} -.->|"THEN"| ${to}`);
-                else lines.push(`  ${from} -->|"${label}"| ${to}`);
+                lines.push(`  class ${id} ${upperClassNames.has(label) ? 'upperCls' : 'domainCls'}`);
             });
             return lines.join('\n');
         }
@@ -5730,33 +5758,65 @@ ${domainCtx}${upperCtx}
         }
         function infRulesToMermaid(inf) {
             const rules = inf?.inferred_rules || [];
-            if (!rules.length) return 'graph TD\n  A["\uaddc\uce59 \uc5c6\uc74c"]';
-            const lbl = s => String(s || '').replace(/"/g, "'").replace(/[\[\]]/g, '').substring(0, 38).trim();
-            const riskStyle = { CRITICAL: 'fill:#b91c1c,color:#fff,stroke:#991b1b', HIGH: 'fill:#c05621,color:#fff,stroke:#9a3412', MEDIUM: 'fill:#d97706,color:#fff,stroke:#b45309', LOW: 'fill:#0E7A52,color:#fff,stroke:#0b6042' };
-            const riskLabel = { CRITICAL: '[!!] CRITICAL', HIGH: '[!] HIGH', MEDIUM: '[*] MEDIUM', LOW: '[-] LOW' };
-            const riskBg = { CRITICAL: '#fef2f2', HIGH: '#fff7ed', MEDIUM: '#fffbeb', LOW: '#f0fdf4' };
-            const byRisk = { CRITICAL: [], HIGH: [], MEDIUM: [], LOW: [] };
-            rules.forEach((r, i) => { const k = r.risk_level || 'LOW'; if (byRisk[k]) byRisk[k].push({ r, i }); });
-            const lines = ['flowchart LR'];
-            // 위험도별 subgraph  -  Dagre 클러스터 레이아웃으로 선 겹침 최소화
-            ['CRITICAL', 'HIGH', 'MEDIUM', 'LOW'].forEach(risk => {
+            if (!rules.length) return 'graph TD\n  A["규칙 없음"]';
+            const lbl = s => String(s || '').replace(/"/g, "'").replace(/[\[\]]/g, '').substring(0, 30).trim();
+            const lblLong = s => String(s || '').replace(/"/g, "'").replace(/[\[\]]/g, '').substring(0, 40).trim();
+            // 위험도 스타일
+            const riskNodeStyle = {
+                CRITICAL: 'fill:#b91c1c,stroke:#991b1b,color:#fff,font-weight:bold',
+                HIGH:     'fill:#c05621,stroke:#9a3412,color:#fff,font-weight:bold',
+                MEDIUM:   'fill:#d97706,stroke:#b45309,color:#fff,font-weight:600',
+                LOW:      'fill:#0E7A52,stroke:#0b6042,color:#fff,font-weight:600'
+            };
+            const riskBg = { CRITICAL:'#fef2f2', HIGH:'#fff7ed', MEDIUM:'#fffbeb', LOW:'#f0fdf4' };
+            const riskStroke = { CRITICAL:'#fca5a5', HIGH:'#fdba74', MEDIUM:'#fde68a', LOW:'#86efac' };
+            const riskLabel = { CRITICAL:'!! CRITICAL', HIGH:'! HIGH', MEDIUM:'* MEDIUM', LOW:'LOW' };
+            const byRisk = { CRITICAL:[], HIGH:[], MEDIUM:[], LOW:[] };
+            rules.forEach((r, i) => { const k = r.risk_level || 'LOW'; if (byRisk[k]) byRisk[k].push({r,i}); });
+            // 추론 ID → 인덱스 맵 (cascade 참조용)
+            const ruleIdx = {}; rules.forEach((r,i) => { if (r.inference_id) ruleIdx[r.inference_id] = i; });
+            const lines = ['flowchart TD'];
+            // 위험도별 subgraph: 다이아몬드(규칙) → 원형(결과)
+            ['CRITICAL','HIGH','MEDIUM','LOW'].forEach(risk => {
                 const items = byRisk[risk]; if (!items.length) return;
-                lines.push(`  subgraph SG${risk}["${riskLabel[risk] || risk}"]`);
-                items.forEach(({ r, i }) => {
-                    lines.push(`    C${i}["${lbl(r.inference_id || 'INF' + (i + 1))}: ${lbl(r.inference_name)}"]`);
-                    lines.push(`    A${i}["${lbl(r.action)}"]`);
+                const sgid = 'SG' + risk;
+                lines.push(`  subgraph ${sgid}["${riskLabel[risk]}"]`);
+                items.forEach(({r,i}) => {
+                    const rid = r.inference_id || ('INF_' + String(i+1).padStart(2,'0'));
+                    // IF 조건 노드 (육각형)
+                    if (r.condition) {
+                        lines.push(`    IF${i}[/"IF: ${lbl(r.condition)}"/]`);
+                    }
+                    // 규칙 노드 (다이아몬드)
+                    lines.push(`    C${i}{"${rid}: ${lbl(r.inference_name)}"}`);
+                    // THEN 결과 노드 (원형)
+                    lines.push(`    A${i}(["THEN: ${lbl(r.action)}"])`);
                 });
                 lines.push('  end');
-                lines.push(`  style SG${risk} fill:${riskBg[risk]},stroke:#ddd,color:#333`);
+                lines.push(`  style ${sgid} fill:${riskBg[risk]},stroke:${riskStroke[risk]},color:#333`);
             });
             // 엣지
-            rules.forEach((r, i) => {
+            rules.forEach((r,i) => {
                 const risk = r.risk_level || 'LOW';
-                lines.push(`  C${i} --> A${i}`);
-                if (riskStyle[risk]) lines.push(`  style A${i} ${riskStyle[risk]}`);
-                (r.cascade_rules || []).slice(0, 2).forEach(cr => {
-                    const crid = 'CR' + cr.replace(/\W/g, '');
-                    lines.push(`  A${i} -.-> ${crid}["<< ${cr}"]`);
+                // IF → 규칙 (점선)
+                if (r.condition) lines.push(`  IF${i} -.->|"조건"| C${i}`);
+                // 규칙 → THEN (굵은 화살표)
+                lines.push(`  C${i} ==>|"추론"| A${i}`);
+                // 규칙/결과 스타일
+                if (riskNodeStyle[risk]) {
+                    lines.push(`  style C${i} ${riskNodeStyle[risk]}`);
+                    lines.push(`  style A${i} fill:${riskBg[risk]},stroke:${riskStroke[risk]},color:#111`);
+                    if (r.condition) lines.push(`  style IF${i} fill:#f8fafc,stroke:#94a3b8,color:#475569`);
+                }
+                // cascade 연쇄 (점선, 최대 3개)
+                (r.cascade_rules || []).slice(0,3).forEach(cr => {
+                    const ti = ruleIdx[cr];
+                    if (ti !== undefined) {
+                        lines.push(`  A${i} -.->|"cascade"| C${ti}`);
+                    } else {
+                        const crid = 'EXT' + cr.replace(/\W/g,'');
+                        lines.push(`  A${i} -.->|"cascade"| ${crid}[/"${lbl(cr)}"/]`);
+                    }
                 });
             });
             return lines.join('\n');
