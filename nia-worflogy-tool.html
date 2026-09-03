@@ -8470,8 +8470,9 @@ for r in results:
             const maxRetry = 3;
             const retryDelays = [0, 30000, 60000];  // 0초 → 30초 → 60초 (high demand 대응)
             const isRetryable = m => (m.includes('503') || m.includes('high demand') || m.includes('overloaded') || m.includes('Service Unavailable') || m.includes('demand') || m.includes('temporarily'));
-            let response = '', tokens = {}, err = null, finishReason = 'UNKNOWN', retryReason = '';
+            let response = '', tokens = {}, err = null, finishReason = 'UNKNOWN', retryReason = '', retryCount = 0;
             for (let attempt = 0; attempt < maxRetry; attempt++) {
+                retryCount = attempt;
                 if (attempt > 0) {
                     // finish_reason/json_parse 재시도: 이미 5초 대기했으므로 추가 대기 없음
                     // high demand 등 API 과부하: 30/60초 대기
@@ -8545,7 +8546,8 @@ for r in results:
                     err = e.message;
                     if (isRetryable(e.message) && attempt < maxRetry - 1) continue;
                     try {
-                        _logAppend(_LOG_API, { ts: new Date().toISOString(), step: 'Step ' + sid, label: label || '', provider: p, model: S.models[p], sys: sys.length > 300 ? sys.slice(0, 300) + '…' : sys, usr: usr.substring(0, 300), query: usr.substring(0, 120), context: docs_info, sys_prompt_chars: sys.length, response: null, error: err, duration_ms: Date.now() - t0, tokens: {} });
+                        const _stepsDone = [...document.querySelectorAll('.sbtn.done')].map(b => Number(b.id.replace('sb', ''))).filter(Boolean);
+                        _logAppend(_LOG_API, { ts: new Date().toISOString(), step: 'Step ' + sid, label: label || '', provider: p, model: S.models[p], sys: sys.length > 500 ? sys.slice(0, 500) + '…' : sys, usr: usr.substring(0, 300), query: usr.substring(0, 120), context: docs_info, sys_prompt_chars: sys.length, usr_chars: usr.length, response: null, response_chars: 0, expect_json: !!expectJson, finish_reason: null, error: err, duration_ms: Date.now() - t0, tokens: {}, retry_count: retryCount, retry_reason: retryReason || null, scenario_count: (S.scenarios || []).length, schemas_done: Object.keys(S.schemas || {}).length, steps_done: _stepsDone });
                         _logUse('api_call', { provider: p, model: S.models[p], status: 'error', label: label || '', error: err.substring(0, 120), duration_ms: Date.now() - t0 });
                     } catch (_) { }
                     throw e;
@@ -8554,8 +8556,9 @@ for r in results:
             if (err) throw new Error(err);
             const dur = Date.now() - t0;
             // ── 대책3: 로그 캡 10,000자 + finish_reason 기록 ──
-            _logAppend(_LOG_API, { ts: new Date().toISOString(), step: 'Step ' + sid, label: label || '', provider: p, model: S.models[p], sys: sys.length > 500 ? sys.slice(0, 500) + '…' : sys, usr: usr.length > 2000 ? usr.slice(0, 2000) + '…' : usr, query: usr.length > 3000 ? usr.slice(0, 3000) + '…' : usr, context: docs_info, sys_prompt_chars: sys.length, response: response.length > 10000 ? response.slice(0, 10000) + '…' : response, finish_reason: finishReason, error: null, duration_ms: dur, tokens });
-            _logUse('api_call', { provider: p, model: S.models[p], status: 'ok', label: label || '', duration_ms: dur });
+            const _stepsDoneOk = [...document.querySelectorAll('.sbtn.done')].map(b => Number(b.id.replace('sb', ''))).filter(Boolean);
+            _logAppend(_LOG_API, { ts: new Date().toISOString(), step: 'Step ' + sid, label: label || '', provider: p, model: S.models[p], sys: sys.length > 500 ? sys.slice(0, 500) + '…' : sys, usr: usr.length > 2000 ? usr.slice(0, 2000) + '…' : usr, query: usr.length > 3000 ? usr.slice(0, 3000) + '…' : usr, context: docs_info, sys_prompt_chars: sys.length, usr_chars: usr.length, response: response.length > 10000 ? response.slice(0, 10000) + '…' : response, response_chars: response.length, expect_json: !!expectJson, finish_reason: finishReason, error: null, duration_ms: dur, tokens, retry_count: retryCount, retry_reason: retryCount > 0 ? (retryReason || null) : null, scenario_count: (S.scenarios || []).length, schemas_done: Object.keys(S.schemas || {}).length, steps_done: _stepsDoneOk });
+            _logUse('api_call', { provider: p, model: S.models[p], status: 'ok', label: label || '', duration_ms: dur, tokens_in: tokens.input, tokens_out: tokens.output, retry_count: retryCount });
             return response;
         }
 
@@ -10068,6 +10071,7 @@ for r in results:
             inp.value = '';
         }
         function setLevel(lv) {
+            const _prevLevel = S.schemaLevel;
             S.schemaLevel = lv;
             ['outline', 'mid', 'detail'].forEach(k => {
                 const el = document.getElementById('lvl-btn-' + k);
@@ -10075,6 +10079,7 @@ for r in results:
                 if (k === lv) { el.style.background = 'var(--nia-blue)'; el.style.color = '#fff'; el.style.fontWeight = '600'; }
                 else { el.style.background = '#fff'; el.style.color = 'var(--text2)'; el.style.fontWeight = '400'; }
             });
+            if (_prevLevel !== lv) _logUse('schema_level_changed', { from: _prevLevel || null, to: lv });
             _persistState();
         }
         // ── SCENARIO LIST ──
@@ -10545,12 +10550,14 @@ for r in results:
                 _editingScenId = null;
                 _resetAddBtn();
                 toast('시나리오가 업데이트되었습니다', 'success');
+                _logUse('scenario_edited', { title: (txt.split('\n').find(l => l.trim()) || '시나리오').substring(0, 40), entities: entities.length, queries: queries.length });
             } else {
                 // 신규 추가 모드
                 const id = Date.now();
                 const title = txt.split('\n').find(l => l.trim()) || '시나리오';
                 S.scenarios.push({ id, title: title.replace(/^\[|\]$/g, '').substring(0, 40), text: txt, level: S.schemaLevel || 'outline', entities, queries });
                 toast('시나리오가 목록에 추가되었습니다', 'success');
+                _logUse('scenario_added', { title: title.replace(/^\[|\]$/g, '').substring(0, 40), chars: txt.length, entities: entities.length, queries: queries.length, level: S.schemaLevel || 'outline' });
             }
             renderScenarioList();
             renderScenHint(true); // Step 3 시나리오 추가: 도메인 저장 없이 UI만 갱신
@@ -10569,6 +10576,7 @@ for r in results:
             btn.style.cssText = 'white-space:nowrap;';
         }
         function removeScenario(id) {
+            const _removedScen = S.scenarios.find(s => s.id === id);
             if (_editingScenId === id) { _editingScenId = null; _resetAddBtn(); document.getElementById('scen-inp').value = ''; renderEntityHints([], []); setLevel('outline'); }
             S.scenarios = S.scenarios.filter(s => s.id !== id);
             delete S.schemas[id];
@@ -10576,6 +10584,7 @@ for r in results:
             renderScenHint(true); // Step 3 시나리오 삭제: 도메인 저장 없이 UI만 갱신
             _persistState();
             if (S.scenarios.length === 0) document.getElementById('scenario-list-card').style.display = 'none';
+            _logUse('scenario_removed', { title: _removedScen?.title || id, had_schema: !!_removedScen && !!S.schemas[id] });
         }
         function loadScenarioToEditor(id) {
             const s = S.scenarios.find(x => x.id === id);
@@ -10894,7 +10903,7 @@ for r in results:
                 if (tabBtn) tabBtn.innerHTML = `${S.scenarios.findIndex(s => s.id === id) + 1}. ${scen.title.substring(0, 14)} &#10003;`;
                 toast(scen.title.substring(0, 10) + ' 추출 완료', 'success');
                 markDone(4);
-                _logUse('schema_extracted', { scenario_id: id, domain: schema.domain || scen.title, triples: (schema.triples || []).length, exception_rules: (schema.exception_rules || []).length, classes: (schema.classes || []).length, properties: (schema.properties || []).length, w3c_valid: _w3cSchemaResult.valid, w3c_errors: (_w3cSchemaResult.errors || []).length, w3c_warnings: (_w3cSchemaResult.warnings || []).length, w3c_infos: (_w3cSchemaResult.infos || []).length });
+                _logUse('schema_extracted', { scenario_id: id, domain: schema.domain || scen.title, triples: (schema.triples || []).length, exception_rules: (schema.exception_rules || []).length, classes: (schema.classes || []).length, properties: (schema.properties || []).length, constraints: (schema.constraints || []).length, level: scen.level || S.schemaLevel, w3c_valid: _w3cSchemaResult.valid, w3c_errors: (_w3cSchemaResult.errors || []).length, w3c_warnings: (_w3cSchemaResult.warnings || []).length, w3c_infos: (_w3cSchemaResult.infos || []).length, w3c_error_msgs: (_w3cSchemaResult.errors || []).slice(0, 10), w3c_warning_msgs: (_w3cSchemaResult.warnings || []).slice(0, 10) });
                 if (S.workH) await saveWork('schema_' + id + '.json', JSON.stringify(schema, null, 2));
             } catch (e) {
                 const m = e.message || '';
@@ -11138,7 +11147,7 @@ for r in results:
                 renderOWLDesignValidation(stEl, validateOWLDesign(result));  // OWL 설계 원칙 준수 배지
                 setSt('상위 온톨로지 완료', 'ok'); markDone(5);
                 const _groups = normalizeUpperGroups(result);
-                _logUse('upper_ontology_done', { groups: _groups.length, upper_classes: _groups.reduce((s, g) => s + (g.upper_classes || []).length, 0), subclass_mappings: _groups.reduce((s, g) => s + (g.subclass_mappings || []).length, 0), w3c_valid: _w3cUpperResult.valid, w3c_errors: (_w3cUpperResult.errors || []).length, w3c_warnings: (_w3cUpperResult.warnings || []).length, w3c_infos: (_w3cUpperResult.infos || []).length });
+                _logUse('upper_ontology_done', { groups: _groups.length, upper_classes: _groups.reduce((s, g) => s + (g.upper_classes || []).length, 0), subclass_mappings: _groups.reduce((s, g) => s + (g.subclass_mappings || []).length, 0), domain_count: Object.keys(S.schemas || {}).length, w3c_valid: _w3cUpperResult.valid, w3c_errors: (_w3cUpperResult.errors || []).length, w3c_warnings: (_w3cUpperResult.warnings || []).length, w3c_infos: (_w3cUpperResult.infos || []).length, w3c_error_msgs: (_w3cUpperResult.errors || []).slice(0, 10), w3c_warning_msgs: (_w3cUpperResult.warnings || []).slice(0, 10) });
             } catch (e) { stEl.innerHTML = `<div class="al al-e">오류: ${e.message}</div>`; setSt('추출 오류', 'err'); }
             finally { btn.disabled = false; btn.innerHTML = '<span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span> 상위 온톨로지 추출'; }
         }
@@ -11464,7 +11473,7 @@ ${domainCtx}${upperCtx}
                 stEl.innerHTML = '<div class="al al-s">&#10003; 추론 규칙 도출 완료! 규칙 실행 버튼으로 트리플에 적용해 보세요.</div>';
                 renderW3CValidation(stEl, _w3cInfResult);  // 성공 메시지 직후 W3C 검증 결과 append
                 setSt('추론 규칙 완료', 'ok'); markDone(6);
-                _logUse('inference_generated', { rules: (inf.inferred_rules || []).length, w3c_valid: _w3cInfResult.valid, w3c_errors: (_w3cInfResult.errors || []).length, w3c_warnings: (_w3cInfResult.warnings || []).length, w3c_infos: (_w3cInfResult.infos || []).length });
+                _logUse('inference_generated', { rules: (inf.inferred_rules || []).length, risk_critical: (inf.inferred_rules || []).filter(r => r.risk_level === 'CRITICAL').length, risk_high: (inf.inferred_rules || []).filter(r => r.risk_level === 'HIGH').length, w3c_valid: _w3cInfResult.valid, w3c_errors: (_w3cInfResult.errors || []).length, w3c_warnings: (_w3cInfResult.warnings || []).length, w3c_infos: (_w3cInfResult.infos || []).length, w3c_error_msgs: (_w3cInfResult.errors || []).slice(0, 10), w3c_warning_msgs: (_w3cInfResult.warnings || []).slice(0, 10) });
                 _persistState();
                 if (S.workH) { await saveWork('combined_schema.json', JSON.stringify(S.combined, null, 2)); }
             } catch (e) {
@@ -11535,7 +11544,7 @@ ${domainCtx}${upperCtx}
                 const reasoningHtml = result.reasoning ? `<div style="font-size:.77rem;color:var(--text2);margin-top:.4rem;line-height:1.5;">${result.reasoning}</div>` : '';
                 if (stEl) stEl.innerHTML = `<div class="al al-s">&#10003; LLM 추론 완료 — 발동 ${(result.fired || []).length}개 / 미발동 ${(result.notFired || []).length}개</div>${reasoningHtml}`;
                 if (document.getElementById('graph-c').children.length) renderGraph();
-                _logUse('inference_run', { fired: (result.fired || []).length, not_fired: (result.notFired || []).length, instances: (S.infInstances || []).length });
+                _logUse('inference_run', { fired: (result.fired || []).length, not_fired: (result.notFired || []).length, instances: (S.infInstances || []).length, fired_ids: (result.fired || []).map(r => r.id), fired_risks: (result.fired || []).map(r => ({ id: r.id, risk: r.risk })), contradictions: (result.contradictions || []).length });
                 toast('LLM 추론 완료 — 발동 ' + (result.fired || []).length + '개', 'success');
             } catch (e) {
                 if (stEl) stEl.innerHTML = `<div class="al al-e">&#10007; 추론 오류: ${e.message}</div>`;
@@ -13114,6 +13123,7 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
                 resetHITL();
                 stEl.innerHTML = '<div class="al al-s">&#10003; A/B/C 비교 완료! 세 답변의 차이를 확인하세요.</div>';
                 markDone(7);
+                _logUse('comparison_run', { question_chars: q.length, has_ontology: !!schema, has_law_doc: !!docCtx, scenario_count: (S.scenarios || []).length });
                 setSt('품질 자동 평가 중...', 'loading');
                 stEl.innerHTML += '<div class="al al-i" style="margin-top:.5rem;"><span class="sp" style="margin-right:.4rem;"></span> LLM이 세 답변을 비교 평가하고 있습니다...</div>';
                 await autoEval(q, llmR, baseR, ontoR);
@@ -13193,7 +13203,9 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
                 const usr = `[질문]\n${q}\n\n[답변 C - 순수 LLM (컨텍스트 없음)]\n${clip(llmR)}\n\n[답변 A - 일반 텍스트 RAG]\n${clip(baseR)}\n\n[답변 B - 온톨로지 스키마 주입]\n${clip(ontoR)}}`;
                 let raw = (await callLLM(sys, usr, '자동평가(A/B/C)')).trim();
                 raw = raw.replace(/^```json\s*/i, '').replace(/^```\s*/i, '').replace(/\s*```$/i, '');
-                el.innerHTML = renderEval(JSON.parse(raw));
+                const _evalResult = JSON.parse(raw);
+                el.innerHTML = renderEval(_evalResult);
+                _logUse('eval_run', { overall_C: _evalResult.overall_C, overall_A: _evalResult.overall_A, overall_B: _evalResult.overall_B, accuracy: { C: _evalResult.accuracy?.C, A: _evalResult.accuracy?.A, B: _evalResult.accuracy?.B }, exception_handling: { C: _evalResult.exception_handling?.C, A: _evalResult.exception_handling?.A, B: _evalResult.exception_handling?.B }, dept_routing: { C: _evalResult.dept_routing?.C, A: _evalResult.dept_routing?.A, B: _evalResult.dept_routing?.B }, legal_basis: { C: _evalResult.legal_basis?.C, A: _evalResult.legal_basis?.A, B: _evalResult.legal_basis?.B }, conclusion: (_evalResult.conclusion || '').substring(0, 200) });
             } catch (e) { el.innerHTML = '<div class="al al-w">&#9651; 자동 평가를 완료하지 못했습니다. 위 세 답변을 직접 비교해 보세요.</div>'; }
         }
 
@@ -13320,6 +13332,7 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
             Object.assign(document.createElement('a'), { href: url, download: fname }).click();
             URL.revokeObjectURL(url);
             if (S.workH) await saveWork('ontology_result_final.json', JSON.stringify(result, null, 2));
+            _logUse('final_export', { filename: fname, domains: Object.keys(S.schemas || {}).length, total_triples: Object.values(S.schemas || {}).reduce((s, sc) => s + (sc.triples || []).length, 0), total_rules: Object.values(S.schemas || {}).reduce((s, sc) => s + (sc.exception_rules || []).length, 0), has_upper: !!(S.upperOntology), has_inference: !!(S.infRules), human_choice: S.humanChoice || null });
             toast('전체 결과를 내보냈습니다', 'success');
         }
         function toJsonLD() {
