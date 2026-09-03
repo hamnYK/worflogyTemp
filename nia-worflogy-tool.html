@@ -10894,7 +10894,7 @@ for r in results:
                 if (tabBtn) tabBtn.innerHTML = `${S.scenarios.findIndex(s => s.id === id) + 1}. ${scen.title.substring(0, 14)} &#10003;`;
                 toast(scen.title.substring(0, 10) + ' 추출 완료', 'success');
                 markDone(4);
-                _logUse('schema_extracted', { scenario_id: id, domain: schema.domain || scen.title, triples: (schema.triples || []).length, exception_rules: (schema.exception_rules || []).length, classes: (schema.classes || []).length, properties: (schema.properties || []).length });
+                _logUse('schema_extracted', { scenario_id: id, domain: schema.domain || scen.title, triples: (schema.triples || []).length, exception_rules: (schema.exception_rules || []).length, classes: (schema.classes || []).length, properties: (schema.properties || []).length, w3c_valid: _w3cSchemaResult.valid, w3c_errors: (_w3cSchemaResult.errors || []).length, w3c_warnings: (_w3cSchemaResult.warnings || []).length, w3c_infos: (_w3cSchemaResult.infos || []).length });
                 if (S.workH) await saveWork('schema_' + id + '.json', JSON.stringify(schema, null, 2));
             } catch (e) {
                 const m = e.message || '';
@@ -11138,7 +11138,7 @@ for r in results:
                 renderOWLDesignValidation(stEl, validateOWLDesign(result));  // OWL 설계 원칙 준수 배지
                 setSt('상위 온톨로지 완료', 'ok'); markDone(5);
                 const _groups = normalizeUpperGroups(result);
-                _logUse('upper_ontology_done', { groups: _groups.length, upper_classes: _groups.reduce((s, g) => s + (g.upper_classes || []).length, 0), subclass_mappings: _groups.reduce((s, g) => s + (g.subclass_mappings || []).length, 0) });
+                _logUse('upper_ontology_done', { groups: _groups.length, upper_classes: _groups.reduce((s, g) => s + (g.upper_classes || []).length, 0), subclass_mappings: _groups.reduce((s, g) => s + (g.subclass_mappings || []).length, 0), w3c_valid: _w3cUpperResult.valid, w3c_errors: (_w3cUpperResult.errors || []).length, w3c_warnings: (_w3cUpperResult.warnings || []).length, w3c_infos: (_w3cUpperResult.infos || []).length });
             } catch (e) { stEl.innerHTML = `<div class="al al-e">오류: ${e.message}</div>`; setSt('추출 오류', 'err'); }
             finally { btn.disabled = false; btn.innerHTML = '<span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span> 상위 온톨로지 추출'; }
         }
@@ -11464,7 +11464,7 @@ ${domainCtx}${upperCtx}
                 stEl.innerHTML = '<div class="al al-s">&#10003; 추론 규칙 도출 완료! 규칙 실행 버튼으로 트리플에 적용해 보세요.</div>';
                 renderW3CValidation(stEl, _w3cInfResult);  // 성공 메시지 직후 W3C 검증 결과 append
                 setSt('추론 규칙 완료', 'ok'); markDone(6);
-                _logUse('inference_generated', { rules: (inf.inferred_rules || []).length });
+                _logUse('inference_generated', { rules: (inf.inferred_rules || []).length, w3c_valid: _w3cInfResult.valid, w3c_errors: (_w3cInfResult.errors || []).length, w3c_warnings: (_w3cInfResult.warnings || []).length, w3c_infos: (_w3cInfResult.infos || []).length });
                 _persistState();
                 if (S.workH) { await saveWork('combined_schema.json', JSON.stringify(S.combined, null, 2)); }
             } catch (e) {
