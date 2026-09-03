@@ -2958,6 +2958,17 @@
         .gl-btn-l5 { border: 1.5px solid #b91c1c; background: #fff1f1; color: #991b1b; }
         .gl-btn-l5s { border: 1.5px solid #92400e; background: #fffbeb; color: #78350f; }
         .gl-btn-casc { border: 1.5px solid #7c3aed; background: #f5f3ff; color: #5b21b6; }
+        .inf-badge { position: relative; display: inline-flex; }
+        .inf-badge-tip {
+            display: none; position: absolute;
+            bottom: calc(100% + 6px); left: 0; z-index: 9999;
+            background: #fff; border-radius: 10px;
+            border: 1.5px solid rgba(185,28,28,.3);
+            padding: .6rem .85rem; min-width: 220px; max-width: 300px;
+            box-shadow: 0 4px 18px rgba(0,0,0,.13);
+            white-space: normal; pointer-events: none; font-weight: 400;
+        }
+        .inf-badge:hover .inf-badge-tip { display: block; }
 
         /* ── Checklist Component ── */
         .chk-list {
@@ -12973,8 +12984,8 @@ ${domainCtx}${upperCtx}
                 if (btn) btn.style.opacity = vis2[layer] ? '1' : '0.4';
                 const nds = window._graphLayerNodes[layer] || [];
                 const eds = window._graphLayerEdges[layer] || [];
-                nds.forEach(id => { try { nodes.update({ id, hidden: !vis2[layer] }); } catch (e) { } });
-                eds.forEach(id => { try { edges.update({ id, hidden: !vis2[layer] }); } catch (e) { } });
+                nds.forEach(id => { try { const n = nodes.get(id); if (n) nodes.update({ ...n, hidden: !vis2[layer] }); } catch (e) { } });
+                eds.forEach(id => { try { const eg = edges.get(id); if (eg) edges.update({ ...eg, hidden: !vis2[layer] }); } catch (e) { } });
             };
 
             // ── 클릭 상세 패널 (W3C 5-Layer 기반 전면 재설계) ──
@@ -13557,8 +13568,10 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
                 const r = ri[id];
                 const nm = r?.rule_name || '';
                 const conds = (r?.if?.conditions || [r?.if?.subject]).filter(Boolean).join('; ');
-                const tip = r ? `IF: ${conds || '(조건 없음)'}\nTHEN: ${r.then || ''}`.substring(0, 150) : '예외 규칙';
-                return `<span title="${tip.replace(/"/g, "'")}" style="display:inline-flex;align-items:center;gap:.22rem;font-size:.71rem;font-weight:700;background:rgba(192,86,33,.1);color:#9a3412;border:1px solid rgba(192,86,33,.3);border-radius:5px;padding:.06rem .4rem;margin:0 .12rem;cursor:help;white-space:nowrap;vertical-align:middle;"><code style="font-size:.68rem;font-weight:800;color:#9a3412;">${id}</code>${nm ? `<span style="font-weight:500;font-size:.67rem;color:#b45309;border-left:1px solid rgba(192,86,33,.3);padding-left:.22rem;max-width:120px;overflow:hidden;text-overflow:ellipsis;">${nm.substring(0, 22)}</span>` : ''}</span>`;
+                const cleanConds = r ? conds.replace(/<[^>]*>/g, '').trim() : '';
+                const cleanThen = r ? (r.then || '').replace(/<[^>]*>/g, '').trim() : '';
+                const tipHtml = r ? `<div class="inf-badge-tip"><div style="margin-bottom:.3rem;"><span style="font-size:.58rem;font-weight:700;background:#ffedd5;color:#9a3412;padding:.05rem .3rem;border-radius:20px;margin-right:.18rem;">W3C SWRL</span><span style="font-size:.58rem;font-weight:700;background:#fff7ed;color:#b45309;padding:.05rem .3rem;border-radius:20px;">\uc608\uc678 \uaddc\uce59</span></div><div style="font-size:.73rem;font-weight:700;color:#111827;margin-bottom:.18rem;">${id}${nm ? ' \u00b7 ' + nm.substring(0, 30) : ''}</div><div style="font-size:.62rem;font-weight:700;color:#9a3412;margin-bottom:.04rem;">IF</div><div style="font-size:.62rem;color:#374151;margin-bottom:.12rem;line-height:1.45;">${cleanConds.substring(0, 120)}</div><div style="font-size:.62rem;font-weight:700;color:#15803d;margin-bottom:.04rem;">THEN</div><div style="font-size:.62rem;color:#374151;line-height:1.45;">${cleanThen.substring(0, 80)}</div></div>` : '';
+                return `<span class="inf-badge" style="display:inline-flex;align-items:center;gap:.22rem;font-size:.71rem;font-weight:700;background:rgba(192,86,33,.1);color:#9a3412;border:1px solid rgba(192,86,33,.3);border-radius:5px;padding:.06rem .4rem;margin:0 .12rem;cursor:help;white-space:nowrap;vertical-align:middle;">${tipHtml}<code style="font-size:.68rem;font-weight:800;color:#9a3412;">${id}</code>${nm ? `<span style="font-weight:500;font-size:.67rem;color:#b45309;border-left:1px solid rgba(192,86,33,.3);padding-left:.22rem;max-width:120px;overflow:hidden;text-overflow:ellipsis;">${nm.substring(0, 22)}</span>` : ''}</span>`;
             });
             // [INF_XX] - 추론 규칙 badge + 인라인 규칙명 + 위험도
             s = s.replace(/\[?(INF_\d+)\]?/g, (_, id) => {
@@ -13566,8 +13579,11 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
                 const nm = r?.inference_name || '';
                 const risk = r?.risk_level || '';
                 const rC = risk === 'CRITICAL' ? '#b91c1c' : risk === 'HIGH' ? '#c05621' : risk === 'MEDIUM' ? '#b45309' : '#15803d';
-                const tip = r ? `[${risk || '?'}] IF: ${r.condition || '(조건)'}\nTHEN: ${r.action || ''}`.substring(0, 150) : '추론 규칙';
-                return `<span title="${tip.replace(/"/g, "'")}" style="display:inline-flex;align-items:center;gap:.22rem;font-size:.71rem;font-weight:700;background:rgba(185,28,28,.09);color:#991b1b;border:1px solid rgba(185,28,28,.26);border-radius:5px;padding:.06rem .4rem;margin:0 .12rem;cursor:help;white-space:nowrap;vertical-align:middle;"><code style="font-size:.68rem;font-weight:800;color:#991b1b;">${id}</code>${nm ? `<span style="font-weight:500;font-size:.67rem;color:${rC};border-left:1px solid rgba(185,28,28,.22);padding-left:.22rem;max-width:120px;overflow:hidden;text-overflow:ellipsis;">${nm.substring(0, 22)}</span>` : ''}</span>`;
+                const cleanCond = r ? (r.condition || '(조건)').replace(/<[^>]*>/g, '').trim() : '';
+                const cleanAction = r ? (r.action || '').replace(/<[^>]*>/g, '').trim() : '';
+                const rBg = risk === 'CRITICAL' ? '#fee2e2' : risk === 'HIGH' ? '#ffedd5' : risk === 'MEDIUM' ? '#fef3c7' : '#dcfce7';
+                const tipHtml = r ? `<div class="inf-badge-tip"><div style="margin-bottom:.3rem;"><span style="font-size:.58rem;font-weight:700;background:#fee2e2;color:#991b1b;padding:.05rem .3rem;border-radius:20px;margin-right:.18rem;">W3C SWRL</span><span style="font-size:.58rem;font-weight:700;background:${rBg};color:${rC};padding:.05rem .3rem;border-radius:20px;">${risk || '?'}</span></div><div style="font-size:.73rem;font-weight:700;color:#111827;margin-bottom:.18rem;">${id}${nm ? ' · ' + nm.substring(0, 30) : ''}</div><div style="font-size:.62rem;font-weight:700;color:#991b1b;margin-bottom:.04rem;">IF</div><div style="font-size:.62rem;color:#374151;margin-bottom:.12rem;line-height:1.45;">${cleanCond.substring(0, 120)}</div><div style="font-size:.62rem;font-weight:700;color:#15803d;margin-bottom:.04rem;">THEN</div><div style="font-size:.62rem;color:#374151;line-height:1.45;">${cleanAction.substring(0, 80)}</div></div>` : '';
+                return `<span class="inf-badge" style="display:inline-flex;align-items:center;gap:.22rem;font-size:.71rem;font-weight:700;background:rgba(185,28,28,.09);color:#991b1b;border:1px solid rgba(185,28,28,.26);border-radius:5px;padding:.06rem .4rem;margin:0 .12rem;cursor:help;white-space:nowrap;vertical-align:middle;">${tipHtml}<code style="font-size:.68rem;font-weight:800;color:#991b1b;">${id}</code>${nm ? `<span style="font-weight:500;font-size:.67rem;color:${rC};border-left:1px solid rgba(185,28,28,.22);padding-left:.22rem;max-width:120px;overflow:hidden;text-overflow:ellipsis;">${nm.substring(0, 22)}</span>` : ''}</span>`;
             });
             // 줄바꿈
             s = s.replace(/\n/g, '<br>');
