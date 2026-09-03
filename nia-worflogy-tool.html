@@ -12009,8 +12009,32 @@ ${domainCtx}${upperCtx}
 
 
 
+
         // ── vis.js 온톨로지 다이어그램 렌더러 ──────────────────────────────────
         if (!window._visNets) window._visNets = {};
+
+        // 스타일 적용 tooltip 엘리먼트 생성 (브라우저 기본 tooltip 대체)
+        function _makeTooltip(text) {
+            if (!text || !String(text).trim()) return undefined;
+            const el = document.createElement('div');
+            el.style.cssText = [
+                'background:#1e293b',
+                'color:#f1f5f9',
+                'padding:8px 12px',
+                'border-radius:7px',
+                'font-size:11.5px',
+                'line-height:1.6',
+                'max-width:260px',
+                'white-space:pre-wrap',
+                'word-break:break-all',
+                'box-shadow:0 4px 16px rgba(0,0,0,0.28)',
+                'font-family:Pretendard,Noto Sans KR,sans-serif',
+                'pointer-events:none',
+                'border:1px solid rgba(255,255,255,0.08)',
+            ].join(';');
+            el.textContent = String(text).trim();
+            return el;
+        }
 
         function renderOntologyVis(containerId, nodesData, edgesData, opts) {
             const el = document.getElementById(containerId);
@@ -12046,7 +12070,7 @@ ${domainCtx}${upperCtx}
                     shadow: { enabled: true, size: 4, x: 1, y: 1, color: 'rgba(0,0,0,0.08)' },
                     margin: 8
                 },
-                interaction: { hover: true, tooltipDelay: 200, navigationButtons: false, keyboard: false, zoomView: true },
+                interaction: { hover: true, tooltipDelay: 150, navigationButtons: false, keyboard: false, zoomView: true },
                 layout: opts?.layout || { randomSeed: 42 }
             };
             const merged = Object.assign({}, defaults, opts || {});
@@ -12092,11 +12116,6 @@ ${domainCtx}${upperCtx}
             el.appendChild(div);
         }
 
-        // ── Step 4: 도메인 스키마 ──
-        // 변경:
-        //   ① SWRL exception_rule 제거 (Step 6 전용)
-        //   ② xsd: 노드 제거 → DatatypeProperty 정보는 Class 노드 tooltip에 포함
-        //   ③ SHACL 엣지 방향 수정: NodeShape →[sh:targetClass]→ TargetClass
         function buildSchemaVisData(schema) {
             const classes = schema?.classes || [];
             const triples = schema?.triples || [];
@@ -12107,23 +12126,20 @@ ${domainCtx}${upperCtx}
             const nodeMap = new Map(); let nid = 0;
             const gn = v => { const k = String(v||'').trim(); if(!k) return null; if(!nodeMap.has(k)) nodeMap.set(k,'N'+(nid++)); return nodeMap.get(k); };
             const nodes = []; const edges = []; const seen = new Set();
-            // properties 맵
             const propMap = {};
             properties.forEach(p => { if(p.name) propMap[p.name] = p; });
             const dtPropNames = new Set(properties.filter(p => p.type === 'owl:DatatypeProperty').map(p => p.name));
-            // DatatypeProperty: Class 노드 tooltip에 통합
             const classDtProps = {};
             properties.filter(p => p.type === 'owl:DatatypeProperty' && p.domain).forEach(p => {
                 if(!classDtProps[p.domain]) classDtProps[p.domain] = [];
                 classDtProps[p.domain].push(p);
             });
-            // owl:Class 노드
             classes.forEach(c => {
                 const id = gn(c.label); if(!id) return;
                 const isRoot = rootSet.has(String(c.label||'').trim());
                 const dtInfo = (classDtProps[c.label]||[]).map(p => '  ' + p.name + ': xsd:' + p.range).join('\n');
-                const tip = [c.comment ? 'rdfs:comment: '+c.comment : '', dtInfo ? 'DatatypeProperties:\n'+dtInfo : ''].filter(Boolean).join('\n');
-                nodes.push({ id, label: lbl(c.label), title: tip||undefined,
+                const tipTxt = [c.comment ? 'rdfs:comment: '+c.comment : '', dtInfo ? 'DatatypeProperties:\n'+dtInfo : ''].filter(Boolean).join('\n');
+                nodes.push({ id, label: lbl(c.label), title: _makeTooltip(tipTxt),
                     shape: isRoot ? 'ellipse' : 'box',
                     color: isRoot
                         ? { background:'#0367b0', border:'#024a7a', highlight:{background:'#0255a0',border:'#024a7a'} }
@@ -12131,7 +12147,6 @@ ${domainCtx}${upperCtx}
                     font: { color: isRoot ? '#fff' : '#1e3a5f', bold: isRoot }
                 });
             });
-            // rdfs:subClassOf
             classes.forEach(c => {
                 if(!c.subClassOf) return;
                 const from = gn(c.label), to = gn(c.subClassOf);
@@ -12139,7 +12154,6 @@ ${domainCtx}${upperCtx}
                 const k = from+'|sub|'+to;
                 if(!seen.has(k)) { seen.add(k); edges.push({ from, to, label:'subClassOf', width:2.5, color:{color:'#0367b0',highlight:'#024a7a'}, dashes:false }); }
             });
-            // owl:ObjectProperty 트리플 (DatatypeProperty predicate 제외)
             triples.forEach(t => {
                 if(!t.subject||!t.object) return;
                 const obj = String(t.object).trim();
@@ -12153,33 +12167,29 @@ ${domainCtx}${upperCtx}
                 if(!seen.has(k)) {
                     seen.add(k);
                     const pd = propMap[t.predicate];
-                    const tip = pd ? ['owl:ObjectProperty: '+t.predicate, pd.domain?'domain: '+pd.domain:'', pd.range?'range: '+pd.range:'', pd.inverseOf?'inverseOf: '+pd.inverseOf:'', pd.comment||''].filter(Boolean).join('\n') : undefined;
-                    edges.push({ from:s, to:o, label:p, title:tip,
+                    const tipTxt = pd ? ['owl:ObjectProperty: '+t.predicate, pd.domain?'domain: '+pd.domain:'', pd.range?'range: '+pd.range:'', pd.inverseOf?'inverseOf: '+pd.inverseOf:'', pd.comment||''].filter(Boolean).join('\n') : '';
+                    edges.push({ from:s, to:o, label:p, title: _makeTooltip(tipTxt),
                         color:{color:'#64748b'},
                         arrows: pd?.inverseOf ? {to:{enabled:true,scaleFactor:0.75},from:{enabled:true,scaleFactor:0.75}} : {to:{enabled:true,scaleFactor:0.75}},
                         dashes:false
                     });
                 }
             });
-            // SHACL — 방향 수정: NodeShape →[sh:targetClass]→ TargetClass
             consts.forEach((c,i) => {
                 const mc = c.min_count!=null ? ' min≥'+c.min_count : '';
                 const shId = 'SH'+i;
                 const shLabel = lbl(c.shape_id||c.target_class||'Shape') + mc + (c.path ? '\n→'+lbl(c.path) : '');
-                const tip = [c.shape_id||'', c.path?'sh:path: '+c.path:'', c.severity||'', c.exception_message||''].filter(Boolean).join('\n');
+                const tipTxt = [c.shape_id||'', c.path?'sh:path: '+c.path:'', c.severity||'', c.exception_message||''].filter(Boolean).join('\n');
                 nodes.push({ id:shId, label:shLabel, shape:'database',
                     color:{background:'#fffbeb',border:'#d97706',highlight:{background:'#fef3c7',border:'#b45309'}},
-                    font:{color:'#92400e',size:10}, title:tip||undefined
+                    font:{color:'#92400e',size:10}, title: _makeTooltip(tipTxt)
                 });
                 const tid = gn(c.target_class);
-                // NodeShape → TargetClass (sh:targetClass 방향 — 검증 대상 지목)
                 if(tid) edges.push({ from:shId, to:tid, label:'sh:targetClass', dashes:[5,3], color:{color:'#d97706'}, arrows:{to:{enabled:true,scaleFactor:0.6}} });
             });
             return { nodes, edges };
         }
 
-        // ── Step 5: 상위 온톨로지 ──
-        // 변경: 도메인 트리플 제거 (Step 4와 중복, 상위 매핑 구조 가독성 저해)
         function buildUpperVisData(result) {
             const groups = normalizeUpperGroups(result);
             const allMappings = groups.flatMap(g => g.subclass_mappings || []);
@@ -12189,40 +12199,36 @@ ${domainCtx}${upperCtx}
             const nodeMap = new Map(); let idx = 0;
             const getNode = v => { const k=clean(v); if(!k) return null; if(!nodeMap.has(k)) nodeMap.set(k,'UN'+(idx++)); return nodeMap.get(k); };
             const nodes = []; const edges = []; const seen = new Set();
-            // 상위 클래스 노드
             groups.forEach((g, gi) => {
                 const col = GC[gi % GC.length];
                 (g.upper_classes||[]).forEach(c => {
                     const id = getNode(c.name); if(!id) return;
                     if(!nodes.find(n=>n.id===id)) {
-                        const tip = [c.description||'', c.id?'IRI: '+c.id:'', c.domain_instances?.length?'예: '+c.domain_instances.slice(0,3).join(', '):''].filter(Boolean).join('\n');
+                        const tipTxt = [c.description||'', c.id?'IRI: '+c.id:'', c.domain_instances?.length?'예: '+c.domain_instances.slice(0,3).join(', '):''].filter(Boolean).join('\n');
                         nodes.push({ id, label:lbl(c.name), shape:'ellipse',
                             color:{background:col,border:col,highlight:{background:col,border:col}},
-                            font:{color:'#fff',bold:true,size:13}, size:28, title:tip||undefined
+                            font:{color:'#fff',bold:true,size:13}, size:28, title: _makeTooltip(tipTxt)
                         });
                     }
                 });
             });
-            // 도메인 클래스 + rdfs:subClassOf
             allMappings.forEach(m => {
                 const up = getNode(m.upper_class), dc = getNode(m.domain_class);
                 if(!up||!dc) return;
                 if(!nodes.find(n=>n.id===dc)) {
                     nodes.push({ id:dc, label:lbl(m.domain_class), shape:'box',
                         color:{background:'#fff',border:'#94a3b8',highlight:{background:'#f8fafc',border:'#64748b'}},
-                        font:{color:'#1e293b'}, title:m.domain?'도메인: '+m.domain:undefined
+                        font:{color:'#1e293b'}, title: _makeTooltip(m.domain ? '도메인: '+m.domain : '')
                     });
                 }
                 const k = dc+'>'+up;
                 if(!seen.has(k)) { seen.add(k); edges.push({ from:dc, to:up, label:'subClassOf', width:2.5, color:{color:'#0367b0'}, dashes:false }); }
             });
-            // owl:equivalentClass
             groups.forEach(g=>(g.upper_classes||[]).forEach(c=>{
                 if(!c.equivalent_to) return;
                 const na=getNode(c.name), nb=getNode(c.equivalent_to);
                 if(na&&nb) edges.push({ from:na, to:nb, label:'owl:equiv', arrows:{from:{enabled:true,scaleFactor:0.6},to:{enabled:true,scaleFactor:0.6}}, dashes:[3,3], color:{color:'#7c3aed'} });
             }));
-            // owl:disjointWith (OWL 2 DL)
             groups.forEach(g=>(g.upper_classes||[]).forEach(c=>{
                 if(!Array.isArray(c.disjoint_with)) return;
                 c.disjoint_with.forEach(ref=>{
@@ -12236,10 +12242,6 @@ ${domainCtx}${upperCtx}
             return { nodes, edges };
         }
 
-        // ── Step 6: 추론 규칙 ──
-        // 변경:
-        //   ① IF 노드는 클래스 연결 가능할 때만 생성, 나머지는 rule 노드 tooltip에 통합
-        //   ② cascade 전체 표시 (slice 제한 제거), 4개↑이면 rule tooltip에 개수 명시
         function buildInfVisData(inf) {
             const rules = inf?.inferred_rules || [];
             const lbl = s => String(s||'').replace(/["\[\]]/g,'').substring(0,28).trim();
@@ -12255,24 +12257,21 @@ ${domainCtx}${upperCtx}
                 const risk = r.risk_level||'LOW';
                 const rid = r.inference_id||('INF_'+String(i+1).padStart(2,'0'));
                 const cond = String(r.condition||'');
-                // conditions_detail 요약 (IF 조건 텍스트)
                 const cdTip = (r.conditions_detail||[]).length > 0
                     ? (r.conditions_detail||[]).map((cd,ci) => '['+(ci+1)+'] '+(cd.triple||cd.condition||'')+(cd.threshold!==undefined?' ≥'+cd.threshold:'')).join('\n')
                     : cond;
-                // IF 노드: if.subject가 변수가 아닌 클래스명일 때만 생성
                 const rawSubj = r.if?.subject;
                 const canConnect = rawSubj && !String(rawSubj).startsWith('?') && String(rawSubj).trim() !== '';
                 if(canConnect) {
                     const usesUpper = upperNames.length > 0 && upperNames.some(n => cond.includes(n));
                     nodes.push({ id:'IF'+i, label:'IF: '+lbl(cond), shape:'hexagon',
                         color:{background:'#f8fafc', border:usesUpper?'#0367b0':'#94a3b8', highlight:{background:'#f1f5f9',border:usesUpper?'#0255a0':'#64748b'}},
-                        borderWidth:usesUpper?3:2, font:{color:'#475569',size:10}, title:cdTip
+                        borderWidth:usesUpper?3:2, font:{color:'#475569',size:10}, title: _makeTooltip(cdTip)
                     });
                     edges.push({ from:'IF'+i, to:'C'+i, label:'조건', dashes:[4,3], color:{color:'#94a3b8'} });
                 }
-                // rule 노드 tooltip: 연결 불가 조건은 여기에 포함
                 const cascadeCount = (r.cascade_rules||[]).length;
-                const ruleTip = [
+                const ruleTipTxt = [
                     rid+(r.inference_name?': '+r.inference_name:''),
                     !canConnect && cdTip ? 'IF:\n'+cdTip : '',
                     r.business_impact ? '영향: '+r.business_impact : '',
@@ -12282,15 +12281,13 @@ ${domainCtx}${upperCtx}
                 ].filter(Boolean).join('\n');
                 nodes.push({ id:'C'+i, label:rid+'\n'+lbl(r.inference_name), shape:'diamond',
                     color:{background:RC[risk],border:RC[risk],highlight:{background:RC[risk],border:RC[risk]}},
-                    font:{color:'#fff',bold:true,size:11}, title:ruleTip
+                    font:{color:'#fff',bold:true,size:11}, title: _makeTooltip(ruleTipTxt)
                 });
-                // THEN 결과 노드
                 nodes.push({ id:'A'+i, label:'THEN:\n'+lbl(r.action), shape:'ellipse',
                     color:{background:RCL[risk],border:RCB[risk],highlight:{background:RCL[risk],border:RC[risk]}},
                     font:{color:'#111',size:11}
                 });
                 edges.push({ from:'C'+i, to:'A'+i, label:'추론', width:2.5, color:{color:RC[risk]}, dashes:false });
-                // cascade 전체 표시 (제한 없음)
                 (r.cascade_rules||[]).forEach(cr => {
                     const ti = ruleIdx[cr];
                     if(ti!==undefined) edges.push({ from:'A'+i, to:'C'+ti, label:'cascade', dashes:[3,3], color:{color:'#7c3aed'} });
