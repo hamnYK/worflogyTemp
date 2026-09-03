@@ -8785,7 +8785,7 @@ for r in results:
                     document.getElementById('inf-ed').value = JSON.stringify(S.infRules, null, 2);
                     document.getElementById('inf-cnt').textContent = '추론 규칙: ' + S.combined.inferred_rules.length + '개';
                     document.getElementById('inf-res').style.display = 'block';
-                    document.getElementById('dl-cmb-btn').style.display = 'inline-flex';
+                    const _dlCmbEl = document.getElementById('dl-cmb-btn'); if (_dlCmbEl) _dlCmbEl.style.display = 'inline-flex';
                     document.getElementById('inf-run-btn').style.display = 'inline-flex';
                     markDone(6);
                 }
@@ -12174,6 +12174,7 @@ ${domainCtx}${upperCtx}
                 layout: opts?.layout || { randomSeed: 42 }
             };
             const merged = Object.assign({}, defaults, opts || {});
+            delete merged.legend;  // legend는 vis.js 비표준 옵션 — L12194에서 별도 처리
             if (!opts?.layout) merged.layout = { randomSeed: 42 };
             const nodesDS = new vis.DataSet(nodesData);
             const edgesDS = new vis.DataSet(edgesData);
@@ -12867,6 +12868,9 @@ ${domainCtx}${upperCtx}
             const infNodeMap = new Map();
             allInferred.forEach(r => {
                 const c = swrlCol(r.risk_level);
+                const _rBw = r.risk_level === 'CRITICAL' ? GDS.border.critical : GDS.border.rule;
+                const _rSz = r.risk_level === 'CRITICAL' ? GDS.size.ruleXL : r.risk_level === 'HIGH' ? GDS.size.ruleL : r.risk_level === 'MEDIUM' ? GDS.size.ruleM : GDS.size.ruleS;
+                const _rSh = r.risk_level === 'CRITICAL' ? GDS.shadow.lg : r.risk_level === 'HIGH' ? GDS.shadow.md : GDS.shadow.sm;
                 const rn = gn('* ' + (r.inference_name || r.inference_id), 'swrl' + r.risk_level, 'star',
                     _mkTip('swrl', r),
                     {
