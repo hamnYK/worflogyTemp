@@ -12007,6 +12007,8 @@ ${domainCtx}${upperCtx}
         }
         // containerId 바인딩: Blob URL 다중 생성에 의한 메모리 누수를 막기 위해 이전 URL 트래킹
 
+
+
         // ── vis.js 온톨로지 다이어그램 렌더러 ──────────────────────────────────
         if (!window._visNets) window._visNets = {};
 
@@ -12054,153 +12056,165 @@ ${domainCtx}${upperCtx}
                 merged
             );
             window._visNets[containerId] = network;
-            // 레이아웃 안정화 후 자동 fit
             network.once('stabilized', () => { try { network.fit({ animation: { duration: 300, easingFunction: 'easeInOutQuad' } }); } catch(e) {} });
+            if (opts?.legend) _renderVisLegend(el, opts.legend);
         }
 
+        function _renderVisLegend(el, items) {
+            const div = document.createElement('div');
+            div.style.cssText = 'position:absolute;bottom:10px;left:10px;background:rgba(255,255,255,0.93);border:1px solid #e2e8f0;border-radius:7px;padding:7px 10px;font-size:10px;line-height:1.7;z-index:10;max-width:190px;box-shadow:0 2px 8px rgba(0,0,0,.07);';
+            let html = '<div style="font-weight:700;color:#1e293b;margin-bottom:3px;font-size:10.5px;">범례</div>';
+            items.forEach(it => {
+                const col = it.color || '#94a3b8';
+                const bdr = it.border || col;
+                let icon = '';
+                if (it.type === 'node') {
+                    const sh = it.nodeShape || 'box';
+                    if (sh === 'ellipse')
+                        icon = `<svg width="16" height="11" style="vertical-align:middle;margin-right:4px;flex-shrink:0"><ellipse cx="8" cy="5.5" rx="7" ry="4.5" fill="${col}" stroke="${bdr}" stroke-width="1.5"/></svg>`;
+                    else if (sh === 'diamond')
+                        icon = `<svg width="16" height="11" style="vertical-align:middle;margin-right:4px;flex-shrink:0"><polygon points="8,1 15,5.5 8,10 1,5.5" fill="${col}" stroke="${bdr}" stroke-width="1.5"/></svg>`;
+                    else if (sh === 'hexagon')
+                        icon = `<svg width="16" height="11" style="vertical-align:middle;margin-right:4px;flex-shrink:0"><polygon points="3.5,5.5 5.5,1.5 10.5,1.5 12.5,5.5 10.5,9.5 5.5,9.5" fill="${col}" stroke="${bdr}" stroke-width="1.5"/></svg>`;
+                    else if (sh === 'database')
+                        icon = `<svg width="16" height="11" style="vertical-align:middle;margin-right:4px;flex-shrink:0"><rect x="1" y="3" width="14" height="7" rx="1" fill="${col}" stroke="${bdr}" stroke-width="1.5"/><ellipse cx="8" cy="3" rx="7" ry="2.2" fill="${col}" stroke="${bdr}" stroke-width="1.5"/></svg>`;
+                    else
+                        icon = `<svg width="16" height="11" style="vertical-align:middle;margin-right:4px;flex-shrink:0"><rect x="1" y="1.5" width="14" height="8" rx="1.5" fill="${col}" stroke="${bdr}" stroke-width="1.5"/></svg>`;
+                } else {
+                    const strokeDash = it.dash ? '4,3' : 'none';
+                    const strokeW = it.bold ? 2.2 : 1.5;
+                    const bidirMark = it.bidir ? `<polygon points="3,3.5 7,1.5 7,5.5" fill="${col}"/>` : '';
+                    icon = `<svg width="30" height="11" style="vertical-align:middle;margin-right:4px;flex-shrink:0">${bidirMark}<line x1="2" y1="5.5" x2="26" y2="5.5" stroke="${col}" stroke-width="${strokeW}" stroke-dasharray="${strokeDash}"/><polygon points="25,3.5 30,5.5 25,7.5" fill="${col}"/></svg>`;
+                }
+                html += `<div style="display:flex;align-items:center;color:#334155;white-space:nowrap;">${icon}<span>${it.label}</span></div>`;
+            });
+            div.innerHTML = html;
+            el.appendChild(div);
+        }
+
+        // ── Step 4: 도메인 스키마 ──
+        // 변경:
+        //   ① SWRL exception_rule 제거 (Step 6 전용)
+        //   ② xsd: 노드 제거 → DatatypeProperty 정보는 Class 노드 tooltip에 포함
+        //   ③ SHACL 엣지 방향 수정: NodeShape →[sh:targetClass]→ TargetClass
         function buildSchemaVisData(schema) {
             const classes = schema?.classes || [];
             const triples = schema?.triples || [];
-            const rules = schema?.exception_rules || [];
             const consts = schema?.constraints || [];
+            const properties = schema?.properties || [];
             const lbl = s => String(s || '').replace(/["\[\]{}]/g, '').trim().substring(0, 22);
             const rootSet = new Set(classes.filter(c => !c.subClassOf).map(c => String(c.label||'').trim()));
             const nodeMap = new Map(); let nid = 0;
             const gn = v => { const k = String(v||'').trim(); if(!k) return null; if(!nodeMap.has(k)) nodeMap.set(k,'N'+(nid++)); return nodeMap.get(k); };
             const nodes = []; const edges = []; const seen = new Set();
+            // properties 맵
+            const propMap = {};
+            properties.forEach(p => { if(p.name) propMap[p.name] = p; });
+            const dtPropNames = new Set(properties.filter(p => p.type === 'owl:DatatypeProperty').map(p => p.name));
+            // DatatypeProperty: Class 노드 tooltip에 통합
+            const classDtProps = {};
+            properties.filter(p => p.type === 'owl:DatatypeProperty' && p.domain).forEach(p => {
+                if(!classDtProps[p.domain]) classDtProps[p.domain] = [];
+                classDtProps[p.domain].push(p);
+            });
             // owl:Class 노드
             classes.forEach(c => {
                 const id = gn(c.label); if(!id) return;
                 const isRoot = rootSet.has(String(c.label||'').trim());
-                nodes.push({ id, label: lbl(c.label),
+                const dtInfo = (classDtProps[c.label]||[]).map(p => '  ' + p.name + ': xsd:' + p.range).join('\n');
+                const tip = [c.comment ? 'rdfs:comment: '+c.comment : '', dtInfo ? 'DatatypeProperties:\n'+dtInfo : ''].filter(Boolean).join('\n');
+                nodes.push({ id, label: lbl(c.label), title: tip||undefined,
                     shape: isRoot ? 'ellipse' : 'box',
                     color: isRoot
                         ? { background:'#0367b0', border:'#024a7a', highlight:{background:'#0255a0',border:'#024a7a'} }
                         : { background:'#dbeafe', border:'#3b82f6', highlight:{background:'#bfdbfe',border:'#2563eb'} },
-                    font: { color: isRoot ? '#fff' : '#1e3a5f', bold: isRoot },
-                    group: 'class'
+                    font: { color: isRoot ? '#fff' : '#1e3a5f', bold: isRoot }
                 });
             });
-            // rdfs:subClassOf 엣지
+            // rdfs:subClassOf
             classes.forEach(c => {
                 if(!c.subClassOf) return;
                 const from = gn(c.label), to = gn(c.subClassOf);
-                if(!from || !to) return;
+                if(!from||!to) return;
                 const k = from+'|sub|'+to;
                 if(!seen.has(k)) { seen.add(k); edges.push({ from, to, label:'subClassOf', width:2.5, color:{color:'#0367b0',highlight:'#024a7a'}, dashes:false }); }
             });
-            // ObjectProperty 트리플
+            // owl:ObjectProperty 트리플 (DatatypeProperty predicate 제외)
             triples.forEach(t => {
                 if(!t.subject||!t.object) return;
                 const obj = String(t.object).trim();
-                if(!isNaN(Number(obj))||obj.startsWith('xsd:')) return;
+                if(obj.startsWith('xsd:')||!isNaN(Number(obj))||/^\d{4}-\d{2}-\d{2}/.test(obj)) return;
+                if(dtPropNames.has(t.predicate)) return;
                 if(String(t.subject).trim()===obj) return;
                 const s = gn(t.subject), o = gn(t.object);
                 if(!s||!o) return;
                 const p = lbl(t.predicate);
                 const k = s+'|'+o+'|'+p;
-                if(!seen.has(k)) { seen.add(k); edges.push({ from:s, to:o, label:p, color:{color:'#64748b'}, dashes:false }); }
+                if(!seen.has(k)) {
+                    seen.add(k);
+                    const pd = propMap[t.predicate];
+                    const tip = pd ? ['owl:ObjectProperty: '+t.predicate, pd.domain?'domain: '+pd.domain:'', pd.range?'range: '+pd.range:'', pd.inverseOf?'inverseOf: '+pd.inverseOf:'', pd.comment||''].filter(Boolean).join('\n') : undefined;
+                    edges.push({ from:s, to:o, label:p, title:tip,
+                        color:{color:'#64748b'},
+                        arrows: pd?.inverseOf ? {to:{enabled:true,scaleFactor:0.75},from:{enabled:true,scaleFactor:0.75}} : {to:{enabled:true,scaleFactor:0.75}},
+                        dashes:false
+                    });
+                }
             });
-            // SHACL constraints
+            // SHACL — 방향 수정: NodeShape →[sh:targetClass]→ TargetClass
             consts.forEach((c,i) => {
-                const mc = c.min_count!=null ? ' min>='+c.min_count : '';
+                const mc = c.min_count!=null ? ' min≥'+c.min_count : '';
                 const shId = 'SH'+i;
-                nodes.push({ id:shId, label:lbl(c.target_class||'Shape')+mc, shape:'database',
-                    color:{ background:'#fffbeb', border:'#d97706', highlight:{background:'#fef3c7',border:'#b45309'} },
-                    font:{ color:'#92400e' }
+                const shLabel = lbl(c.shape_id||c.target_class||'Shape') + mc + (c.path ? '\n→'+lbl(c.path) : '');
+                const tip = [c.shape_id||'', c.path?'sh:path: '+c.path:'', c.severity||'', c.exception_message||''].filter(Boolean).join('\n');
+                nodes.push({ id:shId, label:shLabel, shape:'database',
+                    color:{background:'#fffbeb',border:'#d97706',highlight:{background:'#fef3c7',border:'#b45309'}},
+                    font:{color:'#92400e',size:10}, title:tip||undefined
                 });
                 const tid = gn(c.target_class);
-                if(tid&&c.path) edges.push({ from:tid, to:shId, label:'sh:'+lbl(c.path), dashes:[5,3], color:{color:'#d97706'} });
-            });
-            // SWRL 규칙
-            rules.forEach((r,i) => {
-                const rId = 'R'+i;
-                const ruleLabel = lbl((r.rule_id||'RULE')+': '+(r.rule_name||''));
-                nodes.push({ id:rId, label:ruleLabel, shape:'diamond',
-                    color:{ background:'#fff7ed', border:'#c05621', highlight:{background:'#ffedd5',border:'#9a3412'} },
-                    font:{ color:'#9a3412', bold:true }
-                });
-                // IF 연결
-                if(r.if?.subject&&!String(r.if.subject).startsWith('?')) {
-                    const sn = gn(r.if.subject);
-                    if(sn) edges.push({ from:sn, to:rId, label:'IF', dashes:[4,4], color:{color:'#c05621'} });
-                } else if(r.if?.conditions?.length) {
-                    const m = (r.if.conditions[0]||'').match(/^([^(?\s]+)\s*\(/);
-                    const fc = m?.[1];
-                    if(fc&&!fc.startsWith('?')&&!fc.startsWith('swrlb')) {
-                        const sn = gn(fc);
-                        if(sn) edges.push({ from:sn, to:rId, label:'IF', dashes:[4,4], color:{color:'#c05621'} });
-                    }
-                }
-                // THEN 결과 노드
-                if(r.then) {
-                    const thId = 'TH'+i;
-                    nodes.push({ id:thId, label:lbl(r.then), shape:'ellipse',
-                        color:{ background:'#ecfdf5', border:'#0E7A52', highlight:{background:'#d1fae5',border:'#065f46'} },
-                        font:{ color:'#064e3b' }
-                    });
-                    edges.push({ from:rId, to:thId, label:'THEN', width:2.5, color:{color:'#0E7A52'}, dashes:false });
-                }
+                // NodeShape → TargetClass (sh:targetClass 방향 — 검증 대상 지목)
+                if(tid) edges.push({ from:shId, to:tid, label:'sh:targetClass', dashes:[5,3], color:{color:'#d97706'}, arrows:{to:{enabled:true,scaleFactor:0.6}} });
             });
             return { nodes, edges };
         }
 
+        // ── Step 5: 상위 온톨로지 ──
+        // 변경: 도메인 트리플 제거 (Step 4와 중복, 상위 매핑 구조 가독성 저해)
         function buildUpperVisData(result) {
             const groups = normalizeUpperGroups(result);
             const allMappings = groups.flatMap(g => g.subclass_mappings || []);
-            const domainSchemas = result?.domain_schemas || {};
             const lbl = s => String(s||'').replace(/["\[\]{}]/g,'').trim().substring(0, 22);
             const clean = s => String(s||'').replace(/^base:|^ont:/,'').trim();
             const GC = ['#0367b0','#0E7A52','#c05621','#7c3aed','#be185d'];
-            const GCL = ['#dbeafe','#d1fae5','#fff7ed','#ede9fe','#fce7f3'];
             const nodeMap = new Map(); let idx = 0;
             const getNode = v => { const k=clean(v); if(!k) return null; if(!nodeMap.has(k)) nodeMap.set(k,'UN'+(idx++)); return nodeMap.get(k); };
-            const upperClassNames = new Set(groups.flatMap(g=>(g.upper_classes||[]).map(c=>clean(c.name||''))));
             const nodes = []; const edges = []; const seen = new Set();
-            // 상위 클래스 노드 (그룹별 색상)
+            // 상위 클래스 노드
             groups.forEach((g, gi) => {
                 const col = GC[gi % GC.length];
                 (g.upper_classes||[]).forEach(c => {
                     const id = getNode(c.name); if(!id) return;
                     if(!nodes.find(n=>n.id===id)) {
-                        nodes.push({ id, label:lbl(c.name), shape:'ellipse', level:0,
-                            color:{ background:col, border:col, highlight:{background:col,border:col} },
-                            font:{ color:'#fff', bold:true, size:13 }, size:28
+                        const tip = [c.description||'', c.id?'IRI: '+c.id:'', c.domain_instances?.length?'예: '+c.domain_instances.slice(0,3).join(', '):''].filter(Boolean).join('\n');
+                        nodes.push({ id, label:lbl(c.name), shape:'ellipse',
+                            color:{background:col,border:col,highlight:{background:col,border:col}},
+                            font:{color:'#fff',bold:true,size:13}, size:28, title:tip||undefined
                         });
                     }
                 });
             });
-            // 도메인 클래스 + rdfs:subClassOf 엣지
+            // 도메인 클래스 + rdfs:subClassOf
             allMappings.forEach(m => {
                 const up = getNode(m.upper_class), dc = getNode(m.domain_class);
                 if(!up||!dc) return;
                 if(!nodes.find(n=>n.id===dc)) {
-                    nodes.push({ id:dc, label:lbl(m.domain_class), shape:'box', level:1,
-                        color:{ background:'#fff', border:'#94a3b8', highlight:{background:'#f8fafc',border:'#64748b'} },
-                        font:{ color:'#1e293b' }
+                    nodes.push({ id:dc, label:lbl(m.domain_class), shape:'box',
+                        color:{background:'#fff',border:'#94a3b8',highlight:{background:'#f8fafc',border:'#64748b'}},
+                        font:{color:'#1e293b'}, title:m.domain?'도메인: '+m.domain:undefined
                     });
                 }
                 const k = dc+'>'+up;
                 if(!seen.has(k)) { seen.add(k); edges.push({ from:dc, to:up, label:'subClassOf', width:2.5, color:{color:'#0367b0'}, dashes:false }); }
-            });
-            // 도메인 트리플
-            Object.entries(domainSchemas).forEach(([,sc]) => {
-                (sc.triples||[]).forEach(t => {
-                    if(!t.subject||!t.object) return;
-                    const obj = String(t.object).trim();
-                    if(!isNaN(Number(obj))||obj.startsWith('xsd:')) return;
-                    if(String(t.subject).trim()===obj) return;
-                    const s = getNode(t.subject), o = getNode(t.object), p = lbl(t.predicate);
-                    if(!s||!o||!p) return;
-                    const k = s+'>'+o+'>'+p;
-                    if(!seen.has(k)) {
-                        seen.add(k);
-                        // 아직 노드가 없으면 도메인 클래스로 추가
-                        if(!nodes.find(n=>n.id===s)) nodes.push({ id:s, label:lbl(t.subject), shape:'box', color:{background:'#fff',border:'#94a3b8'}, font:{color:'#1e293b'} });
-                        if(!nodes.find(n=>n.id===o)) nodes.push({ id:o, label:lbl(t.object), shape:'box', color:{background:'#fff',border:'#94a3b8'}, font:{color:'#1e293b'} });
-                        edges.push({ from:s, to:o, label:p, color:{color:'#94a3b8'}, dashes:false });
-                    }
-                });
             });
             // owl:equivalentClass
             groups.forEach(g=>(g.upper_classes||[]).forEach(c=>{
@@ -12208,41 +12222,76 @@ ${domainCtx}${upperCtx}
                 const na=getNode(c.name), nb=getNode(c.equivalent_to);
                 if(na&&nb) edges.push({ from:na, to:nb, label:'owl:equiv', arrows:{from:{enabled:true,scaleFactor:0.6},to:{enabled:true,scaleFactor:0.6}}, dashes:[3,3], color:{color:'#7c3aed'} });
             }));
+            // owl:disjointWith (OWL 2 DL)
+            groups.forEach(g=>(g.upper_classes||[]).forEach(c=>{
+                if(!Array.isArray(c.disjoint_with)) return;
+                c.disjoint_with.forEach(ref=>{
+                    if(!ref||!String(ref).trim()) return;
+                    const na=getNode(c.name), nb=getNode(clean(ref));
+                    if(!na||!nb) return;
+                    const k=[na,nb].sort().join('<>dj<>');
+                    if(!seen.has(k)) { seen.add(k); edges.push({ from:na, to:nb, label:'disjoint', arrows:{from:{enabled:false},to:{enabled:false}}, dashes:[4,2], color:{color:'#dc2626'}, width:1.5 }); }
+                });
+            }));
             return { nodes, edges };
         }
 
+        // ── Step 6: 추론 규칙 ──
+        // 변경:
+        //   ① IF 노드는 클래스 연결 가능할 때만 생성, 나머지는 rule 노드 tooltip에 통합
+        //   ② cascade 전체 표시 (slice 제한 제거), 4개↑이면 rule tooltip에 개수 명시
         function buildInfVisData(inf) {
             const rules = inf?.inferred_rules || [];
             const lbl = s => String(s||'').replace(/["\[\]]/g,'').substring(0,28).trim();
             const RC = { CRITICAL:'#b91c1c', HIGH:'#c05621', MEDIUM:'#d97706', LOW:'#0E7A52' };
             const RCL = { CRITICAL:'#fef2f2', HIGH:'#fff7ed', MEDIUM:'#fffbeb', LOW:'#f0fdf4' };
             const RCB = { CRITICAL:'#fca5a5', HIGH:'#fdba74', MEDIUM:'#fde68a', LOW:'#86efac' };
+            const upperNames = (typeof normalizeUpperGroups === 'function' && S?.upperOntology)
+                ? normalizeUpperGroups(S.upperOntology).flatMap(g=>(g.upper_classes||[]).map(c=>String(c.name||'').trim())).filter(Boolean)
+                : [];
             const ruleIdx = {}; rules.forEach((r,i)=>{ if(r.inference_id) ruleIdx[r.inference_id]=i; });
             const nodes = []; const edges = [];
             rules.forEach((r,i) => {
                 const risk = r.risk_level||'LOW';
                 const rid = r.inference_id||('INF_'+String(i+1).padStart(2,'0'));
-                // IF 조건 노드
-                if(r.condition) {
-                    nodes.push({ id:'IF'+i, label:'IF: '+lbl(r.condition), shape:'hexagon',
-                        color:{ background:'#f8fafc', border:'#94a3b8', highlight:{background:'#f1f5f9',border:'#64748b'} },
-                        font:{ color:'#475569', size:10 }
+                const cond = String(r.condition||'');
+                // conditions_detail 요약 (IF 조건 텍스트)
+                const cdTip = (r.conditions_detail||[]).length > 0
+                    ? (r.conditions_detail||[]).map((cd,ci) => '['+(ci+1)+'] '+(cd.triple||cd.condition||'')+(cd.threshold!==undefined?' ≥'+cd.threshold:'')).join('\n')
+                    : cond;
+                // IF 노드: if.subject가 변수가 아닌 클래스명일 때만 생성
+                const rawSubj = r.if?.subject;
+                const canConnect = rawSubj && !String(rawSubj).startsWith('?') && String(rawSubj).trim() !== '';
+                if(canConnect) {
+                    const usesUpper = upperNames.length > 0 && upperNames.some(n => cond.includes(n));
+                    nodes.push({ id:'IF'+i, label:'IF: '+lbl(cond), shape:'hexagon',
+                        color:{background:'#f8fafc', border:usesUpper?'#0367b0':'#94a3b8', highlight:{background:'#f1f5f9',border:usesUpper?'#0255a0':'#64748b'}},
+                        borderWidth:usesUpper?3:2, font:{color:'#475569',size:10}, title:cdTip
                     });
                     edges.push({ from:'IF'+i, to:'C'+i, label:'조건', dashes:[4,3], color:{color:'#94a3b8'} });
                 }
-                // 규칙 노드 (diamond)
+                // rule 노드 tooltip: 연결 불가 조건은 여기에 포함
+                const cascadeCount = (r.cascade_rules||[]).length;
+                const ruleTip = [
+                    rid+(r.inference_name?': '+r.inference_name:''),
+                    !canConnect && cdTip ? 'IF:\n'+cdTip : '',
+                    r.business_impact ? '영향: '+r.business_impact : '',
+                    r.responsible_dept ? '담당: '+r.responsible_dept : '',
+                    '위험도: '+(r.risk_level||'?'),
+                    cascadeCount > 0 ? 'cascade: '+cascadeCount+'개' : ''
+                ].filter(Boolean).join('\n');
                 nodes.push({ id:'C'+i, label:rid+'\n'+lbl(r.inference_name), shape:'diamond',
-                    color:{ background:RC[risk], border:RC[risk], highlight:{background:RC[risk],border:RC[risk]} },
-                    font:{ color:'#fff', bold:true, size:11 }
+                    color:{background:RC[risk],border:RC[risk],highlight:{background:RC[risk],border:RC[risk]}},
+                    font:{color:'#fff',bold:true,size:11}, title:ruleTip
                 });
                 // THEN 결과 노드
                 nodes.push({ id:'A'+i, label:'THEN:\n'+lbl(r.action), shape:'ellipse',
-                    color:{ background:RCL[risk], border:RCB[risk], highlight:{background:RCL[risk],border:RC[risk]} },
-                    font:{ color:'#111', size:11 }
+                    color:{background:RCL[risk],border:RCB[risk],highlight:{background:RCL[risk],border:RC[risk]}},
+                    font:{color:'#111',size:11}
                 });
                 edges.push({ from:'C'+i, to:'A'+i, label:'추론', width:2.5, color:{color:RC[risk]}, dashes:false });
-                // cascade 연쇄 (최대 3개)
-                (r.cascade_rules||[]).slice(0,3).forEach(cr => {
+                // cascade 전체 표시 (제한 없음)
+                (r.cascade_rules||[]).forEach(cr => {
                     const ti = ruleIdx[cr];
                     if(ti!==undefined) edges.push({ from:'A'+i, to:'C'+ti, label:'cascade', dashes:[3,3], color:{color:'#7c3aed'} });
                 });
@@ -12252,26 +12301,52 @@ ${domainCtx}${upperCtx}
 
         function renderSchemaVis(containerId, schema) {
             const { nodes, edges } = buildSchemaVisData(schema);
-            renderOntologyVis(containerId, nodes, edges);
+            renderOntologyVis(containerId, nodes, edges, {
+                legend: [
+                    { type:'node', nodeShape:'ellipse',  color:'#0367b0',           label:'owl:Class (루트)' },
+                    { type:'node', nodeShape:'box',      color:'#dbeafe', border:'#3b82f6', label:'owl:Class (서브)' },
+                    { type:'node', nodeShape:'database', color:'#fffbeb', border:'#d97706', label:'SHACL Shape' },
+                    { type:'edge', color:'#0367b0', bold:true,  label:'rdfs:subClassOf' },
+                    { type:'edge', color:'#64748b',            label:'owl:ObjectProperty' },
+                    { type:'edge', color:'#d97706', dash:true,  label:'sh:targetClass (SHACL)' },
+                ]
+            });
         }
 
         function renderUpperVis(containerId, result) {
             const { nodes, edges } = buildUpperVisData(result);
-            // hierarchical layout은 canvas 크기 의존성이 높아 DOM reflow 전 오작동
-            // physics 기반 레이아웃 사용 + level 속성은 노드 크기/색상으로 시각적 구분
             renderOntologyVis(containerId, nodes, edges, {
                 physics: {
                     enabled: true,
                     solver: 'repulsion',
                     repulsion: { nodeDistance: 180, centralGravity: 0.15, springLength: 200, springConstant: 0.05, damping: 0.09 },
                     stabilization: { enabled: true, iterations: 250, fit: true }
-                }
+                },
+                legend: [
+                    { type:'node', nodeShape:'ellipse', color:'#0367b0',           label:'상위 클래스' },
+                    { type:'node', nodeShape:'box',     color:'#fff',  border:'#94a3b8', label:'도메인 클래스' },
+                    { type:'edge', color:'#0367b0', bold:true,          label:'rdfs:subClassOf' },
+                    { type:'edge', color:'#7c3aed', dash:true, bidir:true, label:'owl:equivalentClass' },
+                    { type:'edge', color:'#dc2626', dash:true,          label:'owl:disjointWith' },
+                ]
             });
         }
 
         function renderInfVis(containerId, inf) {
             const { nodes, edges } = buildInfVisData(inf);
-            renderOntologyVis(containerId, nodes, edges);
+            renderOntologyVis(containerId, nodes, edges, {
+                legend: [
+                    { type:'node', nodeShape:'hexagon', color:'#f8fafc', border:'#94a3b8', label:'IF (클래스 연결)' },
+                    { type:'node', nodeShape:'hexagon', color:'#f8fafc', border:'#0367b0', label:'IF (상위클래스 포함)' },
+                    { type:'node', nodeShape:'diamond', color:'#b91c1c', label:'CRITICAL' },
+                    { type:'node', nodeShape:'diamond', color:'#c05621', label:'HIGH' },
+                    { type:'node', nodeShape:'diamond', color:'#d97706', label:'MEDIUM' },
+                    { type:'node', nodeShape:'diamond', color:'#0E7A52', label:'LOW' },
+                    { type:'edge', color:'#94a3b8', dash:true, label:'조건 연결' },
+                    { type:'edge', color:'#64748b', bold:true, label:'추론 결과' },
+                    { type:'edge', color:'#7c3aed', dash:true, label:'cascade 연쇄' },
+                ]
+            });
         }
         // ── vis.js 온톨로지 다이어그램 렌더러 끝 ───────────────────────────────
 
