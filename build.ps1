@@ -90,7 +90,14 @@ if ([System.IO.Directory]::Exists($EnSourceDir)) {
 }
 
 # 4. Find files for minification using .NET APIs
-$HtmlFiles = [System.IO.Directory]::GetFiles($SourceDir, "*.html")
+# Excluded directories: NIA TEST (test/work data, not part of the public build)
+$ExcludedDirs = @("NIA TEST", "dist")
+
+$HtmlFiles = [System.IO.Directory]::GetFiles($SourceDir, "*.html") | Where-Object {
+    $relativePath = $_.Substring($SourceDir.Length).TrimStart('\')
+    $firstSegment = $relativePath.Split('\')[0]
+    $ExcludedDirs -notcontains $firstSegment
+}
 if ([System.IO.Directory]::Exists($EnSourceDir)) {
     $HtmlFiles += [System.IO.Directory]::GetFiles($EnSourceDir, "*.html")
 }
