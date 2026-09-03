@@ -5635,6 +5635,18 @@ ${domainCtx}${upperCtx}
             };
         })();
 
+        // ── 다이어그램 디자인 시스템 ─────────────────────────────────────────
+        const VIS_DS = {
+            font: {
+                base:  10,   // 일반 노드 라벨
+                small:  9,   // 보조 노드 (SHACL shape, IF 조건 육각형)
+                large: 12,   // 강조 노드 (상위온톨로지 클래스)
+                edge:   9,   // 엣지 라벨
+            },
+            label: { node: 18 }, // 노드 라벨 최대 글자 수 (기존 22~28 → 통일)
+            face: 'Pretendard, Noto Sans KR, sans-serif',
+        };
+
         function renderOntologyVis(containerId, nodesData, edgesData, opts) {
             const el = document.getElementById(containerId);
             if (!el) return;
@@ -5659,12 +5671,12 @@ ${domainCtx}${upperCtx}
                 edges: {
                     smooth: { type: 'cubicBezier', forceDirection: 'none', roundness: 0.45 },
                     arrows: { to: { enabled: true, scaleFactor: 0.75 } },
-                    font: { size: 10, align: 'middle', background: 'rgba(250,251,255,0.85)', strokeWidth: 0 },
+                    font: { size: VIS_DS.font.edge, align: 'middle', background: 'rgba(250,251,255,0.85)', strokeWidth: 0 },
                     color: { inherit: false },
                     width: 1.5
                 },
                 nodes: {
-                    font: { size: 12, face: 'Pretendard, Noto Sans KR, sans-serif', multi: false },
+                    font: { size: VIS_DS.font.base, face: VIS_DS.face, multi: false },
                     borderWidth: 2,
                     shadow: { enabled: true, size: 4, x: 1, y: 1, color: 'rgba(0,0,0,0.08)' },
                     margin: 8
@@ -5731,7 +5743,7 @@ ${domainCtx}${upperCtx}
             const triples = schema?.triples || [];
             const consts = schema?.constraints || [];
             const properties = schema?.properties || [];
-            const lbl = s => String(s || '').replace(/["\[\]{}]/g, '').trim().substring(0, 22);
+            const lbl = s => String(s || '').replace(/["\[\]{}]/g, '').trim().substring(0, VIS_DS.label.node);
             const rootSet = new Set(classes.filter(c => !c.subClassOf).map(c => String(c.label||'').trim()));
             const nodeMap = new Map(); let nid = 0;
             const gn = v => { const k = String(v||'').trim(); if(!k) return null; if(!nodeMap.has(k)) nodeMap.set(k,'N'+(nid++)); return nodeMap.get(k); };
@@ -5792,7 +5804,7 @@ ${domainCtx}${upperCtx}
                 const tip = [c.shape_id||'', c.path?'sh:path: '+c.path:'', c.severity||'', c.exception_message||''].filter(Boolean).join('\n');
                 nodes.push({ id:shId, label:shLabel, shape:'database', _tip: tip||undefined,
                     color:{background:'#fffbeb',border:'#d97706',highlight:{background:'#fef3c7',border:'#b45309'}},
-                    font:{color:'#92400e',size:10}
+                    font:{color:'#92400e',size:VIS_DS.font.small}
                 });
                 const tid = gn(c.target_class);
                 if(tid) edges.push({ from:shId, to:tid, label:'sh:targetClass', dashes:[5,3], color:{color:'#d97706'}, arrows:{to:{enabled:true,scaleFactor:0.6}} });
@@ -5803,7 +5815,7 @@ ${domainCtx}${upperCtx}
         function buildUpperVisData(result) {
             const groups = normalizeUpperGroups(result);
             const allMappings = groups.flatMap(g => g.subclass_mappings || []);
-            const lbl = s => String(s||'').replace(/["\[\]{}]/g,'').trim().substring(0, 22);
+            const lbl = s => String(s||'').replace(/["\[\]{}]/g,'').trim().substring(0, VIS_DS.label.node);
             const clean = s => String(s||'').replace(/^base:|^ont:/,'').trim();
             const GC = ['#0367b0','#0E7A52','#c05621','#7c3aed','#be185d'];
             const nodeMap = new Map(); let idx = 0;
@@ -5817,7 +5829,7 @@ ${domainCtx}${upperCtx}
                         const tip = [c.description||'', c.id?'IRI: '+c.id:'', c.domain_instances?.length?'예: '+c.domain_instances.slice(0,3).join(', '):''].filter(Boolean).join('\n');
                         nodes.push({ id, label:lbl(c.name), shape:'ellipse', _tip: tip||undefined,
                             color:{background:col,border:col,highlight:{background:col,border:col}},
-                            font:{color:'#fff',size:13}, size:28
+                            font:{color:'#fff',size:VIS_DS.font.large}, size:28
                         });
                     }
                 });
@@ -5854,7 +5866,7 @@ ${domainCtx}${upperCtx}
 
         function buildInfVisData(inf) {
             const rules = inf?.inferred_rules || [];
-            const lbl = s => String(s||'').replace(/["\[\]]/g,'').substring(0,28).trim();
+            const lbl = s => String(s||'').replace(/["\[\]]/g,'').substring(0, VIS_DS.label.node).trim();
             const RISKS = ['CRITICAL','HIGH','MEDIUM','LOW'];
             const RC  = { CRITICAL:'#b91c1c', HIGH:'#c05621', MEDIUM:'#d97706', LOW:'#0E7A52' };
             const RCL = { CRITICAL:'#fef2f2', HIGH:'#fff7ed', MEDIUM:'#fffbeb', LOW:'#f0fdf4' };
@@ -5879,7 +5891,7 @@ ${domainCtx}${upperCtx}
                     const usesUpper = upperNames.length > 0 && upperNames.some(n => cond.includes(n));
                     nodes.push({ id:'IF'+i, label:'IF: '+lbl(cond), shape:'hexagon', _tip: cdTip||undefined,
                         color:{background:'#f8fafc', border:usesUpper?'#0367b0':'#94a3b8', highlight:{background:'#f1f5f9',border:usesUpper?'#0255a0':'#64748b'}},
-                        borderWidth:usesUpper?3:2, font:{color:'#475569',size:10}
+                        borderWidth:usesUpper?3:2, font:{color:'#475569',size:VIS_DS.font.small}
                     });
                     edges.push({ from:'IF'+i, to:'C'+i, label:'조건', dashes:[4,3], color:{color:'#94a3b8'} });
                 }
@@ -5894,11 +5906,11 @@ ${domainCtx}${upperCtx}
                 ].filter(Boolean).join('\n');
                 nodes.push({ id:'C'+i, label:rid+'\n'+lbl(r.inference_name), shape:'diamond', _tip: ruleTip||undefined,
                     color:{background:RC[risk],border:RC[risk],highlight:{background:RC[risk],border:RC[risk]}},
-                    font:{color:RCT[risk],size:11}
+                    font:{color:RCT[risk],size:VIS_DS.font.base}
                 });
                 nodes.push({ id:'A'+i, label:'THEN:\n'+lbl(r.action), shape:'ellipse',
                     color:{background:RCL[risk],border:RCB[risk],highlight:{background:RCL[risk],border:RC[risk]}},
-                    font:{color:'#111',size:11}
+                    font:{color:'#111',size:VIS_DS.font.base}
                 });
                 edges.push({ from:'C'+i, to:'A'+i, label:'추론', width:2.5, color:{color:RC[risk]}, dashes:false });
                 (r.cascade_rules||[]).forEach(cr => {
