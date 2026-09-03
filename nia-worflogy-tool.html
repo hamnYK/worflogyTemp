@@ -8608,7 +8608,7 @@ for r in results:
                 toast('작업 폴더 생성: ' + wn, 'success');
                 _logUse('folder_selected', { folder: wn, parent: dH.name });
                 await _flushPendingLogs();  // 폴더 연결 전 버퍼 이벤트 기록
-                loadFolderFiles(dH);
+                loadFolderFiles(S.workH);
                 _idbSave('folderH', dH).catch(() => { });  // 핸들 IndexedDB 저장
                 _restoreDocsFromFolder();  // 이전 회차 저장된 문서 복원
                 _restoreStateFromWorkFolder();  // 상위 온톨로지·추론 규칙 복원
@@ -8639,7 +8639,7 @@ for r in results:
                 toast('이전 폴더 연결 완료: ' + dH.name, 'success');
                 _logUse('folder_restored', { folder: wn, parent: dH.name });
                 await _flushPendingLogs();  // 폴더 연결 전 버퍼 이벤트 기록
-                loadFolderFiles(dH);
+                loadFolderFiles(S.workH);
                 _restoreDocsFromFolder();  // 저장된 문서 자동 복원
                 _restoreStateFromWorkFolder();  // 상위 온톨로지·추론 규칙 복원
             } catch (e) { toast('폴더 복원 실패: ' + e.message, 'error'); }
