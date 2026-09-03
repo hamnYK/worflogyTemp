@@ -2786,6 +2786,7 @@
         .c-modal-box {
             background: #fff;
             border-radius: 18px;
+            padding: 1.75rem 1.75rem 1.5rem;
             max-width: 400px;
             width: 92%;
             box-shadow: 0 24px 64px rgba(0, 0, 0, .22);
@@ -8867,6 +8868,7 @@ for r in results:
                     const hitlEl = document.getElementById('hitl-section');
                     if (hitlEl) hitlEl.style.display = 'block';
                     resetHITL();
+                    S._hitlSaved = false;
                 }
                 if (saved.evalResult) {
                     const card = document.getElementById('eval-card');
@@ -8879,7 +8881,7 @@ for r in results:
                 markDone(7); markDone(8);
             } catch (e) { } // cmp_result.json 없으면 무시
         }
-        async function _appendHitlHistory(entry) {
+        async function _appendHitlHistory(entry, replace = false) {
             if (!S.workH) return;
             try {
                 let hist = [];
@@ -8887,7 +8889,11 @@ for r in results:
                     const fh0 = await S.workH.getFileHandle('hitl_history.json');
                     hist = JSON.parse(await (await fh0.getFile()).text()) || [];
                 } catch (e) {}
-                hist.push(entry);
+                if (replace && hist.length > 0) {
+                    hist[hist.length - 1] = entry;
+                } else {
+                    hist.push(entry);
+                }
                 const fh = await S.workH.getFileHandle('hitl_history.json', { create: true });
                 const w = await fh.createWritable();
                 await w.write(JSON.stringify(hist, null, 2));
@@ -13489,6 +13495,7 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
                 ]);
                 document.getElementById('hitl-section').style.display = 'block';
                 resetHITL();
+                S._hitlSaved = false;
                 stEl.innerHTML = '<div class="al al-s">&#10003; A/B/C 비교 완료! 세 답변의 차이를 확인하세요.</div>';
                 markDone(7); markDone(8);
                 _logUse('comparison_run', { question_chars: q.length, has_ontology: !!schema, has_law_doc: !!docCtx, scenario_count: (S.scenarios || []).length });
@@ -13518,7 +13525,7 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
             document.getElementById('hitl-btn-clear').style.display = 'none';
             ['hitl-btn-C', 'hitl-btn-A', 'hitl-btn-B', 'hitl-btn-tie'].forEach(id => {
                 const b = document.getElementById(id);
-                if (b) { b.style.fontWeight = '600'; b.style.boxShadow = 'none'; }
+                if (b) { b.style.fontWeight = '600'; b.style.boxShadow = 'none'; b.disabled = false; b.style.opacity = ''; b.style.cursor = ''; }
             });
             S.humanChoice = null;
         }
@@ -13561,8 +13568,16 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
                 document.getElementById('hitl-btn-tie').style.boxShadow = '0 0 0 2px var(--border)';
             }
             document.getElementById('hitl-btn-clear').style.display = 'inline-block';
+            ['hitl-btn-C', 'hitl-btn-A', 'hitl-btn-B', 'hitl-btn-tie'].forEach(id => {
+                const b = document.getElementById(id);
+                if (b) { b.disabled = true; b.style.opacity = '0.45'; b.style.cursor = 'not-allowed'; }
+            });
             _logUse('hitl_choice', { choice: side });
-            if (side) _appendHitlHistory({ ts: new Date().toISOString(), q: S.lastCmpAnswers?.q || '', choice: side, llmR: S.lastCmpAnswers?.llmR || '', baseR: S.lastCmpAnswers?.baseR || '', ontoR: S.lastCmpAnswers?.ontoR || '' });
+            if (side) {
+                const _isUpdate = !!S._hitlSaved;
+                S._hitlSaved = true;
+                _appendHitlHistory({ ts: new Date().toISOString(), q: S.lastCmpAnswers?.q || '', choice: side, llmR: S.lastCmpAnswers?.llmR || '', baseR: S.lastCmpAnswers?.baseR || '', ontoR: S.lastCmpAnswers?.ontoR || '' }, _isUpdate);
+            }
         }
         async function autoEval(q, llmR, baseR, ontoR) {
             const card = document.getElementById('eval-card'), el = document.getElementById('eval-res');
