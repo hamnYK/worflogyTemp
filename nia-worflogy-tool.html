@@ -4993,7 +4993,7 @@
                 <div class="sub-tab-bar mb-sm">
                     <button id="inf-tab-raw" class="sub-tab-btn active" onclick="switchInfTab('raw')">원문
                         JSON</button>
-                    <button id="inf-tab-diagram" class="sub-tab-btn" onclick="switchInfTab('diagram')"><span
+                    <button id="inf-tab-gui" class="sub-tab-btn" onclick="switchInfTab('gui')">GUI 편집</button> <button id="inf-tab-diagram" class="sub-tab-btn" onclick="switchInfTab('diagram')"><span
                             class="ico" style="width:13px;height:13px;"><svg viewBox="0 0 24 24" stroke="currentColor"
                                 fill="none" stroke-width="2">
                                 <line x1="18" y1="20" x2="18" y2="10" />
@@ -5003,7 +5003,7 @@
                 </div>
                 <div id="inf-pane-raw"><textarea spellcheck="false" class="ce" id="inf-ed"
                         oninput="syncInf()"></textarea></div>
-                <div id="inf-pane-diagram" style="display:none;">
+                <div id="inf-pane-gui" style="display:none"><div id="inf-gui" style="padding:.3rem 0"></div></div><div id="inf-pane-diagram" style="display:none;">
                     <div id="inf-diag" style="min-height:360px;"></div>
                     <div id="inf-rule-guide" style="margin-top:1.2rem;"></div>
                 </div>
@@ -11280,13 +11280,37 @@ for r in results:
             if (tab === 'gui') renderUpperGuiEditor();
         }
         function switchInfTab(tab) {
-            ['raw', 'diagram'].forEach(t => {
+            ['raw', 'gui', 'diagram'].forEach(t => {
                 const p = document.getElementById('inf-pane-' + t);
                 const b = document.getElementById('inf-tab-' + t);
                 if (p) p.style.display = t === tab ? 'block' : 'none';
                 if (b) { b.style.borderBottomColor = t === tab ? 'var(--nia-blue)' : 'transparent'; b.style.color = t === tab ? 'var(--nia-blue)' : 'var(--text3)'; }
             });
             if (tab === 'diagram' && S.infRules) { renderInfVis('inf-diag', S.infRules); renderInfRuleGuide(S.infRules); }
+            if (tab === 'gui') renderInfGuiEditor();
+        }
+
+        function renderInfGuiEditor() {
+            const container = document.getElementById('inf-gui');
+            if (!container) return;
+            const rules = S.infRules?.inferred_rules || [];
+            if (!rules.length) {
+                container.innerHTML = '<div style="font-size:.8rem;color:var(--text3);padding:.5rem 0">추론 규칙을 먼저 도출해 주세요.</div>';
+                return;
+            }
+            const RC = { CRITICAL:'#b91c1c', HIGH:'#c05621', MEDIUM:'#d97706', LOW:'#0E7A52' };
+            const RISKS = ['CRITICAL','HIGH','MEDIUM','LOW'];
+            function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+            let h = '';
+            rules.forEach((r, i) => {
+                const rawRisk = String(r.risk_level||'LOW').toUpperCase();
+                const risk = RISKS.includes(rawRisk) ? rawRisk : 'LOW';
+                const col = RC[risk];
+                const rid = r.inference_id || ('INF_' + String(i+1).padStart(2,'0'));
+                h += `<div style="border:1px solid ${col}33;border-radius:10px;padding:.7rem .9rem;margin-bottom:.65rem"><div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.55rem;flex-wrap:wrap"><span style="background:${col};color:#fff;font-size:.68rem;font-weight:700;border-radius:5px;padding:.15rem .52rem;white-space:nowrap">${esc(rid)}</span><input type="text" spellcheck="false" placeholder="규칙 이름" value="${esc(r.inference_name)}" style="flex:1;min-width:120px;border:1px solid var(--border);border-radius:6px;padding:.28rem .5rem;font-size:.8rem" oninput="S.infRules.inferred_rules[${i}].inference_name=this.value;document.getElementById('inf-ed').value=JSON.stringify(S.infRules,null,2)"><select style="border:1px solid ${col};border-radius:6px;padding:.28rem .45rem;font-size:.75rem;color:${col};font-weight:600;cursor:pointer" onchange="S.infRules.inferred_rules[${i}].risk_level=this.value;renderInfGuiEditor()">${RISKS.map(rv=>`<option value="${rv}"${rv===risk?' selected':''}>${rv}</option>`).join('')}</select><button onclick="S.infRules.inferred_rules.splice(${i},1);document.getElementById('inf-ed').value=JSON.stringify(S.infRules,null,2);document.getElementById('inf-cnt').textContent='추론 규칙: '+S.infRules.inferred_rules.length+'개';renderInfGuiEditor()" style="border:1px solid #dc2626;color:#dc2626;background:transparent;border-radius:6px;padding:.22rem .55rem;font-size:.72rem;cursor:pointer">삭제</button></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:.45rem;margin-bottom:.4rem"><div><div style="font-size:.68rem;color:var(--text3);margin-bottom:.12rem;font-weight:600">IF 조건</div><textarea rows="3" spellcheck="false" style="width:100%;box-sizing:border-box;border:1px solid var(--border);border-radius:6px;padding:.28rem .5rem;font-size:.75rem;resize:vertical" oninput="S.infRules.inferred_rules[${i}].condition=this.value;document.getElementById('inf-ed').value=JSON.stringify(S.infRules,null,2)">${esc(r.condition)}</textarea></div><div><div style="font-size:.68rem;color:var(--text3);margin-bottom:.12rem;font-weight:600">THEN 결론 (action)</div><textarea rows="3" spellcheck="false" style="width:100%;box-sizing:border-box;border:1px solid var(--border);border-radius:6px;padding:.28rem .5rem;font-size:.75rem;resize:vertical" oninput="S.infRules.inferred_rules[${i}].action=this.value;document.getElementById('inf-ed').value=JSON.stringify(S.infRules,null,2)">${esc(r.action)}</textarea></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:.45rem"><div><div style="font-size:.68rem;color:var(--text3);margin-bottom:.12rem;font-weight:600">담당 부서</div><input type="text" spellcheck="false" placeholder="담당 부서" value="${esc(r.responsible_dept)}" style="width:100%;box-sizing:border-box;border:1px solid var(--border);border-radius:6px;padding:.28rem .5rem;font-size:.75rem" oninput="S.infRules.inferred_rules[${i}].responsible_dept=this.value;document.getElementById('inf-ed').value=JSON.stringify(S.infRules,null,2)"></div><div><div style="font-size:.68rem;color:var(--text3);margin-bottom:.12rem;font-weight:600">업무 영향</div><input type="text" spellcheck="false" placeholder="업무 영향" value="${esc(r.business_impact)}" style="width:100%;box-sizing:border-box;border:1px solid var(--border);border-radius:6px;padding:.28rem .5rem;font-size:.75rem" oninput="S.infRules.inferred_rules[${i}].business_impact=this.value;document.getElementById('inf-ed').value=JSON.stringify(S.infRules,null,2)"></div></div></div>`;
+            });
+            h += `<button onclick="const nr={inference_id:'INF_'+String(S.infRules.inferred_rules.length+1).padStart(2,'0'),inference_name:'새 규칙',risk_level:'MEDIUM',condition:'',action:'',responsible_dept:'',business_impact:'',cascade_rules:[]};S.infRules.inferred_rules.push(nr);document.getElementById('inf-ed').value=JSON.stringify(S.infRules,null,2);document.getElementById('inf-cnt').textContent='추론 규칙: '+S.infRules.inferred_rules.length+'개';renderInfGuiEditor()" style="width:100%;margin-top:.3rem;padding:.5rem;border:1.5px dashed var(--border);border-radius:8px;background:transparent;color:var(--text3);cursor:pointer;font-size:.8rem;transition:all .15s" onmouseover="this.style.borderColor='var(--nia-blue)';this.style.color='var(--nia-blue)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text3)'">+ 규칙 추가</button>`;
+            container.innerHTML = h;
         }
 
         function renderUpperGuiEditor() {
@@ -11305,7 +11329,7 @@ for r in results:
                 h += `<div style="border:1px solid ${col}33;border-radius:10px;padding:.7rem .9rem;margin-bottom:.65rem;">
 <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.55rem;">
   <span style="font-size:.72rem;font-weight:700;color:${col};">그룹 ${gi + 1}</span>
-  <input type="text" value="${(g.group_name || '').replace(/"/g, '&quot;')}" oninput="updateUpperGroup(${gi},'group_name',this.value)" style="flex:1;border:1px solid ${col}55;border-radius:4px;padding:.18rem .38rem;font-size:.74rem;color:var(--nia-navy);">
+  <input type="text" spellcheck="false" value="${(g.group_name || '').replace(/"/g, '&quot;')}" oninput="updateUpperGroup(${gi},'group_name',this.value)" style="flex:1;border:1px solid ${col}55;border-radius:4px;padding:.18rem .38rem;font-size:.74rem;color:var(--nia-navy);">
 </div>
 <div style="font-size:.72rem;font-weight:700;color:var(--nia-navy);margin-bottom:.3rem;">상위 클래스 (owl:Class)</div>
 <div style="overflow-x:auto;margin-bottom:.4rem;"><table style="width:100%;border-collapse:collapse;font-size:.74rem;">
@@ -11324,11 +11348,11 @@ for r in results:
                     const inpFocus = `onfocus="this.style.borderColor='var(--nia-blue)';this.style.background='#fff'" onblur="this.style.borderColor='transparent';this.style.background='transparent'"`;
                     h += `<tr style="border-bottom:1px solid var(--border);">
   <td style="padding:.2rem;text-align:center;color:var(--text3);font-size:.6rem;">${ci + 1}</td>
-  <td style="padding:.15rem .25rem;"><input type="text" value="${(c.id || '').replace(/"/g, '&quot;')}" oninput="updateUpperClass(${gi},${ci},'id',this.value)" placeholder="ont:클래스명" style="${inpStyle}" ${inpFocus}></td>
-  <td style="padding:.15rem .25rem;"><input type="text" value="${(c.name || '').replace(/"/g, '&quot;')}" oninput="updateUpperClass(${gi},${ci},'name',this.value)" style="${inpStyle}" ${inpFocus}></td>
-  <td style="padding:.15rem .25rem;"><input type="text" value="${(c.description || '').replace(/"/g, '&quot;')}" oninput="updateUpperClass(${gi},${ci},'description',this.value)" style="${inpStyle}" ${inpFocus}></td>
-  <td style="padding:.15rem .25rem;"><input type="text" value="${(c.equivalent_to || '').replace(/"/g, '&quot;')}" oninput="updateUpperClass(${gi},${ci},'equivalent_to',this.value||null)" placeholder="owl:equivalentClass" style="${inpStyle}" ${inpFocus}></td>
-  <td style="padding:.15rem .25rem;"><input type="text" value="${disj.replace(/"/g, '&quot;')}" oninput="updateUpperClass(${gi},${ci},'disjoint_with',this.value.split(';').map(s=>s.trim()).filter(Boolean))" placeholder="owl:disjointWith" style="${inpStyle}" ${inpFocus}></td>
+  <td style="padding:.15rem .25rem;"><input type="text" spellcheck="false" value="${(c.id || '').replace(/"/g, '&quot;')}" oninput="updateUpperClass(${gi},${ci},'id',this.value)" placeholder="ont:클래스명" style="${inpStyle}" ${inpFocus}></td>
+  <td style="padding:.15rem .25rem;"><input type="text" spellcheck="false" value="${(c.name || '').replace(/"/g, '&quot;')}" oninput="updateUpperClass(${gi},${ci},'name',this.value)" style="${inpStyle}" ${inpFocus}></td>
+  <td style="padding:.15rem .25rem;"><input type="text" spellcheck="false" value="${(c.description || '').replace(/"/g, '&quot;')}" oninput="updateUpperClass(${gi},${ci},'description',this.value)" style="${inpStyle}" ${inpFocus}></td>
+  <td style="padding:.15rem .25rem;"><input type="text" spellcheck="false" value="${(c.equivalent_to || '').replace(/"/g, '&quot;')}" oninput="updateUpperClass(${gi},${ci},'equivalent_to',this.value||null)" placeholder="owl:equivalentClass" style="${inpStyle}" ${inpFocus}></td>
+  <td style="padding:.15rem .25rem;"><input type="text" spellcheck="false" value="${disj.replace(/"/g, '&quot;')}" oninput="updateUpperClass(${gi},${ci},'disjoint_with',this.value.split(';').map(s=>s.trim()).filter(Boolean))" placeholder="owl:disjointWith" style="${inpStyle}" ${inpFocus}></td>
   <td style="padding:.2rem;text-align:center;"><button onclick="removeUpperClass(${gi},${ci})" style="background:none;border:none;cursor:pointer;color:var(--text3);" title="삭제"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></td>
 </tr>`;
                 });
@@ -11348,9 +11372,9 @@ for r in results:
                     const inpFocus = `onfocus="this.style.borderColor='var(--nia-blue)';this.style.background='#fff'" onblur="this.style.borderColor='transparent';this.style.background='transparent'"`;
                     h += `<tr style="border-bottom:1px solid var(--border);">
   <td style="padding:.2rem;text-align:center;color:var(--text3);font-size:.6rem;">${mi + 1}</td>
-  <td style="padding:.15rem .25rem;"><input type="text" value="${(m.domain_class || '').replace(/"/g, '&quot;')}" oninput="updateUpperMapping(${gi},${mi},'domain_class',this.value)" style="${inpStyle}" ${inpFocus}></td>
-  <td style="padding:.15rem .25rem;"><input type="text" value="${(m.upper_class || '').replace(/"/g, '&quot;')}" oninput="updateUpperMapping(${gi},${mi},'upper_class',this.value)" style="${inpStyle}" ${inpFocus}></td>
-  <td style="padding:.15rem .25rem;"><input type="text" value="${(m.domain || '').replace(/"/g, '&quot;')}" oninput="updateUpperMapping(${gi},${mi},'domain',this.value)" style="${inpStyle}" ${inpFocus}></td>
+  <td style="padding:.15rem .25rem;"><input type="text" spellcheck="false" value="${(m.domain_class || '').replace(/"/g, '&quot;')}" oninput="updateUpperMapping(${gi},${mi},'domain_class',this.value)" style="${inpStyle}" ${inpFocus}></td>
+  <td style="padding:.15rem .25rem;"><input type="text" spellcheck="false" value="${(m.upper_class || '').replace(/"/g, '&quot;')}" oninput="updateUpperMapping(${gi},${mi},'upper_class',this.value)" style="${inpStyle}" ${inpFocus}></td>
+  <td style="padding:.15rem .25rem;"><input type="text" spellcheck="false" value="${(m.domain || '').replace(/"/g, '&quot;')}" oninput="updateUpperMapping(${gi},${mi},'domain',this.value)" style="${inpStyle}" ${inpFocus}></td>
   <td style="padding:.2rem;text-align:center;"><button onclick="removeUpperMapping(${gi},${mi})" style="background:none;border:none;cursor:pointer;color:var(--text3);" title="삭제"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></td>
 </tr>`;
                 });
