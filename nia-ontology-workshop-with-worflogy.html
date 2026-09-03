@@ -5588,31 +5588,52 @@ ${domainCtx}${upperCtx}
 
 
 
+
+
         // ── vis.js 온톨로지 다이어그램 렌더러 ──────────────────────────────────
         if (!window._visNets) window._visNets = {};
 
-        // 스타일 적용 tooltip 엘리먼트 생성 (브라우저 기본 tooltip 대체)
-        function _makeTooltip(text) {
-            if (!text || !String(text).trim()) return undefined;
-            const el = document.createElement('div');
-            el.style.cssText = [
-                'background:#1e293b',
-                'color:#f1f5f9',
-                'padding:8px 12px',
-                'border-radius:7px',
-                'font-size:11.5px',
-                'line-height:1.6',
-                'max-width:260px',
-                'white-space:pre-wrap',
-                'word-break:break-all',
-                'box-shadow:0 4px 16px rgba(0,0,0,0.28)',
-                'font-family:Pretendard,Noto Sans KR,sans-serif',
-                'pointer-events:none',
-                'border:1px solid rgba(255,255,255,0.08)',
-            ].join(';');
-            el.textContent = String(text).trim();
-            return el;
-        }
+        // ── 커스텀 tooltip (document.body append, overflow 문제 없음) ──
+        (function() {
+            let _el = null, _mx = 0, _my = 0;
+            function _pos() {
+                if (!_el) return;
+                const pw = _el.offsetWidth || 260, ph = _el.offsetHeight || 100;
+                const vw = window.innerWidth, vh = window.innerHeight;
+                let x = _mx + 14, y = _my + 14;
+                if (x + pw > vw - 4) x = _mx - pw - 8;
+                if (y + ph > vh - 4) y = _my - ph - 8;
+                _el.style.left = Math.max(4, x) + 'px';
+                _el.style.top  = Math.max(4, y) + 'px';
+            }
+            document.addEventListener('mousemove', function(e) {
+                _mx = e.clientX; _my = e.clientY;
+                _pos();
+            });
+            window._visShowTip = function(txt) {
+                if (_el) _el.remove();
+                if (!txt) return;
+                _el = document.createElement('div');
+                _el.style.cssText = [
+                    'position:fixed', 'z-index:10000',
+                    'background:#1e293b', 'color:#f1f5f9',
+                    'padding:8px 12px', 'border-radius:7px',
+                    'font-size:11.5px', 'line-height:1.6',
+                    'max-width:260px', 'white-space:pre-wrap',
+                    'word-break:break-word',
+                    'box-shadow:0 4px 16px rgba(0,0,0,.28)',
+                    'font-family:Pretendard,Noto Sans KR,sans-serif',
+                    'border:1px solid rgba(255,255,255,.08)',
+                    'pointer-events:none'
+                ].join(';');
+                _el.textContent = txt;
+                document.body.appendChild(_el);
+                _pos();
+            };
+            window._visHideTip = function() {
+                if (_el) { _el.remove(); _el = null; }
+            };
+        })();
 
         function renderOntologyVis(containerId, nodesData, edgesData, opts) {
             const el = document.getElementById(containerId);
@@ -5648,17 +5669,28 @@ ${domainCtx}${upperCtx}
                     shadow: { enabled: true, size: 4, x: 1, y: 1, color: 'rgba(0,0,0,0.08)' },
                     margin: 8
                 },
-                interaction: { hover: true, tooltipDelay: 150, navigationButtons: false, keyboard: false, zoomView: true },
+                // tooltip 비활성화: 커스텀 popup 사용
+                interaction: { hover: true, tooltipDelay: 99999, navigationButtons: false, keyboard: false, zoomView: true },
                 layout: opts?.layout || { randomSeed: 42 }
             };
             const merged = Object.assign({}, defaults, opts || {});
             if (!opts?.layout) merged.layout = { randomSeed: 42 };
-            const network = new vis.Network(el,
-                { nodes: new vis.DataSet(nodesData), edges: new vis.DataSet(edgesData) },
-                merged
-            );
+            const nodesDS = new vis.DataSet(nodesData);
+            const edgesDS = new vis.DataSet(edgesData);
+            const network = new vis.Network(el, { nodes: nodesDS, edges: edgesDS }, merged);
             window._visNets[containerId] = network;
             network.once('stabilized', () => { try { network.fit({ animation: { duration: 300, easingFunction: 'easeInOutQuad' } }); } catch(e) {} });
+            // 커스텀 tooltip 이벤트 (body append)
+            network.on('hoverNode', function(p) {
+                const nd = nodesDS.get(p.node);
+                window._visShowTip(nd?._tip || null);
+            });
+            network.on('blurNode', window._visHideTip);
+            network.on('hoverEdge', function(p) {
+                const ed = edgesDS.get(p.edge);
+                window._visShowTip(ed?._tip || null);
+            });
+            network.on('blurEdge', window._visHideTip);
             if (opts?.legend) _renderVisLegend(el, opts.legend);
         }
 
@@ -5716,13 +5748,13 @@ ${domainCtx}${upperCtx}
                 const id = gn(c.label); if(!id) return;
                 const isRoot = rootSet.has(String(c.label||'').trim());
                 const dtInfo = (classDtProps[c.label]||[]).map(p => '  ' + p.name + ': xsd:' + p.range).join('\n');
-                const tipTxt = [c.comment ? 'rdfs:comment: '+c.comment : '', dtInfo ? 'DatatypeProperties:\n'+dtInfo : ''].filter(Boolean).join('\n');
-                nodes.push({ id, label: lbl(c.label), title: _makeTooltip(tipTxt),
+                const tip = [c.comment ? 'rdfs:comment: '+c.comment : '', dtInfo ? 'DatatypeProperties:\n'+dtInfo : ''].filter(Boolean).join('\n');
+                nodes.push({ id, label: lbl(c.label), _tip: tip||undefined,
                     shape: isRoot ? 'ellipse' : 'box',
                     color: isRoot
                         ? { background:'#0367b0', border:'#024a7a', highlight:{background:'#0255a0',border:'#024a7a'} }
                         : { background:'#dbeafe', border:'#3b82f6', highlight:{background:'#bfdbfe',border:'#2563eb'} },
-                    font: { color: isRoot ? '#fff' : '#1e3a5f', bold: isRoot }
+                    font: { color: isRoot ? '#fff' : '#1e3a5f' }
                 });
             });
             classes.forEach(c => {
@@ -5745,8 +5777,8 @@ ${domainCtx}${upperCtx}
                 if(!seen.has(k)) {
                     seen.add(k);
                     const pd = propMap[t.predicate];
-                    const tipTxt = pd ? ['owl:ObjectProperty: '+t.predicate, pd.domain?'domain: '+pd.domain:'', pd.range?'range: '+pd.range:'', pd.inverseOf?'inverseOf: '+pd.inverseOf:'', pd.comment||''].filter(Boolean).join('\n') : '';
-                    edges.push({ from:s, to:o, label:p, title: _makeTooltip(tipTxt),
+                    const tip = pd ? ['owl:ObjectProperty: '+t.predicate, pd.domain?'domain: '+pd.domain:'', pd.range?'range: '+pd.range:'', pd.inverseOf?'inverseOf: '+pd.inverseOf:'', pd.comment||''].filter(Boolean).join('\n') : '';
+                    edges.push({ from:s, to:o, label:p, _tip: tip||undefined,
                         color:{color:'#64748b'},
                         arrows: pd?.inverseOf ? {to:{enabled:true,scaleFactor:0.75},from:{enabled:true,scaleFactor:0.75}} : {to:{enabled:true,scaleFactor:0.75}},
                         dashes:false
@@ -5757,10 +5789,10 @@ ${domainCtx}${upperCtx}
                 const mc = c.min_count!=null ? ' min≥'+c.min_count : '';
                 const shId = 'SH'+i;
                 const shLabel = lbl(c.shape_id||c.target_class||'Shape') + mc + (c.path ? '\n→'+lbl(c.path) : '');
-                const tipTxt = [c.shape_id||'', c.path?'sh:path: '+c.path:'', c.severity||'', c.exception_message||''].filter(Boolean).join('\n');
-                nodes.push({ id:shId, label:shLabel, shape:'database',
+                const tip = [c.shape_id||'', c.path?'sh:path: '+c.path:'', c.severity||'', c.exception_message||''].filter(Boolean).join('\n');
+                nodes.push({ id:shId, label:shLabel, shape:'database', _tip: tip||undefined,
                     color:{background:'#fffbeb',border:'#d97706',highlight:{background:'#fef3c7',border:'#b45309'}},
-                    font:{color:'#92400e',size:10}, title: _makeTooltip(tipTxt)
+                    font:{color:'#92400e',size:10}
                 });
                 const tid = gn(c.target_class);
                 if(tid) edges.push({ from:shId, to:tid, label:'sh:targetClass', dashes:[5,3], color:{color:'#d97706'}, arrows:{to:{enabled:true,scaleFactor:0.6}} });
@@ -5782,10 +5814,10 @@ ${domainCtx}${upperCtx}
                 (g.upper_classes||[]).forEach(c => {
                     const id = getNode(c.name); if(!id) return;
                     if(!nodes.find(n=>n.id===id)) {
-                        const tipTxt = [c.description||'', c.id?'IRI: '+c.id:'', c.domain_instances?.length?'예: '+c.domain_instances.slice(0,3).join(', '):''].filter(Boolean).join('\n');
-                        nodes.push({ id, label:lbl(c.name), shape:'ellipse',
+                        const tip = [c.description||'', c.id?'IRI: '+c.id:'', c.domain_instances?.length?'예: '+c.domain_instances.slice(0,3).join(', '):''].filter(Boolean).join('\n');
+                        nodes.push({ id, label:lbl(c.name), shape:'ellipse', _tip: tip||undefined,
                             color:{background:col,border:col,highlight:{background:col,border:col}},
-                            font:{color:'#fff',bold:true,size:13}, size:28, title: _makeTooltip(tipTxt)
+                            font:{color:'#fff',size:13}, size:28
                         });
                     }
                 });
@@ -5794,9 +5826,9 @@ ${domainCtx}${upperCtx}
                 const up = getNode(m.upper_class), dc = getNode(m.domain_class);
                 if(!up||!dc) return;
                 if(!nodes.find(n=>n.id===dc)) {
-                    nodes.push({ id:dc, label:lbl(m.domain_class), shape:'box',
+                    nodes.push({ id:dc, label:lbl(m.domain_class), shape:'box', _tip: m.domain ? '도메인: '+m.domain : undefined,
                         color:{background:'#fff',border:'#94a3b8',highlight:{background:'#f8fafc',border:'#64748b'}},
-                        font:{color:'#1e293b'}, title: _makeTooltip(m.domain ? '도메인: '+m.domain : '')
+                        font:{color:'#1e293b'}
                     });
                 }
                 const k = dc+'>'+up;
@@ -5823,16 +5855,19 @@ ${domainCtx}${upperCtx}
         function buildInfVisData(inf) {
             const rules = inf?.inferred_rules || [];
             const lbl = s => String(s||'').replace(/["\[\]]/g,'').substring(0,28).trim();
-            const RC = { CRITICAL:'#b91c1c', HIGH:'#c05621', MEDIUM:'#d97706', LOW:'#0E7A52' };
+            const RISKS = ['CRITICAL','HIGH','MEDIUM','LOW'];
+            const RC  = { CRITICAL:'#b91c1c', HIGH:'#c05621', MEDIUM:'#d97706', LOW:'#0E7A52' };
             const RCL = { CRITICAL:'#fef2f2', HIGH:'#fff7ed', MEDIUM:'#fffbeb', LOW:'#f0fdf4' };
             const RCB = { CRITICAL:'#fca5a5', HIGH:'#fdba74', MEDIUM:'#fde68a', LOW:'#86efac' };
+            const RCT  = { CRITICAL:'#1e1e1e', HIGH:'#1e1e1e', MEDIUM:'#1e1e1e', LOW:'#1e1e1e' };
             const upperNames = (typeof normalizeUpperGroups === 'function' && S?.upperOntology)
                 ? normalizeUpperGroups(S.upperOntology).flatMap(g=>(g.upper_classes||[]).map(c=>String(c.name||'').trim())).filter(Boolean)
                 : [];
             const ruleIdx = {}; rules.forEach((r,i)=>{ if(r.inference_id) ruleIdx[r.inference_id]=i; });
             const nodes = []; const edges = [];
             rules.forEach((r,i) => {
-                const risk = r.risk_level||'LOW';
+                const rawRisk = String(r.risk_level||'').toUpperCase();
+                const risk = RISKS.includes(rawRisk) ? rawRisk : 'LOW';
                 const rid = r.inference_id||('INF_'+String(i+1).padStart(2,'0'));
                 const cond = String(r.condition||'');
                 const cdTip = (r.conditions_detail||[]).length > 0
@@ -5842,24 +5877,24 @@ ${domainCtx}${upperCtx}
                 const canConnect = rawSubj && !String(rawSubj).startsWith('?') && String(rawSubj).trim() !== '';
                 if(canConnect) {
                     const usesUpper = upperNames.length > 0 && upperNames.some(n => cond.includes(n));
-                    nodes.push({ id:'IF'+i, label:'IF: '+lbl(cond), shape:'hexagon',
+                    nodes.push({ id:'IF'+i, label:'IF: '+lbl(cond), shape:'hexagon', _tip: cdTip||undefined,
                         color:{background:'#f8fafc', border:usesUpper?'#0367b0':'#94a3b8', highlight:{background:'#f1f5f9',border:usesUpper?'#0255a0':'#64748b'}},
-                        borderWidth:usesUpper?3:2, font:{color:'#475569',size:10}, title: _makeTooltip(cdTip)
+                        borderWidth:usesUpper?3:2, font:{color:'#475569',size:10}
                     });
                     edges.push({ from:'IF'+i, to:'C'+i, label:'조건', dashes:[4,3], color:{color:'#94a3b8'} });
                 }
                 const cascadeCount = (r.cascade_rules||[]).length;
-                const ruleTipTxt = [
+                const ruleTip = [
                     rid+(r.inference_name?': '+r.inference_name:''),
                     !canConnect && cdTip ? 'IF:\n'+cdTip : '',
                     r.business_impact ? '영향: '+r.business_impact : '',
                     r.responsible_dept ? '담당: '+r.responsible_dept : '',
-                    '위험도: '+(r.risk_level||'?'),
+                    '위험도: '+risk,
                     cascadeCount > 0 ? 'cascade: '+cascadeCount+'개' : ''
                 ].filter(Boolean).join('\n');
-                nodes.push({ id:'C'+i, label:rid+'\n'+lbl(r.inference_name), shape:'diamond',
+                nodes.push({ id:'C'+i, label:rid+'\n'+lbl(r.inference_name), shape:'diamond', _tip: ruleTip||undefined,
                     color:{background:RC[risk],border:RC[risk],highlight:{background:RC[risk],border:RC[risk]}},
-                    font:{color:'#fff',bold:true,size:11}, title: _makeTooltip(ruleTipTxt)
+                    font:{color:RCT[risk],size:11}
                 });
                 nodes.push({ id:'A'+i, label:'THEN:\n'+lbl(r.action), shape:'ellipse',
                     color:{background:RCL[risk],border:RCB[risk],highlight:{background:RCL[risk],border:RC[risk]}},
