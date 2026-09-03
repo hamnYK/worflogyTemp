@@ -1033,7 +1033,9 @@ for r in results:
         </svg>`
 
 
+
             }
+
 
 
         };
@@ -1087,6 +1089,7 @@ for r in results:
             document.getElementById('landing').classList.add('hidden');
             document.getElementById('concept-modal').classList.remove('open');
         }
+
 
 
         // ── 라이선스 게이트 ──
@@ -1646,6 +1649,7 @@ for r in results:
             }
 
 
+
             if (type === 'inference') {
                 // ── 추론 규칙 검증 (SWRL) ──
                 const rules = (data.inferred_rules || []);
@@ -1881,6 +1885,7 @@ for r in results:
         }
 
 
+
         // ── NAVIGATION ──
         function goStep(n) {
             document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
@@ -1944,6 +1949,7 @@ for r in results:
                 if (gc) gc.innerHTML = '';
             }
         }
+
 
 
         // ── API SELECTION ──
@@ -2190,6 +2196,7 @@ for r in results:
         }
 
 
+
         // ── FOLDER ──
 
         // IndexedDB helpers: FileSystemDirectoryHandle 영속화
@@ -2331,6 +2338,7 @@ for r in results:
                 if (S.combined.upper_ontology?.ontology_groups?.length) {
                     S.upperOntology = S.combined.upper_ontology;
                 }
+
 
 
                 // S.schema도 첫 번째 도메인으로 지정
@@ -2558,6 +2566,7 @@ for r in results:
                 _logUse('law_searched', { query: q, target, error: e.message });
             } finally { if (page === 1) { btn.disabled = false; btn.textContent = '검색'; } }
         }
+
 
 
         async function loadLawText(mst, name, target, el) {
@@ -2939,6 +2948,7 @@ for r in results:
     </div>`;
             toast('"' + d.label + '" 데이터 로드 완료', 'success');
         }
+
 
 
         // ── SCENARIOS (PDF 참가기관 + Step2 데이터 연동) ──
@@ -4156,6 +4166,7 @@ for r in results:
         }
 
 
+
         // 현재 편집 중인 시나리오 id (null이면 신규 추가 모드)
         let _editingScenId = null;
         function addScenario() {
@@ -4463,7 +4474,7 @@ for r in results:
                 if (p) p.style.display = t === tab ? 'block' : 'none';
                 if (b) { b.style.borderBottomColor = t === tab ? 'var(--nia-blue)' : 'transparent'; b.style.color = t === tab ? 'var(--nia-blue)' : 'var(--text3)'; }
             });
-            if (tab === 'diagram' && S.schemas[id]) renderMermaid('s4diag-' + id, schemaToMermaid(S.schemas[id]));
+            if (tab === 'diagram' && S.schemas[id]) renderSchemaVis('s4diag-' + id, S.schemas[id]);
             if (tab === 'gui' && S.schemas[id]) renderGuiEditor(id);
         }
         async function extractSchemaForScenario(id) {
@@ -4723,6 +4734,7 @@ for r in results:
             const usr = `다음은 서로 다른 법 체계를 가진 행정 민원 도메인들입니다. 법령이 달라도 여러 도메인에 실제로 공통 등장하는 행정 패턴(행위자 유형·서류 유형·처리 기관 등)을 의미론적으로 분석하여 상위 온톨로지를 추출하세요. 각 upper_class는 반드시 입력 데이터에 실제로 존재하는 2개 이상 도메인의 클래스와 rdfs:subClassOf 관계로 연결되어야 합니다. (힌트: 여러 도메인에 동일 역할의 행위자·서류·기관이 실제 존재하면 공통 추상 클래스 후보로 검토하세요. 입력 데이터에 없는 패턴은 만들지 마세요.)\n\n## 도메인 스키마들\n${schemasCtx}\n\n[domain 필드 주의] subclass_mappings의 domain은 반드시 [도메인: XXX]의 XXX 그대로 사용. 허용 도메인명: ${domainNames}\n\n출력 형식은 시스템 프롬프트의 JSON 명세를 따르세요.${_prevUpperFeedback}`;
 
 
+
             try {
                 let raw = (await callLLM(sys, usr, '상위 온톨로지(W3C)', { expectJson: true })).trim();
                 raw = _cleanJson(raw);
@@ -4842,7 +4854,7 @@ for r in results:
                 if (p) p.style.display = t === tab ? 'block' : 'none';
                 if (b) { b.style.borderBottomColor = t === tab ? 'var(--nia-blue)' : 'transparent'; b.style.color = t === tab ? 'var(--nia-blue)' : 'var(--text3)'; }
             });
-            if (tab === 'diagram' && S.upperOntology) renderMermaid('utab-diagram-el', upperToMermaid(buildIntegratedUpper() || S.upperOntology));
+            if (tab === 'diagram' && S.upperOntology) renderUpperVis('utab-diagram-el', buildIntegratedUpper() || S.upperOntology);
             if (tab === 'gui') renderUpperGuiEditor();
         }
         function switchInfTab(tab) {
@@ -4852,7 +4864,7 @@ for r in results:
                 if (p) p.style.display = t === tab ? 'block' : 'none';
                 if (b) { b.style.borderBottomColor = t === tab ? 'var(--nia-blue)' : 'transparent'; b.style.color = t === tab ? 'var(--nia-blue)' : 'var(--text3)'; }
             });
-            if (tab === 'diagram' && S.infRules) { renderMermaid('inf-diag', infRulesToMermaid(S.infRules)); renderInfRuleGuide(S.infRules); }
+            if (tab === 'diagram' && S.infRules) { renderInfVis('inf-diag', S.infRules); renderInfRuleGuide(S.infRules); }
         }
 
         function renderUpperGuiEditor() {
@@ -5512,16 +5524,6 @@ ${domainCtx}${upperCtx}
         }
 
         // ── MERMAID HELPERS ──
-        async function ensureMermaid() {
-            if (window.mermaid) return;
-            const m = await import('https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs');
-            window.mermaid = m.default;
-            mermaid.initialize({
-                startOnLoad: false, theme: 'base',
-                flowchart: { curve: 'step', nodeSpacing: 55, rankSpacing: 75 },
-                themeVariables: { primaryColor: '#EBF2FF', primaryBorderColor: '#243B7C', primaryTextColor: '#243B7C', lineColor: '#3687C8', tertiaryColor: '#f0f6ff' }
-            });
-        }
         function triplesToMermaid(triples) {
             if (!triples?.length) return 'graph TD\n  A["\ub370\uc774\ud130 \uc5c6\uc74c"]';
             const lbl = s => String(s || '').replace(/"/g, "'").replace(/[\[\]]/g, '').trim().substring(0, 20);
@@ -5545,183 +5547,8 @@ ${domainCtx}${upperCtx}
         // W3C SWRL 준수: triples(사각형) + exception_rules(다이아몬드) 통합 Mermaid 변환
         // swrl:body → IF 점선, swrl:head → THEN 점선
 
-        function schemaToMermaid(schema) {
-            const classes = schema?.classes || [];
-            const triples = schema?.triples || [];
-            const rules = schema?.exception_rules || [];
-            const consts = schema?.constraints || [];
-            if (!classes.length && !triples.length && !rules.length)
-                return 'graph TD\n  A["데이터 없음"]';
-            const lbl = s => String(s || '').replace(/"/g, "'").replace(/[\[\]{}|>]/g, '').trim().substring(0, 22);
-            const nodeIds = new Map(); let nid = 0;
-            const gn = label => {
-                const k = String(label || '').trim(); if (!k) return null;
-                if (!nodeIds.has(k)) nodeIds.set(k, 'N' + (nid++));
-                return nodeIds.get(k);
-            };
-            // 루트 클래스 vs 서브 클래스 구분
-            const rootClsSet = new Set(classes.filter(c => !c.subClassOf).map(c => String(c.label || '').trim()));
-            const total = classes.length + triples.length + rules.length + consts.length;
-            const dir = total > 14 ? 'LR' : 'TD';
-            const lines = ['flowchart ' + dir];
-            // ① 클래스 노드 + rdfs:subClassOf 계층 (루트=타원, 서브=사각형)
-            if (classes.length) {
-                lines.push('  subgraph CLS["owl:Class 계층"]');
-                classes.forEach(c => {
-                    const id = gn(c.label); if (!id) return;
-                    if (rootClsSet.has(String(c.label || '').trim())) {
-                        lines.push(`    ${id}(["${lbl(c.label)}"])`); // 타원 = 루트/추상
-                    } else {
-                        lines.push(`    ${id}["${lbl(c.label)}"]`); // 사각형 = 서브클래스
-                    }
-                });
-                lines.push('  end');
-                // rdfs:subClassOf → 굵은 화살표
-                classes.forEach(c => {
-                    if (c.subClassOf) {
-                        const cid = gn(c.label), pid = gn(c.subClassOf);
-                        if (cid && pid) lines.push(`  ${cid} ==>|"rdfs:subClassOf"| ${pid}`);
-                    }
-                });
-            }
-            // ② owl:ObjectProperty 트리플 → 실선 화살표 (리터럴/xsd 제외)
-            const seen = new Set();
-            triples.forEach(t => {
-                if (!t.subject || !t.object) return;
-                const obj = String(t.object).trim();
-                if (!isNaN(Number(obj)) || obj.startsWith('xsd:')) return;
-                if (String(t.subject).trim() === obj) return;
-                const s = gn(t.subject), o = gn(t.object);
-                if (!s || !o) return;
-                const p = lbl(t.predicate);
-                const key = `${s}|${o}|${p}`;
-                if (!seen.has(key)) { seen.add(key); lines.push(`  ${s} -->|"${p}"| ${o}`); }
-            });
-            // ③ SHACL NodeShape → stadium shape + 별도 subgraph
-            if (consts.length) {
-                lines.push('  subgraph SHA["SHACL 제약"]');
-                consts.forEach((c, i) => {
-                    const mc = c.min_count != null ? ' minCount≥' + c.min_count : '';
-                    lines.push(`    SH${i}[["${lbl(c.target_class || 'Shape')}${mc}"]];`);
-                });
-                lines.push('  end');
-                consts.forEach((c, i) => {
-                    const tid = gn(c.target_class);
-                    if (tid && c.path) lines.push(`  ${tid} -.->|"sh:${lbl(c.path)}"| SH${i}`);
-                });
-            }
-            // ④ SWRL 예외규칙 → 다이아몬드 + IF 점선/THEN 굵은 화살표
-            let rid = 0;
-            rules.forEach(r => {
-                const ri = rid++;
-                const rn = 'R' + ri;
-                const ruleLabel = lbl((r.rule_id || 'RULE') + ': ' + (r.rule_name || ''));
-                lines.push(`  ${rn}{"${ruleLabel}"}`);
-                // IF 연결: 점선
-                if (r.if?.subject && !String(r.if.subject).startsWith('?')) {
-                    const sn = gn(r.if.subject); if (sn) lines.push(`  ${sn} -.->|"swrl:IF"| ${rn}`);
-                } else if (r.if?.conditions?.length) {
-                    const firstMatch = (r.if.conditions[0] || '').match(/^([^(?\s]+)\s*\(/);
-                    const firstCls = firstMatch?.[1];
-                    if (firstCls && !firstCls.startsWith('?') && !firstCls.startsWith('swrlb')) {
-                        const sn = gn(firstCls); if (sn) lines.push(`  ${sn} -.->|"swrl:IF"| ${rn}`);
-                    }
-                }
-                // THEN 연결: 굵은 화살표 + 원형 결과 노드
-                if (r.then) {
-                    lines.push(`  TH${ri}(["${lbl(r.then)}"])`);
-                    lines.push(`  ${rn} ==>|"swrl:THEN"| TH${ri}`);
-                }
-            });
-            // classDef 스타일 — OWL 표준 색상 체계
-            lines.push('  classDef owlRoot fill:#0367b0,stroke:#024a7a,color:#fff,font-weight:bold');
-            lines.push('  classDef owlSub fill:#dbeafe,stroke:#3b82f6,color:#1e3a5f,font-weight:600');
-            lines.push('  classDef swrlRule fill:#fff7ed,stroke:#c05621,color:#9a3412,font-weight:700');
-            lines.push('  classDef swrlThen fill:#ecfdf5,stroke:#0E7A52,color:#064e3b,font-weight:600');
-            lines.push('  classDef shacl fill:#fffbeb,stroke:#d97706,color:#92400e');
-            classes.forEach(c => {
-                const id = gn(c.label); if (!id) return;
-                lines.push(`  class ${id} ${rootClsSet.has(String(c.label || '').trim()) ? 'owlRoot' : 'owlSub'}`);
-            });
-            for (let i = 0; i < rules.length; i++) {
-                lines.push(`  class R${i} swrlRule`);
-                lines.push(`  class TH${i} swrlThen`);
-            }
-            if (consts.length) {
-                consts.forEach((_, i) => lines.push(`  class SH${i} shacl`));
-            }
-            return lines.join('\n');
-        }
 
-        function upperToMermaid(result) {
-            const groups = normalizeUpperGroups(result);
-            const allMappings = groups.flatMap(g => g.subclass_mappings || []);
-            if (!allMappings.length) return 'graph TD\n  A["데이터 없음"]';
-            const lbl = s => String(s || '').replace(/"/g, "'").replace(/[\[\]{}]/g, '').trim().substring(0, 22);
-            const clean = s => String(s || '').replace(/^base:|^ont:/, '').trim();
-            // 그룹별 색상
-            const GC = ['#0367b0','#0E7A52','#c05621','#7c3aed','#be185d'];
-            const GCL = ['#dbeafe','#d1fae5','#fff7ed','#ede9fe','#fce7f3'];
-            // 노드 맵
-            const nodeMap = new Map(); let idx = 0;
-            const getNode = label => { const k = clean(label); if (!k) return null; if (!nodeMap.has(k)) nodeMap.set(k, 'UN' + (idx++)); return nodeMap.get(k); };
-            // 상위 클래스 집합
-            const upperClassNames = new Set(groups.flatMap(g => (g.upper_classes || []).map(c => clean(c.name || ''))));
-            // equivalent_to 쌍 수집
-            const equivPairs = new Set();
-            groups.forEach(g => (g.upper_classes || []).forEach(c => {
-                if (c.equivalent_to) {
-                    const k = [clean(c.name || ''), clean(c.equivalent_to)].sort().join('|');
-                    equivPairs.add(k);
-                }
-            }));
-            const lines = ['flowchart TD'];
-            // 그룹별 subgraph
-            groups.forEach((g, gi) => {
-                const col = GC[gi % GC.length];
-                const colL = GCL[gi % GCL.length];
-                const gid = 'GRP' + gi;
-                const gname = lbl(g.group_name || ('그룹' + (gi + 1)));
-                lines.push(`  subgraph ${gid}["${gname}"]`);
-                // 상위 클래스 → 타원
-                (g.upper_classes || []).forEach(c => {
-                    const id = getNode(c.name);
-                    if (id) lines.push(`    ${id}(["${lbl(c.name)}"])`);
-                });
-                // 도메인 클래스 → 사각형
-                const domSet = new Set();
-                (g.subclass_mappings || []).forEach(m => {
-                    const k = clean(m.domain_class);
-                    if (!k || upperClassNames.has(k) || domSet.has(k)) return;
-                    domSet.add(k);
-                    const id = getNode(m.domain_class);
-                    if (id) lines.push(`    ${id}["${lbl(m.domain_class)}"]`);
-                });
-                lines.push('  end');
-                lines.push(`  style ${gid} fill:${colL},stroke:${col},color:#111`);
-            });
-            // rdfs:subClassOf 엣지 (굵은 화살표, 아래→위)
-            const seen = new Set();
-            allMappings.forEach(m => {
-                const up = getNode(m.upper_class), dc = getNode(m.domain_class);
-                if (!up || !dc) return;
-                const k = dc + '>' + up;
-                if (!seen.has(k)) { seen.add(k); lines.push(`  ${dc} ==>|"rdfs:subClassOf"| ${up}`); }
-            });
-            // owl:equivalentClass 엣지 (양방향 점선)
-            equivPairs.forEach(pair => {
-                const [a, b] = pair.split('|');
-                const na = getNode(a), nb = getNode(b);
-                if (na && nb) lines.push(`  ${na} <-.->|"owl:≡"| ${nb}`);
-            });
-            // classDef
-            lines.push('  classDef upperCls fill:#0367b0,stroke:#024a7a,color:#fff,font-weight:bold,font-size:13px');
-            lines.push('  classDef domainCls fill:#fff,stroke:#94a3b8,color:#1e293b,font-size:12px');
-            nodeMap.forEach((id, label) => {
-                lines.push(`  class ${id} ${upperClassNames.has(label) ? 'upperCls' : 'domainCls'}`);
-            });
-            return lines.join('\n');
-        }
+
         function renderInfRuleGuide(inf) {
             const el = document.getElementById('inf-rule-guide');
             if (!el) return;
@@ -5756,95 +5583,277 @@ ${domainCtx}${upperCtx}
             }).join('')}
     </div>`;
         }
-        function infRulesToMermaid(inf) {
-            const rules = inf?.inferred_rules || [];
-            if (!rules.length) return 'graph TD\n  A["규칙 없음"]';
-            const lbl = s => String(s || '').replace(/"/g, "'").replace(/[\[\]]/g, '').substring(0, 30).trim();
-            const lblLong = s => String(s || '').replace(/"/g, "'").replace(/[\[\]]/g, '').substring(0, 40).trim();
-            // 위험도 스타일
-            const riskNodeStyle = {
-                CRITICAL: 'fill:#b91c1c,stroke:#991b1b,color:#fff,font-weight:bold',
-                HIGH:     'fill:#c05621,stroke:#9a3412,color:#fff,font-weight:bold',
-                MEDIUM:   'fill:#d97706,stroke:#b45309,color:#fff,font-weight:600',
-                LOW:      'fill:#0E7A52,stroke:#0b6042,color:#fff,font-weight:600'
-            };
-            const riskBg = { CRITICAL:'#fef2f2', HIGH:'#fff7ed', MEDIUM:'#fffbeb', LOW:'#f0fdf4' };
-            const riskStroke = { CRITICAL:'#fca5a5', HIGH:'#fdba74', MEDIUM:'#fde68a', LOW:'#86efac' };
-            const riskLabel = { CRITICAL:'!! CRITICAL', HIGH:'! HIGH', MEDIUM:'* MEDIUM', LOW:'LOW' };
-            const byRisk = { CRITICAL:[], HIGH:[], MEDIUM:[], LOW:[] };
-            rules.forEach((r, i) => { const k = r.risk_level || 'LOW'; if (byRisk[k]) byRisk[k].push({r,i}); });
-            // 추론 ID → 인덱스 맵 (cascade 참조용)
-            const ruleIdx = {}; rules.forEach((r,i) => { if (r.inference_id) ruleIdx[r.inference_id] = i; });
-            const lines = ['flowchart TD'];
-            // 위험도별 subgraph: 다이아몬드(규칙) → 원형(결과)
-            ['CRITICAL','HIGH','MEDIUM','LOW'].forEach(risk => {
-                const items = byRisk[risk]; if (!items.length) return;
-                const sgid = 'SG' + risk;
-                lines.push(`  subgraph ${sgid}["${riskLabel[risk]}"]`);
-                items.forEach(({r,i}) => {
-                    const rid = r.inference_id || ('INF_' + String(i+1).padStart(2,'0'));
-                    // IF 조건 노드 (육각형)
-                    if (r.condition) {
-                        lines.push(`    IF${i}[/"IF: ${lbl(r.condition)}"/]`);
-                    }
-                    // 규칙 노드 (다이아몬드)
-                    lines.push(`    C${i}{"${rid}: ${lbl(r.inference_name)}"}`);
-                    // THEN 결과 노드 (원형)
-                    lines.push(`    A${i}(["THEN: ${lbl(r.action)}"])`);
-                });
-                lines.push('  end');
-                lines.push(`  style ${sgid} fill:${riskBg[risk]},stroke:${riskStroke[risk]},color:#333`);
-            });
-            // 엣지
-            rules.forEach((r,i) => {
-                const risk = r.risk_level || 'LOW';
-                // IF → 규칙 (점선)
-                if (r.condition) lines.push(`  IF${i} -.->|"조건"| C${i}`);
-                // 규칙 → THEN (굵은 화살표)
-                lines.push(`  C${i} ==>|"추론"| A${i}`);
-                // 규칙/결과 스타일
-                if (riskNodeStyle[risk]) {
-                    lines.push(`  style C${i} ${riskNodeStyle[risk]}`);
-                    lines.push(`  style A${i} fill:${riskBg[risk]},stroke:${riskStroke[risk]},color:#111`);
-                    if (r.condition) lines.push(`  style IF${i} fill:#f8fafc,stroke:#94a3b8,color:#475569`);
-                }
-                // cascade 연쇄 (점선, 최대 3개)
-                (r.cascade_rules || []).slice(0,3).forEach(cr => {
-                    const ti = ruleIdx[cr];
-                    if (ti !== undefined) {
-                        lines.push(`  A${i} -.->|"cascade"| C${ti}`);
-                    } else {
-                        const crid = 'EXT' + cr.replace(/\W/g,'');
-                        lines.push(`  A${i} -.->|"cascade"| ${crid}[/"${lbl(cr)}"/]`);
-                    }
-                });
-            });
-            return lines.join('\n');
-        }
-        const _mermaidRetry = {};
-        function retryMermaid(cid) { const code = _mermaidRetry[cid]; if (code) renderMermaid(cid, code); }
         // containerId 바인딩: Blob URL 다중 생성에 의한 메모리 누수를 막기 위해 이전 URL 트래킹
-        async function renderMermaid(containerId, code) {
+
+        // ── vis.js 온톨로지 다이어그램 렌더러 ──────────────────────────────────
+        if (!window._visNets) window._visNets = {};
+
+        function renderOntologyVis(containerId, nodesData, edgesData, opts) {
             const el = document.getElementById(containerId);
             if (!el) return;
-            _mermaidRetry[containerId] = code;
-            el.innerHTML = '<div style="text-align:center;padding:1.5rem;color:var(--text3);font-size:.8rem;"><span class="sp"></span> 다이어그램 렌더링 중...</div>';
-            try {
-                await ensureMermaid();
-                const id = 'mmd-' + Date.now();
-                const { svg } = await mermaid.render(id, code);
-                const _html = `<!DOCTYPE html><html><head><meta charset="utf-8"><style>body{margin:0;padding:1rem;background:#fafbff;}svg{max-width:100%;height:auto;}</style></head><body>${svg}</body></html>`;
-                // 이전 URL 회수 후 새 URL 생성
-                if (window._burlMap && window._burlMap[containerId]) URL.revokeObjectURL(window._burlMap[containerId]);
-                if (!window._burlMap) window._burlMap = {};
-                const _burl = URL.createObjectURL(new Blob([_html], { type: 'text/html' }));
-                window._burlMap[containerId] = _burl;
-                el.innerHTML = `<div style="overflow:auto;padding:.5rem;background:#fafbff;border-radius:8px;border:1px solid var(--border);position:relative;">${svg}<a href="${_burl}" target="_blank" rel="noopener" style="position:absolute;top:.5rem;right:.5rem;font-size:.72rem;background:rgba(255,255,255,.92);color:var(--nia-blue);border:1px solid rgba(3,103,176,.28);border-radius:6px;padding:.25rem .65rem;text-decoration:none;display:inline-flex;align-items:center;gap:.3rem;font-weight:600;">↗ 새 탭에서 보기</a></div>`;
-                delete _mermaidRetry[containerId];
-            } catch (e) {
-                el.innerHTML = `<div class="al al-e" style="font-size:.75rem;">다이어그램 오류: ${e.message.substring(0, 80)}<br><button onclick="retryMermaid('${containerId}')" style="margin-top:.5rem;padding:.3rem .75rem;background:var(--nia-blue);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:.72rem;font-family:inherit;"><span style="margin-right:.3rem;">↻</span>다시 그리기</button><pre style="font-size:.65rem;margin-top:.5rem;overflow:auto;max-height:120px;">${code.substring(0, 300)}</pre></div>`;
+            el.style.height = '480px';
+            el.style.position = 'relative';
+            el.style.background = '#fafbff';
+            el.style.borderRadius = '8px';
+            el.style.border = '1px solid var(--border, #e2e8f0)';
+            el.style.overflow = 'hidden';
+            if (window._visNets[containerId]) {
+                try { window._visNets[containerId].destroy(); } catch(e) {}
+                delete window._visNets[containerId];
             }
+            el.innerHTML = '';
+            const defaults = {
+                physics: {
+                    enabled: true,
+                    solver: 'forceAtlas2Based',
+                    forceAtlas2Based: { gravitationalConstant: -60, centralGravity: 0.008, springLength: 140, springConstant: 0.07, damping: 0.5 },
+                    stabilization: { enabled: true, iterations: 200, fit: true }
+                },
+                edges: {
+                    smooth: { type: 'cubicBezier', forceDirection: 'none', roundness: 0.45 },
+                    arrows: { to: { enabled: true, scaleFactor: 0.75 } },
+                    font: { size: 10, align: 'middle', background: 'rgba(250,251,255,0.85)', strokeWidth: 0 },
+                    color: { inherit: false },
+                    width: 1.5
+                },
+                nodes: {
+                    font: { size: 12, face: 'Pretendard, Noto Sans KR, sans-serif', multi: false },
+                    borderWidth: 2,
+                    shadow: { enabled: true, size: 4, x: 1, y: 1, color: 'rgba(0,0,0,0.08)' },
+                    margin: 8
+                },
+                interaction: { hover: true, tooltipDelay: 200, navigationButtons: false, keyboard: false, zoomView: true },
+                layout: opts?.layout || { randomSeed: 42 }
+            };
+            const merged = Object.assign({}, defaults, opts || {});
+            if (!opts?.layout) merged.layout = { randomSeed: 42 };
+            const network = new vis.Network(el,
+                { nodes: new vis.DataSet(nodesData), edges: new vis.DataSet(edgesData) },
+                merged
+            );
+            window._visNets[containerId] = network;
+            // 레이아웃 안정화 후 자동 fit
+            network.once('stabilized', () => { try { network.fit({ animation: { duration: 300, easingFunction: 'easeInOutQuad' } }); } catch(e) {} });
         }
+
+        function buildSchemaVisData(schema) {
+            const classes = schema?.classes || [];
+            const triples = schema?.triples || [];
+            const rules = schema?.exception_rules || [];
+            const consts = schema?.constraints || [];
+            const lbl = s => String(s || '').replace(/["\[\]{}]/g, '').trim().substring(0, 22);
+            const rootSet = new Set(classes.filter(c => !c.subClassOf).map(c => String(c.label||'').trim()));
+            const nodeMap = new Map(); let nid = 0;
+            const gn = v => { const k = String(v||'').trim(); if(!k) return null; if(!nodeMap.has(k)) nodeMap.set(k,'N'+(nid++)); return nodeMap.get(k); };
+            const nodes = []; const edges = []; const seen = new Set();
+            // owl:Class 노드
+            classes.forEach(c => {
+                const id = gn(c.label); if(!id) return;
+                const isRoot = rootSet.has(String(c.label||'').trim());
+                nodes.push({ id, label: lbl(c.label),
+                    shape: isRoot ? 'ellipse' : 'box',
+                    color: isRoot
+                        ? { background:'#0367b0', border:'#024a7a', highlight:{background:'#0255a0',border:'#024a7a'} }
+                        : { background:'#dbeafe', border:'#3b82f6', highlight:{background:'#bfdbfe',border:'#2563eb'} },
+                    font: { color: isRoot ? '#fff' : '#1e3a5f', bold: isRoot },
+                    group: 'class'
+                });
+            });
+            // rdfs:subClassOf 엣지
+            classes.forEach(c => {
+                if(!c.subClassOf) return;
+                const from = gn(c.label), to = gn(c.subClassOf);
+                if(!from || !to) return;
+                const k = from+'|sub|'+to;
+                if(!seen.has(k)) { seen.add(k); edges.push({ from, to, label:'subClassOf', width:2.5, color:{color:'#0367b0',highlight:'#024a7a'}, dashes:false }); }
+            });
+            // ObjectProperty 트리플
+            triples.forEach(t => {
+                if(!t.subject||!t.object) return;
+                const obj = String(t.object).trim();
+                if(!isNaN(Number(obj))||obj.startsWith('xsd:')) return;
+                if(String(t.subject).trim()===obj) return;
+                const s = gn(t.subject), o = gn(t.object);
+                if(!s||!o) return;
+                const p = lbl(t.predicate);
+                const k = s+'|'+o+'|'+p;
+                if(!seen.has(k)) { seen.add(k); edges.push({ from:s, to:o, label:p, color:{color:'#64748b'}, dashes:false }); }
+            });
+            // SHACL constraints
+            consts.forEach((c,i) => {
+                const mc = c.min_count!=null ? ' min>='+c.min_count : '';
+                const shId = 'SH'+i;
+                nodes.push({ id:shId, label:lbl(c.target_class||'Shape')+mc, shape:'database',
+                    color:{ background:'#fffbeb', border:'#d97706', highlight:{background:'#fef3c7',border:'#b45309'} },
+                    font:{ color:'#92400e' }
+                });
+                const tid = gn(c.target_class);
+                if(tid&&c.path) edges.push({ from:tid, to:shId, label:'sh:'+lbl(c.path), dashes:[5,3], color:{color:'#d97706'} });
+            });
+            // SWRL 규칙
+            rules.forEach((r,i) => {
+                const rId = 'R'+i;
+                const ruleLabel = lbl((r.rule_id||'RULE')+': '+(r.rule_name||''));
+                nodes.push({ id:rId, label:ruleLabel, shape:'diamond',
+                    color:{ background:'#fff7ed', border:'#c05621', highlight:{background:'#ffedd5',border:'#9a3412'} },
+                    font:{ color:'#9a3412', bold:true }
+                });
+                // IF 연결
+                if(r.if?.subject&&!String(r.if.subject).startsWith('?')) {
+                    const sn = gn(r.if.subject);
+                    if(sn) edges.push({ from:sn, to:rId, label:'IF', dashes:[4,4], color:{color:'#c05621'} });
+                } else if(r.if?.conditions?.length) {
+                    const m = (r.if.conditions[0]||'').match(/^([^(?\s]+)\s*\(/);
+                    const fc = m?.[1];
+                    if(fc&&!fc.startsWith('?')&&!fc.startsWith('swrlb')) {
+                        const sn = gn(fc);
+                        if(sn) edges.push({ from:sn, to:rId, label:'IF', dashes:[4,4], color:{color:'#c05621'} });
+                    }
+                }
+                // THEN 결과 노드
+                if(r.then) {
+                    const thId = 'TH'+i;
+                    nodes.push({ id:thId, label:lbl(r.then), shape:'ellipse',
+                        color:{ background:'#ecfdf5', border:'#0E7A52', highlight:{background:'#d1fae5',border:'#065f46'} },
+                        font:{ color:'#064e3b' }
+                    });
+                    edges.push({ from:rId, to:thId, label:'THEN', width:2.5, color:{color:'#0E7A52'}, dashes:false });
+                }
+            });
+            return { nodes, edges };
+        }
+
+        function buildUpperVisData(result) {
+            const groups = normalizeUpperGroups(result);
+            const allMappings = groups.flatMap(g => g.subclass_mappings || []);
+            const domainSchemas = result?.domain_schemas || {};
+            const lbl = s => String(s||'').replace(/["\[\]{}]/g,'').trim().substring(0, 22);
+            const clean = s => String(s||'').replace(/^base:|^ont:/,'').trim();
+            const GC = ['#0367b0','#0E7A52','#c05621','#7c3aed','#be185d'];
+            const GCL = ['#dbeafe','#d1fae5','#fff7ed','#ede9fe','#fce7f3'];
+            const nodeMap = new Map(); let idx = 0;
+            const getNode = v => { const k=clean(v); if(!k) return null; if(!nodeMap.has(k)) nodeMap.set(k,'UN'+(idx++)); return nodeMap.get(k); };
+            const upperClassNames = new Set(groups.flatMap(g=>(g.upper_classes||[]).map(c=>clean(c.name||''))));
+            const nodes = []; const edges = []; const seen = new Set();
+            // 상위 클래스 노드 (그룹별 색상)
+            groups.forEach((g, gi) => {
+                const col = GC[gi % GC.length];
+                (g.upper_classes||[]).forEach(c => {
+                    const id = getNode(c.name); if(!id) return;
+                    if(!nodes.find(n=>n.id===id)) {
+                        nodes.push({ id, label:lbl(c.name), shape:'ellipse', level:0,
+                            color:{ background:col, border:col, highlight:{background:col,border:col} },
+                            font:{ color:'#fff', bold:true, size:13 }, size:28
+                        });
+                    }
+                });
+            });
+            // 도메인 클래스 + rdfs:subClassOf 엣지
+            allMappings.forEach(m => {
+                const up = getNode(m.upper_class), dc = getNode(m.domain_class);
+                if(!up||!dc) return;
+                if(!nodes.find(n=>n.id===dc)) {
+                    nodes.push({ id:dc, label:lbl(m.domain_class), shape:'box', level:1,
+                        color:{ background:'#fff', border:'#94a3b8', highlight:{background:'#f8fafc',border:'#64748b'} },
+                        font:{ color:'#1e293b' }
+                    });
+                }
+                const k = dc+'>'+up;
+                if(!seen.has(k)) { seen.add(k); edges.push({ from:dc, to:up, label:'subClassOf', width:2.5, color:{color:'#0367b0'}, dashes:false }); }
+            });
+            // 도메인 트리플
+            Object.entries(domainSchemas).forEach(([,sc]) => {
+                (sc.triples||[]).forEach(t => {
+                    if(!t.subject||!t.object) return;
+                    const obj = String(t.object).trim();
+                    if(!isNaN(Number(obj))||obj.startsWith('xsd:')) return;
+                    if(String(t.subject).trim()===obj) return;
+                    const s = getNode(t.subject), o = getNode(t.object), p = lbl(t.predicate);
+                    if(!s||!o||!p) return;
+                    const k = s+'>'+o+'>'+p;
+                    if(!seen.has(k)) {
+                        seen.add(k);
+                        // 아직 노드가 없으면 도메인 클래스로 추가
+                        if(!nodes.find(n=>n.id===s)) nodes.push({ id:s, label:lbl(t.subject), shape:'box', color:{background:'#fff',border:'#94a3b8'}, font:{color:'#1e293b'} });
+                        if(!nodes.find(n=>n.id===o)) nodes.push({ id:o, label:lbl(t.object), shape:'box', color:{background:'#fff',border:'#94a3b8'}, font:{color:'#1e293b'} });
+                        edges.push({ from:s, to:o, label:p, color:{color:'#94a3b8'}, dashes:false });
+                    }
+                });
+            });
+            // owl:equivalentClass
+            groups.forEach(g=>(g.upper_classes||[]).forEach(c=>{
+                if(!c.equivalent_to) return;
+                const na=getNode(c.name), nb=getNode(c.equivalent_to);
+                if(na&&nb) edges.push({ from:na, to:nb, label:'owl:equiv', arrows:{from:{enabled:true,scaleFactor:0.6},to:{enabled:true,scaleFactor:0.6}}, dashes:[3,3], color:{color:'#7c3aed'} });
+            }));
+            return { nodes, edges };
+        }
+
+        function buildInfVisData(inf) {
+            const rules = inf?.inferred_rules || [];
+            const lbl = s => String(s||'').replace(/["\[\]]/g,'').substring(0,28).trim();
+            const RC = { CRITICAL:'#b91c1c', HIGH:'#c05621', MEDIUM:'#d97706', LOW:'#0E7A52' };
+            const RCL = { CRITICAL:'#fef2f2', HIGH:'#fff7ed', MEDIUM:'#fffbeb', LOW:'#f0fdf4' };
+            const RCB = { CRITICAL:'#fca5a5', HIGH:'#fdba74', MEDIUM:'#fde68a', LOW:'#86efac' };
+            const ruleIdx = {}; rules.forEach((r,i)=>{ if(r.inference_id) ruleIdx[r.inference_id]=i; });
+            const nodes = []; const edges = [];
+            rules.forEach((r,i) => {
+                const risk = r.risk_level||'LOW';
+                const rid = r.inference_id||('INF_'+String(i+1).padStart(2,'0'));
+                // IF 조건 노드
+                if(r.condition) {
+                    nodes.push({ id:'IF'+i, label:'IF: '+lbl(r.condition), shape:'hexagon',
+                        color:{ background:'#f8fafc', border:'#94a3b8', highlight:{background:'#f1f5f9',border:'#64748b'} },
+                        font:{ color:'#475569', size:10 }
+                    });
+                    edges.push({ from:'IF'+i, to:'C'+i, label:'조건', dashes:[4,3], color:{color:'#94a3b8'} });
+                }
+                // 규칙 노드 (diamond)
+                nodes.push({ id:'C'+i, label:rid+'\n'+lbl(r.inference_name), shape:'diamond',
+                    color:{ background:RC[risk], border:RC[risk], highlight:{background:RC[risk],border:RC[risk]} },
+                    font:{ color:'#fff', bold:true, size:11 }
+                });
+                // THEN 결과 노드
+                nodes.push({ id:'A'+i, label:'THEN:\n'+lbl(r.action), shape:'ellipse',
+                    color:{ background:RCL[risk], border:RCB[risk], highlight:{background:RCL[risk],border:RC[risk]} },
+                    font:{ color:'#111', size:11 }
+                });
+                edges.push({ from:'C'+i, to:'A'+i, label:'추론', width:2.5, color:{color:RC[risk]}, dashes:false });
+                // cascade 연쇄 (최대 3개)
+                (r.cascade_rules||[]).slice(0,3).forEach(cr => {
+                    const ti = ruleIdx[cr];
+                    if(ti!==undefined) edges.push({ from:'A'+i, to:'C'+ti, label:'cascade', dashes:[3,3], color:{color:'#7c3aed'} });
+                });
+            });
+            return { nodes, edges };
+        }
+
+        function renderSchemaVis(containerId, schema) {
+            const { nodes, edges } = buildSchemaVisData(schema);
+            renderOntologyVis(containerId, nodes, edges);
+        }
+
+        function renderUpperVis(containerId, result) {
+            const { nodes, edges } = buildUpperVisData(result);
+            // hierarchical layout은 canvas 크기 의존성이 높아 DOM reflow 전 오작동
+            // physics 기반 레이아웃 사용 + level 속성은 노드 크기/색상으로 시각적 구분
+            renderOntologyVis(containerId, nodes, edges, {
+                physics: {
+                    enabled: true,
+                    solver: 'repulsion',
+                    repulsion: { nodeDistance: 180, centralGravity: 0.15, springLength: 200, springConstant: 0.05, damping: 0.09 },
+                    stabilization: { enabled: true, iterations: 250, fit: true }
+                }
+            });
+        }
+
+        function renderInfVis(containerId, inf) {
+            const { nodes, edges } = buildInfVisData(inf);
+            renderOntologyVis(containerId, nodes, edges);
+        }
+        // ── vis.js 온톨로지 다이어그램 렌더러 끝 ───────────────────────────────
+
+
 
         // ── GRAPH ──
         function renderGraph() {
@@ -6747,6 +6756,7 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
             } catch (e) { toast('질문 생성 실패: ' + e.message, 'error'); }
             finally { btn.disabled = false; btn.innerHTML = '<span class="ico"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></span> 내 스키마 기반 질문 생성'; }
         }
+
 
 
         // ── RAG 문서 선택기: 질문 키워드 기반으로 S.docs에서 관련 문서를 maxTokens 한도 내에서 반환 ──
