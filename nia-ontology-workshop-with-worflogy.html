@@ -5151,8 +5151,8 @@ ${domainCtx}${upperCtx}
             if (!rules.length) { toast('먼저 Step 6에서 추론 규칙을 도출하세요', 'error'); return; }
             const btn = document.getElementById('inf-run-btn');
             const stEl = document.getElementById('inf-st');
-            if (btn) { btn.disabled = true; btn.innerHTML = '<span class="ico">⏳</span> 추론 중...'; }
-            if (stEl) stEl.innerHTML = '<div class="al al-i">⏳ LLM이 시나리오를 분석하고 추론 규칙을 적용 중...</div>';
+            if (btn) { btn.disabled = true; btn.innerHTML = '<span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="animation:spin .8s linear infinite"><circle cx="12" cy="12" r="9" stroke-opacity=".2"/><path d="M12 3a9 9 0 0 1 9 9" stroke-linecap="round"/></svg></span> 추론 중...'; }
+            if (stEl) stEl.innerHTML = '<div class="al al-i"><span class="ico" style="width:14px;height:14px;display:inline-flex;vertical-align:middle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="animation:spin .8s linear infinite"><circle cx="12" cy="12" r="9" stroke-opacity=".2"/><path d="M12 3a9 9 0 0 1 9 9" stroke-linecap="round"/></svg></span> LLM이 시나리오를 분석하고 추론 규칙을 적용 중...</div>';
             // 시나리오 컨텍스트
             const scenCtx = (S.scenarios || []).map((sc, i) =>
                 `시나리오${i + 1}: ${sc.title}\n${sc.text}`
