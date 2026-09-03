@@ -3871,6 +3871,7 @@
                         &nbsp;&nbsp;<code>- custom_prompts.json</code><br>
                         &nbsp;&nbsp;<code>- ontology_result_final.json</code><br>
                         &nbsp;&nbsp;<code>- ontology_result_final.jsonld</code>&nbsp;<span style="color:var(--text3);font-size:.75em;">(JSON-LD · GraphDB 임포트용)</span><br>
+                        &nbsp;&nbsp;<code>- cmp_result.json</code>&nbsp;<span style="color:var(--text3);font-size:.75em;">(A/B/C 검증 비교 마지막 결과)</span><br>
                         &nbsp;&nbsp;<code>docs/</code>&nbsp;<span style="color:var(--text3);font-size:.75em;">(업로드 문서 자동 저장)</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<code>- [문서파일명]</code><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<code>- _index.json</code>
@@ -8827,6 +8828,8 @@ for r in results:
             }
             // custom_prompts.json 복원 → 사용자 편집 프롬프트 유지
             await _restoreCustomPrompts();
+            // 마지막 비교 결과 복원
+            await _restoreCmpResult();
         }
         async function _saveCustomPrompts() {
             if (!S.workH) return;
@@ -8844,6 +8847,36 @@ for r in results:
                 const raw = await (await fh.getFile()).text();
                 S.customPrompts = JSON.parse(raw) || {};
             } catch (e) { } // 파일 없으면 기본값 유지
+        }
+        async function _restoreCmpResult() {
+            if (!S.workH) return;
+            try {
+                const fh = await S.workH.getFileHandle('cmp_result.json');
+                const saved = JSON.parse(await (await fh.getFile()).text());
+                if (!saved?.q) return;
+                const qEl = document.getElementById('test-q');
+                if (qEl) qEl.value = saved.q;
+                const rLlm = document.getElementById('res-llm');
+                const rBase = document.getElementById('res-base');
+                const rOnto = document.getElementById('res-onto');
+                if (rLlm && saved.llmR) rLlm.innerHTML = fmt(saved.llmR);
+                if (rBase && saved.baseR) rBase.innerHTML = fmt(saved.baseR);
+                if (rOnto && saved.ontoR) rOnto.innerHTML = fmt(saved.ontoR);
+                if (saved.llmR || saved.baseR || saved.ontoR) {
+                    const hitlEl = document.getElementById('hitl-section');
+                    if (hitlEl) hitlEl.style.display = 'block';
+                    resetHITL();
+                }
+                if (saved.evalResult) {
+                    const card = document.getElementById('eval-card');
+                    const elEv = document.getElementById('eval-res');
+                    if (card) card.style.display = 'block';
+                    if (elEv) elEv.innerHTML = renderEval(saved.evalResult);
+                }
+                const stEl = document.getElementById('cmp-st');
+                if (stEl) stEl.innerHTML = '<div class="al al-s">&#10003; A/B/C 비교 + 품질 평가 완료! (이전 결과 복원됨)</div>';
+                markDone(7); markDone(8);
+            } catch (e) { } // cmp_result.json 없으면 무시
         }
         async function _restoreDocsFromFolder() {
             if (!S.workH) return;
@@ -13441,13 +13474,14 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
                 document.getElementById('hitl-section').style.display = 'block';
                 resetHITL();
                 stEl.innerHTML = '<div class="al al-s">&#10003; A/B/C 비교 완료! 세 답변의 차이를 확인하세요.</div>';
-                markDone(7);
+                markDone(7); markDone(8);
                 _logUse('comparison_run', { question_chars: q.length, has_ontology: !!schema, has_law_doc: !!docCtx, scenario_count: (S.scenarios || []).length });
                 setSt('품질 자동 평가 중...', 'loading');
                 stEl.innerHTML += '<div class="al al-i" style="margin-top:.5rem;"><span class="sp" style="margin-right:.4rem;"></span> LLM이 세 답변을 비교 평가하고 있습니다...</div>';
                 await autoEval(q, llmR, baseR, ontoR);
                 setSt('검증 완료', 'ok');
                 stEl.innerHTML = '<div class="al al-s">&#10003; A/B/C 비교 + 품질 평가 완료! 아래 평가 점수를 확인하세요.</div>';
+                await saveWork('cmp_result.json', JSON.stringify({ q, llmR, baseR, ontoR, evalResult: S.lastEvalResult || null, ts: new Date().toISOString() }, null, 2));
             } catch (e) {
                 stEl.innerHTML = `<div class="al al-e">&#10007; 오류: ${e.message}</div>`; setSt('오류', 'err');
                 if (!llmR) document.getElementById('res-llm').textContent = '오류 발생';
@@ -13523,6 +13557,7 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
                 let raw = (await callLLM(sys, usr, '자동평가(A/B/C)')).trim();
                 raw = raw.replace(/^```json\s*/i, '').replace(/^```\s*/i, '').replace(/\s*```$/i, '');
                 const _evalResult = JSON.parse(raw);
+                S.lastEvalResult = _evalResult;
                 el.innerHTML = renderEval(_evalResult);
                 _logUse('eval_run', { overall_C: _evalResult.overall_C, overall_A: _evalResult.overall_A, overall_B: _evalResult.overall_B, accuracy: { C: _evalResult.accuracy?.C, A: _evalResult.accuracy?.A, B: _evalResult.accuracy?.B }, exception_handling: { C: _evalResult.exception_handling?.C, A: _evalResult.exception_handling?.A, B: _evalResult.exception_handling?.B }, dept_routing: { C: _evalResult.dept_routing?.C, A: _evalResult.dept_routing?.A, B: _evalResult.dept_routing?.B }, legal_basis: { C: _evalResult.legal_basis?.C, A: _evalResult.legal_basis?.A, B: _evalResult.legal_basis?.B }, conclusion: (_evalResult.conclusion || '').substring(0, 200) });
             } catch (e) { el.innerHTML = '<div class="al al-w">&#9651; 자동 평가를 완료하지 못했습니다. 위 세 답변을 직접 비교해 보세요.</div>'; }
