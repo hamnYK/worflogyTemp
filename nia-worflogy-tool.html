@@ -9598,7 +9598,7 @@ for r in results:
                 const _abortTimer = setTimeout(() => _aborter.abort(), 45000);
                 try {
                     if (p === 'gemini') {
-                        const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${S.models.gemini}:generateContent?key=${k}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: _aborter.signal, body: JSON.stringify({ system_instruction: { parts: [{ text: sys }] }, contents: [{ role: 'user', parts: [{ text: usr }] }], generationConfig: { temperature: 0.2, maxOutputTokens: 8192 } }) });
+                        const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${S.models.gemini}:generateContent?key=${k}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: _aborter.signal, body: JSON.stringify({ system_instruction: { parts: [{ text: sys }] }, contents: [{ role: 'user', parts: [{ text: usr }] }], generationConfig: { temperature: 0.2, maxOutputTokens: 16384 } }) });
                         if (!r.ok) { const e = await r.json(); const msg = e.error?.message || 'HTTP ' + r.status; if (isRetryable(msg) && attempt < maxRetry - 1) { err = msg; continue; } throw new Error(msg); }
                         const d = await r.json();
                         const cand = d.candidates?.[0];
