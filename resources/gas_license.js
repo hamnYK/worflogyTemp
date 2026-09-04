@@ -94,8 +94,23 @@ function requestLicense(org, name, email) {
   for (let i = 1; i < data.length; i++) {
     const rowEmail  = String(data[i][COL.EMAIL]).trim();
     const rowStatus = String(data[i][COL.STATUS]).trim();
-    if (rowEmail === email && (rowStatus === '신청' || rowStatus === '유효')) {
-      return { ok: false, code: 'DUPLICATE', msg: '이미 신청 또는 승인된 이메일입니다. 이메일로 발송된 키를 확인하세요.' };
+    if (rowEmail !== email) continue;
+
+    // '신청' 대기 중 → 무조건 차단
+    if (rowStatus === '신청') {
+      return { ok: false, code: 'DUPLICATE', msg: '이미 신청된 이메일입니다. 승인 후 이메일로 발송된 키를 확인하세요.' };
+    }
+
+    // '유효' 상태 → 만료일 확인 후 판단
+    if (rowStatus === '유효') {
+      const expiry = data[i][COL.EXPIRY];
+      if (expiry && new Date() <= new Date(expiry)) {
+        // 아직 유효한 키가 존재 → 차단
+        return { ok: false, code: 'DUPLICATE', msg: '이미 유효한 라이선스가 있습니다. 이메일로 발송된 키를 확인하세요.' };
+      } else {
+        // 만료됐으나 상태가 갱신 안 됨 → 시트 상태를 '만료'로 업데이트하고 재신청 허용
+        sheet.getRange(i + 1, COL.STATUS + 1).setValue('만료');
+      }
     }
   }
 
