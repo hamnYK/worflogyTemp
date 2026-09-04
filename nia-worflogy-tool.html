@@ -12022,7 +12022,7 @@ for r in results:
             const _scenEntities = (scen.entities && scen.entities.length > 0) ? scen.entities : S.entities;
             const _scenQueries = (scen.queries && scen.queries.length > 0) ? scen.queries : S.queries;
             // 조항 단위 선별: scen.text + entities 키워드로 관련 조항만 주입 (전문 주입 방지)
-            const relDocs = selectRelevantClauses(scen.text, _scenEntities, 30000); // 최대 3만자
+            const relDocs = selectRelevantClauses(scen.text, _scenEntities, 12000); // 최대 1.2만자 (MAX_TOKENS 재시도 방지)
             const docCtx = relDocs.map(d => `[유형:${d.category || '기타'}] [${d.name}]\n${d.content}`).join('\n\n---\n\n');
             if (S.docs.length > 0) toast(`컨텍스트: ${relDocs.map(d => d.name).join(', ')} (${(docCtx.length / 1000).toFixed(1)}k자)`, 'info');
             const entityHint = _scenEntities.length > 0 ? '\n\n## 핵심 엔티티\n' + _scenEntities.map(e => '- ' + e).join('\n') : '';
