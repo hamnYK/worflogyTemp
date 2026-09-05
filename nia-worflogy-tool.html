@@ -8542,6 +8542,8 @@ for r in results:
                 const lic = JSON.parse(raw);
                 if (!lic.key || !lic.expiry) { showLicenseGate(); return; }
                 if (new Date() > new Date(lic.expiry)) { localStorage.removeItem(_LIC_KEY); showLicenseGate(); return; }
+                // 라이선스 유효 — 세션 시작 로그
+                _logUse('session_start', { lic_org: lic.org || null, lic_expiry: lic.expiry || null, ua: navigator.userAgent.substring(0, 80) });
                 // 24시간마다 재검증
                 if (Date.now() - (lic.lastCheck || 0) > 86400000) revalidateLicense(lic.key);
             } catch (e) { showLicenseGate(); }
@@ -8571,17 +8573,19 @@ for r in results:
                 const data = await res.json();
                 if (data.ok) {
                     localStorage.setItem(_LIC_KEY, JSON.stringify({ key, org: data.org, expiry: data.expiry, lastCheck: Date.now() }));
+                    _logUse('license_validated', { org: data.org, expiry: data.expiry, mode: 'online' });
                     msg.className = 'lg-msg lg-ok';
                     msg.textContent = `인증 완료 - ${data.org} (만료: ${data.expiry})`;
                     setTimeout(hideLicenseGate, 1400);
                 } else {
+                    _logUse('license_failed', { reason: (data.msg || 'invalid_key').substring(0, 80), mode: 'online' });
                     msg.className = 'lg-msg lg-err'; msg.textContent = data.msg || '인증 실패';
                     btn.disabled = false; btn.textContent = '인증하기';
                 }
             } catch (e) {
                 // 오프라인 - 저장된 키가 유효하면 허용
                 const raw = localStorage.getItem(_LIC_KEY);
-                if (raw) { try { const l = JSON.parse(raw); if (l.key && new Date() < new Date(l.expiry)) { msg.className = 'lg-msg lg-ok'; msg.textContent = '오프라인 모드 - 저장된 라이선스로 계속합니다.'; setTimeout(hideLicenseGate, 1400); return; } } catch (_) { } }
+                if (raw) { try { const l = JSON.parse(raw); if (l.key && new Date() < new Date(l.expiry)) { _logUse('license_validated', { org: l.org || null, mode: 'offline' }); msg.className = 'lg-msg lg-ok'; msg.textContent = '오프라인 모드 - 저장된 라이선스로 계속합니다.'; setTimeout(hideLicenseGate, 1400); return; } } catch (_) { } }
                 msg.className = 'lg-msg lg-err'; msg.textContent = '서버 연결 실패. 인터넷 연결을 확인하세요.';
                 btn.disabled = false; btn.textContent = '인증하기';
             }
@@ -8596,7 +8600,8 @@ for r in results:
                     const l = raw ? JSON.parse(raw) : {};
                     l.lastCheck = Date.now(); l.expiry = data.expiry;
                     localStorage.setItem(_LIC_KEY, JSON.stringify(l));
-                } else { localStorage.removeItem(_LIC_KEY); showLicenseGate(); }
+                    _logUse('license_revalidated', { expiry: data.expiry });
+                } else { _logUse('license_expired', { reason: data.msg || 'invalid' }); localStorage.removeItem(_LIC_KEY); showLicenseGate(); }
             } catch (e) { }
         }
 
@@ -9366,6 +9371,7 @@ for r in results:
 
         // ── NAVIGATION ──
         function goStep(n) {
+            const _fromStep = Number(document.querySelector('.sbtn.active')?.id?.replace('sb', '')) || null;
             document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.sbtn').forEach(b => b.classList.remove('active'));
             const panel = document.getElementById('s' + n);
@@ -9380,7 +9386,7 @@ for r in results:
             if (n === 2) renderScenHint();
             updateHelpContent(n);
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            _logUse('step_enter', { to: n });  // 사용 로그
+            _logUse('step_enter', { from: _fromStep, to: n, steps_done: [...document.querySelectorAll('.sbtn.done')].map(b => Number(b.id.replace('sb', ''))).filter(Boolean) });  // 사용 로그
             // 2↔3 그룹 박스 활성화
             const pair = document.getElementById('step-pair-23');
             if (pair) pair.classList.toggle('active-pair', n === 2 || n === 3);
@@ -9514,6 +9520,8 @@ for r in results:
         const _LOG_USE = 'usage-log.jsonl';
         // 작업 폴더 연결 전 이벤트 버퍼 (workH 없을 때 누락 방지)
         const _LOG_PENDING = [];
+        // 세션 고유 ID (탭 단위, 페이지 새로고침마다 갱신)
+        const _SESSION_ID = (Date.now().toString(36) + Math.random().toString(36).slice(2, 6)).toUpperCase();
 
         async function _logAppend(fname, obj) {
             if (!S.workH) {
@@ -9547,7 +9555,7 @@ for r in results:
 
         function _logUse(event, extra = {}) {
             const sid = document.querySelector('.sbtn.active')?.id?.replace('sb', '') || '?';
-            _logAppend(_LOG_USE, { ts: new Date().toISOString(), event, step: Number(sid) || sid, ...extra });
+            _logAppend(_LOG_USE, { ts: new Date().toISOString(), session_id: _SESSION_ID, event, step: Number(sid) || sid, ...extra });
         }
 
         // ── LLM ──
@@ -9658,7 +9666,7 @@ for r in results:
                     if (isRetryable(e.message) && attempt < maxRetry - 1) continue;
                     try {
                         const _stepsDone = [...document.querySelectorAll('.sbtn.done')].map(b => Number(b.id.replace('sb', ''))).filter(Boolean);
-                        _logAppend(_LOG_API, { ts: new Date().toISOString(), step: 'Step ' + sid, label: label || '', provider: p, model: S.models[p], sys: sys.length > 500 ? sys.slice(0, 500) + '…' : sys, usr: usr.substring(0, 300), query: usr.substring(0, 120), context: docs_info, sys_prompt_chars: sys.length, usr_chars: usr.length, response: null, response_chars: 0, expect_json: !!expectJson, finish_reason: null, error: err, duration_ms: Date.now() - t0, tokens: {}, retry_count: retryCount, retry_reason: retryReason || null, scenario_count: (S.scenarios || []).length, schemas_done: Object.keys(S.schemas || {}).length, steps_done: _stepsDone });
+                        _logAppend(_LOG_API, { ts: new Date().toISOString(), session_id: _SESSION_ID, step: 'Step ' + sid, label: label || '', provider: p, model: S.models[p], sys: sys.length > 1000 ? sys.slice(0, 1000) + '…' : sys, usr: usr.substring(0, 300), query: usr.substring(0, 120), context: docs_info, sys_prompt_chars: sys.length, usr_chars: usr.length, response: null, response_chars: 0, expect_json: !!expectJson, finish_reason: null, error: err, duration_ms: Date.now() - t0, tokens: {}, retry_count: retryCount, retry_reason: retryReason || null, scenario_count: (S.scenarios || []).length, schemas_done: Object.keys(S.schemas || {}).length, steps_done: _stepsDone });
                         _logUse('api_call', { provider: p, model: S.models[p], status: 'error', label: label || '', error: err.substring(0, 120), duration_ms: Date.now() - t0 });
                     } catch (_) { }
                     throw e;
@@ -9668,7 +9676,7 @@ for r in results:
             const dur = Date.now() - t0;
             // ── 대책3: 로그 캡 10,000자 + finish_reason 기록 ──
             const _stepsDoneOk = [...document.querySelectorAll('.sbtn.done')].map(b => Number(b.id.replace('sb', ''))).filter(Boolean);
-            _logAppend(_LOG_API, { ts: new Date().toISOString(), step: 'Step ' + sid, label: label || '', provider: p, model: S.models[p], sys: sys.length > 500 ? sys.slice(0, 500) + '…' : sys, usr: usr.length > 2000 ? usr.slice(0, 2000) + '…' : usr, query: usr.length > 3000 ? usr.slice(0, 3000) + '…' : usr, context: docs_info, sys_prompt_chars: sys.length, usr_chars: usr.length, response: response.length > 10000 ? response.slice(0, 10000) + '…' : response, response_chars: response.length, expect_json: !!expectJson, finish_reason: finishReason, error: null, duration_ms: dur, tokens, retry_count: retryCount, retry_reason: retryCount > 0 ? (retryReason || null) : null, scenario_count: (S.scenarios || []).length, schemas_done: Object.keys(S.schemas || {}).length, steps_done: _stepsDoneOk });
+            _logAppend(_LOG_API, { ts: new Date().toISOString(), session_id: _SESSION_ID, step: 'Step ' + sid, label: label || '', provider: p, model: S.models[p], sys: sys.length > 1000 ? sys.slice(0, 1000) + '…' : sys, usr: usr.length > 2000 ? usr.slice(0, 2000) + '…' : usr, query: usr.length > 3000 ? usr.slice(0, 3000) + '…' : usr, context: docs_info, sys_prompt_chars: sys.length, usr_chars: usr.length, response: response.length > 10000 ? response.slice(0, 10000) + '…' : response, response_chars: response.length, expect_json: !!expectJson, finish_reason: finishReason, error: null, duration_ms: dur, tokens, retry_count: retryCount, retry_reason: retryCount > 0 ? (retryReason || null) : null, scenario_count: (S.scenarios || []).length, schemas_done: Object.keys(S.schemas || {}).length, steps_done: _stepsDoneOk });
             _logUse('api_call', { provider: p, model: S.models[p], status: 'ok', label: label || '', duration_ms: dur, tokens_in: tokens.input, tokens_out: tokens.output, retry_count: retryCount });
             return response;
         }
@@ -9903,6 +9911,7 @@ for r in results:
                 const w = await fh.createWritable();
                 await w.write(JSON.stringify(hist, null, 2));
                 await w.close();
+                _logUse('hitl_saved', { action: replace ? 'update' : 'new', history_count: hist.length, choice: entry.choice || null });
             } catch (e) { console.warn('[HITL_SAVE]', e); }
         }
         async function _restoreDocsFromFolder() {
@@ -10135,7 +10144,7 @@ for r in results:
                 if (!text.trim().replace(`[${name}]`, '')) throw new Error('조문 내용을 추출할 수 없습니다.');
                 addDoc(name + '.txt', text, '법령/조례');
                 toast('"' + name + '" 로드 완료', 'success');
-                _logUse('law_loaded', { name, target });
+                _logUse('law_loaded', { name, target, chars: text.length });
             } catch (e) {
                 toast(name + ' 로드 실패: ' + e.message, 'error');
                 setSt('법령 로드 실패', 'err');
@@ -10152,7 +10161,7 @@ for r in results:
                 S.docs.push({ name, content, category });
             }
             renderDocList(); prevDoc(name, content);
-            _logUse('doc_added', { name, chars: content.length, category });
+            _logUse('doc_added', { name, chars: content.length, category, ext: name.split('.').pop()?.toLowerCase() || '', is_replace: i >= 0, total_docs: S.docs.length });
             _saveDocToFolder(name, content, category).catch(() => { });  // 작업 폴더에 자동 저장
         }
 
@@ -10175,7 +10184,7 @@ for r in results:
             S.docs.splice(i, 1);
             renderDocList();
             if (doc) {
-                _logUse('doc_removed', { name: doc.name, category: doc.category || '기타' });
+                _logUse('doc_removed', { name: doc.name, category: doc.category || '기타', chars: doc.content?.length || 0 });
                 _deleteDocFromFolder(doc.name).catch(() => { });
             }
         }
@@ -14545,7 +14554,7 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
                 S._hitlSaved = false;
                 stEl.innerHTML = '<div class="al al-s">&#10003; A/B/C 비교 완료! 세 답변의 차이를 확인하세요.</div>';
                 markDone(7); markDone(8);
-                _logUse('comparison_run', { question_chars: q.length, has_ontology: !!schema, has_law_doc: !!docCtx, scenario_count: (S.scenarios || []).length });
+                _logUse('comparison_run', { question_chars: q.length, question: q.substring(0, 80), has_ontology: !!schema, has_law_doc: !!docCtx, scenario_count: (S.scenarios || []).length, provider: S.provider, model: S.models[S.provider] });
                 setSt('품질 자동 평가 중...', 'loading');
                 stEl.innerHTML += '<div class="al al-i" style="margin-top:.5rem;"><span class="sp" style="margin-right:.4rem;"></span> LLM이 세 답변을 비교 평가하고 있습니다...</div>';
                 await autoEval(q, llmR, baseR, ontoR);
@@ -14619,7 +14628,7 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
                 const b = document.getElementById(id);
                 if (b) { b.disabled = true; b.style.opacity = '0.45'; b.style.cursor = 'not-allowed'; }
             });
-            _logUse('hitl_choice', { choice: side });
+            _logUse('hitl_choice', { choice: side, question: (S.lastCmpAnswers?.q || '').substring(0, 80), provider: S.provider, scenario_count: (S.scenarios || []).length });
             if (side) {
                 const _isUpdate = !!S._hitlSaved;
                 S._hitlSaved = true;
@@ -15866,7 +15875,7 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
                             renderDocList();
                             renderScenHint();
                             statusEl.innerHTML = `<span style="color:var(--green);font-weight:600;">${loaded}개 로드 완료</span>`;
-                            _logUse('load_csv', { count: loaded });
+                            _logUse('load_csv', { count: loaded, filenames: Array.from(files).map(f => f.name) });
                         }
                     } catch (err) {
                         statusEl.innerHTML = `<span style="color:#e53e3e;">오류: ${err.message}</span>`;
@@ -15960,7 +15969,7 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
             S.docs.push({ name, text: `[${name}]\n${text}` });
             _persistState(); renderDocList(); renderScenHint();
             showToast(`"${name}" 로드 완료`, 'suc');
-            _logUse('load_portal_item', { name });
+            _logUse('load_portal_item', { name, chars: text.length });
         }
 
     </script>
