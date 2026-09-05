@@ -13740,20 +13740,21 @@ ${domainCtx}${upperCtx}
         };
 
         // ── W3C Onto-Semantic Color Palette (다이어그램 공통 컬러 시스템) ──
+        // vis.js는 HTML5 Canvas 렌더링 엔진 — CSS 변수 미지원. hex 직접값 필수 (아키텍처 제약)
         const VIS_COL = {
-            owlClass: { bg: 'var(--mono-50)', bd: 'var(--mono-800)', ft: 'var(--mono-800)' }, // L2 도메인 클래스 (블루)
-            upperClass: { bg: 'var(--c-purple-100)', bd: 'var(--c-purple-700)', ft: 'var(--c-purple-800)' }, // L2 상위 클래스 (퍼플)
-            objProp: { bg: 'var(--c-green-50)', bd: 'var(--c-green-600)', ft: 'var(--c-green-700)' }, // L3 객체 속성 (그린)
-            dataProp: { bg: 'var(--mono-50)', bd: 'var(--mono-700)', ft: 'var(--mono-700)' }, // L3 데이터 속성 (청록)
-            triple: { bg: 'var(--mono-50)', bd: 'var(--nia-blue)', ft: 'var(--mono-800)' }, // L4 트리플 (네이비)
-            abox: { bg: 'var(--mono-50)', bd: 'var(--mono-700)', ft: 'var(--mono-700)' }, // L4 인스턴스 (사이언)
-            derived: { bg: 'var(--c-green-100)', bd: 'var(--c-green-600)', ft: 'var(--c-green-700)' }, // L4 파생 속성
-            swrlCrit: { bg: 'var(--c-red-100)', bd: 'var(--c-red-700)', ft: 'var(--c-red-800)' }, // L5 CRITICAL (레드)
-            swrlHigh: { bg: 'var(--c-orange-50)', bd: 'var(--c-orange-700)', ft: 'var(--c-orange-800)' }, // L5 HIGH (오렌지)
-            swrlMed: { bg: 'var(--c-amber-50)', bd: 'var(--c-amber-700)', ft: 'var(--c-amber-800)' }, // L5 MEDIUM (앰버)
-            swrlLow: { bg: 'var(--c-green-50)', bd: 'var(--c-green-700)', ft: 'var(--c-green-800)' }, // L5 LOW (그린)
-            exception: { bg: 'var(--c-orange-50)', bd: 'var(--c-orange-700)', ft: 'var(--c-orange-800)' }, // L5 예외규칙 (오렌지)
-            shacl: { bg: 'var(--c-amber-50)', bd: 'var(--c-amber-800)', ft: 'var(--c-amber-800)' }, // L5 SHACL Shape (골드브라운)
+            owlClass: { bg: '#FAFAFA', bd: '#27272A', ft: '#27272A' }, // L2 도메인 클래스 (블루)
+            upperClass: { bg: '#f5f3ff', bd: '#7c3aed', ft: '#5b21b6' }, // L2 상위 클래스 (퍼플)
+            objProp: { bg: '#f0fdf4', bd: '#16a34a', ft: '#15803d' }, // L3 객체 속성 (그린)
+            dataProp: { bg: '#FAFAFA', bd: '#3F3F46', ft: '#3F3F46' }, // L3 데이터 속성 (청록)
+            triple: { bg: '#FAFAFA', bd: '#18181B', ft: '#27272A' }, // L4 트리플 (네이비)
+            abox: { bg: '#FAFAFA', bd: '#3F3F46', ft: '#3F3F46' }, // L4 인스턴스 (사이언)
+            derived: { bg: '#dcfce7', bd: '#16a34a', ft: '#15803d' }, // L4 파생 속성
+            swrlCrit: { bg: '#fff1f1', bd: '#b91c1c', ft: '#991b1b' }, // L5 CRITICAL (레드)
+            swrlHigh: { bg: '#fff7ed', bd: '#c05621', ft: '#9a3412' }, // L5 HIGH (오렌지)
+            swrlMed: { bg: '#fffbeb', bd: '#b45309', ft: '#92400e' }, // L5 MEDIUM (앰버)
+            swrlLow: { bg: '#f0fdf4', bd: '#15803d', ft: '#166534' }, // L5 LOW (그린)
+            exception: { bg: '#fff7ed', bd: '#c05621', ft: '#9a3412' }, // L5 예외규칙 (오렌지)
+            shacl: { bg: '#fffbeb', bd: '#92400e', ft: '#92400e' }, // L5 SHACL Shape (골드브라운)
         };
         function swrlCol(r) {
             if (r === 'CRITICAL') return VIS_COL.swrlCrit;
@@ -13767,7 +13768,7 @@ ${domainCtx}${upperCtx}
             if (!el) return;
             el.style.height = '480px';
             el.style.position = 'relative';
-            el.style.background = 'var(--mono-50)';
+            el.style.background = '#FAFAFA';
             el.style.borderRadius = '8px';
             el.style.border = '1px solid var(--border, var(--mono-200))';
             el.style.overflow = 'hidden';
@@ -13786,14 +13787,14 @@ ${domainCtx}${upperCtx}
                 edges: {
                     smooth: { type: 'cubicBezier', forceDirection: 'none', roundness: 0.45 },
                     arrows: { to: { enabled: true, scaleFactor: 0.75 } },
-                    font: { size: VIS_DS.font.edge, align: 'middle', background: 'var(--c-w-85)', strokeWidth: 0 },
+                    font: { size: VIS_DS.font.edge, align: 'middle', background: 'rgba(255, 255, 255, 0.85)', strokeWidth: 0 },
                     color: { inherit: false },
                     width: 1.5
                 },
                 nodes: {
                     font: { size: VIS_DS.font.base, face: VIS_DS.face, multi: false },
                     borderWidth: 2,
-                    shadow: { enabled: true, size: 4, x: 1, y: 1, color: 'var(--c-ink-08)' },
+                    shadow: { enabled: true, size: 4, x: 1, y: 1, color: 'rgba(0, 0, 0, 0.08)' },
                     margin: 8
                 },
                 // tooltip 비활성화: 커스텀 popup 사용
@@ -13827,7 +13828,7 @@ ${domainCtx}${upperCtx}
             div.style.cssText = 'position:absolute;bottom:10px;left:10px;background:var(--c-w-93);border:var(--bw-thin) solid var(--mono-200);border-radius:var(--r-md);padding:7px 10px;font-size:var(--fs-small);line-height:var(--lh-comfortable);z-index:10;max-width:190px;box-shadow:0 2px 8px var(--c-ink-07);';
             let html = '<div style="font-weight:var(--fw-bold);color:var(--mono-800);margin-bottom:3px;font-size:var(--fs-small);">범례</div>';
             items.forEach(it => {
-                const col = it.color || 'var(--mono-300)';
+                const col = it.color || '#D4D4D8';
                 const bdr = it.border || col;
                 let icon = '';
                 if (it.type === 'node') {
@@ -13881,9 +13882,9 @@ ${domainCtx}${upperCtx}
                     id, label: lbl(c.label), _tip: tip || undefined,
                     shape: isRoot ? 'ellipse' : 'box',
                     color: isRoot
-                        ? { background: 'var(--mono-800)', border: 'var(--mono-800)', highlight: { background: 'var(--mono-800)', border: 'var(--mono-800)' } }
-                        : { background: VIS_COL.owlClass.bg, border: VIS_COL.owlClass.bd, highlight: { background: 'var(--mono-100)', border: 'var(--mono-800)' } },
-                    font: { color: isRoot ? 'var(--mono-white)' : VIS_COL.owlClass.ft }
+                        ? { background: '#27272A', border: '#27272A', highlight: { background: '#27272A', border: '#27272A' } }
+                        : { background: VIS_COL.owlClass.bg, border: VIS_COL.owlClass.bd, highlight: { background: '#F4F4F5', border: '#27272A' } },
+                    font: { color: isRoot ? '#FFFFFF' : VIS_COL.owlClass.ft }
                 });
             });
             classes.forEach(c => {
@@ -13891,7 +13892,7 @@ ${domainCtx}${upperCtx}
                 const from = gn(c.label), to = gn(c.subClassOf);
                 if (!from || !to) return;
                 const k = from + '|sub|' + to;
-                if (!seen.has(k)) { seen.add(k); edges.push({ from, to, label: 'subClassOf', width: 2.5, color: { color: 'var(--mono-800)', highlight: 'var(--mono-800)' }, dashes: false }); }
+                if (!seen.has(k)) { seen.add(k); edges.push({ from, to, label: 'subClassOf', width: 2.5, color: { color: '#27272A', highlight: '#27272A' }, dashes: false }); }
             });
             triples.forEach(t => {
                 if (!t.subject || !t.object) return;
@@ -13922,7 +13923,7 @@ ${domainCtx}${upperCtx}
                 const tip = [c.shape_id || '', c.path ? 'sh:path: ' + c.path : '', c.severity || '', c.exception_message || ''].filter(Boolean).join('\n');
                 nodes.push({
                     id: shId, label: shLabel, shape: 'database', _tip: tip || undefined,
-                    color: { background: VIS_COL.shacl.bg, border: VIS_COL.shacl.bd, highlight: { background: 'var(--c-amber-100)', border: 'var(--c-amber-800)' } },
+                    color: { background: VIS_COL.shacl.bg, border: VIS_COL.shacl.bd, highlight: { background: '#fef3c7', border: '#92400e' } },
                     font: { color: VIS_COL.shacl.ft, size: VIS_DS.font.small }
                 });
                 const tid = gn(c.target_class);
@@ -13946,7 +13947,7 @@ ${domainCtx}${upperCtx}
                         const tip = [c.description || '', c.id ? 'IRI: ' + c.id : '', c.domain_instances?.length ? '예: ' + c.domain_instances.slice(0, 3).join(', ') : ''].filter(Boolean).join('\n');
                         nodes.push({
                             id, label: lbl(c.name), shape: 'ellipse', _tip: tip || undefined,
-                            color: { background: VIS_COL.upperClass.bg, border: VIS_COL.upperClass.bd, highlight: { background: 'var(--c-purple-50)', border: 'var(--c-purple-800)' } },
+                            color: { background: VIS_COL.upperClass.bg, border: VIS_COL.upperClass.bd, highlight: { background: '#ede9fe', border: '#5b21b6' } },
                             font: { color: VIS_COL.upperClass.ft, size: VIS_DS.font.large, bold: true }, size: 28, borderWidth: 2.5
                         });
                     }
@@ -13958,7 +13959,7 @@ ${domainCtx}${upperCtx}
                 if (!nodes.find(n => n.id === dc)) {
                     nodes.push({
                         id: dc, label: lbl(m.domain_class), shape: 'box', _tip: m.domain ? '도메인: ' + m.domain : undefined,
-                        color: { background: VIS_COL.owlClass.bg, border: VIS_COL.owlClass.bd, highlight: { background: 'var(--mono-100)', border: 'var(--mono-800)' } },
+                        color: { background: VIS_COL.owlClass.bg, border: VIS_COL.owlClass.bd, highlight: { background: '#F4F4F5', border: '#27272A' } },
                         font: { color: VIS_COL.owlClass.ft }
                     });
                 }
@@ -13968,7 +13969,7 @@ ${domainCtx}${upperCtx}
             groups.forEach(g => (g.upper_classes || []).forEach(c => {
                 if (!c.equivalent_to) return;
                 const na = getNode(c.name), nb = getNode(c.equivalent_to);
-                if (na && nb) edges.push({ from: na, to: nb, label: 'owl:equiv', arrows: { from: { enabled: true, scaleFactor: 0.6 }, to: { enabled: true, scaleFactor: 0.6 } }, dashes: [3, 3], color: { color: 'var(--c-purple-700)' } });
+                if (na && nb) edges.push({ from: na, to: nb, label: 'owl:equiv', arrows: { from: { enabled: true, scaleFactor: 0.6 }, to: { enabled: true, scaleFactor: 0.6 } }, dashes: [3, 3], color: { color: '#7c3aed' } });
             }));
             groups.forEach(g => (g.upper_classes || []).forEach(c => {
                 if (!Array.isArray(c.disjoint_with)) return;
@@ -13977,7 +13978,7 @@ ${domainCtx}${upperCtx}
                     const na = getNode(c.name), nb = getNode(clean(ref));
                     if (!na || !nb) return;
                     const k = [na, nb].sort().join('<>dj<>');
-                    if (!seen.has(k)) { seen.add(k); edges.push({ from: na, to: nb, label: 'disjoint', arrows: { from: { enabled: false }, to: { enabled: false } }, dashes: [4, 2], color: { color: 'var(--c-red-600)' }, width: 1.5 }); }
+                    if (!seen.has(k)) { seen.add(k); edges.push({ from: na, to: nb, label: 'disjoint', arrows: { from: { enabled: false }, to: { enabled: false } }, dashes: [4, 2], color: { color: '#dc2626' }, width: 1.5 }); }
                 });
             }));
             return { nodes, edges };
@@ -13989,7 +13990,7 @@ ${domainCtx}${upperCtx}
             const RISKS = ['CRITICAL', 'HIGH', 'MEDIUM', 'LOW'];
             const RC = { CRITICAL: VIS_COL.swrlCrit.bd, HIGH: VIS_COL.swrlHigh.bd, MEDIUM: VIS_COL.swrlMed.bd, LOW: VIS_COL.swrlLow.bd };
             const RCL = { CRITICAL: VIS_COL.swrlCrit.bg, HIGH: VIS_COL.swrlHigh.bg, MEDIUM: VIS_COL.swrlMed.bg, LOW: VIS_COL.swrlLow.bg };
-            const RCB = { CRITICAL: 'var(--c-red-300)', HIGH: 'var(--c-orange-300)', MEDIUM: 'var(--mono-200)', LOW: 'var(--c-green-300)' };
+            const RCB = { CRITICAL: '#fca5a5', HIGH: '#fdba74', MEDIUM: '#E4E4E7', LOW: '#86efac' };
             const RCT = { CRITICAL: VIS_COL.swrlCrit.ft, HIGH: VIS_COL.swrlHigh.ft, MEDIUM: VIS_COL.swrlMed.ft, LOW: VIS_COL.swrlLow.ft };
             const upperNames = (typeof normalizeUpperGroups === 'function' && S?.upperOntology)
                 ? normalizeUpperGroups(S.upperOntology).flatMap(g => (g.upper_classes || []).map(c => String(c.name || '').trim())).filter(Boolean)
@@ -14013,7 +14014,7 @@ ${domainCtx}${upperCtx}
                     const ifFt = usesUpper ? VIS_COL.upperClass.ft : VIS_COL.owlClass.ft;
                     nodes.push({
                         id: 'IF' + i, label: 'IF: ' + lbl(cond), shape: 'hexagon', _tip: cdTip || undefined,
-                        color: { background: ifBg, border: ifBd, highlight: { background: usesUpper ? 'var(--c-purple-50)' : 'var(--mono-100)', border: ifBd } },
+                        color: { background: ifBg, border: ifBd, highlight: { background: usesUpper ? '#ede9fe' : '#F4F4F5', border: ifBd } },
                         borderWidth: usesUpper ? 3 : 2, font: { color: ifFt, size: VIS_DS.font.small }
                     });
                     edges.push({ from: 'IF' + i, to: 'C' + i, label: '조건', dashes: [4, 3], color: { color: ifBd } });
@@ -14030,7 +14031,7 @@ ${domainCtx}${upperCtx}
                 nodes.push({
                     id: 'C' + i, label: rid + '\n' + lbl(r.inference_name), shape: 'diamond', _tip: ruleTip || undefined,
                     color: { background: RC[risk], border: RC[risk], highlight: { background: RC[risk], border: RC[risk] } },
-                    font: { color: 'var(--mono-white)', size: VIS_DS.font.base, bold: true }
+                    font: { color: '#FFFFFF', size: VIS_DS.font.base, bold: true }
                 });
                 nodes.push({
                     id: 'A' + i, label: 'THEN:\n' + lbl(r.action), shape: 'ellipse',
@@ -14040,7 +14041,7 @@ ${domainCtx}${upperCtx}
                 edges.push({ from: 'C' + i, to: 'A' + i, label: '추론', width: 2.5, color: { color: RC[risk] }, dashes: false });
                 (r.cascade_rules || []).forEach(cr => {
                     const ti = ruleIdx[cr];
-                    if (ti !== undefined) edges.push({ from: 'A' + i, to: 'C' + ti, label: 'cascade', dashes: [3, 3], color: { color: 'var(--c-purple-700)' } });
+                    if (ti !== undefined) edges.push({ from: 'A' + i, to: 'C' + ti, label: 'cascade', dashes: [3, 3], color: { color: '#7c3aed' } });
                 });
             });
             return { nodes, edges };
@@ -14050,10 +14051,10 @@ ${domainCtx}${upperCtx}
             const { nodes, edges } = buildSchemaVisData(schema);
             renderOntologyVis(containerId, nodes, edges, {
                 legend: [
-                    { type: 'node', nodeShape: 'ellipse', color: 'var(--mono-800)', label: 'owl:Class (루트)' },
+                    { type: 'node', nodeShape: 'ellipse', color: '#27272A', label: 'owl:Class (루트)' },
                     { type: 'node', nodeShape: 'box', color: VIS_COL.owlClass.bg, border: VIS_COL.owlClass.bd, label: 'owl:Class (서브)' },
                     { type: 'node', nodeShape: 'database', color: VIS_COL.shacl.bg, border: VIS_COL.shacl.bd, label: 'SHACL Shape' },
-                    { type: 'edge', color: 'var(--mono-800)', bold: true, label: 'rdfs:subClassOf' },
+                    { type: 'edge', color: '#27272A', bold: true, label: 'rdfs:subClassOf' },
                     { type: 'edge', color: VIS_COL.objProp.bd, label: 'owl:ObjectProperty' },
                     { type: 'edge', color: VIS_COL.shacl.bd, dash: true, label: 'sh:targetClass (SHACL)' },
                 ]
@@ -14073,8 +14074,8 @@ ${domainCtx}${upperCtx}
                     { type: 'node', nodeShape: 'ellipse', color: VIS_COL.upperClass.bg, border: VIS_COL.upperClass.bd, label: '상위 클래스' },
                     { type: 'node', nodeShape: 'box', color: VIS_COL.owlClass.bg, border: VIS_COL.owlClass.bd, label: '도메인 클래스' },
                     { type: 'edge', color: VIS_COL.upperClass.bd, bold: true, label: 'rdfs:subClassOf' },
-                    { type: 'edge', color: 'var(--c-purple-700)', dash: true, bidir: true, label: 'owl:equivalentClass' },
-                    { type: 'edge', color: 'var(--c-red-600)', dash: true, label: 'owl:disjointWith' },
+                    { type: 'edge', color: '#7c3aed', dash: true, bidir: true, label: 'owl:equivalentClass' },
+                    { type: 'edge', color: '#dc2626', dash: true, label: 'owl:disjointWith' },
                 ]
             });
         }
@@ -14089,8 +14090,8 @@ ${domainCtx}${upperCtx}
                     { type: 'node', nodeShape: 'diamond', color: VIS_COL.swrlHigh.bd, label: 'HIGH (높음)' },
                     { type: 'node', nodeShape: 'diamond', color: VIS_COL.swrlMed.bd, label: 'MEDIUM (보통)' },
                     { type: 'node', nodeShape: 'diamond', color: VIS_COL.swrlLow.bd, label: 'LOW (낮음)' },
-                    { type: 'edge', color: 'var(--mono-500)', bold: true, label: '추론 결과' },
-                    { type: 'edge', color: 'var(--c-purple-700)', dash: true, label: 'cascade 연쇄' },
+                    { type: 'edge', color: '#71717A', bold: true, label: '추론 결과' },
+                    { type: 'edge', color: '#7c3aed', dash: true, label: 'cascade 연쇄' },
                 ]
             });
         }
@@ -14169,11 +14170,11 @@ ${domainCtx}${upperCtx}
 
                         id: _nid, label: isHL ? '[HL] ' + sl : sl, shape, title,
                         color: {
-                            background: isHL ? 'var(--mono-300)' : c.bg, border: isHL ? 'var(--c-amber-700)' : c.bd,
+                            background: isHL ? '#D4D4D8' : c.bg, border: isHL ? '#b45309' : c.bd,
                             hover: { background: c.bg, border: c.bd },
-                            highlight: { background: isHL ? 'var(--mono-200)' : 'var(--mono-100)', border: isHL ? 'var(--c-amber-700)' : 'var(--nia-blue)' }
+                            highlight: { background: isHL ? '#E4E4E7' : '#F4F4F5', border: isHL ? '#b45309' : '#18181B' }
                         },
-                        font: { color: isHL ? 'var(--c-amber-800)' : c.ft, size: 11, bold: isHL },
+                        font: { color: isHL ? '#92400e' : c.ft, size: 11, bold: isHL },
                         borderWidth: isHL ? 4 : GDS.border.instance,
                         shadow: { enabled: true, color: c.bd + '44', size: 6, x: 0, y: 2 },
                         group: type, ...(extra || {})
@@ -14191,14 +14192,14 @@ ${domainCtx}${upperCtx}
                 const N = 'font-size:var(--fs-sm);font-weight:var(--fw-bold);color:var(--mono-800);margin:.2rem 0 .15rem;';
                 const R = 'font-size:var(--fs-xs);color:var(--mono-700);margin-bottom:.1rem;';
                 const bdg = (t, bg, c) => `<span style="${B}background:${bg};color:${c};">${t}</span>`;
-                const kv = (k, v, c) => v ? `<div style="${R}"><span style="color:var(--mono-400);">${k}:</span> <b style="color:${c || 'var(--mono-800)'};">${String(v).substring(0, 60)}</b></div>` : '';
+                const kv = (k, v, c) => v ? `<div style="${R}"><span style="color:var(--mono-400);">${k}:</span> <b style="color:${c || '#27272A'};">${String(v).substring(0, 60)}</b></div>` : '';
                 const SH = 'box-shadow:0 4px 18px var(--c-ink-13);';
                 if (type === 'swrl') {
-                    const rc = d.risk_level === 'CRITICAL' ? 'var(--c-red-700)' : d.risk_level === 'HIGH' ? 'var(--c-orange-700)' : d.risk_level === 'MEDIUM' ? 'var(--c-amber-700)' : 'var(--c-green-700)';
-                    const rBg = d.risk_level === 'CRITICAL' ? 'var(--c-red-50)' : d.risk_level === 'HIGH' ? 'var(--c-orange-100)' : d.risk_level === 'MEDIUM' ? 'var(--c-amber-100)' : 'var(--c-green-100)';
+                    const rc = d.risk_level === 'CRITICAL' ? '#b91c1c' : d.risk_level === 'HIGH' ? '#c05621' : d.risk_level === 'MEDIUM' ? '#b45309' : '#15803d';
+                    const rBg = d.risk_level === 'CRITICAL' ? '#fee2e2' : d.risk_level === 'HIGH' ? '#ffedd5' : d.risk_level === 'MEDIUM' ? '#fef3c7' : '#dcfce7';
                     const casc = (d.cascade_rules || []).length ? `<div style="font-size:var(--fs-xs);color:var(--c-purple-700);font-weight:var(--fw-bold);margin-top:.2rem;">cascade → ${d.cascade_rules.join(' → ')}</div>` : '';
                     return `<div style="${C}${rc}80;background:var(--mono-white);min-width:200px;max-width:270px;${SH}">
-                        <div style="margin-bottom:.25rem;">${bdg('W3C SWRL', 'var(--c-red-50)', 'var(--c-red-800)')}${bdg(d.risk_level || '', rBg, rc)}</div>
+                        <div style="margin-bottom:.25rem;">${bdg('W3C SWRL', '#fee2e2', '#991b1b')}${bdg(d.risk_level || '', rBg, rc)}</div>
                         <div style="${N}">${d.inference_id || ''} · ${d.inference_name || ''}</div>
                         <div style="font-size:var(--fs-xs);color:var(--c-red-800);font-weight:var(--fw-bold);margin-bottom:.08rem;">IF</div>
                         <div style="font-size:var(--fs-xs);color:var(--mono-700);margin-bottom:.15rem;white-space:normal;">${(d.condition || '').substring(0, 90)}</div>
@@ -14208,63 +14209,63 @@ ${domainCtx}${upperCtx}
                 }
                 if (type === 'exception') {
                     return `<div style="${C}var(--c-orange-200);background:var(--c-orange-50);min-width:180px;max-width:250px;${SH}">
-                        <div style="margin-bottom:.25rem;">${bdg('W3C SWRL', 'var(--c-red-50)', 'var(--c-red-800)')}${bdg('예외 규칙', 'var(--c-orange-100)', 'var(--c-orange-700)')}</div>
+                        <div style="margin-bottom:.25rem;">${bdg('W3C SWRL', '#fee2e2', '#991b1b')}${bdg('예외 규칙', '#ffedd5', '#c05621')}</div>
                         <div style="${N}">${d.rule_id || ''} · ${d.rule_name || ''}</div>
-                        ${kv('IF 주체', d.if && d.if.subject, 'var(--c-orange-800)')}
-                        ${kv('THEN', d.then, 'var(--c-green-700)')}
+                        ${kv('IF 주체', d.if && d.if.subject, '#9a3412')}
+                        ${kv('THEN', d.then, '#15803d')}
                         ${d.exception ? `<div style="font-size:var(--fs-xs);color:var(--c-amber-800);margin-top:.12rem;white-space:normal;"><b>예외:</b> ${d.exception.substring(0, 80)}</div>` : ''}
                         </div>`;
                 }
                 if (type === 'owlClass') {
                     return `<div style="${C}var(--mono-300);background:var(--mono-50);min-width:160px;max-width:240px;${SH}">
-                        <div style="margin-bottom:.25rem;">${bdg('W3C OWL 2 DL', 'var(--c-purple-50)', 'var(--c-purple-800)')}${bdg('L2 owl:Class', 'var(--mono-100)', 'var(--mono-800)')}</div>
+                        <div style="margin-bottom:.25rem;">${bdg('W3C OWL 2 DL', '#ede9fe', '#5b21b6')}${bdg('L2 owl:Class', '#F4F4F5', '#27272A')}</div>
                         <div style="${N}">${d.label || d.id || ''}</div>
-                        ${kv('IRI', d.id, 'var(--mono-800)')}
-                        ${kv('rdfs:subClassOf', d.subClassOf, 'var(--mono-800)')}
+                        ${kv('IRI', d.id, '#27272A')}
+                        ${kv('rdfs:subClassOf', d.subClassOf, '#27272A')}
                         ${d.comment ? `<div style="font-size:var(--fs-xs);color:var(--mono-700);margin-top:.1rem;white-space:normal;">${d.comment.substring(0, 80)}</div>` : ''}
                         </div>`;
                 }
                 if (type === 'upperClass') {
                     return `<div style="${C}var(--c-purple-300);background:var(--c-purple-100);min-width:170px;max-width:250px;${SH}">
-                        <div style="margin-bottom:.25rem;">${bdg('W3C OWL 2 DL', 'var(--c-purple-50)', 'var(--c-purple-800)')}${bdg('L2 상위 온톨로지', 'var(--c-purple-50)', 'var(--c-purple-700)')}</div>
+                        <div style="margin-bottom:.25rem;">${bdg('W3C OWL 2 DL', '#ede9fe', '#5b21b6')}${bdg('L2 상위 온톨로지', '#ede9fe', '#7c3aed')}</div>
                         <div style="${N}">${d.name || d.id || ''}</div>
-                        ${kv('IRI', d.id, 'var(--c-purple-800)')}
+                        ${kv('IRI', d.id, '#5b21b6')}
                         ${d.description ? `<div style="font-size:var(--fs-xs);color:var(--mono-700);margin-top:.1rem;white-space:normal;">${d.description.substring(0, 80)}</div>` : ''}
                         ${(d.domain_instances || []).length ? `<div style="font-size:var(--fs-small);color:var(--c-purple-700);margin-top:.1rem;">${d.domain_instances.slice(0, 3).join(', ')}</div>` : ''}
                         </div>`;
                 }
                 if (type === 'objProp' || type === 'dataProp') {
-                    const [bc, bg, ct] = type === 'objProp' ? ['var(--c-green-300)', 'var(--c-green-50)', 'var(--c-green-700)'] : ['var(--mono-300)', 'var(--mono-50)', 'var(--mono-700)'];
+                    const [bc, bg, ct] = type === 'objProp' ? ['#86efac', '#f0fdf4', '#15803d'] : ['#D4D4D8', '#FAFAFA', '#3F3F46'];
                     return `<div style="${C}${bc};background:${bg};min-width:160px;max-width:240px;${SH}">
-                        <div style="margin-bottom:.25rem;">${bdg('W3C OWL 2 DL', 'var(--c-purple-50)', 'var(--c-purple-800)')}${bdg(type === 'objProp' ? 'L3 ObjectProp' : 'L3 DataProp', bg, ct)}</div>
+                        <div style="margin-bottom:.25rem;">${bdg('W3C OWL 2 DL', '#ede9fe', '#5b21b6')}${bdg(type === 'objProp' ? 'L3 ObjectProp' : 'L3 DataProp', bg, ct)}</div>
                         <div style="${N}">${d.name || ''}</div>
-                        ${kv('rdfs:domain', d.domain, 'var(--c-green-700)')}
-                        ${kv('rdfs:range', d.range, 'var(--mono-700)')}
-                        ${d.inverseOf ? kv('owl:inverseOf', d.inverseOf, 'var(--c-purple-700)') : ''}
+                        ${kv('rdfs:domain', d.domain, '#15803d')}
+                        ${kv('rdfs:range', d.range, '#3F3F46')}
+                        ${d.inverseOf ? kv('owl:inverseOf', d.inverseOf, '#7c3aed') : ''}
                         </div>`;
                 }
                 if (type === 'triple') {
                     return `<div style="${C}var(--mono-300);background:var(--mono-50);min-width:130px;max-width:200px;${SH}">
-                        <div style="margin-bottom:.2rem;">${bdg('W3C RDF 1.1', 'var(--mono-100)', 'var(--mono-800)')}${bdg('L4', 'var(--mono-50)', 'var(--nia-blue)')}</div>
+                        <div style="margin-bottom:.2rem;">${bdg('W3C RDF 1.1', '#F4F4F5', '#27272A')}${bdg('L4', '#FAFAFA', '#18181B')}</div>
                         <div style="${N}">${d.name || ''}</div>
                         <div style="${R}">클릭: 참여 트리플 목록 확인</div>
                         </div>`;
                 }
                 if (type === 'abox') {
                     return `<div style="${C}var(--mono-300);background:var(--mono-50);min-width:140px;max-width:220px;${SH}">
-                        <div style="margin-bottom:.2rem;">${bdg('W3C RDF 1.1', 'var(--mono-100)', 'var(--mono-800)')}${bdg('L4 A-Box', 'var(--mono-100)', 'var(--mono-700)')}</div>
+                        <div style="margin-bottom:.2rem;">${bdg('W3C RDF 1.1', '#F4F4F5', '#27272A')}${bdg('L4 A-Box', '#F4F4F5', '#3F3F46')}</div>
                         <div style="${N}">${d.name || ''}</div>
-                        ${kv('rdf:type', d.type, 'var(--mono-700)')}
+                        ${kv('rdf:type', d.type, '#3F3F46')}
                         </div>`;
                 }
                 if (type === 'shacl') {
                     return `<div style="${C}var(--mono-200);background:var(--c-amber-50);min-width:170px;max-width:250px;${SH}">
-                        <div style="margin-bottom:.2rem;">${bdg('W3C SHACL', 'var(--c-amber-100)', 'var(--c-amber-800)')}${bdg('L5 sh:NodeShape', 'var(--c-amber-50)', 'var(--c-amber-800)')}</div>
+                        <div style="margin-bottom:.2rem;">${bdg('W3C SHACL', '#fef3c7', '#92400e')}${bdg('L5 sh:NodeShape', '#fffbeb', '#92400e')}</div>
                         <div style="${N}">${d.shape_id || ((d.target_class || '') + 'Shape')}</div>
-                        ${kv('sh:targetClass', d.target_class, 'var(--c-amber-800)')}
-                        ${kv('sh:path', d.path, 'var(--mono-700)')}
-                        ${kv('sh:minCount', String(d.min_count != null ? d.min_count : ''), 'var(--mono-700)')}
-                        ${kv('sh:severity', d.severity, d.severity === 'sh:Violation' ? 'var(--c-red-700)' : 'var(--c-orange-700)')}
+                        ${kv('sh:targetClass', d.target_class, '#92400e')}
+                        ${kv('sh:path', d.path, '#3F3F46')}
+                        ${kv('sh:minCount', String(d.min_count != null ? d.min_count : ''), '#3F3F46')}
+                        ${kv('sh:severity', d.severity, d.severity === 'sh:Violation' ? '#b91c1c' : '#c05621')}
                         </div>`;
                 }
                 return d.label || d.name || '';
@@ -14289,7 +14290,7 @@ ${domainCtx}${upperCtx}
                 const lbl = cl.label || cl.id || ''; if (!lbl || seenCl.has(lbl)) return; seenCl.add(lbl);
                 const n = gn('C: ' + lbl, 'owlClass', 'hexagon',
                     _mkTip('owlClass', cl),
-                    { font: { size: GDS.font.sm, bold: true, color: 'var(--mono-800)' }, size: GDS.size.concept, borderWidth: GDS.border.concept }, 'l2');
+                    { font: { size: GDS.font.sm, bold: true, color: '#27272A' }, size: GDS.size.concept, borderWidth: GDS.border.concept }, 'l2');
                 nodes.update({ id: n, _classData: cl });
             });
             // rdfs:subClassOf
@@ -14298,8 +14299,8 @@ ${domainCtx}${upperCtx}
                 const fk = 'C: ' + lbl + '|owlClass', tk = 'C: ' + cl.subClassOf + '|owlClass';
                 if (nMap.has(fk) && nMap.has(tk)) ge({
                     from: nMap.get(fk), to: nMap.get(tk),
-                    label: 'rdfs:subClassOf', color: { color: 'var(--mono-800)', opacity: .6 },
-                    font: { color: 'var(--mono-800)', size: 8 }, arrows: 'to', dashes: [4, 3],
+                    label: 'rdfs:subClassOf', color: { color: '#27272A', opacity: .6 },
+                    font: { color: '#27272A', size: 8 }, arrows: 'to', dashes: [4, 3],
                     smooth: { type: 'curvedCCW', roundness: .2 }
                 }, 'l2');
             });
@@ -14312,8 +14313,8 @@ ${domainCtx}${upperCtx}
                     const n = gn('U: ' + lbl, 'upperClass', 'hexagon',
                         _mkTip('upperClass', uc),
                         {
-                            font: { size: GDS.font.lg, bold: true, color: 'var(--c-purple-800)' }, size: GDS.size.abstract,
-                            borderWidth: GDS.border.abstract, shadow: { enabled: true, color: 'var(--c-purple-700)55', size: GDS.shadow.lg, x: 0, y: GDS.shadow.y }
+                            font: { size: GDS.font.lg, bold: true, color: '#5b21b6' }, size: GDS.size.abstract,
+                            borderWidth: GDS.border.abstract, shadow: { enabled: true, color: '#7c3aed55', size: GDS.shadow.lg, x: 0, y: GDS.shadow.y }
                         }, 'l2');
                     nodes.update({ id: n, _upperData: uc });
                 });
@@ -14321,8 +14322,8 @@ ${domainCtx}${upperCtx}
                     const dk = 'C: ' + m.domain_class + '|owlClass', uk = 'U: ' + m.upper_class + '|upperClass';
                     if (nMap.has(dk) && nMap.has(uk)) ge({
                         from: nMap.get(dk), to: nMap.get(uk),
-                        label: 'rdfs:subClassOf', color: { color: 'var(--c-purple-700)', opacity: .65 },
-                        font: { color: 'var(--c-purple-700)', size: 8 }, arrows: 'to', dashes: [5, 3],
+                        label: 'rdfs:subClassOf', color: { color: '#7c3aed', opacity: .65 },
+                        font: { color: '#7c3aed', size: 8 }, arrows: 'to', dashes: [5, 3],
                         smooth: { type: 'curvedCW', roundness: .2 }
                     }, 'l2');
                 });
@@ -14336,25 +14337,25 @@ ${domainCtx}${upperCtx}
                 const ck = isObj ? 'objProp' : 'dataProp', pk = (isObj ? 'OP: ' : 'DP: ') + lbl;
                 const n = gn(pk, ck, 'triangle',
                     _mkTip(ck, p),
-                    { font: { size: GDS.font.xs, color: isObj ? 'var(--c-green-700)' : 'var(--mono-700)' }, size: GDS.size.property, borderWidth: GDS.border.property }, 'l3');
+                    { font: { size: GDS.font.xs, color: isObj ? '#15803d' : '#3F3F46' }, size: GDS.size.property, borderWidth: GDS.border.property }, 'l3');
                 nodes.update({ id: n, _propData: p });
                 const domK = 'C: ' + p.domain + '|owlClass', ranK = 'C: ' + p.range + '|owlClass';
                 if (p.domain && nMap.has(domK)) ge({
                     from: nMap.get(domK), to: n,
-                    label: 'rdfs:domain', color: { color: 'var(--c-green-600)', opacity: .6 },
-                    font: { color: 'var(--c-green-600)', size: 8 }, width: GDS.edge.sm, arrows: 'to', dashes: [3, 3]
+                    label: 'rdfs:domain', color: { color: '#16a34a', opacity: .6 },
+                    font: { color: '#16a34a', size: 8 }, width: GDS.edge.sm, arrows: 'to', dashes: [3, 3]
                 }, 'l3');
                 if (p.range && nMap.has(ranK)) ge({
                     from: n, to: nMap.get(ranK),
-                    label: 'rdfs:range', color: { color: 'var(--mono-700)', opacity: .6 },
-                    font: { color: 'var(--mono-700)', size: 8 }, arrows: 'to', dashes: [3, 3]
+                    label: 'rdfs:range', color: { color: '#3F3F46', opacity: .6 },
+                    font: { color: '#3F3F46', size: 8 }, arrows: 'to', dashes: [3, 3]
                 }, 'l3');
                 if (p.inverseOf) {
                     const invK = (isObj ? 'OP: ' : 'DP: ') + p.inverseOf + '|' + ck;
                     if (nMap.has(invK)) ge({
                         from: n, to: nMap.get(invK),
-                        label: 'owl:inverseOf', color: { color: 'var(--c-green-600)', opacity: .45 },
-                        font: { color: 'var(--c-green-600)', size: 8 }, dashes: [2, 4]
+                        label: 'owl:inverseOf', color: { color: '#16a34a', opacity: .45 },
+                        font: { color: '#16a34a', size: 8 }, dashes: [2, 4]
                     }, 'l3');
                 }
             });
@@ -14370,8 +14371,8 @@ ${domainCtx}${upperCtx}
                 entityTripleMap[t.object].asObj.push(t);
                 ge({
                     from: s, to: o, label: t.predicate, _tripleData: t,
-                    color: { color: 'var(--nia-blue)', opacity: .7 },
-                    font: { color: 'var(--mono-700)', size: 10, align: 'middle' },
+                    color: { color: '#18181B', opacity: .7 },
+                    font: { color: '#3F3F46', size: 10, align: 'middle' },
                     width: GDS.edge.md, arrows: 'to', smooth: { type: 'curvedCW', roundness: .15 }
                 }, 'l4');
             });
@@ -14400,8 +14401,8 @@ ${domainCtx}${upperCtx}
 
                 ge({
                     from: sId, to: oId, label: inst.p,
-                    color: { color: 'var(--mono-700)', opacity: .65 },
-                    font: { color: 'var(--mono-700)', size: 9 }, arrows: 'to',
+                    color: { color: '#3F3F46', opacity: .65 },
+                    font: { color: '#3F3F46', size: 9 }, arrows: 'to',
                     smooth: { type: 'curvedCCW', roundness: .2 }
                 }, 'l4a');
 
@@ -14411,7 +14412,7 @@ ${domainCtx}${upperCtx}
                         : (nMap.has(inst.t + '|triple') ? nMap.get(inst.t + '|triple') : null);
                     if (_tgt !== null) ge({
                         from: sId, to: _tgt, label: 'rdf:type',
-                        color: { color: 'var(--mono-700)', opacity: .25 }, font: { color: 'var(--mono-400)', size: 6 },
+                        color: { color: '#3F3F46', opacity: .25 }, font: { color: '#71717A', size: 6 },
                         arrows: 'to', dashes: [2, 6], smooth: { type: 'curvedCW', roundness: .35 }
                     }, 'l4a');
                 }
@@ -14423,8 +14424,8 @@ ${domainCtx}${upperCtx}
                 const o = gn(t.object, 'derived', 'ellipse', undefined, undefined, 'l4');
                 ge({
                     from: s, to: o, label: t.predicate,
-                    color: { color: 'var(--c-green-600)', opacity: .85 },
-                    font: { color: 'var(--c-green-700)', size: 10 }, arrows: 'to',
+                    color: { color: '#16a34a', opacity: .85 },
+                    font: { color: '#15803d', size: 10 }, arrows: 'to',
                     smooth: { type: 'curvedCCW', roundness: .2 }
                 }, 'l4');
             });
@@ -14439,8 +14440,8 @@ ${domainCtx}${upperCtx}
                     ge({
                         from: nMap.get(trKey), to: nMap.get(clKey),
                         label: 'rdf:type',
-                        color: { color: 'var(--nia-blue)', opacity: .3 },
-                        font: { color: 'var(--mono-700)', size: 7 },
+                        color: { color: '#18181B', opacity: .3 },
+                        font: { color: '#3F3F46', size: 7 },
                         arrows: 'to', dashes: [2, 5],
                         smooth: { type: 'curvedCW', roundness: .45 }
                     }, 'l4');
@@ -14455,7 +14456,7 @@ ${domainCtx}${upperCtx}
                 nodes.update({ id: tn, _nodeType: 'excthen', _excData: r });
                 ge({
                     from: rn, to: tn, label: 'THEN', _excData: r,
-                    color: { color: 'var(--mono-800)', opacity: .85 }, font: { color: 'var(--mono-800)', size: 10 },
+                    color: { color: '#27272A', opacity: .85 }, font: { color: '#27272A', size: 10 },
                     arrows: 'to', dashes: true
                 }, 'l5');
                 // IF 조건 클래스 → 예외 규칙 엣지: conditions 배열에서 ClassName(?var) 패턴 추출
@@ -14474,8 +14475,8 @@ ${domainCtx}${upperCtx}
                     const sn = gn(subj, 'triple', 'box', undefined, undefined, 'l4');
                     ge({
                         from: sn, to: rn, label: 'IF', _excData: r,
-                        color: { color: 'var(--c-orange-700)', opacity: .75 },
-                        font: { color: 'var(--c-orange-800)', size: 9 },
+                        color: { color: '#c05621', opacity: .75 },
+                        font: { color: '#9a3412', size: 9 },
                         arrows: 'to', dashes: [4, 3]
                     }, 'l5');
                 });
@@ -14537,8 +14538,8 @@ ${domainCtx}${upperCtx}
                     if (fromN !== undefined && toN !== undefined)
                         ge({
                             from: fromN, to: toN, label: 'cascade',
-                            color: { color: 'var(--c-purple-700)', opacity: .85 },
-                            font: { color: 'var(--c-purple-800)', size: 9, bold: true },
+                            color: { color: '#7c3aed', opacity: .85 },
+                            font: { color: '#5b21b6', size: 9, bold: true },
                             arrows: 'to', dashes: [6, 3], width: GDS.edge.xl,
                             smooth: { type: 'curvedCW', roundness: .3 }
                         }, 'casc');
@@ -14555,12 +14556,12 @@ ${domainCtx}${upperCtx}
                 const tcK = c.target_class + '|triple', ocK = 'C: ' + c.target_class + '|owlClass';
                 if (nMap.has(tcK)) ge({
                     from: sn, to: nMap.get(tcK), label: 'sh:target',
-                    color: { color: 'var(--c-amber-800)', opacity: .75 }, font: { color: 'var(--c-amber-800)', size: 9 },
+                    color: { color: '#92400e', opacity: .75 }, font: { color: '#92400e', size: 9 },
                     arrows: 'to', dashes: [3, 4]
                 }, 'l5s');
                 if (nMap.has(ocK)) ge({
                     from: sn, to: nMap.get(ocK), label: 'sh:target',
-                    color: { color: 'var(--c-amber-800)', opacity: .75 }, font: { color: 'var(--c-amber-800)', size: 9 },
+                    color: { color: '#92400e', opacity: .75 }, font: { color: '#92400e', size: 9 },
                     arrows: 'to', dashes: [3, 4]
                 }, 'l5s');
             });
@@ -14606,18 +14607,18 @@ ${domainCtx}${upperCtx}
             const _tipHTML = (t) => t instanceof Element ? t.innerHTML : (t ? String(t) : ''); // title DOM→string
             function _badge(txt, bg, col) { return `<span style="font-size:var(--fs-small);font-weight:var(--fw-bold);letter-spacing:.04em;padding:.1rem .42rem;border-radius:var(--r-full);background:${bg};color:${col};white-space:nowrap;">${txt}</span>`; }
             const W3C = {
-                'RDF 1.1': ['var(--mono-100)', 'var(--mono-800)'], 'OWL 2 DL': ['var(--c-purple-50)', 'var(--c-purple-800)'],
-                'RDFS': ['var(--mono-100)', 'var(--mono-800)'], 'SWRL': ['var(--c-red-50)', 'var(--c-red-800)'],
-                'SHACL': ['var(--c-amber-100)', 'var(--c-amber-800)'], 'JSON-LD': ['var(--mono-100)', 'var(--c-green-900)'],
+                'RDF 1.1': ['#F4F4F5', '#27272A'], 'OWL 2 DL': ['#ede9fe', '#5b21b6'],
+                'RDFS': ['#F4F4F5', '#27272A'], 'SWRL': ['#fee2e2', '#991b1b'],
+                'SHACL': ['#fef3c7', '#92400e'], 'JSON-LD': ['#F4F4F5', '#065f46'],
             };
             const LY = {
-                'L2': ['var(--mono-50)', 'var(--mono-800)'], 'L2 상위': ['var(--c-purple-100)', 'var(--c-purple-700)'],
-                'L3': ['var(--c-green-50)', 'var(--c-green-700)'], 'L3 DP': ['var(--mono-50)', 'var(--mono-700)'],
-                'L4': ['var(--mono-50)', 'var(--nia-blue)'], 'L4 A-Box': ['var(--mono-50)', 'var(--mono-700)'],
-                'L5 SWRL': ['var(--c-red-100)', 'var(--c-red-800)'], 'L5 SHACL': ['var(--c-amber-50)', 'var(--c-amber-800)'],
+                'L2': ['#FAFAFA', '#27272A'], 'L2 상위': ['#f5f3ff', '#7c3aed'],
+                'L3': ['#f0fdf4', '#15803d'], 'L3 DP': ['#FAFAFA', '#3F3F46'],
+                'L4': ['#FAFAFA', '#18181B'], 'L4 A-Box': ['#FAFAFA', '#3F3F46'],
+                'L5 SWRL': ['#fff1f1', '#991b1b'], 'L5 SHACL': ['#fffbeb', '#92400e'],
             };
-            function _wb(std) { const [b, c] = W3C[std] || ['var(--mono-100)', 'var(--mono-600)']; return _badge('W3C ' + std, b, c); }
-            function _lb(l) { const [b, c] = LY[l] || ['var(--mono-50)', 'var(--mono-600)']; return _badge(l, b, c); }
+            function _wb(std) { const [b, c] = W3C[std] || ['#F4F4F5', '#52525B']; return _badge('W3C ' + std, b, c); }
+            function _lb(l) { const [b, c] = LY[l] || ['#FAFAFA', '#52525B']; return _badge(l, b, c); }
             function _sps(bc, bg) { _detailEl.style.borderLeftColor = bc; _detailEl.style.background = bg; }
             function _hdr(badges, id, name) {
                 return `<div style="display:flex;align-items:center;gap:.38rem;flex-wrap:wrap;margin-bottom:.65rem;padding-bottom:.5rem;border-bottom:var(--bw-thin) solid var(--border);">
@@ -14635,7 +14636,7 @@ ${domainCtx}${upperCtx}
                 if (!v) return '';
                 return `<div style="display:flex;gap:.45rem;font-size:var(--fs-xs);margin-bottom:.18rem;">
                 <span style="color:var(--mono-400);min-width:90px;flex-shrink:0;">${k}</span>
-                <span style="color:${col || 'var(--mono-800)'};font-weight:var(--fw-medium);">${v}</span></div>`;
+                <span style="color:${col || '#27272A'};font-weight:var(--fw-medium);">${v}</span></div>`;
             }
             function _ctbl(cds) {
                 if (!cds || !cds.length) return '';
@@ -14673,83 +14674,83 @@ ${domainCtx}${upperCtx}
 
             // ─── 노드 카드 ───
             function _showDetail(r) {
-                const rc = r.risk_level === 'CRITICAL' ? 'var(--c-red-700)' : r.risk_level === 'HIGH' ? 'var(--c-orange-700)' : r.risk_level === 'MEDIUM' ? 'var(--c-amber-700)' : 'var(--c-green-700)';
-                const rBg = r.risk_level === 'CRITICAL' ? 'var(--c-red-100)' : r.risk_level === 'HIGH' ? 'var(--c-orange-50)' : r.risk_level === 'MEDIUM' ? 'var(--c-amber-50)' : 'var(--c-green-50)';
+                const rc = r.risk_level === 'CRITICAL' ? '#b91c1c' : r.risk_level === 'HIGH' ? '#c05621' : r.risk_level === 'MEDIUM' ? '#b45309' : '#15803d';
+                const rBg = r.risk_level === 'CRITICAL' ? '#fff1f1' : r.risk_level === 'HIGH' ? '#fff7ed' : r.risk_level === 'MEDIUM' ? '#fffbeb' : '#f0fdf4';
                 _sps(rc + '80', rBg);
                 const casc = (r.cascade_rules || []).length
                     ? `<div style="font-size:var(--fs-xs);color:var(--c-purple-700);font-weight:var(--fw-bold);margin-top:.5rem;">cascade 연쇄 → ${r.cascade_rules.map(id => `<code style="background:var(--c-purple-50);color:var(--c-purple-800);padding:.04rem .3rem;border-radius:var(--r-xs);">${id}</code>`).join(' → ')}</div>` : ''
                 _detailEl.innerHTML =
-                    _hdr([_wb('SWRL'), _lb('L5 SWRL'), _badge(r.risk_level || '', rc, 'var(--mono-white)')], r.inference_id, r.inference_name) +
-                    _sec('SWRL Antecedent — IF 조건', 'var(--c-red-800)', _ctbl(r.conditions_detail || [])) +
-                    _sec('SWRL Consequent — THEN', 'var(--c-green-700)',
+                    _hdr([_wb('SWRL'), _lb('L5 SWRL'), _badge(r.risk_level || '', rc, '#FFFFFF')], r.inference_id, r.inference_name) +
+                    _sec('SWRL Antecedent — IF 조건', '#991b1b', _ctbl(r.conditions_detail || [])) +
+                    _sec('SWRL Consequent — THEN', '#15803d',
                         `<div style="font-size:var(--fs-xs);color:var(--mono-800);font-weight:var(--fw-medium);padding:.25rem .45rem;background:rgba(21,128,61,.06);border-radius:var(--r-sm);">${r.action || ''}</div>`) +
-                    (r.business_impact ? _sec('비즈니스 영향', 'var(--mono-700)', `<div style="font-size:var(--fs-xs);color:var(--mono-700);">${r.business_impact}</div>`) : '') +
-                    _kv('담당부서', r.responsible_dept, 'var(--nia-blue)') + casc;
+                    (r.business_impact ? _sec('비즈니스 영향', '#3F3F46', `<div style="font-size:var(--fs-xs);color:var(--mono-700);">${r.business_impact}</div>`) : '') +
+                    _kv('담당부서', r.responsible_dept, '#18181B') + casc;
                 _detailEl.style.display = 'block';
             }
             function _showExcDetail(r) {
-                _sps('var(--c-orange-200)', 'var(--c-orange-50)');
+                _sps('#fed7aa', '#fff7ed');
                 const cl = (r.if?.conditions || []).map(c => `<li style="font-size:var(--fs-xs);color:var(--mono-700);margin-bottom:.13rem;padding-left:.15rem;">${c}</li>`).join('');
                 _detailEl.innerHTML =
-                    _hdr([_wb('SWRL'), _lb('L5 SWRL'), _badge('예외규칙', 'var(--c-orange-100)', 'var(--c-orange-700)')], r.rule_id, r.rule_name) +
-                    _sec('SWRL Antecedent — IF 조건', 'var(--c-orange-800)',
+                    _hdr([_wb('SWRL'), _lb('L5 SWRL'), _badge('예외규칙', '#ffedd5', '#c05621')], r.rule_id, r.rule_name) +
+                    _sec('SWRL Antecedent — IF 조건', '#9a3412',
                         (r.if?.subject ? `<div style="font-size:var(--fs-xs);margin-bottom:.22rem;"><span style="color:var(--mono-400);">주체:</span> <b>${r.if.subject}</b></div>` : '') +
                         (cl ? `<ul style="margin:.08rem 0 .4rem 1.15rem;padding:0;">${cl}</ul>` : '')) +
-                    _sec('SWRL Consequent — THEN', 'var(--c-green-700)',
+                    _sec('SWRL Consequent — THEN', '#15803d',
                         `<div style="font-size:var(--fs-xs);color:var(--mono-800);font-weight:var(--fw-medium);">${r.then || ''}</div>`) +
                     (r.exception ? `<div style="font-size:var(--fs-xs);color:var(--c-amber-800);background:rgba(192,86,33,.07);border-radius:var(--r-md);padding:.28rem .5rem;margin-bottom:.38rem;"><b>예외 조항:</b> ${r.exception}</div>` : '') +
-                    _kv('담당', r.responsible_dept, 'var(--nia-blue)') +
-                    _kv('법적 근거', r.legal_basis, 'var(--mono-700)');
+                    _kv('담당', r.responsible_dept, '#18181B') +
+                    _kv('법적 근거', r.legal_basis, '#3F3F46');
                 _detailEl.style.display = 'block';
             }
             function _showUpperDetail(uc) {
-                _sps('var(--c-purple-300)', 'var(--c-purple-100)');
+                _sps('#c4b5fd', '#f5f3ff');
                 _detailEl.innerHTML =
-                    _hdr([_wb('OWL 2 DL'), _lb('L2 상위'), _badge('상위 온톨로지', 'var(--c-purple-50)', 'var(--c-purple-800)')], uc.id, uc.name) +
-                    _kv('IRI (rdf:ID)', uc.id, 'var(--c-purple-800)') +
-                    _kv('역할', 'rdfs:subClassOf 의 추상 상위 클래스 (Upper Ontology)', 'var(--c-purple-700)') +
-                    (uc.description ? _sec('rdfs:comment', 'var(--mono-700)', `<div style="font-size:var(--fs-xs);color:var(--mono-700);">${uc.description}</div>`) : '') +
-                    ((uc.domain_instances || []).length ? _sec('domain_instances', 'var(--mono-500)', `<div style="font-size:var(--fs-xs);color:var(--mono-700);">${uc.domain_instances.join(', ')}</div>`) : '') +
-                    ((uc.disjoint_with || []).length ? _kv('owl:disjointWith', uc.disjoint_with.join(', '), 'var(--c-red-700)') : '') +
-                    (uc.equivalent_to ? _kv('owl:equivalentClass', uc.equivalent_to, 'var(--mono-700)') : '');
+                    _hdr([_wb('OWL 2 DL'), _lb('L2 상위'), _badge('상위 온톨로지', '#ede9fe', '#5b21b6')], uc.id, uc.name) +
+                    _kv('IRI (rdf:ID)', uc.id, '#5b21b6') +
+                    _kv('역할', 'rdfs:subClassOf 의 추상 상위 클래스 (Upper Ontology)', '#7c3aed') +
+                    (uc.description ? _sec('rdfs:comment', '#3F3F46', `<div style="font-size:var(--fs-xs);color:var(--mono-700);">${uc.description}</div>`) : '') +
+                    ((uc.domain_instances || []).length ? _sec('domain_instances', '#71717A', `<div style="font-size:var(--fs-xs);color:var(--mono-700);">${uc.domain_instances.join(', ')}</div>`) : '') +
+                    ((uc.disjoint_with || []).length ? _kv('owl:disjointWith', uc.disjoint_with.join(', '), '#b91c1c') : '') +
+                    (uc.equivalent_to ? _kv('owl:equivalentClass', uc.equivalent_to, '#3F3F46') : '');
                 _detailEl.style.display = 'block';
             }
             function _showClassDetail(cl) {
-                _sps('var(--mono-300)', 'var(--mono-50)');
+                _sps('#D4D4D8', '#FAFAFA');
                 _detailEl.innerHTML =
-                    _hdr([_wb('OWL 2 DL'), _lb('L2'), _badge('owl:Class', 'var(--mono-100)', 'var(--mono-800)')], cl.id, cl.label || cl.id) +
-                    _kv('IRI (rdf:ID)', cl.id, 'var(--mono-800)') +
-                    (cl.subClassOf ? _kv('rdfs:subClassOf', cl.subClassOf, 'var(--mono-800)') : '') +
-                    (cl.comment ? _sec('rdfs:comment', 'var(--mono-700)', `<div style="font-size:var(--fs-xs);color:var(--mono-700);">${cl.comment}</div>`) : '');
+                    _hdr([_wb('OWL 2 DL'), _lb('L2'), _badge('owl:Class', '#F4F4F5', '#27272A')], cl.id, cl.label || cl.id) +
+                    _kv('IRI (rdf:ID)', cl.id, '#27272A') +
+                    (cl.subClassOf ? _kv('rdfs:subClassOf', cl.subClassOf, '#27272A') : '') +
+                    (cl.comment ? _sec('rdfs:comment', '#3F3F46', `<div style="font-size:var(--fs-xs);color:var(--mono-700);">${cl.comment}</div>`) : '');
                 _detailEl.style.display = 'block';
             }
             function _showPropDetail(p) {
                 const isObj = !p.type || p.type.includes('Object');
-                const [bc, bg, ct] = isObj ? ['var(--c-green-300)', 'var(--c-green-50)', 'var(--c-green-700)'] : ['var(--mono-300)', 'var(--mono-50)', 'var(--mono-700)'];
+                const [bc, bg, ct] = isObj ? ['#86efac', '#f0fdf4', '#15803d'] : ['#D4D4D8', '#FAFAFA', '#3F3F46'];
                 _sps(bc, bg);
                 _detailEl.innerHTML =
                     _hdr([_wb('OWL 2 DL'), _lb(isObj ? 'L3' : 'L3 DP'), _badge(p.type || 'owl:ObjectProperty', bg, ct)], p.id || '', p.name) +
-                    _kv('rdfs:domain', p.domain, 'var(--c-green-700)') +
-                    _kv('rdfs:range', p.range, 'var(--mono-700)') +
-                    (p.inverseOf ? _kv('owl:inverseOf', p.inverseOf, 'var(--c-purple-700)') : '') +
-                    (p.comment ? _sec('rdfs:comment', 'var(--mono-700)', `<div style="font-size:var(--fs-xs);color:var(--mono-700);">${p.comment}</div>`) : '');
+                    _kv('rdfs:domain', p.domain, '#15803d') +
+                    _kv('rdfs:range', p.range, '#3F3F46') +
+                    (p.inverseOf ? _kv('owl:inverseOf', p.inverseOf, '#7c3aed') : '') +
+                    (p.comment ? _sec('rdfs:comment', '#3F3F46', `<div style="font-size:var(--fs-xs);color:var(--mono-700);">${p.comment}</div>`) : '');
                 _detailEl.style.display = 'block';
             }
             function _showEntityDetail(label, data) {
-                _sps('var(--mono-300)', 'var(--mono-50)');
+                _sps('#D4D4D8', '#FAFAFA');
                 const subj = data.asSubj || [], obj = data.asObj || [];
                 _detailEl.innerHTML =
-                    _hdr([_wb('RDF 1.1'), _lb('L4'), _badge('owl:NamedIndividual', 'var(--mono-100)', 'var(--nia-blue)')], '', label) +
-                    (subj.length ? _sec(`주어(Subject)로 참여 — ${subj.length}개 트리플`, 'var(--nia-blue)', _triRow(subj)) : '') +
-                    (obj.length ? _sec(`목적어(Object)로 참여 — ${obj.length}개 트리플`, 'var(--nia-blue)', _triRow(obj)) : '');
+                    _hdr([_wb('RDF 1.1'), _lb('L4'), _badge('owl:NamedIndividual', '#F4F4F5', '#18181B')], '', label) +
+                    (subj.length ? _sec(`주어(Subject)로 참여 — ${subj.length}개 트리플`, '#18181B', _triRow(subj)) : '') +
+                    (obj.length ? _sec(`목적어(Object)로 참여 — ${obj.length}개 트리플`, '#18181B', _triRow(obj)) : '');
                 _detailEl.style.display = 'block';
             }
             function _showTripleEdgeDetail(t) {
-                _sps('var(--mono-300)', 'var(--mono-50)');
+                _sps('#D4D4D8', '#FAFAFA');
                 _detailEl.innerHTML =
-                    _hdr([_wb('RDF 1.1'), _lb('L4'), _badge('RDF Triple', 'var(--mono-100)', 'var(--nia-blue)')], '', 'RDF 트리플 관계') +
+                    _hdr([_wb('RDF 1.1'), _lb('L4'), _badge('RDF Triple', '#F4F4F5', '#18181B')], '', 'RDF 트리플 관계') +
                     _spill(t.subject || '', t.predicate || '', t.object || '') +
-                    _kv('출처 (source)', t.source, 'var(--mono-700)');
+                    _kv('출처 (source)', t.source, '#3F3F46');
                 _detailEl.style.display = 'block';
             }
             // ─── 구조 엣지 카드 ───
@@ -14759,9 +14760,9 @@ ${domainCtx}${upperCtx}
                 const tL = (tn?.label || '').replace(/\n.*/, '').replace(/^[UCOD]P?:\s*/, '').trim();
                 const ll = lbl.toLowerCase();
                 if (ll === 'cascade') {
-                    _sps('var(--c-purple-300)', 'var(--c-purple-100)');
+                    _sps('#c4b5fd', '#f5f3ff');
                     _detailEl.innerHTML =
-                        _hdr([_wb('SWRL'), _lb('L5 SWRL'), _badge('cascade 연쇄', 'var(--c-purple-50)', 'var(--c-purple-700)')], '', 'cascade 연쇄 규칙') +
+                        _hdr([_wb('SWRL'), _lb('L5 SWRL'), _badge('cascade 연쇄', '#ede9fe', '#7c3aed')], '', 'cascade 연쇄 규칙') +
                         `<div style="display:flex;align-items:center;gap:.45rem;padding:.38rem .55rem;background:rgba(124,58,237,.05);border-radius:var(--r-md);margin-bottom:.45rem;flex-wrap:wrap;">
                         <span style="background:var(--c-purple-50);color:var(--c-purple-800);padding:.12rem .5rem;border-radius:var(--r-sm);font-weight:var(--fw-bold);font-size:var(--fs-xs);">${fL}</span>
                         <span style="color:var(--c-purple-700);font-size:var(--fs-xs);">— cascade →</span>
@@ -14769,60 +14770,60 @@ ${domainCtx}${upperCtx}
                         `<div style="font-size:var(--fs-xs);color:var(--mono-500);">${fL} 규칙 발동 시 연쇄적으로 ${tL} 규칙을 검토해야 합니다. (SWRL cascade 체인)</div>`;
                 } else if (ll.includes('subclassof')) {
                     const isUp = (fn?.group === 'upperClass' || tn?.group === 'upperClass');
-                    _sps('var(--mono-300)', 'var(--mono-50)');
+                    _sps('#D4D4D8', '#FAFAFA');
                     _detailEl.innerHTML =
-                        _hdr([_wb('RDFS'), _lb('L2'), _badge('rdfs:subClassOf', isUp ? 'var(--c-purple-50)' : 'var(--mono-100)', isUp ? 'var(--c-purple-800)' : 'var(--mono-800)')], '', '클래스 계층 관계') +
+                        _hdr([_wb('RDFS'), _lb('L2'), _badge('rdfs:subClassOf', isUp ? '#ede9fe' : '#F4F4F5', isUp ? '#5b21b6' : '#27272A')], '', '클래스 계층 관계') +
                         `<div style="display:flex;align-items:center;gap:.45rem;padding:.38rem .55rem;background:rgba(67,56,202,.04);border-radius:var(--r-md);margin-bottom:.45rem;flex-wrap:wrap;">
                         <span style="background:var(--mono-100);color:var(--mono-800);padding:.12rem .5rem;border-radius:var(--r-sm);font-weight:var(--fw-bold);font-size:var(--fs-xs);">${fL}</span>
                         <span style="color:var(--mono-700);font-size:var(--fs-xs);">rdfs:subClassOf →</span>
-                        <span style="background:${isUp ? 'var(--c-purple-50)' : 'var(--mono-100)'};color:${isUp ? 'var(--c-purple-800)' : 'var(--mono-800)'};padding:.12rem .5rem;border-radius:var(--r-sm);font-weight:var(--fw-bold);font-size:var(--fs-xs);">${tL}</span></div>` +
+                        <span style="background:${isUp ? '#ede9fe' : '#F4F4F5'};color:${isUp ? '#5b21b6' : '#27272A'};padding:.12rem .5rem;border-radius:var(--r-sm);font-weight:var(--fw-bold);font-size:var(--fs-xs);">${tL}</span></div>` +
                         `<div style="font-size:var(--fs-xs);color:var(--mono-500);"><b>${fL}</b>은(는) <b>${tL}</b>의 서브클래스입니다. OWL 2 DL에 따라 ${tL}의 모든 속성·제약을 상속받습니다.</div>`;
                 } else if (lbl === 'rdfs:domain') {
-                    _sps('var(--c-green-300)', 'var(--c-green-50)');
+                    _sps('#86efac', '#f0fdf4');
                     _detailEl.innerHTML =
-                        _hdr([_wb('OWL 2 DL'), _lb('L3'), _badge('rdfs:domain', 'var(--c-green-100)', 'var(--c-green-700)')], '', '속성 domain 관계') +
+                        _hdr([_wb('OWL 2 DL'), _lb('L3'), _badge('rdfs:domain', '#dcfce7', '#15803d')], '', '속성 domain 관계') +
                         `<div style="font-size:var(--fs-xs);color:var(--mono-700);padding:.35rem .55rem;background:rgba(21,128,61,.05);border-radius:var(--r-md);margin-bottom:.4rem;">
                         속성 <b>${tL}</b>의 주어(subject)는 반드시 <b>${fL}</b> 클래스에 속해야 합니다.</div>` +
-                        _kv('owl:Class (domain)', fL, 'var(--c-green-700)') + _kv('속성 (Property)', tL, 'var(--c-green-700)');
+                        _kv('owl:Class (domain)', fL, '#15803d') + _kv('속성 (Property)', tL, '#15803d');
                 } else if (lbl === 'rdfs:range') {
-                    _sps('var(--mono-300)', 'var(--mono-50)');
+                    _sps('#D4D4D8', '#FAFAFA');
                     _detailEl.innerHTML =
-                        _hdr([_wb('OWL 2 DL'), _lb('L3'), _badge('rdfs:range', 'var(--mono-100)', 'var(--mono-700)')], '', '속성 range 관계') +
+                        _hdr([_wb('OWL 2 DL'), _lb('L3'), _badge('rdfs:range', '#F4F4F5', '#3F3F46')], '', '속성 range 관계') +
                         `<div style="font-size:var(--fs-xs);color:var(--mono-700);padding:.35rem .55rem;background:rgba(8,145,178,.05);border-radius:var(--r-md);margin-bottom:.4rem;">
                         속성 <b>${fL}</b>의 목적어(object)는 반드시 <b>${tL}</b> 클래스에 속해야 합니다.</div>` +
-                        _kv('속성 (Property)', fL, 'var(--mono-700)') + _kv('owl:Class (range)', tL, 'var(--mono-700)');
+                        _kv('속성 (Property)', fL, '#3F3F46') + _kv('owl:Class (range)', tL, '#3F3F46');
                 } else if (ll.includes('inverseof')) {
-                    _sps('var(--c-green-300)', 'var(--c-green-50)');
+                    _sps('#86efac', '#f0fdf4');
                     _detailEl.innerHTML =
-                        _hdr([_wb('OWL 2 DL'), _lb('L3'), _badge('owl:inverseOf', 'var(--c-green-100)', 'var(--c-green-700)')], '', '속성 역관계') +
+                        _hdr([_wb('OWL 2 DL'), _lb('L3'), _badge('owl:inverseOf', '#dcfce7', '#15803d')], '', '속성 역관계') +
                         `<div style="font-size:var(--fs-xs);color:var(--mono-700);padding:.35rem .55rem;background:rgba(21,128,61,.05);border-radius:var(--r-md);">
                         <b>${fL}</b> ↔ <b>${tL}</b> 는 서로 역방향 관계입니다. (A→B이면 동시에 B→A 성립)</div>`;
                 } else if (ll.includes('sh:') || ll.includes('shacl')) {
-                    _sps('var(--mono-200)', 'var(--c-amber-50)');
+                    _sps('#E4E4E7', '#fffbeb');
                     _detailEl.innerHTML =
-                        _hdr([_wb('SHACL'), _lb('L5 SHACL'), _badge('sh:targetClass', 'var(--c-amber-100)', 'var(--c-amber-800)')], '', 'SHACL 제약 연결') +
+                        _hdr([_wb('SHACL'), _lb('L5 SHACL'), _badge('sh:targetClass', '#fef3c7', '#92400e')], '', 'SHACL 제약 연결') +
                         `<div style="font-size:var(--fs-xs);color:var(--mono-700);padding:.35rem .55rem;background:rgba(120,53,15,.05);border-radius:var(--r-md);margin-bottom:.4rem;">
                         <b>${fL}</b> (sh:NodeShape)이 <b>${tL}</b> 클래스에 데이터 무결성 제약을 적용합니다.</div>` +
                         `<div style="font-size:var(--fs-xs);color:var(--c-amber-800);">SHACL NodeShape 노드를 클릭하면 minCount·severity 상세 확인 가능합니다.</div>`;
                 } else if (lbl === 'COND') {
-                    _sps('var(--c-red-300)', 'var(--c-red-100)');
+                    _sps('#fca5a5', '#fff1f1');
                     _detailEl.innerHTML =
-                        _hdr([_wb('SWRL'), _lb('L5 SWRL'), _badge('SWRL COND', 'var(--c-red-50)', 'var(--c-red-800)')], '', 'SWRL 조건 연결') +
+                        _hdr([_wb('SWRL'), _lb('L5 SWRL'), _badge('SWRL COND', '#fee2e2', '#991b1b')], '', 'SWRL 조건 연결') +
                         `<div style="font-size:var(--fs-xs);color:var(--mono-700);padding:.35rem .55rem;background:rgba(185,28,28,.05);border-radius:var(--r-md);">
                         트리플 개체 <b>${fL}</b>이(가) 추론 규칙 <b>${tL}</b>의 Antecedent(IF 조건) 원자로 사용됩니다.</div>`;
                 } else if (lbl === 'IF' || lbl === 'THEN') {
-                    _sps('var(--c-orange-200)', 'var(--c-orange-50)');
+                    _sps('#fed7aa', '#fff7ed');
                     _detailEl.innerHTML =
-                        _hdr([_wb('SWRL'), _lb('L5 SWRL'), _badge(lbl, 'var(--c-orange-100)', 'var(--c-orange-700)')], '', `예외 규칙 ${lbl} 연결`) +
+                        _hdr([_wb('SWRL'), _lb('L5 SWRL'), _badge(lbl, '#ffedd5', '#c05621')], '', `예외 규칙 ${lbl} 연결`) +
                         _spill(fL, lbl, tL);
                 } else if (['CRITICAL', 'HIGH', 'MEDIUM', 'LOW', 'INF'].includes(lbl)) {
-                    _sps('var(--c-red-300)', 'var(--c-red-100)');
+                    _sps('#fca5a5', '#fff1f1');
                     _detailEl.innerHTML =
-                        _hdr([_wb('SWRL'), _lb('L5 SWRL'), _badge('SWRL INF', 'var(--c-red-50)', 'var(--c-red-800)')], '', 'SWRL Consequent 연결') +
+                        _hdr([_wb('SWRL'), _lb('L5 SWRL'), _badge('SWRL INF', '#fee2e2', '#991b1b')], '', 'SWRL Consequent 연결') +
                         `<div style="font-size:var(--fs-xs);color:var(--mono-700);padding:.35rem .55rem;background:rgba(185,28,28,.05);border-radius:var(--r-md);">
                         추론 규칙 <b>${fL}</b>의 Consequent(THEN) 결론이 <b>${tL}</b>에 적용됩니다.</div>`;
                 } else {
-                    _sps('var(--mono-200)', 'var(--mono-50)');
+                    _sps('#E4E4E7', '#FAFAFA');
                     _detailEl.innerHTML = _hdr([], '', lbl + ' 관계') + _spill(fL, lbl, tL);
                 }
                 _detailEl.style.display = 'block';
@@ -14831,19 +14832,19 @@ ${domainCtx}${upperCtx}
             function _showGenericNodeDetail(n) {
                 const grp = n.group || '', raw = (n.label || '').replace(/\n.*/, '');
                 if (grp === 'shacl') {
-                    _sps('var(--mono-200)', 'var(--c-amber-50)');
-                    _detailEl.innerHTML = _hdr([_wb('SHACL'), _lb('L5 SHACL'), _badge('sh:NodeShape', 'var(--c-amber-100)', 'var(--c-amber-800)')], '', raw) +
+                    _sps('#E4E4E7', '#fffbeb');
+                    _detailEl.innerHTML = _hdr([_wb('SHACL'), _lb('L5 SHACL'), _badge('sh:NodeShape', '#fef3c7', '#92400e')], '', raw) +
                         (n.title ? `<pre style="font-size:var(--fs-xs);color:var(--mono-700);white-space:pre-wrap;background:rgba(120,53,15,.04);border-radius:var(--r-md);padding:.32rem .5rem;margin:0;">${_tipHTML(n.title)}</pre>` : '');
                 } else if (grp === 'abox') {
-                    _sps('var(--mono-300)', 'var(--mono-50)');
-                    _detailEl.innerHTML = _hdr([_wb('RDF 1.1'), _lb('L4 A-Box'), _badge('owl:NamedIndividual', 'var(--mono-100)', 'var(--mono-700)')], '', raw) +
+                    _sps('#D4D4D8', '#FAFAFA');
+                    _detailEl.innerHTML = _hdr([_wb('RDF 1.1'), _lb('L4 A-Box'), _badge('owl:NamedIndividual', '#F4F4F5', '#3F3F46')], '', raw) +
                         (n.title ? `<div style="font-size:var(--fs-xs);color:var(--mono-700);white-space:pre-wrap;">${_tipHTML(n.title)}</div>` : '');
                 } else if (grp === 'derived') {
-                    _sps('var(--c-green-300)', 'var(--c-green-50)');
-                    _detailEl.innerHTML = _hdr([_wb('RDF 1.1'), _lb('L4'), _badge('파생 트리플', 'var(--c-green-100)', 'var(--c-green-700)')], '', raw) +
+                    _sps('#86efac', '#f0fdf4');
+                    _detailEl.innerHTML = _hdr([_wb('RDF 1.1'), _lb('L4'), _badge('파생 트리플', '#dcfce7', '#15803d')], '', raw) +
                         `<div style="font-size:var(--fs-xs);color:var(--mono-500);">추론 엔진 실행 결과로 생성된 파생(derived) 트리플 개체입니다.</div>`;
                 } else {
-                    _sps('var(--mono-200)', 'var(--mono-50)');
+                    _sps('#E4E4E7', '#FAFAFA');
                     _detailEl.innerHTML = _hdr([], '', raw) + (n.title ? `<div style="font-size:var(--fs-xs);color:var(--mono-700);">${n.title}</div>` : '');
                 }
                 _detailEl.style.display = 'block';
@@ -15226,9 +15227,9 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
                 const r = ii[id];
                 const nm = r?.inference_name || '';
                 const risk = r?.risk_level || 'LOW';
-                const rC = risk === 'CRITICAL' ? 'var(--c-red-700)' : risk === 'HIGH' ? 'var(--c-orange-700)' : risk === 'MEDIUM' ? 'var(--c-amber-700)' : 'var(--c-green-700)';
-                const rBg = risk === 'CRITICAL' ? 'var(--c-red-50)' : risk === 'HIGH' ? 'var(--c-orange-100)' : risk === 'MEDIUM' ? 'var(--c-amber-100)' : 'var(--c-green-100)';
-                const rFt = risk === 'CRITICAL' ? 'var(--c-red-800)' : risk === 'HIGH' ? 'var(--c-orange-800)' : risk === 'MEDIUM' ? 'var(--c-amber-800)' : 'var(--c-green-800)';
+                const rC = risk === 'CRITICAL' ? '#b91c1c' : risk === 'HIGH' ? '#c05621' : risk === 'MEDIUM' ? '#b45309' : '#15803d';
+                const rBg = risk === 'CRITICAL' ? '#fee2e2' : risk === 'HIGH' ? '#ffedd5' : risk === 'MEDIUM' ? '#fef3c7' : '#dcfce7';
+                const rFt = risk === 'CRITICAL' ? '#991b1b' : risk === 'HIGH' ? '#9a3412' : risk === 'MEDIUM' ? '#92400e' : '#166534';
                 const cleanCond = r ? (r.condition || '(조건)').replace(/<[^>]*>/g, '').trim() : '';
                 const cleanAction = r ? (r.action || '').replace(/<[^>]*>/g, '').trim() : '';
                 const casc = (r?.cascade_rules || []).length ? `<div style="font-size:var(--fs-small);color:var(--c-purple-700);font-weight:var(--fw-bold);margin-top:.2rem;">cascade → ${r.cascade_rules.join(' → ')}</div>` : '';
@@ -15542,51 +15543,51 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
             var ax = 56, ay = 285, llx = 878, lly = 192, gwx = 878, gwy = 420;
             var s = '<svg width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg" style="font-family:var(--font-body);max-width:100%;display:block;">'
                 + '<defs>'
-                + '<marker id="ucma" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="var(--text)"/></marker>'
-                + '<marker id="ucmg" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="var(--text2)"/></marker>'
+                + '<marker id="ucma" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" style="fill:var(--text);"/></marker>'
+                + '<marker id="ucmg" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" style="fill:var(--text2);"/></marker>'
                 + '</defs>'
-                + '<rect x="' + sbX + '" y="' + sbY + '" width="' + sbW + '" height="' + sbH + '" rx="14" fill="var(--c-ink-02)" stroke="var(--text)" stroke-width="2"/>'
+                + '<rect x="' + sbX + '" y="' + sbY + '" width="' + sbW + '" height="' + sbH + '" rx="14" style="fill:var(--c-ink-02);stroke:var(--text);" stroke-width="2"/>'
                 + '<text class="svg-lbl" x="' + (sbX + sbW / 2) + '" y="' + (sbY + 17) + '" text-anchor="middle">' + APP_TITLE_TOOL + '</text>'
-                + '<circle cx="' + ax + '" cy="' + (ay - 33) + '" r="11" fill="var(--c-ink-06)" stroke="var(--text)" stroke-width="1.5"/>'
-                + '<line x1="' + ax + '" y1="' + (ay - 22) + '" x2="' + ax + '" y2="' + (ay - 2) + '" stroke="var(--text)" stroke-width="1.5"/>'
-                + '<line x1="' + (ax - 14) + '" y1="' + (ay - 15) + '" x2="' + (ax + 14) + '" y2="' + (ay - 15) + '" stroke="var(--text)" stroke-width="1.5"/>'
-                + '<line x1="' + ax + '" y1="' + (ay - 2) + '" x2="' + (ax - 11) + '" y2="' + (ay + 15) + '" stroke="var(--text)" stroke-width="1.5"/>'
-                + '<line x1="' + ax + '" y1="' + (ay - 2) + '" x2="' + (ax + 11) + '" y2="' + (ay + 15) + '" stroke="var(--text)" stroke-width="1.5"/>'
+                + '<circle cx="' + ax + '" cy="' + (ay - 33) + '" r="11" style="fill:var(--c-ink-06);stroke:var(--text);" stroke-width="1.5"/>'
+                + '<line x1="' + ax + '" y1="' + (ay - 22) + '" x2="' + ax + '" y2="' + (ay - 2) + '" style="stroke:var(--text);" stroke-width="1.5"/>'
+                + '<line x1="' + (ax - 14) + '" y1="' + (ay - 15) + '" x2="' + (ax + 14) + '" y2="' + (ay - 15) + '" style="stroke:var(--text);" stroke-width="1.5"/>'
+                + '<line x1="' + ax + '" y1="' + (ay - 2) + '" x2="' + (ax - 11) + '" y2="' + (ay + 15) + '" style="stroke:var(--text);" stroke-width="1.5"/>'
+                + '<line x1="' + ax + '" y1="' + (ay - 2) + '" x2="' + (ax + 11) + '" y2="' + (ay + 15) + '" style="stroke:var(--text);" stroke-width="1.5"/>'
                 + '<text class="svg-cap" x="' + ax + '" y="' + (ay + 30) + '" text-anchor="middle">워크숍</text>'
                 + '<text class="svg-cap" x="' + ax + '" y="' + (ay + 43) + '" text-anchor="middle">참가자</text>'
-                + '<rect x="' + (llx - 44) + '" y="' + (lly - 28) + '" width="88" height="56" rx="9" fill="var(--c-ink-04)" stroke="var(--mono-700)" stroke-width="1.5"/>'
+                + '<rect x="' + (llx - 44) + '" y="' + (lly - 28) + '" width="88" height="56" rx="9" style="fill:var(--c-ink-04);stroke:var(--mono-700);" stroke-width="1.5"/>'
                 + '<text class="svg-cap" x="' + llx + '" y="' + (lly - 10) + '" text-anchor="middle">LLM API</text>'
                 + '<text class="svg-cap" x="' + llx + '" y="' + (lly + 5) + '" text-anchor="middle">(Gemini / GPT /</text>'
                 + '<text class="svg-cap" x="' + llx + '" y="' + (lly + 18) + '" text-anchor="middle">Local Ollama)</text>'
-                + '<rect x="' + (gwx - 44) + '" y="' + (gwy - 22) + '" width="88" height="44" rx="9" fill="var(--c-ink-04)" stroke="var(--mono-700)" stroke-width="1.5"/>'
+                + '<rect x="' + (gwx - 44) + '" y="' + (gwy - 22) + '" width="88" height="44" rx="9" style="fill:var(--c-ink-04);stroke:var(--mono-700);" stroke-width="1.5"/>'
                 + '<text class="svg-cap" x="' + gwx + '" y="' + (gwy - 4) + '" text-anchor="middle">법제처</text>'
                 + '<text class="svg-cap" x="' + gwx + '" y="' + (gwy + 11) + '" text-anchor="middle">Open API</text>';
             ucs.forEach(function (u) {
-                s += '<line x1="' + (ax + 14) + '" y1="' + (ay - 15) + '" x2="' + (u.cx - rx) + '" y2="' + u.cy + '" stroke="var(--c-ink-25)" stroke-width="1"/>';
+                s += '<line x1="' + (ax + 14) + '" y1="' + (ay - 15) + '" x2="' + (u.cx - rx) + '" y2="' + u.cy + '" style="stroke:var(--c-ink-25);" stroke-width="1"/>';
             });
             [3, 4, 5, 7].forEach(function (idx) {
                 var u = ucs[idx];
                 var mx = Math.round((u.cx + rx + llx - 44) / 2);
                 var my = Math.round((u.cy + lly) / 2);
-                s += '<line x1="' + (u.cx + rx) + '" y1="' + u.cy + '" x2="' + (llx - 44) + '" y2="' + lly + '" stroke="var(--text)" stroke-width="1" stroke-dasharray="5,3" marker-end="url(#ucma)"/>';
+                s += '<line x1="' + (u.cx + rx) + '" y1="' + u.cy + '" x2="' + (llx - 44) + '" y2="' + lly + '" style="stroke:var(--text);" stroke-width="1" stroke-dasharray="5,3" marker-end="url(#ucma)"/>';
                 s += '<text class="svg-cap" x="' + mx + '" y="' + (my - 4) + '" text-anchor="middle" font-style="italic">include</text>';
             });
             var u2 = ucs[1];
             var mx2 = Math.round((u2.cx + rx + gwx - 44) / 2);
             var my2 = Math.round((u2.cy + gwy) / 2);
-            s += '<line x1="' + (u2.cx + rx) + '" y1="' + u2.cy + '" x2="' + (gwx - 44) + '" y2="' + gwy + '" stroke="var(--text2)" stroke-width="1" stroke-dasharray="5,3" marker-end="url(#ucmg)"/>';
+            s += '<line x1="' + (u2.cx + rx) + '" y1="' + u2.cy + '" x2="' + (gwx - 44) + '" y2="' + gwy + '" style="stroke:var(--text2);" stroke-width="1" stroke-dasharray="5,3" marker-end="url(#ucmg)"/>';
             s += '<text class="svg-cap" x="' + mx2 + '" y="' + (my2 - 4) + '" text-anchor="middle" font-style="italic">include</text>';
             ucs.forEach(function (u) {
-                s += '<ellipse cx="' + u.cx + '" cy="' + u.cy + '" rx="' + rx + '" ry="' + ry + '" fill="' + u.bg + '" stroke="' + u.st + '" stroke-width="1.5"/>';
+                s += '<ellipse cx="' + u.cx + '" cy="' + u.cy + '" rx="' + rx + '" ry="' + ry + '" style="fill:'+ u.bg +';stroke:'+ u.st +';" stroke-width="1.5"/>';
                 u.lb.forEach(function (l, li) {
                     var yOff = u.lb.length === 1 ? 4 : (li - (u.lb.length - 1) / 2) * 13 + 4;
                     s += '<text class="svg-cap" x="' + u.cx + '" y="' + (u.cy + yOff) + '" text-anchor="middle">' + l + '</text>';
                 });
             });
             var lgy = sbY + sbH - 14;
-            s += '<line x1="' + (sbX + 10) + '" y1="' + lgy + '" x2="' + (sbX + 30) + '" y2="' + lgy + '" stroke="var(--c-ink-40)" stroke-width="1"/>'
+            s += '<line x1="' + (sbX + 10) + '" y1="' + lgy + '" x2="' + (sbX + 30) + '" y2="' + lgy + '" style="stroke:var(--c-ink-40);" stroke-width="1"/>'
                 + '<text class="svg-cap" x="' + (sbX + 34) + '" y="' + (lgy + 4) + '">참가자 연관 (Association)</text>'
-                + '<line x1="' + (sbX + 190) + '" y1="' + lgy + '" x2="' + (sbX + 210) + '" y2="' + lgy + '" stroke="var(--text)" stroke-width="1" stroke-dasharray="4,2"/>'
+                + '<line x1="' + (sbX + 190) + '" y1="' + lgy + '" x2="' + (sbX + 210) + '" y2="' + lgy + '" style="stroke:var(--text);" stroke-width="1" stroke-dasharray="4,2"/>'
                 + '<text class="svg-cap" x="' + (sbX + 214) + '" y="' + (lgy + 4) + '">include - 외부 시스템(LLM/API) 호출 포함</text>'
                 + '</svg>';
             var wrap = document.getElementById('uc-svg-wrap');
