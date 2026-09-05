@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 40" fill="none">
+  <defs>
+    <!-- 메인 그라디언트: Ink Navy에서 Living Coral로 -->
+    <linearGradient id="w-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1A1F36" />
+      <stop offset="100%" stop-color="#E8613A" />
+    </linearGradient>
+    <!-- Coral 단독 그라디언트 -->
+    <linearGradient id="coral-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8613A" />
+      <stop offset="100%" stop-color="#F78261" />
+    </linearGradient>
+  </defs>
+
+  <!-- 지식 그래프 연결선 (메인 W 뼈대) -->
+  <path d="M 6 12 L 12 28 L 18 16 L 24 28 L 30 12" stroke="url(#w-grad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+  
+  <!-- 지식 그래프 연결선 (보조 가지선) -->
+  <line x1="18" y1="16" x2="18" y2="7" stroke="#E8613A" stroke-width="1.2" stroke-dasharray="2 2" stroke-linecap="round" />
+  <line x1="12" y1="28" x2="6" y2="24" stroke="#1A1F36" stroke-width="1" opacity="0.4" stroke-linecap="round" />
+  <line x1="24" y1="28" x2="30" y2="24" stroke="#1A1F36" stroke-width="1" opacity="0.4" stroke-linecap="round" />
+
+  <!-- 노드 (점들) -->
+  <!-- 외곽 노드 -->
+  <circle cx="6" cy="12" r="3" fill="#1A1F36" />
+  <circle cx="30" cy="12" r="3" fill="#1A1F36" />
+  
+  <!-- 하단 노드 -->
+  <circle cx="12" cy="28" r="3" fill="#1A1F36" />
+  <circle cx="24" cy="28" r="3" fill="#1A1F36" />
+  
+  <!-- 중앙 메인 브릿지 노드 (더블 링으로 프랙털 강조) -->
+  <circle cx="18" cy="16" r="5" fill="#E8613A" fill-opacity="0.2" />
+  <circle cx="18" cy="16" r="3" fill="url(#coral-grad)" />
+  
+  <!-- 서브 노드 (확장되는 생각의 맥락 상징) -->
+  <circle cx="18" cy="7" r="1.8" fill="#E8613A" />
+  <circle cx="6" cy="24" r="1.5" fill="#1A1F36" opacity="0.5" />
+  <circle cx="30" cy="24" r="1.5" fill="#1A1F36" opacity="0.5" />
+
+  <!-- 브랜드 텍스트 -->
+  <text x="42" y="26" fill="#1A1F36" font-family="Outfit, 'DM Sans', sans-serif" font-size="20" font-weight="800" letter-spacing="-0.7px">worflogy</text>
+</svg>
