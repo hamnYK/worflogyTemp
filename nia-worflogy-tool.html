@@ -9585,7 +9585,7 @@ for r in results:
             if (p !== 'local' && !k) throw new Error('API 키 미설정 - Step 1에서 저장 및 연결 테스트를 완료하세요');
             const t0 = Date.now();
             const sid = document.querySelector('.sbtn.active')?.id?.replace('sb', '') || '?';
-            const docs_info = { count: S.docs.length, names: S.docs.map(d => d.name || '(unnamed)'), total_chars: opts.contextChars ?? S.docs.reduce((s, d) => s + (d.content || '').length, 0) };
+            const docs_info = { count: S.docs.length, total_chars: opts.contextChars ?? S.docs.reduce((s, d) => s + (d.content || '').length, 0) };
             const maxRetry = 3;
             const retryDelays = [0, 30000, 60000];  // 0초 → 30초 → 60초 (high demand 대응)
             const isRetryable = m => (m.includes('503') || m.includes('high demand') || m.includes('overloaded') || m.includes('Service Unavailable') || m.includes('demand') || m.includes('temporarily'));
@@ -9666,7 +9666,7 @@ for r in results:
                     if (isRetryable(e.message) && attempt < maxRetry - 1) continue;
                     try {
                         const _stepsDone = [...document.querySelectorAll('.sbtn.done')].map(b => Number(b.id.replace('sb', ''))).filter(Boolean);
-                        _logAppend(_LOG_API, { ts: new Date().toISOString(), session_id: _SESSION_ID, step: 'Step ' + sid, label: label || '', provider: p, model: S.models[p], sys: sys.length > 1000 ? sys.slice(0, 1000) + '…' : sys, usr: usr.substring(0, 300), query: usr.substring(0, 120), context: docs_info, sys_prompt_chars: sys.length, usr_chars: usr.length, response: null, response_chars: 0, expect_json: !!expectJson, finish_reason: null, error: err, duration_ms: Date.now() - t0, tokens: {}, retry_count: retryCount, retry_reason: retryReason || null, scenario_count: (S.scenarios || []).length, schemas_done: Object.keys(S.schemas || {}).length, steps_done: _stepsDone });
+                        _logAppend(_LOG_API, { ts: new Date().toISOString(), session_id: _SESSION_ID, step: 'Step ' + sid, label: label || '', provider: p, model: S.models[p], sys: sys.length > 1000 ? sys.slice(0, 1000) + '…' : sys, usr: usr.substring(0, 300), question: (opts.question || '').substring(0, 200), context: docs_info, sys_prompt_chars: sys.length, usr_chars: usr.length, response: null, response_chars: 0, expect_json: !!expectJson, finish_reason: null, error: err, duration_ms: Date.now() - t0, tokens: {}, retry_count: retryCount, retry_reason: retryReason || null, scenario_count: (S.scenarios || []).length, schemas_done: Object.keys(S.schemas || {}).length, steps_done: _stepsDone });
                         _logUse('api_call', { provider: p, model: S.models[p], status: 'error', label: label || '', error: err.substring(0, 120), duration_ms: Date.now() - t0 });
                     } catch (_) { }
                     throw e;
@@ -9676,7 +9676,7 @@ for r in results:
             const dur = Date.now() - t0;
             // ── 대책3: 로그 캡 10,000자 + finish_reason 기록 ──
             const _stepsDoneOk = [...document.querySelectorAll('.sbtn.done')].map(b => Number(b.id.replace('sb', ''))).filter(Boolean);
-            _logAppend(_LOG_API, { ts: new Date().toISOString(), session_id: _SESSION_ID, step: 'Step ' + sid, label: label || '', provider: p, model: S.models[p], sys: sys.length > 1000 ? sys.slice(0, 1000) + '…' : sys, usr: usr.length > 2000 ? usr.slice(0, 2000) + '…' : usr, query: usr.length > 3000 ? usr.slice(0, 3000) + '…' : usr, context: docs_info, sys_prompt_chars: sys.length, usr_chars: usr.length, response: response.length > 10000 ? response.slice(0, 10000) + '…' : response, response_chars: response.length, expect_json: !!expectJson, finish_reason: finishReason, error: null, duration_ms: dur, tokens, retry_count: retryCount, retry_reason: retryCount > 0 ? (retryReason || null) : null, scenario_count: (S.scenarios || []).length, schemas_done: Object.keys(S.schemas || {}).length, steps_done: _stepsDoneOk });
+            _logAppend(_LOG_API, { ts: new Date().toISOString(), session_id: _SESSION_ID, step: 'Step ' + sid, label: label || '', provider: p, model: S.models[p], sys: sys.length > 1000 ? sys.slice(0, 1000) + '…' : sys, usr: usr.length > 2000 ? usr.slice(0, 2000) + '…' : usr, question: (opts.question || '').substring(0, 200), context: docs_info, sys_prompt_chars: sys.length, usr_chars: usr.length, response: response.length > 10000 ? response.slice(0, 10000) + '…' : response, response_chars: response.length, expect_json: !!expectJson, finish_reason: finishReason, error: null, duration_ms: dur, tokens, retry_count: retryCount, retry_reason: retryCount > 0 ? (retryReason || null) : null, scenario_count: (S.scenarios || []).length, schemas_done: Object.keys(S.schemas || {}).length, steps_done: _stepsDoneOk });
             _logUse('api_call', { provider: p, model: S.models[p], status: 'ok', label: label || '', duration_ms: dur, tokens_in: tokens.input, tokens_out: tokens.output, retry_count: retryCount });
             return response;
         }
@@ -12065,7 +12065,7 @@ for r in results:
             const sys = getPrompt('P_EXTRACT_SCENARIO');
             const usr = `다음 행정 시나리오를 분석하여 온톨로지 스키마를 JSON-LD로 추출하세요.\n\n## 조례/법령 문서\n${docCtx || '(없음)'}\n\n## 민원/업무 시나리오\n${scen.text}${entityHint}${queryHint}${_crossDomainHint}${_prevFeedback}\n\n## 상세 수준\n${levelHint}\n\n순수 JSON만 출력 (마크다운 없이):\n{"@context":{"base":"http://admin.go.kr/ontology#","owl":"http://www.w3.org/2002/07/owl#","rdf":"http://www.w3.org/1999/02/22-rdf-syntax-ns#","rdfs":"http://www.w3.org/2000/01/rdf-schema#","xsd":"http://www.w3.org/2001/XMLSchema#","sh":"http://www.w3.org/ns/shacl#"},"ontology_metadata":{"base_iri":"http://admin.go.kr/ontology#","version":"1.0","w3c_standards":["RDF 1.1","OWL 2 DL","SWRL","SHACL","JSON-LD"]},"domain":"${scen.title}","classes":[{"id":"ont:시민","type":"owl:Class","label":"시민","subClassOf":null,"comment":"민원 신청 주체"},{"id":"ont:민원신청서","type":"owl:Class","label":"민원신청서","subClassOf":null,"comment":"신청 서류 개체"}],"properties":[{"name":"제출한다","type":"owl:ObjectProperty","domain":"시민","range":"민원신청서","inverseOf":null,"comment":"제출 행위 관계"},{"name":"처리기한","type":"owl:DatatypeProperty","domain":"행정기관","range":"xsd:integer","inverseOf":null,"comment":"처리 기한 일수"}],"triples":[{"subject":"시민","predicate":"제출한다","object":"민원신청서","source":"조례 제3조"},{"subject":"행정기관","predicate":"처리한다","object":"행정처분","source":"관련 법령 제5조"}],"exception_rules":[{"rule_id":"RULE_01","w3c_standard":"SWRL","rule_name":"","if":{"subject":"","conditions":[""]},"then":"","exception":"","responsible_dept":"","legal_basis":""}],"constraints":[{"shape_id":"시민Shape","w3c_standard":"SHACL","target_class":"시민","path":"제출한다","min_count":1,"severity":"sh:Violation","exception_message":"시민은 최소 1건의 민원신청서를 제출해야 합니다."}]}\n\n**모든 subject, predicate, object는 반드시 한국어로 작성하세요.**`;
             try {
-                let raw = (await callLLM(sys, usr, '스키마 추출(W3C)', { expectJson: true, contextChars: docCtx.length })).trim();
+                let raw = (await callLLM(sys, usr, '스키마 추출(W3C)', { expectJson: true, contextChars: docCtx.length, question: scen.title })).trim();
                 raw = _cleanJson(raw);
                 const schema = JSON.parse(raw);
                 // 방법 3: W3C 표준 준수 검증
@@ -14448,7 +14448,7 @@ ${domainCtx}${upperCtx}
 ${triples || '(없음)'}
 ${rules ? `[추론 규칙]\n${rules}` : ''}`;
 
-                const q = await callLLM(sys, usr, '검증 질문 생성');
+                const q = await callLLM(sys, usr, '검증 질문 생성', { question: domain });
                 // JSON 파싱 (question + target_rules) — fallback: 텍스트 그대로 사용
                 let _qParsed; try { _qParsed = JSON.parse(q.trim()); } catch (e) { _qParsed = { question: q.trim(), target_rules: [] }; }
                 const _qText = (_qParsed.question || q).trim();
