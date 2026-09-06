@@ -24,8 +24,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Outfit:wght@400;600;800&family=JetBrains+Mono:wght@400;500&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+    <style>@font-face{font-family:'Pretendard Variable';font-weight:45 920;font-style:normal;font-display:swap;src:url('assets/fonts/PretendardVariable.woff2') format('woff2-variations');}</style>
     <!-- 문서 파서: pdf.js (PDF) + mammoth.js (DOCX) -->
     <!-- pdf.js: type=module 태그 제거 - file:// 보안 제한으로 에러 발생. parsePDF() 내부 import(경로가 CDN으로 대체) -->
     <script src="lib/mammoth.browser.min.js"></script>
@@ -8994,11 +8993,56 @@ for r in results:
         </svg>`
             },
 
+            c: {
+                badge: '해왕성형 · Weak Signal',
+                formula: '반복되는 예외 = 새로운 규칙의 신호',
+                explain: '매주 반복되는 처리 지연이 있습니다. 하나씩 보면 우연처럼 보이지만, 전체를 놓고 보면 특정 지역·요일·민원 유형에 일관된 패턴이 나타납니다. 이 패턴은 기존 개념 구조 어디에도 없는 새로운 범주의 씨앗입니다. 아직 이름이 없어서 통계에서는 잡음으로 처리되지만, Ansoff(1975)는 이를 Weak Signal이라 불렀습니다. 이것을 감지하지 못하면 아무리 데이터가 쌓여도 온톨로지는 스스로 갱신되지 않습니다.',
+                svg: `<svg viewBox="0 0 500 190" xmlns="http://www.w3.org/2000/svg" style="font-family:var(--font-body);">
+            <defs><marker id="mc1" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="var(--text)"/></marker></defs>
+            <text class="svg-sub" x="250" y="16" text-anchor="middle">위크 시그널 - 잡음 속에 숨은 패턴의 씨앗</text>
+            <rect x="8" y="24" width="188" height="142" rx="10" fill="var(--c-ink-04)" stroke="var(--c-ink-20)" stroke-width="2"/>
+            <text class="svg-cap" x="102" y="41" text-anchor="middle">개별 신호만 보면</text>
+            <circle cx="30"  cy="90"  r="4.5" fill="var(--c-m5-55)"/>
+            <circle cx="55"  cy="68"  r="4.5" fill="var(--c-m5-55)"/>
+            <circle cx="50"  cy="122" r="4.5" fill="var(--c-m5-55)"/>
+            <circle cx="80"  cy="100" r="4.5" fill="var(--c-m5-55)"/>
+            <circle cx="100" cy="72"  r="4.5" fill="var(--c-m5-55)"/>
+            <circle cx="105" cy="130" r="4.5" fill="var(--c-m5-55)"/>
+            <circle cx="132" cy="84"  r="4.5" fill="var(--c-m5-55)"/>
+            <circle cx="148" cy="112" r="4.5" fill="var(--c-m5-55)"/>
+            <circle cx="166" cy="90"  r="4.5" fill="var(--c-m5-55)"/>
+            <circle cx="172" cy="128" r="4.5" fill="var(--c-m5-55)"/>
+            <text class="svg-cap" x="102" y="156" text-anchor="middle">흩어진 점 → 잡음처럼 보임</text>
+            <line x1="200" y1="95" x2="296" y2="95" stroke="var(--text)" stroke-width="2" marker-end="url(#mc1)"/>
+            <text class="svg-cap" x="248" y="84" text-anchor="middle">전체론적 관점</text>
+            <rect x="304" y="24" width="188" height="142" rx="10" fill="var(--c-ink-04)" stroke="var(--c-ink-20)" stroke-width="2"/>
+            <text class="svg-cap" x="398" y="41" text-anchor="middle">전체 맥락으로 보면</text>
+            <circle cx="326" cy="90"  r="4.5" fill="var(--c-m5-35)"/>
+            <circle cx="351" cy="68"  r="4.5" fill="var(--c-m5-35)"/>
+            <circle cx="346" cy="122" r="4.5" fill="var(--c-m5-35)"/>
+            <circle cx="376" cy="100" r="4.5" fill="var(--c-m5-35)"/>
+            <circle cx="396" cy="72"  r="4.5" fill="var(--c-m5-35)"/>
+            <circle cx="401" cy="130" r="4.5" fill="var(--c-m5-35)"/>
+            <circle cx="428" cy="84"  r="4.5" fill="var(--c-m5-35)"/>
+            <circle cx="444" cy="112" r="4.5" fill="var(--c-m5-35)"/>
+            <circle cx="462" cy="90"  r="4.5" fill="var(--c-m5-35)"/>
+            <circle cx="468" cy="128" r="4.5" fill="var(--c-m5-35)"/>
+            <path d="M 322 134 Q 360 112 396 92 Q 430 74 462 62" stroke="var(--text)" stroke-width="2" fill="none"/>
+            <circle cx="322" cy="134" r="5.5" fill="var(--mono-white)" stroke="var(--text)" stroke-width="1.5"/>
+            <circle cx="356" cy="116" r="5.5" fill="var(--mono-white)" stroke="var(--text)" stroke-width="1.5"/>
+            <circle cx="392" cy="95"  r="5.5" fill="var(--mono-white)" stroke="var(--text)" stroke-width="1.5"/>
+            <circle cx="428" cy="76"  r="5.5" fill="var(--mono-white)" stroke="var(--text)" stroke-width="1.5"/>
+            <circle cx="462" cy="62"  r="5.5" fill="var(--mono-white)" stroke="var(--text)" stroke-width="1.5"/>
+            <text class="svg-cap" x="398" y="156" text-anchor="middle">추세선 = 변화의 방향 (Weak Signal)</text>
+            <text class="svg-cap" x="250" y="180" text-anchor="middle">Ansoff(1975) - 통계의 임계치 아래에 있어도 맥락에서는 신호가 됩니다</text>
+        </svg>`
+            },
+
             d: {
                 badge: '토성형 · 시스템 다이나믹스',
                 formula: '정책 변화 → 시스템 구조 변화 매핑',
                 explain: '행정 정책 하나가 바뀌면, 그 영향은 예상치 못한 곳까지 번집니다. 시스템 다이나믹스는 이 인과 구조를 피드백 루프로 그려냅니다. 강화 루프는 변화가 스스로 증폭되는 경로를, 균형 루프는 그 변화를 억제하는 경로를 보여줍니다. 루프를 그리다 보면 현장에서 쌓이는 데이터가 개념 구조의 어느 부분을 바꿔야 하는지가 드러납니다.',
-                svg: `<svg viewBox="0 0 500 190" xmlns="http://www.w3.org/2000/svg" style="font-family:var(--font-body);">
+                svg: `<svg viewBox="-20 0 540 190" xmlns="http://www.w3.org/2000/svg" style="font-family:var(--font-body);">
             <defs>
                 <marker id="md1" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="var(--mono-950)"/></marker>
                 <marker id="md2" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="var(--mono-800)"/></marker>

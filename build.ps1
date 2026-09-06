@@ -123,10 +123,47 @@ if ([System.IO.Directory]::Exists($JsDir)) {
 # =========================================================
 
 # HTML Minification
+# <script> 블록 내부는 건드리지 않고, 바깥의 HTML 주석만 제거
+# (난독화된 JS 코드 안의 <!-- 패턴이 잘못 제거되는 문제 방지)
 function Optimize-Html($content) {
-    # Remove HTML comments <!-- ... -->
-    $content = [System.Text.RegularExpressions.Regex]::Replace($content, "(?s)<!--.*?-->", "")
-    # Remove empty lines
+    $sb  = [System.Text.StringBuilder]::new($content.Length)
+    $i   = 0
+    $len = $content.Length
+
+    while ($i -lt $len) {
+        # <script 태그 시작 감지 → </script> 까지 원본 그대로 복사
+        if (($i + 7) -le $len -and $content.Substring($i, 7) -eq '<script') {
+            $nc = if (($i + 7) -lt $len) { $content[$i + 7] } else { '' }
+            if ($nc -eq '>' -or $nc -eq ' ' -or $nc -eq "`n" -or $nc -eq "`r") {
+                $endScript = $content.IndexOf('</script>', $i)
+                if ($endScript -eq -1) {
+                    [void]$sb.Append($content.Substring($i))
+                    $i = $len
+                } else {
+                    $endScript += '</script>'.Length
+                    [void]$sb.Append($content.Substring($i, $endScript - $i))
+                    $i = $endScript
+                }
+                continue
+            }
+        }
+        # <!-- 주석 시작 감지 → --> 까지 건너뜀
+        if (($i + 4) -le $len -and $content.Substring($i, 4) -eq '<!--') {
+            $endCmt = $content.IndexOf('-->', $i + 4)
+            if ($endCmt -eq -1) {
+                $i = $len          # 닫히지 않은 주석 → 나머지 전부 버림
+            } else {
+                $i = $endCmt + 3
+            }
+            continue
+        }
+        # 일반 문자 → 그대로 복사
+        [void]$sb.Append($content[$i])
+        $i++
+    }
+
+    $content = $sb.ToString()
+    # 빈 줄 정리
     $content = [System.Text.RegularExpressions.Regex]::Replace($content, "(?m)^\s*[\r\n]+", "`r`n")
     return $content.Trim()
 }
