@@ -13745,19 +13745,20 @@ ${domainCtx}${upperCtx}
         // ── W3C Onto-Semantic Color Palette (다이어그램 공통 컬러 시스템) ──
         // vis.js는 HTML5 Canvas 렌더링 엔진 — CSS 변수 미지원. hex 직접값 필수 (아키텍처 제약)
         const VIS_COL = {
-            owlClass: { bg: '#FAFAFA', bd: '#27272A', ft: '#27272A' }, // L2 도메인 클래스 (블루)
+            owlRoot:  { bg: '#1e3a8a', bd: '#1d4ed8', ft: '#FFFFFF' },  // L2 루트 owl:Class (딛블루)
+            owlClass: { bg: '#dbeafe', bd: '#2563eb', ft: '#1e3a8a' },  // L2 서브 owl:Class (라이트블루)
             upperClass: { bg: '#f5f3ff', bd: '#7c3aed', ft: '#5b21b6' }, // L2 상위 클래스 (퍼플)
-            objProp: { bg: '#f0fdf4', bd: '#16a34a', ft: '#15803d' }, // L3 객체 속성 (그린)
-            dataProp: { bg: '#FAFAFA', bd: '#3F3F46', ft: '#3F3F46' }, // L3 데이터 속성 (청록)
-            triple: { bg: '#FAFAFA', bd: '#18181B', ft: '#27272A' }, // L4 트리플 (네이비)
-            abox: { bg: '#FAFAFA', bd: '#3F3F46', ft: '#3F3F46' }, // L4 인스턴스 (사이언)
-            derived: { bg: '#dcfce7', bd: '#16a34a', ft: '#15803d' }, // L4 파생 속성
-            swrlCrit: { bg: '#fff1f1', bd: '#b91c1c', ft: '#991b1b' }, // L5 CRITICAL (레드)
-            swrlHigh: { bg: '#fff7ed', bd: '#c05621', ft: '#9a3412' }, // L5 HIGH (오렌지)
-            swrlMed: { bg: '#fffbeb', bd: '#b45309', ft: '#92400e' }, // L5 MEDIUM (앰버)
-            swrlLow: { bg: '#f0fdf4', bd: '#15803d', ft: '#166534' }, // L5 LOW (그린)
-            exception: { bg: '#fff7ed', bd: '#c05621', ft: '#9a3412' }, // L5 예외규칙 (오렌지)
-            shacl: { bg: '#fffbeb', bd: '#92400e', ft: '#92400e' }, // L5 SHACL Shape (골드브라운)
+            objProp: { bg: '#f0fdf4', bd: '#16a34a', ft: '#15803d' },    // L3 객체 속성 (그린)
+            dataProp: { bg: '#e0f2fe', bd: '#0891b2', ft: '#0e7490' },   // L3 데이터 속성 (틸)
+            triple: { bg: '#eef2ff', bd: '#4f46e5', ft: '#3730a3' },     // L4 트리플 (인디고)
+            abox: { bg: '#e0f7fa', bd: '#0369a1', ft: '#075985' },       // L4 인스턴스 (사이안블루)
+            derived: { bg: '#dcfce7', bd: '#16a34a', ft: '#15803d' },    // L4 파생 속성
+            swrlCrit: { bg: '#fff1f1', bd: '#b91c1c', ft: '#991b1b' },   // L5 CRITICAL (레드)
+            swrlHigh: { bg: '#fff7ed', bd: '#c05621', ft: '#9a3412' },   // L5 HIGH (오렌지)
+            swrlMed: { bg: '#fffbeb', bd: '#b45309', ft: '#92400e' },    // L5 MEDIUM (앤버)
+            swrlLow: { bg: '#f0fdf4', bd: '#15803d', ft: '#166534' },    // L5 LOW (그린)
+            exception: { bg: '#fff7ed', bd: '#c05621', ft: '#9a3412' },  // L5 예외규칙 (오렌지)
+            shacl: { bg: '#fffbeb', bd: '#92400e', ft: '#92400e' },      // L5 SHACL Shape (골드브라운)
         };
         function swrlCol(r) {
             if (r === 'CRITICAL') return VIS_COL.swrlCrit;
@@ -13784,9 +13785,10 @@ ${domainCtx}${upperCtx}
                 badgeLayer: { bg: '#ffedd5', col: '#c05621' },
             },
             owlClass: {
-                bg: '#FAFAFA', bd: '#27272A', ft: '#27272A',
+                bg: '#dbeafe', bd: '#2563eb', ft: '#1e3a8a',
+                rootBg: '#1e3a8a', rootFt: '#FFFFFF',
                 badgeW3C: { bg: '#ede9fe', col: '#5b21b6' },
-                badgeLayer: { bg: '#F4F4F5', col: '#27272A' },
+                badgeLayer: { bg: '#dbeafe', col: '#2563eb' },
             },
             upperClass: {
                 bg: '#f5f3ff', bd: '#7c3aed', ft: '#5b21b6',
@@ -13800,18 +13802,18 @@ ${domainCtx}${upperCtx}
                 domainCol: '#15803d', rangeCol: '#3F3F46', inverseCol: '#7c3aed',
             },
             dataProp: {
-                bg: '#FAFAFA', bd: '#3F3F46', ft: '#3F3F46',
-                badgeLayer: { bg: '#FAFAFA', col: '#3F3F46' },
+                bg: '#e0f2fe', bd: '#0891b2', ft: '#0e7490',
+                badgeLayer: { bg: '#e0f2fe', col: '#0891b2' },
             },
             triple: {
-                bg: '#FAFAFA', bd: '#18181B', ft: '#27272A',
-                badgeW3C: { bg: '#F4F4F5', col: '#27272A' },
-                badgeLayer: { bg: '#FAFAFA', col: '#18181B' },
-                subjCol: '#18181B', predCol: '#52525B', objCol: '#3F3F46', srcCol: '#A1A1AA',
+                bg: '#eef2ff', bd: '#4f46e5', ft: '#3730a3',
+                badgeW3C: { bg: '#e0e7ff', col: '#3730a3' },
+                badgeLayer: { bg: '#eef2ff', col: '#4f46e5' },
+                subjCol: '#4f46e5', predCol: '#6366f1', objCol: '#818cf8', srcCol: '#a5b4fc',
             },
             abox: {
-                bg: '#FAFAFA', bd: '#3F3F46', ft: '#3F3F46',
-                badgeLayer: { bg: '#F4F4F5', col: '#3F3F46' },
+                bg: '#e0f7fa', bd: '#0369a1', ft: '#075985',
+                badgeLayer: { bg: '#e0f2fe', col: '#0369a1' },
             },
             shacl: {
                 bg: '#fffbeb', bd: '#92400e', ft: '#92400e',
@@ -13870,18 +13872,67 @@ ${domainCtx}${upperCtx}
             const network = new vis.Network(el, { nodes: nodesDS, edges: edgesDS }, merged);
             window._visNets[containerId] = network;
             network.once('stabilized', () => { try { network.fit({ animation: { duration: 300, easingFunction: 'easeInOutQuad' } }); } catch (e) { } });
-            // 커스텀 tooltip 이벤트 (body append)
+            // hover 색상 고정: 배경색 변화 없이 테두리만 강조 (vis.js 기본 배경 변화 억제)
+            nodesDS.forEach(function(nd) {
+                var col = nd.color;
+                if (col && typeof col === 'object' && col.background) {
+                    nodesDS.update({ id: nd.id, color: {
+                        background: col.background, border: col.border || col.background,
+                        highlight: { background: col.background, border: col.border || col.background },
+                        hover:     { background: col.background, border: col.border || col.background }
+                    }});
+                }
+            });
+            // 에지 색상 고정: hover/select 시 에지 색상 변화 억제
+            edgesDS.forEach(function(ed) {
+                var col = ed.color;
+                if (col && typeof col === 'object' && col.color) {
+                    edgesDS.update({ id: ed.id, color: {
+                        color: col.color,
+                        highlight: col.color,
+                        hover: col.color
+                    }});
+                }
+            });
+            // hover 테두리 두께 + 글씨 크기 강조
+            var _hvOrig = new Map();
             network.on('hoverNode', function (p) {
-                const nd = nodesDS.get(p.node);
-                window._visShowTip(nd?._tip || null);
+                var nd = nodesDS.get(p.node);
+                window._visShowTip(nd && nd._tip ? nd._tip : null);
+                var bw = (nd && nd.borderWidth != null) ? nd.borderWidth : 2;
+                var origFont = (nd && nd.font) ? Object.assign({}, nd.font) : null;
+                var fs = (origFont && origFont.size != null) ? origFont.size : VIS_DS.font.base;
+                _hvOrig.set(p.node, { bw: bw, font: origFont });
+                var hFont = Object.assign({}, origFont || {}, { size: fs + 2 });
+                nodesDS.update({ id: p.node, borderWidth: bw + 2, font: hFont });
             });
-            network.on('blurNode', window._visHideTip);
+            network.on('blurNode', function (p) {
+                window._visHideTip();
+                var orig = _hvOrig.get(p.node);
+                if (orig !== undefined) {
+                    var upd = { id: p.node, borderWidth: orig.bw };
+                    if (orig.font !== null) upd.font = orig.font;
+                    nodesDS.update(upd);
+                    _hvOrig.delete(p.node);
+                }
+            });
+            var _hvEdgeOrig = new Map();
             network.on('hoverEdge', function (p) {
-                const ed = edgesDS.get(p.edge);
-                window._visShowTip(ed?._tip || null);
+                var ed = edgesDS.get(p.edge);
+                window._visShowTip(ed && ed._tip ? ed._tip : null);
+                var origW = (ed && ed.width != null) ? ed.width : 1.5;
+                _hvEdgeOrig.set(p.edge, origW);
+                edgesDS.update({ id: p.edge, width: origW + 2 });
             });
-            network.on('blurEdge', window._visHideTip);
-            if (opts?.legend) _renderVisLegend(el, opts.legend);
+            network.on('blurEdge', function (p) {
+                window._visHideTip();
+                var origW = _hvEdgeOrig.get(p.edge);
+                if (origW !== undefined) {
+                    edgesDS.update({ id: p.edge, width: origW });
+                    _hvEdgeOrig.delete(p.edge);
+                }
+            });
+            if (opts && opts.legend) _renderVisLegend(el, opts.legend);
         }
 
         function _renderVisLegend(el, items) {
@@ -13943,9 +13994,9 @@ ${domainCtx}${upperCtx}
                     id, label: lbl(c.label), _tip: tip || undefined,
                     shape: isRoot ? 'ellipse' : 'box',
                     color: isRoot
-                        ? { background: '#27272A', border: '#27272A', highlight: { background: '#27272A', border: '#27272A' } }
-                        : { background: VIS_COL.owlClass.bg, border: VIS_COL.owlClass.bd, highlight: { background: '#F4F4F5', border: '#27272A' } },
-                    font: { color: isRoot ? '#FFFFFF' : VIS_COL.owlClass.ft }
+                        ? { background: VIS_COL.owlRoot.bg, border: VIS_COL.owlRoot.bd, highlight: { background: VIS_COL.owlRoot.bd, border: VIS_COL.owlRoot.bd } }
+                        : { background: VIS_COL.owlClass.bg, border: VIS_COL.owlClass.bd, highlight: { background: '#bfdbfe', border: VIS_COL.owlClass.bd } },
+                    font: { color: isRoot ? VIS_COL.owlRoot.ft : VIS_COL.owlClass.ft }
                 });
             });
             classes.forEach(c => {
@@ -13953,7 +14004,7 @@ ${domainCtx}${upperCtx}
                 const from = gn(c.label), to = gn(c.subClassOf);
                 if (!from || !to) return;
                 const k = from + '|sub|' + to;
-                if (!seen.has(k)) { seen.add(k); edges.push({ from, to, label: 'subClassOf', width: 2.5, color: { color: '#27272A', highlight: '#27272A' }, dashes: false }); }
+                if (!seen.has(k)) { seen.add(k); edges.push({ from, to, label: 'subClassOf', width: 2.5, color: { color: VIS_COL.owlClass.bd, highlight: VIS_COL.owlRoot.bd }, dashes: false }); }
             });
             triples.forEach(t => {
                 if (!t.subject || !t.object) return;
@@ -14020,7 +14071,7 @@ ${domainCtx}${upperCtx}
                 if (!nodes.find(n => n.id === dc)) {
                     nodes.push({
                         id: dc, label: lbl(m.domain_class), shape: 'box', _tip: m.domain ? '도메인: ' + m.domain : undefined,
-                        color: { background: VIS_COL.owlClass.bg, border: VIS_COL.owlClass.bd, highlight: { background: '#F4F4F5', border: '#27272A' } },
+                        color: { background: VIS_COL.owlClass.bg, border: VIS_COL.owlClass.bd, highlight: { background: '#bfdbfe', border: VIS_COL.owlClass.bd } },
                         font: { color: VIS_COL.owlClass.ft }
                     });
                 }
@@ -14112,10 +14163,10 @@ ${domainCtx}${upperCtx}
             const { nodes, edges } = buildSchemaVisData(schema);
             renderOntologyVis(containerId, nodes, edges, {
                 legend: [
-                    { type: 'node', nodeShape: 'ellipse', color: '#27272A', label: 'owl:Class (루트)' },
+                    { type: 'node', nodeShape: 'ellipse', color: VIS_COL.owlRoot.bg, border: VIS_COL.owlRoot.bd, label: 'owl:Class (루트)' },
                     { type: 'node', nodeShape: 'box', color: VIS_COL.owlClass.bg, border: VIS_COL.owlClass.bd, label: 'owl:Class (서브)' },
                     { type: 'node', nodeShape: 'database', color: VIS_COL.shacl.bg, border: VIS_COL.shacl.bd, label: 'SHACL Shape' },
-                    { type: 'edge', color: '#27272A', bold: true, label: 'rdfs:subClassOf' },
+                    { type: 'edge', color: VIS_COL.owlClass.bd, bold: true, label: 'rdfs:subClassOf' },
                     { type: 'edge', color: VIS_COL.objProp.bd, label: 'owl:ObjectProperty' },
                     { type: 'edge', color: VIS_COL.shacl.bd, dash: true, label: 'sh:targetClass (SHACL)' },
                 ]
@@ -14796,20 +14847,20 @@ ${domainCtx}${upperCtx}
                 _detailEl.style.display = 'block';
             }
             function _showEntityDetail(label, data) {
-                _sps('#D4D4D8', '#FAFAFA');
+                _sps(KG_STYLE.abox.bd, KG_STYLE.abox.bg);
                 const subj = data.asSubj || [], obj = data.asObj || [];
                 _detailEl.innerHTML =
-                    _hdr([_wb('RDF 1.1'), _lb('L4'), _badge('owl:NamedIndividual', '#F4F4F5', '#18181B')], '', label) +
-                    (subj.length ? _sec(`주어(Subject)로 참여 — ${subj.length}개 트리플`, '#18181B', _triRow(subj)) : '') +
-                    (obj.length ? _sec(`목적어(Object)로 참여 — ${obj.length}개 트리플`, '#18181B', _triRow(obj)) : '');
+                    _hdr([_wb('RDF 1.1'), _lb('L4'), _badge('owl:NamedIndividual', KG_STYLE.abox.badgeLayer.bg, KG_STYLE.abox.ft)], '', label) +
+                    (subj.length ? _sec(`주어(Subject)로 참여 — ${subj.length}개 트리플`, KG_STYLE.abox.bd, _triRow(subj)) : '') +
+                    (obj.length ? _sec(`목적어(Object)로 참여 — ${obj.length}개 트리플`, KG_STYLE.abox.bd, _triRow(obj)) : '');
                 _detailEl.style.display = 'block';
             }
             function _showTripleEdgeDetail(t) {
-                _sps('#D4D4D8', '#FAFAFA');
+                _sps(KG_STYLE.triple.bd, KG_STYLE.triple.bg);
                 _detailEl.innerHTML =
-                    _hdr([_wb('RDF 1.1'), _lb('L4'), _badge('RDF Triple', '#F4F4F5', '#18181B')], '', 'RDF 트리플 관계') +
+                    _hdr([_wb('RDF 1.1'), _lb('L4'), _badge('RDF Triple', KG_STYLE.triple.badgeLayer.bg, KG_STYLE.triple.ft)], '', 'RDF 트리플 관계') +
                     _spill(t.subject || '', t.predicate || '', t.object || '') +
-                    _kv('출처 (source)', t.source, '#3F3F46');
+                    _kv('출처 (source)', t.source, KG_STYLE.triple.subjCol);
                 _detailEl.style.display = 'block';
             }
             // ─── 구조 엣지 카드 ───
