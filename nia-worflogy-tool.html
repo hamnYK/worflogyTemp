@@ -533,6 +533,148 @@
         }
 
         /* ────────────────────────────────────────────────────────────────
+           THEME OVERRIDES — [data-theme] 속성으로 런타임 교체
+           모달 내 순환 버튼이 html[data-theme] 속성을 설정
+           ──────────────────────────────────────────────────────────────── */
+
+        /* Paper — 독서 모드 / 블루라이트 최소화 (안구 피로 제로) */
+        [data-theme="paper"] {
+            --mono-black:  #1a120a;
+            --mono-950:    #2d2318;
+            --mono-900:    #4a3c30;
+            --mono-800:    #6b5a48;
+            --mono-700:    #8c7a68;
+            --mono-600:    #a89888;
+            --mono-500:    #c4b4a4;
+            --mono-300:    #ddd0c4;
+            --mono-200:    #ede5dc;
+            --mono-100:    #f5efe6;
+            --mono-50:     #faf6f0;
+            --mono-white:  #fdf9f4;
+            --ink:         #2d2318;
+            --ink-hover:   #1a120a;
+            --coral:       #4a3c30;
+            --sand:        #f5efe6;
+            --sand-dark:   #ede5dc;
+            --bg-primary:  #faf6f0;
+            --bg-card:     #fdf9f4;
+            --text:        #2d2318;
+            --text2:       #6b5a48;
+            --text3:       #a89888;
+            --border:      rgba(45,35,24,0.10);
+            --border-a:    rgba(45,35,24,0.25);
+            --c-ink-04:    rgba(45,35,24,0.04);
+            --c-ink-06:    rgba(45,35,24,0.06);
+            --c-ink-10:    rgba(45,35,24,0.10);
+            --c-ink-15:    rgba(45,35,24,0.15);
+            --c-ink-20:    rgba(45,35,24,0.20);
+            --grad:        linear-gradient(135deg, #2d2318 0%, #8c7a68 100%);
+        }
+
+        /* Zen — 집중력 / 선정원 미감 (자극 제로) */
+        [data-theme="zen"] {
+            --mono-black:  #0f1410;
+            --mono-950:    #1c2420;
+            --mono-900:    #2e3c32;
+            --mono-800:    #405448;
+            --mono-700:    #556a5c;
+            --mono-600:    #6c8470;
+            --mono-500:    #8aa090;
+            --mono-300:    #b8ccc0;
+            --mono-200:    #d4e4da;
+            --mono-100:    #e8f2ec;
+            --mono-50:     #f2f8f4;
+            --mono-white:  #f8fcf9;
+            --ink:         #1c2420;
+            --ink-hover:   #0f1410;
+            --coral:       #2e3c32;
+            --sand:        #e8f2ec;
+            --sand-dark:   #d4e4da;
+            --bg-primary:  #f2f8f4;
+            --bg-card:     #f8fcf9;
+            --text:        #1c2420;
+            --text2:       #405448;
+            --text3:       #6c8470;
+            --border:      rgba(28,36,32,0.10);
+            --border-a:    rgba(28,36,32,0.25);
+            --c-ink-04:    rgba(28,36,32,0.04);
+            --c-ink-06:    rgba(28,36,32,0.06);
+            --c-ink-10:    rgba(28,36,32,0.10);
+            --c-ink-15:    rgba(28,36,32,0.15);
+            --c-ink-20:    rgba(28,36,32,0.20);
+            --grad:        linear-gradient(135deg, #1c2420 0%, #6c8470 100%);
+        }
+
+        /* Calm — 스트레스 해소 / 혈압 안정 (탈이된 슬레이트 블루) */
+        [data-theme="calm"] {
+            --mono-black:  #0a0f1e;
+            --mono-950:    #141e38;
+            --mono-900:    #203050;
+            --mono-800:    #2c4268;
+            --mono-700:    #3a5480;
+            --mono-600:    #5070a0;
+            --mono-500:    #6888b8;
+            --mono-300:    #a4bcda;
+            --mono-200:    #c8d8f0;
+            --mono-100:    #e0eaf8;
+            --mono-50:     #f0f4fc;
+            --mono-white:  #f8faff;
+            --ink:         #141e38;
+            --ink-hover:   #0a0f1e;
+            --coral:       #203050;
+            --sand:        #e0eaf8;
+            --sand-dark:   #c8d8f0;
+            --bg-primary:  #f0f4fc;
+            --bg-card:     #f8faff;
+            --text:        #141e38;
+            --text2:       #2c4268;
+            --text3:       #5070a0;
+            --border:      rgba(20,30,56,0.10);
+            --border-a:    rgba(20,30,56,0.25);
+            --c-ink-04:    rgba(20,30,56,0.04);
+            --c-ink-06:    rgba(20,30,56,0.06);
+            --c-ink-10:    rgba(20,30,56,0.10);
+            --c-ink-15:    rgba(20,30,56,0.15);
+            --c-ink-20:    rgba(20,30,56,0.20);
+            --grad:        linear-gradient(135deg, #141e38 0%, #5070a0 100%);
+        }
+
+        /* Mist — 활력 회복 / 새벽 안개 틴트 (민트-틸 리프레시) */
+        [data-theme="mist"] {
+            --mono-black:  #041818;
+            --mono-950:    #0a2828;
+            --mono-900:    #144040;
+            --mono-800:    #1e5858;
+            --mono-700:    #2a7070;
+            --mono-600:    #3a8888;
+            --mono-500:    #54a0a0;
+            --mono-300:    #96cccc;
+            --mono-200:    #c0e4e4;
+            --mono-100:    #dcf4f4;
+            --mono-50:     #f0fafa;
+            --mono-white:  #f8fdfd;
+            --ink:         #0a2828;
+            --ink-hover:   #041818;
+            --coral:       #144040;
+            --sand:        #dcf4f4;
+            --sand-dark:   #c0e4e4;
+            --bg-primary:  #f0fafa;
+            --bg-card:     #f8fdfd;
+            --text:        #0a2828;
+            --text2:       #1e5858;
+            --text3:       #3a8888;
+            --border:      rgba(10,40,40,0.10);
+            --border-a:    rgba(10,40,40,0.25);
+            --c-ink-04:    rgba(10,40,40,0.04);
+            --c-ink-06:    rgba(10,40,40,0.06);
+            --c-ink-10:    rgba(10,40,40,0.10);
+            --c-ink-15:    rgba(10,40,40,0.15);
+            --c-ink-20:    rgba(10,40,40,0.20);
+            --grad:        linear-gradient(135deg, #0a2828 0%, #3a8888 100%);
+        }
+
+
+        /* ────────────────────────────────────────────────────────────────
            LAYER 2 · RESET & BASE
            ──────────────────────────────────────────────────────────────── */
         * {
@@ -17002,9 +17144,45 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
             _logUse('load_portal_item', { name, chars: text.length });
         }
 
+        // ── 테마 순환 ──────────────────────────────────────────────────────────────
+        const THEMES = [
+            { name: 'Monochrome', key: null },
+            { name: 'Paper',      key: 'paper' },
+            { name: 'Zen',        key: 'zen' },
+            { name: 'Calm',       key: 'calm' },
+            { name: 'Mist',       key: 'mist' }
+        ];
+        let _themeIdx = 0;
+        function applyTheme(idx) {
+            _themeIdx = ((idx % THEMES.length) + THEMES.length) % THEMES.length;
+            const t = THEMES[_themeIdx];
+            const root = document.documentElement;
+            if (t.key) root.setAttribute('data-theme', t.key);
+            else root.removeAttribute('data-theme');
+            const lbl = document.getElementById('theme-cycle-label');
+            if (lbl) lbl.textContent = t.name;
+            // 활성 닷 강조
+            for (let i = 0; i < THEMES.length; i++) {
+                const dot = document.getElementById('theme-dot-' + i);
+                if (dot) dot.style.outline = i === _themeIdx ? '2px solid var(--ink)' : 'none';
+                if (dot) dot.style.outlineOffset = '2px';
+            }
+            try { localStorage.setItem('wf-theme', _themeIdx); } catch(e) {}
+        }
+        function cycleTheme() { applyTheme(_themeIdx + 1); }
+        // 저장된 테마 복원
+        (function() {
+            try {
+                const saved = parseInt(localStorage.getItem('wf-theme') || '0', 10);
+                if (!isNaN(saved) && saved > 0) applyTheme(saved);
+                else applyTheme(0);
+            } catch(e) { applyTheme(0); }
+        })();
+        // ── 테마 순환 끝 ──────────────────────────────────────────────────────────
+
     </script>
     <!-- 도네이션 모달 -->
-    <div id="dn-modal" class="dn-overlay" onclick="if(event.target===this)closeDonate()">
+    <div id="dn-modal" class="dn-overlay">
         <div class="dn-box">
             <button class="dn-close" aria-label="닫기" data-action="closeDonate">
                 <svg viewBox="0 0 24 24"
@@ -17023,6 +17201,21 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
                 <div>
                     <div class="dn-title">데이터 기반 지능형 솔루션으로<br>함께 성장해 주세요</div>
                     <div class="dn-subtitle">Worflogy Ontology Workshop - Open Development</div>
+                </div>
+            </div>
+            <!-- 테마 순환 버튼 -->
+            <div id="theme-cycle-bar" style="padding:.75rem 2rem .6rem;border-bottom:var(--bw-thin) solid var(--border);display:flex;align-items:center;gap:.75rem;background:var(--c-ink-03)">
+                <span style="font-size:var(--fs-xs);font-weight:var(--fw-semibold);color:var(--text3);letter-spacing:.05em;text-transform:uppercase;flex-shrink:0">테마</span>
+                <button id="theme-cycle-btn" onclick="cycleTheme()" style="display:inline-flex;align-items:center;gap:.5rem;padding:.3rem .9rem;font-size:var(--fs-xs);font-weight:var(--fw-bold);font-family:var(--font-ui);letter-spacing:.04em;border:var(--bw-medium) solid var(--border-a);border-radius:var(--r-full);background:var(--bg-card);color:var(--ink);cursor:pointer;transition:all var(--t);box-shadow:0 1px 4px var(--c-ink-08)" onmouseover="this.style.background='var(--c-ink-06)'" onmouseout="this.style.background='var(--bg-card)'">
+                    <svg viewBox="0 0 24 24" style="width:11px;height:11px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.1"/></svg>
+                    <span id="theme-cycle-label">Monochrome</span>
+                </button>
+                <div style="display:flex;gap:.3rem;margin-left:auto">
+                    <div id="theme-dot-0" onclick="applyTheme(0)" title="Monochrome" style="width:14px;height:14px;border-radius:50%;background:#0F172A;border:2px solid rgba(15,23,42,0.5);cursor:pointer;transition:transform var(--t)" onmouseover="this.style.transform='scale(1.25)'" onmouseout="this.style.transform='scale(1)'"></div>
+                    <div id="theme-dot-1" onclick="applyTheme(1)" title="Paper" style="width:14px;height:14px;border-radius:50%;background:#8c7a68;border:2px solid rgba(45,35,24,0.5);cursor:pointer;transition:transform var(--t)" onmouseover="this.style.transform='scale(1.25)'" onmouseout="this.style.transform='scale(1)'"></div>
+                    <div id="theme-dot-2" onclick="applyTheme(2)" title="Zen" style="width:14px;height:14px;border-radius:50%;background:#6c8470;border:2px solid rgba(28,36,32,0.5);cursor:pointer;transition:transform var(--t)" onmouseover="this.style.transform='scale(1.25)'" onmouseout="this.style.transform='scale(1)'"></div>
+                    <div id="theme-dot-3" onclick="applyTheme(3)" title="Calm" style="width:14px;height:14px;border-radius:50%;background:#5070a0;border:2px solid rgba(20,30,56,0.5);cursor:pointer;transition:transform var(--t)" onmouseover="this.style.transform='scale(1.25)'" onmouseout="this.style.transform='scale(1)'"></div>
+                    <div id="theme-dot-4" onclick="applyTheme(4)" title="Mist" style="width:14px;height:14px;border-radius:50%;background:#3a8888;border:2px solid rgba(10,40,40,0.5);cursor:pointer;transition:transform var(--t)" onmouseover="this.style.transform='scale(1.25)'" onmouseout="this.style.transform='scale(1)'"></div>
                 </div>
             </div>
             <div class="dn-body">
