@@ -160,6 +160,50 @@
             --c-teal-600: #0891b2;
             --c-teal-50:  #e0f2fe;
 
+            /* ── 행성 색상 토큰 (코스모스 다이어그램) ── */
+            /* 은하 (Galaxy) — 시맨틱 코스모스 중심 */
+            --p-galaxy-hi:   #ede0ff;   /* 은하 코어 광휘 */
+            --p-galaxy-mid:  #7c3aed;   /* 은하 중심 자주 */
+            --p-galaxy-deep: #1e0654;   /* 은하 심부 */
+            --p-galaxy-halo1: rgba(90, 20, 180, 0.06);
+            --p-galaxy-halo2: rgba(90, 20, 180, 0.11);
+
+            /* 목성형 (Jupiter) — 따뜻한 주황-갈색 밴드 */
+            --p-jupiter-hi:   #f5deb8;  /* 크림/연 황갈 */
+            --p-jupiter-mid:  #c87040;  /* 주황-갈색 밴드 */
+            --p-jupiter-deep: #6b2c08;  /* 대적점 암부 */
+
+            /* 해왕성형 (Neptune) — 선명한 코발트 블루 */
+            --p-neptune-hi:   #90d4f8;  /* 상층 대기 밝은 청 */
+            --p-neptune-mid:  #1a6fcc;  /* 코발트 블루 */
+            --p-neptune-deep: #0a2850;  /* 심해 네이비 */
+
+            /* 토성형 (Saturn) — 따뜻한 황금 */
+            --p-saturn-hi:   #f0dc98;   /* 연한 금빛 */
+            --p-saturn-mid:  #c8a040;   /* 따뜻한 황금 */
+            --p-saturn-ring: #d4b85a;   /* 고리 색상 */
+            --p-saturn-deep: #7a5c20;   /* 암부 */
+
+            /* 화성형 (Mars) — 산화철 적갈색 */
+            --p-mars-hi:   #e8845a;     /* 하이라이트 황주황 */
+            --p-mars-mid:  #c03a10;     /* 산화철 레드 */
+            --p-mars-deep: #5a1000;     /* 암부 */
+
+            /* 지구형 (Earth) — 파란 바다 + 녹색 대륙 */
+            --p-earth-hi:   #8dd4f0;    /* 구름/얕은 바다 */
+            --p-earth-mid:  #1e7ac8;    /* 심해 블루 */
+            --p-earth-deep: #0a2d58;    /* 심해 암부 */
+
+            /* 수성형 (Mercury) — 어두운 암석 회색 */
+            --p-mercury-hi:   #c0b8b0;  /* 밝은 크레이터 */
+            --p-mercury-mid:  #686060;  /* 암석 회갈 */
+            --p-mercury-deep: #181010;  /* 극 암부 */
+
+            /* 적색왜성형 (Red Dwarf) — 저온 적색 항성 */
+            --p-rdwarf-hi:   #ff8040;   /* 앰버 코어 */
+            --p-rdwarf-mid:  #c02020;   /* 진홍 적색 */
+            --p-rdwarf-deep: #480808;   /* 극 암부 */
+
             /* ── Surface & Background ── */
             --bg-primary: #FAFAF8;
             /* Worflogy Off-White 기본 배경 */
@@ -4122,7 +4166,7 @@
                         <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
                         <line x1="12" y1="17" x2="12.01" y2="17" />
                     </svg> 비중 변화 해설</button>
-                <div class="ld-contact">worflogy@gmail.com &nbsp;|&nbsp; (주)워플로지</div>
+                <div class="ld-contact"><span id="app-footer-ver"></span> &middot; (주)워플로지</div>
             </div>
         </div>
 
@@ -4150,52 +4194,61 @@
                         <feGaussianBlur stdDeviation="5" result="blur" />
                         <feComposite in="SourceGraphic" in2="blur" operator="over" />
                     </filter>
+                    <!-- 은하 (Galaxy): 딥 퍼플 코어 → 자주 → 심우주 -->
                     <radialGradient id="ld-a" cx="38%" cy="32%" r="62%">
-                        <stop offset="0%" stop-color="var(--mono-white)" />
-                        <stop offset="35%" stop-color="var(--mono-300)" />
-                        <stop offset="70%" stop-color="var(--mono-800)" />
-                        <stop offset="100%" stop-color="var(--mono-black)" />
+                        <stop offset="0%"   stop-color="var(--p-galaxy-hi)" />
+                        <stop offset="30%"  stop-color="var(--p-galaxy-mid)" />
+                        <stop offset="75%"  stop-color="var(--p-galaxy-deep)" />
+                        <stop offset="100%" stop-color="#000" />
                     </radialGradient>
+                    <!-- 목성 (Jupiter): 크림 → 주황-갈색 밴드 → 적갈 암부 -->
                     <radialGradient id="ld-b" cx="36%" cy="30%" r="65%">
-                        <stop offset="0%" stop-color="var(--mono-100)" />
-                        <stop offset="45%" stop-color="var(--text2)" />
-                        <stop offset="100%" stop-color="var(--text)" />
+                        <stop offset="0%"   stop-color="var(--p-jupiter-hi)" />
+                        <stop offset="45%"  stop-color="var(--p-jupiter-mid)" />
+                        <stop offset="100%" stop-color="var(--p-jupiter-deep)" />
                     </radialGradient>
+                    <!-- 해왕성 (Neptune): 밝은 청 → 코발트 → 네이비 -->
                     <radialGradient id="ld-c" cx="36%" cy="30%" r="65%">
-                        <stop offset="0%" stop-color="var(--mono-200)" />
-                        <stop offset="50%" stop-color="var(--mono-700)" />
-                        <stop offset="100%" stop-color="var(--mono-950)" />
+                        <stop offset="0%"   stop-color="var(--p-neptune-hi)" />
+                        <stop offset="50%"  stop-color="var(--p-neptune-mid)" />
+                        <stop offset="100%" stop-color="var(--p-neptune-deep)" />
                     </radialGradient>
+                    <!-- 토성 (Saturn): 연금빛 → 황금 → 암갈 -->
                     <radialGradient id="ld-d" cx="36%" cy="30%" r="65%">
-                        <stop offset="0%" stop-color="var(--mono-200)" />
-                        <stop offset="50%" stop-color="var(--text2)" />
-                        <stop offset="100%" stop-color="var(--text)" />
+                        <stop offset="0%"   stop-color="var(--p-saturn-hi)" />
+                        <stop offset="50%"  stop-color="var(--p-saturn-mid)" />
+                        <stop offset="100%" stop-color="var(--p-saturn-deep)" />
                     </radialGradient>
+                    <!-- 토성 고리 -->
                     <linearGradient id="ld-ring" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stop-color="var(--c-m5-05)" />
-                        <stop offset="30%" stop-color="var(--c-m5-35)" />
-                        <stop offset="70%" stop-color="var(--c-m5-35)" />
-                        <stop offset="100%" stop-color="var(--c-m5-05)" />
+                        <stop offset="0%"   stop-color="var(--p-saturn-ring)" stop-opacity="0.05" />
+                        <stop offset="30%"  stop-color="var(--p-saturn-ring)" stop-opacity="0.55" />
+                        <stop offset="70%"  stop-color="var(--p-saturn-ring)" stop-opacity="0.55" />
+                        <stop offset="100%" stop-color="var(--p-saturn-ring)" stop-opacity="0.05" />
                     </linearGradient>
+                    <!-- 화성 (Mars): 황주황 → 산화철 레드 → 암부 -->
                     <radialGradient id="ld-e" cx="36%" cy="30%" r="65%">
-                        <stop offset="0%" stop-color="var(--mono-100)" />
-                        <stop offset="45%" stop-color="var(--text2)" />
-                        <stop offset="100%" stop-color="var(--text)" />
+                        <stop offset="0%"   stop-color="var(--p-mars-hi)" />
+                        <stop offset="45%"  stop-color="var(--p-mars-mid)" />
+                        <stop offset="100%" stop-color="var(--p-mars-deep)" />
                     </radialGradient>
+                    <!-- 지구 (Earth): 구름/얕은 바다 → 심해 → 암부 -->
                     <radialGradient id="ld-f" cx="36%" cy="30%" r="65%">
-                        <stop offset="0%" stop-color="var(--mono-100)" />
-                        <stop offset="45%" stop-color="var(--mono-700)" />
-                        <stop offset="100%" stop-color="var(--mono-950)" />
+                        <stop offset="0%"   stop-color="var(--p-earth-hi)" />
+                        <stop offset="45%"  stop-color="var(--p-earth-mid)" />
+                        <stop offset="100%" stop-color="var(--p-earth-deep)" />
                     </radialGradient>
+                    <!-- 수성 (Mercury): 밝은 크레이터 → 암석 회갈 → 극 암부 -->
                     <radialGradient id="ld-g" cx="36%" cy="30%" r="65%">
-                        <stop offset="0%" stop-color="var(--mono-100)" />
-                        <stop offset="50%" stop-color="var(--text3)" />
-                        <stop offset="100%" stop-color="var(--text)" />
+                        <stop offset="0%"   stop-color="var(--p-mercury-hi)" />
+                        <stop offset="50%"  stop-color="var(--p-mercury-mid)" />
+                        <stop offset="100%" stop-color="var(--p-mercury-deep)" />
                     </radialGradient>
+                    <!-- 적색왜성 (Red Dwarf): 앰버 코어 → 진홍 → 극 암부 -->
                     <radialGradient id="ld-h" cx="38%" cy="32%" r="62%">
-                        <stop offset="0%" stop-color="var(--mono-300)" />
-                        <stop offset="40%" stop-color="var(--mono-800)" />
-                        <stop offset="100%" stop-color="var(--mono-black)" />
+                        <stop offset="0%"   stop-color="var(--p-rdwarf-hi)" />
+                        <stop offset="40%"  stop-color="var(--p-rdwarf-mid)" />
+                        <stop offset="100%" stop-color="var(--p-rdwarf-deep)" />
                     </radialGradient>
                 </defs>
                 <g id="ld-links">
@@ -4232,8 +4285,8 @@
                 </g>
                 <!-- A 항성: 온톨로지 -->
                 <g class="node-group lda" id="ld-node-a" onclick="openConcept('a')">
-                    <circle cx="400" cy="228" r="46" fill="var(--c-ink-04)" />
-                    <circle cx="400" cy="228" r="38" fill="var(--c-ink-06)" />
+                    <circle cx="400" cy="228" r="46" fill="var(--p-galaxy-halo1)" />
+                    <circle cx="400" cy="228" r="38" fill="var(--p-galaxy-halo2)" />
                     <circle class="node-circle" cx="400" cy="228" r="26" fill="url(#ld-a)"
                         filter="url(#ld-star-glow)" />
                     <text class="nd-star" x="400" y="190" text-anchor="middle">시맨틱 코스모스</text>
@@ -8370,6 +8423,7 @@ for r in results:
             s('app-logo-txt', APP_TITLE);
             s('app-org-name', APP_ORG);
             s('app-footer-copy', APP_COPYRIGHT);
+            s('app-footer-ver', APP_VERSION);
             s('app-intro-org', APP_ORG);
             s('app-intro-desc', APP_DESC);
         });
