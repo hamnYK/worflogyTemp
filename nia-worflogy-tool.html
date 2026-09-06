@@ -4283,7 +4283,7 @@
     <!-- ── LANDING OVERLAY ── -->
     <div id="landing" class="ld-overlay">
         <div class="ld-topbar">
-            <div class="ld-brand" onclick="closeLanding()">
+            <div class="ld-brand" data-action="closeLanding">
                 <div class="ld-brand-icon"><span class="fs-small" style="font-family:var(--font-sans);font-weight:var(--fw-bold);color:var(--mono-white);letter-spacing:-.04em;line-height:1;user-select:none;">?!</span></div>
                 <div class="ld-brand-text">
                     <span class="ld-org-name" id="app-brand-org"></span>
@@ -4292,13 +4292,13 @@
             </div>
             <div class="row-gap-lg">
                 <button class="ld-help-btn" id="ld-purpose-toggle" aria-label="강의 목적 패널 열기"
-                    onclick="toggleLdPurpose()"><svg viewBox="0 0 24 24"
+                    data-action="toggleLdPurpose"><svg viewBox="0 0 24 24"
                         style="width:var(--icon-md);height:var(--icon-md);stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round">
                         <polygon
                             points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
                     </svg> 강의 목적</button>
                 <button class="ld-help-btn" id="ld-help-toggle" aria-label="비중 변화 해설 패널 열기"
-                    onclick="toggleLdHelp()"><svg viewBox="0 0 24 24"
+                    data-action="toggleLdHelp"><svg viewBox="0 0 24 24"
                         style="width:var(--icon-md);height:var(--icon-md);stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round">
                         <circle cx="12" cy="12" r="10" />
                         <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
@@ -4403,7 +4403,7 @@
                     <path class="loop-arrow" id="ll-c-h" d="M 630 102 Q 792 272 708 448" marker-end="url(#ld-arr)" />
                 </g>
                 <!-- B 목성: 전체론적 관점 -->
-                <g class="node-group" id="ld-node-b" onclick="openConcept('b')">
+                <g class="node-group" id="ld-node-b" data-action="openConcept" data-args='["b"]'>
                     <circle cx="180" cy="90" r="22" fill="var(--c-ink-06)" />
                     <circle class="node-circle" cx="180" cy="90" r="16" fill="url(#ld-b)" />
                     <text class="nd-label-l" x="180" y="60" text-anchor="middle">전체론적 관점</text>
@@ -4413,7 +4413,7 @@
                     <text class="nd-pct" x="180" y="126" text-anchor="middle">8%→25%</text>
                 </g>
                 <!-- C 해왕성: Weak Signal -->
-                <g class="node-group" id="ld-node-c" onclick="openConcept('c')">
+                <g class="node-group" id="ld-node-c" data-action="openConcept" data-args='["c"]'>
                     <circle class="node-circle" cx="620" cy="90" r="13" fill="url(#ld-c)" />
                     <text class="nd-label-m" x="620" y="61" text-anchor="middle">Weak Signal</text>
                     <text class="nd-type" x="620" y="50" text-anchor="middle">해왕성형</text>
@@ -4422,7 +4422,7 @@
                     <text class="nd-pct" x="620" y="118" text-anchor="middle">3%→15%</text>
                 </g>
                 <!-- A 항성: 온톨로지 -->
-                <g class="node-group lda" id="ld-node-a" onclick="openConcept('a')">
+                <g class="node-group lda" id="ld-node-a" data-action="openConcept" data-args='["a"]'>
                     <circle cx="400" cy="228" r="46" fill="var(--p-galaxy-halo1)" />
                     <circle cx="400" cy="228" r="38" fill="var(--p-galaxy-halo2)" />
                     <circle class="node-circle" cx="400" cy="228" r="26" fill="url(#ld-a)"
@@ -4433,7 +4433,7 @@
                         온톨로지</text>
                 </g>
                 <!-- E 화성: 시맨틱 재료 -->
-                <g class="node-group" id="ld-node-e" onclick="openConcept('e')">
+                <g class="node-group" id="ld-node-e" data-action="openConcept" data-args='["e"]'>
                     <circle class="node-circle" cx="200" cy="372" r="13" fill="url(#ld-e)" />
                     <text class="nd-label-m" x="200" y="400" text-anchor="middle">시맨틱 재료</text>
                     <text class="nd-type" x="200" y="411" text-anchor="middle">화성형</text>
@@ -4442,7 +4442,7 @@
                     <text class="nd-pct" x="200" y="425" text-anchor="middle">5%→20%</text>
                 </g>
                 <!-- F 지구: 시맨틱 -->
-                <g class="node-group" id="ld-node-f" onclick="openConcept('f')">
+                <g class="node-group" id="ld-node-f" data-action="openConcept" data-args='["f"]'>
                     <circle cx="400" cy="372" r="22" fill="var(--c-ink-06)" />
                     <circle class="node-circle" cx="400" cy="372" r="16" fill="url(#ld-f)" />
                     <text class="nd-label-s" x="400" y="404" text-anchor="middle">시맨틱</text>
@@ -4452,7 +4452,7 @@
                     <text class="nd-pct" x="400" y="429" text-anchor="middle">9%→10%</text>
                 </g>
                 <!-- G 수성: 하향식 정적 구현체 -->
-                <g class="node-group" id="ld-node-g" onclick="openConcept('g')">
+                <g class="node-group" id="ld-node-g" data-action="openConcept" data-args='["g"]'>
                     <circle class="node-circle" cx="600" cy="372" r="12" fill="url(#ld-g)" />
                     <text class="nd-label-s" x="600" y="400" text-anchor="middle">하향식 정적 구현체</text>
                     <text class="nd-type" x="600" y="411" text-anchor="middle">수성형</text>
@@ -4461,7 +4461,7 @@
                     <text class="nd-pct" x="600" y="425" text-anchor="middle">68%→5%</text>
                 </g>
                 <!-- D 토성: 시스템 다이나믹스 -->
-                <g class="node-group" id="ld-node-d" onclick="openConcept('d')">
+                <g class="node-group" id="ld-node-d" data-action="openConcept" data-args='["d"]'>
                     <ellipse cx="100" cy="462" rx="26" ry="7" fill="none" stroke="url(#ld-ring)" stroke-width="5"
                         transform="rotate(-18, 100, 462)" opacity="0.6" />
                     <circle class="node-circle" cx="100" cy="462" r="15" fill="url(#ld-d)" />
@@ -4473,7 +4473,7 @@
                     <text class="nd-pct" x="100" y="521" text-anchor="middle">5%→15%</text>
                 </g>
                 <!-- H 적색왜성: 온톨로지 회귀 -->
-                <g class="node-group" id="ld-node-h" onclick="openConcept('h')">
+                <g class="node-group" id="ld-node-h" data-action="openConcept" data-args='["h"]'>
                     <circle cx="712" cy="462" r="26" fill="var(--c-ink-06)" />
                     <circle class="node-circle" cx="712" cy="462" r="16" fill="url(#ld-h)"
                         filter="url(#ld-ember-glow)" />
@@ -4487,7 +4487,7 @@
         </div>
 
         <div class="ld-btn-row">
-            <button class="ld-donate" id="ld-donate-btn" aria-label="이 도구 응원하기" onclick="openDonate()">
+            <button class="ld-donate" id="ld-donate-btn" aria-label="이 도구 응원하기" data-action="openDonate">
                 <svg viewBox="0 0 24 24"
                     style="width:var(--icon-rg);height:var(--icon-rg);fill:var(--coral);stroke:none;flex-shrink:0;display:block;">
                     <path
@@ -4495,7 +4495,7 @@
                 </svg>
                 이 도구 응원하기
             </button>
-            <button class="ld-start" aria-label="워크숍 시작하기" onclick="closeLanding()">
+            <button class="ld-start" aria-label="워크숍 시작하기" data-action="closeLanding">
                 <svg viewBox="0 0 24 24"
                     style="width:var(--icon-lg);height:var(--icon-lg);stroke:var(--mono-white);fill:none;stroke-width:2.2;stroke-linecap:round;">
                     <polygon points="5 3 19 12 5 21 5 3" />
@@ -4526,7 +4526,7 @@
         <div class="ld-help-panel" id="ld-help-panel">
             <div class="ldh-head">
                 <span class="ldh-title">LLM과 온톨로지 - 비중 변화의 의미</span>
-                <button class="ldh-close" aria-label="패널 닫기" onclick="toggleLdHelp()"><svg viewBox="0 0 24 24"
+                <button class="ldh-close" aria-label="패널 닫기" data-action="toggleLdHelp"><svg viewBox="0 0 24 24"
                         style="width:var(--icon-sm);height:var(--icon-sm);stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round">
                         <line x1="18" y1="6" x2="6" y2="18" />
                         <line x1="6" y1="6" x2="18" y2="18" />
@@ -4613,7 +4613,7 @@
         <div class="ld-help-panel" id="ld-purpose-panel">
             <div class="ldh-head">
                 <span class="ldh-title">AI가 맥락을 이해하려면</span>
-                <button class="ldh-close" aria-label="패널 닫기" onclick="toggleLdPurpose()"><svg viewBox="0 0 24 24"
+                <button class="ldh-close" aria-label="패널 닫기" data-action="toggleLdPurpose"><svg viewBox="0 0 24 24"
                         style="width:var(--icon-sm);height:var(--icon-sm);stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round">
                         <line x1="18" y1="6" x2="6" y2="18" />
                         <line x1="6" y1="6" x2="18" y2="18" />
@@ -4689,13 +4689,13 @@
                 </svg></div>
             <div class="lg-title">NIA Worflogy 라이선스</div>
             <div class="lg-tabs">
-                <button class="lg-tab active" id="lg-tab-req" onclick="lgTab('request')"><svg viewBox="0 0 24 24"
+                <button class="lg-tab active" id="lg-tab-req" data-action="lgTab" data-args='["request"]'><svg viewBox="0 0 24 24"
                         width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round" style="vertical-align:middle" class="mr-xs">
                         <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
                         <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
                     </svg>신청하기</button>
-                <button class="lg-tab" id="lg-tab-ver" onclick="lgTab('verify')"><svg viewBox="0 0 24 24" width="12"
+                <button class="lg-tab" id="lg-tab-ver" data-action="lgTab" data-args='["verify"]'><svg viewBox="0 0 24 24" width="12"
                         height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round" style="vertical-align:middle" class="mr-xs">
                         <circle cx="7.5" cy="15.5" r="5.5" />
@@ -4711,7 +4711,7 @@
                 <input spellcheck="false" id="lg-email-inp" class="lg-inp" type="email" placeholder="이메일"
                     maxlength="100">
                 <div id="lg-req-msg" class="lg-msg"></div>
-                <button class="btn btn-p" id="lg-request-btn" onclick="requestLicense()"
+                <button class="btn btn-p" id="lg-request-btn" data-action="requestLicense"
                     style="width:100%;justify-content:center;">라이선스 신청</button>
             </div>
             <!-- 키 입력 탭 -->
@@ -4720,7 +4720,7 @@
                 <input spellcheck="false" id="lg-key-inp" class="lg-inp" type="text" placeholder="NIA-2026-XXXXXX"
                     maxlength="32">
                 <div id="lg-msg" class="lg-msg"></div>
-                <button class="btn btn-p" id="lg-verify-btn" onclick="validateLicense()"
+                <button class="btn btn-p" id="lg-verify-btn" data-action="validateLicense"
                     style="width:100%;justify-content:center;">인증하기</button>
             </div>
         </div>
@@ -4730,7 +4730,7 @@
     <!-- ── CONCEPT MODAL ── -->
     <div id="concept-modal" class="cm-overlay">
         <div class="cm-box">
-            <button class="cm-close" aria-label="모달 닫기" onclick="closeConcept()">&#x2715;</button>
+            <button class="cm-close" aria-label="모달 닫기" data-action="closeConcept">&#x2715;</button>
             <div class="cm-header">
                 <div class="cm-badge" id="cm-badge"></div>
                 <div class="cm-formula" id="cm-formula"></div>
@@ -4743,14 +4743,14 @@
     <!-- HEADER -->
     <header class="hdr">
         <div class="hdr-in">
-            <div class="logo" onclick="openLanding()" style="cursor:pointer;" title="강의 소개 페이지로 돌아가기">
+            <div class="logo" data-action="openLanding" style="cursor:pointer;" title="강의 소개 페이지로 돌아가기">
                 <div class="logo-icon"><span class="fs-small" style="font-family:var(--font-sans);font-weight:var(--fw-bold);color:var(--mono-white);letter-spacing:-.04em;line-height:1;user-select:none;">?!</span></div>
                 <span class="logo-txt" id="app-logo-txt"></span>
             </div>
             <nav class="steps-nav">
-                <button class="sbtn active" onclick="goStep(1)" id="sb1"><span class="snum">1</span>환경 설정</button>
+                <button class="sbtn active" data-action="goStep" data-args='[1]' id="sb1"><span class="snum">1</span>환경 설정</button>
                 <span class="step-pair" id="step-pair-23" title="문서 로드 ↔ 시나리오는 상호 참조합니다">
-                    <button class="sbtn" onclick="goStep(2)" id="sb2"><span class="snum">2</span>데이터</button>
+                    <button class="sbtn" data-action="goStep" data-args='[2]' id="sb2"><span class="snum">2</span>데이터</button>
                     <span class="step-pair-sep">
                         <svg viewBox="0 0 18 14" width="16" height="12" fill="none" stroke="currentColor"
                             stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -4760,21 +4760,21 @@
                             <line x1="3" y1="10" x2="15" y2="10" />
                         </svg>
                     </span>
-                    <button class="sbtn" onclick="goStep(3)" id="sb3"><span class="snum">3</span>시나리오</button>
+                    <button class="sbtn" data-action="goStep" data-args='[3]' id="sb3"><span class="snum">3</span>시나리오</button>
                 </span>
-                <button class="sbtn" onclick="goStep(4)" id="sb4"><span class="snum">4</span>도메인</button>
-                <button class="sbtn" onclick="goStep(5)" id="sb5"><span class="snum">5</span>상위 개념</button>
-                <button class="sbtn" onclick="goStep(6)" id="sb6"><span class="snum">6</span>추론 규칙</button>
-                <button class="sbtn" onclick="goStep(7)" id="sb7"><span class="snum">7</span>지식 그래프</button>
-                <button class="sbtn" onclick="goStep(8)" id="sb8"><span class="snum">8</span>검증 비교</button>
-                <button class="sbtn" onclick="goStep(9)" id="sb9"><span class="snum">9</span>연동 가이드</button>
-                <button class="sbtn" onclick="goStep(10)" id="sb10"><span class="snum">10</span>부록&편집기</button>
+                <button class="sbtn" data-action="goStep" data-args='[4]' id="sb4"><span class="snum">4</span>도메인</button>
+                <button class="sbtn" data-action="goStep" data-args='[5]' id="sb5"><span class="snum">5</span>상위 개념</button>
+                <button class="sbtn" data-action="goStep" data-args='[6]' id="sb6"><span class="snum">6</span>추론 규칙</button>
+                <button class="sbtn" data-action="goStep" data-args='[7]' id="sb7"><span class="snum">7</span>지식 그래프</button>
+                <button class="sbtn" data-action="goStep" data-args='[8]' id="sb8"><span class="snum">8</span>검증 비교</button>
+                <button class="sbtn" data-action="goStep" data-args='[9]' id="sb9"><span class="snum">9</span>연동 가이드</button>
+                <button class="sbtn" data-action="goStep" data-args='[10]' id="sb10"><span class="snum">10</span>부록&편집기</button>
             </nav>
         </div>
     </header>
 
     <!-- HELP OVERLAY -->
-    <div class="help-overlay" id="help-overlay" onclick="toggleHelp()"></div>
+    <div class="help-overlay" id="help-overlay" data-action="toggleHelp"></div>
 
     <!-- HELP PANEL -->
     <div class="help-panel" id="help-panel">
@@ -4789,7 +4789,7 @@
                 단계별 도움말
                 <span class="help-step-badge" id="help-step-label">Step 1</span>
             </div>
-            <button class="help-close" aria-label="도움말 닫기" onclick="toggleHelp()" title="닫기"><svg viewBox="0 0 24 24"
+            <button class="help-close" aria-label="도움말 닫기" data-action="toggleHelp" title="닫기"><svg viewBox="0 0 24 24"
                     style="width:var(--icon-rg);height:var(--icon-rg);stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round">
                     <line x1="18" y1="6" x2="6" y2="18" />
                     <line x1="6" y1="6" x2="18" y2="18" />
@@ -4799,7 +4799,7 @@
     </div>
 
     <!-- HELP TOGGLE BUTTON -->
-    <button class="help-toggle" id="help-toggle-btn" aria-label="도움말 패널 열기" onclick="toggleHelp()" title="도움말 열기">
+    <button class="help-toggle" id="help-toggle-btn" aria-label="도움말 패널 열기" data-action="toggleHelp" title="도움말 열기">
         <svg viewBox="0 0 24 24" style="width:var(--icon-rg);height:var(--icon-rg);stroke:var(--mono-white);fill:none;stroke-width:2.2;">
             <circle cx="12" cy="12" r="10" />
             <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
@@ -4809,7 +4809,7 @@
     </button>
 
     <!-- GLOSSARY TOGGLE -->
-    <button id="glossary-toggle" aria-label="용어집 열기" onclick="toggleGlossary()" title="용어집">
+    <button id="glossary-toggle" aria-label="용어집 열기" data-action="toggleGlossary" title="용어집">
         <svg viewBox="0 0 24 24"
             style="width:var(--icon-rg);height:var(--icon-rg);stroke:var(--mono-white);fill:none;stroke-width:2;stroke-linecap:round;">
             <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
@@ -4819,7 +4819,7 @@
     </button>
 
     <!-- GLOSSARY OVERLAY -->
-    <div class="help-overlay" id="gls-overlay" onclick="toggleGlossary()"></div>
+    <div class="help-overlay" id="gls-overlay" data-action="toggleGlossary"></div>
 
     <!-- GLOSSARY PANEL -->
     <div id="glossary-panel">
@@ -4832,7 +4832,7 @@
                 </svg>
                 온톨로지 핵심 용어집
             </span>
-            <button class="gls-close" aria-label="용어집 닫기" onclick="toggleGlossary()"><svg viewBox="0 0 24 24"
+            <button class="gls-close" aria-label="용어집 닫기" data-action="toggleGlossary"><svg viewBox="0 0 24 24"
                     style="width:var(--icon-rg);height:var(--icon-rg);stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round">
                     <line x1="18" y1="6" x2="6" y2="18" />
                     <line x1="6" y1="6" x2="18" y2="18" />
@@ -5103,10 +5103,10 @@
                                 style="color:var(--text2);margin-top:.1rem">
                                 -</div>
                         </div>
-                        <button class="btn btn-p btn-sm" onclick="restoreFolder()">다시 연결</button>
+                        <button class="btn btn-p btn-sm" data-action="restoreFolder">다시 연결</button>
                     </div>
                     <button class="btn btn-s mb-3" style="width:100%;justify-content:center"
-                        onclick="selFolder()"><span class="ico"><svg viewBox="0 0 24 24">
+                        data-action="selFolder"><span class="ico"><svg viewBox="0 0 24 24">
                                 <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
                                 <line x1="12" y1="11" x2="12" y2="17" />
                                 <polyline points="9 14 12 17 15 14" />
@@ -5155,18 +5155,18 @@
                                 <path d="M12 7v4M8 16h.01M12 16h.01M16 16h.01" />
                             </svg></span> AI API 설정</div>
                     <div class="asel">
-                        <button class="aopt sel" onclick="selAPI('gemini')" id="ao-g"><span id="apdot-gemini"
+                        <button class="aopt sel" data-action="selAPI" data-args='["gemini"]' id="ao-g"><span id="apdot-gemini"
                                 class="aopt-dot" style="display:none;"></span><span class="ico"><svg
                                     viewBox="0 0 24 24">
                                     <circle cx="12" cy="12" r="10" />
                                     <path d="M12 8v4l3 3" />
                                 </svg></span> Google Gemini</button>
-                        <button class="aopt" onclick="selAPI('openai')" id="ao-o"><span id="apdot-openai"
+                        <button class="aopt" data-action="selAPI" data-args='["openai"]' id="ao-o"><span id="apdot-openai"
                                 class="aopt-dot" style="display:none;"></span><span class="ico"><svg
                                     viewBox="0 0 24 24">
                                     <path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm0 4v4l4 2" />
                                 </svg></span> OpenAI GPT</button>
-                        <button class="aopt" onclick="selAPI('local')" id="ao-l"><span id="apdot-local" class="aopt-dot"
+                        <button class="aopt" data-action="selAPI" data-args='["local"]' id="ao-l"><span id="apdot-local" class="aopt-dot"
                                 style="display:none;"></span><span class="ico"><svg viewBox="0 0 24 24">
                                     <rect x="2" y="3" width="20" height="14" rx="2" />
                                     <path d="M8 21h8M12 17v4" />
@@ -5238,7 +5238,7 @@
                             수 있습니다. 이 경우 이 HTML 파일을 로컬 웹서버로 서빙하거나(<code>python -m http.server</code> 등), Ollama에 CORS 허용
                             헤더를 설정하세요.</div>
                     </div>
-                    <button class="btn btn-p" onclick="saveKey()" id="save-key-btn"><span class="ico"><svg
+                    <button class="btn btn-p" data-action="saveKey" id="save-key-btn"><span class="ico"><svg
                                 viewBox="0 0 24 24">
                                 <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
                                 <polyline points="17 21 17 13 7 13 7 21" />
@@ -5270,7 +5270,7 @@
                             <line x1="12" y1="17" x2="12.01" y2="17" />
                         </svg></span> <strong>OC 키 미입력 시 공용 <code>test</code> 계정으로 연결됩니다.</strong> 다수가 동시에 사용하면 Rate
                     Limit으로 차단될 수 있습니다. 차단 시 법령 텍스트를 직접 복사해 Step 2 파일 업로드로 대체하세요.</div>
-                <button class="btn btn-p mt-3" onclick="saveLawOC()" id="save-law-btn"><span
+                <button class="btn btn-p mt-3" data-action="saveLawOC" id="save-law-btn"><span
                         class="ico"><svg viewBox="0 0 24 24">
                             <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
                             <polyline points="17 21 17 13 7 13 7 21" />
@@ -5279,7 +5279,7 @@
                 <div id="law-api-st" class="mt-3"></div>
             </div>
             <div class="nav">
-                <div></div><button class="btn btn-p" onclick="goStep(2)">다음: 문서 로드</button>
+                <div></div><button class="btn btn-p" data-action="goStep" data-args='[2]'>다음: 문서 로드</button>
             </div>
         </div>
 
@@ -5333,26 +5333,26 @@
                                     style="font-weight:var(--fw-semibold);color:var(--text3);letter-spacing:.04em;border-bottom:var(--bw-thin) solid var(--border)">
                                     교통·도로 - 한국도로교통공단 · 서울교통공사 · SR</div>
                                 <div class="chips bc-grp">
-                                    <button class="chip" onclick="loadDummyData('bcar')"><span class="ico"><svg
+                                    <button class="chip" data-action="loadDummyData" data-args='["bcar"]'><span class="ico"><svg
                                                 viewBox="0 0 24 24">
                                                 <rect x="1" y="3" width="15" height="13" rx="2" />
                                                 <path d="M16 8h4l3 5v3h-7V8z" />
                                                 <circle cx="5.5" cy="18.5" r="2.5" />
                                                 <circle cx="18.5" cy="18.5" r="2.5" />
                                             </svg></span> 자동차검사</button>
-                                    <button class="chip" onclick="loadDummyData('bdrv')"><span class="ico"><svg
+                                    <button class="chip" data-action="loadDummyData" data-args='["bdrv"]'><span class="ico"><svg
                                                 viewBox="0 0 24 24">
                                                 <rect x="2" y="5" width="20" height="14" rx="2" />
                                                 <line x1="2" y1="10" x2="22" y2="10" />
                                             </svg></span> 운전면허갱신</button>
-                                    <button class="chip" onclick="loadDummyData('bmetro')"><span class="ico"><svg
+                                    <button class="chip" data-action="loadDummyData" data-args='["bmetro"]'><span class="ico"><svg
                                                 viewBox="0 0 24 24">
                                                 <rect x="3" y="3" width="18" height="14" rx="2" />
                                                 <path d="M8 17l-2 4" />
                                                 <path d="M16 17l2 4" />
                                                 <line x1="7" y1="20" x2="17" y2="20" />
                                             </svg></span> 지하철안전</button>
-                                    <button class="chip" onclick="loadDummyData('bfine')"><span class="ico"><svg
+                                    <button class="chip" data-action="loadDummyData" data-args='["bfine"]'><span class="ico"><svg
                                                 viewBox="0 0 24 24">
                                                 <path d="M3 17l3-6 3 4 3-7 3 5 3-3" />
                                                 <line x1="3" y1="20" x2="21" y2="20" />
@@ -5364,16 +5364,16 @@
                                     style="font-weight:var(--fw-semibold);color:var(--text3);letter-spacing:.04em;border-bottom:var(--bw-thin) solid var(--border)">
                                     안전·재난 - 소방청 · 경찰청 · 행정안전부</div>
                                 <div class="chips bc-grp">
-                                    <button class="chip" onclick="loadDummyData('bfiresafe')"><span class="ico"><svg
+                                    <button class="chip" data-action="loadDummyData" data-args='["bfiresafe"]'><span class="ico"><svg
                                                 viewBox="0 0 24 24">
                                                 <path
                                                     d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" />
                                             </svg></span> 소방점검</button>
-                                    <button class="chip" onclick="loadDummyData('bpolice')"><span class="ico"><svg
+                                    <button class="chip" data-action="loadDummyData" data-args='["bpolice"]'><span class="ico"><svg
                                                 viewBox="0 0 24 24">
                                                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                                             </svg></span> 경찰민원</button>
-                                    <button class="chip" onclick="loadDummyData('bdisaster')"><span class="ico"><svg
+                                    <button class="chip" data-action="loadDummyData" data-args='["bdisaster"]'><span class="ico"><svg
                                                 viewBox="0 0 24 24">
                                                 <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
                                             </svg></span> 재난지원금</button>
@@ -5384,11 +5384,11 @@
                                     style="font-weight:var(--fw-semibold);color:var(--text3);letter-spacing:.04em;border-bottom:var(--bw-thin) solid var(--border)">
                                     복지·의료 - 건강보험심사평가원 · 한국사회보장정보원</div>
                                 <div class="chips bc-grp">
-                                    <button class="chip" onclick="loadDummyData('bhealth')"><span class="ico"><svg
+                                    <button class="chip" data-action="loadDummyData" data-args='["bhealth"]'><span class="ico"><svg
                                                 viewBox="0 0 24 24">
                                                 <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
                                             </svg></span> 건강검진</button>
-                                    <button class="chip" onclick="loadDummyData('bwelfare')"><span class="ico"><svg
+                                    <button class="chip" data-action="loadDummyData" data-args='["bwelfare"]'><span class="ico"><svg
                                                 viewBox="0 0 24 24">
                                                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
                                                 <circle cx="9" cy="7" r="4" />
@@ -5402,12 +5402,12 @@
                                     style="font-weight:var(--fw-semibold);color:var(--text3);letter-spacing:.04em;border-bottom:var(--bw-thin) solid var(--border)">
                                     고용·산업 - 고용노동부 · 한국산업인력공단</div>
                                 <div class="chips bc-grp">
-                                    <button class="chip" onclick="loadDummyData('bjob')"><span class="ico"><svg
+                                    <button class="chip" data-action="loadDummyData" data-args='["bjob"]'><span class="ico"><svg
                                                 viewBox="0 0 24 24">
                                                 <rect x="2" y="7" width="20" height="14" rx="2" />
                                                 <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
                                             </svg></span> 실업급여</button>
-                                    <button class="chip" onclick="loadDummyData('bqualif')"><span class="ico"><svg
+                                    <button class="chip" data-action="loadDummyData" data-args='["bqualif"]'><span class="ico"><svg
                                                 viewBox="0 0 24 24">
                                                 <circle cx="12" cy="8" r="6" />
                                                 <path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11" />
@@ -5419,16 +5419,16 @@
                                     style="font-weight:var(--fw-semibold);color:var(--text3);letter-spacing:.04em;border-bottom:var(--bw-thin) solid var(--border)">
                                     에너지·자연 - 한전KDN · 산림청 · 해양수산부</div>
                                 <div class="chips bc-grp">
-                                    <button class="chip" onclick="loadDummyData('belec')"><span class="ico"><svg
+                                    <button class="chip" data-action="loadDummyData" data-args='["belec"]'><span class="ico"><svg
                                                 viewBox="0 0 24 24">
                                                 <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
                                             </svg></span> 전기요금</button>
-                                    <button class="chip" onclick="loadDummyData('bforest')"><span class="ico"><svg
+                                    <button class="chip" data-action="loadDummyData" data-args='["bforest"]'><span class="ico"><svg
                                                 viewBox="0 0 24 24">
                                                 <path d="M3 18l4-8 4 5 3-3 4 6H3z" />
                                                 <circle cx="18" cy="7" r="3" />
                                             </svg></span> 산림복지</button>
-                                    <button class="chip" onclick="loadDummyData('bmarine')"><span class="ico"><svg
+                                    <button class="chip" data-action="loadDummyData" data-args='["bmarine"]'><span class="ico"><svg
                                                 viewBox="0 0 24 24">
                                                 <path d="M3 18l7-7 4 4 7-7" />
                                                 <line x1="3" y1="21" x2="21" y2="21" />
@@ -5441,11 +5441,11 @@
                                 style="font-weight:var(--fw-semibold);color:var(--text3);letter-spacing:.04em;border-bottom:var(--bw-thin) solid var(--border)">
                                 행정·지자체 - 국민권익위원회 · 행정안전부</div>
                             <div class="chips bc-grp">
-                                <button class="chip" onclick="loadDummyData('bcomplaint')"><span class="ico"><svg
+                                <button class="chip" data-action="loadDummyData" data-args='["bcomplaint"]'><span class="ico"><svg
                                             viewBox="0 0 24 24">
                                             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                                         </svg></span> 민원처리결과</button>
-                                <button class="chip" onclick="loadDummyData('blocalgov')"><span class="ico"><svg
+                                <button class="chip" data-action="loadDummyData" data-args='["blocalgov"]'><span class="ico"><svg
                                             viewBox="0 0 24 24">
                                             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
                                             <polyline points="9 22 9 12 15 12 15 22" />
@@ -5457,23 +5457,23 @@
                                 style="font-weight:var(--fw-semibold);color:var(--text3);letter-spacing:.04em;border-bottom:var(--bw-thin) solid var(--border)">
                                 산업·국방·기술 - 국방부 · 한국광해광업공단 · 국가데이터처 · 기술보증기금</div>
                             <div class="chips bc-grp">
-                                <button class="chip" onclick="loadDummyData('bdefense')"><span class="ico"><svg
+                                <button class="chip" data-action="loadDummyData" data-args='["bdefense"]'><span class="ico"><svg
                                             viewBox="0 0 24 24">
                                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                                         </svg></span> 병역증명</button>
-                                <button class="chip" onclick="loadDummyData('bmining')"><span class="ico"><svg
+                                <button class="chip" data-action="loadDummyData" data-args='["bmining"]'><span class="ico"><svg
                                             viewBox="0 0 24 24">
                                             <polygon points="12 2 2 7 12 12 22 7 12 2" />
                                             <polyline points="2 17 12 22 22 17" />
                                             <polyline points="2 12 12 17 22 12" />
                                         </svg></span> 폐광피해보상</button>
-                                <button class="chip" onclick="loadDummyData('bdata')"><span class="ico"><svg
+                                <button class="chip" data-action="loadDummyData" data-args='["bdata"]'><span class="ico"><svg
                                             viewBox="0 0 24 24">
                                             <ellipse cx="12" cy="5" rx="9" ry="3" />
                                             <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
                                             <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
                                         </svg></span> 데이터개방</button>
-                                <button class="chip" onclick="loadDummyData('bfintech')"><span class="ico"><svg
+                                <button class="chip" data-action="loadDummyData" data-args='["bfintech"]'><span class="ico"><svg
                                             viewBox="0 0 24 24">
                                             <circle cx="12" cy="8" r="6" />
                                             <path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11" />
@@ -5561,7 +5561,7 @@
                                     표기)</span></label><input spellcheck="false" type="text" class="inp" id="ds-api-path"
                                 placeholder="예: response.body.items  (비워두면 전체 응답)"></div>
                         <div class="stack" style="gap:var(--gap-md)">
-                            <button class="btn btn-p btn-sm" onclick="fetchApiData()" id="ds-api-btn">
+                            <button class="btn btn-p btn-sm" data-action="fetchApiData" id="ds-api-btn">
                                 <span class="ico"><svg viewBox="0 0 24 24"
                                         style="width:var(--icon-sm);height:var(--icon-sm);stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round">
                                         <line x1="5" y1="12" x2="19" y2="12" />
@@ -5587,7 +5587,7 @@
                             <input spellcheck="false" type="text" class="inp" id="ds-portal-q"
                                 placeholder="데이터셋 검색어 (예: 행정안전부 민원처리)" style="flex:1"
                                 onkeydown="if(event.key==='Enter')searchPortal()">
-                            <button class="btn btn-p btn-sm" onclick="searchPortal()" id="ds-portal-btn">검색</button>
+                            <button class="btn btn-p btn-sm" data-action="searchPortal" id="ds-portal-btn">검색</button>
                         </div>
                         <div id="ds-portal-results" style="max-height:var(--w-max-sm);overflow-y:auto" class="mt-xs"></div>
                         <p class="ds-note mt-2">• <a
@@ -5657,7 +5657,7 @@
                         <input spellcheck="false" type="text" class="inp" id="law-q"
                             placeholder="법령명 입력 (예: 도로교통법, 주정차 조례)" style="flex:1"
                             onkeydown="if(event.key==='Enter')searchLaw()">
-                        <button class="btn btn-p btn-sm" onclick="searchLaw()" id="law-search-btn">검색</button>
+                        <button class="btn btn-p btn-sm" data-action="searchLaw" id="law-search-btn">검색</button>
                     </div>
                     <div class="fg">
                         <label class="lbl">범위</label>
@@ -5692,7 +5692,7 @@
                                 <div class="fs-small"
                                     style="font-weight:var(--fw-bold);color:var(--text3);letter-spacing:.04em">
                                     시나리오 선택</div>
-                                <button class="fs-small row-gap-xs p-1" id="scen-hint-force-btn" onclick="forceAIScenHint()"
+                                <button class="fs-small row-gap-xs p-1" id="scen-hint-force-btn" data-action="forceAIScenHint"
                                     style="font-weight:var(--fw-semibold);border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);background:var(--bg-card);color:var(--text2);cursor:pointer;transition:all .15s"
                                     title="하드코딩된 키워드 매칭을 무시하고 AI에게 직접 법령을 추천받습니다">
                                     <svg viewBox="0 0 24 24"
@@ -5713,8 +5713,8 @@
                     </div>
                 </div>
             </div>
-            <div class="nav"><button class="btn btn-s" onclick="goStep(1)">이전</button><button class="btn btn-p"
-                    onclick="goStep(3)">다음: 시나리오</button></div>
+            <div class="nav"><button class="btn btn-s" data-action="goStep" data-args='[1]'>이전</button><button class="btn btn-p"
+                    data-action="goStep" data-args='[3]'>다음: 시나리오</button></div>
         </div>
 
         <!-- STEP 3 -->
@@ -5748,24 +5748,24 @@
                             SR</span>
                     </div>
                     <div class="chips mb-0">
-                        <button class="chip s3-chip" onclick="setScen('car')"><span class="ico"><svg
+                        <button class="chip s3-chip" data-action="setScen" data-args='["car"]'><span class="ico"><svg
                                     viewBox="0 0 24 24">
                                     <rect x="1" y="3" width="15" height="13" rx="2" />
                                     <path d="M16 8h4l3 5v3h-7V8z" />
                                     <circle cx="5.5" cy="18.5" r="2.5" />
                                     <circle cx="18.5" cy="18.5" r="2.5" />
                                 </svg></span> 자동차검사 만료</button>
-                        <button class="chip s3-chip" onclick="setScen('drv')"><span class="ico"><svg
+                        <button class="chip s3-chip" data-action="setScen" data-args='["drv"]'><span class="ico"><svg
                                     viewBox="0 0 24 24">
                                     <rect x="2" y="5" width="20" height="14" rx="2" />
                                     <line x1="2" y1="10" x2="22" y2="10" />
                                 </svg></span> 운전면허 갱신</button>
-                        <button class="chip s3-chip" onclick="setScen('road')"><span class="ico"><svg
+                        <button class="chip s3-chip" data-action="setScen" data-args='["road"]'><span class="ico"><svg
                                     viewBox="0 0 24 24">
                                     <path d="M3 17l3-6 3 4 3-7 3 5 3-3" />
                                     <line x1="3" y1="20" x2="21" y2="20" />
                                 </svg></span> 도로·시설물 민원</button>
-                        <button class="chip s3-chip" onclick="setScen('rail')"><span class="ico"><svg
+                        <button class="chip s3-chip" data-action="setScen" data-args='["rail"]'><span class="ico"><svg
                                     viewBox="0 0 24 24">
                                     <rect x="3" y="3" width="18" height="14" rx="2" />
                                     <path d="M8 17l-2 4" />
@@ -5787,16 +5787,16 @@
                             화성특례시</span>
                     </div>
                     <div class="chips mb-0">
-                        <button class="chip s3-chip" onclick="setScen('fire')"><span class="ico"><svg
+                        <button class="chip s3-chip" data-action="setScen" data-args='["fire"]'><span class="ico"><svg
                                     viewBox="0 0 24 24">
                                     <path
                                         d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" />
                                 </svg></span> 소방점검 미이행</button>
-                        <button class="chip s3-chip" onclick="setScen('police')"><span class="ico"><svg
+                        <button class="chip s3-chip" data-action="setScen" data-args='["police"]'><span class="ico"><svg
                                     viewBox="0 0 24 24">
                                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                                 </svg></span> 경찰·치안 민원</button>
-                        <button class="chip s3-chip" onclick="setScen('disaster')"><span class="ico"><svg
+                        <button class="chip s3-chip" data-action="setScen" data-args='["disaster"]'><span class="ico"><svg
                                     viewBox="0 0 24 24">
                                     <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
                                 </svg></span> 재난 대응·복구</button>
@@ -5812,18 +5812,18 @@
                             한국사회보장정보원 · 고용노동부</span>
                     </div>
                     <div class="chips mb-0">
-                        <button class="chip s3-chip" onclick="setScen('health')"><span class="ico"><svg
+                        <button class="chip s3-chip" data-action="setScen" data-args='["health"]'><span class="ico"><svg
                                     viewBox="0 0 24 24">
                                     <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
                                 </svg></span> 건강검진 미수검</button>
-                        <button class="chip s3-chip" onclick="setScen('welfare')"><span class="ico"><svg
+                        <button class="chip s3-chip" data-action="setScen" data-args='["welfare"]'><span class="ico"><svg
                                     viewBox="0 0 24 24">
                                     <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
                                     <circle cx="9" cy="7" r="4" />
                                     <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
                                     <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                                 </svg></span> 사회보장 급여</button>
-                        <button class="chip s3-chip" onclick="setScen('job')"><span class="ico"><svg
+                        <button class="chip s3-chip" data-action="setScen" data-args='["job"]'><span class="ico"><svg
                                     viewBox="0 0 24 24">
                                     <rect x="2" y="7" width="20" height="14" rx="2" />
                                     <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
@@ -5840,16 +5840,16 @@
                             한국산림복지진흥원 · 해양수산부</span>
                     </div>
                     <div class="chips mb-0">
-                        <button class="chip s3-chip" onclick="setScen('elec')"><span class="ico"><svg
+                        <button class="chip s3-chip" data-action="setScen" data-args='["elec"]'><span class="ico"><svg
                                     viewBox="0 0 24 24">
                                     <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
                                 </svg></span> 전기요금 체납</button>
-                        <button class="chip s3-chip" onclick="setScen('forest')"><span class="ico"><svg
+                        <button class="chip s3-chip" data-action="setScen" data-args='["forest"]'><span class="ico"><svg
                                     viewBox="0 0 24 24">
                                     <path d="M3 18l4-8 4 5 3-3 4 6H3z" />
                                     <circle cx="18" cy="7" r="3" />
                                 </svg></span> 산림복지·산불</button>
-                        <button class="chip s3-chip" onclick="setScen('marine')"><span class="ico"><svg
+                        <button class="chip s3-chip" data-action="setScen" data-args='["marine"]'><span class="ico"><svg
                                     viewBox="0 0 24 24">
                                     <path d="M3 18l7-7 4 4 7-7" />
                                     <line x1="3" y1="21" x2="21" y2="21" />
@@ -5869,11 +5869,11 @@
                             · 서울특별시</span>
                     </div>
                     <div class="chips mb-0">
-                        <button class="chip s3-chip" onclick="setScen('complaint')"><span class="ico"><svg
+                        <button class="chip s3-chip" data-action="setScen" data-args='["complaint"]'><span class="ico"><svg
                                     viewBox="0 0 24 24">
                                     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                                 </svg></span> 민원 이의신청</button>
-                        <button class="chip s3-chip" onclick="setScen('qualif')"><span class="ico"><svg
+                        <button class="chip s3-chip" data-action="setScen" data-args='["qualif"]'><span class="ico"><svg
                                     viewBox="0 0 24 24">
                                     <circle cx="12" cy="8" r="6" />
                                     <path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11" />
@@ -5891,7 +5891,7 @@
                             · 의정부시 · 부천시 · 광양시</span>
                     </div>
                     <div class="chips mb-0">
-                        <button class="chip s3-chip" onclick="setScen('localgov')"><span class="ico"><svg
+                        <button class="chip s3-chip" data-action="setScen" data-args='["localgov"]'><span class="ico"><svg
                                     viewBox="0 0 24 24">
                                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
                                     <polyline points="9 22 9 12 15 12 15 22" />
@@ -5908,23 +5908,23 @@
                             · 국가데이터처 · 기술보증기금</span>
                     </div>
                     <div class="chips mb-0">
-                        <button class="chip s3-chip" onclick="setScen('defense')"><span class="ico"><svg
+                        <button class="chip s3-chip" data-action="setScen" data-args='["defense"]'><span class="ico"><svg
                                     viewBox="0 0 24 24">
                                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                                 </svg></span> 병역증명서 발급</button>
-                        <button class="chip s3-chip" onclick="setScen('mining')"><span class="ico"><svg
+                        <button class="chip s3-chip" data-action="setScen" data-args='["mining"]'><span class="ico"><svg
                                     viewBox="0 0 24 24">
                                     <polygon points="12 2 2 7 12 12 22 7 12 2" />
                                     <polyline points="2 17 12 22 22 17" />
                                     <polyline points="2 12 12 17 22 12" />
                                 </svg></span> 폐광 피해보상</button>
-                        <button class="chip s3-chip" onclick="setScen('opendata')"><span class="ico"><svg
+                        <button class="chip s3-chip" data-action="setScen" data-args='["opendata"]'><span class="ico"><svg
                                     viewBox="0 0 24 24">
                                     <ellipse cx="12" cy="5" rx="9" ry="3" />
                                     <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
                                     <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
                                 </svg></span> 공공데이터 개방</button>
-                        <button class="chip s3-chip" onclick="setScen('techguarantee')"><span class="ico"><svg
+                        <button class="chip s3-chip" data-action="setScen" data-args='["techguarantee"]'><span class="ico"><svg
                                     viewBox="0 0 24 24">
                                     <circle cx="12" cy="8" r="6" />
                                     <path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11" />
@@ -6054,7 +6054,7 @@
                         id="scen-inp" style="min-height:var(--h-min-lg);"
                         placeholder="예) 자동차 정기검사 만료 후 14일이 지났습니다. 지금 검사를 받을 수 있는지, 과태료는 얼마인지 문의합니다."></textarea></div>
                 <div class="stack mt-xs" style="gap:var(--gap-md)">
-                    <button class="btn btn-p" id="analyze-btn" onclick="analyzeScenario()"
+                    <button class="btn btn-p" id="analyze-btn" data-action="analyzeScenario"
                         style="flex:1;justify-content:center;">
                         <span class="ico"><svg viewBox="0 0 24 24">
                                 <circle cx="12" cy="12" r="10" />
@@ -6063,7 +6063,7 @@
                             </svg></span>
                         시나리오 분석 - 핵심 엔티티 및 질의 목표 자동 제안
                     </button>
-                    <button class="btn btn-s" id="add-scen-btn" onclick="addScenario()" style="white-space:nowrap;">
+                    <button class="btn btn-s" id="add-scen-btn" data-action="addScenario" style="white-space:nowrap;">
                         <span class="ico"><svg viewBox="0 0 24 24">
                                 <line x1="12" y1="5" x2="12" y2="19" />
                                 <line x1="5" y1="12" x2="19" y2="12" />
@@ -6110,7 +6110,7 @@
                         <input spellcheck="false" type="text" class="inp" id="entity-new"
                             placeholder="엔터티 직접 추가 (예: 수급자, 처리기한)" style="flex:1;"
                             onkeydown="if(event.key==='Enter')addEntityTag()">
-                        <button class="btn btn-s" onclick="addEntityTag()">추가</button>
+                        <button class="btn btn-s" data-action="addEntityTag">추가</button>
                     </div>
                 </div>
 
@@ -6124,7 +6124,7 @@
                         <input spellcheck="false" type="text" class="inp" id="query-new"
                             placeholder="질의 목표 직접 추가 (예: 필요한 서류는 무엇인가요?)" style="flex:1;"
                             onkeydown="if(event.key==='Enter')addQueryItem()">
-                        <button class="btn btn-s" onclick="addQueryItem()">추가</button>
+                        <button class="btn btn-s" data-action="addQueryItem">추가</button>
                     </div>
                 </div>
 
@@ -6132,18 +6132,18 @@
                     <label class="lbl">스키마 상세 수준</label>
                     <div class="stack mt-xs"
                         style="gap:0;border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);overflow:hidden">
-                        <label class="fs-sm" id="lvl-btn-outline" onclick="setLevel('outline')"
+                        <label class="fs-sm" id="lvl-btn-outline" data-action="setLevel" data-args='["outline"]'
                             style="flex:1;text-align:center;padding:var(--gap-sm);cursor:pointer;background:var(--coral);color:var(--mono-white);font-weight:var(--fw-semibold);transition:all .2s">개요</label>
-                        <label class="fs-sm" id="lvl-btn-mid" onclick="setLevel('mid')"
+                        <label class="fs-sm" id="lvl-btn-mid" data-action="setLevel" data-args='["mid"]'
                             style="flex:1;text-align:center;padding:var(--gap-sm);cursor:pointer;background:var(--bg-card);color:var(--text2);border-left:var(--bw-thin) solid var(--border);border-right:var(--bw-thin) solid var(--border);transition:all .2s">중간</label>
-                        <label class="fs-sm" id="lvl-btn-detail" onclick="setLevel('detail')"
+                        <label class="fs-sm" id="lvl-btn-detail" data-action="setLevel" data-args='["detail"]'
                             style="flex:1;text-align:center;padding:var(--gap-sm);cursor:pointer;background:var(--bg-card);color:var(--text2);transition:all .2s">상세</label>
                     </div>
                 </div>
             </div>
 
-            <div class="nav"><button class="btn btn-s" onclick="goStep(2)">이전</button><button class="btn btn-p"
-                    onclick="goStep(4)">다음: 스키마 추출</button></div>
+            <div class="nav"><button class="btn btn-s" data-action="goStep" data-args='[2]'>이전</button><button class="btn btn-p"
+                    data-action="goStep" data-args='[4]'>다음: 스키마 추출</button></div>
         </div>
 
         <!-- STEP 4 -->
@@ -6161,7 +6161,7 @@
                         </svg></span> 시나리오별 스키마 추출</div>
                 <div id="s4-notice" class="al al-i">Step 3에서 시나리오를 추가하면 각 시나리오별 탭이 생성됩니다.</div>
                 <div class="stack mb-3" style="gap:var(--gap-lg);flex-wrap:wrap">
-                    <button class="btn btn-p" onclick="extractAllSchemas()" id="ext-all-btn"><span class="ico"><svg
+                    <button class="btn btn-p" data-action="extractAllSchemas" id="ext-all-btn"><span class="ico"><svg
                                 viewBox="0 0 24 24">
                                 <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
                             </svg></span> 전체 추출</button>
@@ -6174,8 +6174,8 @@
                 <!-- 외부 탭 패널들 -->
                 <div id="s4-panes" style="margin-top:var(--gap-xl);"></div>
             </div>
-            <div class="nav"><button class="btn btn-s" onclick="goStep(3)">이전</button><button class="btn btn-p"
-                    onclick="goStep(5)">다음: 상위 온톨로지</button></div>
+            <div class="nav"><button class="btn btn-s" data-action="goStep" data-args='[3]'>이전</button><button class="btn btn-p"
+                    data-action="goStep" data-args='[5]'>다음: 상위 온톨로지</button></div>
         </div>
 
         <!-- STEP 5 -->
@@ -6200,14 +6200,14 @@
                         </svg></span> 상위 온톨로지 도출</div>
                 <div class="al al-i">도메인 스키마들의 공통 추상 개념(예: 민원인, 처리기한, 담당기관)을 추출하고 각 도메인 클래스와 subClassOf로 연결합니다.</div>
                 <div class="stack mb-3" style="gap:var(--gap-lg);flex-wrap:wrap">
-                    <button class="btn btn-p" onclick="genUpperOntology()" id="upper-btn"><span class="ico"><svg
+                    <button class="btn btn-p" data-action="genUpperOntology" id="upper-btn"><span class="ico"><svg
                                 viewBox="0 0 24 24">
                                 <circle cx="12" cy="12" r="10" />
                                 <line x1="2" y1="12" x2="22" y2="12" />
                                 <path
                                     d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
                             </svg></span> 상위 온톨로지 추출</button>
-                    <button class="btn btn-s" id="dl-upper-btn" style="display:none" onclick="dlJson('upper')"><span
+                    <button class="btn btn-s" id="dl-upper-btn" style="display:none" data-action="dlJson" data-args='["upper"]'><span
                             class="ico"><svg viewBox="0 0 24 24">
                                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                                 <polyline points="7 10 12 15 17 10" />
@@ -6218,19 +6218,19 @@
             </div>
             <div class="card" id="upper-res" style="display:none">
                 <div class="stack mb-xl" style="border-bottom:var(--bw-thin) solid var(--border);gap:0">
-                    <button class="fs-sm py-sm px-4" id="utab-classes" onclick="switchUpperTab('classes')"
+                    <button class="fs-sm py-sm px-4" id="utab-classes" data-action="switchUpperTab" data-args='["classes"]'
                         style="font-weight:var(--fw-semibold);background:none;border:none;cursor:pointer;border-bottom:var(--bw-thick) solid var(--coral);color:var(--coral);transition:all .2s">상위
                         클래스</button>
-                    <button class="fs-sm py-sm px-4" id="utab-links" onclick="switchUpperTab('links')"
+                    <button class="fs-sm py-sm px-4" id="utab-links" data-action="switchUpperTab" data-args='["links"]'
                         style="font-weight:var(--fw-semibold);background:none;border:none;cursor:pointer;border-bottom:var(--bw-thick) solid transparent;color:var(--text3);transition:all .2s">subClassOf
                         연결</button>
-                    <button class="fs-sm py-sm px-4" id="utab-raw" onclick="switchUpperTab('raw')"
+                    <button class="fs-sm py-sm px-4" id="utab-raw" data-action="switchUpperTab" data-args='["raw"]'
                         style="font-weight:var(--fw-semibold);background:none;border:none;cursor:pointer;border-bottom:var(--bw-thick) solid transparent;color:var(--text3);transition:all .2s">원문
                         JSON</button>
-                    <button class="fs-sm py-sm px-4" id="utab-gui" onclick="switchUpperTab('gui')"
+                    <button class="fs-sm py-sm px-4" id="utab-gui" data-action="switchUpperTab" data-args='["gui"]'
                         style="font-weight:var(--fw-semibold);background:none;border:none;cursor:pointer;border-bottom:var(--bw-thick) solid transparent;color:var(--text3);transition:all .2s">GUI
                         편집</button>
-                    <button class="fs-sm row-gap-xs py-sm px-4" id="utab-diagram" onclick="switchUpperTab('diagram')"
+                    <button class="fs-sm row-gap-xs py-sm px-4" id="utab-diagram" data-action="switchUpperTab" data-args='["diagram"]'
                         style="font-weight:var(--fw-semibold);background:none;border:none;cursor:pointer;border-bottom:var(--bw-thick) solid transparent;color:var(--text3);transition:all .2s"><span
                             class="ico" style="width:var(--icon-rg);height:var(--icon-rg);"><svg viewBox="0 0 24 24" stroke="currentColor"
                                 fill="none" stroke-width="2">
@@ -6254,8 +6254,8 @@
                     <div id="utab-diagram-el" style="min-height:var(--h-min-2xl);"></div>
                 </div>
             </div>
-            <div class="nav"><button class="btn btn-s" onclick="goStep(4)">이전</button><button class="btn btn-p"
-                    onclick="goStep(6)">다음: 추론 규칙</button></div>
+            <div class="nav"><button class="btn btn-s" data-action="goStep" data-args='[4]'>이전</button><button class="btn btn-p"
+                    data-action="goStep" data-args='[6]'>다음: 추론 규칙</button></div>
         </div>
 
         <!-- STEP 6 -->
@@ -6283,13 +6283,13 @@
                             <line x1="3" y1="18" x2="3.01" y2="18" />
                         </svg></span> CRITICAL 등급의 추론 규칙이 행정 처리의 핵심 분기점입니다. 도메인 스키마 또는 상위 온톨로지 추출 후 실행하세요.</div>
                 <div class="stack mb-3" style="gap:var(--gap-lg);flex-wrap:wrap">
-                    <button class="btn btn-p" onclick="genInf()" id="inf-btn"><span class="ico"><svg
+                    <button class="btn btn-p" data-action="genInf" id="inf-btn"><span class="ico"><svg
                                 viewBox="0 0 24 24">
                                 <path
                                     d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
                             </svg></span> 추론 규칙 도출</button>
 
-                    <button class="btn btn-s" id="inf-run-btn" style="display:none" onclick="runLLMInference()"><span
+                    <button class="btn btn-s" id="inf-run-btn" style="display:none" data-action="runLLMInference"><span
                             class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <polygon points="5 3 19 12 5 21 5 3" />
                             </svg></span> LLM 추론 실행</button>
@@ -6303,10 +6303,10 @@
                         </svg></span> 도출된 추론 규칙 <span class="badge br ml-sm" id="inf-cnt">추론 규칙:
                         0개</span></div>
                 <div class="sub-tab-bar mb-sm">
-                    <button id="inf-tab-raw" class="sub-tab-btn active" onclick="switchInfTab('raw')">원문
+                    <button id="inf-tab-raw" class="sub-tab-btn active" data-action="switchInfTab" data-args='["raw"]'>원문
                         JSON</button>
-                    <button id="inf-tab-gui" class="sub-tab-btn" onclick="switchInfTab('gui')">GUI 편집</button> <button
-                        id="inf-tab-diagram" class="sub-tab-btn" onclick="switchInfTab('diagram')"><span class="ico"
+                    <button id="inf-tab-gui" class="sub-tab-btn" data-action="switchInfTab" data-args='["gui"]'>GUI 편집</button> <button
+                        id="inf-tab-diagram" class="sub-tab-btn" data-action="switchInfTab" data-args='["diagram"]'><span class="ico"
                             style="width:var(--icon-md);height:var(--icon-md);"><svg viewBox="0 0 24 24" stroke="currentColor" fill="none"
                                 stroke-width="2">
                                 <line x1="18" y1="20" x2="18" y2="10" />
@@ -6341,7 +6341,7 @@
                     정의(T-Box)이므로 인스턴스 데이터(A-Box)가 있어야 규칙이 발동됩니다.</div>
                 <div class="row-gap mb-lg" style="flex-wrap:wrap">
 
-                    <button class="btn btn-s btn-sm" onclick="clearInstances()">전체 삭제</button>
+                    <button class="btn btn-s btn-sm" data-action="clearInstances">전체 삭제</button>
                     <span class="fs-xs ml-auto" id="abox-count" style="color:var(--text3)">0개
                         인스턴스</span>
                 </div>
@@ -6364,7 +6364,7 @@
                         <tbody id="abox-tbody"></tbody>
                     </table>
                 </div>
-                <button class="fs-xs p-1 mt-2" onclick="addInstanceRow()"
+                <button class="fs-xs p-1 mt-2" data-action="addInstanceRow"
                     style="font-weight:var(--fw-semibold);border:var(--bw-thin) dashed var(--coral);border-radius:var(--r-xs);background:var(--c-ink-04);color:var(--coral);cursor:pointer">+
                     인스턴스 추가</button>
             </div>
@@ -6376,8 +6376,8 @@
                        >-</span></div>
                 <div class="col-gap-sm mt-2" id="inf-engine-out"></div>
             </div>
-            <div class="nav"><button class="btn btn-s" onclick="goStep(5)">이전</button><button class="btn btn-p"
-                    onclick="goStep(7)">다음: 시각화</button></div>
+            <div class="nav"><button class="btn btn-s" data-action="goStep" data-args='[5]'>이전</button><button class="btn btn-p"
+                    data-action="goStep" data-args='[7]'>다음: 시각화</button></div>
         </div>
 
         <!-- STEP 7 (시각화 + 질의) -->
@@ -6393,9 +6393,9 @@
                 <p class="pd">추출된 온톨로지 스키마를 인터랙티브 지식 그래프로 시각화하거나, 트리플 패턴 질의로 원하는 관계를 직접 검색합니다.</p>
             </div>
             <div class="sub-tab-bar mb-sm">
-                <button id="s7tab-graph" class="sub-tab-btn active" onclick="switchS7Tab('graph')">지식
+                <button id="s7tab-graph" class="sub-tab-btn active" data-action="switchS7Tab" data-args='["graph"]'>지식
                     그래프</button>
-                <button id="s7tab-query" class="sub-tab-btn" onclick="switchS7Tab('query')"><span class="ico"
+                <button id="s7tab-query" class="sub-tab-btn" data-action="switchS7Tab" data-args='["query"]'><span class="ico"
                         style="width:var(--icon-md);height:var(--icon-md);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
                             <circle cx="11" cy="11" r="8" />
@@ -6465,21 +6465,21 @@
                             <!-- 레이어 필터 -->
                             <div class="gl-filter-group">
                                 <span class="layer-legend-label">레이어 표시:</span>
-                                <button id="gl-l2" class="gl-filter-btn gl-btn-l2" onclick="toggleGraphLayer('l2')">L2
+                                <button id="gl-l2" class="gl-filter-btn gl-btn-l2" data-action="toggleGraphLayer" data-args='["l2"]'>L2
                                     클래스</button>
-                                <button id="gl-l3" class="gl-filter-btn gl-btn-l3" onclick="toggleGraphLayer('l3')">L3
+                                <button id="gl-l3" class="gl-filter-btn gl-btn-l3" data-action="toggleGraphLayer" data-args='["l3"]'>L3
                                     속성</button>
-                                <button id="gl-l4" class="gl-filter-btn gl-btn-l4" onclick="toggleGraphLayer('l4')">L4
+                                <button id="gl-l4" class="gl-filter-btn gl-btn-l4" data-action="toggleGraphLayer" data-args='["l4"]'>L4
                                     트리플</button>
                                 <button id="gl-l4a" class="gl-filter-btn gl-btn-l4a"
-                                    onclick="toggleGraphLayer('l4a')">L4 A-Box</button>
-                                <button id="gl-l5" class="gl-filter-btn gl-btn-l5" onclick="toggleGraphLayer('l5')">L5
+                                    data-action="toggleGraphLayer" data-args='["l4a"]'>L4 A-Box</button>
+                                <button id="gl-l5" class="gl-filter-btn gl-btn-l5" data-action="toggleGraphLayer" data-args='["l5"]'>L5
                                     SWRL</button>
                                 <button id="gl-l5s" class="gl-filter-btn gl-btn-l5s"
-                                    onclick="toggleGraphLayer('l5s')">L5 SHACL</button>
+                                    data-action="toggleGraphLayer" data-args='["l5s"]'>L5 SHACL</button>
                                 <button id="gl-casc" class="gl-filter-btn gl-btn-casc"
-                                    onclick="toggleGraphLayer('casc')">cascade</button>
-                                <button class="btn btn-s btn-sm ml-sm" onclick="renderGraph()"
+                                    data-action="toggleGraphLayer" data-args='["casc"]'>cascade</button>
+                                <button class="btn btn-s btn-sm ml-sm" data-action="renderGraph"
                                    ><span class="ico"><svg viewBox="0 0 24 24">
                                             <polyline points="23 4 23 10 17 10" />
                                             <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
@@ -6808,13 +6808,13 @@
                         </table>
                     </div>
                     <div class="row-gap" style="flex-wrap:wrap">
-                        <button class="btn btn-s btn-sm" onclick="addQueryRow()">+ 조건 추가</button>
+                        <button class="btn btn-s btn-sm" data-action="addQueryRow">+ 조건 추가</button>
                         <label class="fs-xs row-gap-xs"
                             style="color:var(--text2);cursor:pointer">
                             <input spellcheck="false" type="checkbox" id="query-incl-derived" style="cursor:pointer;">
                             파생 트리플 포함
                         </label>
-                        <button class="btn btn-p ml-auto" onclick="runTripleQuery()"><span
+                        <button class="btn btn-p ml-auto" data-action="runTripleQuery"><span
                                 class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <circle cx="11" cy="11" r="8" />
                                     <line x1="21" y1="21" x2="16.65" y2="16.65" />
@@ -6831,8 +6831,8 @@
                         노드가 강조 표시됩니다.</div>
                 </div>
             </div>
-            <div class="nav"><button class="btn btn-s" onclick="goStep(6)">이전</button><button class="btn btn-p"
-                    onclick="goStep(8)">다음: 검증 비교</button></div>
+            <div class="nav"><button class="btn btn-s" data-action="goStep" data-args='[6]'>이전</button><button class="btn btn-p"
+                    data-action="goStep" data-args='[8]'>다음: 검증 비교</button></div>
         </div>
 
         <!-- STEP 8 (검증 비교) -->
@@ -6858,16 +6858,16 @@
                         placeholder="예) 화성시 OO구간에 안전펜스를 즉시 설치해 주세요. B 업종 매장의 교통안전 지원금 신청도 가능한가요? 담당 부서와 처리 절차도 알려주세요."></textarea>
                 </div>
                 <div class="d-flex flex-wrap gap-md">
-                    <button class="btn btn-s btn-sm" onclick="setTestQ()"><span class="ico"><svg viewBox="0 0 24 24">
+                    <button class="btn btn-s btn-sm" data-action="setTestQ"><span class="ico"><svg viewBox="0 0 24 24">
                                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
                                 <polyline points="14 2 14 8 20 8" />
                             </svg></span> 예시 질문 불러오기</button>
-                    <button class="btn btn-s btn-sm" onclick="genTestQ()" id="gen-q-btn"><span class="ico"><svg
+                    <button class="btn btn-s btn-sm" data-action="genTestQ" id="gen-q-btn"><span class="ico"><svg
                                 viewBox="0 0 24 24">
                                 <path d="M12 20h9" />
                                 <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
                             </svg></span> 내 스키마 기반 질문 생성</button>
-                    <button class="btn btn-p" onclick="runCmp()" id="cmp-btn"><span class="ico"><svg
+                    <button class="btn btn-p" data-action="runCmp" id="cmp-btn"><span class="ico"><svg
                                 viewBox="0 0 24 24">
                                 <polygon points="5 3 19 12 5 21 5 3" />
                             </svg></span> A/B/C 비교 실행</button>
@@ -6912,28 +6912,28 @@
                     Human In the Loop - 어느 답변을 채택하시겠습니까?
                 </div>
                 <div class="d-flex flex-wrap gap-sm flex-center">
-                    <button class="btn btn-s" id="hitl-btn-C" onclick="selectChoice('C')"
+                    <button class="btn btn-s" id="hitl-btn-C" data-action="selectChoice" data-args='["C"]'
                         style="border-color:var(--border);color:var(--ink);"><span class="ico"><svg viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2">
                                 <circle cx="12" cy="12" r="10" />
                                 <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
                                 <line x1="12" y1="17" x2="12.01" y2="17" />
                             </svg></span> C 채택 - 순수 LLM</button>
-                    <button class="btn btn-s" id="hitl-btn-A" onclick="selectChoice('A')"><span class="ico"><svg
+                    <button class="btn btn-s" id="hitl-btn-A" data-action="selectChoice" data-args='["A"]'><span class="ico"><svg
                                 viewBox="0 0 24 24">
                                 <line x1="18" y1="6" x2="6" y2="18" />
                                 <line x1="6" y1="6" x2="18" y2="18" />
                             </svg></span> A 채택 - 일반 RAG</button>
-                    <button class="btn btn-p" id="hitl-btn-B" onclick="selectChoice('B')"><span class="ico"><svg
+                    <button class="btn btn-p" id="hitl-btn-B" data-action="selectChoice" data-args='["B"]'><span class="ico"><svg
                                 viewBox="0 0 24 24">
                                 <polyline points="20 6 9 17 4 12" />
                             </svg></span> B 채택 - 온톨로지 RAG</button>
-                    <button class="btn btn-s" id="hitl-btn-tie" onclick="selectChoice('tie')"><span class="ico"><svg
+                    <button class="btn btn-s" id="hitl-btn-tie" data-action="selectChoice" data-args='["tie"]'><span class="ico"><svg
                                 viewBox="0 0 24 24">
                                 <line x1="5" y1="9" x2="19" y2="9" />
                                 <line x1="5" y1="15" x2="19" y2="15" />
                             </svg></span> 동등 - 우열 없음</button>
-                    <button class="fs-xs p-1" id="hitl-btn-clear" onclick="selectChoice(null)"
+                    <button class="fs-xs p-1" id="hitl-btn-clear" data-action="selectChoice" data-args="[null]"
                         style="display:none;background:none;border:none;color:var(--text3);cursor:pointer;text-decoration:underline">선택
                         취소</button>
                 </div>
@@ -6948,8 +6948,8 @@
                         </svg></span> LLM 자동 품질 평가</div>
                 <div id="eval-res"></div>
             </div>
-            <div class="nav"><button class="btn btn-s" onclick="goStep(7)">이전</button><button class="btn btn-p"
-                    onclick="goStep(9)">다음: 연동 가이드</button></div>
+            <div class="nav"><button class="btn btn-s" data-action="goStep" data-args='[7]'>이전</button><button class="btn btn-p"
+                    data-action="goStep" data-args='[9]'>다음: 연동 가이드</button></div>
         </div>
 
         <!-- STEP 9 (연동 가이드) -->
@@ -6965,17 +6965,17 @@
 
             <!-- 탭 바 -->
             <div class="sub-tab-bar mb-md">
-                <button id="itab-export" class="sub-tab-btn active" onclick="switchIntTab('export')">내보내기
+                <button id="itab-export" class="sub-tab-btn active" data-action="switchIntTab" data-args='["export"]'>내보내기
                     · 스키마 확인</button>
-                <button id="itab-python" class="sub-tab-btn" onclick="switchIntTab('python')">Python
+                <button id="itab-python" class="sub-tab-btn" data-action="switchIntTab" data-args='["python"]'>Python
                     (rdflib)</button>
-                <button id="itab-langchain" class="sub-tab-btn" onclick="switchIntTab('langchain')">LangChain
+                <button id="itab-langchain" class="sub-tab-btn" data-action="switchIntTab" data-args='["langchain"]'>LangChain
                     / GraphRAG</button>
-                <button id="itab-sparql" class="sub-tab-btn" onclick="switchIntTab('sparql')">SPARQL
+                <button id="itab-sparql" class="sub-tab-btn" data-action="switchIntTab" data-args='["sparql"]'>SPARQL
                     쿼리</button>
-                <button id="itab-rest" class="sub-tab-btn" onclick="switchIntTab('rest')">REST
+                <button id="itab-rest" class="sub-tab-btn" data-action="switchIntTab" data-args='["rest"]'>REST
                     API · DB 연동</button>
-                <button id="itab-security" class="sub-tab-btn" onclick="switchIntTab('security')"><svg
+                <button id="itab-security" class="sub-tab-btn" data-action="switchIntTab" data-args='["security"]'><svg
                         viewBox="0 0 24 24"
                         style="width:var(--icon-md);height:var(--icon-md);stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;display:inline-block;vertical-align:middle;margin-bottom:.1rem" class="mr-1">
                         <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
@@ -6987,12 +6987,12 @@
             <div id="itab-export-pane">
                 <div class="al al-i">추출된 스키마·규칙을 스키마 JSON 파일로 다운로드한 뒤 외부 시스템에 로드합니다.</div>
                 <div class="stack mb-4" style="gap:var(--gap-lg);flex-wrap:wrap">
-                    <button class="btn btn-s" onclick="dlJson('cmb')"><span class="ico"><svg viewBox="0 0 24 24">
+                    <button class="btn btn-s" data-action="dlJson" data-args='["cmb"]'><span class="ico"><svg viewBox="0 0 24 24">
                                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                                 <polyline points="7 10 12 15 17 10" />
                                 <line x1="12" y1="15" x2="12" y2="3" />
                             </svg></span> 통합 스키마 다운로드</button>
-                    <button class="btn btn-p" onclick="exportJsonLD()"><span class="ico"><svg viewBox="0 0 24 24">
+                    <button class="btn btn-p" data-action="exportJsonLD"><span class="ico"><svg viewBox="0 0 24 24">
                                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                                 <polyline points="7 10 12 15 17 10" />
                                 <line x1="12" y1="15" x2="12" y2="3" />
@@ -7769,8 +7769,8 @@ for r in results:
                 </div>
             </div>
 
-            <div class="nav"><button class="btn btn-s" onclick="goStep(8)">이전</button><button class="btn btn-p"
-                    onclick="goStep(10)">다음: 부록</button></div>
+            <div class="nav"><button class="btn btn-s" data-action="goStep" data-args='[8]'>이전</button><button class="btn btn-p"
+                    data-action="goStep" data-args='[10]'>다음: 부록</button></div>
         </div>
 
         <!-- STEP 10: APPENDIX -->
@@ -7810,25 +7810,25 @@ for r in results:
             <!-- Tab Nav -->
             <div class="stack mb-6"
                 style="border-bottom:var(--bw-thin) solid var(--border);gap:0;overflow-x:auto">
-                <button class="fs-sm p-2" id="a10-t1" onclick="switchA10Tab(1)"
+                <button class="fs-sm p-2" id="a10-t1" data-action="switchA10Tab" data-args='[1]'
                     style="font-weight:var(--fw-bold);background:none;border:none;cursor:pointer;border-bottom:var(--bw-strong) solid var(--ink);color:var(--ink);white-space:nowrap">시스템
                     아키텍처</button>
-                <button class="fs-sm p-2" id="a10-t2" onclick="switchA10Tab(2)"
+                <button class="fs-sm p-2" id="a10-t2" data-action="switchA10Tab" data-args='[2]'
                     style="font-weight:var(--fw-semibold);background:none;border:none;cursor:pointer;border-bottom:var(--bw-strong) solid transparent;color:var(--text3);white-space:nowrap">USE
                     CASE 다이어그램</button>
-                <button class="fs-sm p-2" id="a10-t3" onclick="switchA10Tab(3)"
+                <button class="fs-sm p-2" id="a10-t3" data-action="switchA10Tab" data-args='[3]'
                     style="font-weight:var(--fw-semibold);background:none;border:none;cursor:pointer;border-bottom:var(--bw-strong) solid transparent;color:var(--text3);white-space:nowrap">시퀀스
                     다이어그램</button>
-                <button class="fs-sm p-2" id="a10-t4" onclick="switchA10Tab(4)"
+                <button class="fs-sm p-2" id="a10-t4" data-action="switchA10Tab" data-args='[4]'
                     style="font-weight:var(--fw-semibold);background:none;border:none;cursor:pointer;border-bottom:var(--bw-strong) solid transparent;color:var(--text3);white-space:nowrap">WBS
                     차트</button>
-                <button class="fs-sm p-2" id="a10-t5" onclick="switchA10Tab(5)"
+                <button class="fs-sm p-2" id="a10-t5" data-action="switchA10Tab" data-args='[5]'
                     style="font-weight:var(--fw-semibold);background:none;border:none;cursor:pointer;border-bottom:var(--bw-strong) solid transparent;color:var(--text3);white-space:nowrap">프롬프트
                     편집기</button>
-                <button class="fs-sm p-2" id="a10-t6" onclick="switchA10Tab(6)"
+                <button class="fs-sm p-2" id="a10-t6" data-action="switchA10Tab" data-args='[6]'
                     style="font-weight:var(--fw-semibold);background:none;border:none;cursor:pointer;border-bottom:var(--bw-strong) solid transparent;color:var(--text3);white-space:nowrap">도메인
                     가이드 편집</button>
-                <button class="fs-sm p-2" id="a10-t7" onclick="switchA10Tab(7)"
+                <button class="fs-sm p-2" id="a10-t7" data-action="switchA10Tab" data-args='[7]'
                     style="font-weight:var(--fw-semibold);background:none;border:none;cursor:pointer;border-bottom:var(--bw-strong) solid transparent;color:var(--text3);white-space:nowrap">W3C
                     표준 참조</button>
             </div>
@@ -7919,13 +7919,13 @@ for r in results:
                 <div class="al al-i mb-4">각 단계 AI API 호출의 시스템 프롬프트를 편집할 수 있습니다. 골든 샘플은 코드에 보존되어
                     언제든 One 클릭으로 복구 가능합니다.</div>
                 <div class="stack mb-4" style="gap:var(--gap-md);flex-wrap:wrap">
-                    <button class="btn btn-s btn-sm" onclick="resetAllPrompts()" style="color:var(--ink);"><span
+                    <button class="btn btn-s btn-sm" data-action="resetAllPrompts" style="color:var(--ink);"><span
                             class="ico"><svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor"
                                 fill="none" stroke-width="2">
                                 <polyline points="1 4 1 10 7 10" />
                                 <path d="M3.51 15a9 9 0 1 0 .49-3.51" />
                             </svg></span> 전체 기본값으로 초기화</button>
-                    <button class="btn btn-s btn-sm" onclick="dlCustomPrompts()"><span class="ico"><svg
+                    <button class="btn btn-s btn-sm" data-action="dlCustomPrompts"><span class="ico"><svg
                                 viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" fill="none"
                                 stroke-width="2">
                                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -7990,7 +7990,7 @@ for r in results:
                                 placeholder="예: 건축허가신청서, 건축도면, 토지이용계획확인서">
                         </div>
                         <div class="stack mt-1" style="gap:var(--gap-md);justify-content:flex-end">
-                            <button class="btn btn-p btn-sm" onclick="saveDomainEntry()"><span class="ico"><svg
+                            <button class="btn btn-p btn-sm" data-action="saveDomainEntry"><span class="ico"><svg
                                         viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" fill="none"
                                         stroke-width="2">
                                         <polyline points="20 6 9 17 4 12" />
@@ -8510,7 +8510,7 @@ for r in results:
                 </div>
             </div>
 
-            <div class="nav"><button class="btn btn-s" onclick="goStep(9)">이전</button></div>
+            <div class="nav"><button class="btn btn-s" data-action="goStep" data-args='[9]'>이전</button></div>
         </div>
     </main>
 
@@ -8540,7 +8540,7 @@ for r in results:
         const APP_COPYRIGHT = APP_TITLE + ' ' + APP_VERSION + ' &copy; (주)워플로지';
         const APP_DESC = APP_TITLE + '은 공공 AX에 온톨로지 기술을 활용할 수 있도록 도메인과 규칙 설계를 지원하는 지식 기반 추론 도구입니다. 모두가 온톨로지를 쉽게 디자인할 수 있도록 확장해 나아가겠습니다.';
         document.addEventListener('DOMContentLoaded', function () {
-            var s = function (id, v) { var e = document.getElementById(id); if (e) e.innerHTML = v; };
+            let s = function (id, v) { let e = document.getElementById(id); if (e) e.innerHTML = v; };
             s('app-brand-org', APP_ORG);
             s('app-brand-title', APP_TITLE);
             s('app-logo-txt', APP_TITLE);
@@ -13934,10 +13934,10 @@ ${domainCtx}${upperCtx}
                 if (_el) _el.remove();
                 if (!txt) return;
                 _el = document.createElement('div');
-                var hasBg = bg ? true : false;
-                var useBg = hasBg ? bg : 'var(--mono-800)';
-                var useFt = (hasBg && ft) ? ft : 'var(--mono-100)';
-                var useBd = (hasBg && bd) ? bd : 'rgba(255,255,255,.08)';
+                const hasBg = bg ? true : false;
+                const useBg = hasBg ? bg : 'var(--mono-800)';
+                const useFt = (hasBg && ft) ? ft : 'var(--mono-100)';
+                const useBd = (hasBg && bd) ? bd : 'rgba(255,255,255,.08)';
                 _el.style.cssText = [
                     'position:fixed', 'z-index:10000',
                     'background:' + useBg,
@@ -14001,7 +14001,7 @@ ${domainCtx}${upperCtx}
         }
         // 에지 색상 → 툴팁 팔레트 역방향 조회 (VIS_COL.xxx.bd → { bg, ft })
         function _visTipStyle(edgeColor) {
-            var P = [
+            const P = [
                 [VIS_COL.objProp.bd,    VIS_COL.objProp],
                 [VIS_COL.owlClass.bd,   VIS_COL.owlClass],
                 [VIS_COL.owlRoot.bd,    VIS_COL.owlRoot],
@@ -14018,7 +14018,7 @@ ${domainCtx}${upperCtx}
                 ['#7c3aed', { bg: '#f5f3ff', ft: '#5b21b6' }],
                 ['#dc2626', { bg: '#fff1f1', ft: '#991b1b' }],
             ];
-            for (var i = 0; i < P.length; i++) {
+            for (let i = 0; i < P.length; i++) {
                 if (P[i][0] === edgeColor) return P[i][1];
             }
             return null;
@@ -14134,7 +14134,7 @@ ${domainCtx}${upperCtx}
             network.once('stabilized', () => { try { network.fit({ animation: { duration: 300, easingFunction: 'easeInOutQuad' } }); } catch (e) { } });
             // hover 색상 고정: 배경색 변화 없이 테두리만 강조 (vis.js 기본 배경 변화 억제)
             nodesDS.forEach(function(nd) {
-                var col = nd.color;
+                let col = nd.color;
                 if (col && typeof col === 'object' && col.background) {
                     nodesDS.update({ id: nd.id, color: {
                         background: col.background, border: col.border || col.background,
@@ -14145,7 +14145,7 @@ ${domainCtx}${upperCtx}
             });
             // 에지 색상 고정: hover/select 시 에지 색상 변화 억제
             edgesDS.forEach(function(ed) {
-                var col = ed.color;
+                let col = ed.color;
                 if (col && typeof col === 'object' && col.color) {
                     edgesDS.update({ id: ed.id, color: {
                         color: col.color,
@@ -14155,20 +14155,20 @@ ${domainCtx}${upperCtx}
                 }
             });
             // 노드/에지 두께 강조 헬퍼 (hover 전용)
-            var _thick  = new Map();  // nodeId → { bw, font }
-            var _thickE = new Map();  // edgeId → origWidth
+            const _thick  = new Map();  // nodeId → { bw, font }
+            const _thickE = new Map();  // edgeId → origWidth
             function _nodeOn(nd) {
                 if (!nd || _thick.has(nd.id)) return;
-                var bw = nd.borderWidth != null ? nd.borderWidth : 2;
-                var origFont = nd.font ? Object.assign({}, nd.font) : null;
-                var fs = origFont && origFont.size != null ? origFont.size : VIS_DS.font.base;
+                let bw = nd.borderWidth != null ? nd.borderWidth : 2;
+                const origFont = nd.font ? Object.assign({}, nd.font) : null;
+                let fs = origFont && origFont.size != null ? origFont.size : VIS_DS.font.base;
                 _thick.set(nd.id, { bw: bw, font: origFont });
                 nodesDS.update({ id: nd.id, borderWidth: bw + 2, font: Object.assign({}, origFont || {}, { size: fs + 2 }) });
             }
             function _nodeOff(id) {
-                var orig = _thick.get(id);
+                const orig = _thick.get(id);
                 if (!orig) return;
-                var upd = { id: id, borderWidth: orig.bw };
+                const upd = { id: id, borderWidth: orig.bw };
                 // orig.font === null: DataSet에 font 미설정 노드 → 글로벌 기본 size로 명시 복원
                 // 복원 안 하면 DataSet에 증가된 size가 남아 다음 hover 시 잘못된 orig 저장 (누적 버그)
                 upd.font = orig.font !== null ? orig.font : { size: VIS_DS.font.base };
@@ -14177,31 +14177,31 @@ ${domainCtx}${upperCtx}
             }
             function _edgeOn(ed) {
                 if (!ed || _thickE.has(ed.id)) return;
-                var origW = ed.width != null ? ed.width : 1.5;
+                const origW = ed.width != null ? ed.width : 1.5;
                 _thickE.set(ed.id, origW);
                 edgesDS.update({ id: ed.id, width: origW + 2 });
             }
             function _edgeOff(id) {
-                var origW = _thickE.get(id);
+                const origW = _thickE.get(id);
                 if (origW === undefined) return;
                 edgesDS.update({ id: id, width: origW });
                 _thickE.delete(id);
             }
             // hover 이벤트
             network.on('hoverNode', function(p) {
-                var nd = nodesDS.get(p.node);
-                var tipBg = nd && nd.color && nd.color.background ? nd.color.background : null;
-                var tipBd = nd && nd.color && nd.color.border ? nd.color.border : null;
-                var tipFt = nd && nd._tipFt ? nd._tipFt : (nd && nd.font && nd.font.color ? nd.font.color : null);
+                let nd = nodesDS.get(p.node);
+                const tipBg = nd && nd.color && nd.color.background ? nd.color.background : null;
+                const tipBd = nd && nd.color && nd.color.border ? nd.color.border : null;
+                const tipFt = nd && nd._tipFt ? nd._tipFt : (nd && nd.font && nd.font.color ? nd.font.color : null);
                 window._visShowTip(nd && nd._tip ? nd._tip : null, tipBg, tipBd, tipFt);
                 _nodeOn(nd);
                 // 연결된 에지도 함께 강조
                 network.getConnectedEdges(p.node).forEach(function(eid) { _edgeOn(edgesDS.get(eid)); });
             });
             network.on('hoverEdge', function(p) {
-                var ed = edgesDS.get(p.edge);
-                var ec = ed && ed.color && ed.color.color ? ed.color.color : null;
-                var ets = ec ? _visTipStyle(ec) : null;
+                let ed = edgesDS.get(p.edge);
+                const ec = ed && ed.color && ed.color.color ? ed.color.color : null;
+                const ets = ec ? _visTipStyle(ec) : null;
                 window._visShowTip(ed && ed._tip ? ed._tip : null, ets ? ets.bg : null, ec, ets ? ets.ft : null);
                 _edgeOn(ed);
             });
@@ -14210,7 +14210,7 @@ ${domainCtx}${upperCtx}
                 _edgeOff(p.edge);
             });
             // dragStart가 blurNode보다 먼저 발생 → 드래그 중 blurNode에 의한 조기 정리 방지
-            var _isDragging = false;
+            let _isDragging = false;
             network.on('dragStart', function() { _isDragging = true; });
             network.on('dragEnd', function(p) {
                 _isDragging = false;
@@ -15966,8 +15966,8 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
         let a10Drawn = false;
 
         function drawUseCase() {
-            var W = 950, H = 575, sbX = 120, sbY = 28, sbW = 660, sbH = 520, rx = 74, ry = 21;
-            var ucs = [
+            let W = 950, H = 575, sbX = 120, sbY = 28, sbW = 660, sbH = 520, rx = 74, ry = 21;
+            const ucs = [
                 { cx: 278, cy: 88, lb: ['UC1 환경 설정', '(API 키 등록)'], st: 'var(--mono-800)', bg: 'var(--mono-white)' },
                 { cx: 524, cy: 88, lb: ['UC2 문서 로드', '(PDF/DOCX/법령)'], st: 'var(--mono-800)', bg: 'var(--mono-white)' },
                 { cx: 278, cy: 172, lb: ['UC3 시나리오 설정'], st: 'var(--mono-800)', bg: 'var(--mono-white)' },
@@ -15979,8 +15979,8 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
                 { cx: 278, cy: 424, lb: ['UC9 연동 가이드', '확인'], st: 'var(--mono-800)', bg: 'var(--mono-white)' },
                 { cx: 524, cy: 424, lb: ['UC10 결과 내보내기'], st: 'var(--mono-800)', bg: 'var(--mono-white)' },
             ];
-            var ax = 56, ay = 285, llx = 878, lly = 192, gwx = 878, gwy = 420;
-            var s = '<svg width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg" style="font-family:var(--font-body);max-width:100%;display:block;">'
+            let ax = 56, ay = 285, llx = 878, lly = 192, gwx = 878, gwy = 420;
+            let s = '<svg width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg" style="font-family:var(--font-body);max-width:100%;display:block;">'
                 + '<defs>'
                 + '<marker id="ucma" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" style="fill:var(--text);"/></marker>'
                 + '<marker id="ucmg" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" style="fill:var(--text2);"/></marker>'
@@ -16005,31 +16005,31 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
                 s += '<line x1="' + (ax + 14) + '" y1="' + (ay - 15) + '" x2="' + (u.cx - rx) + '" y2="' + u.cy + '" style="stroke:var(--c-ink-25);" stroke-width="1"/>';
             });
             [3, 4, 5, 7].forEach(function (idx) {
-                var u = ucs[idx];
-                var mx = Math.round((u.cx + rx + llx - 44) / 2);
-                var my = Math.round((u.cy + lly) / 2);
+                const u = ucs[idx];
+                const mx = Math.round((u.cx + rx + llx - 44) / 2);
+                const my = Math.round((u.cy + lly) / 2);
                 s += '<line x1="' + (u.cx + rx) + '" y1="' + u.cy + '" x2="' + (llx - 44) + '" y2="' + lly + '" style="stroke:var(--text);" stroke-width="1" stroke-dasharray="5,3" marker-end="url(#ucma)"/>';
                 s += '<text class="svg-cap" x="' + mx + '" y="' + (my - 4) + '" text-anchor="middle" font-style="italic">include</text>';
             });
-            var u2 = ucs[1];
-            var mx2 = Math.round((u2.cx + rx + gwx - 44) / 2);
-            var my2 = Math.round((u2.cy + gwy) / 2);
+            const u2 = ucs[1];
+            const mx2 = Math.round((u2.cx + rx + gwx - 44) / 2);
+            const my2 = Math.round((u2.cy + gwy) / 2);
             s += '<line x1="' + (u2.cx + rx) + '" y1="' + u2.cy + '" x2="' + (gwx - 44) + '" y2="' + gwy + '" style="stroke:var(--text2);" stroke-width="1" stroke-dasharray="5,3" marker-end="url(#ucmg)"/>';
             s += '<text class="svg-cap" x="' + mx2 + '" y="' + (my2 - 4) + '" text-anchor="middle" font-style="italic">include</text>';
             ucs.forEach(function (u) {
                 s += '<ellipse cx="' + u.cx + '" cy="' + u.cy + '" rx="' + rx + '" ry="' + ry + '" style="fill:'+ u.bg +';stroke:'+ u.st +';" stroke-width="1.5"/>';
                 u.lb.forEach(function (l, li) {
-                    var yOff = u.lb.length === 1 ? 4 : (li - (u.lb.length - 1) / 2) * 13 + 4;
+                    const yOff = u.lb.length === 1 ? 4 : (li - (u.lb.length - 1) / 2) * 13 + 4;
                     s += '<text class="svg-cap" x="' + u.cx + '" y="' + (u.cy + yOff) + '" text-anchor="middle">' + l + '</text>';
                 });
             });
-            var lgy = sbY + sbH - 14;
+            const lgy = sbY + sbH - 14;
             s += '<line x1="' + (sbX + 10) + '" y1="' + lgy + '" x2="' + (sbX + 30) + '" y2="' + lgy + '" style="stroke:var(--c-ink-40);" stroke-width="1"/>'
                 + '<text class="svg-cap" x="' + (sbX + 34) + '" y="' + (lgy + 4) + '">참가자 연관 (Association)</text>'
                 + '<line x1="' + (sbX + 190) + '" y1="' + lgy + '" x2="' + (sbX + 210) + '" y2="' + lgy + '" style="stroke:var(--text);" stroke-width="1" stroke-dasharray="4,2"/>'
                 + '<text class="svg-cap" x="' + (sbX + 214) + '" y="' + (lgy + 4) + '">include - 외부 시스템(LLM/API) 호출 포함</text>'
                 + '</svg>';
-            var wrap = document.getElementById('uc-svg-wrap');
+            const wrap = document.getElementById('uc-svg-wrap');
             if (wrap) wrap.innerHTML = s;
         }
 
@@ -16929,7 +16929,7 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
     <!-- 도네이션 모달 -->
     <div id="dn-modal" class="dn-overlay" onclick="if(event.target===this)closeDonate()">
         <div class="dn-box">
-            <button class="dn-close" aria-label="닫기" onclick="closeDonate()">
+            <button class="dn-close" aria-label="닫기" data-action="closeDonate">
                 <svg viewBox="0 0 24 24"
                     style="width:var(--icon-2xs);height:var(--icon-2xs);stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;">
                     <line x1="18" y1="6" x2="6" y2="18" />
@@ -16993,8 +16993,8 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
             </div>
             <div id="c-modal-msg" class="c-modal-msg"></div>
             <div class="c-modal-btns">
-                <button class="btn btn-s" onclick="_modalCancel()">취소</button>
-                <button class="btn btn-p" onclick="_modalOk()">확인</button>
+                <button class="btn btn-s" data-action="_modalCancel">취소</button>
+                <button class="btn btn-p" data-action="_modalOk">확인</button>
             </div>
         </div>
     </div>
@@ -17013,6 +17013,16 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
             document.getElementById('c-modal').style.display = 'none';
             _modalCb = null;
         }
+        // ── 이벤트 위임 핸들러 (data-action) ────────────────────
+        // HTML의 onclick 대신 data-action/data-args 속성을 읽어 함수를 호출합니다.
+        document.addEventListener('click', function(e) {
+            const el = e.target.closest('[data-action]');
+            if (!el) return;
+            const action = el.dataset.action;
+            const args = el.dataset.args ? JSON.parse(el.dataset.args) : [];
+            const fn = window[action];
+            if (typeof fn === 'function') fn.apply(el, args);
+        }, false);
     </script>
 </body>
 
