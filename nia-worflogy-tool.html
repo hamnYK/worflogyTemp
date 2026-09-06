@@ -1,4 +1,4 @@
-<!--
+﻿<!--
   행정 혁신 온톨로지 워크숍 & NIA 프로젝트
   © 2026 Worflogy Inc. All Rights Reserved.
   
@@ -9042,68 +9042,46 @@ for r in results:
                 badge: '토성형 · 시스템 다이나믹스',
                 formula: '정책 변화 → 시스템 구조 변화 매핑',
                 explain: '행정 정책 하나가 바뀌면, 그 영향은 예상치 못한 곳까지 번집니다. 시스템 다이나믹스는 이 인과 구조를 피드백 루프로 그려냅니다. 강화 루프는 변화가 스스로 증폭되는 경로를, 균형 루프는 그 변화를 억제하는 경로를 보여줍니다. 루프를 그리다 보면 현장에서 쌓이는 데이터가 개념 구조의 어느 부분을 바꿔야 하는지가 드러납니다.',
-                svg: `<svg viewBox="-20 0 540 190" xmlns="http://www.w3.org/2000/svg" style="font-family:var(--font-body);">
+                svg: `<svg viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg" overflow="visible" style="font-family:var(--font-body);">
             <defs>
                 <marker id="md1" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="var(--mono-950)"/></marker>
                 <marker id="md2" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="var(--mono-800)"/></marker>
             </defs>
-            <!-- 타이틀: y=16 -->
-            <text class="svg-sub" x="250" y="16" text-anchor="middle">시스템 다이나믹스 - 피드백 루프로 보는 세상</text>
-            <!-- 구분선: x=250, y=26-166 -->
-            <line x1="250" y1="26" x2="250" y2="166" stroke="var(--c-ink-12)" stroke-width="1" stroke-dasharray="5,4"/>
-            <!-- ── 좌: 강화 루프 R+ ── -->
-            <text class="svg-cap" x="100" y="40" text-anchor="middle">강화 루프 (R+)</text>
-            <!-- 노드 노력: rect(60,52,80,26,rx=13) center(100,65) -->
-            <rect x="60" y="52" width="80" height="26" rx="13" fill="var(--c-ink-08)" stroke="var(--mono-950)" stroke-width="2" style="filter:drop-shadow(0 1.5px 3px var(--c-ink-08))"/>
-            <text class="svg-cap" x="100" y="69" text-anchor="middle">노력</text>
-            <!-- 노드 성과: rect(60,122,80,26,rx=13) center(100,135) -->
-            <rect x="60" y="122" width="80" height="26" rx="13" fill="var(--c-ink-08)" stroke="var(--mono-950)" stroke-width="2" style="filter:drop-shadow(0 1.5px 3px var(--c-ink-08))"/>
-            <text class="svg-cap" x="100" y="139" text-anchor="middle">성과</text>
-            <!-- 우 곡선 화살표: 노력→성과 (M 140 65 Q 172 100 140 135) -->
-            <!-- 화살표시작: node 우측 끝(140,65), 끝: (140,135) -->
-            <path d="M 140 65 Q 174 100 140 135" stroke="var(--mono-950)" stroke-width="2" fill="none" marker-end="url(#md1)"/>
-            <!-- + 레이블: 곡선 우측 중간점 ≈ (165,100) -->
-            <text class="svg-sub" x="178" y="104" text-anchor="middle">+</text>
-            <text class="svg-cap" x="178" y="116" text-anchor="middle">노력할수록</text>
-            <!-- 좌 곡선 화살표: 성과→노력 (M 60 135 Q 26 100 60 65) -->
-            <path d="M 60 135 Q 26 100 60 65" stroke="var(--mono-950)" stroke-width="2" fill="none" marker-end="url(#md1)"/>
-            <!-- + 레이블: 곡선 좌측 중간점 ≈ (34,100) -->
-            <text class="svg-sub" x="20" y="104" text-anchor="middle">+</text>
-            <text class="svg-cap" x="20" y="116" text-anchor="middle">성과 날수록</text>
-            <!-- R+ 중앙: y=100 (노드 top=65+26=91, 노드 bottom=122, gap=31, center=106.5) -->
-            <!-- node1 bottom=65+26=91... wait rect y=52+h=26=78 bottom, center y=65 -->
-            <!-- node1: rect y=52, h=26, bottom=78. node2: rect y=122, top=122. gap=44 -->
-            <!-- 중앙 y = (78+122)/2 = 100 ✓ -->
-            <circle cx="100" cy="100" r="16" fill="var(--c-ink-06)" stroke="var(--c-ink-22)" stroke-width="2" stroke-dasharray="5,3"/>
-            <text class="svg-cap" x="100" y="96" text-anchor="middle">R+</text>
-            <text class="svg-cap" x="100" y="108" text-anchor="middle">강화</text>
-            <!-- 좌 하단 설명: y=158, box bottom=166, gap=8 ✓ -->
-            <text class="svg-cap" x="100" y="158" text-anchor="middle">성장이 성장을 부릅니다</text>
-            <!-- ── 우: 조절 루프 B- ── -->
-            <text class="svg-cap" x="380" y="40" text-anchor="middle">조절 루프 (B-)</text>
-            <!-- 노드 목표: rect(340,52,80,26,rx=13) center(380,65) -->
-            <rect x="340" y="52" width="80" height="26" rx="13" fill="var(--c-ink-08)" stroke="var(--mono-950)" stroke-width="2" style="filter:drop-shadow(0 1.5px 3px var(--c-ink-08))"/>
-            <text class="svg-cap" x="380" y="69" text-anchor="middle">목표</text>
-            <!-- 노드 현재: rect(340,122,80,26,rx=13) center(380,135) -->
-            <rect x="340" y="122" width="80" height="26" rx="13" fill="var(--c-ink-08)" stroke="var(--mono-950)" stroke-width="2" style="filter:drop-shadow(0 1.5px 3px var(--c-ink-08))"/>
-            <text class="svg-cap" x="380" y="139" text-anchor="middle">현재 상태</text>
-            <!-- 우 곡선: 목표→현재 (오차 → 행동 유발) -->
-            <path d="M 420 65 Q 454 100 420 135" stroke="var(--mono-950)" stroke-width="2" fill="none" marker-end="url(#md1)"/>
-            <text class="svg-sub" x="462" y="104" text-anchor="middle">+</text>
-            <text class="svg-cap" x="462" y="116" text-anchor="middle">차이 있으면</text>
-            <!-- 좌 곡선: 현재→목표 (행동이 현재를 조정) -->
-            <path d="M 340 135 Q 306 100 340 65" stroke="var(--mono-800)" stroke-width="2" fill="none" marker-end="url(#md2)"/>
-            <!-- - 레이블: 행동이 오차를 줄임 -->
-            <text class="svg-sub" x="296" y="104" text-anchor="middle">-</text>
-            <text class="svg-cap" x="296" y="116" text-anchor="middle">오차 감소</text>
-            <!-- B- 중앙: y=100 -->
-            <circle cx="380" cy="100" r="16" fill="var(--c-ink-04)" stroke="var(--c-ink-18)" stroke-width="2" stroke-dasharray="5,3"/>
-            <text class="svg-cap" x="380" y="96" text-anchor="middle">B-</text>
-            <text class="svg-cap" x="380" y="108" text-anchor="middle">조절</text>
-            <!-- 우 하단 설명 -->
-            <text class="svg-cap" x="380" y="158" text-anchor="middle">편차가 스스로 줄어듭니다</text>
-            <!-- 푸터 -->
-            <text class="svg-cap" x="250" y="180" text-anchor="middle">Jay Forrester - 피드백 루프가 시스템의 행동을 결정합니다</text>
+            <text class="svg-sub" x="260" y="14" text-anchor="middle">시스템 다이나믹스 - 피드백 루프로 보는 세상</text>
+            <line x1="260" y1="26" x2="260" y2="168" stroke="var(--c-ink-12)" stroke-width="1" stroke-dasharray="5,4"/>
+            <!-- 좌: 강화 루프 R+ / 중심 cx=130 -->
+            <text class="svg-cap" x="130" y="38" text-anchor="middle">강화 루프 (R+)</text>
+            <rect x="90" y="48" width="80" height="24" rx="12" fill="var(--c-ink-08)" stroke="var(--mono-950)" stroke-width="2" style="filter:drop-shadow(0 1.5px 3px var(--c-ink-08))"/>
+            <text class="svg-cap" x="130" y="65" text-anchor="middle">노력</text>
+            <rect x="90" y="126" width="80" height="24" rx="12" fill="var(--c-ink-08)" stroke="var(--mono-950)" stroke-width="2" style="filter:drop-shadow(0 1.5px 3px var(--c-ink-08))"/>
+            <text class="svg-cap" x="130" y="143" text-anchor="middle">성과</text>
+            <path d="M 170 60 Q 206 99 170 138" stroke="var(--mono-950)" stroke-width="2" fill="none" marker-end="url(#md1)"/>
+            <text class="svg-sub" x="220" y="101" text-anchor="middle">+</text>
+            <text class="svg-cap" x="220" y="113" text-anchor="middle">노력할수록</text>
+            <path d="M 90 138 Q 54 99 90 60" stroke="var(--mono-950)" stroke-width="2" fill="none" marker-end="url(#md1)"/>
+            <text class="svg-sub" x="44" y="101" text-anchor="middle">+</text>
+            <text class="svg-cap" x="44" y="113" text-anchor="middle">성과 날수록</text>
+            <circle cx="130" cy="99" r="15" fill="var(--c-ink-06)" stroke="var(--c-ink-22)" stroke-width="2" stroke-dasharray="5,3"/>
+            <text class="svg-cap" x="130" y="95" text-anchor="middle">R+</text>
+            <text class="svg-cap" x="130" y="107" text-anchor="middle">강화</text>
+            <text class="svg-cap" x="130" y="163" text-anchor="middle">성장이 성장을 부릅니다</text>
+            <!-- 우: 조절 루프 B- / 중심 cx=390 -->
+            <text class="svg-cap" x="390" y="38" text-anchor="middle">조절 루프 (B-)</text>
+            <rect x="350" y="48" width="80" height="24" rx="12" fill="var(--c-ink-08)" stroke="var(--mono-950)" stroke-width="2" style="filter:drop-shadow(0 1.5px 3px var(--c-ink-08))"/>
+            <text class="svg-cap" x="390" y="65" text-anchor="middle">목표</text>
+            <rect x="350" y="126" width="80" height="24" rx="12" fill="var(--c-ink-08)" stroke="var(--mono-950)" stroke-width="2" style="filter:drop-shadow(0 1.5px 3px var(--c-ink-08))"/>
+            <text class="svg-cap" x="390" y="143" text-anchor="middle">현재 상태</text>
+            <path d="M 430 60 Q 466 99 430 138" stroke="var(--mono-950)" stroke-width="2" fill="none" marker-end="url(#md1)"/>
+            <text class="svg-sub" x="476" y="101" text-anchor="middle">+</text>
+            <text class="svg-cap" x="476" y="113" text-anchor="middle">차이 있으면</text>
+            <path d="M 350 138 Q 314 99 350 60" stroke="var(--mono-800)" stroke-width="2" fill="none" marker-end="url(#md2)"/>
+            <text class="svg-sub" x="300" y="101" text-anchor="middle">-</text>
+            <text class="svg-cap" x="300" y="113" text-anchor="middle">오차 감소</text>
+            <circle cx="390" cy="99" r="15" fill="var(--c-ink-04)" stroke="var(--c-ink-18)" stroke-width="2" stroke-dasharray="5,3"/>
+            <text class="svg-cap" x="390" y="95" text-anchor="middle">B-</text>
+            <text class="svg-cap" x="390" y="107" text-anchor="middle">조절</text>
+            <text class="svg-cap" x="390" y="163" text-anchor="middle">편차가 스스로 줄어듭니다</text>
+            <text class="svg-cap" x="260" y="185" text-anchor="middle">Jay Forrester - 피드백 루프가 시스템의 행동을 결정합니다</text>
         </svg>`
             },
 
