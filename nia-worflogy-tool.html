@@ -13766,6 +13766,64 @@ ${domainCtx}${upperCtx}
             return VIS_COL.swrlLow;
         }
 
+        // ── KG_STYLE: 툴팁·카드·범례 통합 디자인 토큰 ──
+        // vis.js Canvas는 CSS 변수 미지원 → JS hex 상수로 토큰화. DOM 툴팁·카드에서 공통 참조.
+        const KG_STYLE = {
+            swrl: {
+                CRITICAL: { bg: '#fff1f1', bd: '#b91c1c', ft: '#991b1b' },
+                HIGH:     { bg: '#fff7ed', bd: '#c05621', ft: '#9a3412' },
+                MEDIUM:   { bg: '#fffbeb', bd: '#b45309', ft: '#92400e' },
+                LOW:      { bg: '#f0fdf4', bd: '#15803d', ft: '#166534' },
+                ifCol: '#991b1b', thenCol: '#15803d', cascadeCol: '#7c3aed',
+                badgeW3C: { bg: '#fee2e2', col: '#991b1b' },
+            },
+            exception: {
+                bg: '#fff7ed', bd: '#c05621', ft: '#9a3412',
+                ifCol: '#9a3412', thenCol: '#15803d', exceptionCol: '#c05621',
+                badgeW3C: { bg: '#fee2e2', col: '#991b1b' },
+                badgeLayer: { bg: '#ffedd5', col: '#c05621' },
+            },
+            owlClass: {
+                bg: '#FAFAFA', bd: '#27272A', ft: '#27272A',
+                badgeW3C: { bg: '#ede9fe', col: '#5b21b6' },
+                badgeLayer: { bg: '#F4F4F5', col: '#27272A' },
+            },
+            upperClass: {
+                bg: '#f5f3ff', bd: '#7c3aed', ft: '#5b21b6',
+                badgeW3C: { bg: '#ede9fe', col: '#5b21b6' },
+                badgeLayer: { bg: '#ede9fe', col: '#7c3aed' },
+                domainInstCol: '#7c3aed',
+            },
+            objProp: {
+                bg: '#f0fdf4', bd: '#16a34a', ft: '#15803d',
+                badgeLayer: { bg: '#dcfce7', col: '#15803d' },
+                domainCol: '#15803d', rangeCol: '#3F3F46', inverseCol: '#7c3aed',
+            },
+            dataProp: {
+                bg: '#FAFAFA', bd: '#3F3F46', ft: '#3F3F46',
+                badgeLayer: { bg: '#FAFAFA', col: '#3F3F46' },
+            },
+            triple: {
+                bg: '#FAFAFA', bd: '#18181B', ft: '#27272A',
+                badgeW3C: { bg: '#F4F4F5', col: '#27272A' },
+                badgeLayer: { bg: '#FAFAFA', col: '#18181B' },
+                subjCol: '#18181B', predCol: '#52525B', objCol: '#3F3F46', srcCol: '#A1A1AA',
+            },
+            abox: {
+                bg: '#FAFAFA', bd: '#3F3F46', ft: '#3F3F46',
+                badgeLayer: { bg: '#F4F4F5', col: '#3F3F46' },
+            },
+            shacl: {
+                bg: '#fffbeb', bd: '#92400e', ft: '#92400e',
+                badgeW3C: { bg: '#fef3c7', col: '#92400e' },
+                badgeLayer: { bg: '#fffbeb', col: '#92400e' },
+                targetCol: '#92400e', pathCol: '#3F3F46',
+                sevViolation: '#b91c1c', sevWarning: '#c05621',
+            },
+            cascade: { bg: '#f5f3ff', bd: '#c4b5fd', ft: '#5b21b6', textCol: '#7c3aed', nodeBg: '#ede9fe', nodeCol: '#5b21b6' },
+            cond:    { bg: '#fff1f1', bd: '#fca5a5', ft: '#991b1b', textCol: '#991b1b' },
+        };
+
         function renderOntologyVis(containerId, nodesData, edgesData, opts) {
             const el = document.getElementById(containerId);
             if (!el) return;
@@ -14198,25 +14256,24 @@ ${domainCtx}${upperCtx}
                 const kv = (k, v, c) => v ? `<div style="${R}"><span style="color:var(--mono-400);">${k}:</span> <b style="color:${c || '#27272A'};">${String(v).substring(0, 60)}</b></div>` : '';
                 const SH = 'box-shadow:0 4px 18px var(--c-ink-13);';
                 if (type === 'swrl') {
-                    const rc = d.risk_level === 'CRITICAL' ? '#b91c1c' : d.risk_level === 'HIGH' ? '#c05621' : d.risk_level === 'MEDIUM' ? '#b45309' : '#15803d';
-                    const rBg = d.risk_level === 'CRITICAL' ? '#fee2e2' : d.risk_level === 'HIGH' ? '#ffedd5' : d.risk_level === 'MEDIUM' ? '#fef3c7' : '#dcfce7';
-                    const casc = (d.cascade_rules || []).length ? `<div style="font-size:var(--fs-xs);color:var(--c-purple-700);font-weight:var(--fw-bold);margin-top:.2rem;">cascade → ${d.cascade_rules.join(' → ')}</div>` : '';
-                    return `<div style="${C}${rc}80;background:var(--mono-white);min-width:200px;max-width:270px;${SH}">
-                        <div style="margin-bottom:.25rem;">${bdg('W3C SWRL', '#fee2e2', '#991b1b')}${bdg(d.risk_level || '', rBg, rc)}</div>
+                    const ks = KG_STYLE.swrl[String(d.risk_level || '').toUpperCase()] || KG_STYLE.swrl.LOW;
+                    const casc = (d.cascade_rules || []).length ? `<div style="font-size:var(--fs-xs);color:${KG_STYLE.swrl.cascadeCol};font-weight:var(--fw-bold);margin-top:.2rem;">cascade → ${d.cascade_rules.join(' → ')}</div>` : '';
+                    return `<div style="${C}${ks.bd}80;background:var(--mono-white);min-width:200px;max-width:270px;${SH}">
+                        <div style="margin-bottom:.25rem;">${bdg('W3C SWRL', KG_STYLE.swrl.badgeW3C.bg, KG_STYLE.swrl.badgeW3C.col)}${bdg(d.risk_level || '', ks.bg, ks.bd)}</div>
                         <div style="${N}">${d.inference_id || ''} · ${d.inference_name || ''}</div>
-                        <div style="font-size:var(--fs-xs);color:var(--c-red-800);font-weight:var(--fw-bold);margin-bottom:.08rem;">IF</div>
+                        <div style="font-size:var(--fs-xs);color:${KG_STYLE.swrl.ifCol};font-weight:var(--fw-bold);margin-bottom:.08rem;">IF</div>
                         <div style="font-size:var(--fs-xs);color:var(--mono-700);margin-bottom:.15rem;white-space:normal;">${(d.condition || '').substring(0, 90)}</div>
-                        <div style="font-size:var(--fs-xs);color:var(--c-green-700);font-weight:var(--fw-bold);margin-bottom:.08rem;">THEN</div>
+                        <div style="font-size:var(--fs-xs);color:${KG_STYLE.swrl.thenCol};font-weight:var(--fw-bold);margin-bottom:.08rem;">THEN</div>
                         <div style="font-size:var(--fs-xs);color:var(--mono-700);white-space:normal;">${(d.action || '').substring(0, 70)}</div>
                         ${casc}</div>`;
                 }
                 if (type === 'exception') {
-                    return `<div style="${C}var(--c-orange-200);background:var(--c-orange-50);min-width:180px;max-width:250px;${SH}">
-                        <div style="margin-bottom:.25rem;">${bdg('W3C SWRL', '#fee2e2', '#991b1b')}${bdg('예외 규칙', '#ffedd5', '#c05621')}</div>
+                    return `<div style="${C}${KG_STYLE.exception.bd}80;background:${KG_STYLE.exception.bg};min-width:180px;max-width:250px;${SH}">
+                        <div style="margin-bottom:.25rem;">${bdg('W3C SWRL', KG_STYLE.exception.badgeW3C.bg, KG_STYLE.exception.badgeW3C.col)}${bdg('예외 규칙', KG_STYLE.exception.badgeLayer.bg, KG_STYLE.exception.badgeLayer.col)}</div>
                         <div style="${N}">${d.rule_id || ''} · ${d.rule_name || ''}</div>
-                        ${kv('IF 주체', d.if && d.if.subject, '#9a3412')}
-                        ${kv('THEN', d.then, '#15803d')}
-                        ${d.exception ? `<div style="font-size:var(--fs-xs);color:var(--c-amber-800);margin-top:.12rem;white-space:normal;"><b>예외:</b> ${d.exception.substring(0, 80)}</div>` : ''}
+                        ${kv('IF 주체', d.if && d.if.subject, KG_STYLE.exception.ifCol)}
+                        ${kv('THEN', d.then, KG_STYLE.exception.thenCol)}
+                        ${d.exception ? `<div style="font-size:var(--fs-xs);color:${KG_STYLE.exception.exceptionCol};margin-top:.12rem;white-space:normal;"><b>예외:</b> ${d.exception.substring(0, 80)}</div>` : ''}
                         </div>`;
                 }
                 if (type === 'owlClass') {
@@ -14229,22 +14286,22 @@ ${domainCtx}${upperCtx}
                         </div>`;
                 }
                 if (type === 'upperClass') {
-                    return `<div style="${C}var(--c-purple-300);background:var(--c-purple-100);min-width:170px;max-width:250px;${SH}">
-                        <div style="margin-bottom:.25rem;">${bdg('W3C OWL 2 DL', '#ede9fe', '#5b21b6')}${bdg('L2 상위 온톨로지', '#ede9fe', '#7c3aed')}</div>
+                    return `<div style="${C}${KG_STYLE.upperClass.bd};background:${KG_STYLE.upperClass.bg};min-width:170px;max-width:250px;${SH}">
+                        <div style="margin-bottom:.25rem;">${bdg('W3C OWL 2 DL', KG_STYLE.upperClass.badgeW3C.bg, KG_STYLE.upperClass.badgeW3C.col)}${bdg('L2 상위 온톨로지', KG_STYLE.upperClass.badgeLayer.bg, KG_STYLE.upperClass.badgeLayer.col)}</div>
                         <div style="${N}">${d.name || d.id || ''}</div>
-                        ${kv('IRI', d.id, '#5b21b6')}
+                        ${kv('IRI', d.id, KG_STYLE.upperClass.ft)}
                         ${d.description ? `<div style="font-size:var(--fs-xs);color:var(--mono-700);margin-top:.1rem;white-space:normal;">${d.description.substring(0, 80)}</div>` : ''}
-                        ${(d.domain_instances || []).length ? `<div style="font-size:var(--fs-small);color:var(--c-purple-700);margin-top:.1rem;">${d.domain_instances.slice(0, 3).join(', ')}</div>` : ''}
+                        ${(d.domain_instances || []).length ? `<div style="font-size:var(--fs-small);color:${KG_STYLE.upperClass.domainInstCol};margin-top:.1rem;">${d.domain_instances.slice(0, 3).join(', ')}</div>` : ''}
                         </div>`;
                 }
                 if (type === 'objProp' || type === 'dataProp') {
-                    const [bc, bg, ct] = type === 'objProp' ? ['#86efac', '#f0fdf4', '#15803d'] : ['#D4D4D8', '#FAFAFA', '#3F3F46'];
-                    return `<div style="${C}${bc};background:${bg};min-width:160px;max-width:240px;${SH}">
-                        <div style="margin-bottom:.25rem;">${bdg('W3C OWL 2 DL', '#ede9fe', '#5b21b6')}${bdg(type === 'objProp' ? 'L3 ObjectProp' : 'L3 DataProp', bg, ct)}</div>
+                    const ks2 = type === 'objProp' ? KG_STYLE.objProp : KG_STYLE.dataProp;
+                    return `<div style="${C}${ks2.bd};background:${ks2.bg};min-width:160px;max-width:240px;${SH}">
+                        <div style="margin-bottom:.25rem;">${bdg('W3C OWL 2 DL', KG_STYLE.owlClass.badgeW3C.bg, KG_STYLE.owlClass.badgeW3C.col)}${bdg(type === 'objProp' ? 'L3 ObjectProp' : 'L3 DataProp', ks2.badgeLayer.bg, ks2.badgeLayer.col)}</div>
                         <div style="${N}">${d.name || ''}</div>
-                        ${kv('rdfs:domain', d.domain, '#15803d')}
-                        ${kv('rdfs:range', d.range, '#3F3F46')}
-                        ${d.inverseOf ? kv('owl:inverseOf', d.inverseOf, '#7c3aed') : ''}
+                        ${kv('rdfs:domain', d.domain, KG_STYLE.objProp.domainCol)}
+                        ${kv('rdfs:range', d.range, KG_STYLE.dataProp.ft)}
+                        ${d.inverseOf ? kv('owl:inverseOf', d.inverseOf, KG_STYLE.objProp.inverseCol) : ''}
                         </div>`;
                 }
                 if (type === 'triple') {
@@ -14262,13 +14319,13 @@ ${domainCtx}${upperCtx}
                         </div>`;
                 }
                 if (type === 'shacl') {
-                    return `<div style="${C}var(--mono-200);background:var(--c-amber-50);min-width:170px;max-width:250px;${SH}">
-                        <div style="margin-bottom:.2rem;">${bdg('W3C SHACL', '#fef3c7', '#92400e')}${bdg('L5 sh:NodeShape', '#fffbeb', '#92400e')}</div>
+                    return `<div style="${C}${KG_STYLE.shacl.bd};background:${KG_STYLE.shacl.bg};min-width:170px;max-width:250px;${SH}">
+                        <div style="margin-bottom:.2rem;">${bdg('W3C SHACL', KG_STYLE.shacl.badgeW3C.bg, KG_STYLE.shacl.badgeW3C.col)}${bdg('L5 sh:NodeShape', KG_STYLE.shacl.badgeLayer.bg, KG_STYLE.shacl.badgeLayer.col)}</div>
                         <div style="${N}">${d.shape_id || ((d.target_class || '') + 'Shape')}</div>
-                        ${kv('sh:targetClass', d.target_class, '#92400e')}
-                        ${kv('sh:path', d.path, '#3F3F46')}
-                        ${kv('sh:minCount', String(d.min_count != null ? d.min_count : ''), '#3F3F46')}
-                        ${kv('sh:severity', d.severity, d.severity === 'sh:Violation' ? '#b91c1c' : '#c05621')}
+                        ${kv('sh:targetClass', d.target_class, KG_STYLE.shacl.targetCol)}
+                        ${kv('sh:path', d.path, KG_STYLE.shacl.pathCol)}
+                        ${kv('sh:minCount', String(d.min_count != null ? d.min_count : ''), KG_STYLE.shacl.pathCol)}
+                        ${kv('sh:severity', d.severity, d.severity === 'sh:Violation' ? KG_STYLE.shacl.sevViolation : KG_STYLE.shacl.sevWarning)}
                         </div>`;
                 }
                 return d.label || d.name || '';
@@ -14603,7 +14660,7 @@ ${domainCtx}${upperCtx}
             let _detailEl = document.getElementById('graph-node-detail');
             if (!_detailEl) {
                 _detailEl = document.createElement('div'); _detailEl.id = 'graph-node-detail';
-                _detailEl.style.cssText = 'display:none;margin-top:.65rem;padding:.9rem 1.15rem 1rem 1.25rem;border-radius:var(--r-md);font-size:var(--fs-sm);line-height:var(--lh-relaxed);border:var(--bw-thin) solid var(--border);border-left:var(--bw-thick) solid var(--coral);background:var(--bg-card);position:relative;box-shadow:0 2px 12px var(--c-ink-15);transition:border-left-color .2s,background .2s;';
+                _detailEl.style.cssText = 'display:none;margin-top:.65rem;padding:.9rem 1.15rem 1rem 1.25rem;border-radius:var(--r-md);font-size:var(--fs-sm);line-height:var(--lh-relaxed);border:var(--bw-thin) solid var(--border);border-left:var(--bw-thick) solid #27272A;background:var(--bg-card);position:relative;box-shadow:0 2px 12px var(--c-ink-15);transition:border-left-color .2s,background .2s;';
                 if (_pane) _pane.appendChild(_detailEl);
             }
             // ── 배지/공통 헬퍼 ──
@@ -14644,99 +14701,98 @@ ${domainCtx}${upperCtx}
             function _ctbl(cds) {
                 if (!cds || !cds.length) return '';
                 return `<table style="width:100%;border-collapse:collapse;font-size:var(--fs-xs);margin-bottom:.45rem;border-radius:var(--r-sm);overflow:hidden;">
-                <tr style="background:var(--c-red-50);">
-                <th style="padding:.2rem .4rem;text-align:left;color:var(--c-red-800);font-weight:var(--fw-bold);">SWRL Atom (트리플)</th>
-                <th style="padding:.2rem .4rem;text-align:left;color:var(--c-red-800);font-weight:var(--fw-bold);">기준값</th>
-                <th style="padding:.2rem .4rem;text-align:left;color:var(--c-purple-700);font-weight:var(--fw-bold);">swrlb</th></tr>
+                <tr style="background:${KG_STYLE.swrl.CRITICAL.bg};">
+                <th style="padding:.2rem .4rem;text-align:left;color:${KG_STYLE.swrl.CRITICAL.bd};font-weight:var(--fw-bold);">SWRL Atom (트리플)</th>
+                <th style="padding:.2rem .4rem;text-align:left;color:${KG_STYLE.swrl.CRITICAL.bd};font-weight:var(--fw-bold);">기준값</th>
+                <th style="padding:.2rem .4rem;text-align:left;color:${KG_STYLE.swrl.cascadeCol};font-weight:var(--fw-bold);">swrlb</th></tr>
                 ${cds.map(cd => `<tr style="border-top:var(--bw-thin) solid var(--c-ink-05);">
                 <td style="padding:.2rem .4rem;color:var(--mono-700);">${cd.triple || ''}</td>
                 <td style="padding:.2rem .4rem;color:var(--mono-500);">${cd.threshold || ''}</td>
-                <td style="padding:.2rem .4rem;color:var(--c-purple-700);">${cd.swrlb_direction || ''}</td></tr>`).join('')}
+                <td style="padding:.2rem .4rem;color:${KG_STYLE.swrl.cascadeCol};">${cd.swrlb_direction || ''}</td></tr>`).join('')}
                 </table>`;
             }
             function _triRow(rows) {
                 return `<table style="width:100%;border-collapse:collapse;font-size:var(--fs-xs);margin-bottom:.35rem;">
                 <tr style="background:var(--c-ink-05);">
-                <th style="padding:.18rem .4rem;text-align:left;color:var(--nia-blue);font-weight:var(--fw-bold);">S</th>
-                <th style="padding:.18rem .4rem;text-align:left;color:var(--nia-blue);font-weight:var(--fw-bold);">P</th>
-                <th style="padding:.18rem .4rem;text-align:left;color:var(--nia-blue);font-weight:var(--fw-bold);">O</th>
+                <th style="padding:.18rem .4rem;text-align:left;color:${KG_STYLE.triple.subjCol};font-weight:var(--fw-bold);">S</th>
+                <th style="padding:.18rem .4rem;text-align:left;color:${KG_STYLE.triple.subjCol};font-weight:var(--fw-bold);">P</th>
+                <th style="padding:.18rem .4rem;text-align:left;color:${KG_STYLE.triple.subjCol};font-weight:var(--fw-bold);">O</th>
                 <th style="padding:.18rem .4rem;text-align:left;color:var(--mono-400);font-weight:var(--fw-bold);">출처</th></tr>
                 ${rows.map(t => `<tr style="border-top:var(--bw-thin) solid var(--c-ink-04);">
-                <td style="padding:.18rem .4rem;color:var(--nia-blue);font-weight:var(--fw-semibold);">${t.subject || ''}</td>
+                <td style="padding:.18rem .4rem;color:${KG_STYLE.triple.subjCol};font-weight:var(--fw-semibold);">${t.subject || ''}</td>
                 <td style="padding:.18rem .4rem;color:var(--mono-500);font-style:italic;">${t.predicate || ''}</td>
                 <td style="padding:.18rem .4rem;color:var(--mono-700);">${t.object || ''}</td>
                 <td style="padding:.18rem .4rem;color:var(--mono-400);font-size:var(--fs-small);">${t.source || ''}</td></tr>`).join('')}
                 </table>`;
             }
             function _spill(s, p, o) {
-                return `<div style="display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;padding:.38rem .55rem;border-radius:var(--r-md);margin-bottom:.4rem;background:rgba(3,103,176,.04);">
-                <span style="background:var(--mono-100);color:var(--nia-blue);padding:.12rem .5rem;border-radius:var(--r-sm);font-weight:var(--fw-bold);font-size:var(--fs-sm);">${s}</span>
+                return `<div style="display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;padding:.38rem .55rem;border-radius:var(--r-md);margin-bottom:.4rem;background:${KG_STYLE.triple.bg};">
+                <span style="background:var(--mono-100);color:${KG_STYLE.triple.subjCol};padding:.12rem .5rem;border-radius:var(--r-sm);font-weight:var(--fw-bold);font-size:var(--fs-sm);">${s}</span>
                 <span style="color:var(--mono-500);font-size:var(--fs-xs);font-style:italic;">— ${p} →</span>
-                <span style="background:var(--mono-100);color:var(--nia-blue);padding:.12rem .5rem;border-radius:var(--r-sm);font-weight:var(--fw-bold);font-size:var(--fs-sm);">${o}</span></div>`;
+                <span style="background:var(--mono-100);color:${KG_STYLE.triple.subjCol};padding:.12rem .5rem;border-radius:var(--r-sm);font-weight:var(--fw-bold);font-size:var(--fs-sm);">${o}</span></div>`;
             }
 
             // ─── 노드 카드 ───
             function _showDetail(r) {
-                const rc = r.risk_level === 'CRITICAL' ? '#b91c1c' : r.risk_level === 'HIGH' ? '#c05621' : r.risk_level === 'MEDIUM' ? '#b45309' : '#15803d';
-                const rBg = r.risk_level === 'CRITICAL' ? '#fff1f1' : r.risk_level === 'HIGH' ? '#fff7ed' : r.risk_level === 'MEDIUM' ? '#fffbeb' : '#f0fdf4';
-                _sps(rc + '80', rBg);
+                const ks = KG_STYLE.swrl[String(r.risk_level || '').toUpperCase()] || KG_STYLE.swrl.LOW;
+                _sps(ks.bd + '80', ks.bg);
                 const casc = (r.cascade_rules || []).length
-                    ? `<div style="font-size:var(--fs-xs);color:var(--c-purple-700);font-weight:var(--fw-bold);margin-top:.5rem;">cascade 연쇄 → ${r.cascade_rules.map(id => `<code style="background:var(--c-purple-50);color:var(--c-purple-800);padding:.04rem .3rem;border-radius:var(--r-xs);">${id}</code>`).join(' → ')}</div>` : ''
+                    ? `<div style="font-size:var(--fs-xs);color:${KG_STYLE.swrl.cascadeCol};font-weight:var(--fw-bold);margin-top:.5rem;">cascade 연쇄 → ${r.cascade_rules.map(id => `<code style="background:${KG_STYLE.cascade.nodeBg};color:${KG_STYLE.cascade.nodeCol};padding:.04rem .3rem;border-radius:var(--r-xs);">${id}</code>`).join(' → ')}</div>` : ''
                 _detailEl.innerHTML =
-                    _hdr([_wb('SWRL'), _lb('L5 SWRL'), _badge(r.risk_level || '', rc, '#FFFFFF')], r.inference_id, r.inference_name) +
-                    _sec('SWRL Antecedent — IF 조건', '#991b1b', _ctbl(r.conditions_detail || [])) +
-                    _sec('SWRL Consequent — THEN', '#15803d',
-                        `<div style="font-size:var(--fs-xs);color:var(--mono-800);font-weight:var(--fw-medium);padding:.25rem .45rem;background:rgba(21,128,61,.06);border-radius:var(--r-sm);">${r.action || ''}</div>`) +
+                    _hdr([_wb('SWRL'), _lb('L5 SWRL'), _badge(r.risk_level || '', ks.bd, '#FFFFFF')], r.inference_id, r.inference_name) +
+                    _sec('SWRL Antecedent — IF 조건', KG_STYLE.swrl.ifCol, _ctbl(r.conditions_detail || [])) +
+                    _sec('SWRL Consequent — THEN', KG_STYLE.swrl.thenCol,
+                        `<div style="font-size:var(--fs-xs);color:var(--mono-800);font-weight:var(--fw-medium);padding:.25rem .45rem;background:${KG_STYLE.swrl.LOW.bg};border-radius:var(--r-sm);">${r.action || ''}</div>`) +
                     (r.business_impact ? _sec('비즈니스 영향', '#3F3F46', `<div style="font-size:var(--fs-xs);color:var(--mono-700);">${r.business_impact}</div>`) : '') +
-                    _kv('담당부서', r.responsible_dept, '#18181B') + casc;
+                    _kv('담당부서', r.responsible_dept, KG_STYLE.triple.subjCol) + casc;
                 _detailEl.style.display = 'block';
             }
             function _showExcDetail(r) {
-                _sps('#fed7aa', '#fff7ed');
+                _sps(KG_STYLE.exception.bd, KG_STYLE.exception.bg);
                 const cl = (r.if?.conditions || []).map(c => `<li style="font-size:var(--fs-xs);color:var(--mono-700);margin-bottom:.13rem;padding-left:.15rem;">${c}</li>`).join('');
                 _detailEl.innerHTML =
-                    _hdr([_wb('SWRL'), _lb('L5 SWRL'), _badge('예외규칙', '#ffedd5', '#c05621')], r.rule_id, r.rule_name) +
-                    _sec('SWRL Antecedent — IF 조건', '#9a3412',
+                    _hdr([_wb('SWRL'), _lb('L5 SWRL'), _badge('예외규칙', KG_STYLE.exception.badgeLayer.bg, KG_STYLE.exception.badgeLayer.col)], r.rule_id, r.rule_name) +
+                    _sec('SWRL Antecedent — IF 조건', KG_STYLE.exception.ifCol,
                         (r.if?.subject ? `<div style="font-size:var(--fs-xs);margin-bottom:.22rem;"><span style="color:var(--mono-400);">주체:</span> <b>${r.if.subject}</b></div>` : '') +
                         (cl ? `<ul style="margin:.08rem 0 .4rem 1.15rem;padding:0;">${cl}</ul>` : '')) +
-                    _sec('SWRL Consequent — THEN', '#15803d',
+                    _sec('SWRL Consequent — THEN', KG_STYLE.exception.thenCol,
                         `<div style="font-size:var(--fs-xs);color:var(--mono-800);font-weight:var(--fw-medium);">${r.then || ''}</div>`) +
-                    (r.exception ? `<div style="font-size:var(--fs-xs);color:var(--c-amber-800);background:rgba(192,86,33,.07);border-radius:var(--r-md);padding:.28rem .5rem;margin-bottom:.38rem;"><b>예외 조항:</b> ${r.exception}</div>` : '') +
-                    _kv('담당', r.responsible_dept, '#18181B') +
-                    _kv('법적 근거', r.legal_basis, '#3F3F46');
+                    (r.exception ? `<div style="font-size:var(--fs-xs);color:${KG_STYLE.exception.exceptionCol};background:${KG_STYLE.exception.bg};border-radius:var(--r-md);padding:.28rem .5rem;margin-bottom:.38rem;"><b>예외 조항:</b> ${r.exception}</div>` : '') +
+                    _kv('담당', r.responsible_dept, KG_STYLE.triple.subjCol) +
+                    _kv('법적 근거', r.legal_basis, KG_STYLE.dataProp.ft);
                 _detailEl.style.display = 'block';
             }
             function _showUpperDetail(uc) {
-                _sps('#c4b5fd', '#f5f3ff');
+                _sps(KG_STYLE.upperClass.bd, KG_STYLE.upperClass.bg);
                 _detailEl.innerHTML =
-                    _hdr([_wb('OWL 2 DL'), _lb('L2 상위'), _badge('상위 온톨로지', '#ede9fe', '#5b21b6')], uc.id, uc.name) +
-                    _kv('IRI (rdf:ID)', uc.id, '#5b21b6') +
-                    _kv('역할', 'rdfs:subClassOf 의 추상 상위 클래스 (Upper Ontology)', '#7c3aed') +
-                    (uc.description ? _sec('rdfs:comment', '#3F3F46', `<div style="font-size:var(--fs-xs);color:var(--mono-700);">${uc.description}</div>`) : '') +
+                    _hdr([_wb('OWL 2 DL'), _lb('L2 상위'), _badge('상위 온톨로지', KG_STYLE.upperClass.badgeLayer.bg, KG_STYLE.upperClass.ft)], uc.id, uc.name) +
+                    _kv('IRI (rdf:ID)', uc.id, KG_STYLE.upperClass.ft) +
+                    _kv('역할', 'rdfs:subClassOf 의 추상 상위 클래스 (Upper Ontology)', KG_STYLE.upperClass.domainInstCol) +
+                    (uc.description ? _sec('rdfs:comment', KG_STYLE.dataProp.ft, `<div style="font-size:var(--fs-xs);color:var(--mono-700);">${uc.description}</div>`) : '') +
                     ((uc.domain_instances || []).length ? _sec('domain_instances', '#71717A', `<div style="font-size:var(--fs-xs);color:var(--mono-700);">${uc.domain_instances.join(', ')}</div>`) : '') +
-                    ((uc.disjoint_with || []).length ? _kv('owl:disjointWith', uc.disjoint_with.join(', '), '#b91c1c') : '') +
-                    (uc.equivalent_to ? _kv('owl:equivalentClass', uc.equivalent_to, '#3F3F46') : '');
+                    ((uc.disjoint_with || []).length ? _kv('owl:disjointWith', uc.disjoint_with.join(', '), KG_STYLE.swrl.CRITICAL.bd) : '') +
+                    (uc.equivalent_to ? _kv('owl:equivalentClass', uc.equivalent_to, KG_STYLE.dataProp.ft) : '');
                 _detailEl.style.display = 'block';
             }
             function _showClassDetail(cl) {
-                _sps('#D4D4D8', '#FAFAFA');
+                _sps(KG_STYLE.owlClass.bd, KG_STYLE.owlClass.bg);
                 _detailEl.innerHTML =
-                    _hdr([_wb('OWL 2 DL'), _lb('L2'), _badge('owl:Class', '#F4F4F5', '#27272A')], cl.id, cl.label || cl.id) +
-                    _kv('IRI (rdf:ID)', cl.id, '#27272A') +
-                    (cl.subClassOf ? _kv('rdfs:subClassOf', cl.subClassOf, '#27272A') : '') +
-                    (cl.comment ? _sec('rdfs:comment', '#3F3F46', `<div style="font-size:var(--fs-xs);color:var(--mono-700);">${cl.comment}</div>`) : '');
+                    _hdr([_wb('OWL 2 DL'), _lb('L2'), _badge('owl:Class', KG_STYLE.owlClass.badgeLayer.bg, KG_STYLE.owlClass.bd)], cl.id, cl.label || cl.id) +
+                    _kv('IRI (rdf:ID)', cl.id, KG_STYLE.owlClass.ft) +
+                    (cl.subClassOf ? _kv('rdfs:subClassOf', cl.subClassOf, KG_STYLE.owlClass.ft) : '') +
+                    (cl.comment ? _sec('rdfs:comment', KG_STYLE.dataProp.ft, `<div style="font-size:var(--fs-xs);color:var(--mono-700);">${cl.comment}</div>`) : '');
                 _detailEl.style.display = 'block';
             }
             function _showPropDetail(p) {
                 const isObj = !p.type || p.type.includes('Object');
-                const [bc, bg, ct] = isObj ? ['#86efac', '#f0fdf4', '#15803d'] : ['#D4D4D8', '#FAFAFA', '#3F3F46'];
-                _sps(bc, bg);
+                const ks3 = isObj ? KG_STYLE.objProp : KG_STYLE.dataProp;
+                _sps(ks3.bd, ks3.bg);
                 _detailEl.innerHTML =
-                    _hdr([_wb('OWL 2 DL'), _lb(isObj ? 'L3' : 'L3 DP'), _badge(p.type || 'owl:ObjectProperty', bg, ct)], p.id || '', p.name) +
-                    _kv('rdfs:domain', p.domain, '#15803d') +
-                    _kv('rdfs:range', p.range, '#3F3F46') +
-                    (p.inverseOf ? _kv('owl:inverseOf', p.inverseOf, '#7c3aed') : '') +
-                    (p.comment ? _sec('rdfs:comment', '#3F3F46', `<div style="font-size:var(--fs-xs);color:var(--mono-700);">${p.comment}</div>`) : '');
+                    _hdr([_wb('OWL 2 DL'), _lb(isObj ? 'L3' : 'L3 DP'), _badge(p.type || 'owl:ObjectProperty', ks3.badgeLayer.bg, ks3.ft)], p.id || '', p.name) +
+                    _kv('rdfs:domain', p.domain, KG_STYLE.objProp.domainCol) +
+                    _kv('rdfs:range', p.range, KG_STYLE.dataProp.ft) +
+                    (p.inverseOf ? _kv('owl:inverseOf', p.inverseOf, KG_STYLE.objProp.inverseCol) : '') +
+                    (p.comment ? _sec('rdfs:comment', KG_STYLE.dataProp.ft, `<div style="font-size:var(--fs-xs);color:var(--mono-700);">${p.comment}</div>`) : '');
                 _detailEl.style.display = 'block';
             }
             function _showEntityDetail(label, data) {
@@ -14763,13 +14819,13 @@ ${domainCtx}${upperCtx}
                 const tL = (tn?.label || '').replace(/\n.*/, '').replace(/^[UCOD]P?:\s*/, '').trim();
                 const ll = lbl.toLowerCase();
                 if (ll === 'cascade') {
-                    _sps('#c4b5fd', '#f5f3ff');
+                    _sps(KG_STYLE.cascade.bd, KG_STYLE.cascade.bg);
                     _detailEl.innerHTML =
-                        _hdr([_wb('SWRL'), _lb('L5 SWRL'), _badge('cascade 연쇄', '#ede9fe', '#7c3aed')], '', 'cascade 연쇄 규칙') +
-                        `<div style="display:flex;align-items:center;gap:.45rem;padding:.38rem .55rem;background:rgba(124,58,237,.05);border-radius:var(--r-md);margin-bottom:.45rem;flex-wrap:wrap;">
-                        <span style="background:var(--c-purple-50);color:var(--c-purple-800);padding:.12rem .5rem;border-radius:var(--r-sm);font-weight:var(--fw-bold);font-size:var(--fs-xs);">${fL}</span>
-                        <span style="color:var(--c-purple-700);font-size:var(--fs-xs);">— cascade →</span>
-                        <span style="background:var(--c-purple-50);color:var(--c-purple-800);padding:.12rem .5rem;border-radius:var(--r-sm);font-weight:var(--fw-bold);font-size:var(--fs-xs);">${tL}</span></div>` +
+                        _hdr([_wb('SWRL'), _lb('L5 SWRL'), _badge('cascade 연쇄', KG_STYLE.cascade.nodeBg, KG_STYLE.cascade.nodeCol)], '', 'cascade 연쇄 규칙') +
+                        `<div style="display:flex;align-items:center;gap:.45rem;padding:.38rem .55rem;background:${KG_STYLE.cascade.bg};border-radius:var(--r-md);margin-bottom:.45rem;flex-wrap:wrap;">
+                        <span style="background:${KG_STYLE.cascade.nodeBg};color:${KG_STYLE.cascade.nodeCol};padding:.12rem .5rem;border-radius:var(--r-sm);font-weight:var(--fw-bold);font-size:var(--fs-xs);">${fL}</span>
+                        <span style="color:${KG_STYLE.cascade.textCol};font-size:var(--fs-xs);">— cascade →</span>
+                        <span style="background:${KG_STYLE.cascade.nodeBg};color:${KG_STYLE.cascade.nodeCol};padding:.12rem .5rem;border-radius:var(--r-sm);font-weight:var(--fw-bold);font-size:var(--fs-xs);">${tL}</span></div>` +
                         `<div style="font-size:var(--fs-xs);color:var(--mono-500);">${fL} 규칙 발동 시 연쇄적으로 ${tL} 규칙을 검토해야 합니다. (SWRL cascade 체인)</div>`;
                 } else if (ll.includes('subclassof')) {
                     const isUp = (fn?.group === 'upperClass' || tn?.group === 'upperClass');
