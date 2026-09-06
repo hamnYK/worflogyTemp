@@ -10508,7 +10508,7 @@ for r in results:
                 if (h.kind === 'file' && EXTS.some(e => name.toLowerCase().endsWith(e))) {
                     const item = document.createElement('div'); item.className = 'fi';
                     const ext = name.split('.').pop().toLowerCase();
-                    const ico = ext === 'pdf' ? '<svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:var(--red);fill:none;stroke-width:1.8;stroke-linecap:round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>' : ext === 'docx' ? '<svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:var(--coral);fill:none;stroke-width:1.8;stroke-linecap:round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>' : '<svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:var(--text3);fill:none;stroke-width:1.8;stroke-linecap:round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>';
+                    const ico = ext === 'pdf' ? '<svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:var(--mono-700);fill:none;stroke-width:1.8;stroke-linecap:round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>' : ext === 'docx' ? '<svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:var(--ink);fill:none;stroke-width:1.8;stroke-linecap:round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>' : '<svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:var(--text3);fill:none;stroke-width:1.8;stroke-linecap:round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>';
                     item.innerHTML = `<span class="ico">${ico}</span><span class="fn">${name}</span><span class="fs">${ext.toUpperCase()}</span>`;
                     item.onclick = async () => {
                         const f = await h.getFile();
@@ -10634,7 +10634,7 @@ for r in results:
                 more.style.cssText = 'font-size:var(--fs-xs);color:var(--text3);padding:.4rem 0;text-align:center;display:flex;align-items:center;justify-content:center;gap:.6rem;border-top:var(--bw-thin) solid var(--border);margin-top:.3rem;';
                 if (shown < _lawCtx.total) {
                     const remaining = _lawCtx.total - shown;
-                    more.innerHTML = `<span>총 ${_lawCtx.total}건 · ${shown}건 표시</span><button onclick="searchLaw(${page + 1})" style="padding:.22rem .65rem;font-size:var(--fs-xs);font-weight:var(--fw-semibold);background:var(--coral);color:var(--mono-white);border:none;border-radius:var(--r-sm);cursor:pointer;">다음 ${Math.min(10, remaining)}건 →</button>`;
+                    more.innerHTML = `<span>총 ${_lawCtx.total}건 · ${shown}건 표시</span><button onclick="searchLaw(${page + 1})" style="padding:.22rem .65rem;font-size:var(--fs-xs);font-weight:var(--fw-semibold);background:var(--ink);color:var(--mono-white);border:none;border-radius:var(--r-sm);cursor:pointer;">다음 ${Math.min(10, remaining)}건 →</button>`;
                 } else {
                     more.innerHTML = `<span>총 ${_lawCtx.total}건 · 전체 표시 완료</span>`;
                 }
@@ -10711,7 +10711,7 @@ for r in results:
                 if (d.name.endsWith('_샘플.txt')) return; // 샘플 데이터는 칩 토글로 표시
                 tc += d.content.length;
                 const el = document.createElement('div'); el.className = 'fi sel';
-                const cur = d.category || '기타'; const opts = ['기타', '공개데이터', '법령/조례', 'SOP/절차서', '업무매뉴얼', '예시데이터'].map(c => `<option value="${c}"${cur === c ? ' selected' : ''}>${c}</option>`).join(''); el.innerHTML = `<span style="font-size:var(--fs-base);flex-shrink:0">&#10003;</span><span class="fn" title="${d.name}">${d.name}</span><select class="doc-cat" onclick="event.stopPropagation()" onchange="event.stopPropagation();setDocCat(${i},this.value)" title="문서 유형">${opts}</select><span class="fs">${(d.content.length / 1000).toFixed(1)}k자</span><button onclick="event.stopPropagation();rmDoc(${i})" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:var(--fs-base);padding:0 .25rem;flex-shrink:0"><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>`;
+                const cur = d.category || '기타'; const opts = ['기타', '공개데이터', '법령/조례', 'SOP/절차서', '업무매뉴얼', '예시데이터'].map(c => `<option value="${c}"${cur === c ? ' selected' : ''}>${c}</option>`).join(''); el.innerHTML = `<span style="font-size:var(--fs-base);flex-shrink:0">&#10003;</span><span class="fn" title="${d.name}">${d.name}</span><select class="doc-cat" onclick="event.stopPropagation()" onchange="event.stopPropagation();setDocCat(${i},this.value)" title="문서 유형">${opts}</select><span class="fs">${(d.content.length / 1000).toFixed(1)}k자</span><button onclick="event.stopPropagation();rmDoc(${i})" style="background:none;border:none;color:var(--mono-700);cursor:pointer;font-size:var(--fs-base);padding:0 .25rem;flex-shrink:0"><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>`;
                 el.onclick = () => prevDoc(d.name, d.content); cont.appendChild(el);
             });
             const allLen = S.docs.reduce((s, d) => s + d.content.length, 0);
@@ -11010,7 +11010,7 @@ for r in results:
             _persistState();
             addDoc(fname, d.text, '예시데이터');
 
-            const stepColor = d.step.includes('위급') ? 'var(--red)' : d.step.includes('긴급') ? 'var(--orange)' : 'var(--coral)';
+            const stepColor = d.step.includes('위급') ? 'var(--mono-700)' : d.step.includes('긴급') ? 'var(--orange)' : 'var(--ink)';
             spec.style.display = 'block';
             spec.innerHTML = `<div style="background:var(--c-ink-04);border:var(--bw-thin) solid var(--border);border-left:var(--bw-strong) solid ${stepColor};border-radius:var(--r-md);padding:.85rem 1rem;font-size:var(--fs-sm);">
         <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem;flex-wrap:wrap;">
@@ -11790,7 +11790,7 @@ for r in results:
             ['outline', 'mid', 'detail'].forEach(k => {
                 const el = document.getElementById('lvl-btn-' + k);
                 if (!el) return;
-                if (k === lv) { el.style.background = 'var(--coral)'; el.style.color = 'var(--mono-white)'; el.style.fontWeight = '600'; }
+                if (k === lv) { el.style.background = 'var(--ink)'; el.style.color = 'var(--mono-white)'; el.style.fontWeight = '600'; }
                 else { el.style.background = 'var(--mono-white)'; el.style.color = 'var(--text2)'; el.style.fontWeight = '400'; }
             });
             if (_prevLevel !== lv) _logUse('schema_level_changed', { from: _prevLevel || null, to: lv });
@@ -12023,7 +12023,7 @@ for r in results:
                 btn.className = 'chip';
                 btn.dataset.idx = i;
                 const shortTitle = sc.title.length > 14 ? sc.title.slice(0, 14) + '…' : sc.title;
-                btn.innerHTML = `<span style="flex-shrink:0;width:16px;height:16px;border-radius:var(--r-full);background:var(--coral);color:var(--mono-white);font-size:var(--fs-small);font-weight:var(--fw-bold);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-ui);">${i + 1}</span> ${shortTitle}`;
+                btn.innerHTML = `<span style="flex-shrink:0;width:16px;height:16px;border-radius:var(--r-full);background:var(--ink);color:var(--mono-white);font-size:var(--fs-small);font-weight:var(--fw-bold);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-ui);">${i + 1}</span> ${shortTitle}`;
                 btn.onclick = () => { _currentHintIdx = i; selectScenHint(i, btn); };
                 chipsCt.appendChild(btn);
             });
@@ -12122,12 +12122,12 @@ for r in results:
             }
             if (empty) empty.style.display = 'none';
             list.innerHTML = matched.map(h => `
-        <div style="border-left:var(--bw-strong) solid var(--coral);padding:.45rem .75rem;background:var(--c-ink-04);border-radius:0 var(--r-sm) var(--r-sm) 0;">
-            <div style="font-family:var(--font-ui);font-size:var(--fs-small);font-weight:var(--fw-bold);color:var(--coral);letter-spacing:.03em;margin-bottom:.35rem;">${h.label}</div>
+        <div style="border-left:var(--bw-strong) solid var(--ink);padding:.45rem .75rem;background:var(--c-ink-04);border-radius:0 var(--r-sm) var(--r-sm) 0;">
+            <div style="font-family:var(--font-ui);font-size:var(--fs-small);font-weight:var(--fw-bold);color:var(--ink);letter-spacing:.03em;margin-bottom:.35rem;">${h.label}</div>
             <div style="margin-bottom:.3rem;">
                 <span style="font-size:var(--fs-small);font-weight:var(--fw-bold);color:var(--text2);letter-spacing:.04em;text-transform:uppercase;">추천 법령 검색어</span>
                 <div style="display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.25rem;">
-                    ${h.laws.map(l => `<button onclick="document.getElementById('law-q').value='${l}';searchLaw();" style="display:inline-flex;align-items:center;gap:.28rem;padding:.22rem .6rem;background:var(--c-ink-06);border:var(--bw-thin) solid var(--border);border-radius:var(--r-lg);font-size:var(--fs-small);font-weight:var(--fw-medium);color:var(--coral);cursor:pointer;font-family:var(--font-ui);transition:all .15s;" onmouseover="this.style.background='var(--coral)';this.style.color='var(--mono-white)';this.querySelector('svg').style.stroke='var(--mono-white)';" onmouseout="this.style.background='var(--c-ink-06)';this.style.color='var(--coral)';this.querySelector('svg').style.stroke='var(--coral)';" ><svg viewBox='0 0 24 24' style='width:10px;height:10px;stroke:var(--coral);fill:none;stroke-width:2.5;stroke-linecap:round;flex-shrink:0;transition:stroke .15s;'><circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg>${l}</button>`).join('')}
+                    ${h.laws.map(l => `<button onclick="document.getElementById('law-q').value='${l}';searchLaw();" style="display:inline-flex;align-items:center;gap:.28rem;padding:.22rem .6rem;background:var(--c-ink-06);border:var(--bw-thin) solid var(--border);border-radius:var(--r-lg);font-size:var(--fs-small);font-weight:var(--fw-medium);color:var(--ink);cursor:pointer;font-family:var(--font-ui);transition:all .15s;" onmouseover="this.style.background='var(--ink)';this.style.color='var(--mono-white)';this.querySelector('svg').style.stroke='var(--mono-white)';" onmouseout="this.style.background='var(--c-ink-06)';this.style.color='var(--ink)';this.querySelector('svg').style.stroke='var(--ink)';" ><svg viewBox='0 0 24 24' style='width:10px;height:10px;stroke:var(--ink);fill:none;stroke-width:2.5;stroke-linecap:round;flex-shrink:0;transition:stroke .15s;'><circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg>${l}</button>`).join('')}
                 </div>
             </div>
             <div>
@@ -12141,7 +12141,7 @@ for r in results:
                 <span style="font-size:var(--fs-small);font-weight:var(--fw-bold);color:var(--text2);letter-spacing:.04em;text-transform:uppercase;">추천 공공데이터</span>
                 <div style="display:flex;flex-direction:column;gap:.28rem;margin-top:.28rem;">
                     ${h.data.map(d => `<a href="${d.url}" target="_blank" style="display:flex;align-items:center;gap:.5rem;padding:.3rem .55rem;background:var(--c-ink-04);border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);text-decoration:none;transition:all .15s;" onmouseover="this.style.background='var(--c-ink-08)'" onmouseout="this.style.background='var(--c-ink-04)'">
-                        <span style="flex-shrink:0;padding:.15rem .38rem;border-radius:var(--r-sm);font-size:var(--fs-small);font-weight:var(--fw-bold);background:var(--c-ink-08);color:var(--coral)">${d.type || 'CSV'}</span>
+                        <span style="flex-shrink:0;padding:.15rem .38rem;border-radius:var(--r-sm);font-size:var(--fs-small);font-weight:var(--fw-bold);background:var(--c-ink-08);color:var(--ink)">${d.type || 'CSV'}</span>
                         <span style="flex:1;overflow:hidden;">
                             <span style="font-size:var(--fs-small);font-weight:var(--fw-semibold);color:var(--ink);display:block;">${d.name}</span>
                             <span style="font-size:var(--fs-small);color:var(--text3);">${d.desc || ''}</span>
@@ -12154,7 +12154,7 @@ for r in results:
                 <span style="font-size:var(--fs-small);font-weight:var(--fw-bold);color:var(--text2);letter-spacing:.04em;text-transform:uppercase;">추천 공공데이터</span>
                 <div style="margin-top:.28rem;">
                     <a href="https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=${encodeURIComponent(h.label)}" target="_blank" style="display:flex;align-items:center;gap:.5rem;padding:.3rem .55rem;background:var(--c-ink-04);border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);text-decoration:none;transition:all .15s;" onmouseover="this.style.background='var(--c-ink-08)'" onmouseout="this.style.background='var(--c-ink-04)'">
-                        <span style="flex-shrink:0;padding:.15rem .38rem;border-radius:var(--r-sm);font-size:var(--fs-small);font-weight:var(--fw-bold);background:var(--c-ink-08);color:var(--coral)">검색</span>
+                        <span style="flex-shrink:0;padding:.15rem .38rem;border-radius:var(--r-sm);font-size:var(--fs-small);font-weight:var(--fw-bold);background:var(--c-ink-08);color:var(--ink)">검색</span>
                         <span style="flex:1;overflow:hidden;"><span style="font-size:var(--fs-small);font-weight:var(--fw-semibold);color:var(--ink);display:block;">data.go.kr에서 「${h.label}」 데이터 검색</span><span style="font-size:var(--fs-small);color:var(--text3);">공공데이터포털에서 관련 데이터셋 직접 검색</span></span>
                         <svg viewBox="0 0 24 24" style="width:10px;height:10px;stroke:var(--text3);fill:none;stroke-width:2;stroke-linecap:round;flex-shrink:0;"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
                     </a>
@@ -12207,15 +12207,15 @@ for r in results:
                 return;
             }
             list.innerHTML = results.map(h => `
-        <div style="border-left:var(--bw-strong) solid var(--green);padding:.45rem .75rem;background:var(--c-ink-04);border-radius:0 var(--r-sm) var(--r-sm) 0;">
+        <div style="border-left:var(--bw-strong) solid var(--mono-700);padding:.45rem .75rem;background:var(--c-ink-04);border-radius:0 var(--r-sm) var(--r-sm) 0;">
             <div style="display:flex;align-items:center;gap:.4rem;margin-bottom:.35rem;">
-                <span style="font-family:var(--font-ui);font-size:var(--fs-small);font-weight:var(--fw-bold);color:var(--green);letter-spacing:.03em;">${h.label}</span>
-                <span style="font-size:var(--fs-small);font-weight:var(--fw-bold);padding:.1rem .35rem;background:var(--c-ink-08);color:var(--green);border-radius:var(--r-sm);letter-spacing:.03em;">AI 추천</span>
+                <span style="font-family:var(--font-ui);font-size:var(--fs-small);font-weight:var(--fw-bold);color:var(--mono-700);letter-spacing:.03em;">${h.label}</span>
+                <span style="font-size:var(--fs-small);font-weight:var(--fw-bold);padding:.1rem .35rem;background:var(--c-ink-08);color:var(--mono-700);border-radius:var(--r-sm);letter-spacing:.03em;">AI 추천</span>
             </div>
             <div style="margin-bottom:.3rem;">
                 <span style="font-size:var(--fs-small);font-weight:var(--fw-bold);color:var(--text2);letter-spacing:.04em;text-transform:uppercase;">추천 법령 검색어</span>
                 <div style="display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.25rem;">
-                    ${(h.laws || []).map(l => `<button onclick="document.getElementById('law-q').value='${l}';searchLaw();" style="display:inline-flex;align-items:center;gap:.28rem;padding:.22rem .6rem;background:var(--c-ink-06);border:var(--bw-thin) solid var(--border);border-radius:var(--r-lg);font-size:var(--fs-small);font-weight:var(--fw-medium);color:var(--green);cursor:pointer;font-family:var(--font-ui);transition:all .15s;" onmouseover="this.style.background='var(--green)';this.style.color='var(--mono-white)';" onmouseout="this.style.background='var(--c-ink-06)';this.style.color='var(--green)';" ><svg viewBox='0 0 24 24' style='width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;flex-shrink:0;'><circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg>${l}</button>`).join('')}
+                    ${(h.laws || []).map(l => `<button onclick="document.getElementById('law-q').value='${l}';searchLaw();" style="display:inline-flex;align-items:center;gap:.28rem;padding:.22rem .6rem;background:var(--c-ink-06);border:var(--bw-thin) solid var(--border);border-radius:var(--r-lg);font-size:var(--fs-small);font-weight:var(--fw-medium);color:var(--mono-700);cursor:pointer;font-family:var(--font-ui);transition:all .15s;" onmouseover="this.style.background='var(--mono-700)';this.style.color='var(--mono-white)';" onmouseout="this.style.background='var(--c-ink-06)';this.style.color='var(--mono-700)';" ><svg viewBox='0 0 24 24' style='width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;flex-shrink:0;'><circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg>${l}</button>`).join('')}
                 </div>
             </div>
             <div>
@@ -12228,11 +12228,11 @@ for r in results:
                 <span style="font-size:var(--fs-small);font-weight:var(--fw-bold);color:var(--text2);letter-spacing:.04em;text-transform:uppercase;">추천 공공데이터</span>
                 <div style="display:flex;flex-direction:column;gap:.28rem;margin-top:.28rem;">
                     ${(h.data && h.data.length ? h.data.map(d => `<a href="${d.url}" target="_blank" style="display:flex;align-items:center;gap:.5rem;padding:.3rem .55rem;background:var(--c-ink-04);border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);text-decoration:none;transition:all .15s;" onmouseover="this.style.background='var(--c-ink-08)'" onmouseout="this.style.background='var(--c-ink-04)'">
-                        <span style="flex-shrink:0;padding:.15rem .38rem;border-radius:var(--r-sm);font-size:var(--fs-small);font-weight:var(--fw-bold);background:var(--c-ink-08);color:var(--green)">${d.type || 'CSV'}</span>
+                        <span style="flex-shrink:0;padding:.15rem .38rem;border-radius:var(--r-sm);font-size:var(--fs-small);font-weight:var(--fw-bold);background:var(--c-ink-08);color:var(--mono-700)">${d.type || 'CSV'}</span>
                         <span style="flex:1;overflow:hidden;"><span style="font-size:var(--fs-small);font-weight:var(--fw-semibold);color:var(--ink);display:block;">${d.name}</span><span style="font-size:var(--fs-small);color:var(--text3);">${d.desc || ''}</span></span>
                         <svg viewBox="0 0 24 24" style="width:10px;height:10px;stroke:var(--text3);fill:none;stroke-width:2;stroke-linecap:round;flex-shrink:0;"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
                     </a>`) : [`<a href="https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=${encodeURIComponent(h.label || '')}" target="_blank" style="display:flex;align-items:center;gap:.5rem;padding:.3rem .55rem;background:var(--c-ink-04);border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);text-decoration:none;transition:all .15s;" onmouseover="this.style.background='var(--c-ink-08)'" onmouseout="this.style.background='var(--c-ink-04)'">
-                        <span style="flex-shrink:0;padding:.15rem .38rem;border-radius:var(--r-sm);font-size:var(--fs-small);font-weight:var(--fw-bold);background:var(--c-ink-08);color:var(--green)">검색</span>
+                        <span style="flex-shrink:0;padding:.15rem .38rem;border-radius:var(--r-sm);font-size:var(--fs-small);font-weight:var(--fw-bold);background:var(--c-ink-08);color:var(--mono-700)">검색</span>
                         <span style="flex:1;overflow:hidden;"><span style="font-size:var(--fs-small);font-weight:var(--fw-semibold);color:var(--ink);display:block;">data.go.kr에서 「${h.label}」 데이터 검색</span><span style="font-size:var(--fs-small);color:var(--text3);">공공데이터포털에서 관련 데이터셋 직접 검색</span></span>
                         <svg viewBox="0 0 24 24" style="width:10px;height:10px;stroke:var(--text3);fill:none;stroke-width:2;stroke-linecap:round;flex-shrink:0;"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
                     </a>`]).join('')}
@@ -12329,20 +12329,20 @@ for r in results:
                 const queries = s.queries || [];
                 const lv = levelLabel[s.level || 'outline'] || '개요';
                 const entityHtml = entities.length > 0
-                    ? entities.map(e => `<span style="display:inline-flex;align-items:center;padding:.13rem .45rem;background:var(--c-ink-06);color:var(--coral);border-radius:var(--r-md);font-size:var(--fs-small);font-weight:var(--fw-semibold);">${e}</span>`).join('')
+                    ? entities.map(e => `<span style="display:inline-flex;align-items:center;padding:.13rem .45rem;background:var(--c-ink-06);color:var(--ink);border-radius:var(--r-md);font-size:var(--fs-small);font-weight:var(--fw-semibold);">${e}</span>`).join('')
                     : `<span style="font-size:var(--fs-small);color:var(--text3);">엔터티 없음  -  편집하여 추가하세요</span>`;
                 const queryHtml = queries.length > 0
                     ? queries.map(q => `<span style="font-size:var(--fs-small);color:var(--text2);">&#10003; ${q}</span>`).join('')
                     : `<span style="font-size:var(--fs-small);color:var(--text3);">질의 목표 없음</span>`;
                 const row = document.createElement('div');
                 row.style.cssText = 'border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);background:var(--bg-card);transition:border-color .15s;overflow:hidden;';
-                row.onmouseenter = () => row.style.borderColor = 'var(--coral)';
+                row.onmouseenter = () => row.style.borderColor = 'var(--ink)';
                 row.onmouseleave = () => row.style.borderColor = 'var(--border)';
                 row.innerHTML = `
           <div style="display:flex;align-items:center;gap:.6rem;padding:.6rem .8rem;">
-            <span style="flex-shrink:0;width:20px;height:20px;border-radius:var(--r-full);background:var(--coral);color:var(--mono-white);font-size:var(--fs-small);font-weight:var(--fw-bold);display:flex;align-items:center;justify-content:center;font-family:var(--font-ui);">${i + 1}</span>
+            <span style="flex-shrink:0;width:20px;height:20px;border-radius:var(--r-full);background:var(--ink);color:var(--mono-white);font-size:var(--fs-small);font-weight:var(--fw-bold);display:flex;align-items:center;justify-content:center;font-family:var(--font-ui);">${i + 1}</span>
             <span style="flex:1;font-size:var(--fs-sm);font-weight:var(--fw-semibold);color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${s.title}</span>
-            <span style="flex-shrink:0;padding:.12rem .45rem;border-radius:var(--r-sm);font-size:var(--fs-small);font-weight:var(--fw-bold);background:var(--c-ink-06);color:var(--coral);">${lv}</span>
+            <span style="flex-shrink:0;padding:.12rem .45rem;border-radius:var(--r-sm);font-size:var(--fs-small);font-weight:var(--fw-bold);background:var(--c-ink-06);color:var(--ink);">${lv}</span>
             <button aria-label="시나리오 편집" onclick="loadScenarioToEditor(${s.id})" style="background:none;border:none;cursor:pointer;color:var(--text3);padding:.1rem .3rem;border-radius:var(--r-xs);" title="편집하기 (텍스트·엔터티·질의·수준 복원)"><svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" fill="none" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
             <button aria-label="시나리오 삭제" onclick="removeScenario(${s.id})" style="background:none;border:none;cursor:pointer;color:var(--text3);padding:.1rem .3rem;border-radius:var(--r-xs);" title="삭제"><svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" fill="none" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
           </div>
@@ -12475,7 +12475,7 @@ for r in results:
             if (notice) notice.style.display = 'none';
             // Outer tab buttons
             tb.innerHTML = S.scenarios.map((s, i) => {
-                const done = S.schemas[s.id] ? 'color:var(--coral);' : 'color:var(--text3);';
+                const done = S.schemas[s.id] ? 'color:var(--ink);' : 'color:var(--text3);';
                 const tick = S.schemas[s.id] ? ' &#10003;' : '';
                 return `<button id="s4btn-${s.id}" onclick="switchS4Tab(${s.id})" style="padding:.45rem .9rem;font-size:var(--fs-sm);font-weight:var(--fw-semibold);background:none;border:none;cursor:pointer;border-bottom:var(--bw-thick) solid transparent;${done}white-space:nowrap;transition:all .2s;">${i + 1}. ${s.title.substring(0, 14)}${tick}</button>`;
             }).join('');
@@ -12499,7 +12499,7 @@ for r in results:
             </div>
             <div id="s4inner-${s.id}" style="display:${S.schemas[s.id] ? 'block' : 'none'};margin-top:.8rem;">
                 <div id="s4tabs-${s.id}" style="display:flex;border-bottom:var(--bw-thin) solid var(--border);gap:0;margin-bottom:.8rem;">
-                    <button id="s4it-triple-${s.id}" onclick="switchInnerTab(${s.id},'triple')" style="padding:.4rem .9rem;font-size:var(--fs-sm);font-weight:var(--fw-semibold);background:none;border:none;cursor:pointer;border-bottom:var(--bw-thick) solid var(--coral);color:var(--coral);transition:all .2s;"><span id="s4tri-${s.id}">트리플</span></button>
+                    <button id="s4it-triple-${s.id}" onclick="switchInnerTab(${s.id},'triple')" style="padding:.4rem .9rem;font-size:var(--fs-sm);font-weight:var(--fw-semibold);background:none;border:none;cursor:pointer;border-bottom:var(--bw-thick) solid var(--ink);color:var(--ink);transition:all .2s;"><span id="s4tri-${s.id}">트리플</span></button>
                     <button id="s4it-classes-${s.id}" onclick="switchInnerTab(${s.id},'classes')" style="padding:.4rem .9rem;font-size:var(--fs-sm);font-weight:var(--fw-semibold);background:none;border:none;cursor:pointer;border-bottom:var(--bw-thick) solid transparent;color:var(--text3);transition:all .2s;"><span id="s4cls-${s.id}">클래스/속성</span></button>
                     <button id="s4it-rule-${s.id}" onclick="switchInnerTab(${s.id},'rule')" style="padding:.4rem .9rem;font-size:var(--fs-sm);font-weight:var(--fw-semibold);background:none;border:none;cursor:pointer;border-bottom:var(--bw-thick) solid transparent;color:var(--text3);transition:all .2s;"><span id="s4rule-${s.id}">예외 규칙</span></button>
                     <button id="s4it-constraints-${s.id}" onclick="switchInnerTab(${s.id},'constraints')" style="padding:.4rem .9rem;font-size:var(--fs-sm);font-weight:var(--fw-semibold);background:none;border:none;cursor:pointer;border-bottom:var(--bw-thick) solid transparent;color:var(--text3);transition:all .2s;"><span id="s4cst-${s.id}">제약 조건</span></button>
@@ -12526,7 +12526,7 @@ for r in results:
             if (scen) scen.level = level;
             ['outline', 'mid', 'detail'].forEach(l => {
                 const b = document.getElementById('s4lvl-' + l + '-' + id);
-                if (b) { b.style.background = l === level ? 'var(--coral)' : 'var(--mono-white)'; b.style.color = l === level ? 'var(--mono-white)' : 'var(--text3)'; }
+                if (b) { b.style.background = l === level ? 'var(--ink)' : 'var(--mono-white)'; b.style.color = l === level ? 'var(--mono-white)' : 'var(--text3)'; }
             });
         }
         function switchS4Tab(id) {
@@ -12536,8 +12536,8 @@ for r in results:
                 if (pane) pane.style.display = s.id === id ? 'block' : 'none';
                 if (btn) {
                     const done = S.schemas[s.id];
-                    btn.style.borderBottomColor = s.id === id ? 'var(--coral)' : 'transparent';
-                    btn.style.color = s.id === id ? 'var(--coral)' : (done ? 'var(--ink)' : 'var(--text3)');
+                    btn.style.borderBottomColor = s.id === id ? 'var(--ink)' : 'transparent';
+                    btn.style.color = s.id === id ? 'var(--ink)' : (done ? 'var(--ink)' : 'var(--text3)');
                 }
             });
             if (S.schemas[id]) S.schema = S.schemas[id]; // 탭 전환 시 다운로드 대상 동기화
@@ -12547,7 +12547,7 @@ for r in results:
                 const p = document.getElementById('s4ip-' + t + '-' + id);
                 const b = document.getElementById('s4it-' + t + '-' + id);
                 if (p) p.style.display = t === tab ? 'block' : 'none';
-                if (b) { b.style.borderBottomColor = t === tab ? 'var(--coral)' : 'transparent'; b.style.color = t === tab ? 'var(--coral)' : 'var(--text3)'; }
+                if (b) { b.style.borderBottomColor = t === tab ? 'var(--ink)' : 'transparent'; b.style.color = t === tab ? 'var(--ink)' : 'var(--text3)'; }
             });
             if (tab === 'diagram' && S.schemas[id]) renderSchemaVis('s4diag-' + id, S.schemas[id]);
             if (tab === 'gui' && S.schemas[id]) renderGuiEditor(id);
@@ -12674,7 +12674,7 @@ for r in results:
             if (_clsEl) _clsEl.textContent = '클래스 ' + classes.length + '개 · 속성 ' + props.length + '개';
             // Triple list
             const tl = document.getElementById('s4tl-' + id);
-            if (tl) tl.innerHTML = triples.map((t, i) => `<div style="display:flex;align-items:baseline;gap:.5rem;padding:.45rem .65rem;border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);background:var(--bg-card);font-size:var(--fs-sm);"><span style="flex-shrink:0;width:17px;height:17px;border-radius:var(--r-full);background:var(--c-ink-06);color:var(--coral);font-size:var(--fs-small);font-weight:var(--fw-bold);display:flex;align-items:center;justify-content:center;">${i + 1}</span><span style="color:var(--ink);font-weight:var(--fw-semibold);">${t.subject || ''}</span><span style="color:var(--text3);font-style:italic;font-size:var(--fs-xs);">${t.predicate || ''}</span><span style="color:var(--text2);flex:1;">${t.object || ''}</span>${t.source ? `<span style="font-size:var(--fs-small);color:var(--text3);">${t.source}</span>` : ''}</div>`).join('');
+            if (tl) tl.innerHTML = triples.map((t, i) => `<div style="display:flex;align-items:baseline;gap:.5rem;padding:.45rem .65rem;border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);background:var(--bg-card);font-size:var(--fs-sm);"><span style="flex-shrink:0;width:17px;height:17px;border-radius:var(--r-full);background:var(--c-ink-06);color:var(--ink);font-size:var(--fs-small);font-weight:var(--fw-bold);display:flex;align-items:center;justify-content:center;">${i + 1}</span><span style="color:var(--ink);font-weight:var(--fw-semibold);">${t.subject || ''}</span><span style="color:var(--text3);font-style:italic;font-size:var(--fs-xs);">${t.predicate || ''}</span><span style="color:var(--text2);flex:1;">${t.object || ''}</span>${t.source ? `<span style="font-size:var(--fs-small);color:var(--text3);">${t.source}</span>` : ''}</div>`).join('');
             // Classes/Properties list
             const cl = document.getElementById('s4cl-' + id);
             if (cl) {
@@ -12686,7 +12686,7 @@ for r in results:
                 _subCls.sort((a, b) => (a.subClassOf || '').localeCompare(b.subClassOf || ''));
                 const _clsRow = (c) => {
                     const parentBadge = c.subClassOf
-                        ? `<span style="font-size:var(--fs-small);color:var(--c-orange-700);background:rgba(192,86,33,.07);padding:.1rem .32rem;border-radius:var(--r-xs);border:var(--bw-thin) solid rgba(192,86,33,.18);white-space:nowrap;flex-shrink:0;">↑ ${c.subClassOf}</span>`
+                        ? `<span style="font-size:var(--fs-small);color:var(--text2);background:var(--c-ink-07);padding:.1rem .32rem;border-radius:var(--r-xs);border:var(--bw-thin) solid var(--c-ink-18);white-space:nowrap;flex-shrink:0;">↑ ${c.subClassOf}</span>`
                         : `<span style="font-size:var(--fs-small);color:var(--text3);padding:.1rem .32rem;background:var(--c-ink-04);border-radius:var(--r-xs);flex-shrink:0;">루트</span>`;
                     const cmt = (c.comment || c.description)
                         ? `<span style="font-size:var(--fs-xs);color:var(--text3);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"> ${c.comment || c.description}</span>`
@@ -12872,18 +12872,18 @@ for r in results:
                 ll.innerHTML = '';
             } else {
                 // 그룹별 섹션 카드 렌더링
-                const groupColors = ['var(--nia-blue)', 'var(--ink)', 'var(--c-orange-700)', 'var(--c-purple-700)', 'var(--mono-800)'];
+                const groupColors = ['var(--ink)', 'var(--mono-800)', 'var(--mono-700)', 'var(--mono-600)', 'var(--mono-500)'];
                 cl.innerHTML = groups.map((g, gi) => {
                     const col = groupColors[gi % groupColors.length];
                     const classes = g.upper_classes || [];
                     const classCards = classes.map((c, i) => `
-                <div style="border:var(--bw-thin) solid rgba(3,103,176,.15);border-left:var(--bw-thick) solid ${col};border-radius:var(--r-md);padding:.6rem .85rem;background:var(--mono-white);margin-top:.4rem;">
+                <div style="border:var(--bw-thin) solid var(--c-ink-15);border-left:var(--bw-thick) solid ${col};border-radius:var(--r-md);padding:.6rem .85rem;background:var(--mono-white);margin-top:.4rem;">
                     <div style="display:flex;align-items:center;gap:.45rem;margin-bottom:.25rem;">
                         <span style="width:20px;height:20px;border-radius:var(--r-full);background:${col};color:var(--mono-white);font-size:var(--fs-small);font-weight:var(--fw-bold);display:flex;align-items:center;justify-content:center;">${i + 1}</span>
                         <span style="font-weight:var(--fw-bold);color:var(--ink);font-size:var(--fs-sm);">${c.name}</span>
                     </div>
                     <p style="font-size:var(--fs-xs);color:var(--text2);margin:.1rem 0 .35rem;">${c.description || ''}</p>
-                    ${c.domain_instances?.length ? `<div style="display:flex;flex-wrap:wrap;gap:.25rem;">${c.domain_instances.map(d => `<span style="font-size:var(--fs-xs);background:rgba(3,103,176,.07);color:var(--ink);padding:.12rem .45rem;border-radius:var(--r-md);">${d}</span>`).join('')}</div>` : ''}
+                    ${c.domain_instances?.length ? `<div style="display:flex;flex-wrap:wrap;gap:.25rem;">${c.domain_instances.map(d => `<span style="font-size:var(--fs-xs);background:var(--c-ink-07);color:var(--ink);padding:.12rem .45rem;border-radius:var(--r-md);">${d}</span>`).join('')}</div>` : ''}
                 </div>`).join('');
                     return `<div style="border:var(--bw-thin) solid ${col}33;border-radius:var(--r-md);padding:.7rem .9rem;margin-bottom:.65rem;">
                 <div style="font-size:var(--fs-xs);font-weight:var(--fw-bold);color:${col};margin-bottom:.35rem;display:flex;align-items:center;gap:.4rem;">
@@ -12925,7 +12925,7 @@ for r in results:
                 const p = document.getElementById('utab-' + t + '-pane');
                 const b = document.getElementById('utab-' + t);
                 if (p) p.style.display = t === tab ? 'block' : 'none';
-                if (b) { b.style.borderBottomColor = t === tab ? 'var(--coral)' : 'transparent'; b.style.color = t === tab ? 'var(--coral)' : 'var(--text3)'; }
+                if (b) { b.style.borderBottomColor = t === tab ? 'var(--ink)' : 'transparent'; b.style.color = t === tab ? 'var(--ink)' : 'var(--text3)'; }
             });
             if (tab === 'diagram' && S.upperOntology) renderUpperVis('utab-diagram-el', buildIntegratedUpper() || S.upperOntology);
             if (tab === 'gui') renderUpperGuiEditor();
@@ -12935,7 +12935,7 @@ for r in results:
                 const p = document.getElementById('inf-pane-' + t);
                 const b = document.getElementById('inf-tab-' + t);
                 if (p) p.style.display = t === tab ? 'block' : 'none';
-                if (b) { b.style.borderBottomColor = t === tab ? 'var(--coral)' : 'transparent'; b.style.color = t === tab ? 'var(--coral)' : 'var(--text3)'; }
+                if (b) { b.style.borderBottomColor = t === tab ? 'var(--ink)' : 'transparent'; b.style.color = t === tab ? 'var(--ink)' : 'var(--text3)'; }
             });
             if (tab === 'diagram' && S.infRules) { renderInfVis('inf-diag', S.infRules); renderInfRuleGuide(S.infRules); }
             if (tab === 'gui') renderInfGuiEditor();
@@ -12949,7 +12949,7 @@ for r in results:
                 container.innerHTML = '<div style="font-size:var(--fs-sm);color:var(--text3);padding:.5rem 0">추론 규칙을 먼저 도출해 주세요.</div>';
                 return;
             }
-            const RC = { CRITICAL: 'var(--c-red-700)', HIGH: 'var(--c-orange-700)', MEDIUM: 'var(--c-amber-700)', LOW: 'var(--ink)' };
+            const RC = { CRITICAL: 'var(--ink)', HIGH: 'var(--mono-700)', MEDIUM: 'var(--mono-600)', LOW: 'var(--mono-500)' };
             const RISKS = ['CRITICAL', 'HIGH', 'MEDIUM', 'LOW'];
             function esc(s) { return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
             let h = '';
@@ -12958,9 +12958,9 @@ for r in results:
                 const risk = RISKS.includes(rawRisk) ? rawRisk : 'LOW';
                 const col = RC[risk];
                 const rid = r.inference_id || ('INF_' + String(i + 1).padStart(2, '0'));
-                h += `<div style="border:var(--bw-thin) solid ${col}33;border-radius:var(--r-md);padding:.7rem .9rem;margin-bottom:.65rem"><div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.55rem;flex-wrap:wrap"><span style="background:${col};color:var(--mono-white);font-size:var(--fs-xs);font-weight:var(--fw-bold);border-radius:var(--r-sm);padding:.15rem .52rem;white-space:nowrap">${esc(rid)}</span><input type="text" spellcheck="false" placeholder="규칙 이름" value="${esc(r.inference_name)}" style="flex:1;min-width:120px;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.28rem .5rem;font-size:var(--fs-sm)" oninput="S.infRules.inferred_rules[${i}].inference_name=this.value;document.getElementById('inf-ed').value=JSON.stringify(S.infRules,null,2)"><select style="border:var(--bw-thin) solid ${col};border-radius:var(--r-sm);padding:.28rem .45rem;font-size:var(--fs-xs);color:${col};font-weight:var(--fw-semibold);cursor:pointer" onchange="S.infRules.inferred_rules[${i}].risk_level=this.value;renderInfGuiEditor()">${RISKS.map(rv => `<option value="${rv}"${rv === risk ? ' selected' : ''}>${rv}</option>`).join('')}</select><button onclick="S.infRules.inferred_rules.splice(${i},1);document.getElementById('inf-ed').value=JSON.stringify(S.infRules,null,2);document.getElementById('inf-cnt').textContent='추론 규칙: '+S.infRules.inferred_rules.length+'개';renderInfGuiEditor()" style="border:var(--bw-thin) solid var(--c-red-600);color:var(--c-red-600);background:transparent;border-radius:var(--r-sm);padding:.22rem .55rem;font-size:var(--fs-xs);cursor:pointer">삭제</button></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:.45rem;margin-bottom:.4rem"><div><div style="font-size:var(--fs-xs);color:var(--text3);margin-bottom:.12rem;font-weight:var(--fw-semibold)">IF 조건</div><textarea rows="3" spellcheck="false" style="width:100%;box-sizing:border-box;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.28rem .5rem;font-size:var(--fs-xs);resize:vertical" oninput="S.infRules.inferred_rules[${i}].condition=this.value;document.getElementById('inf-ed').value=JSON.stringify(S.infRules,null,2)">${esc(r.condition)}</textarea></div><div><div style="font-size:var(--fs-xs);color:var(--text3);margin-bottom:.12rem;font-weight:var(--fw-semibold)">THEN 결론 (action)</div><textarea rows="3" spellcheck="false" style="width:100%;box-sizing:border-box;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.28rem .5rem;font-size:var(--fs-xs);resize:vertical" oninput="S.infRules.inferred_rules[${i}].action=this.value;document.getElementById('inf-ed').value=JSON.stringify(S.infRules,null,2)">${esc(r.action)}</textarea></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:.45rem"><div><div style="font-size:var(--fs-xs);color:var(--text3);margin-bottom:.12rem;font-weight:var(--fw-semibold)">담당 부서</div><input type="text" spellcheck="false" placeholder="담당 부서" value="${esc(r.responsible_dept)}" style="width:100%;box-sizing:border-box;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.28rem .5rem;font-size:var(--fs-xs)" oninput="S.infRules.inferred_rules[${i}].responsible_dept=this.value;document.getElementById('inf-ed').value=JSON.stringify(S.infRules,null,2)"></div><div><div style="font-size:var(--fs-xs);color:var(--text3);margin-bottom:.12rem;font-weight:var(--fw-semibold)">업무 영향</div><input type="text" spellcheck="false" placeholder="업무 영향" value="${esc(r.business_impact)}" style="width:100%;box-sizing:border-box;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.28rem .5rem;font-size:var(--fs-xs)" oninput="S.infRules.inferred_rules[${i}].business_impact=this.value;document.getElementById('inf-ed').value=JSON.stringify(S.infRules,null,2)"></div></div></div>`;
+                h += `<div style="border:var(--bw-thin) solid ${col}33;border-radius:var(--r-md);padding:.7rem .9rem;margin-bottom:.65rem"><div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.55rem;flex-wrap:wrap"><span style="background:${col};color:var(--mono-white);font-size:var(--fs-xs);font-weight:var(--fw-bold);border-radius:var(--r-sm);padding:.15rem .52rem;white-space:nowrap">${esc(rid)}</span><input type="text" spellcheck="false" placeholder="규칙 이름" value="${esc(r.inference_name)}" style="flex:1;min-width:120px;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.28rem .5rem;font-size:var(--fs-sm)" oninput="S.infRules.inferred_rules[${i}].inference_name=this.value;document.getElementById('inf-ed').value=JSON.stringify(S.infRules,null,2)"><select style="border:var(--bw-thin) solid ${col};border-radius:var(--r-sm);padding:.28rem .45rem;font-size:var(--fs-xs);color:${col};font-weight:var(--fw-semibold);cursor:pointer" onchange="S.infRules.inferred_rules[${i}].risk_level=this.value;renderInfGuiEditor()">${RISKS.map(rv => `<option value="${rv}"${rv === risk ? ' selected' : ''}>${rv}</option>`).join('')}</select><button onclick="S.infRules.inferred_rules.splice(${i},1);document.getElementById('inf-ed').value=JSON.stringify(S.infRules,null,2);document.getElementById('inf-cnt').textContent='추론 규칙: '+S.infRules.inferred_rules.length+'개';renderInfGuiEditor()" style="border:var(--bw-thin) solid var(--mono-600);color:var(--mono-600);background:transparent;border-radius:var(--r-sm);padding:.22rem .55rem;font-size:var(--fs-xs);cursor:pointer">삭제</button></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:.45rem;margin-bottom:.4rem"><div><div style="font-size:var(--fs-xs);color:var(--text3);margin-bottom:.12rem;font-weight:var(--fw-semibold)">IF 조건</div><textarea rows="3" spellcheck="false" style="width:100%;box-sizing:border-box;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.28rem .5rem;font-size:var(--fs-xs);resize:vertical" oninput="S.infRules.inferred_rules[${i}].condition=this.value;document.getElementById('inf-ed').value=JSON.stringify(S.infRules,null,2)">${esc(r.condition)}</textarea></div><div><div style="font-size:var(--fs-xs);color:var(--text3);margin-bottom:.12rem;font-weight:var(--fw-semibold)">THEN 결론 (action)</div><textarea rows="3" spellcheck="false" style="width:100%;box-sizing:border-box;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.28rem .5rem;font-size:var(--fs-xs);resize:vertical" oninput="S.infRules.inferred_rules[${i}].action=this.value;document.getElementById('inf-ed').value=JSON.stringify(S.infRules,null,2)">${esc(r.action)}</textarea></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:.45rem"><div><div style="font-size:var(--fs-xs);color:var(--text3);margin-bottom:.12rem;font-weight:var(--fw-semibold)">담당 부서</div><input type="text" spellcheck="false" placeholder="담당 부서" value="${esc(r.responsible_dept)}" style="width:100%;box-sizing:border-box;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.28rem .5rem;font-size:var(--fs-xs)" oninput="S.infRules.inferred_rules[${i}].responsible_dept=this.value;document.getElementById('inf-ed').value=JSON.stringify(S.infRules,null,2)"></div><div><div style="font-size:var(--fs-xs);color:var(--text3);margin-bottom:.12rem;font-weight:var(--fw-semibold)">업무 영향</div><input type="text" spellcheck="false" placeholder="업무 영향" value="${esc(r.business_impact)}" style="width:100%;box-sizing:border-box;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.28rem .5rem;font-size:var(--fs-xs)" oninput="S.infRules.inferred_rules[${i}].business_impact=this.value;document.getElementById('inf-ed').value=JSON.stringify(S.infRules,null,2)"></div></div></div>`;
             });
-            h += `<button onclick="const nr={inference_id:'INF_'+String(S.infRules.inferred_rules.length+1).padStart(2,'0'),inference_name:'새 규칙',risk_level:'MEDIUM',condition:'',action:'',responsible_dept:'',business_impact:'',cascade_rules:[]};S.infRules.inferred_rules.push(nr);document.getElementById('inf-ed').value=JSON.stringify(S.infRules,null,2);document.getElementById('inf-cnt').textContent='추론 규칙: '+S.infRules.inferred_rules.length+'개';renderInfGuiEditor()" style="width:100%;margin-top:.3rem;padding:.5rem;border:var(--bw-strong) dashed var(--border);border-radius:var(--r-md);background:transparent;color:var(--text3);cursor:pointer;font-size:var(--fs-sm);transition:all .15s" onmouseover="this.style.borderColor='var(--coral)';this.style.color='var(--coral)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text3)'">+ 규칙 추가</button>`;
+            h += `<button onclick="const nr={inference_id:'INF_'+String(S.infRules.inferred_rules.length+1).padStart(2,'0'),inference_name:'새 규칙',risk_level:'MEDIUM',condition:'',action:'',responsible_dept:'',business_impact:'',cascade_rules:[]};S.infRules.inferred_rules.push(nr);document.getElementById('inf-ed').value=JSON.stringify(S.infRules,null,2);document.getElementById('inf-cnt').textContent='추론 규칙: '+S.infRules.inferred_rules.length+'개';renderInfGuiEditor()" style="width:100%;margin-top:.3rem;padding:.5rem;border:var(--bw-strong) dashed var(--border);border-radius:var(--r-md);background:transparent;color:var(--text3);cursor:pointer;font-size:var(--fs-sm);transition:all .15s" onmouseover="this.style.borderColor='var(--ink)';this.style.color='var(--ink)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text3)'">+ 규칙 추가</button>`;
             container.innerHTML = h;
         }
 
@@ -12969,7 +12969,7 @@ for r in results:
             const container = document.getElementById('upper-gui');
             if (!container) return;
             const groups = normalizeUpperGroups(S.upperOntology);
-            const groupColors = ['var(--nia-blue)', 'var(--ink)', 'var(--c-orange-700)', 'var(--c-purple-700)', 'var(--mono-800)'];
+            const groupColors = ['var(--ink)', 'var(--mono-800)', 'var(--mono-700)', 'var(--mono-600)', 'var(--mono-500)'];
             let h = '';
             if (!groups.length) {
                 container.innerHTML = '<div style="font-size:var(--fs-sm);color:var(--text3);padding:.5rem;">상위 온톨로지를 먼저 추출해 주세요.</div>';
@@ -12996,7 +12996,7 @@ for r in results:
                 (g.upper_classes || []).forEach((c, ci) => {
                     const disj = Array.isArray(c.disjoint_with) ? c.disjoint_with.join('; ') : (c.disjoint_with || '');
                     const inpStyle = `width:100%;border:var(--bw-thin) solid transparent;border-radius:var(--r-xs);padding:.18rem .3rem;font-size:var(--fs-xs);background:transparent;color:var(--text1);`;
-                    const inpFocus = `onfocus="this.style.borderColor='var(--coral)';this.style.background='var(--mono-white)'" onblur="this.style.borderColor='transparent';this.style.background='transparent'"`;
+                    const inpFocus = `onfocus="this.style.borderColor='var(--ink)';this.style.background='var(--mono-white)'" onblur="this.style.borderColor='transparent';this.style.background='transparent'"`;
                     h += `<tr style="border-bottom:var(--bw-thin) solid var(--border);">
   <td style="padding:.2rem;text-align:center;color:var(--text3);font-size:var(--fs-small);">${ci + 1}</td>
   <td style="padding:.15rem .25rem;"><input type="text" spellcheck="false" value="${(c.id || '').replace(/"/g, '&quot;')}" oninput="updateUpperClass(${gi},${ci},'id',this.value)" placeholder="ont:클래스명" style="${inpStyle}" ${inpFocus}></td>
@@ -13008,7 +13008,7 @@ for r in results:
 </tr>`;
                 });
                 h += `</tbody></table></div>
-<button onclick="addUpperClass(${gi})" style="font-size:var(--fs-xs);padding:.2rem .55rem;border:var(--bw-thin) dashed var(--coral);border-radius:var(--r-sm);background:rgba(3,103,176,.04);color:var(--coral);cursor:pointer;margin-bottom:.65rem;">+ 클래스 추가</button>
+<button onclick="addUpperClass(${gi})" style="font-size:var(--fs-xs);padding:.2rem .55rem;border:var(--bw-thin) dashed var(--ink);border-radius:var(--r-sm);background:var(--c-ink-04);color:var(--ink);cursor:pointer;margin-bottom:.65rem;">+ 클래스 추가</button>
 <div style="font-size:var(--fs-xs);font-weight:var(--fw-bold);color:var(--ink);margin-bottom:.3rem;">rdfs:subClassOf 매핑</div>
 <div style="overflow-x:auto;margin-bottom:.4rem;"><table style="width:100%;border-collapse:collapse;font-size:var(--fs-xs);">
 <thead><tr style="background:var(--c-ink-06);">
@@ -13020,7 +13020,7 @@ for r in results:
 </tr></thead><tbody>`;
                 (g.subclass_mappings || []).forEach((m, mi) => {
                     const inpStyle = `width:100%;border:var(--bw-thin) solid transparent;border-radius:var(--r-xs);padding:.18rem .3rem;font-size:var(--fs-xs);background:transparent;color:var(--text1);`;
-                    const inpFocus = `onfocus="this.style.borderColor='var(--coral)';this.style.background='var(--mono-white)'" onblur="this.style.borderColor='transparent';this.style.background='transparent'"`;
+                    const inpFocus = `onfocus="this.style.borderColor='var(--ink)';this.style.background='var(--mono-white)'" onblur="this.style.borderColor='transparent';this.style.background='transparent'"`;
                     h += `<tr style="border-bottom:var(--bw-thin) solid var(--border);">
   <td style="padding:.2rem;text-align:center;color:var(--text3);font-size:var(--fs-small);">${mi + 1}</td>
   <td style="padding:.15rem .25rem;"><input type="text" spellcheck="false" value="${(m.domain_class || '').replace(/"/g, '&quot;')}" oninput="updateUpperMapping(${gi},${mi},'domain_class',this.value)" style="${inpStyle}" ${inpFocus}></td>
@@ -13030,7 +13030,7 @@ for r in results:
 </tr>`;
                 });
                 h += `</tbody></table></div>
-<button onclick="addUpperMapping(${gi})" style="font-size:var(--fs-xs);padding:.2rem .55rem;border:var(--bw-thin) dashed var(--coral);border-radius:var(--r-sm);background:rgba(3,103,176,.04);color:var(--coral);cursor:pointer;">+ 매핑 추가</button>
+<button onclick="addUpperMapping(${gi})" style="font-size:var(--fs-xs);padding:.2rem .55rem;border:var(--bw-thin) dashed var(--ink);border-radius:var(--r-sm);background:var(--c-ink-04);color:var(--ink);cursor:pointer;">+ 매핑 추가</button>
 </div>`;
             });
             container.innerHTML = h;
@@ -13082,7 +13082,7 @@ for r in results:
                 const p = document.getElementById('itab-' + t + '-pane');
                 const b = document.getElementById('itab-' + t);
                 if (p) p.style.display = t === tab ? 'block' : 'none';
-                if (b) { b.style.borderBottomColor = t === tab ? 'var(--coral)' : 'transparent'; b.style.color = t === tab ? 'var(--coral)' : 'var(--text3)'; }
+                if (b) { b.style.borderBottomColor = t === tab ? 'var(--ink)' : 'transparent'; b.style.color = t === tab ? 'var(--ink)' : 'var(--text3)'; }
             });
         }
 
@@ -13318,7 +13318,7 @@ ${domainCtx}${upperCtx}
                 h += `<div style="font-weight:var(--fw-bold);color:var(--ink);margin:.7rem 0 .5rem;">SHACL 제약 위반 - W3C SHACL (${shaclViolations.length}건)</div>`;
                 shaclViolations.forEach(v => { h += `<div style="border:var(--bw-thin) solid ${sevBd(v.severity)};border-left:var(--bw-thick) solid ${sevColor(v.severity)};border-radius:var(--r-md);padding:.5rem .8rem;background:${sevBg(v.severity)};margin-bottom:.35rem;font-size:var(--fs-sm);"><div style="display:flex;gap:.4rem;align-items:center;margin-bottom:.2rem;flex-wrap:wrap;"><code style="font-size:var(--fs-small);background:var(--c-ink-06);color:var(--text2);padding:.1rem .3rem;border-radius:var(--r-xs);">${v.shape_id}</code><span style="font-weight:var(--fw-semibold);">${v.target}</span><span style="margin-left:auto;font-size:var(--fs-small);font-weight:var(--fw-bold);color:${sevColor(v.severity)};">${v.severity}</span></div><div style="font-size:var(--fs-xs);color:var(--text2);"><span style="font-weight:var(--fw-semibold);">대상 클래스:</span> ${v.target_class} | <span style="font-weight:var(--fw-semibold);">속성:</span> ${v.path} | <span style="font-weight:var(--fw-semibold);">필요:</span> ${v.expected}개 이상 - <span style="font-weight:var(--fw-semibold);">실제:</span> ${v.actual}개</div><div style="font-size:var(--fs-xs);color:var(--text3);margin-top:.15rem;">${v.message}</div></div>` });
             } else if ((S.infInstances || []).length > 0 && Object.values((S.combined && S.combined.domain_schemas) || {}).some(sc => (sc.constraints || []).length > 0)) {
-                h += `<div style="font-size:var(--fs-xs);color:var(--c-green-700);margin:.7rem 0 .25rem;font-weight:var(--fw-semibold);">&#10003; SHACL 검증 통과 - 모든 A-Box 인스턴스가 제약 조건을 충족합니다.</div>`;
+                h += `<div style="font-size:var(--fs-xs);color:var(--mono-700);margin:.7rem 0 .25rem;font-weight:var(--fw-semibold);">&#10003; SHACL 검증 통과 - 모든 A-Box 인스턴스가 제약 조건을 충족합니다.</div>`;
             }
             el.innerHTML = h;
         }
@@ -13367,7 +13367,7 @@ ${domainCtx}${upperCtx}
             const thead = document.getElementById('abox-thead');
             if (thead) thead.innerHTML = `<tr style="background:var(--c-ink-06);">
         <th style="padding:.3rem .4rem;font-weight:var(--fw-semibold);text-align:left;">주체 (Subject)</th>
-        <th style="padding:.3rem .4rem;font-weight:var(--fw-semibold);text-align:left;color:var(--coral);" title="rdf:type - SWRL 클래스 원자 발동에 필요">유형 (rdf:type)</th>
+        <th style="padding:.3rem .4rem;font-weight:var(--fw-semibold);text-align:left;color:var(--ink);" title="rdf:type - SWRL 클래스 원자 발동에 필요">유형 (rdf:type)</th>
         <th style="padding:.3rem .4rem;font-weight:var(--fw-semibold);text-align:left;">서술어 (Predicate)</th>
         <th style="padding:.3rem .4rem;font-weight:var(--fw-semibold);text-align:left;">객체 (Object)</th>
         ${hasResult ? '<th style="padding:.3rem .4rem;font-weight:var(--fw-semibold);text-align:left;">발동 규칙</th>' : ''}
@@ -13376,8 +13376,8 @@ ${domainCtx}${upperCtx}
             tbody.innerHTML = insts.map((inst, i) => {
                 const key = String(inst.s || '').trim() + '|' + String(inst.p || '').trim() + '|' + String(inst.o || '').trim();
                 const ruleIds = firedMap[key] || [];
-                const badges = ruleIds.map(rid => `<span style="font-size:var(--fs-small);font-weight:var(--fw-bold);background:rgba(22,163,74,.15);color:var(--c-green-700);border:var(--bw-thin) solid rgba(22,163,74,.3);border-radius:var(--r-full);padding:.1rem .45rem;white-space:nowrap;">${rid}</span>`).join(' ');
-                const rowBg = ruleIds.length ? 'var(--c-green-50)' : 'transparent';
+                const badges = ruleIds.map(rid => `<span style="font-size:var(--fs-small);font-weight:var(--fw-bold);background:rgba(22,163,74,.15);color:var(--mono-700);border:var(--bw-thin) solid rgba(22,163,74,.3);border-radius:var(--r-full);padding:.1rem .45rem;white-space:nowrap;">${rid}</span>`).join(' ');
+                const rowBg = ruleIds.length ? 'var(--c-ink-04)' : 'transparent';
                 return `<tr style="border-bottom:var(--bw-thin) solid var(--border);background:${rowBg};">
             <td style="padding:.25rem .4rem;"><input spellcheck="false" value="${(inst.s || '').replace(/"/g, '&quot;')}" oninput="S.infInstances[${i}].s=this.value" style="width:100%;border:none;border-bottom:var(--bw-thin) solid var(--border2);font-size:var(--fs-sm);padding:.15rem .2rem;background:transparent;outline:none;" placeholder="예: 홍길동"/></td>
             <td style="padding:.25rem .4rem;"><input spellcheck="false" value="${(inst.t || '').replace(/"/g, '&quot;')}" oninput="S.infInstances[${i}].t=this.value" style="width:100%;border:none;border-bottom:var(--bw-thin) solid rgba(3,103,176,.35);font-size:var(--fs-sm);padding:.15rem .2rem;background:rgba(3,103,176,.03);outline:none;color:var(--ink);" placeholder="예: 시민"/></td>
@@ -13411,22 +13411,22 @@ ${domainCtx}${upperCtx}
             let h = '';
 
             // ── owl:Class ──
-            h += `<div style="margin-bottom:.9rem;"><div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.4rem;"><div style="font-size:var(--fs-sm);font-weight:var(--fw-bold);color:var(--ink);">owl:Class (${classes.length}개)</div><button onclick="addClass(${id})" style="margin-left:auto;padding:.2rem .6rem;font-size:var(--fs-xs);font-weight:var(--fw-bold);border:var(--bw-thin) dashed var(--coral);border-radius:var(--r-sm);background:rgba(3,103,176,.04);color:var(--coral);cursor:pointer;">+ 추가</button></div><div style="overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:var(--fs-xs);"><thead><tr style="background:var(--c-ink-06);"><th style="padding:.3rem;width:18px;color:var(--text3);font-size:var(--fs-small);">#</th><th style="padding:.3rem .5rem;text-align:left;color:var(--ink);font-weight:var(--fw-bold);">label</th><th style="padding:.3rem .5rem;text-align:left;color:var(--ink);font-weight:var(--fw-bold);">subClassOf</th><th style="padding:.3rem .5rem;text-align:left;color:var(--ink);font-weight:var(--fw-bold);">comment</th><th style="width:24px;"></th></tr></thead><tbody>`;
+            h += `<div style="margin-bottom:.9rem;"><div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.4rem;"><div style="font-size:var(--fs-sm);font-weight:var(--fw-bold);color:var(--ink);">owl:Class (${classes.length}개)</div><button onclick="addClass(${id})" style="margin-left:auto;padding:.2rem .6rem;font-size:var(--fs-xs);font-weight:var(--fw-bold);border:var(--bw-thin) dashed var(--ink);border-radius:var(--r-sm);background:var(--c-ink-04);color:var(--ink);cursor:pointer;">+ 추가</button></div><div style="overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:var(--fs-xs);"><thead><tr style="background:var(--c-ink-06);"><th style="padding:.3rem;width:18px;color:var(--text3);font-size:var(--fs-small);">#</th><th style="padding:.3rem .5rem;text-align:left;color:var(--ink);font-weight:var(--fw-bold);">label</th><th style="padding:.3rem .5rem;text-align:left;color:var(--ink);font-weight:var(--fw-bold);">subClassOf</th><th style="padding:.3rem .5rem;text-align:left;color:var(--ink);font-weight:var(--fw-bold);">comment</th><th style="width:24px;"></th></tr></thead><tbody>`;
             classes.forEach((c, i) => {
                 h += `<tr style="border-bottom:var(--bw-thin) solid var(--border);"><td style="padding:.22rem;text-align:center;color:var(--text3);font-size:var(--fs-small);">${i + 1}</td>`;
                 ['label', 'subClassOf', 'comment'].forEach(f => {
-                    h += `<td style="padding:.18rem .28rem;"><input spellcheck="false" type="text" value="${String(c[f] ?? '').replace(/"/g, '&quot;')}" oninput="updateClass(${id},${i},'${f}',this.value)" style="width:100%;border:var(--bw-thin) solid transparent;border-radius:var(--r-sm);padding:.2rem .35rem;font-size:var(--fs-xs);background:transparent;color:var(--text1);" onfocus="this.style.borderColor='var(--coral)';this.style.background='var(--mono-white)'" onblur="this.style.borderColor='transparent';this.style.background='transparent'"></td>`;
+                    h += `<td style="padding:.18rem .28rem;"><input spellcheck="false" type="text" value="${String(c[f] ?? '').replace(/"/g, '&quot;')}" oninput="updateClass(${id},${i},'${f}',this.value)" style="width:100%;border:var(--bw-thin) solid transparent;border-radius:var(--r-sm);padding:.2rem .35rem;font-size:var(--fs-xs);background:transparent;color:var(--text1);" onfocus="this.style.borderColor='var(--ink)';this.style.background='var(--mono-white)'" onblur="this.style.borderColor='transparent';this.style.background='transparent'"></td>`;
                 });
                 h += `<td style="padding:.22rem;text-align:center;"><button onclick="removeClass(${id},${i})" style="background:none;border:none;cursor:pointer;color:var(--text3);" title="삭제"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></td></tr>`;
             });
             h += `</tbody></table></div></div>`;
 
             // ── owl:Property ──
-            h += `<div style="margin-bottom:.9rem;"><div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.4rem;"><div style="font-size:var(--fs-sm);font-weight:var(--fw-bold);color:var(--ink);">owl:Property (${properties.length}개)</div><button onclick="addProperty(${id})" style="margin-left:auto;padding:.2rem .6rem;font-size:var(--fs-xs);font-weight:var(--fw-bold);border:var(--bw-thin) dashed var(--coral);border-radius:var(--r-sm);background:rgba(3,103,176,.04);color:var(--coral);cursor:pointer;">+ 추가</button></div><div style="overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:var(--fs-xs);"><thead><tr style="background:var(--c-ink-06);"><th style="padding:.3rem;width:18px;color:var(--text3);font-size:var(--fs-small);">#</th><th style="padding:.3rem .5rem;text-align:left;color:var(--ink);font-weight:var(--fw-bold);">name</th><th style="padding:.3rem .5rem;text-align:left;color:var(--ink);font-weight:var(--fw-bold);">type</th><th style="padding:.3rem .5rem;text-align:left;color:var(--ink);font-weight:var(--fw-bold);">domain</th><th style="padding:.3rem .5rem;text-align:left;color:var(--ink);font-weight:var(--fw-bold);">range</th><th style="padding:.3rem .5rem;text-align:left;color:var(--ink);font-weight:var(--fw-bold);">comment</th><th style="width:24px;"></th></tr></thead><tbody>`;
+            h += `<div style="margin-bottom:.9rem;"><div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.4rem;"><div style="font-size:var(--fs-sm);font-weight:var(--fw-bold);color:var(--ink);">owl:Property (${properties.length}개)</div><button onclick="addProperty(${id})" style="margin-left:auto;padding:.2rem .6rem;font-size:var(--fs-xs);font-weight:var(--fw-bold);border:var(--bw-thin) dashed var(--ink);border-radius:var(--r-sm);background:var(--c-ink-04);color:var(--ink);cursor:pointer;">+ 추가</button></div><div style="overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:var(--fs-xs);"><thead><tr style="background:var(--c-ink-06);"><th style="padding:.3rem;width:18px;color:var(--text3);font-size:var(--fs-small);">#</th><th style="padding:.3rem .5rem;text-align:left;color:var(--ink);font-weight:var(--fw-bold);">name</th><th style="padding:.3rem .5rem;text-align:left;color:var(--ink);font-weight:var(--fw-bold);">type</th><th style="padding:.3rem .5rem;text-align:left;color:var(--ink);font-weight:var(--fw-bold);">domain</th><th style="padding:.3rem .5rem;text-align:left;color:var(--ink);font-weight:var(--fw-bold);">range</th><th style="padding:.3rem .5rem;text-align:left;color:var(--ink);font-weight:var(--fw-bold);">comment</th><th style="width:24px;"></th></tr></thead><tbody>`;
             properties.forEach((p, i) => {
-                h += `<tr style="border-bottom:var(--bw-thin) solid var(--border);"><td style="padding:.22rem;text-align:center;color:var(--text3);font-size:var(--fs-small);">${i + 1}</td><td style="padding:.18rem .28rem;"><input spellcheck="false" type="text" value="${String(p.name ?? '').replace(/"/g, '&quot;')}" oninput="updateProperty(${id},${i},'name',this.value)" style="width:100%;border:var(--bw-thin) solid transparent;border-radius:var(--r-sm);padding:.2rem .35rem;font-size:var(--fs-xs);background:transparent;color:var(--text1);" onfocus="this.style.borderColor='var(--coral)';this.style.background='var(--mono-white)'" onblur="this.style.borderColor='transparent';this.style.background='transparent'"></td><td style="padding:.18rem .28rem;"><select onchange="updateProperty(${id},${i},'type',this.value)" style="border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.18rem .3rem;font-size:var(--fs-xs);background:var(--mono-white);"><option value="owl:ObjectProperty" ${p.type === 'owl:ObjectProperty' ? 'selected' : ''}>ObjectProp</option><option value="owl:DatatypeProperty" ${p.type === 'owl:DatatypeProperty' ? 'selected' : ''}>DatatypeProp</option></select></td>`;
+                h += `<tr style="border-bottom:var(--bw-thin) solid var(--border);"><td style="padding:.22rem;text-align:center;color:var(--text3);font-size:var(--fs-small);">${i + 1}</td><td style="padding:.18rem .28rem;"><input spellcheck="false" type="text" value="${String(p.name ?? '').replace(/"/g, '&quot;')}" oninput="updateProperty(${id},${i},'name',this.value)" style="width:100%;border:var(--bw-thin) solid transparent;border-radius:var(--r-sm);padding:.2rem .35rem;font-size:var(--fs-xs);background:transparent;color:var(--text1);" onfocus="this.style.borderColor='var(--ink)';this.style.background='var(--mono-white)'" onblur="this.style.borderColor='transparent';this.style.background='transparent'"></td><td style="padding:.18rem .28rem;"><select onchange="updateProperty(${id},${i},'type',this.value)" style="border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.18rem .3rem;font-size:var(--fs-xs);background:var(--mono-white);"><option value="owl:ObjectProperty" ${p.type === 'owl:ObjectProperty' ? 'selected' : ''}>ObjectProp</option><option value="owl:DatatypeProperty" ${p.type === 'owl:DatatypeProperty' ? 'selected' : ''}>DatatypeProp</option></select></td>`;
                 ['domain', 'range', 'comment'].forEach(f => {
-                    h += `<td style="padding:.18rem .28rem;"><input spellcheck="false" type="text" value="${String(p[f] ?? '').replace(/"/g, '&quot;')}" oninput="updateProperty(${id},${i},'${f}',this.value)" style="width:100%;border:var(--bw-thin) solid transparent;border-radius:var(--r-sm);padding:.2rem .35rem;font-size:var(--fs-xs);background:transparent;color:var(--text1);" onfocus="this.style.borderColor='var(--coral)';this.style.background='var(--mono-white)'" onblur="this.style.borderColor='transparent';this.style.background='transparent'"></td>`;
+                    h += `<td style="padding:.18rem .28rem;"><input spellcheck="false" type="text" value="${String(p[f] ?? '').replace(/"/g, '&quot;')}" oninput="updateProperty(${id},${i},'${f}',this.value)" style="width:100%;border:var(--bw-thin) solid transparent;border-radius:var(--r-sm);padding:.2rem .35rem;font-size:var(--fs-xs);background:transparent;color:var(--text1);" onfocus="this.style.borderColor='var(--ink)';this.style.background='var(--mono-white)'" onblur="this.style.borderColor='transparent';this.style.background='transparent'"></td>`;
                 });
                 h += `<td style="padding:.22rem;text-align:center;"><button onclick="removeProperty(${id},${i})" style="background:none;border:none;cursor:pointer;color:var(--text3);" title="삭제"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></td></tr>`;
             });
@@ -13437,25 +13437,25 @@ ${domainCtx}${upperCtx}
             const LABELS = ['주체', '서술어', '객체', '출처'];
             h += `<div style="font-size:var(--fs-sm);font-weight:var(--fw-bold);color:var(--ink);margin-bottom:.5rem;">트리플 편집 (${triples.length}개)</div><div style="overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:var(--fs-sm);"><thead><tr style="background:var(--c-ink-06);"><th style="width:20px;padding:.3rem;text-align:center;color:var(--text3);font-size:var(--fs-small);">#</th>${LABELS.map(l => `<th style="padding:.3rem .5rem;text-align:left;color:var(--ink);font-weight:var(--fw-bold);">${l}</th>`).join('')}<th style="width:28px;"></th></tr></thead><tbody id="s4gui-tbody-${id}">`;
             triples.forEach((t, i) => {
-                h += `<tr style="border-bottom:var(--bw-thin) solid var(--border);"><td style="padding:.25rem;text-align:center;color:var(--text3);font-size:var(--fs-small);">${i + 1}</td>${FIELDS.map(f => `<td style="padding:.2rem .3rem;"><input spellcheck="false" type="text" value="${String(t[f] ?? '').replace(/"/g, '&quot;').replace(/'/g, '&#39;')}" oninput="updateTriple(${id},${i},'${f}',this.value)" style="width:100%;border:var(--bw-thin) solid transparent;border-radius:var(--r-sm);padding:.22rem .38rem;font-size:var(--fs-xs);background:transparent;color:var(--text1);" onfocus="this.style.borderColor='var(--coral)';this.style.background='var(--mono-white)'" onblur="this.style.borderColor='transparent';this.style.background='transparent'"></td>`).join('')}<td style="padding:.25rem;text-align:center;"><button onclick="removeTriple(${id},${i})" style="background:none;border:none;cursor:pointer;color:var(--text3);padding:.15rem;" title="삭제"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></td></tr>`;
+                h += `<tr style="border-bottom:var(--bw-thin) solid var(--border);"><td style="padding:.25rem;text-align:center;color:var(--text3);font-size:var(--fs-small);">${i + 1}</td>${FIELDS.map(f => `<td style="padding:.2rem .3rem;"><input spellcheck="false" type="text" value="${String(t[f] ?? '').replace(/"/g, '&quot;').replace(/'/g, '&#39;')}" oninput="updateTriple(${id},${i},'${f}',this.value)" style="width:100%;border:var(--bw-thin) solid transparent;border-radius:var(--r-sm);padding:.22rem .38rem;font-size:var(--fs-xs);background:transparent;color:var(--text1);" onfocus="this.style.borderColor='var(--ink)';this.style.background='var(--mono-white)'" onblur="this.style.borderColor='transparent';this.style.background='transparent'"></td>`).join('')}<td style="padding:.25rem;text-align:center;"><button onclick="removeTriple(${id},${i})" style="background:none;border:none;cursor:pointer;color:var(--text3);padding:.15rem;" title="삭제"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></td></tr>`;
             });
-            h += `</tbody></table></div><button onclick="addTriple(${id})" style="margin-top:.55rem;padding:.28rem .75rem;font-size:var(--fs-xs);font-weight:var(--fw-semibold);border:var(--bw-thin) dashed var(--coral);border-radius:var(--r-sm);background:rgba(3,103,176,.04);color:var(--coral);cursor:pointer;">+ 트리플 추가</button>`;
+            h += `</tbody></table></div><button onclick="addTriple(${id})" style="margin-top:.55rem;padding:.28rem .75rem;font-size:var(--fs-xs);font-weight:var(--fw-semibold);border:var(--bw-thin) dashed var(--ink);border-radius:var(--r-sm);background:var(--c-ink-04);color:var(--ink);cursor:pointer;">+ 트리플 추가</button>`;
 
             // ── 예외 규칙 ──
             if (rules.length) {
                 h += `<div style="margin-top:.9rem;font-size:var(--fs-sm);font-weight:var(--fw-bold);color:var(--ink);margin-bottom:.5rem;">예외 규칙 편집 (${rules.length}개)</div>`;
                 rules.forEach((r, i) => {
-                    h += `<div style="border:var(--bw-thin) solid rgba(3,103,176,.18);border-left:var(--bw-thick) solid var(--coral);border-radius:var(--r-md);padding:.55rem .8rem;background:var(--mono-white);margin-bottom:.4rem;font-size:var(--fs-sm);"><div style="display:flex;gap:.4rem;align-items:center;margin-bottom:.3rem;flex-wrap:wrap;"><code style="font-size:var(--fs-small);background:var(--c-ink-08);color:var(--ink);padding:.1rem .3rem;border-radius:var(--r-xs);">${r.rule_id || ''}</code><input spellcheck="false" type="text" value="${(r.rule_name || '').replace(/"/g, '&quot;')}" placeholder="규칙명" oninput="updateRule(${id},${i},'rule_name',this.value)" style="flex:1;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.18rem .38rem;font-size:var(--fs-xs);"><button onclick="removeRule(${id},${i})" style="background:none;border:none;cursor:pointer;color:var(--text3);" title="삭제"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div style="display:grid;gap:.25rem;"><div style="display:flex;align-items:center;gap:.5rem;"><span style="font-size:var(--fs-xs);font-weight:var(--fw-bold);color:var(--text2);width:38px;">IF</span><input spellcheck="false" type="text" value="${(r.if?.conditions?.join('; ') || '').replace(/"/g, '&quot;')}" placeholder="조건 (세미콜론 구분)" oninput="updateRule(${id},${i},'if_conditions',this.value)" style="flex:1;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.18rem .38rem;font-size:var(--fs-xs);"></div><div style="display:flex;align-items:center;gap:.5rem;"><span style="font-size:var(--fs-xs);font-weight:var(--fw-bold);color:var(--coral);width:38px;">THEN</span><input spellcheck="false" type="text" value="${(r.then || '').replace(/"/g, '&quot;')}" oninput="updateRule(${id},${i},'then',this.value)" style="flex:1;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.18rem .38rem;font-size:var(--fs-xs);"></div></div></div>`;
+                    h += `<div style="border:var(--bw-thin) solid var(--c-ink-18);border-left:var(--bw-thick) solid var(--ink);border-radius:var(--r-md);padding:.55rem .8rem;background:var(--mono-white);margin-bottom:.4rem;font-size:var(--fs-sm);"><div style="display:flex;gap:.4rem;align-items:center;margin-bottom:.3rem;flex-wrap:wrap;"><code style="font-size:var(--fs-small);background:var(--c-ink-08);color:var(--ink);padding:.1rem .3rem;border-radius:var(--r-xs);">${r.rule_id || ''}</code><input spellcheck="false" type="text" value="${(r.rule_name || '').replace(/"/g, '&quot;')}" placeholder="규칙명" oninput="updateRule(${id},${i},'rule_name',this.value)" style="flex:1;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.18rem .38rem;font-size:var(--fs-xs);"><button onclick="removeRule(${id},${i})" style="background:none;border:none;cursor:pointer;color:var(--text3);" title="삭제"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div style="display:grid;gap:.25rem;"><div style="display:flex;align-items:center;gap:.5rem;"><span style="font-size:var(--fs-xs);font-weight:var(--fw-bold);color:var(--text2);width:38px;">IF</span><input spellcheck="false" type="text" value="${(r.if?.conditions?.join('; ') || '').replace(/"/g, '&quot;')}" placeholder="조건 (세미콜론 구분)" oninput="updateRule(${id},${i},'if_conditions',this.value)" style="flex:1;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.18rem .38rem;font-size:var(--fs-xs);"></div><div style="display:flex;align-items:center;gap:.5rem;"><span style="font-size:var(--fs-xs);font-weight:var(--fw-bold);color:var(--ink);width:38px;">THEN</span><input spellcheck="false" type="text" value="${(r.then || '').replace(/"/g, '&quot;')}" oninput="updateRule(${id},${i},'then',this.value)" style="flex:1;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.18rem .38rem;font-size:var(--fs-xs);"></div></div></div>`;
                 });
             }
 
             // ── SHACL Constraints ──
-            h += `<div style="margin-top:.9rem;display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem;"><div style="font-size:var(--fs-sm);font-weight:var(--fw-bold);color:var(--c-amber-800);">SHACL 제약 조건 편집 - W3C Layer 5 (${constraints.length}개)</div><button onclick="addConstraint(${id})" style="margin-left:auto;padding:.2rem .6rem;font-size:var(--fs-xs);font-weight:var(--fw-bold);border:var(--bw-thin) dashed var(--c-orange-700);border-radius:var(--r-sm);background:rgba(192,86,33,.05);color:var(--c-orange-700);cursor:pointer;">+ 제약 추가</button></div>`;
+            h += `<div style="margin-top:.9rem;display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem;"><div style="font-size:var(--fs-sm);font-weight:var(--fw-bold);color:var(--text2);">SHACL 제약 조건 편집 - W3C Layer 5 (${constraints.length}개)</div><button onclick="addConstraint(${id})" style="margin-left:auto;padding:.2rem .6rem;font-size:var(--fs-xs);font-weight:var(--fw-bold);border:var(--bw-thin) dashed var(--ink);border-radius:var(--r-sm);background:var(--c-ink-04);color:var(--ink);cursor:pointer;">+ 제약 추가</button></div>`;
             if (constraints.length) {
                 constraints.forEach((c, ci) => {
                     const sid = (c.shape_id || (c.target_class || 'Shape') + 'Shape').replace(/\s+/g, '_');
                     const sevVal = (c.severity || 'sh:Violation').replace(/^sh:/, '');
-                    h += `<div style="border:var(--bw-thin) solid var(--c-orange-200);border-left:var(--bw-thick) solid var(--c-orange-700);border-radius:var(--r-md);padding:.5rem .75rem;background:var(--c-amber-50);margin-bottom:.4rem;font-size:var(--fs-xs);"><div style="display:flex;gap:.4rem;align-items:center;margin-bottom:.35rem;flex-wrap:wrap;"><code style="font-size:var(--fs-small);background:rgba(192,86,33,.1);color:var(--c-amber-800);padding:.1rem .3rem;border-radius:var(--r-xs);">${sid}</code><span style="font-size:var(--fs-small);color:var(--text3);">sh:NodeShape</span><button onclick="removeConstraint(${id},${ci})" style="margin-left:auto;background:none;border:none;cursor:pointer;color:var(--text3);" title="삭제"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:.3rem .5rem;"><div><label style="font-size:var(--fs-small);font-weight:var(--fw-bold);color:var(--c-amber-800);display:block;margin-bottom:.1rem;">sh:targetClass</label><input spellcheck="false" type="text" value="${(c.target_class || '').replace(/"/g, '&quot;')}" oninput="updateConstraint(${id},${ci},'target_class',this.value)" style="width:100%;border:var(--bw-thin) solid var(--c-orange-200);border-radius:var(--r-sm);padding:.18rem .35rem;font-size:var(--fs-xs);background:var(--mono-white);"></div><div><label style="font-size:var(--fs-small);font-weight:var(--fw-bold);color:var(--c-amber-800);display:block;margin-bottom:.1rem;">sh:path (속성)</label><input spellcheck="false" type="text" value="${(c.path || '').replace(/"/g, '&quot;')}" oninput="updateConstraint(${id},${ci},'path',this.value)" style="width:100%;border:var(--bw-thin) solid var(--c-orange-200);border-radius:var(--r-sm);padding:.18rem .35rem;font-size:var(--fs-xs);background:var(--mono-white);"></div><div><label style="font-size:var(--fs-small);font-weight:var(--fw-bold);color:var(--c-amber-800);display:block;margin-bottom:.1rem;">sh:minCount</label><input spellcheck="false" type="number" min="0" value="${c.min_count ?? ''}" oninput="updateConstraint(${id},${ci},'min_count',+this.value)" style="width:100%;border:var(--bw-thin) solid var(--c-orange-200);border-radius:var(--r-sm);padding:.18rem .35rem;font-size:var(--fs-xs);background:var(--mono-white);"></div><div><label style="font-size:var(--fs-small);font-weight:var(--fw-bold);color:var(--c-amber-800);display:block;margin-bottom:.1rem;">sh:severity</label><select onchange="updateConstraint(${id},${ci},'severity','sh:'+this.value)" style="width:100%;border:var(--bw-thin) solid var(--c-orange-200);border-radius:var(--r-sm);padding:.18rem .35rem;font-size:var(--fs-xs);background:var(--mono-white);"><option value="Violation" ${sevVal === 'Violation' ? 'selected' : ''}>sh:Violation</option><option value="Warning" ${sevVal === 'Warning' ? 'selected' : ''}>sh:Warning</option><option value="Info" ${sevVal === 'Info' ? 'selected' : ''}>sh:Info</option></select></div></div><div style="margin-top:.3rem;"><label style="font-size:var(--fs-small);font-weight:var(--fw-bold);color:var(--c-amber-800);display:block;margin-bottom:.1rem;">sh:message (위반 메시지)</label><input spellcheck="false" type="text" value="${(c.exception_message || '').replace(/"/g, '&quot;')}" oninput="updateConstraint(${id},${ci},'exception_message',this.value)" style="width:100%;border:var(--bw-thin) solid var(--c-orange-200);border-radius:var(--r-sm);padding:.18rem .35rem;font-size:var(--fs-xs);background:var(--mono-white);"></div></div>`;
+                    h += `<div style="border:var(--bw-thin) solid var(--border);border-left:var(--bw-thick) solid var(--ink);border-radius:var(--r-md);padding:.5rem .75rem;background:var(--c-ink-04);margin-bottom:.4rem;font-size:var(--fs-xs);"><div style="display:flex;gap:.4rem;align-items:center;margin-bottom:.35rem;flex-wrap:wrap;"><code style="font-size:var(--fs-small);background:var(--c-ink-08);color:var(--text2);padding:.1rem .3rem;border-radius:var(--r-xs);">${sid}</code><span style="font-size:var(--fs-small);color:var(--text3);">sh:NodeShape</span><button onclick="removeConstraint(${id},${ci})" style="margin-left:auto;background:none;border:none;cursor:pointer;color:var(--text3);" title="삭제"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:.3rem .5rem;"><div><label style="font-size:var(--fs-small);font-weight:var(--fw-bold);color:var(--text2);display:block;margin-bottom:.1rem;">sh:targetClass</label><input spellcheck="false" type="text" value="${(c.target_class || '').replace(/"/g, '&quot;')}" oninput="updateConstraint(${id},${ci},'target_class',this.value)" style="width:100%;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.18rem .35rem;font-size:var(--fs-xs);background:var(--mono-white);"></div><div><label style="font-size:var(--fs-small);font-weight:var(--fw-bold);color:var(--text2);display:block;margin-bottom:.1rem;">sh:path (속성)</label><input spellcheck="false" type="text" value="${(c.path || '').replace(/"/g, '&quot;')}" oninput="updateConstraint(${id},${ci},'path',this.value)" style="width:100%;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.18rem .35rem;font-size:var(--fs-xs);background:var(--mono-white);"></div><div><label style="font-size:var(--fs-small);font-weight:var(--fw-bold);color:var(--text2);display:block;margin-bottom:.1rem;">sh:minCount</label><input spellcheck="false" type="number" min="0" value="${c.min_count ?? ''}" oninput="updateConstraint(${id},${ci},'min_count',+this.value)" style="width:100%;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.18rem .35rem;font-size:var(--fs-xs);background:var(--mono-white);"></div><div><label style="font-size:var(--fs-small);font-weight:var(--fw-bold);color:var(--text2);display:block;margin-bottom:.1rem;">sh:severity</label><select onchange="updateConstraint(${id},${ci},'severity','sh:'+this.value)" style="width:100%;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.18rem .35rem;font-size:var(--fs-xs);background:var(--mono-white);"><option value="Violation" ${sevVal === 'Violation' ? 'selected' : ''}>sh:Violation</option><option value="Warning" ${sevVal === 'Warning' ? 'selected' : ''}>sh:Warning</option><option value="Info" ${sevVal === 'Info' ? 'selected' : ''}>sh:Info</option></select></div></div><div style="margin-top:.3rem;"><label style="font-size:var(--fs-small);font-weight:var(--fw-bold);color:var(--text2);display:block;margin-bottom:.1rem;">sh:message (위반 메시지)</label><input spellcheck="false" type="text" value="${(c.exception_message || '').replace(/"/g, '&quot;')}" oninput="updateConstraint(${id},${ci},'exception_message',this.value)" style="width:100%;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.18rem .35rem;font-size:var(--fs-xs);background:var(--mono-white);"></div></div>`;
                 });
             } else {
                 h += `<div style="font-size:var(--fs-xs);color:var(--text3);padding:.4rem .5rem;">SHACL 제약이 없습니다. [+ 제약 추가]로 직접 추가하거나, 온톨로지 추출 시 LLM이 자동 생성합니다.</div>`;
@@ -13542,7 +13542,7 @@ ${domainCtx}${upperCtx}
                 const p = document.getElementById('s7tab-' + t + '-pane');
                 const b = document.getElementById('s7tab-' + t);
                 if (p) p.style.display = t === tab ? 'block' : 'none';
-                if (b) { b.style.borderBottomColor = t === tab ? 'var(--coral)' : 'transparent'; b.style.color = t === tab ? 'var(--coral)' : 'var(--text3)'; }
+                if (b) { b.style.borderBottomColor = t === tab ? 'var(--ink)' : 'transparent'; b.style.color = t === tab ? 'var(--ink)' : 'var(--text3)'; }
             });
             // 탭별 자동 동작
             if (tab === 'graph') renderGraph();
@@ -13621,7 +13621,7 @@ ${domainCtx}${upperCtx}
             const resEl = document.getElementById('query-results'); if (!resEl) return;
             if (!results.length) { resEl.innerHTML = '<div class="al al-i">매칭 결과 없음. 조건을 완화하거나 <code>?</code> 와일드카드를 사용해 보세요.</div>'; return; }
             _queryHighlightKeys = new Set(results.flatMap(t => [t.subject, t.object].filter(Boolean)));
-            resEl.innerHTML = `<div style="font-size:var(--fs-xs);color:var(--text2);margin-bottom:.45rem;">매칭 결과: <strong>${results.length}개</strong> 트리플</div><div style="display:flex;flex-direction:column;gap:.32rem;">${results.map((t, i) => `<div style="display:flex;align-items:baseline;gap:.45rem;padding:.38rem .6rem;border:var(--bw-thin) solid ${t._type === 'derived' ? 'var(--c-green-100)' : 'var(--border)'};border-radius:var(--r-md);background:${t._type === 'derived' ? 'var(--c-green-50)' : 'var(--mono-white)'};font-size:var(--fs-sm);"><span style="flex-shrink:0;width:16px;height:16px;border-radius:var(--r-full);background:var(--c-ink-06);color:var(--coral);font-size:var(--fs-small);font-weight:var(--fw-bold);display:flex;align-items:center;justify-content:center;">${i + 1}</span><span style="color:var(--ink);font-weight:var(--fw-semibold);">${t.subject || ''}</span><span style="color:var(--text3);font-style:italic;font-size:var(--fs-xs);">${t.predicate || ''}</span><span style="color:var(--text2);flex:1;">${t.object || ''}</span>${t.source ? `<span style="font-size:var(--fs-small);color:var(--text3);">${t.source}</span>` : ''} ${t._type === 'derived' ? '<span style="font-size:var(--fs-small);background:var(--c-green-100);color:var(--c-green-700);padding:.04rem .28rem;border-radius:var(--r-xs);">파생</span>' : ''}</div>`).join('')}</div>`;
+            resEl.innerHTML = `<div style="font-size:var(--fs-xs);color:var(--text2);margin-bottom:.45rem;">매칭 결과: <strong>${results.length}개</strong> 트리플</div><div style="display:flex;flex-direction:column;gap:.32rem;">${results.map((t, i) => `<div style="display:flex;align-items:baseline;gap:.45rem;padding:.38rem .6rem;border:var(--bw-thin) solid ${t._type === 'derived' ? 'var(--c-ink-10)' : 'var(--border)'};border-radius:var(--r-md);background:${t._type === 'derived' ? 'var(--c-ink-04)' : 'var(--mono-white)'};font-size:var(--fs-sm);"><span style="flex-shrink:0;width:16px;height:16px;border-radius:var(--r-full);background:var(--c-ink-06);color:var(--ink);font-size:var(--fs-small);font-weight:var(--fw-bold);display:flex;align-items:center;justify-content:center;">${i + 1}</span><span style="color:var(--ink);font-weight:var(--fw-semibold);">${t.subject || ''}</span><span style="color:var(--text3);font-style:italic;font-size:var(--fs-xs);">${t.predicate || ''}</span><span style="color:var(--text2);flex:1;">${t.object || ''}</span>${t.source ? `<span style="font-size:var(--fs-small);color:var(--text3);">${t.source}</span>` : ''} ${t._type === 'derived' ? '<span style="font-size:var(--fs-small);background:var(--c-ink-10);color:var(--mono-700);padding:.04rem .28rem;border-radius:var(--r-xs);">파생</span>' : ''}</div>`).join('')}</div>`;
             document.getElementById('query-highlight-note').style.display = 'block';
         }
 
@@ -15137,14 +15137,14 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
                 if (pC) pC.classList.add('hitl-rejected');
                 if (pB) pB.classList.add('hitl-rejected');
                 document.getElementById('hitl-msg').textContent = '일반 텍스트 RAG(A)가 채택됐습니다. 온톨로지 보완이 필요할 수 있습니다.';
-                document.getElementById('hitl-btn-A').style.boxShadow = '0 0 0 2px var(--nia-blue)';
+                document.getElementById('hitl-btn-A').style.boxShadow = '0 0 0 2px var(--ink)';
             } else if (side === 'B') {
                 if (hB) hB.insertAdjacentHTML('beforeend', badge('채택됨', '', SVG_CHECK));
                 if (pB) pB.classList.add('hitl-chosen');
                 if (pC) pC.classList.add('hitl-rejected');
                 if (pA) pA.classList.add('hitl-rejected');
                 document.getElementById('hitl-msg').textContent = '온톨로지 스키마 주입 RAG(B)가 채택됐습니다. 온톨로지가 효과적으로 작동하고 있습니다.';
-                document.getElementById('hitl-btn-B').style.boxShadow = '0 0 0 2px var(--nia-blue)';
+                document.getElementById('hitl-btn-B').style.boxShadow = '0 0 0 2px var(--ink)';
             } else {
                 [hC, hA, hB].forEach(h => { if (h) h.insertAdjacentHTML('beforeend', badge('동등', 'hitl-badge-tie', SVG_EQ)); });
                 document.getElementById('hitl-msg').textContent = '세 답변이 동등합니다. 시나리오를 더 구체화하거나 추론 규칙을 보완해 보세요.';
@@ -15185,20 +15185,20 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
             mtx.forEach(([k, label]) => {
                 if (!ev[k]) return;
                 const vc = ev[k].C ?? '-', va = ev[k].A ?? '-', vb = ev[k].B ?? '-';
-                h += `<div style="padding:.75rem;background:var(--bg-primary);border-radius:var(--r-md);border:var(--bw-thin) solid rgba(3,103,176,0.12);">
+                h += `<div style="padding:.75rem;background:var(--bg-primary);border-radius:var(--r-md);border:var(--bw-thin) solid var(--c-ink-12);">
             <div style="font-size:var(--fs-xs);font-weight:var(--fw-bold);margin-bottom:.5rem;color:var(--text2);">${label}</div>
-            <div style="display:flex;align-items:center;gap:.45rem;margin-bottom:.28rem;"><span style="font-size:var(--fs-xs);color:var(--mono-black);width:44px;">C: ${vc}/10</span><div style="flex:1;height:5px;background:rgba(60,52,99,.12);border-radius:var(--r-xs);"><div class="sbar" style="width:${vc * 10}%;background:var(--mono-black);"></div></div></div>
-            <div style="display:flex;align-items:center;gap:.45rem;margin-bottom:.28rem;"><span style="font-size:var(--fs-xs);color:var(--red);width:44px;">A: ${va}/10</span><div style="flex:1;height:5px;background:rgba(185,28,28,.12);border-radius:var(--r-xs);"><div class="sbar" style="width:${va * 10}%;background:var(--red);"></div></div></div>
-            <div style="display:flex;align-items:center;gap:.45rem;margin-bottom:.28rem;"><span style="font-size:var(--fs-xs);color:var(--coral);width:44px;">B: ${vb}/10</span><div style="flex:1;height:5px;background:rgba(3,103,176,.12);border-radius:var(--r-xs);"><div class="sbar" style="width:${vb * 10}%;background:var(--coral);"></div></div></div>
+            <div style="display:flex;align-items:center;gap:.45rem;margin-bottom:.28rem;"><span style="font-size:var(--fs-xs);color:var(--mono-black);width:44px;">C: ${vc}/10</span><div style="flex:1;height:5px;background:var(--c-ink-12);border-radius:var(--r-xs);"><div class="sbar" style="width:${vc * 10}%;background:var(--mono-black);"></div></div></div>
+            <div style="display:flex;align-items:center;gap:.45rem;margin-bottom:.28rem;"><span style="font-size:var(--fs-xs);color:var(--mono-700);width:44px;">A: ${va}/10</span><div style="flex:1;height:5px;background:var(--c-ink-12);border-radius:var(--r-xs);"><div class="sbar" style="width:${va * 10}%;background:var(--mono-700);"></div></div></div>
+            <div style="display:flex;align-items:center;gap:.45rem;margin-bottom:.28rem;"><span style="font-size:var(--fs-xs);color:var(--ink);width:44px;">B: ${vb}/10</span><div style="flex:1;height:5px;background:var(--c-ink-12);border-radius:var(--r-xs);"><div class="sbar" style="width:${vb * 10}%;background:var(--ink);"></div></div></div>
             <div style="font-size:var(--fs-xs);color:var(--text3);line-height:var(--lh-normal);">${ev[k].comment || ''}</div>
         </div>`;
 
             });
             h += '</div>';
             h += `<div style="display:flex;gap:.7rem;margin-bottom:1rem;flex-wrap:wrap;">
-        <div style="flex:1;min-width:120px;padding:1rem;background:rgba(60,52,99,.06);border:var(--bw-thin) solid rgba(60,52,99,.2);border-radius:var(--r-md);text-align:center;"><div style="font-size:var(--fs-2xl);font-weight:var(--fw-heavy);color:var(--mono-black);">${ev.overall_C ?? '-'}</div><div style="font-size:var(--fs-xs);color:var(--text2);margin-top:.2rem;">실험 C (순수 LLM)</div></div>
-        <div style="flex:1;min-width:120px;padding:1rem;background:var(--c-red-50);border:var(--bw-thin) solid rgba(185,28,28,.2);border-radius:var(--r-md);text-align:center;"><div style="font-size:var(--fs-2xl);font-weight:var(--fw-heavy);color:var(--red);">${ev.overall_A ?? '-'}</div><div style="font-size:var(--fs-xs);color:var(--text2);margin-top:.2rem;">실험 A (일반 RAG)</div></div>
-        <div style="flex:1;min-width:120px;padding:1rem;background:var(--c-ink-06);border:var(--bw-thin) solid rgba(3,103,176,.2);border-radius:var(--r-md);text-align:center;"><div style="font-size:var(--fs-2xl);font-weight:var(--fw-heavy);color:var(--coral);">${ev.overall_B ?? '-'}</div><div style="font-size:var(--fs-xs);color:var(--text2);margin-top:.2rem;">실험 B (온톨로지 주입)</div></div>
+        <div style="flex:1;min-width:120px;padding:1rem;background:var(--c-ink-06);border:var(--bw-thin) solid var(--c-ink-20);border-radius:var(--r-md);text-align:center;"><div style="font-size:var(--fs-2xl);font-weight:var(--fw-heavy);color:var(--mono-black);">${ev.overall_C ?? '-'}</div><div style="font-size:var(--fs-xs);color:var(--text2);margin-top:.2rem;">실험 C (순수 LLM)</div></div>
+        <div style="flex:1;min-width:120px;padding:1rem;background:var(--c-ink-04);border:var(--bw-thin) solid var(--c-ink-20);border-radius:var(--r-md);text-align:center;"><div style="font-size:var(--fs-2xl);font-weight:var(--fw-heavy);color:var(--mono-700);">${ev.overall_A ?? '-'}</div><div style="font-size:var(--fs-xs);color:var(--text2);margin-top:.2rem;">실험 A (일반 RAG)</div></div>
+        <div style="flex:1;min-width:120px;padding:1rem;background:var(--c-ink-06);border:var(--bw-thin) solid var(--c-ink-20);border-radius:var(--r-md);text-align:center;"><div style="font-size:var(--fs-2xl);font-weight:var(--fw-heavy);color:var(--ink);">${ev.overall_B ?? '-'}</div><div style="font-size:var(--fs-xs);color:var(--text2);margin-top:.2rem;">실험 B (온톨로지 주입)</div></div>
     </div>
     <div class="al al-s"><span class="ico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> <strong>결론:</strong> ${ev.conclusion || ''}</div>`;
             return h;
@@ -15235,8 +15235,8 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
                 const rFt = risk === 'CRITICAL' ? '#991b1b' : risk === 'HIGH' ? '#9a3412' : risk === 'MEDIUM' ? '#92400e' : '#166534';
                 const cleanCond = r ? (r.condition || '(조건)').replace(/<[^>]*>/g, '').trim() : '';
                 const cleanAction = r ? (r.action || '').replace(/<[^>]*>/g, '').trim() : '';
-                const casc = (r?.cascade_rules || []).length ? `<div style="font-size:var(--fs-small);color:var(--c-purple-700);font-weight:var(--fw-bold);margin-top:.2rem;">cascade → ${r.cascade_rules.join(' → ')}</div>` : '';
-                const tipHtml = r ? `<div class="inf-badge-tip" style="border:var(--bw-strong) solid ${rC}66;"><div style="margin-bottom:.3rem;"><span style="font-size:var(--fs-small);font-weight:var(--fw-bold);background:var(--c-red-50);color:var(--c-red-800);padding:.05rem .3rem;border-radius:var(--r-full);margin-right:.18rem;">W3C SWRL</span><span style="font-size:var(--fs-small);font-weight:var(--fw-bold);background:${rBg};color:${rC};padding:.05rem .3rem;border-radius:var(--r-full);">${risk}</span></div><div style="font-size:var(--fs-xs);font-weight:var(--fw-bold);color:var(--mono-800);margin-bottom:.18rem;">${id}${nm ? ' · ' + nm.substring(0, 30) : ''}</div><div style="font-size:var(--fs-small);font-weight:var(--fw-bold);color:${rC};margin-bottom:.04rem;">IF</div><div style="font-size:var(--fs-small);color:var(--mono-700);margin-bottom:.12rem;line-height:var(--lh-snug);">${cleanCond.substring(0, 120)}</div><div style="font-size:var(--fs-small);font-weight:var(--fw-bold);color:var(--ink);margin-bottom:.04rem;">THEN</div><div style="font-size:var(--fs-small);color:var(--mono-700);line-height:var(--lh-snug);">${cleanAction.substring(0, 80)}</div>${casc}</div>` : '';
+                const casc = (r?.cascade_rules || []).length ? `<div style="font-size:var(--fs-small);color:var(--mono-700);font-weight:var(--fw-bold);margin-top:.2rem;">cascade → ${r.cascade_rules.join(' → ')}</div>` : '';
+                const tipHtml = r ? `<div class="inf-badge-tip" style="border:var(--bw-strong) solid ${rC}66;"><div style="margin-bottom:.3rem;"><span style="font-size:var(--fs-small);font-weight:var(--fw-bold);background:var(--c-ink-04);color:var(--ink);padding:.05rem .3rem;border-radius:var(--r-full);margin-right:.18rem;">W3C SWRL</span><span style="font-size:var(--fs-small);font-weight:var(--fw-bold);background:${rBg};color:${rC};padding:.05rem .3rem;border-radius:var(--r-full);">${risk}</span></div><div style="font-size:var(--fs-xs);font-weight:var(--fw-bold);color:var(--mono-800);margin-bottom:.18rem;">${id}${nm ? ' · ' + nm.substring(0, 30) : ''}</div><div style="font-size:var(--fs-small);font-weight:var(--fw-bold);color:${rC};margin-bottom:.04rem;">IF</div><div style="font-size:var(--fs-small);color:var(--mono-700);margin-bottom:.12rem;line-height:var(--lh-snug);">${cleanCond.substring(0, 120)}</div><div style="font-size:var(--fs-small);font-weight:var(--fw-bold);color:var(--ink);margin-bottom:.04rem;">THEN</div><div style="font-size:var(--fs-small);color:var(--mono-700);line-height:var(--lh-snug);">${cleanAction.substring(0, 80)}</div>${casc}</div>` : '';
                 return `<span class="inf-badge" style="display:inline-flex;align-items:center;gap:.22rem;font-size:var(--fs-xs);font-weight:var(--fw-bold);background:${rBg};color:${rFt};border:var(--bw-thin) solid ${rC}55;border-radius:var(--r-sm);padding:.06rem .4rem;margin:0 .12rem;cursor:help;white-space:nowrap;vertical-align:middle;">${tipHtml}<code style="font-size:var(--fs-small);font-weight:var(--fw-heavy);color:${rFt};">${id}</code>${nm ? `<span style="font-weight:var(--fw-medium);font-size:var(--fs-small);color:${rFt};border-left:var(--bw-thin) solid ${rC}55;padding-left:.22rem;max-width:120px;overflow:hidden;text-overflow:ellipsis;">${nm.substring(0, 22)}</span>` : ''}</span>`;
             });
             // 줄바꿈
@@ -16253,21 +16253,21 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
                     <svg viewBox="0 0 24 24" style="width:30px;height:30px;stroke:var(--mono-white);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                 </div>
                 <div style="text-align:center;display:flex;flex-direction:column;gap:1.1rem;align-items:center;">
-                    <div style="font-size:var(--fs-xs);font-weight:var(--fw-heavy);letter-spacing:.08em;color:var(--coral);text-transform:uppercase;margin-bottom:.2rem;">Contact</div>
+                    <div style="font-size:var(--fs-xs);font-weight:var(--fw-heavy);letter-spacing:.08em;color:var(--ink);text-transform:uppercase;margin-bottom:.2rem;">Contact</div>
 
                     <!-- NIA -->
                     <div style="border:var(--bw-thin) solid var(--border-a);border-radius:var(--r-md);padding:.7rem 1.2rem;background:var(--c-ink-04);width:100%;">
                         <div style="font-size:var(--fs-xs);font-weight:var(--fw-bold);color:var(--ink);margin-bottom:.3rem;" id="app-intro-org"></div>
-                        <a href="https://www.nia.or.kr" target="_blank" style="font-size:var(--fs-xs);color:var(--coral);font-weight:var(--fw-medium);text-decoration:none;border-bottom:var(--bw-thin) solid var(--border-a);padding-bottom:.05rem;">www.nia.or.kr</a>
+                        <a href="https://www.nia.or.kr" target="_blank" style="font-size:var(--fs-xs);color:var(--ink);font-weight:var(--fw-medium);text-decoration:none;border-bottom:var(--bw-thin) solid var(--border-a);padding-bottom:.05rem;">www.nia.or.kr</a>
                     </div>
 
                     <!-- 주식회사 워플로지 -->
                     <div style="border:var(--bw-thin) solid var(--border-ink);border-radius:var(--r-md);padding:.7rem 1.2rem;background:var(--c-ink-04);width:100%;">
                         <div style="font-size:var(--fs-xs);font-weight:var(--fw-bold);color:var(--ink);margin-bottom:.35rem;">주식회사 워플로지</div>
                         <div style="display:flex;flex-direction:column;gap:.22rem;">
-                            <a href="https://worflogy.com" target="_blank" style="font-size:var(--fs-xs);color:var(--coral);font-weight:var(--fw-medium);text-decoration:none;border-bottom:var(--bw-thin) solid var(--border-a);padding-bottom:.05rem;">worflogy.com</a>
-                            <a href="https://contents.contextonai.com" target="_blank" style="font-size:var(--fs-xs);color:var(--coral);font-weight:var(--fw-medium);text-decoration:none;border-bottom:var(--bw-thin) solid var(--border-a);padding-bottom:.05rem;">contents.contextonai.com</a>
-                            <a href="mailto:worflogy@gmail.com" style="font-size:var(--fs-xs);color:var(--coral);font-weight:var(--fw-medium);text-decoration:none;border-bottom:var(--bw-thin) solid var(--border-a);padding-bottom:.05rem;">worflogy@gmail.com</a>
+                            <a href="https://worflogy.com" target="_blank" style="font-size:var(--fs-xs);color:var(--ink);font-weight:var(--fw-medium);text-decoration:none;border-bottom:var(--bw-thin) solid var(--border-a);padding-bottom:.05rem;">worflogy.com</a>
+                            <a href="https://contents.contextonai.com" target="_blank" style="font-size:var(--fs-xs);color:var(--ink);font-weight:var(--fw-medium);text-decoration:none;border-bottom:var(--bw-thin) solid var(--border-a);padding-bottom:.05rem;">contents.contextonai.com</a>
+                            <a href="mailto:worflogy@gmail.com" style="font-size:var(--fs-xs);color:var(--ink);font-weight:var(--fw-medium);text-decoration:none;border-bottom:var(--bw-thin) solid var(--border-a);padding-bottom:.05rem;">worflogy@gmail.com</a>
                         </div>
                     </div>
                 </div>
@@ -16279,7 +16279,7 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
             const d = HELP_DATA[n];
             if (!d) return;
             body.innerHTML = `
-        <div style="background:linear-gradient(135deg,var(--c-ink-08),var(--c-ink-06));border-radius:var(--r-md);padding:1.1rem 1.2rem;border-left:var(--bw-strong) solid var(--coral);">
+        <div style="background:linear-gradient(135deg,var(--c-ink-08),var(--c-ink-06));border-radius:var(--r-md);padding:1.1rem 1.2rem;border-left:var(--bw-strong) solid var(--ink);">
             <div style="font-size:var(--fs-xs);font-weight:var(--fw-heavy);letter-spacing:.07em;color:var(--ink);text-transform:uppercase;margin-bottom:.55rem;">이 단계를 반드시 거쳐야 하는 이유</div>
             <div style="font-size:var(--fs-sm);color:var(--ink);font-weight:var(--fw-semibold);line-height:var(--lh-airy);">${d.why}</div>
         </div>
@@ -16288,7 +16288,7 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
             <div style="font-size:var(--fs-xs);color:var(--col-except-ft);line-height:var(--lh-loose);">${d.skip}</div>
         </div>
         <div>
-            <div style="font-size:var(--fs-xs);font-weight:var(--fw-heavy);letter-spacing:.07em;color:var(--green);text-transform:uppercase;margin-bottom:.55rem;">이 단계로 얻는 것</div>
+            <div style="font-size:var(--fs-xs);font-weight:var(--fw-heavy);letter-spacing:.07em;color:var(--mono-700);text-transform:uppercase;margin-bottom:.55rem;">이 단계로 얻는 것</div>
             <div style="display:flex;flex-direction:column;gap:.55rem;">${d.gain.map(g => `<div style="display:flex;align-items:flex-start;gap:.55rem;font-size:var(--fs-xs);color:var(--text2);line-height:var(--lh-comfortable);"><span style="width:6px;height:6px;border-radius:var(--r-full);background:var(--ink);flex-shrink:0;margin-top:.48rem;"></span>${g}</div>`).join('')}</div>
         </div>
         <div style="background:var(--c-ink-04);border-radius:var(--r-md);padding:1rem 1.1rem;">
@@ -16391,11 +16391,11 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
                             _persistState();
                             renderDocList();
                             renderScenHint();
-                            statusEl.innerHTML = `<span style="color:var(--green);font-weight:var(--fw-semibold);">${loaded}개 로드 완료</span>`;
+                            statusEl.innerHTML = `<span style="color:var(--mono-700);font-weight:var(--fw-semibold);">${loaded}개 로드 완료</span>`;
                             _logUse('load_csv', { count: loaded, filenames: Array.from(files).map(f => f.name) });
                         }
                     } catch (err) {
-                        statusEl.innerHTML = `<span style="color:var(--c-red-500);">오류: ${err.message}</span>`;
+                        statusEl.innerHTML = `<span style="color:var(--mono-500);">오류: ${err.message}</span>`;
                     }
                 };
                 reader.readAsText(file, 'UTF-8');
@@ -16410,7 +16410,7 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
             const path = document.getElementById('ds-api-path').value.trim();
             const statusEl = document.getElementById('ds-api-status');
             const btn = document.getElementById('ds-api-btn');
-            if (!url) { statusEl.innerHTML = '<span style="color:var(--c-red-500);">URL을 입력하세요.</span>'; return; }
+            if (!url) { statusEl.innerHTML = '<span style="color:var(--mono-500);">URL을 입력하세요.</span>'; return; }
             btn.disabled = true;
             statusEl.innerHTML = '<span style="color:var(--text3);">요청 중...</span>';
             try {
@@ -16441,10 +16441,10 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
                     S.docs.push({ name: 'API응답', text: `[API응답]\n${text.slice(0, 8000)}` });
                 }
                 _persistState(); renderDocList(); renderScenHint();
-                statusEl.innerHTML = '<span style="color:var(--green);font-weight:var(--fw-semibold);">로드 완료</span>';
+                statusEl.innerHTML = '<span style="color:var(--mono-700);font-weight:var(--fw-semibold);">로드 완료</span>';
                 _logUse('load_api', { url });
             } catch (err) {
-                statusEl.innerHTML = `<span style="color:var(--c-red-500);">오류: ${err.message} (CORS 차단 가능성 확인)</span>`;
+                statusEl.innerHTML = `<span style="color:var(--mono-500);">오류: ${err.message} (CORS 차단 가능성 확인)</span>`;
             } finally { btn.disabled = false; }
         }
 
@@ -16454,7 +16454,7 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
             const q = document.getElementById('ds-portal-q').value.trim();
             const resultEl = document.getElementById('ds-portal-results');
             const btn = document.getElementById('ds-portal-btn');
-            if (!key || !q) { resultEl.innerHTML = '<p style="font-size:var(--fs-xs);color:var(--c-red-500);">API 키와 검색어를 모두 입력하세요.</p>'; return; }
+            if (!key || !q) { resultEl.innerHTML = '<p style="font-size:var(--fs-xs);color:var(--mono-500);">API 키와 검색어를 모두 입력하세요.</p>'; return; }
             btn.disabled = true;
             resultEl.innerHTML = '<p style="font-size:var(--fs-xs);color:var(--text3);">검색 중...</p>';
             try {
@@ -16475,7 +16475,7 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
             </div>`).join('');
                 _logUse('search_portal', { q });
             } catch (err) {
-                resultEl.innerHTML = `<div style="font-size:var(--fs-xs);color:var(--c-red-500);">오류: ${err.message}</div>
+                resultEl.innerHTML = `<div style="font-size:var(--fs-xs);color:var(--mono-500);">오류: ${err.message}</div>
         <p style="font-size:var(--fs-xs);color:var(--text3);margin-top:.4rem;">CORS 차단 시: <a href="https://www.data.go.kr" target="_blank">data.go.kr</a>에서 직접 데이터 미리보기 후 복사 → 파일 업로드하세요.</p>`;
             } finally { btn.disabled = false; }
         }
