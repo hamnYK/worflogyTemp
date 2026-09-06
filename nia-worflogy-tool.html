@@ -14212,7 +14212,7 @@ ${domainCtx}${upperCtx}
                 nodes.push({
                     id: 'C' + i, label: rid + '\n' + lbl(r.inference_name), shape: 'diamond', _tip: ruleTip || undefined,
                     color: { background: RC[risk], border: RC[risk], highlight: { background: RC[risk], border: RC[risk] } },
-                    font: { color: '#FFFFFF', size: VIS_DS.font.base, bold: true }
+                    font: { color: RCT[risk], size: VIS_DS.font.base, bold: true }
                 });
                 nodes.push({
                     id: 'A' + i, label: 'THEN:\n' + lbl(r.action), shape: 'ellipse',
