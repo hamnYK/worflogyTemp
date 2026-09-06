@@ -13438,7 +13438,7 @@ ${domainCtx}${upperCtx}
 
 반드시 순수 JSON만 출력하세요.${_prevInfFeedback}`;
             try {
-                let raw = (await callLLM(sys2, usr2, '추론 규칙(W3C)', { expectJson: true })).trim();
+                let raw = (await callLLM(sys2, usr2, '추론 규칙(W3C)', { expectJson: true, timeoutMs: 240000 })).trim();
                 raw = _cleanJson(raw);
                 let inf = JSON.parse(raw);
                 // ── 자기교정 루프: W3C 오류 + 치명적 경고(dangling variable / cascade 전부 빈) 시 1회 재시도 ──
@@ -13463,7 +13463,7 @@ ${domainCtx}${upperCtx}
                     stEl.innerHTML = `<div class="al al-w">&#9888; ${_isWarnOnly ? 'SWRL 구조 문제' : 'W3C 오류'} 발견 → 자기교정 재추출 중...</div>`;
                     const errFeedback = [..._w3cInfResult.errors, ..._criticalWarns].join('\n');
                     const retryUsr = usr2 + `\n\n[자기교정 피드백 - 반드시 수정 후 재출력]\n${errFeedback}`;
-                    let raw2 = (await callLLM(sys2, retryUsr, '추론규칙 재추출', { expectJson: true })).trim();
+                    let raw2 = (await callLLM(sys2, retryUsr, '추론규칙 재추출', { expectJson: true, timeoutMs: 240000 })).trim();
                     raw2 = _cleanJson(raw2);
                     inf = JSON.parse(raw2);
                     _w3cInfResult = validateW3C(inf, 'inference');
