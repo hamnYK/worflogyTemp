@@ -10360,7 +10360,7 @@ for r in results:
             return raw.trim();
         }
         async function callLLM(sys, usr, label = '', opts = {}) {
-            const { expectJson = false } = opts;
+            const { expectJson = false, timeoutMs = 45000 } = opts;
             const p = S.provider;
             const k = S.keys[p];
             if (p !== 'local' && !k) throw new Error('API 키 미설정 - Step 1에서 저장 및 연결 테스트를 완료하세요');
@@ -10382,9 +10382,9 @@ for r in results:
                         await _sleep(wait);
                     }
                 }
-                // ── API Timeout (45초) ──
+                // ── API Timeout (opts.timeoutMs, 기본 45초 / 스키마 생성 240초) ──
                 const _aborter = new AbortController();
-                const _abortTimer = setTimeout(() => _aborter.abort(), 45000);
+                const _abortTimer = setTimeout(() => _aborter.abort(), timeoutMs);
                 try {
                     if (p === 'gemini') {
                         const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${S.models.gemini}:generateContent?key=${k}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: _aborter.signal, body: JSON.stringify({ system_instruction: { parts: [{ text: sys }] }, contents: [{ role: 'user', parts: [{ text: usr }] }], generationConfig: { temperature: 0.2, maxOutputTokens: 16384 } }) });
@@ -10438,8 +10438,8 @@ for r in results:
                 } catch (e) {
                     clearTimeout(_abortTimer);
                     if (e.name === 'AbortError') {
-                        err = 'API 응답 시간 초과 (45초)';
-                        toast('API 응답 시간 초과 (45초) - 재시도 중...', 'warn');
+                        err = `API 응답 시간 초과 (${timeoutMs / 1000}초)`;
+                        toast(`API 응답 시간 초과 (${timeoutMs / 1000}초) - 재시도 중...`, 'warn');
                         if (attempt < maxRetry - 1) { retryReason = 'timeout'; continue; }
                         throw new Error(err);
                     }
@@ -12867,7 +12867,7 @@ for r in results:
             const sys = getPrompt('P_EXTRACT_SCENARIO');
             const usr = `다음 행정 시나리오를 분석하여 온톨로지 스키마를 JSON-LD로 추출하세요.\n\n## 조례/법령 문서\n${docCtx || '(없음)'}\n\n## 민원/업무 시나리오\n${scen.text}${entityHint}${queryHint}${_crossDomainHint}${_prevFeedback}\n\n## 상세 수준\n${levelHint}\n\n순수 JSON만 출력 (마크다운 없이):\n{"@context":{"base":"http://admin.go.kr/ontology#","owl":"http://www.w3.org/2002/07/owl#","rdf":"http://www.w3.org/1999/02/22-rdf-syntax-ns#","rdfs":"http://www.w3.org/2000/01/rdf-schema#","xsd":"http://www.w3.org/2001/XMLSchema#","sh":"http://www.w3.org/ns/shacl#"},"ontology_metadata":{"base_iri":"http://admin.go.kr/ontology#","version":"1.0","w3c_standards":["RDF 1.1","OWL 2 DL","SWRL","SHACL","JSON-LD"]},"domain":"${scen.title}","classes":[{"id":"ont:시민","type":"owl:Class","label":"시민","subClassOf":null,"comment":"민원 신청 주체"},{"id":"ont:민원신청서","type":"owl:Class","label":"민원신청서","subClassOf":null,"comment":"신청 서류 개체"}],"properties":[{"name":"제출한다","type":"owl:ObjectProperty","domain":"시민","range":"민원신청서","inverseOf":null,"comment":"제출 행위 관계"},{"name":"처리기한","type":"owl:DatatypeProperty","domain":"행정기관","range":"xsd:integer","inverseOf":null,"comment":"처리 기한 일수"}],"triples":[{"subject":"시민","predicate":"제출한다","object":"민원신청서","source":"조례 제3조"},{"subject":"행정기관","predicate":"처리한다","object":"행정처분","source":"관련 법령 제5조"}],"exception_rules":[{"rule_id":"RULE_01","w3c_standard":"SWRL","rule_name":"","if":{"subject":"","conditions":[""]},"then":"","exception":"","responsible_dept":"","legal_basis":""}],"constraints":[{"shape_id":"시민Shape","w3c_standard":"SHACL","target_class":"시민","path":"제출한다","min_count":1,"severity":"sh:Violation","exception_message":"시민은 최소 1건의 민원신청서를 제출해야 합니다."}]}\n\n**모든 subject, predicate, object는 반드시 한국어로 작성하세요.**`;
             try {
-                let raw = (await callLLM(sys, usr, '스키마 추출(W3C)', { expectJson: true, contextChars: docCtx.length, question: scen.title })).trim();
+                let raw = (await callLLM(sys, usr, '스키마 추출(W3C)', { expectJson: true, contextChars: docCtx.length, question: scen.title, timeoutMs: 240000 })).trim();
                 raw = _cleanJson(raw);
                 const schema = JSON.parse(raw);
                 // 방법 3: W3C 표준 준수 검증
@@ -13075,7 +13075,7 @@ for r in results:
             const usr = `다음은 서로 다른 법 체계를 가진 행정 민원 도메인들입니다. 법령이 달라도 여러 도메인에 실제로 공통 등장하는 행정 패턴(행위자 유형·서류 유형·처리 기관 등)을 의미론적으로 분석하여 상위 온톨로지를 추출하세요. 각 upper_class는 반드시 입력 데이터에 실제로 존재하는 2개 이상 도메인의 클래스와 rdfs:subClassOf 관계로 연결되어야 합니다. (힌트: 여러 도메인에 동일 역할의 행위자·서류·기관이 실제 존재하면 공통 추상 클래스 후보로 검토하세요. 입력 데이터에 없는 패턴은 만들지 마세요.)\n\n## 도메인 스키마들\n${schemasCtx}\n\n[domain 필드 주의] subclass_mappings의 domain은 반드시 [도메인: XXX]의 XXX 그대로 사용. 허용 도메인명: ${domainNames}\n\n출력 형식은 시스템 프롬프트의 JSON 명세를 따르세요.${_prevUpperFeedback}`;
 
             try {
-                let raw = (await callLLM(sys, usr, '상위 온톨로지(W3C)', { expectJson: true })).trim();
+                let raw = (await callLLM(sys, usr, '상위 온톨로지(W3C)', { expectJson: true, timeoutMs: 120000 })).trim();
                 raw = _cleanJson(raw);
                 let result = JSON.parse(raw);
                 // Gap2 피스: w3cResult 저장 후 stEl 분기 완료 직후에 append
@@ -13085,7 +13085,7 @@ for r in results:
                     stEl.innerHTML = '<div class="al al-w"><span class="sp"></span> W3C 검증 오류 감지 → 자동 교정 재시도 중...</div>';
                     const _errCtx = '\n\n[자기 교정 - 이전 응답 W3C 오류]\n다음 오류를 반드시 수정하세요:\n' + _w3cUpperResult.errors.map(e => '- ' + e).join('\n');
                     try {
-                        let raw2 = (await callLLM(sys, usr + _errCtx, '상위 온톨로지(W3C)-교정', { expectJson: true })).trim();
+                        let raw2 = (await callLLM(sys, usr + _errCtx, '상위 온톨로지(W3C)-교정', { expectJson: true, timeoutMs: 120000 })).trim();
                         raw2 = _cleanJson(raw2);
                         const result2 = JSON.parse(raw2);
                         const _w3c2 = validateW3C(result2, 'upper');
