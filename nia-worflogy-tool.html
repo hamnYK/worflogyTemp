@@ -10431,6 +10431,10 @@ for r in results:
                                 err = 'json_parse_failed';
                                 continue;
                             }
+                            // 마지막 시도에서도 파싱 실패 → 깨진 JSON 반환 방지
+                            clearTimeout(_abortTimer);
+                            err = `JSON 파싱 최종 실패: ${_je.message}`;
+                            throw new Error(err);
                         }
                     }
                     clearTimeout(_abortTimer);
@@ -13376,12 +13380,22 @@ for r in results:
             invalidateFrom(7);
             stEl.innerHTML = '<div class="al al-i"><span class="sp"></span> 복합 조건 추론 규칙을 도출하고 있습니다...</div>';
             setSt('추론 규칙 도출 중...', 'loading');
-            // 모든 도메인 스키마 컨텍스트
-            const domainCtx = domainSchemas.map(([id, sc]) => {
+            // 도메인 컨텍스트 — 핵심 필드만 추출 후 최대 12,000자 제한
+            const _DOMAIN_CTX_MAX = 12000;
+            const _compressSchema = (sc) => ({
+                domain: sc.domain,
+                classes: (sc.classes || []).map(c => ({ id: c.id, label: c.label, subClassOf: c.subClassOf || null })),
+                properties: (sc.properties || []).map(p => ({ name: p.name, type: p.type, domain: p.domain, range: p.range })),
+                triples: (sc.triples || []).slice(0, 20),
+                exception_rules: (sc.exception_rules || []).map(r => ({ rule_id: r.rule_id, rule_name: r.rule_name, if: r.if, then: r.then }))
+            });
+            const _domainParts = domainSchemas.map(([id, sc]) => {
                 const scen = S.scenarios.find(s => s.id === Number(id));
-                return `[도메인: ${sc.domain || scen?.title || id}]\n${JSON.stringify(sc, null, 2)}`;
-            }).join('\n\n---\n\n');
-            // 상위 온톨로지 컨텍스트 (있으면)  -  groups 구조 기반으로 명확하게 정리
+                return `[도메인: ${sc.domain || scen?.title || id}]\n${JSON.stringify(_compressSchema(sc))}`;
+            });
+            const _perDomainMax = Math.floor(_DOMAIN_CTX_MAX / Math.max(1, _domainParts.length));
+            const domainCtx = _domainParts.map(p => p.length > _perDomainMax ? p.slice(0, _perDomainMax) + '…(압축)' : p).join('\n\n---\n\n');
+            // 상위 온톨로지 컨텍스트 — 그룹 요약 + 상세 최대 1,500자
             const upperCtx = S.upperOntology ? (() => {
                 const groups = normalizeUpperGroups(S.upperOntology);
                 if (groups.length === 0) return '';
@@ -13390,7 +13404,9 @@ for r in results:
                     const mappingCount = (g.subclass_mappings || []).length;
                     return `  그룹${i + 1}(${g.group_name || '이름없음'}): 상위클래스=[${classNames}], 매핑${mappingCount}건`;
                 }).join('\n');
-                return `\n\n## 상위 온톨로지 (${groups.length}개 그룹)\n${groupSummary}\n상세:\n${JSON.stringify(S.upperOntology, null, 2)}`;
+                const detail = JSON.stringify(S.upperOntology);
+                const detailCapped = detail.length > 1500 ? detail.slice(0, 1500) + '…(압축)' : detail;
+                return `\n\n## 상위 온톨로지 (${groups.length}개 그룹)\n${groupSummary}\n상세:\n${detailCapped}`;
             })() : '';
             const domainCount = domainSchemas.length;
             const sys2 = getPrompt('P_INF');
