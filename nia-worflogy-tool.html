@@ -13752,20 +13752,21 @@ ${domainCtx}${upperCtx}
         // ── W3C Onto-Semantic Color Palette (다이어그램 공통 컬러 시스템) ──
         // vis.js는 HTML5 Canvas 렌더링 엔진 — CSS 변수 미지원. hex 직접값 필수 (아키텍처 제약)
         const VIS_COL = {
-            owlRoot:  { bg: '#1e3a8a', bd: '#1d4ed8', ft: '#FFFFFF' },  // L2 루트 owl:Class (딛블루)
-            owlClass: { bg: '#dbeafe', bd: '#2563eb', ft: '#1e3a8a' },  // L2 서브 owl:Class (라이트블루)
-            upperClass: { bg: '#f5f3ff', bd: '#7c3aed', ft: '#5b21b6' }, // L2 상위 클래스 (퍼플)
-            objProp: { bg: '#f0fdf4', bd: '#16a34a', ft: '#15803d' },    // L3 객체 속성 (그린)
-            dataProp: { bg: '#e0f2fe', bd: '#0891b2', ft: '#0e7490' },   // L3 데이터 속성 (틸)
-            triple: { bg: '#eef2ff', bd: '#4f46e5', ft: '#3730a3' },     // L4 트리플 (인디고)
-            abox: { bg: '#e0f7fa', bd: '#0369a1', ft: '#075985' },       // L4 인스턴스 (사이안블루)
-            derived: { bg: '#dcfce7', bd: '#16a34a', ft: '#15803d' },    // L4 파생 속성
-            swrlCrit: { bg: '#fff1f1', bd: '#b91c1c', ft: '#991b1b' },   // L5 CRITICAL (레드)
-            swrlHigh: { bg: '#fff7ed', bd: '#c05621', ft: '#9a3412' },   // L5 HIGH (오렌지)
-            swrlMed: { bg: '#fffbeb', bd: '#b45309', ft: '#92400e' },    // L5 MEDIUM (앤버)
-            swrlLow: { bg: '#f0fdf4', bd: '#15803d', ft: '#166534' },    // L5 LOW (그린)
-            exception: { bg: '#fff7ed', bd: '#c05621', ft: '#9a3412' },  // L5 예외규칙 (오렌지)
-            shacl: { bg: '#fffbeb', bd: '#92400e', ft: '#92400e' },      // L5 SHACL Shape (골드브라운)
+            owlRoot:  { bg: '#1e3a8a', bd: '#1d4ed8', ft: '#FFFFFF' },               // L2 루트 owl:Class (딥블루)
+            owlClass: { bg: '#dbeafe', bd: '#2563eb', ft: '#1e3a8a', hi: '#bfdbfe' }, // L2 서브 owl:Class (라이트블루) | hi: hover 배경
+            upperClass: { bg: '#f5f3ff', bd: '#7c3aed', ft: '#5b21b6', hi: '#ede9fe' }, // L2 상위 클래스 (퍼플) | hi: hover 배경
+            objProp: { bg: '#f0fdf4', bd: '#16a34a', ft: '#15803d' },                // L3 객체 속성 (그린)
+            dataProp: { bg: '#e0f2fe', bd: '#0891b2', ft: '#0e7490' },               // L3 데이터 속성 (틸)
+            triple: { bg: '#eef2ff', bd: '#4f46e5', ft: '#3730a3' },                 // L4 트리플 (인디고)
+            abox: { bg: '#e0f7fa', bd: '#0369a1', ft: '#075985' },                   // L4 인스턴스 (사이안블루)
+            derived: { bg: '#dcfce7', bd: '#16a34a', ft: '#15803d' },                // L4 파생 속성
+            swrlCrit: { bg: '#fff1f1', bd: '#b91c1c', ft: '#991b1b', bm: '#fca5a5' }, // L5 CRITICAL (레드) | bm: THEN 노드 border
+            swrlHigh: { bg: '#fff7ed', bd: '#c05621', ft: '#9a3412', bm: '#fdba74' }, // L5 HIGH (오렌지) | bm: THEN 노드 border
+            swrlMed:  { bg: '#fffbeb', bd: '#b45309', ft: '#92400e', bm: '#fde68a' }, // L5 MEDIUM (앰버) | bm: THEN 노드 border
+            swrlLow:  { bg: '#f0fdf4', bd: '#15803d', ft: '#166534', bm: '#86efac' }, // L5 LOW (그린) | bm: THEN 노드 border
+            exception: { bg: '#fff7ed', bd: '#c05621', ft: '#9a3412' },              // L5 예외규칙 (오렌지)
+            shacl: { bg: '#fffbeb', bd: '#92400e', ft: '#92400e', hi: '#fef3c7' },   // L5 SHACL Shape (골드브라운) | hi: hover 배경
+            disjoint: { bd: '#dc2626' },                                              // owl:disjointWith 관계 엣지 (레드)
         };
         function swrlCol(r) {
             if (r === 'CRITICAL') return VIS_COL.swrlCrit;
@@ -13966,7 +13967,7 @@ ${domainCtx}${upperCtx}
                 var nd = nodesDS.get(p.node);
                 var tipBg = nd && nd.color && nd.color.background ? nd.color.background : null;
                 var tipBd = nd && nd.color && nd.color.border ? nd.color.border : null;
-                var tipFt = nd && nd.font && nd.font.color ? nd.font.color : null;
+                var tipFt = nd && nd._tipFt ? nd._tipFt : (nd && nd.font && nd.font.color ? nd.font.color : null);
                 window._visShowTip(nd && nd._tip ? nd._tip : null, tipBg, tipBd, tipFt);
                 _nodeOn(nd);
                 // 연결된 에지도 함께 강조
@@ -14064,7 +14065,7 @@ ${domainCtx}${upperCtx}
                     shape: isRoot ? 'ellipse' : 'box',
                     color: isRoot
                         ? { background: VIS_COL.owlRoot.bg, border: VIS_COL.owlRoot.bd, highlight: { background: VIS_COL.owlRoot.bd, border: VIS_COL.owlRoot.bd } }
-                        : { background: VIS_COL.owlClass.bg, border: VIS_COL.owlClass.bd, highlight: { background: '#bfdbfe', border: VIS_COL.owlClass.bd } },
+                        : { background: VIS_COL.owlClass.bg, border: VIS_COL.owlClass.bd, highlight: { background: VIS_COL.owlClass.hi, border: VIS_COL.owlClass.bd } },
                     font: { color: isRoot ? VIS_COL.owlRoot.ft : VIS_COL.owlClass.ft }
                 });
             });
@@ -14104,7 +14105,7 @@ ${domainCtx}${upperCtx}
                 const tip = [c.shape_id || '', c.path ? 'sh:path: ' + c.path : '', c.severity || '', c.exception_message || ''].filter(Boolean).join('\n');
                 nodes.push({
                     id: shId, label: shLabel, shape: 'database', _tip: tip || undefined,
-                    color: { background: VIS_COL.shacl.bg, border: VIS_COL.shacl.bd, highlight: { background: '#fef3c7', border: '#92400e' } },
+                    color: { background: VIS_COL.shacl.bg, border: VIS_COL.shacl.bd, highlight: { background: VIS_COL.shacl.hi, border: VIS_COL.shacl.bd } },
                     font: { color: VIS_COL.shacl.ft, size: VIS_DS.font.small }
                 });
                 const tid = gn(c.target_class);
@@ -14128,7 +14129,7 @@ ${domainCtx}${upperCtx}
                         const tip = [c.description || '', c.id ? 'IRI: ' + c.id : '', c.domain_instances?.length ? '예: ' + c.domain_instances.slice(0, 3).join(', ') : ''].filter(Boolean).join('\n');
                         nodes.push({
                             id, label: lbl(c.name), shape: 'ellipse', _tip: tip || undefined,
-                            color: { background: VIS_COL.upperClass.bg, border: VIS_COL.upperClass.bd, highlight: { background: '#ede9fe', border: '#5b21b6' } },
+                            color: { background: VIS_COL.upperClass.bg, border: VIS_COL.upperClass.bd, highlight: { background: VIS_COL.upperClass.hi, border: VIS_COL.upperClass.ft } },
                             font: { color: VIS_COL.upperClass.ft, size: VIS_DS.font.large, bold: true }, size: 28, borderWidth: 2.5
                         });
                     }
@@ -14140,7 +14141,7 @@ ${domainCtx}${upperCtx}
                 if (!nodes.find(n => n.id === dc)) {
                     nodes.push({
                         id: dc, label: lbl(m.domain_class), shape: 'box', _tip: m.domain ? '도메인: ' + m.domain : undefined,
-                        color: { background: VIS_COL.owlClass.bg, border: VIS_COL.owlClass.bd, highlight: { background: '#bfdbfe', border: VIS_COL.owlClass.bd } },
+                        color: { background: VIS_COL.owlClass.bg, border: VIS_COL.owlClass.bd, highlight: { background: VIS_COL.owlClass.hi, border: VIS_COL.owlClass.bd } },
                         font: { color: VIS_COL.owlClass.ft }
                     });
                 }
@@ -14150,7 +14151,7 @@ ${domainCtx}${upperCtx}
             groups.forEach(g => (g.upper_classes || []).forEach(c => {
                 if (!c.equivalent_to) return;
                 const na = getNode(c.name), nb = getNode(c.equivalent_to);
-                if (na && nb) edges.push({ from: na, to: nb, label: 'owl:equiv', arrows: { from: { enabled: true, scaleFactor: 0.6 }, to: { enabled: true, scaleFactor: 0.6 } }, dashes: [3, 3], color: { color: '#7c3aed' } });
+                if (na && nb) edges.push({ from: na, to: nb, label: 'owl:equiv', arrows: { from: { enabled: true, scaleFactor: 0.6 }, to: { enabled: true, scaleFactor: 0.6 } }, dashes: [3, 3], color: { color: VIS_COL.upperClass.bd } });
             }));
             groups.forEach(g => (g.upper_classes || []).forEach(c => {
                 if (!Array.isArray(c.disjoint_with)) return;
@@ -14159,7 +14160,7 @@ ${domainCtx}${upperCtx}
                     const na = getNode(c.name), nb = getNode(clean(ref));
                     if (!na || !nb) return;
                     const k = [na, nb].sort().join('<>dj<>');
-                    if (!seen.has(k)) { seen.add(k); edges.push({ from: na, to: nb, label: 'disjoint', arrows: { from: { enabled: false }, to: { enabled: false } }, dashes: [4, 2], color: { color: '#dc2626' }, width: 1.5 }); }
+                    if (!seen.has(k)) { seen.add(k); edges.push({ from: na, to: nb, label: 'disjoint', arrows: { from: { enabled: false }, to: { enabled: false } }, dashes: [4, 2], color: { color: VIS_COL.disjoint.bd }, width: 1.5 }); }
                 });
             }));
             return { nodes, edges };
@@ -14171,7 +14172,7 @@ ${domainCtx}${upperCtx}
             const RISKS = ['CRITICAL', 'HIGH', 'MEDIUM', 'LOW'];
             const RC = { CRITICAL: VIS_COL.swrlCrit.bd, HIGH: VIS_COL.swrlHigh.bd, MEDIUM: VIS_COL.swrlMed.bd, LOW: VIS_COL.swrlLow.bd };
             const RCL = { CRITICAL: VIS_COL.swrlCrit.bg, HIGH: VIS_COL.swrlHigh.bg, MEDIUM: VIS_COL.swrlMed.bg, LOW: VIS_COL.swrlLow.bg };
-            const RCB = { CRITICAL: '#fca5a5', HIGH: '#fdba74', MEDIUM: '#E4E4E7', LOW: '#86efac' };
+            const RCB = { CRITICAL: VIS_COL.swrlCrit.bm, HIGH: VIS_COL.swrlHigh.bm, MEDIUM: VIS_COL.swrlMed.bm, LOW: VIS_COL.swrlLow.bm };
             const RCT = { CRITICAL: VIS_COL.swrlCrit.ft, HIGH: VIS_COL.swrlHigh.ft, MEDIUM: VIS_COL.swrlMed.ft, LOW: VIS_COL.swrlLow.ft };
             const upperNames = (typeof normalizeUpperGroups === 'function' && S?.upperOntology)
                 ? normalizeUpperGroups(S.upperOntology).flatMap(g => (g.upper_classes || []).map(c => String(c.name || '').trim())).filter(Boolean)
@@ -14195,7 +14196,7 @@ ${domainCtx}${upperCtx}
                     const ifFt = usesUpper ? VIS_COL.upperClass.ft : VIS_COL.owlClass.ft;
                     nodes.push({
                         id: 'IF' + i, label: 'IF: ' + lbl(cond), shape: 'hexagon', _tip: cdTip || undefined,
-                        color: { background: ifBg, border: ifBd, highlight: { background: usesUpper ? '#ede9fe' : '#F4F4F5', border: ifBd } },
+                        color: { background: ifBg, border: ifBd, highlight: { background: usesUpper ? VIS_COL.upperClass.hi : VIS_COL.owlClass.hi, border: ifBd } },
                         borderWidth: usesUpper ? 3 : 2, font: { color: ifFt, size: VIS_DS.font.small }
                     });
                     edges.push({ from: 'IF' + i, to: 'C' + i, label: '조건', dashes: [4, 3], color: { color: ifBd } });
@@ -14212,7 +14213,8 @@ ${domainCtx}${upperCtx}
                 nodes.push({
                     id: 'C' + i, label: rid + '\n' + lbl(r.inference_name), shape: 'diamond', _tip: ruleTip || undefined,
                     color: { background: RC[risk], border: RC[risk], highlight: { background: RC[risk], border: RC[risk] } },
-                    font: { color: RCT[risk], size: VIS_DS.font.base, bold: true }
+                    font: { color: RCT[risk], size: VIS_DS.font.base, bold: true },
+                    _tipFt: '#FFFFFF'  // 툴팁 텍스트: 짙은 배경 위 흰색 / canvas label: RCT(어두운색, 흰 캔버스 위)
                 });
                 nodes.push({
                     id: 'A' + i, label: 'THEN:\n' + lbl(r.action), shape: 'ellipse',
@@ -14222,7 +14224,7 @@ ${domainCtx}${upperCtx}
                 edges.push({ from: 'C' + i, to: 'A' + i, label: '추론', width: 2.5, color: { color: RC[risk] }, dashes: false });
                 (r.cascade_rules || []).forEach(cr => {
                     const ti = ruleIdx[cr];
-                    if (ti !== undefined) edges.push({ from: 'A' + i, to: 'C' + ti, label: 'cascade', dashes: [3, 3], color: { color: '#7c3aed' } });
+                    if (ti !== undefined) edges.push({ from: 'A' + i, to: 'C' + ti, label: 'cascade', dashes: [3, 3], color: { color: VIS_COL.upperClass.bd } });
                 });
             });
             return { nodes, edges };
