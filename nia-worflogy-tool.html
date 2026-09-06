@@ -3238,7 +3238,7 @@
             position: fixed;
             inset: 0;
             z-index: var(--z-gate);
-            background: var(--mono-950);
+            background: var(--bg-primary);
             display: none;
             flex-direction: column;
             align-items: center;
@@ -11963,7 +11963,31 @@ for r in results:
 
         };
 
-        function setScen(t) { document.getElementById('scen-inp').value = SCENS[t] || ''; document.getElementById('entity-hint-card').style.display = 'none'; }
+        function setScen(t) {
+            document.getElementById('scen-inp').value = SCENS[t] || '';
+            document.getElementById('entity-hint-card').style.display = 'none';
+            // 하드코딩 칩 → SCEN_HINT_MAP 직접 렌더링 (키워드 매칭·AI 없이)
+            _renderChipHint(t);
+        }
+
+        function _renderChipHint(scenKey) {
+            const box = document.getElementById('scen-hint-box');
+            const list = document.getElementById('scen-hint-list');
+            const empty = document.getElementById('scen-hint-empty');
+            const chipsCt = document.getElementById('scen-hint-chips');
+            const forceBtn = document.getElementById('scen-hint-force-btn');
+            if (!box || !list) return;
+            const hint = SCEN_HINT_MAP.find(h => h.scenKey === scenKey);
+            if (!hint) return;
+            box.style.display = 'block';
+            if (chipsCt) chipsCt.innerHTML = '';
+            if (forceBtn) forceBtn.style.display = 'none';
+            if (empty) empty.style.display = 'none';
+            // SCEN_HINT_MAP 항목을 _renderLLMHintResult 호환 형식으로 변환
+            _renderLLMHintResult(list, [{ label: hint.label, laws: hint.laws, docs: hint.docs, data: hint.data }]);
+            // AI 추천 배지를 "가이드"로 교체
+            list.querySelectorAll('span').forEach(el => { if (el.textContent === 'AI 추천') el.textContent = '가이드'; });
+        }
 
         function renderEntityHints(entities, queries, level) {
             const tagsDiv = document.getElementById('entity-tags');
@@ -12035,6 +12059,7 @@ for r in results:
         // ── STEP 2: 시나리오 기반 법령 키워드 & 문서 가이드 ──
         const SCEN_HINT_MAP = [
             {
+                scenKey: 'car',
                 keys: ['자동차검사', '자동차검사소', '자동차 검사', '자동차등록', '차량검사'],
 
                 label: '자동차 검사',
@@ -12045,6 +12070,7 @@ for r in results:
                 testQ: '자동차 정기검사 만료 후 14일이 초과되어 과태료 납부 고지서를 받았습니다. 재검사 신청 기한·방법, 과태료 분할 납부 가능 여부, 자동차관리법상 최대 유예 기간과 담당 기관을 알려주세요?'
             },
             {
+                scenKey: 'drv',
                 keys: ['운전면허', '운전면허갱신', '운전면허 갱신', '적성검사', '면허증갱신'],
 
                 label: '운전면허 갱신',
@@ -12055,6 +12081,7 @@ for r in results:
                 testQ: '75세 이상 고령 운전자가 면허 갱신 적성검사 기간을 6개월 초과했습니다. 취소 전 구제 절차, 인지능력 검사 면제 조건, 갱신 미이행 시 면허 효력 정지 기준과 처리 기한을 알려주세요?'
             },
             {
+                scenKey: 'road',
                 keys: ['도로파손', '포장도로', '인도파손', '도로보수', '도로시설물', '도로구간', '시설물점검'],
 
                 label: '도로·시설물 민원',
@@ -12065,6 +12092,7 @@ for r in results:
                 testQ: '특정 도로 구간에서 1년 내 노후 포장·배수 불량 민원이 8건 접수되었습니다. 반복 민원 위험구간 자동 지정 기준, 긴급 보수 발주 절차, 시비·국비 예산 요청과 처리 기한을 알려주세요?'
             },
             {
+                scenKey: 'rail',
                 keys: ['철도', 'SRT', '고속철도', 'SR운수약관', '열차지연', '철도환불', '지하철', '지하철안전', '역사안전', '스크린도어', '철도승강기'],
                 label: '철도 서비스',
                 laws: ['철도사업법 제10조', '철도사업법 시행규칙', '공공교통수단 서비스 기준에 관한 규칙'],
@@ -12074,6 +12102,7 @@ for r in results:
                 testQ: 'SRT 열차가 기상 악화로 60분 이상 지연 운행 중입니다. 자동 환불 발동 기준, 대체 교통수단(KTX·버스) 연계 예약 절차, 여객 개별 통보 방식과 처리 기한을 알려주세요?'
             },
             {
+                scenKey: 'fire',
                 keys: ['소방점검', '소방검사', '소화기점검', '비상구확인', '화재예방점검', '스프링클러점검', '소방시설'],
 
                 label: '소방 점검',
@@ -12084,6 +12113,7 @@ for r in results:
                 testQ: '야간 주거지역에 화재 신고가 동시에 2건 접수되었으나 관할 소방서 출동 차량이 부족합니다. 출동 우선순위 배정 기준, 인근 시도 소방 상호응원 요청 절차, 법적 처리 기한을 알려주세요?'
             },
             {
+                scenKey: 'police',
                 keys: ['경찰민원', '도난신고', '절도신고', '수사의뢰', '112신고', '범죄피해신고', '사건접수'],
 
                 label: '경찰·치안 민원',
@@ -12094,6 +12124,7 @@ for r in results:
                 testQ: '특정 교차로에 신호 체계 불합리·불법 주정차·도로 파손 민원이 동시에 접수되었습니다. 교통·단속·시설 담당 부서 자동 분류 기준, 협업 처리 절차, 민원인 통합 회신 기한을 알려주세요?'
             },
             {
+                scenKey: 'disaster',
                 keys: ['재난', '침수', '호우', '집중호우', '이재민', '복구'],
                 label: '재난 대응·복구',
                 laws: ['재난 및 안전관리 기본법', '재해구호법', '자연재해대책법'],
@@ -12103,6 +12134,7 @@ for r in results:
                 testQ: '집중호우로 이재민 50명이 발생했습니다. 긴급 재난지원금 신청 자격 기준, 임시 주거 지원 연계 절차, 피해 복구 예산 신청과 지자체·국가 지원 역할 분담, 처리 기한을 알려주세요?'
             },
             {
+                scenKey: 'health',
                 keys: ['건강검진', '검진', '국가건강검진', '미수검', '건강보험'],
                 label: '건강검진',
                 laws: ['국민건강보험법', '건강검진기본법', '국민건강보험법 시행령'],
@@ -12112,6 +12144,7 @@ for r in results:
                 testQ: '국가건강검진 대상자인데 3년 연속 미수검 상태입니다. 미수검에 따른 건강보험료 추가 부담 기준, 검진 결과 이상 소견 시 2차 검진 연계 절차, 담당 기관과 처리 기한을 알려주세요?'
             },
             {
+                scenKey: 'welfare',
                 keys: ['복지급여', '차상위계층', '수급자', '기초생활', '의료급여', '장기요양급여', '건강보험료경감', '보험료고지', '사회보장급여'],
 
                 label: '사회보장 급여',
@@ -12122,6 +12155,7 @@ for r in results:
                 testQ: '기초생활수급자의 근로소득이 기준 중위소득 40%를 초과하는 것이 사회보장정보시스템에서 감지되었습니다. 급여 자격 자동 재산정 기준, 수급자 사전 통보 절차, 이의신청 방법과 처리 기한을 알려주세요?'
             },
             {
+                scenKey: 'job',
                 keys: ['실업', '실업급여', '고용보험', '구직', '취업', '이직', '퇴직'],
                 label: '실업급여',
                 laws: ['고용보험법', '고용보험법 시행령', '직업안정법'],
@@ -12131,6 +12165,7 @@ for r in results:
                 testQ: '업무상 재해로 요양 중인 근로자가 요양 종료 후 복직이 불가능하여 실업급여도 신청하려 합니다. 산재보험 요양급여와 실업급여 동시 수급 가능 여부, 중복 제한 조건과 우선 지급 기준을 알려주세요?'
             },
             {
+                scenKey: 'elec',
                 keys: ['전기', '전기요금', '한전', '체납', '단전', '가산금'],
                 label: '전기요금 민원',
                 laws: ['전기사업법', '전기사업법 시행규칙', '한전 공급약관'],
@@ -12140,6 +12175,7 @@ for r in results:
                 testQ: '전기요금 3개월 체납으로 단전 예고를 받았습니다. 사회취약계층 단전 유예 기준, 체납 분할납부 신청 절차, 가산금 면제 요건과 에너지바우처 연계 신청 방법, 담당 기관을 알려주세요?'
             },
             {
+                scenKey: 'forest',
                 keys: ['산림', '산불', '나무', '임야', '산주', '조림', '산림복지'],
                 label: '산림 복지·산불',
                 laws: ['산림보호법', '산림복지 진흥에 관한 법률', '산림자원의 조성 및 관리에 관한 법률'],
@@ -12149,6 +12185,7 @@ for r in results:
                 testQ: '치유의숲 이용 예약이 개방 후 1시간 내 정원을 초과했습니다. 대기자 자동 배정 기준(접수 순서·취약계층 우선)과 취소 발생 시 자동 알림 발송 절차, 담당 부서와 처리 기한을 알려주세요?'
             },
             {
+                scenKey: 'marine',
                 keys: ['어업', '어선', '어업허가', '조업', '수산', '해양'],
                 label: '해양수산 인허가',
                 laws: ['수산업법 제41조', '수산업법 시행령', '어선법', '연안관리법'],
@@ -12158,6 +12195,7 @@ for r in results:
                 testQ: '어선이 조업 허가 해역을 벗어난 것이 VMS(선박위치발신장치)로 감지되었습니다. 위반 자동 경보 발동 기준, 해경·지방청 통보 절차, 과태료 부과와 면허 취소 판단 요건을 순서대로 알려주세요?'
             },
             {
+                scenKey: 'complaint',
                 keys: ['이의신청', '행정심판', '처분', '영업정지', '과징금', '제재'],
                 label: '행정처분 이의·심판',
                 laws: ['행정심판법', '행정소송법', '민원 처리에 관한 법률', '식품위생법 제75조'],
@@ -12167,6 +12205,7 @@ for r in results:
                 testQ: '식품위생법 위반으로 영업정지 처분을 받았으나 처분 통지서에 이의신청 기한이 기재되지 않았습니다. 행정심판 청구 기한, 집행 정지 신청 요건, 이의신청과 행정심판의 차이, 처리 기한을 알려주세요?'
             },
             {
+                scenKey: 'qualif',
                 keys: ['자격증', '기술자격', '면허갱신', '계속교육', '국가기술자격'],
                 label: '자격증·면허',
                 laws: ['국가기술자격법', '국가기술자격법 시행규칙'],
@@ -12176,6 +12215,7 @@ for r in results:
                 testQ: '관련 학과 졸업 예정자이면서 동일 직무 분야 실무 경력 1년이 있는 경우, 국가기술자격 기사 시험 응시 자격이 인정되나요? 경력·학력 복합 조건 판단 기준과 서류 제출 절차를 알려주세요?'
             }
             , {
+                scenKey: 'localgov',
                 keys: ['주민등록', '전입신고', '전출신고', '주민센터', '지방세납부', '취득세신고', '재산세납부', '등록면허세', '건축허가신청', '개발행위허가', '지자체민원'],
 
                 label: '지자체 주민 행정',
@@ -12186,6 +12226,7 @@ for r in results:
                 testQ: '전입신고와 동시에 이전 주소지 재산세 고지서가 발송되었습니다. 과세 기준 변경 소급 적용 여부, 주소 정정 절차, 이중 납부 시 환급 처리 기한과 담당 기관을 알려주세요?'
             }
             , {
+                scenKey: 'defense',
                 keys: ['병역', '전역', '병역증명서', '입영', '복무', '현역', '사회복무', '공익근무', '병적', '예비군', '국방', '군대'],
                 label: '병역·국방 민원',
                 laws: ['병역법', '병역법 시행령', '병역법 시행규칙', '군인사법'],
@@ -12195,6 +12236,7 @@ for r in results:
                 testQ: '주요 방산 장비 정비 주기가 60일 이내로 도래했는데 예산 집행이 미승인 상태입니다. 자동 정비 발주 요청 기준, 예산 미승인 시 긴급 절충 절차, 담당 부서와 처리 기한을 알려주세요?'
             }
             , {
+                scenKey: 'mining',
                 keys: ['광산', '폐광', '지반침하', '광해', '피해보상', '탄광', '채굴', '광업', '광해방지', '광물'],
                 label: '광산·폐광 피해보상',
                 laws: ['광산피해의 방지 및 복구에 관한 법률', '광산피해배상법', '광업법', '한국광해광업공단법'],
@@ -12204,6 +12246,7 @@ for r in results:
                 testQ: '폐광 지역 지표 침하계에서 연 30mm 이상 침하가 감지되어 자동 경보가 발동되었습니다. 위험 등급 판정 기준, 인근 주민 대피 명령 절차, 지자체·소방 통보와 복구 예산 요청 처리 기한을 알려주세요?'
             }
             , {
+                scenKey: 'opendata',
                 keys: ['공공데이터', '데이터개방', '데이터 개방', '오픈데이터', 'data.go.kr', '공공데이터개방신청', '공공데이터셋', '국가데이터포털'],
 
                 label: '공공데이터 개방·활용',
@@ -12214,6 +12257,7 @@ for r in results:
                 testQ: '복지 급여 중복 수급 확인을 위해 타 부처 행정 데이터를 조회하려 합니다. 국가데이터포털 행정 데이터 연계 요청 절차, 개인정보 처리 동의 요건, 결과 데이터 보관·파기 기한을 알려주세요?'
             }
             , {
+                scenKey: 'techguarantee',
                 keys: ['기술보증', '기술보증서', '벤처기업', '정책자금', '스타트업', '기술창업', '창업보증', '기보', 'KIBO', '기술평가', '기술사업화', '보증기금'],
 
                 label: '기술보증·정책금융',
@@ -12222,54 +12266,6 @@ for r in results:
                 data: [{ name: '기술보증기금 보증 현황', url: 'https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EA%B8%B0%EC%88%A0%EB%B3%B4%EC%A6%9D%EA%B8%B0%EA%B8%88', type: 'CSV', desc: '기보 보증 잔액 및 신규 현황' }, { name: '벤처기업 현황', url: 'https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EB%B2%A4%EC%B2%98%EA%B8%B0%EC%97%85%ED%98%84%ED%99%A9', type: 'CSV', desc: '전국 벤처기업 인증 현황' }],
 
                 testQ: '기술보증을 받은 기업이 매출 60% 급감으로 보증 취소 대상이 되었습니다. 최초 해당이고 경영 회생 계획서를 제출할 경우 감경 처분이 가능한가요? 이의신청 요건, 심사 절차, 처리 기한을 알려주세요?'
-            }
-            , {
-                keys: ['층간소음', '윗집', '아랫집', '발소리', '쿵쿵', '소음분쟁', '소음피해', '공동주택소음', '이웃소음', '아파트소음', '시끄러', '쾅쾅', '뛰어다니', '발걸음', '쿵'],
-                label: '공동주택 층간소음 분쟁',
-                laws: ['공동주택관리법', '소음·진동관리법', '주택법', '층간소음 이웃사이센터 운영에 관한 규정'],
-                docs: ['층간소음 피해 신고서', '이웃사이센터 조정 신청서', '소음 측정 결과서', '공동주택 관리규약'],
-                data: [{ name: '층간소음 민원 현황', url: 'https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%B8%B5%EA%B0%84%EC%86%8C%EC%9D%8C%EB%AF%BC%EC%9B%90', type: 'CSV', desc: '국토부 공동주택 층간소음 민원 통계' }, { name: '공동주택 관리 현황', url: 'https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EA%B3%B5%EB%8F%99%EC%A3%BC%ED%83%9D%EA%B4%80%EB%A6%AC', type: 'CSV', desc: '전국 공동주택 관리 현황' }],
-                testQ: '아파트 위층 거주자가 밤 11시 이후에도 반복적으로 뛰어다니는 소음을 유발하고 있습니다. 층간소음 이웃사이센터 조정 신청 절차, 소음 측정 기준, 조정 불성립 시 분쟁 해결 방법과 처리 기한을 알려주세요?'
-            }
-            , {
-                keys: ['야생동물', '유해동물', '비둘기', '멧돼지', '고라니', '너구리', '길고양이', '유기동물', '들개', '쥐', '해충', '벌집', '말벌', '유해조수', '유해야생동물', '날짐승', '조류피해', '박쥐', '마당새'],
-                label: '야생동물·유해생물 피해',
-                laws: ['야생생물 보호 및 관리에 관한 법률', '동물보호법', '생물다양성 보전 및 이용에 관한 법률', '지방자치법'],
-                docs: ['유해야생동물 피해 신고서', '포획 허가 신청서', '피해 현황 조사표', '지자체 유해동물 방제 지침'],
-                data: [{ name: '야생동물 피해 현황', url: 'https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%95%BC%EC%83%9D%EB%8F%99%EB%AC%BC%ED%94%BC%ED%95%B4', type: 'CSV', desc: '환경부 유해야생동물 포획 및 피해 통계' }, { name: '동물보호 민원 현황', url: 'https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EB%8F%99%EB%AC%BC%EB%B3%B4%ED%98%B8%EB%AF%BC%EC%9B%90', type: 'CSV', desc: '동물보호 및 유해동물 관련 민원 현황' }],
-                testQ: '우리 집 마당에 비둘기 무리가 지속적으로 서식하여 배설물과 소음 피해가 심각합니다. 유해야생동물 지정 기준, 지자체 방제 요청 절차, 직접 포획·퇴치 가능 여부와 관련 법령을 알려주세요?'
-            }
-            , {
-                keys: ['전파', '전자파', '전파방해', '전파간섭', '전파교란', '불법전파', '전파조종', '뇌파조종', '전자기', '기지국', '안테나', '전파발사', '도청전파', '신호교란', '전파차단'],
-                label: '전파·전자파 민원',
-                laws: ['전파법', '전파법 시행령', '전기통신기본법', '전기통신사업법', '방송통신위원회의 설치 및 운영에 관한 법률'],
-                docs: ['전파 혼신·방해 신고서', '전자파 측정 신청서', '방송통신위원회 민원 안내문', '무선국 허가 현황'],
-                data: [{ name: '전파 민원 현황', url: 'https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%ED%8C%8C%EB%AF%BC%EC%9B%90', type: 'CSV', desc: '방송통신위원회 전파 혼신·방해 민원 통계' }, { name: '무선국 현황', url: 'https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EB%AC%B4%EC%84%A0%EA%B5%AD%ED%98%84%ED%99%A9', type: 'CSV', desc: '전국 무선국 허가 및 운영 현황' }],
-                testQ: '인근 기지국에서 발생하는 전자파가 가정용 무선기기에 간섭을 일으키고 있습니다. 전파 혼신 신고 절차, 전자파 측정 요청 방법, 방송통신위원회 처리 기한과 피해 보상 기준을 알려주세요?'
-            }
-            , {
-                keys: ['불법주차', '불법주정차', '주차위반', '주정차', '주차민원', '주차단속', '이중주차', '소화전주차', '장애인주차', '주차방해', '도로점용', '차량이동', '견인', '주차문제'],
-                label: '불법주정차·주차 민원',
-                laws: ['도로교통법 제32조', '도로교통법 시행령', '주차장법', '도로법'],
-                docs: ['불법주정차 신고서', '주정차 위반 과태료 기준표', '견인 처리 확인서', '주차장 설치 기준'],
-                data: [{ name: '불법주정차 단속 현황', url: 'https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EB%B6%88%EB%B2%95%EC%A3%BC%EC%A0%95%EC%B0%A8%EB%8B%A8%EC%86%8D', type: 'CSV', desc: '경찰청·지자체 불법주정차 단속 건수' }, { name: '주차장 현황', url: 'https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A3%BC%EC%B0%A8%EC%9E%A5%ED%98%84%ED%99%A9', type: 'CSV', desc: '전국 주차장 위치 및 면수 현황' }],
-                testQ: '아파트 단지 내 소화전 앞에 반복 불법주차 차량이 있습니다. 과태료 부과 기준, 즉시 견인 요청 가능 여부, 신고 방법(국민신문고·안전신문고)과 처리 기한을 알려주세요?'
-            }
-            , {
-                keys: ['생활소음', '공사소음', '건설소음', '야간소음', '소음규제', '공사장소음', '기계소음', '소음기준', '공사장', '굴착', '건설공사', '철거소음'],
-                label: '생활소음·공사 소음',
-                laws: ['소음·진동관리법', '소음·진동관리법 시행규칙', '건설기계관리법', '주택건설기준 등에 관한 규정'],
-                docs: ['생활소음 민원 신고서', '소음 측정 결과서', '공사장 소음 규제 기준표', '지자체 소음 저감 조치 계획'],
-                data: [{ name: '소음·진동 민원 현황', url: 'https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%86%8C%EC%9D%8C%EC%A7%84%EB%8F%99%EB%AF%BC%EC%9B%90', type: 'CSV', desc: '환경부 소음·진동 민원 통계' }, { name: '소음 측정 지점 현황', url: 'https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%86%8C%EC%9D%8C%EC%B8%A1%EC%A0%95%EC%A7%80%EC%A0%90', type: 'CSV', desc: '전국 소음 자동 측정망 현황' }],
-                testQ: '인근 재건축 공사장에서 밤 10시 이후에도 소음이 발생합니다. 야간 공사 금지 기준, 소음 측정 요청 절차, 공사 중지 명령 요건과 처리 기한을 알려주세요?'
-            }
-            , {
-                keys: ['쓰레기', '쓰레기투기', '불법투기', '무단투기', '폐기물', '생활폐기물', '음식물쓰레기', '재활용', '분리수거', '오물', '폐기물처리', '투기', '버리다', '버려진'],
-                label: '생활폐기물·쓰레기 민원',
-                laws: ['폐기물관리법', '폐기물관리법 시행규칙', '자원의 절약과 재활용촉진에 관한 법률', '지방자치법'],
-                docs: ['폐기물 불법투기 신고서', '생활폐기물 수거 일정표', '분리배출 기준 안내문', '폐기물처리업체 목록'],
-                data: [{ name: '폐기물 발생 현황', url: 'https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%ED%8F%90%EA%B8%B0%EB%AC%BC%EB%B0%9C%EC%83%9D%ED%98%84%ED%99%A9', type: 'CSV', desc: '환경부 폐기물 종류별 발생량 통계' }, { name: '재활용 실적 현황', url: 'https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%9E%AC%ED%99%9C%EC%9A%A9%EC%8B%A4%EC%A0%81', type: 'CSV', desc: '전국 재활용 품목별 처리 실적' }],
-                testQ: '공동주택 재활용 분리수거장에 무단으로 폐기물을 투기하는 주민이 있습니다. 불법투기 신고 절차, CCTV 영상 증거 활용 방법, 과태료 부과 기준과 담당 기관을 알려주세요?'
             }
         ];
 
@@ -12411,64 +12407,7 @@ for r in results:
                 return;
             }
 
-            // ── 우선순위 2: SCEN_HINT_MAP 키워드 매칭 (캐시 없을 때만) ──
-            const targets = (idx === 'all') ? S.scenarios : [S.scenarios[idx]].filter(Boolean);
-            const matched = [];
-            const usedLabels = new Set();
-            targets.forEach(sc => {
-                const txt = (sc.title + ' ' + sc.text).toLowerCase();
-                SCEN_HINT_MAP.forEach(hint => {
-                    if (usedLabels.has(hint.label)) return;
-                    if (hint.keys.some(k => _softMatch(txt, k))) { matched.push(hint); usedLabels.add(hint.label); }
-                });
-            });
-            if (matched.length > 0) {
-                if (empty) empty.style.display = 'none';
-                list.innerHTML = matched.map(h => `
-        <div style="border-left:var(--bw-strong) solid var(--ink);padding:var(--gap-sm) var(--sp-3);background:var(--c-ink-04);border-radius:0 var(--r-sm) var(--r-sm) 0;">
-            <div class="fs-small mb-xs" style="font-family:var(--font-ui);font-weight:var(--fw-bold);color:var(--ink);letter-spacing:.03em">${h.label}</div>
-            <div class="mb-xs">
-                <span class="fs-small" style="font-weight:var(--fw-bold);color:var(--text2);letter-spacing:.04em;text-transform:uppercase">추천 법령 검색어</span>
-                <div class="stack mt-1" style="flex-wrap:wrap;gap:var(--gap-sm)">
-                    ${h.laws.map(l => `<button class="fs-small p-1" onclick="document.getElementById('law-q').value='${l}';searchLaw();" style="display:inline-flex;align-items:center;gap:var(--sp-1);background:var(--c-ink-06);border:var(--bw-thin) solid var(--border);border-radius:var(--r-lg);font-weight:var(--fw-medium);color:var(--ink);cursor:pointer;font-family:var(--font-ui);transition:all .15s" onmouseover="this.style.background='var(--ink)';this.style.color='var(--mono-white)';this.querySelector('svg').style.stroke='var(--mono-white)';" onmouseout="this.style.background='var(--c-ink-06)';this.style.color='var(--ink)';this.querySelector('svg').style.stroke='var(--ink)';" ><svg viewBox='0 0 24 24' style='width:10px;height:10px;stroke:var(--ink);fill:none;stroke-width:2.5;stroke-linecap:round;flex-shrink:0;transition:stroke .15s;'><circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg>${l}</button>`).join('')}
-                </div>
-            </div>
-            <div>
-                <span class="fs-small" style="font-weight:var(--fw-bold);color:var(--text2);letter-spacing:.04em;text-transform:uppercase">첨부 권장 문서</span>
-                <ul style="padding-left:var(--sp-4)" class="mt-1">
-                    ${h.docs.map(d => `<li class="fs-small" style="color:var(--text2);line-height:var(--lh-relaxed)">${d}</li>`).join('')}
-                </ul>
-            </div>
-            ${h.data && h.data.length ? `
-            <div class="mt-xs">
-                <span class="fs-small" style="font-weight:var(--fw-bold);color:var(--text2);letter-spacing:.04em;text-transform:uppercase">추천 공공데이터</span>
-                <div class="col-gap mt-1">
-                    ${h.data.map(d => `<a class="row-gap py-xs px-2" href="${d.url}" target="_blank" style="background:var(--c-ink-04);border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);text-decoration:none;transition:all .15s" onmouseover="this.style.background='var(--c-ink-08)'" onmouseout="this.style.background='var(--c-ink-04)'">
-                        <span class="fs-small py-tiny px-sm" style="flex-shrink:0;border-radius:var(--r-sm);font-weight:var(--fw-bold);background:var(--c-ink-08);color:var(--ink)">${d.type || 'CSV'}</span>
-                        <span style="flex:1;overflow:hidden;">
-                            <span class="fs-small" style="font-weight:var(--fw-semibold);color:var(--ink);display:block">${d.name}</span>
-                            <span class="fs-small" style="color:var(--text3)">${d.desc || ''}</span>
-                        </span>
-                        <svg viewBox="0 0 24 24" style="width:var(--icon-xs);height:var(--icon-xs);stroke:var(--text3);fill:none;stroke-width:2;stroke-linecap:round;flex-shrink:0;"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-                    </a>`).join('')}
-                </div>
-            </div>` : `
-            <div class="mt-xs">
-                <span class="fs-small" style="font-weight:var(--fw-bold);color:var(--text2);letter-spacing:.04em;text-transform:uppercase">추천 공공데이터</span>
-                <div class="mt-1">
-                    <a class="row-gap py-xs px-2" href="https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=${encodeURIComponent(h.label)}" target="_blank" style="background:var(--c-ink-04);border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);text-decoration:none;transition:all .15s" onmouseover="this.style.background='var(--c-ink-08)'" onmouseout="this.style.background='var(--c-ink-04)'">
-                        <span class="fs-small py-tiny px-sm" style="flex-shrink:0;border-radius:var(--r-sm);font-weight:var(--fw-bold);background:var(--c-ink-08);color:var(--ink)">검색</span>
-                        <span style="flex:1;overflow:hidden;"><span class="fs-small" style="font-weight:var(--fw-semibold);color:var(--ink);display:block">data.go.kr에서 「${h.label}」 데이터 검색</span><span class="fs-small" style="color:var(--text3)">공공데이터포털에서 관련 데이터셋 직접 검색</span></span>
-                        <svg viewBox="0 0 24 24" style="width:var(--icon-xs);height:var(--icon-xs);stroke:var(--text3);fill:none;stroke-width:2;stroke-linecap:round;flex-shrink:0;"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-                    </a>
-                </div>
-            </div>`}
-        </div>
-    `).join('');
-                return;
-            }
-
-            // ── 우선순위 3: AI 호출 ──
+            // ── 우선순위 2: AI 호출 (수동 입력 시나리오 — 키워드 매칭 없음) ──
             if (empty) empty.style.display = 'none';
             list.innerHTML = '<div class="fs-sm row-gap py-sm" style="color:var(--text3)"><span class="sp"></span> AI가 관련 법령과 문서를 분석 중...</div>';
             try {
@@ -13707,10 +13646,10 @@ ${domainCtx}${upperCtx}
                 const badges = ruleIds.map(rid => `<span class="fs-small py-micro px-sm" style="font-weight:var(--fw-bold);background:rgba(22,163,74,.15);color:var(--mono-700);border:var(--bw-thin) solid rgba(22,163,74,.3);border-radius:var(--r-full);white-space:nowrap">${rid}</span>`).join(' ');
                 const rowBg = ruleIds.length ? 'var(--c-ink-04)' : 'transparent';
                 return `<tr style="border-bottom:var(--bw-thin) solid var(--border);background:${rowBg};">
-            <td  class="p-1"><input class="fs-sm py-tiny px-1" spellcheck="false" value="${(inst.s || '').replace(/"/g, '&quot;')}" oninput="S.infInstances[${i}].s=this.value" style="width:100%;border:none;border-bottom:var(--bw-thin) solid var(--border2);background:transparent;outline:none" placeholder="예: 홍길동"/></td>
-            <td  class="p-1"><input class="fs-sm py-tiny px-1" spellcheck="false" value="${(inst.t || '').replace(/"/g, '&quot;')}" oninput="S.infInstances[${i}].t=this.value" style="width:100%;border:none;border-bottom:var(--bw-thin) solid rgba(3,103,176,.35);background:rgba(3,103,176,.03);outline:none;color:var(--ink)" placeholder="예: 시민"/></td>
-            <td  class="p-1"><input class="fs-sm py-tiny px-1" spellcheck="false" value="${(inst.p || '').replace(/"/g, '&quot;')}" oninput="S.infInstances[${i}].p=this.value" style="width:100%;border:none;border-bottom:var(--bw-thin) solid var(--border2);background:transparent;outline:none" placeholder="예: 유형"/></td>
-            <td  class="p-1"><input class="fs-sm py-tiny px-1" spellcheck="false" value="${(inst.o || '').replace(/"/g, '&quot;')}" oninput="S.infInstances[${i}].o=this.value" style="width:100%;border:none;border-bottom:var(--bw-thin) solid var(--border2);background:transparent;outline:none" placeholder="예: 이재민"/></td>
+            <td  class="p-1"><input class="fs-sm py-tiny px-1" spellcheck="false" value="${String(inst.s ?? '').replace(/"/g, '&quot;')}" oninput="S.infInstances[${i}].s=this.value" style="width:100%;border:none;border-bottom:var(--bw-thin) solid var(--border2);background:transparent;outline:none" placeholder="예: 홍길동"/></td>
+            <td  class="p-1"><input class="fs-sm py-tiny px-1" spellcheck="false" value="${String(inst.t ?? '').replace(/"/g, '&quot;')}" oninput="S.infInstances[${i}].t=this.value" style="width:100%;border:none;border-bottom:var(--bw-thin) solid rgba(3,103,176,.35);background:rgba(3,103,176,.03);outline:none;color:var(--ink)" placeholder="예: 시민"/></td>
+            <td  class="p-1"><input class="fs-sm py-tiny px-1" spellcheck="false" value="${String(inst.p ?? '').replace(/"/g, '&quot;')}" oninput="S.infInstances[${i}].p=this.value" style="width:100%;border:none;border-bottom:var(--bw-thin) solid var(--border2);background:transparent;outline:none" placeholder="예: 유형"/></td>
+            <td  class="p-1"><input class="fs-sm py-tiny px-1" spellcheck="false" value="${String(inst.o ?? '').replace(/"/g, '&quot;')}" oninput="S.infInstances[${i}].o=this.value" style="width:100%;border:none;border-bottom:var(--bw-thin) solid var(--border2);background:transparent;outline:none" placeholder="예: 이재민"/></td>
             ${hasResult ? `<td style="min-width:80px" class="p-1">${badges || '<span class="fs-small" style="color:var(--text3)">-</span>'}</td>` : ''}
             <td  class="p-1"><button class="fs-sm" onclick="S.infInstances.splice(${i},1);renderABoxTable()" style="border:none;background:none;color:var(--text3);cursor:pointer;line-height:var(--lh-none)"><svg viewBox="0 0 24 24" style="width:var(--icon-sm);height:var(--icon-sm);stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></td>
         </tr>`;
