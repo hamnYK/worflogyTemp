@@ -13705,20 +13705,27 @@ ${domainCtx}${upperCtx}
                 _mx = e.clientX; _my = e.clientY;
                 _pos();
             });
-            window._visShowTip = function (txt) {
+            window._visShowTip = function (txt, bg, bd, ft) {
                 if (_el) _el.remove();
                 if (!txt) return;
                 _el = document.createElement('div');
+                var hasBg = bg ? true : false;
+                var useBg = hasBg ? bg : 'var(--mono-800)';
+                var useFt = (hasBg && ft) ? ft : 'var(--mono-100)';
+                var useBd = (hasBg && bd) ? bd : 'rgba(255,255,255,.08)';
                 _el.style.cssText = [
                     'position:fixed', 'z-index:10000',
-                    'background:var(--mono-800)', 'color:var(--mono-100)',
-                    'padding:8px 12px', 'border-radius:var(--r-md)',
+                    'background:' + useBg,
+                    'color:' + useFt,
+                    'padding:7px 12px 7px 14px',
+                    'border-radius:var(--r-md)',
                     'font-size:var(--fs-xs)', 'line-height:1.6',
                     'max-width:260px', 'white-space:pre-wrap',
                     'word-break:break-word',
                     'box-shadow:0 4px 16px var(--c-ink-28)',
                     'font-family:var(--font-body)',
-                    'border:var(--bw-thin) solid rgba(255,255,255,.08)',
+                    'border:1px solid ' + useBd,
+                    'border-left:3px solid ' + useBd,
                     'pointer-events:none'
                 ].join(';');
                 _el.textContent = txt;
@@ -13765,6 +13772,30 @@ ${domainCtx}${upperCtx}
             if (r === 'HIGH') return VIS_COL.swrlHigh;
             if (r === 'MEDIUM') return VIS_COL.swrlMed;
             return VIS_COL.swrlLow;
+        }
+        // 에지 색상 → 툴팁 팔레트 역방향 조회 (VIS_COL.xxx.bd → { bg, ft })
+        function _visTipStyle(edgeColor) {
+            var P = [
+                [VIS_COL.objProp.bd,    VIS_COL.objProp],
+                [VIS_COL.owlClass.bd,   VIS_COL.owlClass],
+                [VIS_COL.owlRoot.bd,    VIS_COL.owlRoot],
+                [VIS_COL.upperClass.bd, VIS_COL.upperClass],
+                [VIS_COL.dataProp.bd,   VIS_COL.dataProp],
+                [VIS_COL.triple.bd,     VIS_COL.triple],
+                [VIS_COL.abox.bd,       VIS_COL.abox],
+                [VIS_COL.shacl.bd,      VIS_COL.shacl],
+                [VIS_COL.swrlCrit.bd,   VIS_COL.swrlCrit],
+                [VIS_COL.swrlHigh.bd,   VIS_COL.swrlHigh],
+                [VIS_COL.swrlMed.bd,    VIS_COL.swrlMed],
+                [VIS_COL.swrlLow.bd,    VIS_COL.swrlLow],
+                [VIS_COL.exception.bd,  VIS_COL.exception],
+                ['#7c3aed', { bg: '#f5f3ff', ft: '#5b21b6' }],
+                ['#dc2626', { bg: '#fff1f1', ft: '#991b1b' }],
+            ];
+            for (var i = 0; i < P.length; i++) {
+                if (P[i][0] === edgeColor) return P[i][1];
+            }
+            return null;
         }
 
         // ── KG_STYLE: 툴팁·카드·범례 통합 디자인 토큰 ──
@@ -13848,20 +13879,23 @@ ${domainCtx}${upperCtx}
                     stabilization: { enabled: true, iterations: 200, fit: true }
                 },
                 edges: {
-                    smooth: { type: 'cubicBezier', forceDirection: 'none', roundness: 0.45 },
+                    smooth: { enabled: true, type: 'dynamic' },
                     arrows: { to: { enabled: true, scaleFactor: 0.75 } },
                     font: { size: VIS_DS.font.edge, align: 'middle', background: 'rgba(255, 255, 255, 0.85)', strokeWidth: 0 },
                     color: { inherit: false },
-                    width: 1.5
+                    width: 1.5,
+                    hoverWidth: 0,        // vis.js 자체 hover 두께 배증 차단 (우리가 직접 제어)
+                    selectionWidth: 0     // vis.js 자체 select 두께 배증 차단
                 },
                 nodes: {
                     font: { size: VIS_DS.font.base, face: VIS_DS.face, multi: false },
                     borderWidth: 2,
+                    borderWidthSelected: 2,  // drag 중 내부 selected 상태에서도 borderWidth 배증 방지 (hover 분기에는 미적용)
                     shadow: { enabled: true, size: 4, x: 1, y: 1, color: 'rgba(0, 0, 0, 0.08)' },
                     margin: 8
                 },
                 // tooltip 비활성화: 커스텀 popup 사용
-                interaction: { hover: true, tooltipDelay: 99999, navigationButtons: false, keyboard: false, zoomView: true },
+                interaction: { hover: true, selectable: false, tooltipDelay: 99999, navigationButtons: false, keyboard: false, zoomView: true },
                 layout: opts?.layout || { randomSeed: 42 }
             };
             const merged = Object.assign({}, defaults, opts || {});
@@ -13894,43 +13928,78 @@ ${domainCtx}${upperCtx}
                     }});
                 }
             });
-            // hover 테두리 두께 + 글씨 크기 강조
-            var _hvOrig = new Map();
-            network.on('hoverNode', function (p) {
+            // 노드/에지 두께 강조 헬퍼 (hover 전용)
+            var _thick  = new Map();  // nodeId → { bw, font }
+            var _thickE = new Map();  // edgeId → origWidth
+            function _nodeOn(nd) {
+                if (!nd || _thick.has(nd.id)) return;
+                var bw = nd.borderWidth != null ? nd.borderWidth : 2;
+                var origFont = nd.font ? Object.assign({}, nd.font) : null;
+                var fs = origFont && origFont.size != null ? origFont.size : VIS_DS.font.base;
+                _thick.set(nd.id, { bw: bw, font: origFont });
+                nodesDS.update({ id: nd.id, borderWidth: bw + 2, font: Object.assign({}, origFont || {}, { size: fs + 2 }) });
+            }
+            function _nodeOff(id) {
+                var orig = _thick.get(id);
+                if (!orig) return;
+                var upd = { id: id, borderWidth: orig.bw };
+                // orig.font === null: DataSet에 font 미설정 노드 → 글로벌 기본 size로 명시 복원
+                // 복원 안 하면 DataSet에 증가된 size가 남아 다음 hover 시 잘못된 orig 저장 (누적 버그)
+                upd.font = orig.font !== null ? orig.font : { size: VIS_DS.font.base };
+                nodesDS.update(upd);
+                _thick.delete(id);
+            }
+            function _edgeOn(ed) {
+                if (!ed || _thickE.has(ed.id)) return;
+                var origW = ed.width != null ? ed.width : 1.5;
+                _thickE.set(ed.id, origW);
+                edgesDS.update({ id: ed.id, width: origW + 2 });
+            }
+            function _edgeOff(id) {
+                var origW = _thickE.get(id);
+                if (origW === undefined) return;
+                edgesDS.update({ id: id, width: origW });
+                _thickE.delete(id);
+            }
+            // hover 이벤트
+            network.on('hoverNode', function(p) {
                 var nd = nodesDS.get(p.node);
-                window._visShowTip(nd && nd._tip ? nd._tip : null);
-                var bw = (nd && nd.borderWidth != null) ? nd.borderWidth : 2;
-                var origFont = (nd && nd.font) ? Object.assign({}, nd.font) : null;
-                var fs = (origFont && origFont.size != null) ? origFont.size : VIS_DS.font.base;
-                _hvOrig.set(p.node, { bw: bw, font: origFont });
-                var hFont = Object.assign({}, origFont || {}, { size: fs + 2 });
-                nodesDS.update({ id: p.node, borderWidth: bw + 2, font: hFont });
+                var tipBg = nd && nd.color && nd.color.background ? nd.color.background : null;
+                var tipBd = nd && nd.color && nd.color.border ? nd.color.border : null;
+                var tipFt = nd && nd.font && nd.font.color ? nd.font.color : null;
+                window._visShowTip(nd && nd._tip ? nd._tip : null, tipBg, tipBd, tipFt);
+                _nodeOn(nd);
+                // 연결된 에지도 함께 강조
+                network.getConnectedEdges(p.node).forEach(function(eid) { _edgeOn(edgesDS.get(eid)); });
             });
-            network.on('blurNode', function (p) {
-                window._visHideTip();
-                var orig = _hvOrig.get(p.node);
-                if (orig !== undefined) {
-                    var upd = { id: p.node, borderWidth: orig.bw };
-                    if (orig.font !== null) upd.font = orig.font;
-                    nodesDS.update(upd);
-                    _hvOrig.delete(p.node);
-                }
-            });
-            var _hvEdgeOrig = new Map();
-            network.on('hoverEdge', function (p) {
+            network.on('hoverEdge', function(p) {
                 var ed = edgesDS.get(p.edge);
-                window._visShowTip(ed && ed._tip ? ed._tip : null);
-                var origW = (ed && ed.width != null) ? ed.width : 1.5;
-                _hvEdgeOrig.set(p.edge, origW);
-                edgesDS.update({ id: p.edge, width: origW + 2 });
+                var ec = ed && ed.color && ed.color.color ? ed.color.color : null;
+                var ets = ec ? _visTipStyle(ec) : null;
+                window._visShowTip(ed && ed._tip ? ed._tip : null, ets ? ets.bg : null, ec, ets ? ets.ft : null);
+                _edgeOn(ed);
             });
-            network.on('blurEdge', function (p) {
+            network.on('blurEdge', function(p) {
                 window._visHideTip();
-                var origW = _hvEdgeOrig.get(p.edge);
-                if (origW !== undefined) {
-                    edgesDS.update({ id: p.edge, width: origW });
-                    _hvEdgeOrig.delete(p.edge);
-                }
+                _edgeOff(p.edge);
+            });
+            // dragStart가 blurNode보다 먼저 발생 → 드래그 중 blurNode에 의한 조기 정리 방지
+            var _isDragging = false;
+            network.on('dragStart', function() { _isDragging = true; });
+            network.on('dragEnd', function(p) {
+                _isDragging = false;
+                network.unselectAll();  // drag 후 남는 internal selected 상태 강제 초기화
+                if (!p.nodeIds || p.nodeIds.length === 0) return;
+                p.nodeIds.forEach(function(nid) {
+                    _nodeOff(nid);
+                    network.getConnectedEdges(nid).forEach(function(eid) { _edgeOff(eid); });
+                });
+            });
+            network.on('blurNode', function(p) {
+                window._visHideTip();
+                if (_isDragging) return;  // 드래그 중 blurNode 무시 — dragEnd에서 처리
+                _nodeOff(p.node);
+                network.getConnectedEdges(p.node).forEach(function(eid) { _edgeOff(eid); });
             });
             if (opts && opts.legend) _renderVisLegend(el, opts.legend);
         }
