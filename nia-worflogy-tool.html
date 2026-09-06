@@ -1319,6 +1319,14 @@
             body {
                 overflow-x: clip !important;
             }
+
+            /* 테이블 모바일 스크롤 */
+            table {
+                display: block;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                max-width: 100%;
+            }
         }
 
         /* ── RESPONSIVE : Mobile ≤ 480px ── */
@@ -4706,10 +4714,10 @@
             <!-- 신청 탭 -->
             <div id="lg-pane-request" class="lg-pane active">
                 <div class="lg-sub">기관명·담당자·이메일을 입력하면<br>검토 후 라이선스 키가 이메일로 발송됩니다.</div>
-                <input spellcheck="false" id="lg-org-inp" class="lg-inp" type="text" placeholder="기관명" maxlength="50">
-                <input spellcheck="false" id="lg-name-inp" class="lg-inp" type="text" placeholder="담당자명" maxlength="30">
+                <input spellcheck="false" id="lg-org-inp" class="lg-inp" type="text" placeholder="기관명" maxlength="50" aria-label="기관명">
+                <input spellcheck="false" id="lg-name-inp" class="lg-inp" type="text" placeholder="담당자명" maxlength="30" aria-label="담당자명">
                 <input spellcheck="false" id="lg-email-inp" class="lg-inp" type="email" placeholder="이메일"
-                    maxlength="100">
+                    maxlength="100" aria-label="이메일">
                 <div id="lg-req-msg" class="lg-msg"></div>
                 <button class="btn btn-p" id="lg-request-btn" data-action="requestLicense"
                     style="width:100%;justify-content:center;">라이선스 신청</button>
@@ -4718,7 +4726,7 @@
             <div id="lg-pane-verify" class="lg-pane">
                 <div class="lg-sub">이메일로 받은 라이선스 키를 입력하세요.</div>
                 <input spellcheck="false" id="lg-key-inp" class="lg-inp" type="text" placeholder="NIA-2026-XXXXXX"
-                    maxlength="32">
+                    maxlength="32" aria-label="NIA-2026-XXXXXX">
                 <div id="lg-msg" class="lg-msg"></div>
                 <button class="btn btn-p" id="lg-verify-btn" data-action="validateLicense"
                     style="width:100%;justify-content:center;">인증하기</button>
@@ -5174,8 +5182,8 @@
                     </div>
                     <div id="g-cfg">
                         <div class="fg"><label class="lbl">Google AI Studio API 키</label><input spellcheck="false"
-                                type="password" class="inp" id="g-key" placeholder="AQ..."></div>
-                        <div class="fg"><label class="lbl">모델</label><select class="inp" id="g-mdl">
+                                type="password" class="inp" id="g-key" placeholder="AQ..." aria-label="AQ..."></div>
+                        <div class="fg"><label class="lbl">모델</label><select class="inp" id="g-mdl" aria-label="g mdl">
                                 <option value="gemini-3.6-flash">gemini-3.6-flash (최신 · GA)</option>
                                 <option value="gemini-3.5-flash">gemini-3.5-flash (균형 · 비용 효율)</option>
                                 <option value="gemini-3.5-flash-lite">gemini-3.5-flash-lite (고속 · 저비용)</option>
@@ -5196,8 +5204,8 @@
                     </div>
                     <div id="o-cfg" style="display:none">
                         <div class="fg"><label class="lbl">OpenAI API 키</label><input spellcheck="false" type="password"
-                                class="inp" id="o-key" placeholder="sk-proj-..."></div>
-                        <div class="fg"><label class="lbl">모델</label><select class="inp" id="o-mdl">
+                                class="inp" id="o-key" placeholder="sk-proj-..." aria-label="sk-proj-..."></div>
+                        <div class="fg"><label class="lbl">모델</label><select class="inp" id="o-mdl" aria-label="o mdl">
                                 <option value="gpt-4.1-mini">gpt-4.1-mini (경제적)</option>
                                 <option value="gpt-4.1">gpt-4.1 (고성능 · 긴 컨텍스트)</option>
                                 <option value="o4-mini">o4-mini (추론 특화 · 복잡한 로직)</option>
@@ -5219,9 +5227,9 @@
                     <div id="l-cfg" style="display:none">
                         <div class="fg"><label class="lbl">엔드포인트 URL (Ollama / vLLM / LM Studio)</label><input
                                 spellcheck="false" type="text" class="inp" id="l-url"
-                                placeholder="http://localhost:11434" value="http://localhost:11434"></div>
+                                placeholder="http://localhost:11434" value="http://localhost:11434" aria-label="http://localhost:11434"></div>
                         <div class="fg"><label class="lbl">모델명</label><input spellcheck="false" type="text" class="inp"
-                                id="l-mdl" placeholder="llama3, exaone3.5, gemma3 ..." value="llama3"></div>
+                                id="l-mdl" placeholder="llama3, exaone3.5, gemma3 ..." value="llama3" aria-label="llama3, exaone3.5, gemma3 ..."></div>
                         <div class="al al-w"><span class="ico"><svg viewBox="0 0 24 24">
                                     <path
                                         d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
@@ -5255,7 +5263,7 @@
                             <polyline points="9 22 9 12 15 12 15 22" />
                         </svg></span> 법령정보 오픈 API 설정</div>
                 <div class="fg"><label class="lbl">법제처 오픈API OC 키 (OC)</label><input spellcheck="false" type="password"
-                        class="inp" id="law-oc" placeholder="open.law.go.kr에서 발급받은 OC 키값"></div>
+                        class="inp" id="law-oc" placeholder="open.law.go.kr에서 발급받은 OC 키값" aria-label="open.law.go.kr에서 발급받은 OC 키값"></div>
                 <div class="al al-i"><span class="ico"><svg viewBox="0 0 24 24">
                             <circle cx="12" cy="12" r="10" />
                             <line x1="12" y1="8" x2="12" y2="12" />
@@ -5307,7 +5315,7 @@
                         <div id="fol-files"></div>
                     </div>
                     <input spellcheck="false" type="file" id="file-inp" accept=".txt,.md,.pdf,.docx" multiple
-                        style="display:none" onchange="loadFiles(this)">
+                        style="display:none" onchange="loadFiles(this)" aria-label="file inp">
                     <button class="btn btn-s mb-sm" style="width:100%;justify-content:center"
                         onclick="document.getElementById('file-inp').click()"><span class="ico"><svg
                                 viewBox="0 0 24 24">
@@ -5494,8 +5502,8 @@
                             style="font-weight:var(--fw-regular);color:var(--text3)">고급
                             ·
                             선택사항</span></div>
-                    <div class="ds-tabs" role="tablist">
-                        <button class="ds-tab ds-sel" onclick="selDsTab('csv',this)" role="tab">
+                    <div class="ds-tabs" role="tablist" aria-label="데이터 소스 선택">
+                        <button class="ds-tab ds-sel" onclick="selDsTab('csv',this)" role="tab" aria-selected="true" aria-controls="dsp-csv">
                             <svg viewBox="0 0 24 24">
                                 <rect x="3" y="3" width="18" height="18" rx="2" />
                                 <line x1="3" y1="9" x2="21" y2="9" />
@@ -5503,14 +5511,14 @@
                                 <line x1="9" y1="3" x2="9" y2="21" />
                             </svg>CSV / Excel
                         </button>
-                        <button class="ds-tab" onclick="selDsTab('api',this)" role="tab">
+                        <button class="ds-tab" onclick="selDsTab('api',this)" role="tab" aria-selected="false" aria-controls="dsp-api">
                             <svg viewBox="0 0 24 24">
                                 <path d="M18 20V10" />
                                 <path d="M12 20V4" />
                                 <path d="M6 20v-6" />
                             </svg>REST API
                         </button>
-                        <button class="ds-tab" onclick="selDsTab('portal',this)" role="tab">
+                        <button class="ds-tab" onclick="selDsTab('portal',this)" role="tab" aria-selected="false" aria-controls="dsp-portal">
                             <svg viewBox="0 0 24 24">
                                 <circle cx="12" cy="12" r="10" />
                                 <line x1="2" y1="12" x2="22" y2="12" />
@@ -5518,7 +5526,7 @@
                                     d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
                             </svg>공공데이터포털
                         </button>
-                        <button class="ds-tab" onclick="selDsTab('db',this)" role="tab">
+                        <button class="ds-tab" onclick="selDsTab('db',this)" role="tab" aria-selected="false" aria-controls="dsp-db">
                             <svg viewBox="0 0 24 24">
                                 <ellipse cx="12" cy="5" rx="9" ry="3" />
                                 <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
@@ -5530,7 +5538,7 @@
                     <!-- CSV / Excel 탭 -->
                     <div class="ds-pane ds-act" id="dsp-csv">
                         <input spellcheck="false" type="file" id="csv-inp" accept=".csv,.tsv,.json,.xml,.xlsx,.xls"
-                            multiple style="display:none" onchange="loadCsvFiles(this)">
+                            multiple style="display:none" onchange="loadCsvFiles(this)" aria-label="csv inp">
                         <button class="btn btn-s mb-sm" style="width:100%;justify-content:center"
                             onclick="document.getElementById('csv-inp').click()">
                             <span class="ico"><svg viewBox="0 0 24 24"
@@ -5551,15 +5559,15 @@
                     <div class="ds-pane" id="dsp-api">
                         <div class="fg"><label class="lbl">API 엔드포인트 URL</label><input spellcheck="false" type="text"
                                 class="inp" id="ds-api-url"
-                                placeholder="https://api.example.go.kr/v1/data?serviceKey=..."></div>
+                                placeholder="https://api.example.go.kr/v1/data?serviceKey=..." aria-label="https://api.example.go.kr/v1/data?serviceKey=..."></div>
                         <div class="fg"><label class="lbl">Authorization 헤더 <span
                                     style="font-weight:var(--fw-regular);color:var(--text3);">(선택)</span></label><input
                                 spellcheck="false" type="text" class="inp" id="ds-api-auth"
-                                placeholder="Bearer YOUR_TOKEN 또는 Basic base64..."></div>
+                                placeholder="Bearer YOUR_TOKEN 또는 Basic base64..." aria-label="Bearer YOUR_TOKEN 또는 Basic base64..."></div>
                         <div class="fg"><label class="lbl">응답 데이터 경로 <span
                                     style="font-weight:var(--fw-regular);color:var(--text3);">(선택, 점
                                     표기)</span></label><input spellcheck="false" type="text" class="inp" id="ds-api-path"
-                                placeholder="예: response.body.items  (비워두면 전체 응답)"></div>
+                                placeholder="예: response.body.items  (비워두면 전체 응답)" aria-label="예: response.body.items  (비워두면 전체 응답)"></div>
                         <div class="stack" style="gap:var(--gap-md)">
                             <button class="btn btn-p btn-sm" data-action="fetchApiData" id="ds-api-btn">
                                 <span class="ico"><svg viewBox="0 0 24 24"
@@ -5582,11 +5590,11 @@
                         <div class="fg"><label class="lbl">공공데이터포털 API 키 <span
                                     style="font-weight:var(--fw-regular);color:var(--text3);">(data.go.kr
                                     발급)</span></label><input spellcheck="false" type="password" class="inp"
-                                id="ds-portal-key" placeholder="발급받은 인증키(Encoding 또는 Decoding)"></div>
+                                id="ds-portal-key" placeholder="발급받은 인증키(Encoding 또는 Decoding)" aria-label="발급받은 인증키(Encoding 또는 Decoding)"></div>
                         <div class="fg stack" style="gap:var(--gap-md)">
                             <input spellcheck="false" type="text" class="inp" id="ds-portal-q"
                                 placeholder="데이터셋 검색어 (예: 행정안전부 민원처리)" style="flex:1"
-                                onkeydown="if(event.key==='Enter')searchPortal()">
+                                onkeydown="if(event.key==='Enter')searchPortal()" aria-label="데이터셋 검색어 (예: 행정안전부 민원처리)">
                             <button class="btn btn-p btn-sm" data-action="searchPortal" id="ds-portal-btn">검색</button>
                         </div>
                         <div id="ds-portal-results" style="max-height:var(--w-max-sm);overflow-y:auto" class="mt-xs"></div>
@@ -5656,12 +5664,12 @@
                     <div class="fg stack" style="gap:var(--gap-md)">
                         <input spellcheck="false" type="text" class="inp" id="law-q"
                             placeholder="법령명 입력 (예: 도로교통법, 주정차 조례)" style="flex:1"
-                            onkeydown="if(event.key==='Enter')searchLaw()">
+                            onkeydown="if(event.key==='Enter')searchLaw()" aria-label="법령명 입력 (예: 도로교통법, 주정차 조례)">
                         <button class="btn btn-p btn-sm" data-action="searchLaw" id="law-search-btn">검색</button>
                     </div>
                     <div class="fg">
                         <label class="lbl">범위</label>
-                        <select class="inp mb-2" id="law-target">
+                        <select class="inp mb-2" id="law-target" aria-label="law target">
                             <option value="law">법령 (법률/대통령령/부령)</option>
                             <option value="ordin">자치법규 (조례/규칙)</option>
                             <option value="admrul">행정규칙</option>
@@ -5694,7 +5702,7 @@
                                     시나리오 선택</div>
                                 <button class="fs-small row-gap-xs p-1" id="scen-hint-force-btn" data-action="forceAIScenHint"
                                     style="font-weight:var(--fw-semibold);border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);background:var(--bg-card);color:var(--text2);cursor:pointer;transition:all .15s"
-                                    title="하드코딩된 키워드 매칭을 무시하고 AI에게 직접 법령을 추천받습니다">
+                                    title="하드코딩된 키워드 매칭을 무시하고 AI에게 직접 법령을 추천받습니다" aria-label="하드코딩된 키워드 매칭을 무시하고 AI에게 직접 법령을 추천받습니다">
                                     <svg viewBox="0 0 24 24"
                                         style="width:var(--icon-2xs);height:var(--icon-2xs);stroke:currentColor;fill:none;stroke-width:2.5;">
                                         <polyline points="23 4 23 10 17 10" />
@@ -6052,7 +6060,7 @@
 
                 <div class="fg"><label class="lbl">민원/업무 처리 시나리오</label><textarea spellcheck="false" class="inp"
                         id="scen-inp" style="min-height:var(--h-min-lg);"
-                        placeholder="예) 자동차 정기검사 만료 후 14일이 지났습니다. 지금 검사를 받을 수 있는지, 과태료는 얼마인지 문의합니다."></textarea></div>
+                        placeholder="예) 자동차 정기검사 만료 후 14일이 지났습니다. 지금 검사를 받을 수 있는지, 과태료는 얼마인지 문의합니다." aria-label="예) 자동차 정기검사 만료 후 14일이 지났습니다. 지금 검사를 받을 수 있는지, 과태료는 얼마인지 문의합니다."></textarea></div>
                 <div class="stack mt-xs" style="gap:var(--gap-md)">
                     <button class="btn btn-p" id="analyze-btn" data-action="analyzeScenario"
                         style="flex:1;justify-content:center;">
@@ -6109,7 +6117,7 @@
                     <div class="stack mt-1" style="gap:var(--gap-md)">
                         <input spellcheck="false" type="text" class="inp" id="entity-new"
                             placeholder="엔터티 직접 추가 (예: 수급자, 처리기한)" style="flex:1;"
-                            onkeydown="if(event.key==='Enter')addEntityTag()">
+                            onkeydown="if(event.key==='Enter')addEntityTag()" aria-label="엔터티 직접 추가 (예: 수급자, 처리기한)">
                         <button class="btn btn-s" data-action="addEntityTag">추가</button>
                     </div>
                 </div>
@@ -6123,7 +6131,7 @@
                     <div class="stack mt-sm" style="gap:var(--gap-md)">
                         <input spellcheck="false" type="text" class="inp" id="query-new"
                             placeholder="질의 목표 직접 추가 (예: 필요한 서류는 무엇인가요?)" style="flex:1;"
-                            onkeydown="if(event.key==='Enter')addQueryItem()">
+                            onkeydown="if(event.key==='Enter')addQueryItem()" aria-label="질의 목표 직접 추가 (예: 필요한 서류는 무엇인가요?)">
                         <button class="btn btn-s" data-action="addQueryItem">추가</button>
                     </div>
                 </div>
@@ -6246,7 +6254,7 @@
                     <div class="col-gap-sm" id="upper-links-list"></div>
                 </div>
                 <div id="utab-raw-pane" style="display:none"><textarea spellcheck="false" class="ce" id="upper-ed"
-                        oninput="syncUpper()"></textarea></div>
+                        oninput="syncUpper()" aria-label="upper ed"></textarea></div>
                 <div id="utab-gui-pane" style="display:none">
                     <div id="upper-gui" class="py-xs"></div>
                 </div>
@@ -6315,7 +6323,7 @@
                             </svg></span> 다이어그램</button>
                 </div>
                 <div id="inf-pane-raw"><textarea spellcheck="false" class="ce" id="inf-ed"
-                        oninput="syncInf()"></textarea></div>
+                        oninput="syncInf()" aria-label="inf ed"></textarea></div>
                 <div id="inf-pane-gui" style="display:none">
                     <div id="inf-gui" class="py-xs"></div>
                 </div>
@@ -6792,15 +6800,15 @@
                                 <tr id="qrow-0">
                                     <td  class="p-1"><input class="fs-xs p-1" spellcheck="false" type="text"
                                             placeholder="주체 또는 ?" id="qrow-s-0"
-                                            style="width:100%;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm)">
+                                            style="width:100%;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm)" aria-label="주체 또는 ?">
                                     </td>
                                     <td  class="p-1"><input class="fs-xs p-1" spellcheck="false" type="text"
                                             placeholder="서술어 또는 ?" id="qrow-p-0"
-                                            style="width:100%;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm)">
+                                            style="width:100%;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm)" aria-label="서술어 또는 ?">
                                     </td>
                                     <td  class="p-1"><input class="fs-xs p-1" spellcheck="false" type="text"
                                             placeholder="객체 또는 ?" id="qrow-o-0"
-                                            style="width:100%;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm)">
+                                            style="width:100%;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm)" aria-label="객체 또는 ?">
                                     </td>
                                     <td class="p-1"></td>
                                 </tr>
@@ -6811,7 +6819,7 @@
                         <button class="btn btn-s btn-sm" data-action="addQueryRow">+ 조건 추가</button>
                         <label class="fs-xs row-gap-xs"
                             style="color:var(--text2);cursor:pointer">
-                            <input spellcheck="false" type="checkbox" id="query-incl-derived" style="cursor:pointer;">
+                            <input spellcheck="false" type="checkbox" id="query-incl-derived" style="cursor:pointer;" aria-label="query incl derived">
                             파생 트리플 포함
                         </label>
                         <button class="btn btn-p ml-auto" data-action="runTripleQuery"><span
@@ -6855,7 +6863,7 @@
                         </svg></span> 검증 질문 입력</div>
                 <div class="fg"><label class="lbl">테스트 질문 (민원 또는 행정 업무 질문)</label><textarea spellcheck="false"
                         class="inp" id="test-q" style="min-height:95px;"
-                        placeholder="예) 화성시 OO구간에 안전펜스를 즉시 설치해 주세요. B 업종 매장의 교통안전 지원금 신청도 가능한가요? 담당 부서와 처리 절차도 알려주세요."></textarea>
+                        placeholder="예) 화성시 OO구간에 안전펜스를 즉시 설치해 주세요. B 업종 매장의 교통안전 지원금 신청도 가능한가요? 담당 부서와 처리 절차도 알려주세요." aria-label="예) 화성시 OO구간에 안전펜스를 즉시 설치해 주세요. B 업종 매장의 교통안전 지원금 신청도 가능한가요? 담당 부서와 처리 절차도 알려주세요."></textarea>
                 </div>
                 <div class="d-flex flex-wrap gap-md">
                     <button class="btn btn-s btn-sm" data-action="setTestQ"><span class="ico"><svg viewBox="0 0 24 24">
@@ -7164,7 +7172,7 @@ print(f'[온톨로지 기반] {answer.content}')</textarea>
                                 style="padding:var(--sp-1) var(--sp-3);flex-shrink:0;">복사</button>
                         </div>
                         <textarea spellcheck="false" id="vibe-prompt" class="ce fs-xs" readonly
-                            style="min-height:320px;line-height:var(--lh-comfortable)">## 역할
+                            style="min-height:320px;line-height:var(--lh-comfortable)" aria-label="vibe prompt">## 역할
 당신은 시니어 Python 백엔드 개발자입니다. 아래 명세대로 즉시 실행 가능한 완전한 코드를 파일별로 작성해 주세요. 모든 코드에 한국어 주석을 포함하세요.
 
 ## 파일 컨텍스트
@@ -7968,26 +7976,26 @@ for r in results:
                             <div style="flex:1;min-width:var(--h-min-md);">
                                 <label class="lbl">도메인 이름 <span style="color:var(--ink);">*</span></label>
                                 <input spellcheck="false" type="text" class="inp" id="de-label"
-                                    placeholder="예: 건축 허가 민원">
+                                    placeholder="예: 건축 허가 민원" aria-label="예: 건축 허가 민원">
                             </div>
                             <div style="flex:2;min-width:var(--h-min-xl);">
                                 <label class="lbl">트리거 키워드 <span class="fs-xs" style="color:var(--text3)">(쉼표로
                                         구분)</span></label>
                                 <input spellcheck="false" type="text" class="inp" id="de-keys"
-                                    placeholder="예: 건축허가, 착공신고, 사용승인, 건축물">
+                                    placeholder="예: 건축허가, 착공신고, 사용승인, 건축물" aria-label="예: 건축허가, 착공신고, 사용승인, 건축물">
                             </div>
                         </div>
                         <div>
                             <label class="lbl">추천 법령 <span class="fs-xs" style="color:var(--text3)">(쉼표로
                                     구분)</span></label>
                             <input spellcheck="false" type="text" class="inp" id="de-laws"
-                                placeholder="예: 건축법, 건축법 시행령, 건축물 관리법">
+                                placeholder="예: 건축법, 건축법 시행령, 건축물 관리법" aria-label="예: 건축법, 건축법 시행령, 건축물 관리법">
                         </div>
                         <div>
                             <label class="lbl">첨부 권장 문서 <span class="fs-xs" style="color:var(--text3)">(쉼표로
                                     구분)</span></label>
                             <input spellcheck="false" type="text" class="inp" id="de-docs"
-                                placeholder="예: 건축허가신청서, 건축도면, 토지이용계획확인서">
+                                placeholder="예: 건축허가신청서, 건축도면, 토지이용계획확인서" aria-label="예: 건축허가신청서, 건축도면, 토지이용계획확인서">
                         </div>
                         <div class="stack mt-1" style="gap:var(--gap-md);justify-content:flex-end">
                             <button class="btn btn-p btn-sm" data-action="saveDomainEntry"><span class="ico"><svg
