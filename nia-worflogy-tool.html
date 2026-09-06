@@ -142,6 +142,23 @@
             --c-purple-50: #ede9fe;
             --c-purple-100: #f5f3ff;
             --c-purple-300: #c4b5fd;
+            /* L2 owl:Class (Blue) — VIS_COL.owlClass */
+            --c-blue-900: #1e3a8a;
+            --c-blue-600: #2563eb;
+            --c-blue-200: #bfdbfe;
+            --c-blue-100: #dbeafe;
+            /* L4 A-Box Individual (Sky/Cyan) — VIS_COL.abox */
+            --c-sky-800: #075985;
+            --c-sky-700: #0369a1;
+            --c-sky-50:  #e0f7fa;
+            /* L4 Triple (Indigo) — VIS_COL.triple */
+            --c-indigo-800: #3730a3;
+            --c-indigo-600: #4f46e5;
+            --c-indigo-50:  #eef2ff;
+            /* L3 DataProp (Teal) — VIS_COL.dataProp */
+            --c-teal-700: #0e7490;
+            --c-teal-600: #0891b2;
+            --c-teal-50:  #e0f2fe;
 
             /* ── Surface & Background ── */
             --bg-primary: #FAFAF8;
@@ -3638,15 +3655,15 @@
         }
 
         .ld-dot-l2 {
-            background: var(--mono-50);
-            border: 2px solid var(--mono-800);
-            border-radius: var(--r-xs2);
+            background: var(--c-blue-100);
+            border: 2px solid var(--c-blue-600);
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%); /* hexagon = vis.js 'hexagon' */
         }
 
         .ld-dot-l2-up {
             background: var(--c-purple-100);
             border: 2px solid var(--c-purple-700);
-            border-radius: var(--r-xs2);
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%); /* hexagon */
         }
 
         .ld-dot-l3-obj {
@@ -3657,22 +3674,21 @@
         }
 
         .ld-dot-l3-dat {
-            background: var(--mono-50);
-            border: 2px solid var(--mono-700);
-            border-radius: var(--r-xs);
-            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+            background: var(--c-teal-50);
+            border: 2px solid var(--c-teal-600);
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%); /* triangle = vis.js 'triangle' */
         }
 
         .ld-dot-l4-trp {
-            background: var(--c-ink-06);
-            border: var(--bw-thick) solid var(--coral);
-            border-radius: var(--r-xs);
+            background: var(--c-indigo-50);
+            border: 2px solid var(--c-indigo-600);
+            border-radius: var(--r-xs); /* box = vis.js 'box' */
         }
 
         .ld-dot-l4-abx {
-            background: var(--mono-50);
-            border: 2px solid var(--mono-700);
-            border-radius: 50%;
+            background: var(--c-sky-50);
+            border: 2px solid var(--c-sky-700);
+            border-radius: 50%; /* ellipse = vis.js 'ellipse' */
         }
 
         .ld-dot-l4-drv {
@@ -3724,9 +3740,21 @@
             box-shadow: 0 0 6px var(--c-amber-glow);
         }
 
+        /* cascade 에지 아이콘 — 점선 선분 형태 (vis.js edge 표현) */
+        .ld-dot-casc {
+            width: 22px;
+            height: 3px;
+            border-radius: 2px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--c-purple-700) 0px, var(--c-purple-700) 6px,
+                transparent 6px, transparent 9px
+            );
+        }
+
         .ld-text-l2 {
             font-size: var(--fs-xs);
-            color: var(--mono-800);
+            color: var(--c-blue-900);  /* VIS_COL.owlClass.ft */
             font-weight: var(--fw-semibold);
         }
 
@@ -3744,19 +3772,19 @@
 
         .ld-text-l3-dat {
             font-size: var(--fs-xs);
-            color: var(--mono-700);
+            color: var(--c-teal-700);  /* VIS_COL.dataProp.ft */
             font-weight: var(--fw-semibold);
         }
 
         .ld-text-l4 {
             font-size: var(--fs-xs);
-            color: var(--ink);
+            color: var(--c-indigo-800);  /* VIS_COL.triple.ft */
             font-weight: var(--fw-semibold);
         }
 
         .ld-text-l4-abx {
             font-size: var(--fs-xs);
-            color: var(--mono-700);
+            color: var(--c-sky-800);  /* VIS_COL.abox.ft */
             font-weight: var(--fw-semibold);
         }
 
@@ -3805,6 +3833,12 @@
         .ld-text-match {
             font-size: var(--fs-xs);
             color: var(--c-amber-800);
+            font-weight: var(--fw-semibold);
+        }
+
+        .ld-text-casc {
+            font-size: var(--fs-xs);
+            color: var(--c-purple-800);  /* VIS_COL.upperClass.ft = cascade 에지 폰트 */
             font-weight: var(--fw-semibold);
         }
 
@@ -6234,6 +6268,9 @@
                                 </div>
                                 <div class="ld-item">
                                     <div class="ld-dot ld-dot-l5-exc"></div><span class="ld-text-l5-exc">L5 예외규칙</span>
+                                </div>
+                                <div class="ld-item">
+                                    <div class="ld-dot ld-dot-casc"></div><span class="ld-text-casc">cascade</span>
                                 </div>
                                 <div class="ld-item">
                                     <div class="ld-dot ld-dot-match"></div><span class="ld-text-match">질의 매칭</span>
@@ -14334,12 +14371,29 @@ ${domainCtx}${upperCtx}
                     abstract: 3, concept: 2.5, property: 2, instance: 1.5,
                     critical: 3, rule: 2, selected: 3.5
                 },
-                font: { lg: 12, md: 11, sm: 10, xs: 9 },
+                font:   { lg: 12, md: 11, sm: 10, xs: 9 },
                 shadow: { lg: 14, md: 8, sm: 5, y: 2 },
-                edge: { xl: 2.5, md: 1.5, sm: 1, ghost: 0.5 }
+                edge:   { xl: 2.5, md: 1.5, sm: 1, ghost: 0.5 },
+                hl:     { bg: '#F4F4F5', border: '#18181B' },                                          // 노드 선택 상태 (사용자 승인: 회색 배경 + 검은 테두리)
+                query:  { bg: '#D4D4D8', border: '#b45309', hlBg: '#E4E4E7', ft: '#92400e', bw: 4 }   // 쿼리 매칭 하이라이트 상태
             };
             // ── W3C Layer 색상 팔레트 (상위 VIS_COL 동기화) ──
             const COL = VIS_COL;
+            // ── 에지 색상 토큰 (COL 정의 후 초기화, VIS_COL semantic 참조) ──
+            GDS.edgeCol = {
+                subclass:  '#27272A',           // rdfs:subClassOf — 중립 다크
+                triple:    '#18181B',           // L4 triple 에지 — near-black
+                neutral:   '#3F3F46',           // A-Box/rdf:type 등 중립
+                ghost:     '#71717A',           // 희미한 참조 (rdf:type 배경)
+                property:  COL.objProp.bd,      // rdfs:domain/range (#16a34a)
+                derived:   COL.derived.bd,      // L4 파생 (#16a34a)
+                cascade:   COL.upperClass.bd,   // cascade INF→INF (#7c3aed)
+                cascFt:    COL.upperClass.ft,   // cascade 폰트 (#5b21b6)
+                upper:     COL.upperClass.bd,   // subClassOf → upperClass (#7c3aed)
+                shacl:     COL.shacl.bd,        // SHACL sh:target (#92400e)
+                exception: COL.exception.bd,    // 예외규칙 IF (#c05621)
+                excFt:     COL.exception.ft,    // 예외규칙 IF 폰트 (#9a3412)
+            };
             function gn(label, type, shape, title, extra, layer) {
                 label = String(label ?? '');  // 숫자·null 트리플 object 안전 처리
                 if (!shape) shape = 'box';
@@ -14353,12 +14407,12 @@ ${domainCtx}${upperCtx}
 
                         id: _nid, label: isHL ? '[HL] ' + sl : sl, shape, title,
                         color: {
-                            background: isHL ? '#D4D4D8' : c.bg, border: isHL ? '#b45309' : c.bd,
-                            hover: { background: c.bg, border: c.bd },
-                            highlight: { background: isHL ? '#E4E4E7' : '#F4F4F5', border: isHL ? '#b45309' : '#18181B' }
+                            background: isHL ? GDS.query.bg    : c.bg, border: isHL ? GDS.query.border : c.bd,
+                            hover:     { background: c.bg, border: c.bd },
+                            highlight: { background: isHL ? GDS.query.hlBg : GDS.hl.bg, border: isHL ? GDS.query.border : GDS.hl.border }
                         },
-                        font: { color: isHL ? '#92400e' : c.ft, size: 11, bold: isHL },
-                        borderWidth: isHL ? 4 : GDS.border.instance,
+                        font: { color: isHL ? GDS.query.ft : c.ft, size: GDS.font.md, bold: isHL },
+                        borderWidth: isHL ? GDS.query.bw : GDS.border.instance,
                         shadow: { enabled: true, color: c.bd + '44', size: 6, x: 0, y: 2 },
                         group: type, ...(extra || {})
                     };
@@ -14399,11 +14453,11 @@ ${domainCtx}${upperCtx}
                         </div>`;
                 }
                 if (type === 'owlClass') {
-                    return `<div style="${C}var(--mono-300);background:var(--mono-50);min-width:160px;max-width:240px;${SH}">
-                        <div style="margin-bottom:.25rem;">${bdg('W3C OWL 2 DL', '#ede9fe', '#5b21b6')}${bdg('L2 owl:Class', '#F4F4F5', '#27272A')}</div>
+                    return `<div style="${C}${KG_STYLE.owlClass.bd}80;background:${KG_STYLE.owlClass.bg};min-width:160px;max-width:240px;${SH}">
+                        <div style="margin-bottom:.25rem;">${bdg('W3C OWL 2 DL', KG_STYLE.owlClass.badgeW3C.bg, KG_STYLE.owlClass.badgeW3C.col)}${bdg('L2 owl:Class', KG_STYLE.owlClass.badgeLayer.bg, KG_STYLE.owlClass.badgeLayer.col)}</div>
                         <div style="${N}">${d.label || d.id || ''}</div>
-                        ${kv('IRI', d.id, '#27272A')}
-                        ${kv('rdfs:subClassOf', d.subClassOf, '#27272A')}
+                        ${kv('IRI', d.id, KG_STYLE.owlClass.ft)}
+                        ${kv('rdfs:subClassOf', d.subClassOf, KG_STYLE.owlClass.ft)}
                         ${d.comment ? `<div style="font-size:var(--fs-xs);color:var(--mono-700);margin-top:.1rem;white-space:normal;">${d.comment.substring(0, 80)}</div>` : ''}
                         </div>`;
                 }
@@ -14427,17 +14481,17 @@ ${domainCtx}${upperCtx}
                         </div>`;
                 }
                 if (type === 'triple') {
-                    return `<div style="${C}var(--mono-300);background:var(--mono-50);min-width:130px;max-width:200px;${SH}">
-                        <div style="margin-bottom:.2rem;">${bdg('W3C RDF 1.1', '#F4F4F5', '#27272A')}${bdg('L4', '#FAFAFA', '#18181B')}</div>
+                    return `<div style="${C}${KG_STYLE.triple.bd}80;background:${KG_STYLE.triple.bg};min-width:130px;max-width:200px;${SH}">
+                        <div style="margin-bottom:.2rem;">${bdg('W3C RDF 1.1', KG_STYLE.triple.badgeW3C.bg, KG_STYLE.triple.badgeW3C.col)}${bdg('L4', KG_STYLE.triple.badgeLayer.bg, KG_STYLE.triple.badgeLayer.col)}</div>
                         <div style="${N}">${d.name || ''}</div>
                         <div style="${R}">클릭: 참여 트리플 목록 확인</div>
                         </div>`;
                 }
                 if (type === 'abox') {
-                    return `<div style="${C}var(--mono-300);background:var(--mono-50);min-width:140px;max-width:220px;${SH}">
-                        <div style="margin-bottom:.2rem;">${bdg('W3C RDF 1.1', '#F4F4F5', '#27272A')}${bdg('L4 A-Box', '#F4F4F5', '#3F3F46')}</div>
+                    return `<div style="${C}${KG_STYLE.abox.bd}80;background:${KG_STYLE.abox.bg};min-width:140px;max-width:220px;${SH}">
+                        <div style="margin-bottom:.2rem;">${bdg('W3C RDF 1.1', KG_STYLE.triple.badgeW3C.bg, KG_STYLE.triple.badgeW3C.col)}${bdg('L4 A-Box', KG_STYLE.abox.badgeLayer.bg, KG_STYLE.abox.badgeLayer.col)}</div>
                         <div style="${N}">${d.name || ''}</div>
-                        ${kv('rdf:type', d.type, '#3F3F46')}
+                        ${kv('rdf:type', d.type, KG_STYLE.abox.ft)}
                         </div>`;
                 }
                 if (type === 'shacl') {
@@ -14460,11 +14514,27 @@ ${domainCtx}${upperCtx}
                 el.innerHTML = s;
                 return el.firstChild || el;
             }
+            const _edgePairMap = new Map(); // (from,to) 쌍별 에지 ID 추적 — 평행 에지 자동 분리
             function ge(edgeObj, layer) {
-                const id = edges.add(edgeObj)[0];
+                // ── 평행 에지 자동 분리 ──
+                // 동일 쌍에 N번째 에지 추가 시: N≥2 → curvedCW/CCW 번갈아 배정, N=2 시 1번째도 소급 처리
+                const pairKey = [edgeObj.from, edgeObj.to].sort().join('>');
+                if (!_edgePairMap.has(pairKey)) _edgePairMap.set(pairKey, []);
+                const pairIds = _edgePairMap.get(pairKey);
+                const pos = pairIds.length + 1; // 1-indexed: 이 쌍에서 몇 번째 에지인가
+                let toAdd = Object.assign({}, edgeObj);
+                if (pos > 1) {
+                    const roundness = 0.15 * Math.ceil(pos / 2);
+                    toAdd.smooth = { type: pos % 2 === 0 ? 'curvedCW' : 'curvedCCW', roundness };
+                    if (pos === 2) // 첫 번째 에지를 반대 방향 곡선으로 소급 처리
+                        edges.update({ id: pairIds[0], smooth: { type: 'curvedCCW', roundness: 0.15 } });
+                }
+                const id = edges.add(toAdd)[0];
+                pairIds.push(id);
                 if (layer && window._graphLayerEdges[layer]) window._graphLayerEdges[layer].push(id);
                 return id;
             }
+
 
             // ── Layer 2: owl:Class (T-Box) ──
             const seenCl = new Set();
@@ -14472,7 +14542,7 @@ ${domainCtx}${upperCtx}
                 const lbl = cl.label || cl.id || ''; if (!lbl || seenCl.has(lbl)) return; seenCl.add(lbl);
                 const n = gn('C: ' + lbl, 'owlClass', 'hexagon',
                     _mkTip('owlClass', cl),
-                    { font: { size: GDS.font.sm, bold: true, color: '#27272A' }, size: GDS.size.concept, borderWidth: GDS.border.concept }, 'l2');
+                    { font: { size: GDS.font.sm, bold: true, color: GDS.edgeCol.subclass }, size: GDS.size.concept, borderWidth: GDS.border.concept }, 'l2');
                 nodes.update({ id: n, _classData: cl });
             });
             // rdfs:subClassOf
@@ -14481,8 +14551,8 @@ ${domainCtx}${upperCtx}
                 const fk = 'C: ' + lbl + '|owlClass', tk = 'C: ' + cl.subClassOf + '|owlClass';
                 if (nMap.has(fk) && nMap.has(tk)) ge({
                     from: nMap.get(fk), to: nMap.get(tk),
-                    label: 'rdfs:subClassOf', color: { color: '#27272A', opacity: .6 },
-                    font: { color: '#27272A', size: 8 }, arrows: 'to', dashes: [4, 3],
+                    label: 'rdfs:subClassOf', color: { color: GDS.edgeCol.subclass, opacity: .6 },
+                    font: { color: GDS.edgeCol.subclass, size: 8 }, arrows: 'to', dashes: [4, 3],
                     smooth: { type: 'curvedCCW', roundness: .2 }
                 }, 'l2');
             });
@@ -14495,8 +14565,8 @@ ${domainCtx}${upperCtx}
                     const n = gn('U: ' + lbl, 'upperClass', 'hexagon',
                         _mkTip('upperClass', uc),
                         {
-                            font: { size: GDS.font.lg, bold: true, color: '#5b21b6' }, size: GDS.size.abstract,
-                            borderWidth: GDS.border.abstract, shadow: { enabled: true, color: '#7c3aed55', size: GDS.shadow.lg, x: 0, y: GDS.shadow.y }
+                            font: { size: GDS.font.lg, bold: true, color: COL.upperClass.ft }, size: GDS.size.abstract,
+                            borderWidth: GDS.border.abstract, shadow: { enabled: true, color: COL.upperClass.bd + '55', size: GDS.shadow.lg, x: 0, y: GDS.shadow.y }
                         }, 'l2');
                     nodes.update({ id: n, _upperData: uc });
                 });
@@ -14504,8 +14574,8 @@ ${domainCtx}${upperCtx}
                     const dk = 'C: ' + m.domain_class + '|owlClass', uk = 'U: ' + m.upper_class + '|upperClass';
                     if (nMap.has(dk) && nMap.has(uk)) ge({
                         from: nMap.get(dk), to: nMap.get(uk),
-                        label: 'rdfs:subClassOf', color: { color: '#7c3aed', opacity: .65 },
-                        font: { color: '#7c3aed', size: 8 }, arrows: 'to', dashes: [5, 3],
+                        label: 'rdfs:subClassOf', color: { color: GDS.edgeCol.upper, opacity: .65 },
+                        font: { color: GDS.edgeCol.upper, size: 8 }, arrows: 'to', dashes: [5, 3],
                         smooth: { type: 'curvedCW', roundness: .2 }
                     }, 'l2');
                 });
@@ -14519,25 +14589,25 @@ ${domainCtx}${upperCtx}
                 const ck = isObj ? 'objProp' : 'dataProp', pk = (isObj ? 'OP: ' : 'DP: ') + lbl;
                 const n = gn(pk, ck, 'triangle',
                     _mkTip(ck, p),
-                    { font: { size: GDS.font.xs, color: isObj ? '#15803d' : '#3F3F46' }, size: GDS.size.property, borderWidth: GDS.border.property }, 'l3');
+                    { font: { size: GDS.font.xs, color: isObj ? COL.objProp.ft : GDS.edgeCol.neutral }, size: GDS.size.property, borderWidth: GDS.border.property }, 'l3');
                 nodes.update({ id: n, _propData: p });
                 const domK = 'C: ' + p.domain + '|owlClass', ranK = 'C: ' + p.range + '|owlClass';
                 if (p.domain && nMap.has(domK)) ge({
                     from: nMap.get(domK), to: n,
-                    label: 'rdfs:domain', color: { color: '#16a34a', opacity: .6 },
-                    font: { color: '#16a34a', size: 8 }, width: GDS.edge.sm, arrows: 'to', dashes: [3, 3]
+                    label: 'rdfs:domain', color: { color: GDS.edgeCol.property, opacity: .6 },
+                    font: { color: GDS.edgeCol.property, size: 8 }, width: GDS.edge.sm, arrows: 'to', dashes: [3, 3]
                 }, 'l3');
                 if (p.range && nMap.has(ranK)) ge({
                     from: n, to: nMap.get(ranK),
-                    label: 'rdfs:range', color: { color: '#3F3F46', opacity: .6 },
-                    font: { color: '#3F3F46', size: 8 }, arrows: 'to', dashes: [3, 3]
+                    label: 'rdfs:range', color: { color: GDS.edgeCol.neutral, opacity: .6 },
+                    font: { color: GDS.edgeCol.neutral, size: 8 }, arrows: 'to', dashes: [3, 3]
                 }, 'l3');
                 if (p.inverseOf) {
                     const invK = (isObj ? 'OP: ' : 'DP: ') + p.inverseOf + '|' + ck;
                     if (nMap.has(invK)) ge({
                         from: n, to: nMap.get(invK),
-                        label: 'owl:inverseOf', color: { color: '#16a34a', opacity: .45 },
-                        font: { color: '#16a34a', size: 8 }, dashes: [2, 4]
+                        label: 'owl:inverseOf', color: { color: GDS.edgeCol.property, opacity: .45 },
+                        font: { color: GDS.edgeCol.property, size: 8 }, dashes: [2, 4]
                     }, 'l3');
                 }
             });
@@ -14553,8 +14623,8 @@ ${domainCtx}${upperCtx}
                 entityTripleMap[t.object].asObj.push(t);
                 ge({
                     from: s, to: o, label: t.predicate, _tripleData: t,
-                    color: { color: '#18181B', opacity: .7 },
-                    font: { color: '#3F3F46', size: 10, align: 'middle' },
+                    color: { color: GDS.edgeCol.triple, opacity: .7 },
+                    font: { color: GDS.edgeCol.neutral, size: 10, align: 'middle' },
                     width: GDS.edge.md, arrows: 'to', smooth: { type: 'curvedCW', roundness: .15 }
                 }, 'l4');
             });
@@ -14583,8 +14653,8 @@ ${domainCtx}${upperCtx}
 
                 ge({
                     from: sId, to: oId, label: inst.p,
-                    color: { color: '#3F3F46', opacity: .65 },
-                    font: { color: '#3F3F46', size: 9 }, arrows: 'to',
+                    color: { color: GDS.edgeCol.neutral, opacity: .65 },
+                    font: { color: GDS.edgeCol.neutral, size: 9 }, arrows: 'to',
                     smooth: { type: 'curvedCCW', roundness: .2 }
                 }, 'l4a');
 
@@ -14594,7 +14664,7 @@ ${domainCtx}${upperCtx}
                         : (nMap.has(inst.t + '|triple') ? nMap.get(inst.t + '|triple') : null);
                     if (_tgt !== null) ge({
                         from: sId, to: _tgt, label: 'rdf:type',
-                        color: { color: '#3F3F46', opacity: .25 }, font: { color: '#71717A', size: 6 },
+                        color: { color: GDS.edgeCol.neutral, opacity: .25 }, font: { color: GDS.edgeCol.ghost, size: 6 },
                         arrows: 'to', dashes: [2, 6], smooth: { type: 'curvedCW', roundness: .35 }
                     }, 'l4a');
                 }
@@ -14606,8 +14676,8 @@ ${domainCtx}${upperCtx}
                 const o = gn(t.object, 'derived', 'ellipse', undefined, undefined, 'l4');
                 ge({
                     from: s, to: o, label: t.predicate,
-                    color: { color: '#16a34a', opacity: .85 },
-                    font: { color: '#15803d', size: 10 }, arrows: 'to',
+                    color: { color: GDS.edgeCol.derived, opacity: .85 },
+                    font: { color: COL.derived.ft, size: 10 }, arrows: 'to',
                     smooth: { type: 'curvedCCW', roundness: .2 }
                 }, 'l4');
             });
@@ -14622,8 +14692,8 @@ ${domainCtx}${upperCtx}
                     ge({
                         from: nMap.get(trKey), to: nMap.get(clKey),
                         label: 'rdf:type',
-                        color: { color: '#18181B', opacity: .3 },
-                        font: { color: '#3F3F46', size: 7 },
+                        color: { color: GDS.edgeCol.triple, opacity: .3 },
+                        font: { color: GDS.edgeCol.neutral, size: 7 },
                         arrows: 'to', dashes: [2, 5],
                         smooth: { type: 'curvedCW', roundness: .45 }
                     }, 'l4');
@@ -14638,7 +14708,7 @@ ${domainCtx}${upperCtx}
                 nodes.update({ id: tn, _nodeType: 'excthen', _excData: r });
                 ge({
                     from: rn, to: tn, label: 'THEN', _excData: r,
-                    color: { color: '#27272A', opacity: .85 }, font: { color: '#27272A', size: 10 },
+                    color: { color: GDS.edgeCol.subclass, opacity: .85 }, font: { color: GDS.edgeCol.subclass, size: 10 },
                     arrows: 'to', dashes: true
                 }, 'l5');
                 // IF 조건 클래스 → 예외 규칙 엣지: conditions 배열에서 ClassName(?var) 패턴 추출
@@ -14657,8 +14727,8 @@ ${domainCtx}${upperCtx}
                     const sn = gn(subj, 'triple', 'box', undefined, undefined, 'l4');
                     ge({
                         from: sn, to: rn, label: 'IF', _excData: r,
-                        color: { color: '#c05621', opacity: .75 },
-                        font: { color: '#9a3412', size: 9 },
+                        color: { color: GDS.edgeCol.exception, opacity: .75 },
+                        font: { color: GDS.edgeCol.excFt, size: 9 },
                         arrows: 'to', dashes: [4, 3]
                     }, 'l5');
                 });
@@ -14720,8 +14790,8 @@ ${domainCtx}${upperCtx}
                     if (fromN !== undefined && toN !== undefined)
                         ge({
                             from: fromN, to: toN, label: 'cascade',
-                            color: { color: '#7c3aed', opacity: .85 },
-                            font: { color: '#5b21b6', size: 9, bold: true },
+                            color: { color: GDS.edgeCol.cascade, opacity: .85 },
+                            font: { color: GDS.edgeCol.cascFt, size: 9, bold: true },
                             arrows: 'to', dashes: [6, 3], width: GDS.edge.xl,
                             smooth: { type: 'curvedCW', roundness: .3 }
                         }, 'casc');
@@ -14738,12 +14808,12 @@ ${domainCtx}${upperCtx}
                 const tcK = c.target_class + '|triple', ocK = 'C: ' + c.target_class + '|owlClass';
                 if (nMap.has(tcK)) ge({
                     from: sn, to: nMap.get(tcK), label: 'sh:target',
-                    color: { color: '#92400e', opacity: .75 }, font: { color: '#92400e', size: 9 },
+                    color: { color: GDS.edgeCol.shacl, opacity: .75 }, font: { color: GDS.edgeCol.shacl, size: 9 },
                     arrows: 'to', dashes: [3, 4]
                 }, 'l5s');
                 if (nMap.has(ocK)) ge({
                     from: sn, to: nMap.get(ocK), label: 'sh:target',
-                    color: { color: '#92400e', opacity: .75 }, font: { color: '#92400e', size: 9 },
+                    color: { color: GDS.edgeCol.shacl, opacity: .75 }, font: { color: GDS.edgeCol.shacl, size: 9 },
                     arrows: 'to', dashes: [3, 4]
                 }, 'l5s');
             });
