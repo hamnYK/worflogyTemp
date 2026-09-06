@@ -2243,12 +2243,28 @@
             justify-content: center;
         }
 
-        .ld-brand-name {
+        .ld-brand-text {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+        }
+
+        .ld-org-name {
             font-family: var(--font-sans);
-            font-size: var(--fs-base);
-            font-weight: var(--fw-semibold);
+            font-size: var(--fs-small);   /* 11px */
+            font-weight: var(--fw-medium);
+            color: var(--text3);
+            letter-spacing: .02em;
+            line-height: 1.2;
+        }
+
+        .ld-brand-title {
+            font-family: var(--font-sans);
+            font-size: var(--fs-base);    /* 15px */
+            font-weight: var(--fw-bold);
             color: var(--ink);
-            letter-spacing: 0;
+            letter-spacing: -.01em;
+            line-height: 1.25;
         }
 
         .ld-contact {
@@ -4086,13 +4102,11 @@
     <div id="landing" class="ld-overlay">
         <div class="ld-topbar">
             <div class="ld-brand" onclick="closeLanding()">
-                <div class="ld-brand-icon"><svg viewBox="0 0 24 24"
-                        style="width:16px;height:16px;stroke:var(--mono-white);fill:none;stroke-width:2;stroke-linecap:round;">
-                        <circle cx="12" cy="12" r="3" />
-                        <path
-                            d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
-                    </svg></div>
-                <span class="ld-brand-name" id="app-brand-name"></span>
+                <div class="ld-brand-icon"><span style="font-family:var(--font-sans);font-size:13px;font-weight:var(--fw-bold);color:var(--mono-white);letter-spacing:-.04em;line-height:1;user-select:none;">?!</span></div>
+                <div class="ld-brand-text">
+                    <span class="ld-org-name" id="app-brand-org"></span>
+                    <span class="ld-brand-title" id="app-brand-title"></span>
+                </div>
             </div>
             <div style="display:flex;align-items:center;gap:.75rem;">
                 <button class="ld-help-btn" id="ld-purpose-toggle" aria-label="강의 목적 패널 열기"
@@ -4554,11 +4568,7 @@
     <header class="hdr">
         <div class="hdr-in">
             <div class="logo" onclick="openLanding()" style="cursor:pointer;" title="강의 소개 페이지로 돌아가기">
-                <div class="logo-icon"><span class="ico"><svg viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="3" />
-                            <path
-                                d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12" />
-                        </svg></span></div>
+                <div class="logo-icon"><span style="font-family:var(--font-sans);font-size:13px;font-weight:var(--fw-bold);color:var(--mono-white);letter-spacing:-.04em;line-height:1;user-select:none;">?!</span></div>
                 <span class="logo-txt" id="app-logo-txt"></span>
             </div>
             <nav class="steps-nav">
@@ -8355,7 +8365,8 @@ for r in results:
         const APP_DESC = APP_TITLE + '은 공공 AX에 온톨로지 기술을 활용할 수 있도록 도메인과 규칙 설계를 지원하는 지식 기반 추론 도구입니다. 모두가 온톨로지를 쉽게 디자인할 수 있도록 확장해 나아가겠습니다.';
         document.addEventListener('DOMContentLoaded', function () {
             var s = function (id, v) { var e = document.getElementById(id); if (e) e.innerHTML = v; };
-            s('app-brand-name', APP_BRAND);
+            s('app-brand-org', APP_ORG);
+            s('app-brand-title', APP_TITLE);
             s('app-logo-txt', APP_TITLE);
             s('app-org-name', APP_ORG);
             s('app-footer-copy', APP_COPYRIGHT);
