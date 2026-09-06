@@ -1,4 +1,4 @@
-<!--
+﻿<!--
   행정 혁신 온톨로지 워크숍 & NIA 프로젝트
   © 2026 Worflogy Inc. All Rights Reserved.
   
@@ -18,11 +18,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>행정 혁신 온톨로지 워크숍 & Graph RAG</title>
     <meta name="description" content="행정 혁신 온톨로지 스키마 추출, 추론 규칙 도출, 지식 그래프 시각화 및 A/B 비교 검증 도구">
-    <!-- 타이포그래피: 국문 고가독성 Pretendard Variable + Noto Sans KR / Noto Serif KR + 영문 DM Serif Display / DM Sans / Outfit + JetBrains Mono -->
+    <!-- 타이포그래피: Pretendard Variable (primary) + Noto Sans KR (한글 fallback) + DM Sans (영문 fallback) + Outfit (UI) + JetBrains Mono (코드) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Noto+Serif+KR:wght@400;600;700;900&family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Outfit:wght@400;600;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Outfit:wght@400;600;800&family=JetBrains+Mono:wght@400;500&display=swap"
         rel="stylesheet">
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
@@ -407,19 +407,19 @@
             --green-bg: var(--c-ink-04);
             --orange-bg: var(--c-ink-05);
             --sh-xl: 0 20px 60px var(--c-ink-15), 0 8px 24px var(--c-ink-10);
-            --col-except-bg: var(--c-orange-50);
-            --col-except-bd: var(--c-orange-700);
-            --col-except-ft: var(--c-orange-700);
+            --col-except-bg: var(--c-ink-05);
+            --col-except-bd: var(--mono-600);
+            --col-except-ft: var(--text2);
 
 
             /* ── Font Family: 한글/영문 고가독성 산세리프(Pretendard + Outfit / DM Sans) 완전 일체화 ── */
 
-            /* 국문/영문 공통 가독성 최우선 산세리프 통일 */
-            --font-sans: 'Pretendard Variable', Pretendard, 'DM Sans', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Noto Sans KR', sans-serif;
-            --font-body: 'Pretendard Variable', Pretendard, 'DM Sans', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Noto Sans KR', sans-serif;
-            --font-ui: 'Outfit', 'Pretendard Variable', Pretendard, 'DM Sans', -apple-system, sans-serif;
-            --font-title: 'Pretendard Variable', Pretendard, 'Outfit', 'DM Sans', sans-serif;
-            --font-mono: 'JetBrains Mono', Consolas, monospace;
+            /* 폰트 스택: Pretendard(primary) → DM Sans(Latin) → Noto Sans KR(한글) */
+            --font-sans:  'Pretendard Variable', Pretendard, 'DM Sans', -apple-system, BlinkMacSystemFont, system-ui, 'Noto Sans KR', sans-serif;
+            --font-body:  var(--font-sans);  /* alias */
+            --font-title: var(--font-sans);  /* alias */
+            --font-ui:    'Outfit', 'Pretendard Variable', Pretendard, -apple-system, sans-serif;
+            --font-mono:  'JetBrains Mono', Consolas, monospace;
         }
 
         /* ────────────────────────────────────────────────────────────────
@@ -451,6 +451,10 @@
         :lang(ko) {
             font-family: var(--font-body);
             word-break: keep-all;
+        }
+
+        input[type="checkbox"] {
+            accent-color: var(--mono-950);
         }
 
         /* 배경 은은한 워플로지 앰비언트 광원 */
@@ -734,30 +738,30 @@
            .svg-title 14px / fw700 · 패널/섹션 제목
         ────────────────────────────────────────────────────────────────────── */
         svg text.svg-cap {
-            font-size: var(--fs-small);
-            /* 11px */
+            font-family: var(--font-sans);
+            font-size: var(--fs-small); /* 11px */
             font-weight: var(--fw-regular);
             fill: var(--text3);
             letter-spacing: 0;
         }
 
         svg text.svg-sub {
-            font-size: var(--fs-small);
-            /* 11px */
+            font-family: var(--font-sans);
+            font-size: var(--fs-small); /* 11px */
             font-weight: var(--fw-medium);
             fill: var(--text3);
         }
 
         svg text.svg-lbl {
-            font-size: var(--fs-xs);
-            /* 12px */
+            font-family: var(--font-sans);
+            font-size: var(--fs-xs); /* 12px */
             font-weight: var(--fw-semibold);
             fill: var(--text);
         }
 
         svg text.svg-title {
-            font-size: var(--fs-ui);
-            /* 14px */
+            font-family: var(--font-sans);
+            font-size: var(--fs-ui); /* 14px */
             font-weight: var(--fw-bold);
             fill: var(--ink);
             letter-spacing: var(--ls-tight);
@@ -1439,8 +1443,8 @@
             width: 7px;
             height: 7px;
             border-radius: 50%;
-            background: var(--c-green-500);
-            box-shadow: 0 0 5px var(--c-green-500);
+            background: var(--ink);
+            box-shadow: 0 0 5px var(--c-ink-25);
             margin-right: .35rem;
             flex-shrink: 0;
             vertical-align: middle;
@@ -1451,16 +1455,16 @@
 
             0%,
             100% {
-                box-shadow: 0 0 4px var(--c-green-500);
+                box-shadow: 0 0 4px var(--c-ink-18);
             }
 
             50% {
-                box-shadow: 0 0 10px var(--c-green-500);
+                box-shadow: 0 0 10px var(--c-ink-35);
             }
         }
 
         .aopt.live {
-            border-color: var(--c-green-500);
+            border-color: var(--ink);
             background: var(--c-ink-07);
         }
 
@@ -3100,7 +3104,7 @@
             position: fixed;
             inset: 0;
             z-index: var(--z-gate);
-            background: var(--c-dark-97);
+            background: var(--mono-950);
             display: none;
             flex-direction: column;
             align-items: center;
@@ -3171,16 +3175,16 @@
         }
 
         #license-gate .lg-err {
-            color: var(--c-red-600);
+            color: var(--mono-700);
         }
 
         #license-gate .lg-ok {
-            color: var(--c-green-600);
+            color: var(--mono-800);
         }
 
         #license-gate .lg-copy {
             font-size: var(--fs-small);
-            color: var(--c-w-38);
+            color: var(--mono-500);
             font-family: var(--font-sans);
         }
 
@@ -3206,7 +3210,7 @@
         }
 
         #license-gate .lg-tab.active {
-            background: var(--nia-blue);
+            background: var(--ink);
             color: var(--mono-white);
         }
 
@@ -3910,7 +3914,6 @@
 
         .chk-item input[type="checkbox"] {
             margin-top: .2rem;
-            accent-color: var(--nia-blue);
             flex-shrink: 0;
         }
 
@@ -7370,28 +7373,28 @@ for r in results:
                     <div class="ct">빠른 시작 체크리스트</div>
                     <div style="display:flex;flex-direction:column;gap:.5rem;padding:.4rem 0;font-size:var(--fs-sm);">
                         <label style="display:flex;align-items:flex-start;gap:.65rem;cursor:pointer;"><input
-                                spellcheck="false" type="checkbox" style="margin-top:.2rem;accent-color:var(--coral);">
+                                spellcheck="false" type="checkbox" style="margin-top:.2rem;accent-color:var(--mono-950);">
                             <span><strong>Step ①</strong> <a href="https://www.ontotext.com/products/graphdb/"
                                     target="_blank" style="color:var(--coral);">GraphDB Free 다운로드</a> 및 설치 (포트
                                 7200)</span></label>
                         <label style="display:flex;align-items:flex-start;gap:.65rem;cursor:pointer;"><input
-                                spellcheck="false" type="checkbox" style="margin-top:.2rem;accent-color:var(--coral);">
+                                spellcheck="false" type="checkbox" style="margin-top:.2rem;accent-color:var(--mono-950);">
                             <span><strong>Step ②</strong>
                                 GraphDB Workbench에서 저장소 생성: <code>admin-ontology</code></span></label>
                         <label style="display:flex;align-items:flex-start;gap:.65rem;cursor:pointer;"><input
-                                spellcheck="false" type="checkbox" style="margin-top:.2rem;accent-color:var(--coral);">
+                                spellcheck="false" type="checkbox" style="margin-top:.2rem;accent-color:var(--mono-950);">
                             <span><strong>Step ③</strong> 이
                                 도구에서 <em>전체 결과 내보내기</em> → <code>ontology_result_final.jsonld</code> 저장</span></label>
                         <label style="display:flex;align-items:flex-start;gap:.65rem;cursor:pointer;"><input
-                                spellcheck="false" type="checkbox" style="margin-top:.2rem;accent-color:var(--coral);">
+                                spellcheck="false" type="checkbox" style="margin-top:.2rem;accent-color:var(--mono-950);">
                             <span><strong>Step ④</strong> 위
                                 Python 업로드 코드 실행 → GraphDB 확인</span></label>
                         <label style="display:flex;align-items:flex-start;gap:.65rem;cursor:pointer;"><input
-                                spellcheck="false" type="checkbox" style="margin-top:.2rem;accent-color:var(--coral);">
+                                spellcheck="false" type="checkbox" style="margin-top:.2rem;accent-color:var(--mono-950);">
                             <span><strong>Step ⑤</strong>
                                 LangChain 코드로 온톨로지 스키마 주입 질의 테스트</span></label>
                         <label style="display:flex;align-items:flex-start;gap:.65rem;cursor:pointer;"><input
-                                spellcheck="false" type="checkbox" style="margin-top:.2rem;accent-color:var(--coral);">
+                                spellcheck="false" type="checkbox" style="margin-top:.2rem;accent-color:var(--mono-950);">
                             <span><strong>Step ⑥</strong>
                                 A/B 비교 결과(Step 8)와 스키마 주입 LangChain 결과 비교 → 성능 확인</span></label>
                     </div>
@@ -11237,18 +11240,9 @@ for r in results:
 
 [행정 처리 기준]
 담당기관: 한국도로교통공단 운전면허시험장 / 경찰청 교통국
-관련법령: 도로교통법 제87조(적성검사), 동법 시행규칙 제52조(갱신 기간)
-
-□ 적성검사 갱신 주기
-- 65세 미만: 10년마다 갱신
-- 65세 이상 70세 미만: 5년마다 갱신
-- 70세 이상: 3년마다 갱신
-- 해당 민원인(45세): 2024-08-31까지 갱신 필요
-
-□ 갱신 방법 및 절차
-- 온라인 갱신: 경찰청 교통민원 24(www.efine.go.kr) - 시력·청력 기준 충족 시 가능
-- 오프라인: 운전면허시험장 또는 지정 경찰서 방문
-- 필요 서류: 신분증, 최근 6개월 이내 촬영 사진 1매
+관련법령: 도로교통법 제                    const parentBadge = c.subClassOf
+                        ? \`<span style="font-size:var(--fs-small);color:var(--mono-700);background:var(--c-ink-06);padding:.1rem .32rem;border-radius:var(--r-xs);border:var(--bw-thin) solid var(--border);white-space:nowrap;flex-shrink:0;">↑ ${c.subClassOf}</span>\`
+                        : \`<span style="font-size:var(--fs-small);color:var(--text3);padding:.1rem .32rem;background:var(--c-ink-04);border-radius:var(--r-xs);flex-shrink:0;">루트</span>\`; 6개월 이내 촬영 사진 1매
 - 신체검사: 시력 0.5 이상(1종 보통), 청력 55dB 이상
 
 □ 미갱신 시 처리 기준
@@ -12675,7 +12669,7 @@ for r in results:
             // Classes/Properties list
             const cl = document.getElementById('s4cl-' + id);
             if (cl) {
-                const typeColor = t => t === 'owl:ObjectProperty' ? 'var(--coral)' : 'var(--c-orange-700)';
+                const typeColor = t => t === 'owl:ObjectProperty' ? 'var(--ink)' : 'var(--mono-700)';
                 const typeLabel = t => t === 'owl:ObjectProperty' ? 'ObjProp' : 'DataProp';
                 // 클래스: 루트 / 서브 분리 후 세로 행 레이아웃
                 const _rootCls = classes.filter(c => !c.subClassOf);
@@ -12688,20 +12682,20 @@ for r in results:
                     const cmt = (c.comment || c.description)
                         ? `<span style="font-size:var(--fs-xs);color:var(--text3);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"> ${c.comment || c.description}</span>`
                         : '';
-                    return `<div style="display:flex;align-items:center;gap:.45rem;padding:.3rem .6rem;font-size:var(--fs-sm);border-bottom:var(--bw-thin) solid var(--border);background:var(--mono-white);" title="${c.id || c.uri || ''}"><code style="font-size:var(--fs-small);padding:.08rem .25rem;border-radius:var(--r-xs);background:rgba(3,103,176,.12);color:var(--ink);font-weight:var(--fw-bold);flex-shrink:0;">C</code><span style="font-weight:var(--fw-semibold);color:var(--ink);white-space:nowrap;">${c.label || c.name}</span>${parentBadge}${cmt}</div>`;
+                    return `<div style="display:flex;align-items:center;gap:.45rem;padding:.3rem .6rem;font-size:var(--fs-sm);border-bottom:var(--bw-thin) solid var(--border);background:var(--mono-white);" title="${c.id || c.uri || ''}"><code style="font-size:var(--fs-small);padding:.08rem .25rem;border-radius:var(--r-xs);background:var(--c-ink-08);color:var(--ink);font-weight:var(--fw-bold);flex-shrink:0;">C</code><span style="font-weight:var(--fw-semibold);color:var(--ink);white-space:nowrap;">${c.label || c.name}</span>${parentBadge}${cmt}</div>`;
                 };
-                const clHtml = classes.length > 0 ? `<div style="margin-bottom:.7rem;"><div style="font-size:var(--fs-xs);font-weight:var(--fw-bold);color:var(--text2);margin-bottom:.35rem;letter-spacing:.03em;">owl:Class 선언 (${classes.length}개)</div><div style="border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);overflow:hidden;">${_rootCls.length > 0 ? `<div style="background:var(--c-ink-05);padding:.2rem .6rem;font-size:var(--fs-small);color:var(--text3);font-weight:var(--fw-bold);letter-spacing:.04em;border-bottom:var(--bw-thin) solid var(--border);">루트 클래스 (${_rootCls.length})</div>${_rootCls.map(_clsRow).join('')}` : ''}${_subCls.length > 0 ? `<div style="background:rgba(192,86,33,.05);padding:.2rem .6rem;font-size:var(--fs-small);color:var(--text3);font-weight:var(--fw-bold);letter-spacing:.04em;${_rootCls.length > 0 ? 'border-top:var(--bw-thin) solid var(--border);' : ''}border-bottom:var(--bw-thin) solid var(--border);">서브 클래스 (${_subCls.length})</div>${_subCls.map(_clsRow).join('')}` : ''}</div></div>` : '';
-                const prHtml = props.length > 0 ? `<div><div style="font-size:var(--fs-xs);font-weight:var(--fw-bold);color:var(--text2);margin-bottom:.35rem;letter-spacing:.03em;">owl:Property 구분 (${props.length}개)</div><div style="display:flex;flex-direction:column;gap:.3rem;">${props.map(p => `<div style="display:flex;align-items:center;gap:.4rem;font-size:var(--fs-sm);padding:.3rem .5rem;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);background:var(--mono-white);"><code style="font-size:var(--fs-small);padding:.1rem .3rem;border-radius:var(--r-xs);background:${typeColor(p.type)}22;color:${typeColor(p.type)};font-weight:var(--fw-bold);">${typeLabel(p.type)}</code><span style="color:var(--ink);font-weight:var(--fw-semibold);">${p.name}</span><span style="color:var(--text3);font-size:var(--fs-xs);">${p.domain || ''} → ${p.range || ''}</span>${p.inverseOf ? `<span style="font-size:var(--fs-xs);color:var(--c-orange-700);margin-left:.3rem;" title="owl:inverseOf">⇄ ${p.inverseOf}</span>` : ''} ${(p.comment || p.description) ? `<span style="font-size:var(--fs-xs);color:var(--text3);margin-left:auto;"> -  ${p.comment || p.description}</span>` : ''}</div>`).join('')}</div></div>` : '';
+                const clHtml = classes.length > 0 ? `<div style="margin-bottom:.7rem;"><div style="font-size:var(--fs-xs);font-weight:var(--fw-bold);color:var(--text2);margin-bottom:.35rem;letter-spacing:.03em;">owl:Class 선언 (${classes.length}개)</div><div style="border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);overflow:hidden;">${_rootCls.length > 0 ? `<div style="background:var(--c-ink-05);padding:.2rem .6rem;font-size:var(--fs-small);color:var(--text3);font-weight:var(--fw-bold);letter-spacing:.04em;border-bottom:var(--bw-thin) solid var(--border);">루트 클래스 (${_rootCls.length})</div>${_rootCls.map(_clsRow).join('')}` : ''}${_subCls.length > 0 ? `<div style="background:var(--c-ink-04);padding:.2rem .6rem;font-size:var(--fs-small);color:var(--text3);font-weight:var(--fw-bold);letter-spacing:.04em;${_rootCls.length > 0 ? 'border-top:var(--bw-thin) solid var(--border);' : ''}border-bottom:var(--bw-thin) solid var(--border);">서브 클래스 (${_subCls.length})</div>${_subCls.map(_clsRow).join('')}` : ''}</div></div>` : '';
+                const prHtml = props.length > 0 ? `<div><div style="font-size:var(--fs-xs);font-weight:var(--fw-bold);color:var(--text2);margin-bottom:.35rem;letter-spacing:.03em;">owl:Property 구분 (${props.length}개)</div><div style="display:flex;flex-direction:column;gap:.3rem;">${props.map(p => `<div style="display:flex;align-items:center;gap:.4rem;font-size:var(--fs-sm);padding:.3rem .5rem;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);background:var(--mono-white);"><code style="font-size:var(--fs-small);padding:.1rem .3rem;border-radius:var(--r-xs);background:var(--c-ink-08);color:${typeColor(p.type)};font-weight:var(--fw-bold);">${typeLabel(p.type)}</code><span style="color:var(--ink);font-weight:var(--fw-semibold);">${p.name}</span><span style="color:var(--text3);font-size:var(--fs-xs);">${p.domain || ''} → ${p.range || ''}</span>${p.inverseOf ? `<span style="font-size:var(--fs-xs);color:var(--mono-600);margin-left:.3rem;" title="owl:inverseOf">⇄ ${p.inverseOf}</span>` : ''} ${(p.comment || p.description) ? `<span style="font-size:var(--fs-xs);color:var(--text3);margin-left:auto;"> -  ${p.comment || p.description}</span>` : ''}</div>`).join('')}</div></div>` : '';
                 cl.innerHTML = (clHtml || prHtml) ? clHtml + prHtml : '<div style="color:var(--text3);font-size:var(--fs-sm);padding:.5rem;">클래스/속성 정보가 없습니다. 재추출하면 자동으로 포함됩니다.</div>';
             }
             // Rule list
             const rl = document.getElementById('s4rl-' + id);
-            if (rl) rl.innerHTML = rules.map(r => `<div style="border:var(--bw-thin) solid rgba(3,103,176,.18);border-left:var(--bw-thick) solid var(--coral);border-radius:var(--r-md);padding:.65rem .85rem;background:var(--mono-white);font-size:var(--fs-sm);"><div style="display:flex;gap:.4rem;align-items:center;margin-bottom:.4rem;flex-wrap:wrap;"><code style="font-size:var(--fs-small);background:var(--c-ink-08);color:var(--ink);padding:.1rem .35rem;border-radius:var(--r-xs);">${r.rule_id || ''}</code><span style="font-weight:var(--fw-bold);">${r.rule_name || ''}</span></div>${r.if?.conditions?.length ? `<div><span style="font-size:var(--fs-xs);font-weight:var(--fw-semibold);color:var(--text2);">IF</span> ${r.if.conditions.join(' / ')}</div>` : ''} ${r.then ? `<div><span style="font-size:var(--fs-xs);font-weight:var(--fw-semibold);color:var(--coral);">THEN</span> ${r.then}</div>` : ''} ${r.exception ? `<div><span style="font-size:var(--fs-xs);font-weight:var(--fw-semibold);color:var(--c-orange-700);">EXCEPT</span> ${r.exception}</div>` : ''}</div>`).join('');
+            if (rl) rl.innerHTML = rules.map(r => `<div style="border:var(--bw-thin) solid var(--border);border-left:var(--bw-thick) solid var(--ink);border-radius:var(--r-md);padding:.65rem .85rem;background:var(--mono-white);font-size:var(--fs-sm);"><div style="display:flex;gap:.4rem;align-items:center;margin-bottom:.4rem;flex-wrap:wrap;"><code style="font-size:var(--fs-small);background:var(--c-ink-08);color:var(--ink);padding:.1rem .35rem;border-radius:var(--r-xs);">${r.rule_id || ''}</code><span style="font-weight:var(--fw-bold);">${r.rule_name || ''}</span></div>${r.if?.conditions?.length ? `<div><span style="font-size:var(--fs-xs);font-weight:var(--fw-semibold);color:var(--text2);">IF</span> ${r.if.conditions.join(' / ')}</div>` : ''} ${r.then ? `<div><span style="font-size:var(--fs-xs);font-weight:var(--fw-semibold);color:var(--ink);">THEN</span> ${r.then}</div>` : ''} ${r.exception ? `<div><span style="font-size:var(--fs-xs);font-weight:var(--fw-semibold);color:var(--mono-600);">EXCEPT</span> ${r.exception}</div>` : ''}</div>`).join('');
             // Constraints (SHACL)
             const cstl = document.getElementById('s4cstl-' + id);
             if (cstl) {
-                const sevColor = s => s === 'sh:Violation' ? 'var(--c-red-600)' : s === 'sh:Warning' ? 'var(--c-orange-700)' : 'var(--coral)';
-                const sevBg = s => s === 'sh:Violation' ? 'var(--c-red-50)' : s === 'sh:Warning' ? 'var(--c-orange-50)' : 'var(--c-ink-08)';
+                const sevColor = s => s === 'sh:Violation' ? 'var(--ink)' : s === 'sh:Warning' ? 'var(--mono-600)' : 'var(--text2)';
+                const sevBg = s => s === 'sh:Violation' ? 'var(--c-ink-06)' : s === 'sh:Warning' ? 'var(--c-ink-04)' : 'var(--c-ink-08)';
                 cstl.innerHTML = constraints.length > 0 ? constraints.map(c => `<div style="border:var(--bw-thin) solid ${sevColor(c.severity)};border-left:var(--bw-thick) solid ${sevColor(c.severity)};border-radius:var(--r-md);padding:.6rem .85rem;background:${sevBg(c.severity)};font-size:var(--fs-sm);"><div style="display:flex;gap:.4rem;align-items:center;margin-bottom:.35rem;flex-wrap:wrap;"><code style="font-size:var(--fs-small);background:var(--c-ink-06);color:var(--text2);padding:.1rem .35rem;border-radius:var(--r-xs);">${c.shape_id || ''}</code><span style="font-size:var(--fs-small);font-weight:var(--fw-bold);padding:.1rem .3rem;border-radius:var(--r-xs);background:${sevBg(c.severity)};color:${sevColor(c.severity)};border:var(--bw-thin) solid ${sevColor(c.severity)}20;">${c.severity || 'sh:Violation'}</span><span style="font-size:var(--fs-small);color:var(--text3);margin-left:auto;">SHACL</span></div><div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:.28rem;"><span><span style="font-size:var(--fs-xs);color:var(--text3);">대상 클래스</span> <strong>${c.target_class || ''}</strong></span>${c.path ? `<span><span style="font-size:var(--fs-xs);color:var(--text3);">속성</span> <strong>${c.path}</strong></span>` : ''}${c.min_count != null ? `<span><span style="font-size:var(--fs-xs);color:var(--text3);">최소값</span> <code style="font-size:var(--fs-xs);padding:.05rem .25rem;border-radius:var(--r-xs);background:var(--c-ink-06);">sh:minCount ${c.min_count}</code></span>` : ''}</div>${c.exception_message ? `<div style="font-size:var(--fs-xs);color:var(--text2);border-top:var(--bw-thin) solid var(--c-ink-06);padding-top:.28rem;margin-top:.28rem;"><div style='display:flex;align-items:flex-start;gap:.3rem;margin-top:.28rem;'><svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><span>${c.exception_message}</span></div></div>` : ''}</div>`).join('') : '<div style="color:var(--text3);font-size:var(--fs-sm);padding:.5rem;">SHACL 제약 조건이 없습니다. 재추출 시 자동 생성됩니다.</div>';
             }
             // Raw
@@ -13293,27 +13287,27 @@ ${domainCtx}${upperCtx}
         }
         function _renderEngineResult(fired, notFired, contradictions, shaclViolations = []) {
             const el = document.getElementById('inf-engine-out'); if (!el) return;
-            const rc = r => r === 'CRITICAL' ? 'var(--c-red-700)' : r === 'HIGH' ? 'var(--c-orange-700)' : r === 'MEDIUM' ? 'var(--c-amber-700)' : 'var(--c-green-700)';
+            const rc = r => r === 'CRITICAL' ? 'var(--ink)' : r === 'HIGH' ? 'var(--mono-700)' : r === 'MEDIUM' ? 'var(--mono-500)' : 'var(--mono-400)';
             let h = '';
             if (fired.length) {
                 h += `<div style="font-weight:var(--fw-bold);color:var(--ink);margin-bottom:.5rem;">발동된 규칙 (${fired.length}개)</div>`;
-                fired.forEach(r => { h += `<div style="border:var(--bw-thin) solid var(--c-green-100);border-left:var(--bw-thick) solid var(--c-green-600);border-radius:var(--r-md);padding:.5rem .8rem;background:var(--c-green-50);margin-bottom:.35rem;font-size:var(--fs-sm);"><div style="display:flex;gap:.4rem;align-items:center;margin-bottom:.25rem;"><code style="font-size:var(--fs-small);background:rgba(22,163,74,.12);color:var(--c-green-700);padding:.1rem .35rem;border-radius:var(--r-xs);">${r.id}</code><span style="font-weight:var(--fw-bold);">${r.name}</span>${r.risk ? `<span style="margin-left:auto;font-size:var(--fs-small);font-weight:var(--fw-bold);color:${rc(r.risk)};">${r.risk}</span>` : ''}</div><div><span style="font-size:var(--fs-xs);font-weight:var(--fw-semibold);color:var(--c-green-700);">THEN</span> ${r.action}</div>${r.dept ? `<div style="font-size:var(--fs-xs);color:var(--text3);margin-top:.15rem;">담당: ${r.dept}</div>` : ''}</div>`; });
+                fired.forEach(r => { h += `<div style="border:var(--bw-thin) solid var(--border);border-left:var(--bw-thick) solid var(--ink);border-radius:var(--r-md);padding:.5rem .8rem;background:var(--c-ink-04);margin-bottom:.35rem;font-size:var(--fs-sm);"><div style="display:flex;gap:.4rem;align-items:center;margin-bottom:.25rem;"><code style="font-size:var(--fs-small);background:var(--c-ink-06);color:var(--ink);padding:.1rem .35rem;border-radius:var(--r-xs);">${r.id}</code><span style="font-weight:var(--fw-bold);">${r.name}</span>${r.risk ? `<span style="margin-left:auto;font-size:var(--fs-small);font-weight:var(--fw-bold);color:${rc(r.risk)};">${r.risk}</span>` : ''}</div><div><span style="font-size:var(--fs-xs);font-weight:var(--fw-semibold);color:var(--ink);">THEN</span> ${r.action}</div>${r.dept ? `<div style="font-size:var(--fs-xs);color:var(--text3);margin-top:.15rem;">담당: ${r.dept}</div>` : ''}</div>`; });
             }
             if (notFired.length) {
                 h += `<div style="font-weight:var(--fw-bold);color:var(--ink);margin:.7rem 0 .5rem;">미발동 규칙 - 조건 불충족 (${notFired.length}개)</div>`;
                 notFired.forEach(r => { h += `<div style="border:var(--bw-thin) solid var(--border);border-left:var(--bw-thick) solid var(--text3);border-radius:var(--r-md);padding:.5rem .8rem;background:var(--mono-50);margin-bottom:.35rem;font-size:var(--fs-sm);"><div style="display:flex;gap:.4rem;align-items:center;margin-bottom:.25rem;"><code style="font-size:var(--fs-small);background:rgba(229,231,235,.7);color:var(--text2);padding:.1rem .35rem;border-radius:var(--r-xs);">${r.id}</code><span style="font-weight:var(--fw-bold);">${r.name}</span></div><div style="font-size:var(--fs-xs);color:var(--text3);">미충족: ${r.missing.join(', ')}</div></div>`; });
             }
             if (contradictions.length) {
-                h += `<div style="font-weight:var(--fw-bold);color:var(--c-red-700);margin:.7rem 0 .5rem;">모순 감지 (${contradictions.length}개)</div>`;
-                contradictions.forEach(c => { h += `<div style="border:var(--bw-thin) solid var(--c-red-50);border-left:var(--bw-thick) solid var(--c-red-700);border-radius:var(--r-md);padding:.5rem .8rem;background:var(--c-red-50b);margin-bottom:.35rem;font-size:var(--fs-sm);"><span style="font-weight:var(--fw-bold);">${c.subject}</span> 의 <span style="font-weight:var(--fw-bold);">${c.predicate}</span> 관계가 모순됨: <code>${c.pos}</code> vs <code>${c.neg}</code></div>`; });
+                h += `<div style="font-weight:var(--fw-bold);color:var(--ink);margin:.7rem 0 .5rem;">모순 감지 (${contradictions.length}개)</div>`;
+                contradictions.forEach(c => { h += `<div style="border:var(--bw-thin) solid var(--border);border-left:var(--bw-thick) solid var(--ink);border-radius:var(--r-md);padding:.5rem .8rem;background:var(--c-ink-04);margin-bottom:.35rem;font-size:var(--fs-sm);"><span style="font-weight:var(--fw-bold);">${c.subject}</span> 의 <span style="font-weight:var(--fw-bold);">${c.predicate}</span> 관계가 모순됨: <code>${c.pos}</code> vs <code>${c.neg}</code></div>`; });
             }
             // SHACL 위반 렌더링 (W3C SHACL 표준 검증 결과)
             if (shaclViolations.length) {
-                const sevColor = sv => sv === 'Violation' ? 'var(--c-red-700)' : sv === 'Warning' ? 'var(--c-orange-700)' : 'var(--c-amber-700)';
-                const sevBg = sv => sv === 'Violation' ? 'var(--c-red-50b)' : sv === 'Warning' ? 'var(--c-orange-50)' : 'var(--c-amber-50)';
-                const sevBd = sv => sv === 'Violation' ? 'var(--c-red-50)' : sv === 'Warning' ? 'var(--c-orange-200)' : 'var(--c-amber-100)';
-                h += `<div style="font-weight:var(--fw-bold);color:var(--c-amber-800);margin:.7rem 0 .5rem;">SHACL 제약 위반 - W3C SHACL (${shaclViolations.length}건)</div>`;
-                shaclViolations.forEach(v => { h += `<div style="border:var(--bw-thin) solid ${sevBd(v.severity)};border-left:var(--bw-thick) solid ${sevColor(v.severity)};border-radius:var(--r-md);padding:.5rem .8rem;background:${sevBg(v.severity)};margin-bottom:.35rem;font-size:var(--fs-sm);"><div style="display:flex;gap:.4rem;align-items:center;margin-bottom:.2rem;flex-wrap:wrap;"><code style="font-size:var(--fs-small);background:rgba(180,83,9,.1);color:var(--c-amber-800);padding:.1rem .3rem;border-radius:var(--r-xs);">${v.shape_id}</code><span style="font-weight:var(--fw-semibold);">${v.target}</span><span style="margin-left:auto;font-size:var(--fs-small);font-weight:var(--fw-bold);color:${sevColor(v.severity)};">${v.severity}</span></div><div style="font-size:var(--fs-xs);color:var(--text2);"><span style="font-weight:var(--fw-semibold);">대상 클래스:</span> ${v.target_class} | <span style="font-weight:var(--fw-semibold);">속성:</span> ${v.path} | <span style="font-weight:var(--fw-semibold);">필요:</span> ${v.expected}개 이상 - <span style="font-weight:var(--fw-semibold);">실제:</span> ${v.actual}개</div><div style="font-size:var(--fs-xs);color:var(--text3);margin-top:.15rem;">${v.message}</div></div>` });
+                const sevColor = sv => sv === 'Violation' ? 'var(--ink)' : sv === 'Warning' ? 'var(--mono-600)' : 'var(--mono-500)';
+                const sevBg = sv => sv === 'Violation' ? 'var(--c-ink-06)' : sv === 'Warning' ? 'var(--c-ink-04)' : 'var(--c-ink-03)';
+                const sevBd = sv => sv === 'Violation' ? 'var(--border)' : sv === 'Warning' ? 'var(--border)' : 'var(--border)';
+                h += `<div style="font-weight:var(--fw-bold);color:var(--ink);margin:.7rem 0 .5rem;">SHACL 제약 위반 - W3C SHACL (${shaclViolations.length}건)</div>`;
+                shaclViolations.forEach(v => { h += `<div style="border:var(--bw-thin) solid ${sevBd(v.severity)};border-left:var(--bw-thick) solid ${sevColor(v.severity)};border-radius:var(--r-md);padding:.5rem .8rem;background:${sevBg(v.severity)};margin-bottom:.35rem;font-size:var(--fs-sm);"><div style="display:flex;gap:.4rem;align-items:center;margin-bottom:.2rem;flex-wrap:wrap;"><code style="font-size:var(--fs-small);background:var(--c-ink-06);color:var(--text2);padding:.1rem .3rem;border-radius:var(--r-xs);">${v.shape_id}</code><span style="font-weight:var(--fw-semibold);">${v.target}</span><span style="margin-left:auto;font-size:var(--fs-small);font-weight:var(--fw-bold);color:${sevColor(v.severity)};">${v.severity}</span></div><div style="font-size:var(--fs-xs);color:var(--text2);"><span style="font-weight:var(--fw-semibold);">대상 클래스:</span> ${v.target_class} | <span style="font-weight:var(--fw-semibold);">속성:</span> ${v.path} | <span style="font-weight:var(--fw-semibold);">필요:</span> ${v.expected}개 이상 - <span style="font-weight:var(--fw-semibold);">실제:</span> ${v.actual}개</div><div style="font-size:var(--fs-xs);color:var(--text3);margin-top:.15rem;">${v.message}</div></div>` });
             } else if ((S.infInstances || []).length > 0 && Object.values((S.combined && S.combined.domain_schemas) || {}).some(sc => (sc.constraints || []).length > 0)) {
                 h += `<div style="font-size:var(--fs-xs);color:var(--c-green-700);margin:.7rem 0 .25rem;font-weight:var(--fw-semibold);">&#10003; SHACL 검증 통과 - 모든 A-Box 인스턴스가 제약 조건을 충족합니다.</div>`;
             }
@@ -13652,10 +13646,10 @@ ${domainCtx}${upperCtx}
             const rules = (inf?.inferred_rules) || [];
             if (!rules.length) { el.innerHTML = ''; return; }
             const riskStyle = {
-                CRITICAL: { bg: 'var(--c-red-50b)', border: 'var(--c-red-700)', badge: 'background:var(--c-red-700);color:var(--mono-white)', label: '!! CRITICAL' },
-                HIGH: { bg: 'var(--c-orange-50)', border: 'var(--c-orange-700)', badge: 'background:var(--c-orange-700);color:var(--mono-white)', label: '! HIGH' },
-                MEDIUM: { bg: 'var(--c-amber-50)', border: 'var(--c-amber-700)', badge: 'background:var(--c-amber-700);color:var(--mono-white)', label: '* MEDIUM' },
-                LOW: { bg: 'var(--c-green-50)', border: 'var(--c-green-700)', badge: 'background:var(--c-green-700);color:var(--mono-white)', label: 'LOW' },
+                CRITICAL: { bg: 'var(--c-ink-08)', border: 'var(--ink)', badge: 'background:var(--ink);color:var(--mono-white)', label: '!! CRITICAL' },
+                HIGH: { bg: 'var(--c-ink-06)', border: 'var(--mono-700)', badge: 'background:var(--mono-700);color:var(--mono-white)', label: '! HIGH' },
+                MEDIUM: { bg: 'var(--c-ink-04)', border: 'var(--mono-500)', badge: 'background:var(--mono-500);color:var(--mono-white)', label: '* MEDIUM' },
+                LOW: { bg: 'var(--c-ink-02)', border: 'var(--mono-400)', badge: 'background:var(--mono-400);color:var(--mono-white)', label: 'LOW' },
             };
             el.innerHTML = `
     <div style="border-top:var(--bw-strong) solid var(--border);padding-top:1rem;">
@@ -13736,7 +13730,7 @@ ${domainCtx}${upperCtx}
                 edge: 9,   // 엣지 라벨
             },
             label: { node: 18 }, // 노드 라벨 최대 글자 수 (기존 22~28 → 통일)
-            face: 'DM Sans, Noto Serif KR, serif',
+            face: 'DM Sans, Noto Sans KR, sans-serif',
         };
 
         // ── W3C Onto-Semantic Color Palette (다이어그램 공통 컬러 시스템) ──
@@ -15219,8 +15213,8 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
                 const conds = (r?.if?.conditions || [r?.if?.subject]).filter(Boolean).join('; ');
                 const cleanConds = r ? conds.replace(/<[^>]*>/g, '').trim() : '';
                 const cleanThen = r ? (r.then || '').replace(/<[^>]*>/g, '').trim() : '';
-                const tipHtml = r ? `<div class="inf-badge-tip" style="border:var(--bw-strong) solid var(--c-orange-200);"><div style="margin-bottom:.3rem;"><span style="font-size:var(--fs-small);font-weight:var(--fw-bold);background:var(--c-orange-100);color:var(--c-orange-800);padding:.05rem .3rem;border-radius:var(--r-full);margin-right:.18rem;">W3C SWRL</span><span style="font-size:var(--fs-small);font-weight:var(--fw-bold);background:var(--c-orange-50);color:var(--c-orange-700);padding:.05rem .3rem;border-radius:var(--r-full);">예외 규칙</span></div><div style="font-size:var(--fs-xs);font-weight:var(--fw-bold);color:var(--mono-800);margin-bottom:.18rem;">${id}${nm ? ' · ' + nm.substring(0, 30) : ''}</div><div style="font-size:var(--fs-small);font-weight:var(--fw-bold);color:var(--c-orange-800);margin-bottom:.04rem;">IF</div><div style="font-size:var(--fs-small);color:var(--mono-700);margin-bottom:.12rem;line-height:var(--lh-snug);">${cleanConds.substring(0, 120)}</div><div style="font-size:var(--fs-small);font-weight:var(--fw-bold);color:var(--c-green-700);margin-bottom:.04rem;">THEN</div><div style="font-size:var(--fs-small);color:var(--mono-700);line-height:var(--lh-snug);">${cleanThen.substring(0, 80)}</div></div>` : '';
-                return `<span class="inf-badge" style="display:inline-flex;align-items:center;gap:.22rem;font-size:var(--fs-xs);font-weight:var(--fw-bold);background:var(--c-orange-50);color:var(--c-orange-800);border:var(--bw-thin) solid var(--c-orange-300);border-radius:var(--r-sm);padding:.06rem .4rem;margin:0 .12rem;cursor:help;white-space:nowrap;vertical-align:middle;">${tipHtml}<code style="font-size:var(--fs-small);font-weight:var(--fw-heavy);color:var(--c-orange-800);">${id}</code>${nm ? `<span style="font-weight:var(--fw-medium);font-size:var(--fs-small);color:var(--c-orange-700);border-left:var(--bw-thin) solid var(--c-orange-300);padding-left:.22rem;max-width:120px;overflow:hidden;text-overflow:ellipsis;">${nm.substring(0, 22)}</span>` : ''}</span>`;
+                const tipHtml = r ? `<div class="inf-badge-tip" style="border:var(--bw-strong) solid var(--border);"><div style="margin-bottom:.3rem;"><span style="font-size:var(--fs-small);font-weight:var(--fw-bold);background:var(--c-ink-08);color:var(--ink);padding:.05rem .3rem;border-radius:var(--r-full);margin-right:.18rem;">W3C SWRL</span><span style="font-size:var(--fs-small);font-weight:var(--fw-bold);background:var(--c-ink-06);color:var(--mono-700);padding:.05rem .3rem;border-radius:var(--r-full);">예외 규칙</span></div><div style="font-size:var(--fs-xs);font-weight:var(--fw-bold);color:var(--mono-800);margin-bottom:.18rem;">${id}${nm ? ' · ' + nm.substring(0, 30) : ''}</div><div style="font-size:var(--fs-small);font-weight:var(--fw-bold);color:var(--ink);margin-bottom:.04rem;">IF</div><div style="font-size:var(--fs-small);color:var(--mono-700);margin-bottom:.12rem;line-height:var(--lh-snug);">${cleanConds.substring(0, 120)}</div><div style="font-size:var(--fs-small);font-weight:var(--fw-bold);color:var(--ink);margin-bottom:.04rem;">THEN</div><div style="font-size:var(--fs-small);color:var(--mono-700);line-height:var(--lh-snug);">${cleanThen.substring(0, 80)}</div></div>` : '';
+                return `<span class="inf-badge" style="display:inline-flex;align-items:center;gap:.22rem;font-size:var(--fs-xs);font-weight:var(--fw-bold);background:var(--c-ink-06);color:var(--ink);border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.06rem .4rem;margin:0 .12rem;cursor:help;white-space:nowrap;vertical-align:middle;">${tipHtml}<code style="font-size:var(--fs-small);font-weight:var(--fw-heavy);color:var(--ink);">${id}</code>${nm ? `<span style="font-weight:var(--fw-medium);font-size:var(--fs-small);color:var(--mono-600);border-left:var(--bw-thin) solid var(--border);padding-left:.22rem;max-width:120px;overflow:hidden;text-overflow:ellipsis;">${nm.substring(0, 22)}</span>` : ''}</span>`;
             });
             // [INF_XX] - 추론 규칙 badge + 인라인 규칙명 + 위험도
             s = s.replace(/\[?(INF_\d+)\]?/g, (_, id) => {
@@ -15233,7 +15227,7 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
                 const cleanCond = r ? (r.condition || '(조건)').replace(/<[^>]*>/g, '').trim() : '';
                 const cleanAction = r ? (r.action || '').replace(/<[^>]*>/g, '').trim() : '';
                 const casc = (r?.cascade_rules || []).length ? `<div style="font-size:var(--fs-small);color:var(--c-purple-700);font-weight:var(--fw-bold);margin-top:.2rem;">cascade → ${r.cascade_rules.join(' → ')}</div>` : '';
-                const tipHtml = r ? `<div class="inf-badge-tip" style="border:var(--bw-strong) solid ${rC}66;"><div style="margin-bottom:.3rem;"><span style="font-size:var(--fs-small);font-weight:var(--fw-bold);background:var(--c-red-50);color:var(--c-red-800);padding:.05rem .3rem;border-radius:var(--r-full);margin-right:.18rem;">W3C SWRL</span><span style="font-size:var(--fs-small);font-weight:var(--fw-bold);background:${rBg};color:${rC};padding:.05rem .3rem;border-radius:var(--r-full);">${risk}</span></div><div style="font-size:var(--fs-xs);font-weight:var(--fw-bold);color:var(--mono-800);margin-bottom:.18rem;">${id}${nm ? ' · ' + nm.substring(0, 30) : ''}</div><div style="font-size:var(--fs-small);font-weight:var(--fw-bold);color:${rC};margin-bottom:.04rem;">IF</div><div style="font-size:var(--fs-small);color:var(--mono-700);margin-bottom:.12rem;line-height:var(--lh-snug);">${cleanCond.substring(0, 120)}</div><div style="font-size:var(--fs-small);font-weight:var(--fw-bold);color:var(--c-green-700);margin-bottom:.04rem;">THEN</div><div style="font-size:var(--fs-small);color:var(--mono-700);line-height:var(--lh-snug);">${cleanAction.substring(0, 80)}</div>${casc}</div>` : '';
+                const tipHtml = r ? `<div class="inf-badge-tip" style="border:var(--bw-strong) solid ${rC}66;"><div style="margin-bottom:.3rem;"><span style="font-size:var(--fs-small);font-weight:var(--fw-bold);background:var(--c-red-50);color:var(--c-red-800);padding:.05rem .3rem;border-radius:var(--r-full);margin-right:.18rem;">W3C SWRL</span><span style="font-size:var(--fs-small);font-weight:var(--fw-bold);background:${rBg};color:${rC};padding:.05rem .3rem;border-radius:var(--r-full);">${risk}</span></div><div style="font-size:var(--fs-xs);font-weight:var(--fw-bold);color:var(--mono-800);margin-bottom:.18rem;">${id}${nm ? ' · ' + nm.substring(0, 30) : ''}</div><div style="font-size:var(--fs-small);font-weight:var(--fw-bold);color:${rC};margin-bottom:.04rem;">IF</div><div style="font-size:var(--fs-small);color:var(--mono-700);margin-bottom:.12rem;line-height:var(--lh-snug);">${cleanCond.substring(0, 120)}</div><div style="font-size:var(--fs-small);font-weight:var(--fw-bold);color:var(--ink);margin-bottom:.04rem;">THEN</div><div style="font-size:var(--fs-small);color:var(--mono-700);line-height:var(--lh-snug);">${cleanAction.substring(0, 80)}</div>${casc}</div>` : '';
                 return `<span class="inf-badge" style="display:inline-flex;align-items:center;gap:.22rem;font-size:var(--fs-xs);font-weight:var(--fw-bold);background:${rBg};color:${rFt};border:var(--bw-thin) solid ${rC}55;border-radius:var(--r-sm);padding:.06rem .4rem;margin:0 .12rem;cursor:help;white-space:nowrap;vertical-align:middle;">${tipHtml}<code style="font-size:var(--fs-small);font-weight:var(--fw-heavy);color:${rFt};">${id}</code>${nm ? `<span style="font-weight:var(--fw-medium);font-size:var(--fs-small);color:${rFt};border-left:var(--bw-thin) solid ${rC}55;padding-left:.22rem;max-width:120px;overflow:hidden;text-overflow:ellipsis;">${nm.substring(0, 22)}</span>` : ''}</span>`;
             });
             // 줄바꿈
@@ -16277,16 +16271,16 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
             if (!d) return;
             body.innerHTML = `
         <div style="background:linear-gradient(135deg,var(--c-ink-08),var(--c-ink-06));border-radius:var(--r-md);padding:1.1rem 1.2rem;border-left:var(--bw-strong) solid var(--coral);">
-            <div style="font-size:var(--fs-xs);font-weight:var(--fw-heavy);letter-spacing:.07em;color:var(--coral);text-transform:uppercase;margin-bottom:.55rem;">이 단계를 반드시 거쳐야 하는 이유</div>
+            <div style="font-size:var(--fs-xs);font-weight:var(--fw-heavy);letter-spacing:.07em;color:var(--ink);text-transform:uppercase;margin-bottom:.55rem;">이 단계를 반드시 거쳐야 하는 이유</div>
             <div style="font-size:var(--fs-sm);color:var(--ink);font-weight:var(--fw-semibold);line-height:var(--lh-airy);">${d.why}</div>
         </div>
-        <div style="background:var(--col-except-bg);border:var(--bw-thin) solid var(--c-orange-200);border-left:var(--bw-thick) solid var(--col-except-bd);border-radius:var(--r-md);padding:1rem 1.1rem;">
+        <div style="background:var(--col-except-bg);border:var(--bw-thin) solid var(--border);border-left:var(--bw-thick) solid var(--col-except-bd);border-radius:var(--r-md);padding:1rem 1.1rem;">
             <div style="font-size:var(--fs-xs);font-weight:var(--fw-heavy);letter-spacing:.07em;color:var(--col-except-bd);text-transform:uppercase;margin-bottom:.45rem;">이 단계를 건너뛰면?</div>
             <div style="font-size:var(--fs-xs);color:var(--col-except-ft);line-height:var(--lh-loose);">${d.skip}</div>
         </div>
         <div>
             <div style="font-size:var(--fs-xs);font-weight:var(--fw-heavy);letter-spacing:.07em;color:var(--green);text-transform:uppercase;margin-bottom:.55rem;">이 단계로 얻는 것</div>
-            <div style="display:flex;flex-direction:column;gap:.55rem;">${d.gain.map(g => `<div style="display:flex;align-items:flex-start;gap:.55rem;font-size:var(--fs-xs);color:var(--text2);line-height:var(--lh-comfortable);"><span style="width:6px;height:6px;border-radius:var(--r-full);background:var(--coral);flex-shrink:0;margin-top:.48rem;"></span>${g}</div>`).join('')}</div>
+            <div style="display:flex;flex-direction:column;gap:.55rem;">${d.gain.map(g => `<div style="display:flex;align-items:flex-start;gap:.55rem;font-size:var(--fs-xs);color:var(--text2);line-height:var(--lh-comfortable);"><span style="width:6px;height:6px;border-radius:var(--r-full);background:var(--ink);flex-shrink:0;margin-top:.48rem;"></span>${g}</div>`).join('')}</div>
         </div>
         <div style="background:var(--c-ink-04);border-radius:var(--r-md);padding:1rem 1.1rem;">
             <div style="font-size:var(--fs-xs);font-weight:var(--fw-heavy);letter-spacing:.07em;color:var(--ink);text-transform:uppercase;margin-bottom:.45rem;">쉬운 비유</div>
