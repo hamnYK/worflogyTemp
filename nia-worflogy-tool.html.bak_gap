@@ -246,13 +246,15 @@
             --sp-6: 1.5rem;     /* 24px */
             --sp-7: 1.75rem;    /* 28px */
             --sp-8: 2rem;       /* 32px */
-            /* ── Gap Tokens (5단계 설계) ── */
-            /* xs(4.8px) sm(6.4px) md(8px) lg(10.4px) xl(13.6px) */
-            --gap-xs: 0.3rem;   /* 4.8px — 최소 간격 (태그 내부, 아이콘+텍스트) */
-            --gap-sm: 0.4rem;   /* 6.4px — 소형 간격 (인라인 요소 나열) */
-            --gap-md: 0.5rem;   /* 8px   — 기본 간격 (대부분 실내 레이아웃) */
-            --gap-lg: 0.65rem;  /* 10.4px— 대형 간격 (패널 내부 섹션) */
-            --gap-xl: 0.85rem;  /* 13.6px— 최대 간격 (주요 영역 간 분리) */
+            /* ── Gap Tokens (내부 인터미디에이트) ── */
+            --gap-2xs: 0.3rem;   /* 4.8px */
+            --gap-xs:  0.4rem;   /* 6.4px */
+            --gap-sm:  0.45rem;  /* 7.2px */
+            --gap-md:  0.5rem;   /* 8px = --sp-2 */
+            --gap-rg:  0.6rem;   /* 9.6px */
+            --gap-lg:  0.65rem;  /* 10.4px */
+            --gap-xl:  0.7rem;   /* 11.2px */
+            --gap-2xl: 0.8rem;   /* 12.8px */
 
             /* ── Line Height Scale ── */
             --lh-none:        1;
@@ -2236,7 +2238,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: var(--gap-sm);
+            gap: var(--gap-xs);
             box-shadow: -3px 0 16px var(--c-ink-20);
             transition: all var(--t);
             writing-mode: vertical-rl;
@@ -3450,7 +3452,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: var(--gap-sm);
+            gap: var(--gap-xs);
             box-shadow: -3px 0 12px var(--c-ink-15);
             transition: var(--transition-base);
             writing-mode: vertical-rl;
@@ -4170,10 +4172,9 @@
         /* 행: flex 기본 레이아웃 */
         .row        { display: flex; align-items: center; }
         .row-gap    { display: flex; align-items: center; gap: var(--gap-md); }
-        .row-gap-xs { display: flex; align-items: center; gap: var(--gap-sm); }
+        .row-gap-xs { display: flex; align-items: center; gap: var(--gap-xs); }
         .row-gap-sm { display: flex; align-items: center; gap: var(--gap-sm); }
-        .row-gap-lg { display: flex; align-items: center; gap: var(--gap-lg); }
-        .row-start  { display: flex; align-items: flex-start; }
+        .row-gap-lg { display: flex; align-items: center; gap: var(--gap-xl); }
         /* 열: flex-direction column */
         .col        { display: flex; flex-direction: column; }
         .col-gap    { display: flex; flex-direction: column; gap: var(--gap-md); }
@@ -4181,8 +4182,6 @@
         /* 간격만: justify-content */
         .between    { display: flex; align-items: center; justify-content: space-between; }
         .center     { display: flex; align-items: center; justify-content: center; }
-        /* flex + gap만 (align-items 없음) */
-        .stack      { display: flex; }
     </style>
 </head>
 
@@ -4198,7 +4197,7 @@
                     <span class="ld-brand-title" id="app-brand-title"></span>
                 </div>
             </div>
-            <div class="row-gap-lg">
+            <div style="display:flex;align-items:center;gap:.75rem;">
                 <button class="ld-help-btn" id="ld-purpose-toggle" aria-label="강의 목적 패널 열기"
                     onclick="toggleLdPurpose()"><svg viewBox="0 0 24 24"
                         style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round">
@@ -4416,8 +4415,22 @@
         <p class="ld-mobile-notice">이 도구는 <strong>PC 웹 환경</strong>에 최적화되어 있습니다.<br>모바일에서는 기능이 정상 동작하지 않을 수 있습니다.</p>
 
         <!-- ── 랜딩 저작권 푸터 ── -->
-        <footer class="fs-small center" style="position:absolute;bottom:0;left:0;right:0;padding:14px 32px;gap:20px;background:linear-gradient(to top, var(--c-dark-82) 0%, var(--c-ink-02) 100%);font-family:var(--font-body);letter-spacing:var(--ls-wide);color:var(--c-w-85);pointer-events:none;z-index:var(--z-above)">
-            <span class="row" style="gap:6px">
+        <footer class="fs-small" style="
+        position:absolute;
+        bottom:0; left:0; right:0;
+        padding:14px 32px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        gap:20px;
+        background:linear-gradient(to top, var(--c-dark-82) 0%, var(--c-ink-02) 100%);
+        font-family:var(--font-body);
+        letter-spacing: var(--ls-wide);
+        color:var(--c-w-85);
+        pointer-events:none;
+        z-index:var(--z-above);
+">
+            <span style="display:flex;align-items:center;gap:6px;">
                 <svg viewBox="0 0 16 16" style="width:11px;height:11px;fill:var(--c-w-75);flex-shrink:0;">
                     <path
                         d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm0 1.3A5.7 5.7 0 1 1 8 13.7 5.7 5.7 0 0 1 8 2.3zm-.1 1.5c-.9 0-1.7.3-2.3.9-.6.6-.9 1.4-.9 2.3 0 .9.3 1.7.9 2.3.6.6 1.4.9 2.3.9.6 0 1.2-.2 1.7-.5l-.7-.9c-.3.2-.6.3-1 .3-.5 0-1-.2-1.3-.6C6.3 9.2 6.1 8.7 6.1 8c0-.7.2-1.2.5-1.6.3-.4.8-.6 1.3-.6.4 0 .7.1 1 .3l.7-.9C9.1 5 8.5 4.8 7.9 4.8z" />
@@ -4490,7 +4503,7 @@
                 <div class="ldh-divider"></div>
                 <div class="ldh-section">
                     <div class="ldh-stitle">얼마나 더 실현 가능해졌나</div>
-                    <div class="stack" style="gap:var(--gap-xl);margin-bottom:.8rem">
+                    <div style="display:flex;gap:.8rem;margin-bottom:.8rem;">
                         <div class="ldh-highlight" style="flex:1;text-align:center;">
                             <div class="ldh-hl-num">~15%</div>
                             <div class="ldh-hl-label">LLM 이전<br>실현 가능 범위</div>
@@ -5000,7 +5013,7 @@
                             </svg></span> 파일 시스템 접근은 <strong>Chrome / Edge</strong>에서만 지원됩니다. Firefox·Safari는 파일 첨부 방식을
                         이용하세요.</div>
                     <div id="restore-folder-ui"
-                        style="display:none;align-items:center;gap:var(--sp-3);padding:.65rem .9rem;border:var(--bw-thin) solid var(--border-a);border-radius:var(--r-md);background:var(--c-ink-04);margin-bottom:.7rem;border-left:var(--bw-strong) solid var(--coral);">
+                        style="display:none;align-items:center;gap:.75rem;padding:.65rem .9rem;border:var(--bw-thin) solid var(--border-a);border-radius:var(--r-md);background:var(--c-ink-04);margin-bottom:.7rem;border-left:var(--bw-strong) solid var(--coral);">
                         <span class="ico"><svg viewBox="0 0 24 24">
                                 <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
                             </svg></span>
@@ -5228,14 +5241,14 @@
                         조례 · 법령 · 표준운영절차(SOP) · 민원 처리 지침서 등</div>
                     <details style="margin-top:.7rem;">
                         <summary
-                            style="list-style:none;cursor:pointer;font-weight:var(--fw-semibold);color:var(--text2);padding:.25rem 0"
-                            class="lbl fs-sm between">
+                            style="list-style:none;cursor:pointer;font-weight:var(--fw-semibold);color:var(--text2);padding:.25rem 0;display:flex;align-items:center;justify-content:space-between"
+                            class="lbl fs-sm">
                             <span>대국민 알림 예시 데이터</span>
                             <span class="fs-small"
                                 style="font-weight:var(--fw-regular);color:var(--text3);margin-left:.5rem">펼치기
                                 ▾</span>
                         </summary>
-                        <div class="col-gap" style="margin-top:.5rem">
+                        <div style="display:flex;flex-direction:column;gap:.5rem;margin-top:.5rem;">
                             <div>
                                 <div class="fs-xs"
                                     style="font-weight:var(--fw-semibold);color:var(--text3);letter-spacing:.04em;margin-bottom:.28rem;padding-bottom:.18rem;border-bottom:var(--bw-thin) solid var(--border)">
@@ -5468,7 +5481,7 @@
                                     style="font-weight:var(--fw-regular);color:var(--text3);">(선택, 점
                                     표기)</span></label><input spellcheck="false" type="text" class="inp" id="ds-api-path"
                                 placeholder="예: response.body.items  (비워두면 전체 응답)"></div>
-                        <div class="stack" style="gap:var(--gap-md)">
+                        <div style="display:flex;gap:.5rem;">
                             <button class="btn btn-p btn-sm" onclick="fetchApiData()" id="ds-api-btn">
                                 <span class="ico"><svg viewBox="0 0 24 24"
                                         style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round">
@@ -5491,7 +5504,7 @@
                                     style="font-weight:var(--fw-regular);color:var(--text3);">(data.go.kr
                                     발급)</span></label><input spellcheck="false" type="password" class="inp"
                                 id="ds-portal-key" placeholder="발급받은 인증키(Encoding 또는 Decoding)"></div>
-                        <div class="fg stack" style="gap:var(--gap-md)">
+                        <div class="fg" style="display:flex;gap:.5rem;">
                             <input spellcheck="false" type="text" class="inp" id="ds-portal-q"
                                 placeholder="데이터셋 검색어 (예: 행정안전부 민원처리)" style="flex:1"
                                 onkeydown="if(event.key==='Enter')searchPortal()">
@@ -5547,7 +5560,7 @@
                             </svg></span> 문서 미리보기</div>
                     <div class="fs-sm" style="color:var(--text3)" id="prev-fn">파일을 선택하면 내용이 표시됩니다</div>
                     <div class="dprev" id="doc-prev">-</div>
-                    <div class="row-gap-sm" style="margin-top:.7rem;flex-wrap:wrap">
+                    <div style="margin-top:.7rem;display:flex;align-items:center;gap:.45rem;flex-wrap:wrap;">
                         <span class="fs-sm" style="color:var(--text3)">로드된 문서:</span>
                         <span class="badge bb" id="doc-cnt">0개</span>
                         <span class="fs-xs" style="color:var(--text3)" id="doc-chars"></span>
@@ -5561,7 +5574,7 @@
                                 <line x1="21" y1="21" x2="16.65" y2="16.65" />
                             </svg></span> 법령정보센터 검색</div>
 
-                    <div class="fg stack" style="gap:var(--gap-md)">
+                    <div class="fg" style="display:flex;gap:.5rem;">
                         <input spellcheck="false" type="text" class="inp" id="law-q"
                             placeholder="법령명 입력 (예: 도로교통법, 주정차 조례)" style="flex:1"
                             onkeydown="if(event.key==='Enter')searchLaw()">
@@ -5595,13 +5608,13 @@
                             Step 3 시나리오 기반 - 추천 법령 검색어 &amp; 첨부 문서 가이드
                         </div>
                         <div style="margin-bottom:.75rem;">
-                            <div class="between"
-                                style="margin-bottom:.4rem">
+                            <div
+                                style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.4rem;">
                                 <div class="fs-small"
                                     style="font-weight:var(--fw-bold);color:var(--text3);letter-spacing:.04em">
                                     시나리오 선택</div>
-                                <button class="fs-small row-gap-xs" id="scen-hint-force-btn" onclick="forceAIScenHint()"
-                                    style="padding:.2rem .55rem;font-weight:var(--fw-semibold);border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);background:var(--bg-card);color:var(--text2);cursor:pointer;transition:all .15s"
+                                <button class="fs-small" id="scen-hint-force-btn" onclick="forceAIScenHint()"
+                                    style="display:none;padding:.2rem .55rem;font-weight:var(--fw-semibold);border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);background:var(--bg-card);color:var(--text2);cursor:pointer;display:flex;align-items:center;gap:.3rem;transition:all .15s"
                                     title="하드코딩된 키워드 매칭을 무시하고 AI에게 직접 법령을 추천받습니다">
                                     <svg viewBox="0 0 24 24"
                                         style="width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2.5;">
@@ -5617,7 +5630,7 @@
                             style="display:none;color:var(--text3);padding:.4rem 0">선택한 시나리오에서
                             매칭되는
                             도메인을 찾을 수 없습니다.</div>
-                        <div class="col-gap" id="scen-hint-list"></div>
+                        <div id="scen-hint-list" style="display:flex;flex-direction:column;gap:.8rem;"></div>
                     </div>
                 </div>
             </div>
@@ -5850,9 +5863,9 @@
 
                 <!-- 접이식 작성 가이드 -->
                 <details style="margin-bottom:1rem;" id="scen-guide-details">
-                    <summary class="fs-sm between"
-                        style="list-style:none;cursor:pointer;padding:.55rem .9rem;background:var(--c-ink-06);border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);font-weight:var(--fw-bold);color:var(--ink);user-select:none">
-                        <span class="row-gap-sm">
+                    <summary class="fs-sm"
+                        style="list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:.55rem .9rem;background:var(--c-ink-06);border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);font-weight:var(--fw-bold);color:var(--ink);user-select:none">
+                        <span style="display:flex;align-items:center;gap:.45rem;">
                             <svg viewBox="0 0 24 24"
                                 style="width:14px;height:14px;stroke:var(--ink);fill:none;stroke-width:var(--sw-thick);stroke-linecap:round;">
                                 <circle cx="12" cy="12" r="10" />
@@ -5864,10 +5877,10 @@
                         <span class="fs-xs" style="font-weight:var(--fw-regular);color:var(--text3)">펼치기
                             ▾</span>
                     </summary>
-                    <div class="col-gap"
-                        style="margin-top:.7rem;padding:.85rem 1rem;background:var(--mono-white);border:var(--bw-thin) solid var(--border-a);border-radius:var(--r-md)">
-                        <div class="fs-sm row-gap-xs"
-                            style="font-weight:var(--fw-bold);color:var(--ink)">
+                    <div
+                        style="margin-top:.7rem;padding:.85rem 1rem;background:var(--mono-white);border:var(--bw-thin) solid var(--border-a);border-radius:var(--r-md);display:flex;flex-direction:column;gap:.7rem;">
+                        <div class="fs-sm"
+                            style="display:flex;align-items:center;gap:.4rem;font-weight:var(--fw-bold);color:var(--ink)">
                             <svg viewBox="0 0 24 24"
                                 style="width:13px;height:13px;stroke:var(--coral);fill:none;stroke-width:var(--sw-thick);stroke-linecap:round;flex-shrink:0;">
                                 <line x1="8" y1="6" x2="21" y2="6" />
@@ -5878,7 +5891,7 @@
                                 <line x1="3" y1="18" x2="3.01" y2="18" />
                             </svg> 시나리오에 포함하면 온톨로지 품질이 높아지는 5가지 요소
                         </div>
-                        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--gap-md);">
+                        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.55rem;">
                             <div
                                 style="border-left:var(--bw-strong) solid var(--coral);padding:.5rem .75rem;background:var(--c-ink-04);border-radius:0 var(--r-sm) var(--r-sm) 0;">
                                 <div class="fs-xs"
@@ -5929,8 +5942,8 @@
                             </div>
                         </div>
                         <div style="padding:.65rem .9rem;background:var(--c-ink-06);border-radius:var(--r-sm);">
-                            <div class="fs-xs row-gap-xs"
-                                style="font-weight:var(--fw-bold);color:var(--ink);margin-bottom:.35rem">
+                            <div class="fs-xs"
+                                style="display:flex;align-items:center;gap:.35rem;font-weight:var(--fw-bold);color:var(--ink);margin-bottom:.35rem">
                                 <svg viewBox="0 0 24 24"
                                     style="width:12px;height:12px;stroke:var(--coral);fill:none;stroke-width:var(--sw-thick);stroke-linecap:round;flex-shrink:0;">
                                     <path d="M12 20h9" />
@@ -5944,8 +5957,8 @@
                                 처리 요청: ① 긴급 보수 가능 여부, ② 담당 부서 및 처리기한, ③ 야간 임시 안전시설 설치 가능 여부.&rdquo;
                             </div>
                         </div>
-                        <div class="fs-xs row-start"
-                            style="color:var(--text3);line-height:var(--lh-normal)">
+                        <div class="fs-xs"
+                            style="display:flex;align-items:flex-start;gap:.35rem;color:var(--text3);line-height:var(--lh-normal)">
                             <svg viewBox="0 0 24 24"
                                 style="width:12px;height:12px;stroke:var(--coral);fill:none;stroke-width:2;stroke-linecap:round;flex-shrink:0;margin-top:.1rem;">
                                 <circle cx="12" cy="12" r="10" />
@@ -5961,7 +5974,7 @@
                 <div class="fg"><label class="lbl">민원/업무 처리 시나리오</label><textarea spellcheck="false" class="inp"
                         id="scen-inp" style="min-height:180px;"
                         placeholder="예) 자동차 정기검사 만료 후 14일이 지났습니다. 지금 검사를 받을 수 있는지, 과태료는 얼마인지 문의합니다."></textarea></div>
-                <div class="stack" style="gap:var(--gap-md);margin-top:.3rem">
+                <div style="display:flex;gap:.5rem;margin-top:.3rem;">
                     <button class="btn btn-p" id="analyze-btn" onclick="analyzeScenario()"
                         style="flex:1;justify-content:center;">
                         <span class="ico"><svg viewBox="0 0 24 24">
@@ -5991,7 +6004,7 @@
                         </svg></span> 등록된 시나리오 <span class="fs-xs" id="scen-cnt"
                         style="font-weight:var(--fw-regular);color:var(--text3);margin-left:.4rem"></span>
                 </div>
-                <div class="col-gap" id="scenario-list"></div>
+                <div id="scenario-list" style="display:flex;flex-direction:column;gap:.5rem;"></div>
             </div>
 
             <div class="card" id="entity-hint-card">
@@ -6014,7 +6027,7 @@
                         <span class="fs-xs" style="color:var(--text3);padding:.1rem .2rem"
                             id="entity-empty-hint">엔터티가 없습니다. 아래에서 직접 추가하거나 AI 분석을 이용하세요.</span>
                     </div>
-                    <div class="stack" style="gap:var(--gap-md);margin-top:.2rem">
+                    <div style="display:flex;gap:.5rem;margin-top:.2rem;">
                         <input spellcheck="false" type="text" class="inp" id="entity-new"
                             placeholder="엔터티 직접 추가 (예: 수급자, 처리기한)" style="flex:1;"
                             onkeydown="if(event.key==='Enter')addEntityTag()">
@@ -6027,8 +6040,8 @@
                             style="color:var(--text3);font-weight:var(--fw-regular)">- 체크한
                             질문에
                             답할 수 있는 온톨로지를 설계합니다</span></label>
-                    <div class="col-gap-sm" id="query-checks"></div>
-                    <div class="stack" style="gap:var(--gap-md);margin-top:.4rem">
+                    <div id="query-checks" style="display:flex;flex-direction:column;gap:.3rem;"></div>
+                    <div style="display:flex;gap:.5rem;margin-top:.4rem;">
                         <input spellcheck="false" type="text" class="inp" id="query-new"
                             placeholder="질의 목표 직접 추가 (예: 필요한 서류는 무엇인가요?)" style="flex:1;"
                             onkeydown="if(event.key==='Enter')addQueryItem()">
@@ -6038,8 +6051,8 @@
 
                 <div class="fg" style="margin-top:.6rem;">
                     <label class="lbl">스키마 상세 수준</label>
-                    <div class="stack"
-                        style="gap:0;border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);overflow:hidden;margin-top:.3rem">
+                    <div
+                        style="display:flex;gap:0;border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);overflow:hidden;margin-top:.3rem;">
                         <label class="fs-sm" id="lvl-btn-outline" onclick="setLevel('outline')"
                             style="flex:1;text-align:center;padding:.45rem;cursor:pointer;background:var(--coral);color:var(--mono-white);font-weight:var(--fw-semibold);transition:all .2s">개요</label>
                         <label class="fs-sm" id="lvl-btn-mid" onclick="setLevel('mid')"
@@ -6068,7 +6081,7 @@
                             <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
                         </svg></span> 시나리오별 스키마 추출</div>
                 <div id="s4-notice" class="al al-i">Step 3에서 시나리오를 추가하면 각 시나리오별 탭이 생성됩니다.</div>
-                <div class="stack" style="gap:var(--gap-lg);flex-wrap:wrap;margin-bottom:.8rem">
+                <div style="display:flex;gap:.7rem;flex-wrap:wrap;margin-bottom:.8rem;">
                     <button class="btn btn-p" onclick="extractAllSchemas()" id="ext-all-btn"><span class="ico"><svg
                                 viewBox="0 0 24 24">
                                 <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
@@ -6076,8 +6089,8 @@
 
                 </div>
                 <!-- 외부 시나리오 탭 바 -->
-                <div class="stack" id="s4-outer-tabs"
-                    style="border-bottom:var(--bw-thin) solid var(--border);gap:0;overflow-x:auto;flex-wrap:nowrap">
+                <div id="s4-outer-tabs"
+                    style="display:flex;border-bottom:var(--bw-thin) solid var(--border);gap:0;overflow-x:auto;flex-wrap:nowrap;">
                 </div>
                 <!-- 외부 탭 패널들 -->
                 <div id="s4-panes" style="margin-top:.9rem;"></div>
@@ -6107,7 +6120,7 @@
                                 d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
                         </svg></span> 상위 온톨로지 도출</div>
                 <div class="al al-i">도메인 스키마들의 공통 추상 개념(예: 민원인, 처리기한, 담당기관)을 추출하고 각 도메인 클래스와 subClassOf로 연결합니다.</div>
-                <div class="stack" style="gap:var(--gap-lg);flex-wrap:wrap;margin-bottom:.7rem">
+                <div style="display:flex;gap:.7rem;flex-wrap:wrap;margin-bottom:.7rem;">
                     <button class="btn btn-p" onclick="genUpperOntology()" id="upper-btn"><span class="ico"><svg
                                 viewBox="0 0 24 24">
                                 <circle cx="12" cy="12" r="10" />
@@ -6125,7 +6138,7 @@
                 <div id="upper-st"></div>
             </div>
             <div class="card" id="upper-res" style="display:none">
-                <div class="stack" style="border-bottom:var(--bw-thin) solid var(--border);margin-bottom:.9rem;gap:0">
+                <div style="display:flex;border-bottom:var(--bw-thin) solid var(--border);margin-bottom:.9rem;gap:0;">
                     <button class="fs-sm" id="utab-classes" onclick="switchUpperTab('classes')"
                         style="padding:.45rem 1.1rem;font-weight:var(--fw-semibold);background:none;border:none;cursor:pointer;border-bottom:var(--bw-thick) solid var(--coral);color:var(--coral);transition:all .2s">상위
                         클래스</button>
@@ -6138,8 +6151,8 @@
                     <button class="fs-sm" id="utab-gui" onclick="switchUpperTab('gui')"
                         style="padding:.45rem 1.1rem;font-weight:var(--fw-semibold);background:none;border:none;cursor:pointer;border-bottom:var(--bw-thick) solid transparent;color:var(--text3);transition:all .2s">GUI
                         편집</button>
-                    <button class="fs-sm row-gap-xs" id="utab-diagram" onclick="switchUpperTab('diagram')"
-                        style="padding:.45rem 1.1rem;font-weight:var(--fw-semibold);background:none;border:none;cursor:pointer;border-bottom:var(--bw-thick) solid transparent;color:var(--text3);transition:all .2s"><span
+                    <button class="fs-sm" id="utab-diagram" onclick="switchUpperTab('diagram')"
+                        style="padding:.45rem 1.1rem;font-weight:var(--fw-semibold);background:none;border:none;cursor:pointer;border-bottom:var(--bw-thick) solid transparent;color:var(--text3);transition:all .2s;display:flex;align-items:center;gap:.3rem"><span
                             class="ico" style="width:14px;height:14px;"><svg viewBox="0 0 24 24" stroke="currentColor"
                                 fill="none" stroke-width="2">
                                 <line x1="18" y1="20" x2="18" y2="10" />
@@ -6148,10 +6161,10 @@
                             </svg></span> 다이어그램</button>
                 </div>
                 <div id="utab-classes-pane">
-                    <div class="col-gap" id="upper-classes-list"></div>
+                    <div id="upper-classes-list" style="display:flex;flex-direction:column;gap:.5rem;"></div>
                 </div>
                 <div id="utab-links-pane" style="display:none">
-                    <div class="col-gap-sm" id="upper-links-list"></div>
+                    <div id="upper-links-list" style="display:flex;flex-direction:column;gap:.4rem;"></div>
                 </div>
                 <div id="utab-raw-pane" style="display:none"><textarea spellcheck="false" class="ce" id="upper-ed"
                         oninput="syncUpper()"></textarea></div>
@@ -6190,7 +6203,7 @@
                             <line x1="3" y1="12" x2="3.01" y2="12" />
                             <line x1="3" y1="18" x2="3.01" y2="18" />
                         </svg></span> CRITICAL 등급의 추론 규칙이 행정 처리의 핵심 분기점입니다. 도메인 스키마 또는 상위 온톨로지 추출 후 실행하세요.</div>
-                <div class="stack" style="gap:var(--gap-lg);flex-wrap:wrap;margin-bottom:.7rem">
+                <div style="display:flex;gap:.7rem;flex-wrap:wrap;margin-bottom:.7rem;">
                     <button class="btn btn-p" onclick="genInf()" id="inf-btn"><span class="ico"><svg
                                 viewBox="0 0 24 24">
                                 <path
@@ -6247,7 +6260,7 @@
                 <div class="al al-i fs-sm">추론 규칙 발동을 테스트하려면 실제 개별 사례(인스턴스)를 입력하세요. Step 4의
                     스키마는 구조
                     정의(T-Box)이므로 인스턴스 데이터(A-Box)가 있어야 규칙이 발동됩니다.</div>
-                <div class="row-gap" style="margin-bottom:.6rem;flex-wrap:wrap">
+                <div style="display:flex;gap:.5rem;margin-bottom:.6rem;align-items:center;flex-wrap:wrap;">
 
                     <button class="btn btn-s btn-sm" onclick="clearInstances()">전체 삭제</button>
                     <span class="fs-xs" id="abox-count" style="color:var(--text3);margin-left:auto">0개
@@ -6282,7 +6295,7 @@
                             <polygon points="5 3 19 12 5 21 5 3" />
                         </svg></span> 추론 엔진 실행 결과 <span class="badge br" id="inf-eng-summary"
                         style="margin-left:.4rem;">-</span></div>
-                <div class="col-gap-sm" id="inf-engine-out" style="margin-top:.5rem"></div>
+                <div id="inf-engine-out" style="display:flex;flex-direction:column;gap:.4rem;margin-top:.5rem;"></div>
             </div>
             <div class="nav"><button class="btn btn-s" onclick="goStep(5)">이전</button><button class="btn btn-p"
                     onclick="goStep(7)">다음: 시각화</button></div>
@@ -6312,9 +6325,9 @@
             </div>
             <div id="s7tab-graph-pane">
                 <div class="card">
-                    <div class="between"
-                        style="flex-wrap:wrap;gap:var(--gap-lg);margin-bottom:.9rem">
-                        <div class="col-gap" style="flex:1">
+                    <div
+                        style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.7rem;margin-bottom:.9rem;">
+                        <div style="display:flex;flex-direction:column;gap:.55rem;flex:1;">
                             <!-- W3C 5-Layer 범례 -->
                             <div class="layer-legend-group">
                                 <span class="layer-legend-label">W3C Layer</span>
@@ -6398,8 +6411,8 @@
                     <!-- 그래프 읽는 법 가이드 (접이식) -->
                     <details
                         style="margin:.55rem 0 .7rem;border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);background:var(--c-ink-04);overflow:hidden;">
-                        <summary class="fs-sm row-gap"
-                            style="list-style:none;cursor:pointer;padding:.5rem .85rem;font-weight:var(--fw-bold);color:var(--ink);user-select:none">
+                        <summary class="fs-sm"
+                            style="list-style:none;cursor:pointer;display:flex;align-items:center;gap:.5rem;padding:.5rem .85rem;font-weight:var(--fw-bold);color:var(--ink);user-select:none">
                             <svg viewBox="0 0 24 24"
                                 style="width:13px;height:13px;stroke:var(--coral);fill:none;stroke-width:var(--sw-thick);stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;">
                                 <circle cx="12" cy="12" r="10" />
@@ -6411,13 +6424,13 @@
                                 style="font-weight:var(--fw-regular);color:var(--text3);margin-left:.1rem">(펼쳐서
                                 확인)</span>
                         </summary>
-                        <div class="fs-xs col-gap"
-                            style="padding:.75rem 1rem .9rem;color:var(--text2);line-height:var(--lh-comfortable)">
+                        <div class="fs-xs"
+                            style="padding:.75rem 1rem .9rem;display:flex;flex-direction:column;gap:.8rem;color:var(--text2);line-height:var(--lh-comfortable)">
 
                             <!-- ① 노드와 엣지 -->
                             <div>
-                                <div class="fs-sm row-gap"
-                                    style="font-weight:var(--fw-bold);color:var(--ink);margin-bottom:.4rem">
+                                <div class="fs-sm"
+                                    style="display:flex;align-items:center;gap:.38rem;font-weight:var(--fw-bold);color:var(--ink);margin-bottom:.4rem">
                                     <svg viewBox="0 0 24 24"
                                         style="width:13px;height:13px;stroke:var(--coral);fill:none;stroke-width:var(--sw-thick);stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;">
                                         <circle cx="18" cy="5" r="3" />
@@ -6446,8 +6459,8 @@
 
                             <!-- ② Layer별 의미 -->
                             <div>
-                                <div class="fs-sm row-gap"
-                                    style="font-weight:var(--fw-bold);color:var(--ink);margin-bottom:.4rem">
+                                <div class="fs-sm"
+                                    style="display:flex;align-items:center;gap:.38rem;font-weight:var(--fw-bold);color:var(--ink);margin-bottom:.4rem">
                                     <svg viewBox="0 0 24 24"
                                         style="width:13px;height:13px;stroke:var(--coral);fill:none;stroke-width:var(--sw-thick);stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;">
                                         <polygon points="12 2 2 7 12 12 22 7 12 2" />
@@ -6611,8 +6624,8 @@
 
                             <!-- ③ 클릭 카드 필드 해설 -->
                             <div>
-                                <div class="fs-sm row-gap"
-                                    style="font-weight:var(--fw-bold);color:var(--ink);margin-bottom:.4rem">
+                                <div class="fs-sm"
+                                    style="display:flex;align-items:center;gap:.38rem;font-weight:var(--fw-bold);color:var(--ink);margin-bottom:.4rem">
                                     <svg viewBox="0 0 24 24"
                                         style="width:13px;height:13px;stroke:var(--coral);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;">
                                         <rect x="3" y="3" width="18" height="18" rx="2" />
@@ -6673,8 +6686,8 @@
                         <code>?</code>(와일드카드)를 입력하세요. 조건 행이 여러 개면 <strong>AND</strong> 조건 - 하나의 트리플이 모든 행의 조건을 동시에 만족해야
                         결과에 포함됩니다. 실제 SPARQL 서버 연동 없이 현재 메모리의 트리플에 대해 동작합니다.
                     </div>
-                    <div class="row-gap" id="quick-query-btns"
-                        style="flex-wrap:wrap;margin-bottom:.7rem">
+                    <div id="quick-query-btns"
+                        style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.7rem;align-items:center;">
                         <span class="fs-xs"
                             style="color:var(--text2);align-self:center;font-weight:var(--fw-semibold)">빠른
                             입력:</span>
@@ -6715,10 +6728,10 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="row-gap" style="flex-wrap:wrap">
+                    <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;">
                         <button class="btn btn-s btn-sm" onclick="addQueryRow()">+ 조건 추가</button>
-                        <label class="fs-xs row-gap-xs"
-                            style="color:var(--text2);cursor:pointer">
+                        <label class="fs-xs"
+                            style="display:flex;align-items:center;gap:.35rem;color:var(--text2);cursor:pointer">
                             <input spellcheck="false" type="checkbox" id="query-incl-derived" style="cursor:pointer;">
                             파생 트리플 포함
                         </label>
@@ -6784,7 +6797,7 @@
                 </div>
                 <div id="cmp-st" class="mt-sm"></div>
             </div>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--gap-xl);" class="mb-sm">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:.8rem;" class="mb-sm">
                 <div class="cmpb">
                     <div class="cmph"
                         style="background:var(--c-ink-06);border-bottom:var(--bw-thin) solid var(--border);border-left:var(--bw-strong) solid var(--mono-400);color:var(--ink);"
@@ -6894,7 +6907,7 @@
             <!-- TAB: 내보내기 -->
             <div id="itab-export-pane">
                 <div class="al al-i">추출된 스키마·규칙을 스키마 JSON 파일로 다운로드한 뒤 외부 시스템에 로드합니다.</div>
-                <div class="stack" style="gap:var(--gap-lg);flex-wrap:wrap;margin-bottom:1rem">
+                <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem;">
                     <button class="btn btn-s" onclick="dlJson('cmb')"><span class="ico"><svg viewBox="0 0 24 24">
                                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                                 <polyline points="7 10 12 15 17 10" />
@@ -6908,7 +6921,7 @@
                 </div>
                 <div class="card" style="margin-bottom:1rem;">
                     <div class="ct">다운로드 파일 활용 가이드</div>
-                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--gap-xl);">
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.8rem;">
                         <div
                             style="border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);padding:.8rem;background:var(--sand);">
                             <div class="fs-sm"
@@ -6942,7 +6955,7 @@
                 <!-- Extra Exercise -->
                 <div class="card"
                     style="margin-top:1rem;border:var(--bw-thick) solid var(--ink);border-radius:var(--r-lg);padding:1rem;">
-                    <div class="ct row-gap" style="color:var(--ink)">
+                    <div class="ct" style="color:var(--ink);display:flex;align-items:center;gap:.5rem;">
                         <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M12 2L2 7l10 5 10-5-10-5z" />
                                 <path d="M2 17l10 5 10-5" />
@@ -6953,7 +6966,7 @@
                     <div class="fs-sm"
                         style="background:var(--c-ink-04);border:var(--bw-thin) solid var(--border-ink);border-radius:var(--r-md);padding:.9rem;margin-bottom:1rem;line-height:var(--lh-open)">
                         <div style="font-weight:var(--fw-bold);color:var(--ink);margin-bottom:.4rem;">실습 파이프라인</div>
-                        <div class="row-gap-xs" style="flex-wrap:wrap;color:var(--text2)">
+                        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:.3rem;color:var(--text2);">
                             <span
                                 style="background:var(--ink);color:var(--mono-white);border-radius:var(--r-xs);padding:.15rem .55rem;font-weight:var(--fw-bold);">이
                                 도구</span>
@@ -6974,7 +6987,7 @@
                                 연동</span>
                         </div>
                     </div>
-                    <div class="col-gap" style="margin-bottom:1rem">
+                    <div style="display:flex;flex-direction:column;gap:.6rem;margin-bottom:1rem;">
                         <div class="fs-sm"
                             style="background:var(--bg-primary);border-radius:var(--r-sm);padding:.7rem .9rem">
                             <div style="font-weight:var(--fw-bold);color:var(--ink);margin-bottom:.3rem;">① 사전 준비
@@ -7063,7 +7076,7 @@ print(f'[온톨로지 기반] {answer.content}')</textarea>
                     </div>
                     <div
                         style="border:var(--bw-medium) dashed var(--border-a);border-radius:var(--r-md);padding:.8rem;background:var(--c-ink-04);">
-                        <div class="between" style="margin-bottom:.5rem">
+                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem;">
                             <div class="fs-sm" style="font-weight:var(--fw-bold);color:var(--ink)">바이브 코딩 프롬프트
                                 (Cursor /
                                 Claude Code에 붙여넣기)</div>
@@ -7502,29 +7515,29 @@ for r in results:
                 </div>
                 <div class="card">
                     <div class="ct">빠른 시작 체크리스트</div>
-                    <div class="fs-sm col-gap" style="padding:.4rem 0">
-                        <label class="row-start" style="cursor:pointer"><input
+                    <div class="fs-sm" style="display:flex;flex-direction:column;gap:.5rem;padding:.4rem 0">
+                        <label style="display:flex;align-items:flex-start;gap:.65rem;cursor:pointer;"><input
                                 spellcheck="false" type="checkbox" style="margin-top:.2rem;accent-color:var(--mono-950);">
                             <span><strong>Step ①</strong> <a href="https://www.ontotext.com/products/graphdb/"
                                     target="_blank" style="color:var(--coral);">GraphDB Free 다운로드</a> 및 설치 (포트
                                 7200)</span></label>
-                        <label class="row-start" style="cursor:pointer"><input
+                        <label style="display:flex;align-items:flex-start;gap:.65rem;cursor:pointer;"><input
                                 spellcheck="false" type="checkbox" style="margin-top:.2rem;accent-color:var(--mono-950);">
                             <span><strong>Step ②</strong>
                                 GraphDB Workbench에서 저장소 생성: <code>admin-ontology</code></span></label>
-                        <label class="row-start" style="cursor:pointer"><input
+                        <label style="display:flex;align-items:flex-start;gap:.65rem;cursor:pointer;"><input
                                 spellcheck="false" type="checkbox" style="margin-top:.2rem;accent-color:var(--mono-950);">
                             <span><strong>Step ③</strong> 이
                                 도구에서 <em>전체 결과 내보내기</em> → <code>ontology_result_final.jsonld</code> 저장</span></label>
-                        <label class="row-start" style="cursor:pointer"><input
+                        <label style="display:flex;align-items:flex-start;gap:.65rem;cursor:pointer;"><input
                                 spellcheck="false" type="checkbox" style="margin-top:.2rem;accent-color:var(--mono-950);">
                             <span><strong>Step ④</strong> 위
                                 Python 업로드 코드 실행 → GraphDB 확인</span></label>
-                        <label class="row-start" style="cursor:pointer"><input
+                        <label style="display:flex;align-items:flex-start;gap:.65rem;cursor:pointer;"><input
                                 spellcheck="false" type="checkbox" style="margin-top:.2rem;accent-color:var(--mono-950);">
                             <span><strong>Step ⑤</strong>
                                 LangChain 코드로 온톨로지 스키마 주입 질의 테스트</span></label>
-                        <label class="row-start" style="cursor:pointer"><input
+                        <label style="display:flex;align-items:flex-start;gap:.65rem;cursor:pointer;"><input
                                 spellcheck="false" type="checkbox" style="margin-top:.2rem;accent-color:var(--mono-950);">
                             <span><strong>Step ⑥</strong>
                                 A/B 비교 결과(Step 8)와 스키마 주입 LangChain 결과 비교 → 성능 확인</span></label>
@@ -7584,7 +7597,7 @@ for r in results:
                 <div class="card" style="margin-bottom:1rem;">
                     <div class="ct">행정망 도입을 위한 3가지 아키텍처 옵션</div>
                     <div
-                        style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:var(--gap-xl);margin-top:.6rem;">
+                        style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.8rem;margin-top:.6rem;">
                         <div
                             style="border:var(--bw-thin) solid var(--border-a);border-radius:var(--r-md);padding:.9rem;background:var(--c-ink-04);">
                             <div class="fs-ui"
@@ -7648,8 +7661,8 @@ for r in results:
                 <!-- 관련 법령·가이드 안내 -->
                 <div class="card">
                     <div class="ct">참고: 행정 AI 도입 관련 법령·가이드</div>
-                    <div class="fs-sm col-gap-sm"
-                        style="color:var(--text2);padding:.3rem 0;line-height:var(--lh-comfortable)">
+                    <div class="fs-sm"
+                        style="display:flex;flex-direction:column;gap:.45rem;color:var(--text2);padding:.3rem 0;line-height:var(--lh-comfortable)">
                         <div><svg viewBox="0 0 24 24"
                                 style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;display:inline-block;vertical-align:middle;margin-right:.3rem;">
                                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -7683,9 +7696,9 @@ for r in results:
 
         <!-- STEP 10: APPENDIX -->
         <div id="s10" class="panel">
-            <div class="pt row-gap-lg" style="margin-bottom:1.4rem">
-                <div class="pt-icon center"
-                    style="background:var(--grad);width:46px;height:46px;border-radius:var(--r-lg);flex-shrink:0">
+            <div class="pt" style="display:flex;align-items:center;gap:1rem;margin-bottom:1.4rem;">
+                <div class="pt-icon"
+                    style="background:var(--grad);width:46px;height:46px;border-radius:var(--r-lg);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
                     <span class="ico"><svg viewBox="0 0 24 24" style="width:22px;height:22px;fill:var(--mono-white);">
                             <rect x="3" y="3" width="7" height="7" />
                             <rect x="14" y="3" width="7" height="7" />
@@ -7716,8 +7729,8 @@ for r in results:
             </div>
 
             <!-- Tab Nav -->
-            <div class="stack"
-                style="border-bottom:var(--bw-thin) solid var(--border);gap:0;margin-bottom:1.4rem;overflow-x:auto">
+            <div
+                style="display:flex;border-bottom:var(--bw-thin) solid var(--border);gap:0;margin-bottom:1.4rem;overflow-x:auto;">
                 <button class="fs-sm" id="a10-t1" onclick="switchA10Tab(1)"
                     style="padding:.5rem 1.1rem;font-weight:var(--fw-bold);background:none;border:none;cursor:pointer;border-bottom:var(--bw-strong) solid var(--ink);color:var(--ink);white-space:nowrap">시스템
                     아키텍처</button>
@@ -7780,7 +7793,7 @@ for r in results:
                 <div class="card" style="margin-top:1.2rem;">
                     <div class="ct">기간 비중 가이드 (총 16주 기준)</div>
                     <div
-                        style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:var(--gap-lg);margin-top:.6rem;">
+                        style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.7rem;margin-top:.6rem;">
                         <div
                             style="background:var(--c-ink-06);border-left:var(--bw-strong) solid var(--ink);padding:.6rem .9rem;border-radius:var(--r-sm);">
                             <div class="fs-xs"
@@ -7826,7 +7839,7 @@ for r in results:
             <div id="a10-p5" style="display:none;">
                 <div class="al al-i" style="margin-bottom:1rem;">각 단계 AI API 호출의 시스템 프롬프트를 편집할 수 있습니다. 골든 샘플은 코드에 보존되어
                     언제든 One 클릭으로 복구 가능합니다.</div>
-                <div class="stack" style="gap:var(--gap-md);margin-bottom:1rem;flex-wrap:wrap">
+                <div style="display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap;">
                     <button class="btn btn-s btn-sm" onclick="resetAllPrompts()" style="color:var(--ink);"><span
                             class="ico"><svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor"
                                 fill="none" stroke-width="2">
@@ -7841,7 +7854,7 @@ for r in results:
                                 <line x1="12" y1="15" x2="12" y2="3" />
                             </svg></span> custom_prompts.json 다운로드</button>
                 </div>
-                <div class="col-gap" id="prompt-editor-list"></div>
+                <div id="prompt-editor-list" style="display:flex;flex-direction:column;gap:1rem;"></div>
             </div>
 
             <!-- Tab 6: Domain Guide Editor -->
@@ -7859,8 +7872,8 @@ for r in results:
                 <!-- 신규 도메인 추가 폼 -->
                 <!-- 수동 도메인 추가 폼 (접이식) -->
                 <details style="margin-bottom:1rem;">
-                    <summary class="fs-sm row-gap"
-                        style="list-style:none;cursor:pointer;padding:.6rem .9rem;background:var(--c-ink-06);border:var(--bw-thin) solid var(--border-a);border-radius:var(--r-md);font-weight:var(--fw-bold);color:var(--ink);user-select:none">
+                    <summary class="fs-sm"
+                        style="list-style:none;cursor:pointer;display:flex;align-items:center;gap:.5rem;padding:.6rem .9rem;background:var(--c-ink-06);border:var(--bw-thin) solid var(--border-a);border-radius:var(--r-md);font-weight:var(--fw-bold);color:var(--ink);user-select:none">
                         <svg viewBox="0 0 24 24"
                             style="width:14px;height:14px;stroke:var(--ink);fill:none;stroke-width:var(--sw-thick);stroke-linecap:round;">
                             <line x1="12" y1="5" x2="12" y2="19" />
@@ -7871,8 +7884,8 @@ for r in results:
                             사용자용 ·
                             펼쳐서 직접 입력)</span>
                     </summary>
-                    <div class="col-gap" style="padding:.9rem .5rem 0">
-                        <div class="stack" style="gap:var(--gap-md);flex-wrap:wrap">
+                    <div style="padding:.9rem .5rem 0;display:flex;flex-direction:column;gap:.6rem;">
+                        <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
                             <div style="flex:1;min-width:140px;">
                                 <label class="lbl">도메인 이름 <span style="color:var(--ink);">*</span></label>
                                 <input spellcheck="false" type="text" class="inp" id="de-label"
@@ -7897,7 +7910,7 @@ for r in results:
                             <input spellcheck="false" type="text" class="inp" id="de-docs"
                                 placeholder="예: 건축허가신청서, 건축도면, 토지이용계획확인서">
                         </div>
-                        <div class="stack" style="gap:var(--gap-md);justify-content:flex-end;margin-top:.2rem">
+                        <div style="display:flex;gap:.5rem;justify-content:flex-end;margin-top:.2rem;">
                             <button class="btn btn-p btn-sm" onclick="saveDomainEntry()"><span class="ico"><svg
                                         viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" fill="none"
                                         stroke-width="2">
@@ -7921,7 +7934,7 @@ for r in results:
                         <span class="fs-xs" id="de-count"
                             style="font-weight:var(--fw-regular);color:var(--text3)"></span>
                     </div>
-                    <div class="col-gap" id="de-list" style="margin-top:.5rem"></div>
+                    <div id="de-list" style="display:flex;flex-direction:column;gap:.5rem;margin-top:.5rem;"></div>
                 </div>
             </div>
 
@@ -7929,7 +7942,7 @@ for r in results:
             <div id="a10-p7" style="display:none;">
                 <div class="al al-i" style="margin-bottom:1rem;">이 도구가 구현하는 W3C 온톨로지 표준 5계층 아키텍처와 핵심 스펙 레퍼런스입니다.</div>
                 <!-- 5계층 구조 -->
-                <div style="display:grid;gap:var(--sp-3);margin-bottom:1.4rem;">
+                <div style="display:grid;gap:.75rem;margin-bottom:1.4rem;">
                     <div
                         style="border:var(--bw-thin) solid var(--border);border-left:var(--bw-strong) solid var(--ink);border-radius:var(--r-md);padding:.75rem 1rem;background:var(--c-ink-04);">
                         <div class="fs-sm"
@@ -8231,7 +8244,7 @@ for r in results:
                     </div>
 
                     <!-- 검증 레벨 범례 -->
-                    <div class="row-gap" style="flex-wrap:wrap;margin-bottom:1.4rem">
+                    <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.4rem;align-items:center;">
                         <span class="fs-small"
                             style="font-weight:var(--fw-bold);color:var(--text3);text-transform:uppercase;letter-spacing:.05em">검증
                             레벨:</span>
@@ -8250,8 +8263,8 @@ for r in results:
 
                     <!-- Table 2: 단계별 적용 표준 매트릭스 -->
                     <div style="margin-bottom:.8rem;">
-                        <div class="fs-xs row-gap-xs"
-                            style="font-weight:var(--fw-extrabold);letter-spacing:.06em;color:var(--ink);text-transform:uppercase;margin-bottom:.3rem">
+                        <div class="fs-xs"
+                            style="font-weight:var(--fw-extrabold);letter-spacing:.06em;color:var(--ink);text-transform:uppercase;display:flex;align-items:center;gap:.4rem;margin-bottom:.3rem">
                             <svg viewBox="0 0 24 24"
                                 style="width:12px;height:12px;stroke:var(--ink);fill:none;stroke-width:var(--sw-thick);stroke-linecap:round;stroke-linejoin:round;">
                                 <rect x="3" y="3" width="7" height="7" />
@@ -8432,7 +8445,7 @@ for r in results:
             <span class="stbar-nia-short fs-xs"
                 style="font-weight:var(--fw-extrabold);color:var(--ink);display:none">NIA</span>
         </span>
-        <div class="row-gap-lg" style="margin-left:1.2rem">
+        <div style="display:flex;align-items:center;gap:.7rem;margin-left:1.2rem;">
             <div class="stdot" id="st-dot"></div>
             <span id="st-txt">준비 완료 - Chrome 또는 Edge 브라우저 권장</span>
         </div>
@@ -9989,7 +10002,7 @@ for r in results:
             // 설계 원칙 위반 블록 (.al-w)
             if (result.issues.length > 0) {
                 const items = result.issues.map(e =>
-                    `<li class="row-start" style="margin:.25rem 0 0 0;list-style:none">${_icoWarnSm}<span class="fs-xs">${e}</span></li>`
+                    `<li style="margin:.25rem 0 0 0;list-style:none;display:flex;align-items:flex-start;gap:.25rem;">${_icoWarnSm}<span class="fs-xs">${e}</span></li>`
                 ).join('');
                 html += `<div class="al al-w"><span class="ico">${_icoWarn}</span><strong>OWL 설계 원칙 경고 ${result.issues.length}건</strong><ul style="margin-top:.3rem;padding:0;">${items}</ul></div>`;
             }
@@ -9997,7 +10010,7 @@ for r in results:
             // 설계 원칙 준수 블록 (.al-s)
             if (result.clean) {
                 const passItems = result.passes.map(p =>
-                    `<li class="row-start" style="margin:.25rem 0 0 0;list-style:none">${_icoCheckSm}<span class="fs-xs">${p}</span></li>`
+                    `<li style="margin:.25rem 0 0 0;list-style:none;display:flex;align-items:flex-start;gap:.25rem;">${_icoCheckSm}<span class="fs-xs">${p}</span></li>`
                 ).join('');
                 html += `<div class="al al-s"><span class="ico">${_icoCheck}</span><strong>OWL 2 설계 원칙 준수</strong><ul style="margin-top:.3rem;padding:0;">${passItems}</ul></div>`;
             }
@@ -10756,7 +10769,7 @@ for r in results:
                     const el = document.createElement('div');
                     el.className = 'fi';
                     el.style.flexDirection = 'column'; el.style.alignItems = 'flex-start'; el.style.gap = '.2rem';
-                    el.innerHTML = `<div class="row-gap-sm" style="width:100%"><span class="fn fs-ui" style="font-weight:var(--fw-semibold)">${name}</span><span class="badge bb fs-small">${type}</span></div><div class="fs-xs" style="color:var(--text3)">${dept}${date ? ' · 시행 ' + date : ''}</div>`;
+                    el.innerHTML = `<div style="display:flex;align-items:center;gap:.45rem;width:100%;"><span class="fn fs-ui" style="font-weight:var(--fw-semibold)">${name}</span><span class="badge bb fs-small">${type}</span></div><div class="fs-xs" style="color:var(--text3)">${dept}${date ? ' · 시행 ' + date : ''}</div>`;
                     el.onclick = () => loadLawText(mst, name, target, el);
                     cont.appendChild(el);
                 });
@@ -11146,13 +11159,13 @@ for r in results:
             const stepColor = d.step.includes('위급') ? 'var(--mono-700)' : d.step.includes('긴급') ? 'var(--orange)' : 'var(--ink)';
             spec.style.display = 'block';
             spec.innerHTML = `<div class="fs-sm" style="background:var(--c-ink-04);border:var(--bw-thin) solid var(--border);border-left:var(--bw-strong) solid ${stepColor};border-radius:var(--r-md);padding:.85rem 1rem">
-        <div class="row-gap" style="margin-bottom:.75rem;flex-wrap:wrap">
+        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem;flex-wrap:wrap;">
             <span class="fs-md" style="font-weight:var(--fw-bold);color:var(--text1)">${d.label}</span>
             <span class="fs-small" style="background:${stepColor};color:var(--mono-white);font-weight:var(--fw-bold);padding:.12rem .45rem;border-radius:var(--r-sm);font-family:var(--font-ui);letter-spacing:.04em">${d.step}</span>
         </div>
         <div style="margin-bottom:.55rem;"><span class="lbl">데이터 출처</span><div style="color:var(--text2);margin-top:.2rem;">${d.src}</div></div>
         <div style="margin-bottom:.55rem;"><span class="lbl">주요 필드</span>
-            <div class="col-gap" style="margin-top:.3rem">${d.fields.map(f => `<div class="stack" style="gap:var(--gap-sm);align-items:baseline"><code class="fs-small" style="flex-shrink:0;background:var(--c-ink-06);color:var(--ink);padding:.08rem .38rem;border-radius:var(--r-xs)">${f.k}</code><span class="fs-sm" style="color:var(--text2);line-height:var(--lh-normal)">${f.v}</span></div>`).join('')}</div>
+            <div style="margin-top:.3rem;display:flex;flex-direction:column;gap:.22rem;">${d.fields.map(f => `<div style="display:flex;gap:.45rem;align-items:baseline;"><code class="fs-small" style="flex-shrink:0;background:var(--c-ink-06);color:var(--ink);padding:.08rem .38rem;border-radius:var(--r-xs)">${f.k}</code><span class="fs-sm" style="color:var(--text2);line-height:var(--lh-normal)">${f.v}</span></div>`).join('')}</div>
         </div>
         <div style="margin-bottom:.5rem;"><span class="lbl">발령 기준</span><div style="color:var(--text2);margin-top:.2rem;">${d.criteria}</div></div>
         <div style="margin-bottom:.5rem;"><span class="lbl">관련 법령</span><div style="color:var(--text2);margin-top:.2rem;">${d.law}</div></div>
@@ -12180,7 +12193,7 @@ for r in results:
             _scenHintCache.delete(cacheKey);
 
             if (forceBtn) { forceBtn.disabled = true; forceBtn.innerHTML = '<span class="sp"></span> 분석 중...'; }
-            list.innerHTML = '<div class="fs-sm row-gap" style="padding:.4rem 0;color:var(--text3)"><span class="sp"></span> AI가 법령을 재분석 중...</div>';
+            list.innerHTML = '<div class="fs-sm" style="display:flex;align-items:center;gap:.5rem;padding:.4rem 0;color:var(--text3)"><span class="sp"></span> AI가 법령을 재분석 중...</div>';
             if (empty) empty.style.display = 'none';
 
             try {
@@ -12227,7 +12240,7 @@ for r in results:
             if (matched.length === 0) {
                 // ── LLM fallback: 매칭 없으면 AI 자동 추천 ──
                 if (empty) empty.style.display = 'none';
-                list.innerHTML = '<div class="fs-sm row-gap" style="padding:.4rem 0;color:var(--text3)"><span class="sp"></span> AI가 관련 법령과 문서를 분석 중...</div>';
+                list.innerHTML = '<div class="fs-sm" style="display:flex;align-items:center;gap:.5rem;padding:.4rem 0;color:var(--text3)"><span class="sp"></span> AI가 관련 법령과 문서를 분석 중...</div>';
                 // 캐시 키: 시나리오 텍스트 합산
                 const cacheKey = targets.map(s => s.id).join(',');
                 if (_scenHintCache.has(cacheKey)) {
@@ -12259,8 +12272,8 @@ for r in results:
             <div class="fs-small" style="font-family:var(--font-ui);font-weight:var(--fw-bold);color:var(--ink);letter-spacing:.03em;margin-bottom:.35rem">${h.label}</div>
             <div style="margin-bottom:.3rem;">
                 <span class="fs-small" style="font-weight:var(--fw-bold);color:var(--text2);letter-spacing:.04em;text-transform:uppercase">추천 법령 검색어</span>
-                <div class="stack" style="flex-wrap:wrap;gap:var(--gap-sm);margin-top:.25rem">
-                    ${h.laws.map(l => `<button class="fs-small" onclick="document.getElementById('law-q').value='${l}';searchLaw();" style="display:inline-flex;align-items:center;gap:var(--sp-1);padding:.22rem .6rem;background:var(--c-ink-06);border:var(--bw-thin) solid var(--border);border-radius:var(--r-lg);font-weight:var(--fw-medium);color:var(--ink);cursor:pointer;font-family:var(--font-ui);transition:all .15s" onmouseover="this.style.background='var(--ink)';this.style.color='var(--mono-white)';this.querySelector('svg').style.stroke='var(--mono-white)';" onmouseout="this.style.background='var(--c-ink-06)';this.style.color='var(--ink)';this.querySelector('svg').style.stroke='var(--ink)';" ><svg viewBox='0 0 24 24' style='width:10px;height:10px;stroke:var(--ink);fill:none;stroke-width:2.5;stroke-linecap:round;flex-shrink:0;transition:stroke .15s;'><circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg>${l}</button>`).join('')}
+                <div style="display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.25rem;">
+                    ${h.laws.map(l => `<button class="fs-small" onclick="document.getElementById('law-q').value='${l}';searchLaw();" style="display:inline-flex;align-items:center;gap:.28rem;padding:.22rem .6rem;background:var(--c-ink-06);border:var(--bw-thin) solid var(--border);border-radius:var(--r-lg);font-weight:var(--fw-medium);color:var(--ink);cursor:pointer;font-family:var(--font-ui);transition:all .15s" onmouseover="this.style.background='var(--ink)';this.style.color='var(--mono-white)';this.querySelector('svg').style.stroke='var(--mono-white)';" onmouseout="this.style.background='var(--c-ink-06)';this.style.color='var(--ink)';this.querySelector('svg').style.stroke='var(--ink)';" ><svg viewBox='0 0 24 24' style='width:10px;height:10px;stroke:var(--ink);fill:none;stroke-width:2.5;stroke-linecap:round;flex-shrink:0;transition:stroke .15s;'><circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg>${l}</button>`).join('')}
                 </div>
             </div>
             <div>
@@ -12272,8 +12285,8 @@ for r in results:
             ${h.data && h.data.length ? `
             <div style="margin-top:.35rem;">
                 <span class="fs-small" style="font-weight:var(--fw-bold);color:var(--text2);letter-spacing:.04em;text-transform:uppercase">추천 공공데이터</span>
-                <div class="col-gap" style="margin-top:.28rem">
-                    ${h.data.map(d => `<a class="row-gap" href="${d.url}" target="_blank" style="padding:.3rem .55rem;background:var(--c-ink-04);border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);text-decoration:none;transition:all .15s" onmouseover="this.style.background='var(--c-ink-08)'" onmouseout="this.style.background='var(--c-ink-04)'">
+                <div style="display:flex;flex-direction:column;gap:.28rem;margin-top:.28rem;">
+                    ${h.data.map(d => `<a href="${d.url}" target="_blank" style="display:flex;align-items:center;gap:.5rem;padding:.3rem .55rem;background:var(--c-ink-04);border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);text-decoration:none;transition:all .15s;" onmouseover="this.style.background='var(--c-ink-08)'" onmouseout="this.style.background='var(--c-ink-04)'">
                         <span class="fs-small" style="flex-shrink:0;padding:.15rem .38rem;border-radius:var(--r-sm);font-weight:var(--fw-bold);background:var(--c-ink-08);color:var(--ink)">${d.type || 'CSV'}</span>
                         <span style="flex:1;overflow:hidden;">
                             <span class="fs-small" style="font-weight:var(--fw-semibold);color:var(--ink);display:block">${d.name}</span>
@@ -12286,7 +12299,7 @@ for r in results:
             <div style="margin-top:.35rem;">
                 <span class="fs-small" style="font-weight:var(--fw-bold);color:var(--text2);letter-spacing:.04em;text-transform:uppercase">추천 공공데이터</span>
                 <div style="margin-top:.28rem;">
-                    <a class="row-gap" href="https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=${encodeURIComponent(h.label)}" target="_blank" style="padding:.3rem .55rem;background:var(--c-ink-04);border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);text-decoration:none;transition:all .15s" onmouseover="this.style.background='var(--c-ink-08)'" onmouseout="this.style.background='var(--c-ink-04)'">
+                    <a href="https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=${encodeURIComponent(h.label)}" target="_blank" style="display:flex;align-items:center;gap:.5rem;padding:.3rem .55rem;background:var(--c-ink-04);border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);text-decoration:none;transition:all .15s;" onmouseover="this.style.background='var(--c-ink-08)'" onmouseout="this.style.background='var(--c-ink-04)'">
                         <span class="fs-small" style="flex-shrink:0;padding:.15rem .38rem;border-radius:var(--r-sm);font-weight:var(--fw-bold);background:var(--c-ink-08);color:var(--ink)">검색</span>
                         <span style="flex:1;overflow:hidden;"><span class="fs-small" style="font-weight:var(--fw-semibold);color:var(--ink);display:block">data.go.kr에서 「${h.label}」 데이터 검색</span><span class="fs-small" style="color:var(--text3)">공공데이터포털에서 관련 데이터셋 직접 검색</span></span>
                         <svg viewBox="0 0 24 24" style="width:10px;height:10px;stroke:var(--text3);fill:none;stroke-width:2;stroke-linecap:round;flex-shrink:0;"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
@@ -12341,14 +12354,14 @@ for r in results:
             }
             list.innerHTML = results.map(h => `
         <div style="border-left:var(--bw-strong) solid var(--mono-700);padding:.45rem .75rem;background:var(--c-ink-04);border-radius:0 var(--r-sm) var(--r-sm) 0;">
-            <div class="row-gap-xs" style="margin-bottom:.35rem">
+            <div style="display:flex;align-items:center;gap:.4rem;margin-bottom:.35rem;">
                 <span class="fs-small" style="font-family:var(--font-ui);font-weight:var(--fw-bold);color:var(--mono-700);letter-spacing:.03em">${h.label}</span>
                 <span class="fs-small" style="font-weight:var(--fw-bold);padding:.1rem .35rem;background:var(--c-ink-08);color:var(--mono-700);border-radius:var(--r-sm);letter-spacing:.03em">AI 추천</span>
             </div>
             <div style="margin-bottom:.3rem;">
                 <span class="fs-small" style="font-weight:var(--fw-bold);color:var(--text2);letter-spacing:.04em;text-transform:uppercase">추천 법령 검색어</span>
-                <div class="stack" style="flex-wrap:wrap;gap:var(--gap-sm);margin-top:.25rem">
-                    ${(h.laws || []).map(l => `<button class="fs-small" onclick="document.getElementById('law-q').value='${l}';searchLaw();" style="display:inline-flex;align-items:center;gap:var(--sp-1);padding:.22rem .6rem;background:var(--c-ink-06);border:var(--bw-thin) solid var(--border);border-radius:var(--r-lg);font-weight:var(--fw-medium);color:var(--mono-700);cursor:pointer;font-family:var(--font-ui);transition:all .15s" onmouseover="this.style.background='var(--mono-700)';this.style.color='var(--mono-white)';" onmouseout="this.style.background='var(--c-ink-06)';this.style.color='var(--mono-700)';" ><svg viewBox='0 0 24 24' style='width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;flex-shrink:0;'><circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg>${l}</button>`).join('')}
+                <div style="display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.25rem;">
+                    ${(h.laws || []).map(l => `<button class="fs-small" onclick="document.getElementById('law-q').value='${l}';searchLaw();" style="display:inline-flex;align-items:center;gap:.28rem;padding:.22rem .6rem;background:var(--c-ink-06);border:var(--bw-thin) solid var(--border);border-radius:var(--r-lg);font-weight:var(--fw-medium);color:var(--mono-700);cursor:pointer;font-family:var(--font-ui);transition:all .15s" onmouseover="this.style.background='var(--mono-700)';this.style.color='var(--mono-white)';" onmouseout="this.style.background='var(--c-ink-06)';this.style.color='var(--mono-700)';" ><svg viewBox='0 0 24 24' style='width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;flex-shrink:0;'><circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg>${l}</button>`).join('')}
                 </div>
             </div>
             <div>
@@ -12359,12 +12372,12 @@ for r in results:
             </div>
             <div style="margin-top:.35rem;">
                 <span class="fs-small" style="font-weight:var(--fw-bold);color:var(--text2);letter-spacing:.04em;text-transform:uppercase">추천 공공데이터</span>
-                <div class="col-gap" style="margin-top:.28rem">
-                    ${(h.data && h.data.length ? h.data.map(d => `<a class="row-gap" href="${d.url}" target="_blank" style="padding:.3rem .55rem;background:var(--c-ink-04);border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);text-decoration:none;transition:all .15s" onmouseover="this.style.background='var(--c-ink-08)'" onmouseout="this.style.background='var(--c-ink-04)'">
+                <div style="display:flex;flex-direction:column;gap:.28rem;margin-top:.28rem;">
+                    ${(h.data && h.data.length ? h.data.map(d => `<a href="${d.url}" target="_blank" style="display:flex;align-items:center;gap:.5rem;padding:.3rem .55rem;background:var(--c-ink-04);border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);text-decoration:none;transition:all .15s;" onmouseover="this.style.background='var(--c-ink-08)'" onmouseout="this.style.background='var(--c-ink-04)'">
                         <span class="fs-small" style="flex-shrink:0;padding:.15rem .38rem;border-radius:var(--r-sm);font-weight:var(--fw-bold);background:var(--c-ink-08);color:var(--mono-700)">${d.type || 'CSV'}</span>
                         <span style="flex:1;overflow:hidden;"><span class="fs-small" style="font-weight:var(--fw-semibold);color:var(--ink);display:block">${d.name}</span><span class="fs-small" style="color:var(--text3)">${d.desc || ''}</span></span>
                         <svg viewBox="0 0 24 24" style="width:10px;height:10px;stroke:var(--text3);fill:none;stroke-width:2;stroke-linecap:round;flex-shrink:0;"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-                    </a>`) : [`<a class="row-gap" href="https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=${encodeURIComponent(h.label || '')}" target="_blank" style="padding:.3rem .55rem;background:var(--c-ink-04);border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);text-decoration:none;transition:all .15s" onmouseover="this.style.background='var(--c-ink-08)'" onmouseout="this.style.background='var(--c-ink-04)'">
+                    </a>`) : [`<a href="https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=${encodeURIComponent(h.label || '')}" target="_blank" style="display:flex;align-items:center;gap:.5rem;padding:.3rem .55rem;background:var(--c-ink-04);border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);text-decoration:none;transition:all .15s;" onmouseover="this.style.background='var(--c-ink-08)'" onmouseout="this.style.background='var(--c-ink-04)'">
                         <span class="fs-small" style="flex-shrink:0;padding:.15rem .38rem;border-radius:var(--r-sm);font-weight:var(--fw-bold);background:var(--c-ink-08);color:var(--mono-700)">검색</span>
                         <span style="flex:1;overflow:hidden;"><span class="fs-small" style="font-weight:var(--fw-semibold);color:var(--ink);display:block">data.go.kr에서 「${h.label}」 데이터 검색</span><span class="fs-small" style="color:var(--text3)">공공데이터포털에서 관련 데이터셋 직접 검색</span></span>
                         <svg viewBox="0 0 24 24" style="width:10px;height:10px;stroke:var(--text3);fill:none;stroke-width:2;stroke-linecap:round;flex-shrink:0;"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
@@ -12472,16 +12485,16 @@ for r in results:
                 row.onmouseenter = () => row.style.borderColor = 'var(--ink)';
                 row.onmouseleave = () => row.style.borderColor = 'var(--border)';
                 row.innerHTML = `
-          <div class="row-gap" style="padding:.6rem .8rem">
-            <span class="fs-small center" style="flex-shrink:0;width:20px;height:20px;border-radius:var(--r-full);background:var(--ink);color:var(--mono-white);font-weight:var(--fw-bold);font-family:var(--font-ui)">${i + 1}</span>
+          <div style="display:flex;align-items:center;gap:.6rem;padding:.6rem .8rem;">
+            <span class="fs-small" style="flex-shrink:0;width:20px;height:20px;border-radius:var(--r-full);background:var(--ink);color:var(--mono-white);font-weight:var(--fw-bold);display:flex;align-items:center;justify-content:center;font-family:var(--font-ui)">${i + 1}</span>
             <span class="fs-sm" style="flex:1;font-weight:var(--fw-semibold);color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${s.title}</span>
             <span class="fs-small" style="flex-shrink:0;padding:.12rem .45rem;border-radius:var(--r-sm);font-weight:var(--fw-bold);background:var(--c-ink-06);color:var(--ink)">${lv}</span>
             <button aria-label="시나리오 편집" onclick="loadScenarioToEditor(${s.id})" style="background:none;border:none;cursor:pointer;color:var(--text3);padding:.1rem .3rem;border-radius:var(--r-xs);" title="편집하기 (텍스트·엔터티·질의·수준 복원)"><svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" fill="none" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
             <button aria-label="시나리오 삭제" onclick="removeScenario(${s.id})" style="background:none;border:none;cursor:pointer;color:var(--text3);padding:.1rem .3rem;border-radius:var(--r-xs);" title="삭제"><svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" fill="none" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
           </div>
-          <div class="col-gap" style="padding:.3rem .8rem .55rem 2.6rem;border-top:var(--bw-thin) solid var(--border);background:var(--c-ink-04)">
-            <div class="row-start" style="flex-wrap:wrap"><span class="fs-small" style="font-weight:var(--fw-bold);color:var(--text3);letter-spacing:.04em;text-transform:uppercase;flex-shrink:0;padding-top:.1rem">엔터티</span><div class="stack" style="flex-wrap:wrap;gap:var(--sp-1)">${entityHtml}</div></div>
-            <div class="row-start" style="flex-wrap:wrap"><span class="fs-small" style="font-weight:var(--fw-bold);color:var(--text3);letter-spacing:.04em;text-transform:uppercase;flex-shrink:0;padding-top:.1rem">질의</span><div class="col-gap">${queryHtml}</div></div>
+          <div style="padding:.3rem .8rem .55rem 2.6rem;display:flex;flex-direction:column;gap:.28rem;border-top:var(--bw-thin) solid var(--border);background:var(--c-ink-04);">
+            <div style="display:flex;align-items:flex-start;gap:.4rem;flex-wrap:wrap;"><span class="fs-small" style="font-weight:var(--fw-bold);color:var(--text3);letter-spacing:.04em;text-transform:uppercase;flex-shrink:0;padding-top:.1rem">엔터티</span><div style="display:flex;flex-wrap:wrap;gap:.25rem;">${entityHtml}</div></div>
+            <div style="display:flex;align-items:flex-start;gap:.4rem;flex-wrap:wrap;"><span class="fs-small" style="font-weight:var(--fw-bold);color:var(--text3);letter-spacing:.04em;text-transform:uppercase;flex-shrink:0;padding-top:.1rem">질의</span><div style="display:flex;flex-direction:column;gap:.15rem;">${queryHtml}</div></div>
           </div>`;
                 list.appendChild(row);
             });
@@ -12616,11 +12629,11 @@ for r in results:
             pn.innerHTML = S.scenarios.map(s => `
         <div id="s4pane-${s.id}" style="display:none;">
             <div id="s4status-${s.id}">
-                <div class="row-gap" style="flex-wrap:wrap;margin-bottom:.7rem">
+                <div style="display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-bottom:.7rem;">
                     <button class="btn btn-s" onclick="extractSchemaForScenario(${s.id})" id="s4extbtn-${s.id}">
                         <span class="ico"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span> 이 시나리오 추출
                     </button>
-                    <div class="stack" style="gap:0;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);overflow:hidden;height:28px" title="추출 상세 수준">
+                    <div style="display:flex;gap:0;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);overflow:hidden;height:28px;" title="추출 상세 수준">
                         <button class="fs-small" onclick="setScenLevel(${s.id},'outline')" id="s4lvl-outline-${s.id}" style="flex:1;font-weight:var(--fw-semibold);border:none;cursor:pointer;padding:0 .55rem;background:var(--bg-card);color:var(--text3);transition:all .15s">개요</button>
                         <button class="fs-small" onclick="setScenLevel(${s.id},'mid')" id="s4lvl-mid-${s.id}" style="flex:1;font-weight:var(--fw-semibold);border:none;cursor:pointer;padding:0 .55rem;background:var(--bg-card);color:var(--text3);border-left:var(--bw-thin) solid var(--border);border-right:var(--bw-thin) solid var(--border);transition:all .15s">중간</button>
                         <button class="fs-small" onclick="setScenLevel(${s.id},'detail')" id="s4lvl-detail-${s.id}" style="flex:1;font-weight:var(--fw-semibold);border:none;cursor:pointer;padding:0 .55rem;background:var(--bg-card);color:var(--text3);transition:all .15s">상세</button>
@@ -12631,19 +12644,19 @@ for r in results:
                 <div class="al al-i fs-sm" style="max-height:80px;overflow:hidden;color:var(--text2)">${s.text.substring(0, 150)}...</div>
             </div>
             <div id="s4inner-${s.id}" style="display:${S.schemas[s.id] ? 'block' : 'none'};margin-top:.8rem;">
-                <div class="stack" id="s4tabs-${s.id}" style="border-bottom:var(--bw-thin) solid var(--border);gap:0;margin-bottom:.8rem">
+                <div id="s4tabs-${s.id}" style="display:flex;border-bottom:var(--bw-thin) solid var(--border);gap:0;margin-bottom:.8rem;">
                     <button class="fs-sm" id="s4it-triple-${s.id}" onclick="switchInnerTab(${s.id},'triple')" style="padding:.4rem .9rem;font-weight:var(--fw-semibold);background:none;border:none;cursor:pointer;border-bottom:var(--bw-thick) solid var(--ink);color:var(--ink);transition:all .2s"><span id="s4tri-${s.id}">트리플</span></button>
                     <button class="fs-sm" id="s4it-classes-${s.id}" onclick="switchInnerTab(${s.id},'classes')" style="padding:.4rem .9rem;font-weight:var(--fw-semibold);background:none;border:none;cursor:pointer;border-bottom:var(--bw-thick) solid transparent;color:var(--text3);transition:all .2s"><span id="s4cls-${s.id}">클래스/속성</span></button>
                     <button class="fs-sm" id="s4it-rule-${s.id}" onclick="switchInnerTab(${s.id},'rule')" style="padding:.4rem .9rem;font-weight:var(--fw-semibold);background:none;border:none;cursor:pointer;border-bottom:var(--bw-thick) solid transparent;color:var(--text3);transition:all .2s"><span id="s4rule-${s.id}">예외 규칙</span></button>
                     <button class="fs-sm" id="s4it-constraints-${s.id}" onclick="switchInnerTab(${s.id},'constraints')" style="padding:.4rem .9rem;font-weight:var(--fw-semibold);background:none;border:none;cursor:pointer;border-bottom:var(--bw-thick) solid transparent;color:var(--text3);transition:all .2s"><span id="s4cst-${s.id}">제약 조건</span></button>
                     <button class="fs-sm" id="s4it-raw-${s.id}" onclick="switchInnerTab(${s.id},'raw')" style="padding:.4rem .9rem;font-weight:var(--fw-semibold);background:none;border:none;cursor:pointer;border-bottom:var(--bw-thick) solid transparent;color:var(--text3);transition:all .2s">원문 JSON</button>
-                    <button class="fs-sm row-gap-xs" id="s4it-gui-${s.id}" onclick="switchInnerTab(${s.id},'gui')" style="padding:.4rem .9rem;font-weight:var(--fw-semibold);background:none;border:none;cursor:pointer;border-bottom:var(--bw-thick) solid transparent;color:var(--text3);transition:all .2s"><span class="ico" style="width:13px;height:13px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span> GUI 편집</button>
-                    <button class="fs-sm row-gap-xs" id="s4it-diagram-${s.id}" onclick="switchInnerTab(${s.id},'diagram')" style="padding:.4rem .9rem;font-weight:var(--fw-semibold);background:none;border:none;cursor:pointer;border-bottom:var(--bw-thick) solid transparent;color:var(--text3);transition:all .2s"><span class="ico" style="width:13px;height:13px;"><svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span> 다이어그램</button>
+                    <button class="fs-sm" id="s4it-gui-${s.id}" onclick="switchInnerTab(${s.id},'gui')" style="padding:.4rem .9rem;font-weight:var(--fw-semibold);background:none;border:none;cursor:pointer;border-bottom:var(--bw-thick) solid transparent;color:var(--text3);transition:all .2s;display:flex;align-items:center;gap:.3rem"><span class="ico" style="width:13px;height:13px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span> GUI 편집</button>
+                    <button class="fs-sm" id="s4it-diagram-${s.id}" onclick="switchInnerTab(${s.id},'diagram')" style="padding:.4rem .9rem;font-weight:var(--fw-semibold);background:none;border:none;cursor:pointer;border-bottom:var(--bw-thick) solid transparent;color:var(--text3);transition:all .2s;display:flex;align-items:center;gap:.3rem"><span class="ico" style="width:13px;height:13px;"><svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span> 다이어그램</button>
                 </div>
-                <div id="s4ip-triple-${s.id}"><div class="col-gap-sm" id="s4tl-${s.id}"></div></div>
-                <div id="s4ip-classes-${s.id}" style="display:none;"><div class="col-gap" id="s4cl-${s.id}"></div></div>
-                <div id="s4ip-rule-${s.id}" style="display:none;"><div class="col-gap" id="s4rl-${s.id}"></div></div>
-                <div id="s4ip-constraints-${s.id}" style="display:none;"><div class="col-gap" id="s4cstl-${s.id}"></div></div>
+                <div id="s4ip-triple-${s.id}"><div id="s4tl-${s.id}" style="display:flex;flex-direction:column;gap:.4rem;"></div></div>
+                <div id="s4ip-classes-${s.id}" style="display:none;"><div id="s4cl-${s.id}" style="display:flex;flex-direction:column;gap:.5rem;"></div></div>
+                <div id="s4ip-rule-${s.id}" style="display:none;"><div id="s4rl-${s.id}" style="display:flex;flex-direction:column;gap:.5rem;"></div></div>
+                <div id="s4ip-constraints-${s.id}" style="display:none;"><div id="s4cstl-${s.id}" style="display:flex;flex-direction:column;gap:.5rem;"></div></div>
                 <div id="s4ip-raw-${s.id}" style="display:none;"><textarea spellcheck="false" class="ce" id="s4raw-${s.id}" style="min-height:200px;"></textarea></div>
                 <div id="s4ip-gui-${s.id}" style="display:none;"><div id="s4gui-${s.id}" style="padding:.3rem 0;"></div></div>
                 <div id="s4ip-diagram-${s.id}" style="display:none;"><div id="s4diag-${s.id}" style="min-height:360px;overflow:auto;"></div></div>
@@ -12807,7 +12820,7 @@ for r in results:
             if (_clsEl) _clsEl.textContent = '클래스 ' + classes.length + '개 · 속성 ' + props.length + '개';
             // Triple list
             const tl = document.getElementById('s4tl-' + id);
-            if (tl) tl.innerHTML = triples.map((t, i) => `<div class="fs-sm stack" style="align-items:baseline;gap:var(--gap-md);padding:.45rem .65rem;border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);background:var(--bg-card)"><span class="fs-small center" style="flex-shrink:0;width:17px;height:17px;border-radius:var(--r-full);background:var(--c-ink-06);color:var(--ink);font-weight:var(--fw-bold)">${i + 1}</span><span style="color:var(--ink);font-weight:var(--fw-semibold);">${t.subject || ''}</span><span class="fs-xs" style="color:var(--text3);font-style:italic">${t.predicate || ''}</span><span style="color:var(--text2);flex:1;">${t.object || ''}</span>${t.source ? `<span class="fs-small" style="color:var(--text3)">${t.source}</span>` : ''}</div>`).join('');
+            if (tl) tl.innerHTML = triples.map((t, i) => `<div class="fs-sm" style="display:flex;align-items:baseline;gap:.5rem;padding:.45rem .65rem;border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);background:var(--bg-card)"><span class="fs-small" style="flex-shrink:0;width:17px;height:17px;border-radius:var(--r-full);background:var(--c-ink-06);color:var(--ink);font-weight:var(--fw-bold);display:flex;align-items:center;justify-content:center">${i + 1}</span><span style="color:var(--ink);font-weight:var(--fw-semibold);">${t.subject || ''}</span><span class="fs-xs" style="color:var(--text3);font-style:italic">${t.predicate || ''}</span><span style="color:var(--text2);flex:1;">${t.object || ''}</span>${t.source ? `<span class="fs-small" style="color:var(--text3)">${t.source}</span>` : ''}</div>`).join('');
             // Classes/Properties list
             const cl = document.getElementById('s4cl-' + id);
             if (cl) {
@@ -12824,21 +12837,21 @@ for r in results:
                     const cmt = (c.comment || c.description)
                         ? `<span class="fs-xs" style="color:var(--text3);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"> ${c.comment || c.description}</span>`
                         : '';
-                    return `<div class="fs-sm row-gap-sm" style="padding:.3rem .6rem;border-bottom:var(--bw-thin) solid var(--border);background:var(--mono-white)" title="${c.id || c.uri || ''}"><code class="fs-small" style="padding:.08rem .25rem;border-radius:var(--r-xs);background:var(--c-ink-08);color:var(--ink);font-weight:var(--fw-bold);flex-shrink:0">C</code><span style="font-weight:var(--fw-semibold);color:var(--ink);white-space:nowrap;">${c.label || c.name}</span>${parentBadge}${cmt}</div>`;
+                    return `<div class="fs-sm" style="display:flex;align-items:center;gap:.45rem;padding:.3rem .6rem;border-bottom:var(--bw-thin) solid var(--border);background:var(--mono-white)" title="${c.id || c.uri || ''}"><code class="fs-small" style="padding:.08rem .25rem;border-radius:var(--r-xs);background:var(--c-ink-08);color:var(--ink);font-weight:var(--fw-bold);flex-shrink:0">C</code><span style="font-weight:var(--fw-semibold);color:var(--ink);white-space:nowrap;">${c.label || c.name}</span>${parentBadge}${cmt}</div>`;
                 };
                 const clHtml = classes.length > 0 ? `<div style="margin-bottom:.7rem;"><div class="fs-xs" style="font-weight:var(--fw-bold);color:var(--text2);margin-bottom:.35rem;letter-spacing:.03em">owl:Class 선언 (${classes.length}개)</div><div style="border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);overflow:hidden;">${_rootCls.length > 0 ? `<div class="fs-small" style="background:var(--c-ink-05);padding:.2rem .6rem;color:var(--text3);font-weight:var(--fw-bold);letter-spacing:.04em;border-bottom:var(--bw-thin) solid var(--border)">루트 클래스 (${_rootCls.length})</div>${_rootCls.map(_clsRow).join('')}` : ''}${_subCls.length > 0 ? `<div class="fs-small" style="background:var(--c-ink-04);padding:.2rem .6rem;color:var(--text3);font-weight:var(--fw-bold);letter-spacing:.04em;${_rootCls.length > 0 ? 'border-top:var(--bw-thin) solid var(--border);' : ''}border-bottom:var(--bw-thin) solid var(--border)">서브 클래스 (${_subCls.length})</div>${_subCls.map(_clsRow).join('')}` : ''}</div></div>` : '';
-                const prHtml = props.length > 0 ? `<div><div class="fs-xs" style="font-weight:var(--fw-bold);color:var(--text2);margin-bottom:.35rem;letter-spacing:.03em">owl:Property 구분 (${props.length}개)</div><div class="col-gap-sm">${props.map(p => `<div class="fs-sm row-gap-xs" style="padding:.3rem .5rem;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);background:var(--mono-white)"><code class="fs-small" style="padding:.1rem .3rem;border-radius:var(--r-xs);background:var(--c-ink-08);color:${typeColor(p.type)};font-weight:var(--fw-bold)">${typeLabel(p.type)}</code><span style="color:var(--ink);font-weight:var(--fw-semibold);">${p.name}</span><span class="fs-xs" style="color:var(--text3)">${p.domain || ''} → ${p.range || ''}</span>${p.inverseOf ? `<span class="fs-xs" style="color:var(--mono-600);margin-left:.3rem" title="owl:inverseOf">⇄ ${p.inverseOf}</span>` : ''} ${(p.comment || p.description) ? `<span class="fs-xs" style="color:var(--text3);margin-left:auto"> -  ${p.comment || p.description}</span>` : ''}</div>`).join('')}</div></div>` : '';
+                const prHtml = props.length > 0 ? `<div><div class="fs-xs" style="font-weight:var(--fw-bold);color:var(--text2);margin-bottom:.35rem;letter-spacing:.03em">owl:Property 구분 (${props.length}개)</div><div style="display:flex;flex-direction:column;gap:.3rem;">${props.map(p => `<div class="fs-sm" style="display:flex;align-items:center;gap:.4rem;padding:.3rem .5rem;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);background:var(--mono-white)"><code class="fs-small" style="padding:.1rem .3rem;border-radius:var(--r-xs);background:var(--c-ink-08);color:${typeColor(p.type)};font-weight:var(--fw-bold)">${typeLabel(p.type)}</code><span style="color:var(--ink);font-weight:var(--fw-semibold);">${p.name}</span><span class="fs-xs" style="color:var(--text3)">${p.domain || ''} → ${p.range || ''}</span>${p.inverseOf ? `<span class="fs-xs" style="color:var(--mono-600);margin-left:.3rem" title="owl:inverseOf">⇄ ${p.inverseOf}</span>` : ''} ${(p.comment || p.description) ? `<span class="fs-xs" style="color:var(--text3);margin-left:auto"> -  ${p.comment || p.description}</span>` : ''}</div>`).join('')}</div></div>` : '';
                 cl.innerHTML = (clHtml || prHtml) ? clHtml + prHtml : '<div class="fs-sm" style="color:var(--text3);padding:.5rem">클래스/속성 정보가 없습니다. 재추출하면 자동으로 포함됩니다.</div>';
             }
             // Rule list
             const rl = document.getElementById('s4rl-' + id);
-            if (rl) rl.innerHTML = rules.map(r => `<div class="fs-sm" style="border:var(--bw-thin) solid var(--border);border-left:var(--bw-thick) solid var(--ink);border-radius:var(--r-md);padding:.65rem .85rem;background:var(--mono-white)"><div class="row-gap-xs" style="margin-bottom:.4rem;flex-wrap:wrap"><code class="fs-small" style="background:var(--c-ink-08);color:var(--ink);padding:.1rem .35rem;border-radius:var(--r-xs)">${r.rule_id || ''}</code><span style="font-weight:var(--fw-bold);">${r.rule_name || ''}</span></div>${r.if?.conditions?.length ? `<div><span class="fs-xs" style="font-weight:var(--fw-semibold);color:var(--text2)">IF</span> ${r.if.conditions.join(' / ')}</div>` : ''} ${r.then ? `<div><span class="fs-xs" style="font-weight:var(--fw-semibold);color:var(--ink)">THEN</span> ${r.then}</div>` : ''} ${r.exception ? `<div><span class="fs-xs" style="font-weight:var(--fw-semibold);color:var(--mono-600)">EXCEPT</span> ${r.exception}</div>` : ''}</div>`).join('');
+            if (rl) rl.innerHTML = rules.map(r => `<div class="fs-sm" style="border:var(--bw-thin) solid var(--border);border-left:var(--bw-thick) solid var(--ink);border-radius:var(--r-md);padding:.65rem .85rem;background:var(--mono-white)"><div style="display:flex;gap:.4rem;align-items:center;margin-bottom:.4rem;flex-wrap:wrap;"><code class="fs-small" style="background:var(--c-ink-08);color:var(--ink);padding:.1rem .35rem;border-radius:var(--r-xs)">${r.rule_id || ''}</code><span style="font-weight:var(--fw-bold);">${r.rule_name || ''}</span></div>${r.if?.conditions?.length ? `<div><span class="fs-xs" style="font-weight:var(--fw-semibold);color:var(--text2)">IF</span> ${r.if.conditions.join(' / ')}</div>` : ''} ${r.then ? `<div><span class="fs-xs" style="font-weight:var(--fw-semibold);color:var(--ink)">THEN</span> ${r.then}</div>` : ''} ${r.exception ? `<div><span class="fs-xs" style="font-weight:var(--fw-semibold);color:var(--mono-600)">EXCEPT</span> ${r.exception}</div>` : ''}</div>`).join('');
             // Constraints (SHACL)
             const cstl = document.getElementById('s4cstl-' + id);
             if (cstl) {
                 const sevColor = s => s === 'sh:Violation' ? 'var(--ink)' : s === 'sh:Warning' ? 'var(--mono-600)' : 'var(--text2)';
                 const sevBg = s => s === 'sh:Violation' ? 'var(--c-ink-06)' : s === 'sh:Warning' ? 'var(--c-ink-04)' : 'var(--c-ink-08)';
-                cstl.innerHTML = constraints.length > 0 ? constraints.map(c => `<div class="fs-sm" style="border:var(--bw-thin) solid ${sevColor(c.severity)};border-left:var(--bw-thick) solid ${sevColor(c.severity)};border-radius:var(--r-md);padding:.6rem .85rem;background:${sevBg(c.severity)}"><div class="row-gap-xs" style="margin-bottom:.35rem;flex-wrap:wrap"><code class="fs-small" style="background:var(--c-ink-06);color:var(--text2);padding:.1rem .35rem;border-radius:var(--r-xs)">${c.shape_id || ''}</code><span class="fs-small" style="font-weight:var(--fw-bold);padding:.1rem .3rem;border-radius:var(--r-xs);background:${sevBg(c.severity)};color:${sevColor(c.severity)};border:var(--bw-thin) solid ${sevColor(c.severity)}20">${c.severity || 'sh:Violation'}</span><span class="fs-small" style="color:var(--text3);margin-left:auto">SHACL</span></div><div class="stack" style="gap:var(--gap-lg);flex-wrap:wrap;margin-bottom:.28rem"><span><span class="fs-xs" style="color:var(--text3)">대상 클래스</span> <strong>${c.target_class || ''}</strong></span>${c.path ? `<span><span class="fs-xs" style="color:var(--text3)">속성</span> <strong>${c.path}</strong></span>` : ''}${c.min_count != null ? `<span><span class="fs-xs" style="color:var(--text3)">최소값</span> <code class="fs-xs" style="padding:.05rem .25rem;border-radius:var(--r-xs);background:var(--c-ink-06)">sh:minCount ${c.min_count}</code></span>` : ''}</div>${c.exception_message ? `<div class="fs-xs" style="color:var(--text2);border-top:var(--bw-thin) solid var(--c-ink-06);padding-top:.28rem;margin-top:.28rem"><div style='display:flex;align-items:flex-start;gap:.3rem;margin-top:.28rem;'><svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><span>${c.exception_message}</span></div></div>` : ''}</div>`).join('') : '<div class="fs-sm" style="color:var(--text3);padding:.5rem">SHACL 제약 조건이 없습니다. 재추출 시 자동 생성됩니다.</div>';
+                cstl.innerHTML = constraints.length > 0 ? constraints.map(c => `<div class="fs-sm" style="border:var(--bw-thin) solid ${sevColor(c.severity)};border-left:var(--bw-thick) solid ${sevColor(c.severity)};border-radius:var(--r-md);padding:.6rem .85rem;background:${sevBg(c.severity)}"><div style="display:flex;gap:.4rem;align-items:center;margin-bottom:.35rem;flex-wrap:wrap;"><code class="fs-small" style="background:var(--c-ink-06);color:var(--text2);padding:.1rem .35rem;border-radius:var(--r-xs)">${c.shape_id || ''}</code><span class="fs-small" style="font-weight:var(--fw-bold);padding:.1rem .3rem;border-radius:var(--r-xs);background:${sevBg(c.severity)};color:${sevColor(c.severity)};border:var(--bw-thin) solid ${sevColor(c.severity)}20">${c.severity || 'sh:Violation'}</span><span class="fs-small" style="color:var(--text3);margin-left:auto">SHACL</span></div><div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:.28rem;"><span><span class="fs-xs" style="color:var(--text3)">대상 클래스</span> <strong>${c.target_class || ''}</strong></span>${c.path ? `<span><span class="fs-xs" style="color:var(--text3)">속성</span> <strong>${c.path}</strong></span>` : ''}${c.min_count != null ? `<span><span class="fs-xs" style="color:var(--text3)">최소값</span> <code class="fs-xs" style="padding:.05rem .25rem;border-radius:var(--r-xs);background:var(--c-ink-06)">sh:minCount ${c.min_count}</code></span>` : ''}</div>${c.exception_message ? `<div class="fs-xs" style="color:var(--text2);border-top:var(--bw-thin) solid var(--c-ink-06);padding-top:.28rem;margin-top:.28rem"><div style='display:flex;align-items:flex-start;gap:.3rem;margin-top:.28rem;'><svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><span>${c.exception_message}</span></div></div>` : ''}</div>`).join('') : '<div class="fs-sm" style="color:var(--text3);padding:.5rem">SHACL 제약 조건이 없습니다. 재추출 시 자동 생성됩니다.</div>';
             }
             // Raw
             const raw = document.getElementById('s4raw-' + id);
@@ -12871,7 +12884,7 @@ for r in results:
 <div class="schema-guide-row"><span class="schema-guide-key">properties</span><span class="schema-guide-val">owl:ObjectProperty(개체↔개체) / owl:DatatypeProperty(개체↔값) 구분  -  domain, range, inverseOf(owl:inverseOf), comment</span></div>
 <div class="schema-guide-row"><span class="schema-guide-key">exception_rules</span><span class="schema-guide-val">IF-THEN 예외 처리 규칙 목록. rule_id / if.conditions / then / except 구조 (W3C SWRL)</span></div>
 <div class="schema-guide-row"><span class="schema-guide-key">constraints</span><span class="schema-guide-val">SHACL 유효성 제약 조건  -  shape_id, target_class, path, min_count, severity(sh:Violation/Warning/Info), exception_message</span></div>
-<div class="fs-xs row-start" style="margin-top:.5rem;color:var(--text3)"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:.1rem;"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg> 트리플이 5개 미만이거나 예외 규칙이 없으면 추출 수준을 "중간" 또는 "상세"로 올려 재추출해 보세요.</div>`;
+<div class="fs-xs" style="margin-top:.5rem;color:var(--text3);display:flex;align-items:flex-start;gap:.3rem"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:.1rem;"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg> 트리플이 5개 미만이거나 예외 규칙이 없으면 추출 수준을 "중간" 또는 "상세"로 올려 재추출해 보세요.</div>`;
                 const innerWrap = document.getElementById('s4inner-' + id);
                 if (innerWrap) innerWrap.after(guideEl);
             }
@@ -13011,15 +13024,15 @@ for r in results:
                     const classes = g.upper_classes || [];
                     const classCards = classes.map((c, i) => `
                 <div style="border:var(--bw-thin) solid var(--c-ink-15);border-left:var(--bw-thick) solid ${col};border-radius:var(--r-md);padding:.6rem .85rem;background:var(--mono-white);margin-top:.4rem;">
-                    <div class="row-gap-sm" style="margin-bottom:.25rem">
-                        <span class="fs-small center" style="width:20px;height:20px;border-radius:var(--r-full);background:${col};color:var(--mono-white);font-weight:var(--fw-bold)">${i + 1}</span>
+                    <div style="display:flex;align-items:center;gap:.45rem;margin-bottom:.25rem;">
+                        <span class="fs-small" style="width:20px;height:20px;border-radius:var(--r-full);background:${col};color:var(--mono-white);font-weight:var(--fw-bold);display:flex;align-items:center;justify-content:center">${i + 1}</span>
                         <span class="fs-sm" style="font-weight:var(--fw-bold);color:var(--ink)">${c.name}</span>
                     </div>
                     <p class="fs-xs" style="color:var(--text2);margin:.1rem 0 .35rem">${c.description || ''}</p>
-                    ${c.domain_instances?.length ? `<div class="stack" style="flex-wrap:wrap;gap:var(--sp-1)">${c.domain_instances.map(d => `<span class="fs-xs" style="background:var(--c-ink-07);color:var(--ink);padding:.12rem .45rem;border-radius:var(--r-md)">${d}</span>`).join('')}</div>` : ''}
+                    ${c.domain_instances?.length ? `<div style="display:flex;flex-wrap:wrap;gap:.25rem;">${c.domain_instances.map(d => `<span class="fs-xs" style="background:var(--c-ink-07);color:var(--ink);padding:.12rem .45rem;border-radius:var(--r-md)">${d}</span>`).join('')}</div>` : ''}
                 </div>`).join('');
                     return `<div style="border:var(--bw-thin) solid ${col}33;border-radius:var(--r-md);padding:.7rem .9rem;margin-bottom:.65rem;">
-                <div class="fs-xs row-gap-xs" style="font-weight:var(--fw-bold);color:${col};margin-bottom:.35rem">
+                <div class="fs-xs" style="font-weight:var(--fw-bold);color:${col};margin-bottom:.35rem;display:flex;align-items:center;gap:.4rem">
                     <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
                     그룹 ${gi + 1}: ${g.group_name || '이름 없음'} (상위 클래스 ${classes.length}개)
                 </div>
@@ -13031,7 +13044,7 @@ for r in results:
                     const col = groupColors[gi % groupColors.length];
                     const links = g.subclass_mappings || [];
                     const linkRows = links.map(l => `
-                <div class="fs-sm row-gap" style="padding:.35rem .6rem;border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);background:var(--mono-white)">
+                <div class="fs-sm" style="display:flex;align-items:center;gap:.6rem;padding:.35rem .6rem;border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);background:var(--mono-white)">
                     <span style="color:var(--ink);font-weight:var(--fw-semibold);">${l.domain_class || ''}</span>
                     <span class="fs-xs" style="color:var(--text3);font-style:italic">subClassOf</span>
                     <span style="color:${col};font-weight:var(--fw-semibold);">${l.upper_class || ''}</span>
@@ -13091,7 +13104,7 @@ for r in results:
                 const risk = RISKS.includes(rawRisk) ? rawRisk : 'LOW';
                 const col = RC[risk];
                 const rid = r.inference_id || ('INF_' + String(i + 1).padStart(2, '0'));
-                h += `<div style="border:var(--bw-thin) solid ${col}33;border-radius:var(--r-md);padding:.7rem .9rem;margin-bottom:.65rem"><div class="row-gap" style="margin-bottom:.55rem;flex-wrap:wrap"><span class="fs-xs" style="background:${col};color:var(--mono-white);font-weight:var(--fw-bold);border-radius:var(--r-sm);padding:.15rem .52rem;white-space:nowrap">${esc(rid)}</span><input class="fs-sm" type="text" spellcheck="false" placeholder="규칙 이름" value="${esc(r.inference_name)}" style="flex:1;min-width:120px;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.28rem .5rem" oninput="S.infRules.inferred_rules[${i}].inference_name=this.value;document.getElementById('inf-ed').value=JSON.stringify(S.infRules,null,2)"><select class="fs-xs" style="border:var(--bw-thin) solid ${col};border-radius:var(--r-sm);padding:.28rem .45rem;color:${col};font-weight:var(--fw-semibold);cursor:pointer" onchange="S.infRules.inferred_rules[${i}].risk_level=this.value;renderInfGuiEditor()">${RISKS.map(rv => `<option value="${rv}"${rv === risk ? ' selected' : ''}>${rv}</option>`).join('')}</select><button class="fs-xs" onclick="S.infRules.inferred_rules.splice(${i},1);document.getElementById('inf-ed').value=JSON.stringify(S.infRules,null,2);document.getElementById('inf-cnt').textContent='추론 규칙: '+S.infRules.inferred_rules.length+'개';renderInfGuiEditor()" style="border:var(--bw-thin) solid var(--mono-600);color:var(--mono-600);background:transparent;border-radius:var(--r-sm);padding:.22rem .55rem;cursor:pointer">삭제</button></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--gap-sm);margin-bottom:.4rem"><div><div class="fs-xs" style="color:var(--text3);margin-bottom:.12rem;font-weight:var(--fw-semibold)">IF 조건</div><textarea class="fs-xs" rows="3" spellcheck="false" style="width:100%;box-sizing:border-box;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.28rem .5rem;resize:vertical" oninput="S.infRules.inferred_rules[${i}].condition=this.value;document.getElementById('inf-ed').value=JSON.stringify(S.infRules,null,2)">${esc(r.condition)}</textarea></div><div><div class="fs-xs" style="color:var(--text3);margin-bottom:.12rem;font-weight:var(--fw-semibold)">THEN 결론 (action)</div><textarea class="fs-xs" rows="3" spellcheck="false" style="width:100%;box-sizing:border-box;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.28rem .5rem;resize:vertical" oninput="S.infRules.inferred_rules[${i}].action=this.value;document.getElementById('inf-ed').value=JSON.stringify(S.infRules,null,2)">${esc(r.action)}</textarea></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--gap-sm)"><div><div class="fs-xs" style="color:var(--text3);margin-bottom:.12rem;font-weight:var(--fw-semibold)">담당 부서</div><input class="fs-xs" type="text" spellcheck="false" placeholder="담당 부서" value="${esc(r.responsible_dept)}" style="width:100%;box-sizing:border-box;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.28rem .5rem" oninput="S.infRules.inferred_rules[${i}].responsible_dept=this.value;document.getElementById('inf-ed').value=JSON.stringify(S.infRules,null,2)"></div><div><div class="fs-xs" style="color:var(--text3);margin-bottom:.12rem;font-weight:var(--fw-semibold)">업무 영향</div><input class="fs-xs" type="text" spellcheck="false" placeholder="업무 영향" value="${esc(r.business_impact)}" style="width:100%;box-sizing:border-box;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.28rem .5rem" oninput="S.infRules.inferred_rules[${i}].business_impact=this.value;document.getElementById('inf-ed').value=JSON.stringify(S.infRules,null,2)"></div></div></div>`;
+                h += `<div style="border:var(--bw-thin) solid ${col}33;border-radius:var(--r-md);padding:.7rem .9rem;margin-bottom:.65rem"><div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.55rem;flex-wrap:wrap"><span class="fs-xs" style="background:${col};color:var(--mono-white);font-weight:var(--fw-bold);border-radius:var(--r-sm);padding:.15rem .52rem;white-space:nowrap">${esc(rid)}</span><input class="fs-sm" type="text" spellcheck="false" placeholder="규칙 이름" value="${esc(r.inference_name)}" style="flex:1;min-width:120px;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.28rem .5rem" oninput="S.infRules.inferred_rules[${i}].inference_name=this.value;document.getElementById('inf-ed').value=JSON.stringify(S.infRules,null,2)"><select class="fs-xs" style="border:var(--bw-thin) solid ${col};border-radius:var(--r-sm);padding:.28rem .45rem;color:${col};font-weight:var(--fw-semibold);cursor:pointer" onchange="S.infRules.inferred_rules[${i}].risk_level=this.value;renderInfGuiEditor()">${RISKS.map(rv => `<option value="${rv}"${rv === risk ? ' selected' : ''}>${rv}</option>`).join('')}</select><button class="fs-xs" onclick="S.infRules.inferred_rules.splice(${i},1);document.getElementById('inf-ed').value=JSON.stringify(S.infRules,null,2);document.getElementById('inf-cnt').textContent='추론 규칙: '+S.infRules.inferred_rules.length+'개';renderInfGuiEditor()" style="border:var(--bw-thin) solid var(--mono-600);color:var(--mono-600);background:transparent;border-radius:var(--r-sm);padding:.22rem .55rem;cursor:pointer">삭제</button></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:.45rem;margin-bottom:.4rem"><div><div class="fs-xs" style="color:var(--text3);margin-bottom:.12rem;font-weight:var(--fw-semibold)">IF 조건</div><textarea class="fs-xs" rows="3" spellcheck="false" style="width:100%;box-sizing:border-box;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.28rem .5rem;resize:vertical" oninput="S.infRules.inferred_rules[${i}].condition=this.value;document.getElementById('inf-ed').value=JSON.stringify(S.infRules,null,2)">${esc(r.condition)}</textarea></div><div><div class="fs-xs" style="color:var(--text3);margin-bottom:.12rem;font-weight:var(--fw-semibold)">THEN 결론 (action)</div><textarea class="fs-xs" rows="3" spellcheck="false" style="width:100%;box-sizing:border-box;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.28rem .5rem;resize:vertical" oninput="S.infRules.inferred_rules[${i}].action=this.value;document.getElementById('inf-ed').value=JSON.stringify(S.infRules,null,2)">${esc(r.action)}</textarea></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:.45rem"><div><div class="fs-xs" style="color:var(--text3);margin-bottom:.12rem;font-weight:var(--fw-semibold)">담당 부서</div><input class="fs-xs" type="text" spellcheck="false" placeholder="담당 부서" value="${esc(r.responsible_dept)}" style="width:100%;box-sizing:border-box;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.28rem .5rem" oninput="S.infRules.inferred_rules[${i}].responsible_dept=this.value;document.getElementById('inf-ed').value=JSON.stringify(S.infRules,null,2)"></div><div><div class="fs-xs" style="color:var(--text3);margin-bottom:.12rem;font-weight:var(--fw-semibold)">업무 영향</div><input class="fs-xs" type="text" spellcheck="false" placeholder="업무 영향" value="${esc(r.business_impact)}" style="width:100%;box-sizing:border-box;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.28rem .5rem" oninput="S.infRules.inferred_rules[${i}].business_impact=this.value;document.getElementById('inf-ed').value=JSON.stringify(S.infRules,null,2)"></div></div></div>`;
             });
             h += `<button class="fs-sm" onclick="const nr={inference_id:'INF_'+String(S.infRules.inferred_rules.length+1).padStart(2,'0'),inference_name:'새 규칙',risk_level:'MEDIUM',condition:'',action:'',responsible_dept:'',business_impact:'',cascade_rules:[]};S.infRules.inferred_rules.push(nr);document.getElementById('inf-ed').value=JSON.stringify(S.infRules,null,2);document.getElementById('inf-cnt').textContent='추론 규칙: '+S.infRules.inferred_rules.length+'개';renderInfGuiEditor()" style="width:100%;margin-top:.3rem;padding:.5rem;border:var(--bw-strong) dashed var(--border);border-radius:var(--r-md);background:transparent;color:var(--text3);cursor:pointer;transition:all .15s" onmouseover="this.style.borderColor='var(--ink)';this.style.color='var(--ink)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text3)'">+ 규칙 추가</button>`;
             container.innerHTML = h;
@@ -13111,7 +13124,7 @@ for r in results:
             groups.forEach((g, gi) => {
                 const col = groupColors[gi % groupColors.length];
                 h += `<div style="border:var(--bw-thin) solid ${col}33;border-radius:var(--r-md);padding:.7rem .9rem;margin-bottom:.65rem;">
-<div class="row-gap" style="margin-bottom:.55rem">
+<div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.55rem;">
   <span class="fs-xs" style="font-weight:var(--fw-bold);color:${col}">그룹 ${gi + 1}</span>
   <input class="fs-xs" type="text" spellcheck="false" value="${(g.group_name || '').replace(/"/g, '&quot;')}" oninput="updateUpperGroup(${gi},'group_name',this.value)" style="flex:1;border:var(--bw-thin) solid ${col}55;border-radius:var(--r-sm);padding:.18rem .38rem;color:var(--ink)">
 </div>
@@ -13433,11 +13446,11 @@ ${domainCtx}${upperCtx}
             let h = '';
             if (fired.length) {
                 h += `<div style="font-weight:var(--fw-bold);color:var(--ink);margin-bottom:.5rem;">발동된 규칙 (${fired.length}개)</div>`;
-                fired.forEach(r => { h += `<div class="fs-sm" style="border:var(--bw-thin) solid var(--border);border-left:var(--bw-thick) solid var(--ink);border-radius:var(--r-md);padding:.5rem .8rem;background:var(--c-ink-04);margin-bottom:.35rem"><div class="row-gap-xs" style="margin-bottom:.25rem"><code class="fs-small" style="background:var(--c-ink-06);color:var(--ink);padding:.1rem .35rem;border-radius:var(--r-xs)">${r.id}</code><span style="font-weight:var(--fw-bold);">${r.name}</span>${r.risk ? `<span class="fs-small" style="margin-left:auto;font-weight:var(--fw-bold);color:${rc(r.risk)}">${r.risk}</span>` : ''}</div><div><span class="fs-xs" style="font-weight:var(--fw-semibold);color:var(--ink)">THEN</span> ${r.action}</div>${r.dept ? `<div class="fs-xs" style="color:var(--text3);margin-top:.15rem">담당: ${r.dept}</div>` : ''}</div>`; });
+                fired.forEach(r => { h += `<div class="fs-sm" style="border:var(--bw-thin) solid var(--border);border-left:var(--bw-thick) solid var(--ink);border-radius:var(--r-md);padding:.5rem .8rem;background:var(--c-ink-04);margin-bottom:.35rem"><div style="display:flex;gap:.4rem;align-items:center;margin-bottom:.25rem;"><code class="fs-small" style="background:var(--c-ink-06);color:var(--ink);padding:.1rem .35rem;border-radius:var(--r-xs)">${r.id}</code><span style="font-weight:var(--fw-bold);">${r.name}</span>${r.risk ? `<span class="fs-small" style="margin-left:auto;font-weight:var(--fw-bold);color:${rc(r.risk)}">${r.risk}</span>` : ''}</div><div><span class="fs-xs" style="font-weight:var(--fw-semibold);color:var(--ink)">THEN</span> ${r.action}</div>${r.dept ? `<div class="fs-xs" style="color:var(--text3);margin-top:.15rem">담당: ${r.dept}</div>` : ''}</div>`; });
             }
             if (notFired.length) {
                 h += `<div style="font-weight:var(--fw-bold);color:var(--ink);margin:.7rem 0 .5rem;">미발동 규칙 - 조건 불충족 (${notFired.length}개)</div>`;
-                notFired.forEach(r => { h += `<div class="fs-sm" style="border:var(--bw-thin) solid var(--border);border-left:var(--bw-thick) solid var(--text3);border-radius:var(--r-md);padding:.5rem .8rem;background:var(--mono-50);margin-bottom:.35rem"><div class="row-gap-xs" style="margin-bottom:.25rem"><code class="fs-small" style="background:rgba(229,231,235,.7);color:var(--text2);padding:.1rem .35rem;border-radius:var(--r-xs)">${r.id}</code><span style="font-weight:var(--fw-bold);">${r.name}</span></div><div class="fs-xs" style="color:var(--text3)">미충족: ${r.missing.join(', ')}</div></div>`; });
+                notFired.forEach(r => { h += `<div class="fs-sm" style="border:var(--bw-thin) solid var(--border);border-left:var(--bw-thick) solid var(--text3);border-radius:var(--r-md);padding:.5rem .8rem;background:var(--mono-50);margin-bottom:.35rem"><div style="display:flex;gap:.4rem;align-items:center;margin-bottom:.25rem;"><code class="fs-small" style="background:rgba(229,231,235,.7);color:var(--text2);padding:.1rem .35rem;border-radius:var(--r-xs)">${r.id}</code><span style="font-weight:var(--fw-bold);">${r.name}</span></div><div class="fs-xs" style="color:var(--text3)">미충족: ${r.missing.join(', ')}</div></div>`; });
             }
             if (contradictions.length) {
                 h += `<div style="font-weight:var(--fw-bold);color:var(--ink);margin:.7rem 0 .5rem;">모순 감지 (${contradictions.length}개)</div>`;
@@ -13449,7 +13462,7 @@ ${domainCtx}${upperCtx}
                 const sevBg = sv => sv === 'Violation' ? 'var(--c-ink-06)' : sv === 'Warning' ? 'var(--c-ink-04)' : 'var(--c-ink-03)';
                 const sevBd = sv => sv === 'Violation' ? 'var(--border)' : sv === 'Warning' ? 'var(--border)' : 'var(--border)';
                 h += `<div style="font-weight:var(--fw-bold);color:var(--ink);margin:.7rem 0 .5rem;">SHACL 제약 위반 - W3C SHACL (${shaclViolations.length}건)</div>`;
-                shaclViolations.forEach(v => { h += `<div class="fs-sm" style="border:var(--bw-thin) solid ${sevBd(v.severity)};border-left:var(--bw-thick) solid ${sevColor(v.severity)};border-radius:var(--r-md);padding:.5rem .8rem;background:${sevBg(v.severity)};margin-bottom:.35rem"><div class="row-gap-xs" style="margin-bottom:.2rem;flex-wrap:wrap"><code class="fs-small" style="background:var(--c-ink-06);color:var(--text2);padding:.1rem .3rem;border-radius:var(--r-xs)">${v.shape_id}</code><span style="font-weight:var(--fw-semibold);">${v.target}</span><span class="fs-small" style="margin-left:auto;font-weight:var(--fw-bold);color:${sevColor(v.severity)}">${v.severity}</span></div><div class="fs-xs" style="color:var(--text2)"><span style="font-weight:var(--fw-semibold);">대상 클래스:</span> ${v.target_class} | <span style="font-weight:var(--fw-semibold);">속성:</span> ${v.path} | <span style="font-weight:var(--fw-semibold);">필요:</span> ${v.expected}개 이상 - <span style="font-weight:var(--fw-semibold);">실제:</span> ${v.actual}개</div><div class="fs-xs" style="color:var(--text3);margin-top:.15rem">${v.message}</div></div>` });
+                shaclViolations.forEach(v => { h += `<div class="fs-sm" style="border:var(--bw-thin) solid ${sevBd(v.severity)};border-left:var(--bw-thick) solid ${sevColor(v.severity)};border-radius:var(--r-md);padding:.5rem .8rem;background:${sevBg(v.severity)};margin-bottom:.35rem"><div style="display:flex;gap:.4rem;align-items:center;margin-bottom:.2rem;flex-wrap:wrap;"><code class="fs-small" style="background:var(--c-ink-06);color:var(--text2);padding:.1rem .3rem;border-radius:var(--r-xs)">${v.shape_id}</code><span style="font-weight:var(--fw-semibold);">${v.target}</span><span class="fs-small" style="margin-left:auto;font-weight:var(--fw-bold);color:${sevColor(v.severity)}">${v.severity}</span></div><div class="fs-xs" style="color:var(--text2)"><span style="font-weight:var(--fw-semibold);">대상 클래스:</span> ${v.target_class} | <span style="font-weight:var(--fw-semibold);">속성:</span> ${v.path} | <span style="font-weight:var(--fw-semibold);">필요:</span> ${v.expected}개 이상 - <span style="font-weight:var(--fw-semibold);">실제:</span> ${v.actual}개</div><div class="fs-xs" style="color:var(--text3);margin-top:.15rem">${v.message}</div></div>` });
             } else if ((S.infInstances || []).length > 0 && Object.values((S.combined && S.combined.domain_schemas) || {}).some(sc => (sc.constraints || []).length > 0)) {
                 h += `<div class="fs-xs" style="color:var(--mono-700);margin:.7rem 0 .25rem;font-weight:var(--fw-semibold)">&#10003; SHACL 검증 통과 - 모든 A-Box 인스턴스가 제약 조건을 충족합니다.</div>`;
             }
@@ -13544,7 +13557,7 @@ ${domainCtx}${upperCtx}
             let h = '';
 
             // ── owl:Class ──
-            h += `<div style="margin-bottom:.9rem;"><div class="row-gap" style="margin-bottom:.4rem"><div class="fs-sm" style="font-weight:var(--fw-bold);color:var(--ink)">owl:Class (${classes.length}개)</div><button class="fs-xs" onclick="addClass(${id})" style="margin-left:auto;padding:.2rem .6rem;font-weight:var(--fw-bold);border:var(--bw-thin) dashed var(--ink);border-radius:var(--r-sm);background:var(--c-ink-04);color:var(--ink);cursor:pointer">+ 추가</button></div><div style="overflow-x:auto;"><table class="fs-xs" style="width:100%;border-collapse:collapse"><thead><tr style="background:var(--c-ink-06);"><th class="fs-small" style="padding:.3rem;width:18px;color:var(--text3)">#</th><th style="padding:.3rem .5rem;text-align:left;color:var(--ink);font-weight:var(--fw-bold);">label</th><th style="padding:.3rem .5rem;text-align:left;color:var(--ink);font-weight:var(--fw-bold);">subClassOf</th><th style="padding:.3rem .5rem;text-align:left;color:var(--ink);font-weight:var(--fw-bold);">comment</th><th style="width:24px;"></th></tr></thead><tbody>`;
+            h += `<div style="margin-bottom:.9rem;"><div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.4rem;"><div class="fs-sm" style="font-weight:var(--fw-bold);color:var(--ink)">owl:Class (${classes.length}개)</div><button class="fs-xs" onclick="addClass(${id})" style="margin-left:auto;padding:.2rem .6rem;font-weight:var(--fw-bold);border:var(--bw-thin) dashed var(--ink);border-radius:var(--r-sm);background:var(--c-ink-04);color:var(--ink);cursor:pointer">+ 추가</button></div><div style="overflow-x:auto;"><table class="fs-xs" style="width:100%;border-collapse:collapse"><thead><tr style="background:var(--c-ink-06);"><th class="fs-small" style="padding:.3rem;width:18px;color:var(--text3)">#</th><th style="padding:.3rem .5rem;text-align:left;color:var(--ink);font-weight:var(--fw-bold);">label</th><th style="padding:.3rem .5rem;text-align:left;color:var(--ink);font-weight:var(--fw-bold);">subClassOf</th><th style="padding:.3rem .5rem;text-align:left;color:var(--ink);font-weight:var(--fw-bold);">comment</th><th style="width:24px;"></th></tr></thead><tbody>`;
             classes.forEach((c, i) => {
                 h += `<tr style="border-bottom:var(--bw-thin) solid var(--border);"><td class="fs-small" style="padding:.22rem;text-align:center;color:var(--text3)">${i + 1}</td>`;
                 ['label', 'subClassOf', 'comment'].forEach(f => {
@@ -13555,7 +13568,7 @@ ${domainCtx}${upperCtx}
             h += `</tbody></table></div></div>`;
 
             // ── owl:Property ──
-            h += `<div style="margin-bottom:.9rem;"><div class="row-gap" style="margin-bottom:.4rem"><div class="fs-sm" style="font-weight:var(--fw-bold);color:var(--ink)">owl:Property (${properties.length}개)</div><button class="fs-xs" onclick="addProperty(${id})" style="margin-left:auto;padding:.2rem .6rem;font-weight:var(--fw-bold);border:var(--bw-thin) dashed var(--ink);border-radius:var(--r-sm);background:var(--c-ink-04);color:var(--ink);cursor:pointer">+ 추가</button></div><div style="overflow-x:auto;"><table class="fs-xs" style="width:100%;border-collapse:collapse"><thead><tr style="background:var(--c-ink-06);"><th class="fs-small" style="padding:.3rem;width:18px;color:var(--text3)">#</th><th style="padding:.3rem .5rem;text-align:left;color:var(--ink);font-weight:var(--fw-bold);">name</th><th style="padding:.3rem .5rem;text-align:left;color:var(--ink);font-weight:var(--fw-bold);">type</th><th style="padding:.3rem .5rem;text-align:left;color:var(--ink);font-weight:var(--fw-bold);">domain</th><th style="padding:.3rem .5rem;text-align:left;color:var(--ink);font-weight:var(--fw-bold);">range</th><th style="padding:.3rem .5rem;text-align:left;color:var(--ink);font-weight:var(--fw-bold);">comment</th><th style="width:24px;"></th></tr></thead><tbody>`;
+            h += `<div style="margin-bottom:.9rem;"><div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.4rem;"><div class="fs-sm" style="font-weight:var(--fw-bold);color:var(--ink)">owl:Property (${properties.length}개)</div><button class="fs-xs" onclick="addProperty(${id})" style="margin-left:auto;padding:.2rem .6rem;font-weight:var(--fw-bold);border:var(--bw-thin) dashed var(--ink);border-radius:var(--r-sm);background:var(--c-ink-04);color:var(--ink);cursor:pointer">+ 추가</button></div><div style="overflow-x:auto;"><table class="fs-xs" style="width:100%;border-collapse:collapse"><thead><tr style="background:var(--c-ink-06);"><th class="fs-small" style="padding:.3rem;width:18px;color:var(--text3)">#</th><th style="padding:.3rem .5rem;text-align:left;color:var(--ink);font-weight:var(--fw-bold);">name</th><th style="padding:.3rem .5rem;text-align:left;color:var(--ink);font-weight:var(--fw-bold);">type</th><th style="padding:.3rem .5rem;text-align:left;color:var(--ink);font-weight:var(--fw-bold);">domain</th><th style="padding:.3rem .5rem;text-align:left;color:var(--ink);font-weight:var(--fw-bold);">range</th><th style="padding:.3rem .5rem;text-align:left;color:var(--ink);font-weight:var(--fw-bold);">comment</th><th style="width:24px;"></th></tr></thead><tbody>`;
             properties.forEach((p, i) => {
                 h += `<tr style="border-bottom:var(--bw-thin) solid var(--border);"><td class="fs-small" style="padding:.22rem;text-align:center;color:var(--text3)">${i + 1}</td><td style="padding:.18rem .28rem;"><input class="fs-xs" spellcheck="false" type="text" value="${String(p.name ?? '').replace(/"/g, '&quot;')}" oninput="updateProperty(${id},${i},'name',this.value)" style="width:100%;border:var(--bw-thin) solid transparent;border-radius:var(--r-sm);padding:.2rem .35rem;background:transparent;color:var(--text1)" onfocus="this.style.borderColor='var(--ink)';this.style.background='var(--mono-white)'" onblur="this.style.borderColor='transparent';this.style.background='transparent'"></td><td style="padding:.18rem .28rem;"><select class="fs-xs" onchange="updateProperty(${id},${i},'type',this.value)" style="border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.18rem .3rem;background:var(--mono-white)"><option value="owl:ObjectProperty" ${p.type === 'owl:ObjectProperty' ? 'selected' : ''}>ObjectProp</option><option value="owl:DatatypeProperty" ${p.type === 'owl:DatatypeProperty' ? 'selected' : ''}>DatatypeProp</option></select></td>`;
                 ['domain', 'range', 'comment'].forEach(f => {
@@ -13578,17 +13591,17 @@ ${domainCtx}${upperCtx}
             if (rules.length) {
                 h += `<div class="fs-sm" style="margin-top:.9rem;font-weight:var(--fw-bold);color:var(--ink);margin-bottom:.5rem">예외 규칙 편집 (${rules.length}개)</div>`;
                 rules.forEach((r, i) => {
-                    h += `<div class="fs-sm" style="border:var(--bw-thin) solid var(--c-ink-18);border-left:var(--bw-thick) solid var(--ink);border-radius:var(--r-md);padding:.55rem .8rem;background:var(--mono-white);margin-bottom:.4rem"><div class="row-gap-xs" style="margin-bottom:.3rem;flex-wrap:wrap"><code class="fs-small" style="background:var(--c-ink-08);color:var(--ink);padding:.1rem .3rem;border-radius:var(--r-xs)">${r.rule_id || ''}</code><input class="fs-xs" spellcheck="false" type="text" value="${(r.rule_name || '').replace(/"/g, '&quot;')}" placeholder="규칙명" oninput="updateRule(${id},${i},'rule_name',this.value)" style="flex:1;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.18rem .38rem"><button onclick="removeRule(${id},${i})" style="background:none;border:none;cursor:pointer;color:var(--text3);" title="삭제"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div style="display:grid;gap:var(--sp-1);"><div class="row-gap"><span class="fs-xs" style="font-weight:var(--fw-bold);color:var(--text2);width:38px">IF</span><input class="fs-xs" spellcheck="false" type="text" value="${(r.if?.conditions?.join('; ') || '').replace(/"/g, '&quot;')}" placeholder="조건 (세미콜론 구분)" oninput="updateRule(${id},${i},'if_conditions',this.value)" style="flex:1;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.18rem .38rem"></div><div class="row-gap"><span class="fs-xs" style="font-weight:var(--fw-bold);color:var(--ink);width:38px">THEN</span><input class="fs-xs" spellcheck="false" type="text" value="${(r.then || '').replace(/"/g, '&quot;')}" oninput="updateRule(${id},${i},'then',this.value)" style="flex:1;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.18rem .38rem"></div></div></div>`;
+                    h += `<div class="fs-sm" style="border:var(--bw-thin) solid var(--c-ink-18);border-left:var(--bw-thick) solid var(--ink);border-radius:var(--r-md);padding:.55rem .8rem;background:var(--mono-white);margin-bottom:.4rem"><div style="display:flex;gap:.4rem;align-items:center;margin-bottom:.3rem;flex-wrap:wrap;"><code class="fs-small" style="background:var(--c-ink-08);color:var(--ink);padding:.1rem .3rem;border-radius:var(--r-xs)">${r.rule_id || ''}</code><input class="fs-xs" spellcheck="false" type="text" value="${(r.rule_name || '').replace(/"/g, '&quot;')}" placeholder="규칙명" oninput="updateRule(${id},${i},'rule_name',this.value)" style="flex:1;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.18rem .38rem"><button onclick="removeRule(${id},${i})" style="background:none;border:none;cursor:pointer;color:var(--text3);" title="삭제"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div style="display:grid;gap:.25rem;"><div style="display:flex;align-items:center;gap:.5rem;"><span class="fs-xs" style="font-weight:var(--fw-bold);color:var(--text2);width:38px">IF</span><input class="fs-xs" spellcheck="false" type="text" value="${(r.if?.conditions?.join('; ') || '').replace(/"/g, '&quot;')}" placeholder="조건 (세미콜론 구분)" oninput="updateRule(${id},${i},'if_conditions',this.value)" style="flex:1;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.18rem .38rem"></div><div style="display:flex;align-items:center;gap:.5rem;"><span class="fs-xs" style="font-weight:var(--fw-bold);color:var(--ink);width:38px">THEN</span><input class="fs-xs" spellcheck="false" type="text" value="${(r.then || '').replace(/"/g, '&quot;')}" oninput="updateRule(${id},${i},'then',this.value)" style="flex:1;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.18rem .38rem"></div></div></div>`;
                 });
             }
 
             // ── SHACL Constraints ──
-            h += `<div class="row-gap" style="margin-top:.9rem;margin-bottom:.5rem"><div class="fs-sm" style="font-weight:var(--fw-bold);color:var(--text2)">SHACL 제약 조건 편집 - W3C Layer 5 (${constraints.length}개)</div><button class="fs-xs" onclick="addConstraint(${id})" style="margin-left:auto;padding:.2rem .6rem;font-weight:var(--fw-bold);border:var(--bw-thin) dashed var(--ink);border-radius:var(--r-sm);background:var(--c-ink-04);color:var(--ink);cursor:pointer">+ 제약 추가</button></div>`;
+            h += `<div style="margin-top:.9rem;display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem;"><div class="fs-sm" style="font-weight:var(--fw-bold);color:var(--text2)">SHACL 제약 조건 편집 - W3C Layer 5 (${constraints.length}개)</div><button class="fs-xs" onclick="addConstraint(${id})" style="margin-left:auto;padding:.2rem .6rem;font-weight:var(--fw-bold);border:var(--bw-thin) dashed var(--ink);border-radius:var(--r-sm);background:var(--c-ink-04);color:var(--ink);cursor:pointer">+ 제약 추가</button></div>`;
             if (constraints.length) {
                 constraints.forEach((c, ci) => {
                     const sid = (c.shape_id || (c.target_class || 'Shape') + 'Shape').replace(/\s+/g, '_');
                     const sevVal = (c.severity || 'sh:Violation').replace(/^sh:/, '');
-                    h += `<div class="fs-xs" style="border:var(--bw-thin) solid var(--border);border-left:var(--bw-thick) solid var(--ink);border-radius:var(--r-md);padding:.5rem .75rem;background:var(--c-ink-04);margin-bottom:.4rem"><div class="row-gap-xs" style="margin-bottom:.35rem;flex-wrap:wrap"><code class="fs-small" style="background:var(--c-ink-08);color:var(--text2);padding:.1rem .3rem;border-radius:var(--r-xs)">${sid}</code><span class="fs-small" style="color:var(--text3)">sh:NodeShape</span><button onclick="removeConstraint(${id},${ci})" style="margin-left:auto;background:none;border:none;cursor:pointer;color:var(--text3);" title="삭제"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--gap-sm) .5rem;"><div><label class="fs-small" style="font-weight:var(--fw-bold);color:var(--text2);display:block;margin-bottom:.1rem">sh:targetClass</label><input class="fs-xs" spellcheck="false" type="text" value="${(c.target_class || '').replace(/"/g, '&quot;')}" oninput="updateConstraint(${id},${ci},'target_class',this.value)" style="width:100%;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.18rem .35rem;background:var(--mono-white)"></div><div><label class="fs-small" style="font-weight:var(--fw-bold);color:var(--text2);display:block;margin-bottom:.1rem">sh:path (속성)</label><input class="fs-xs" spellcheck="false" type="text" value="${(c.path || '').replace(/"/g, '&quot;')}" oninput="updateConstraint(${id},${ci},'path',this.value)" style="width:100%;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.18rem .35rem;background:var(--mono-white)"></div><div><label class="fs-small" style="font-weight:var(--fw-bold);color:var(--text2);display:block;margin-bottom:.1rem">sh:minCount</label><input class="fs-xs" spellcheck="false" type="number" min="0" value="${c.min_count ?? ''}" oninput="updateConstraint(${id},${ci},'min_count',+this.value)" style="width:100%;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.18rem .35rem;background:var(--mono-white)"></div><div><label class="fs-small" style="font-weight:var(--fw-bold);color:var(--text2);display:block;margin-bottom:.1rem">sh:severity</label><select class="fs-xs" onchange="updateConstraint(${id},${ci},'severity','sh:'+this.value)" style="width:100%;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.18rem .35rem;background:var(--mono-white)"><option value="Violation" ${sevVal === 'Violation' ? 'selected' : ''}>sh:Violation</option><option value="Warning" ${sevVal === 'Warning' ? 'selected' : ''}>sh:Warning</option><option value="Info" ${sevVal === 'Info' ? 'selected' : ''}>sh:Info</option></select></div></div><div style="margin-top:.3rem;"><label class="fs-small" style="font-weight:var(--fw-bold);color:var(--text2);display:block;margin-bottom:.1rem">sh:message (위반 메시지)</label><input class="fs-xs" spellcheck="false" type="text" value="${(c.exception_message || '').replace(/"/g, '&quot;')}" oninput="updateConstraint(${id},${ci},'exception_message',this.value)" style="width:100%;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.18rem .35rem;background:var(--mono-white)"></div></div>`;
+                    h += `<div class="fs-xs" style="border:var(--bw-thin) solid var(--border);border-left:var(--bw-thick) solid var(--ink);border-radius:var(--r-md);padding:.5rem .75rem;background:var(--c-ink-04);margin-bottom:.4rem"><div style="display:flex;gap:.4rem;align-items:center;margin-bottom:.35rem;flex-wrap:wrap;"><code class="fs-small" style="background:var(--c-ink-08);color:var(--text2);padding:.1rem .3rem;border-radius:var(--r-xs)">${sid}</code><span class="fs-small" style="color:var(--text3)">sh:NodeShape</span><button onclick="removeConstraint(${id},${ci})" style="margin-left:auto;background:none;border:none;cursor:pointer;color:var(--text3);" title="삭제"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:.3rem .5rem;"><div><label class="fs-small" style="font-weight:var(--fw-bold);color:var(--text2);display:block;margin-bottom:.1rem">sh:targetClass</label><input class="fs-xs" spellcheck="false" type="text" value="${(c.target_class || '').replace(/"/g, '&quot;')}" oninput="updateConstraint(${id},${ci},'target_class',this.value)" style="width:100%;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.18rem .35rem;background:var(--mono-white)"></div><div><label class="fs-small" style="font-weight:var(--fw-bold);color:var(--text2);display:block;margin-bottom:.1rem">sh:path (속성)</label><input class="fs-xs" spellcheck="false" type="text" value="${(c.path || '').replace(/"/g, '&quot;')}" oninput="updateConstraint(${id},${ci},'path',this.value)" style="width:100%;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.18rem .35rem;background:var(--mono-white)"></div><div><label class="fs-small" style="font-weight:var(--fw-bold);color:var(--text2);display:block;margin-bottom:.1rem">sh:minCount</label><input class="fs-xs" spellcheck="false" type="number" min="0" value="${c.min_count ?? ''}" oninput="updateConstraint(${id},${ci},'min_count',+this.value)" style="width:100%;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.18rem .35rem;background:var(--mono-white)"></div><div><label class="fs-small" style="font-weight:var(--fw-bold);color:var(--text2);display:block;margin-bottom:.1rem">sh:severity</label><select class="fs-xs" onchange="updateConstraint(${id},${ci},'severity','sh:'+this.value)" style="width:100%;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.18rem .35rem;background:var(--mono-white)"><option value="Violation" ${sevVal === 'Violation' ? 'selected' : ''}>sh:Violation</option><option value="Warning" ${sevVal === 'Warning' ? 'selected' : ''}>sh:Warning</option><option value="Info" ${sevVal === 'Info' ? 'selected' : ''}>sh:Info</option></select></div></div><div style="margin-top:.3rem;"><label class="fs-small" style="font-weight:var(--fw-bold);color:var(--text2);display:block;margin-bottom:.1rem">sh:message (위반 메시지)</label><input class="fs-xs" spellcheck="false" type="text" value="${(c.exception_message || '').replace(/"/g, '&quot;')}" oninput="updateConstraint(${id},${ci},'exception_message',this.value)" style="width:100%;border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.18rem .35rem;background:var(--mono-white)"></div></div>`;
                 });
             } else {
                 h += `<div class="fs-xs" style="color:var(--text3);padding:.4rem .5rem">SHACL 제약이 없습니다. [+ 제약 추가]로 직접 추가하거나, 온톨로지 추출 시 LLM이 자동 생성합니다.</div>`;
@@ -13754,7 +13767,7 @@ ${domainCtx}${upperCtx}
             const resEl = document.getElementById('query-results'); if (!resEl) return;
             if (!results.length) { resEl.innerHTML = '<div class="al al-i">매칭 결과 없음. 조건을 완화하거나 <code>?</code> 와일드카드를 사용해 보세요.</div>'; return; }
             _queryHighlightKeys = new Set(results.flatMap(t => [t.subject, t.object].filter(Boolean)));
-            resEl.innerHTML = `<div class="fs-xs" style="color:var(--text2);margin-bottom:.45rem">매칭 결과: <strong>${results.length}개</strong> 트리플</div><div class="col-gap">${results.map((t, i) => `<div class="fs-sm stack" style="align-items:baseline;gap:var(--gap-sm);padding:.38rem .6rem;border:var(--bw-thin) solid ${t._type === 'derived' ? 'var(--c-ink-10)':'var(--border)'};border-radius:var(--r-md);background:${t._type === 'derived' ? 'var(--c-ink-04)':'var(--mono-white)'}"><span class="fs-small center" style="flex-shrink:0;width:16px;height:16px;border-radius:var(--r-full);background:var(--c-ink-06);color:var(--ink);font-weight:var(--fw-bold)">${i + 1}</span><span style="color:var(--ink);font-weight:var(--fw-semibold);">${t.subject || ''}</span><span class="fs-xs" style="color:var(--text3);font-style:italic">${t.predicate || ''}</span><span style="color:var(--text2);flex:1;">${t.object || ''}</span>${t.source ? `<span class="fs-small" style="color:var(--text3)">${t.source}</span>` : ''} ${t._type === 'derived' ? '<span class="fs-small" style="background:var(--c-ink-10);color:var(--mono-700);padding:.04rem .28rem;border-radius:var(--r-xs)">파생</span>' : ''}</div>`).join('')}</div>`;
+            resEl.innerHTML = `<div class="fs-xs" style="color:var(--text2);margin-bottom:.45rem">매칭 결과: <strong>${results.length}개</strong> 트리플</div><div style="display:flex;flex-direction:column;gap:.32rem;">${results.map((t, i) => `<div class="fs-sm" style="display:flex;align-items:baseline;gap:.45rem;padding:.38rem .6rem;border:var(--bw-thin) solid ${t._type === 'derived' ? 'var(--c-ink-10)' : 'var(--border)'};border-radius:var(--r-md);background:${t._type === 'derived' ? 'var(--c-ink-04)' : 'var(--mono-white)'}"><span class="fs-small" style="flex-shrink:0;width:16px;height:16px;border-radius:var(--r-full);background:var(--c-ink-06);color:var(--ink);font-weight:var(--fw-bold);display:flex;align-items:center;justify-content:center">${i + 1}</span><span style="color:var(--ink);font-weight:var(--fw-semibold);">${t.subject || ''}</span><span class="fs-xs" style="color:var(--text3);font-style:italic">${t.predicate || ''}</span><span style="color:var(--text2);flex:1;">${t.object || ''}</span>${t.source ? `<span class="fs-small" style="color:var(--text3)">${t.source}</span>` : ''} ${t._type === 'derived' ? '<span class="fs-small" style="background:var(--c-ink-10);color:var(--mono-700);padding:.04rem .28rem;border-radius:var(--r-xs)">파생</span>' : ''}</div>`).join('')}</div>`;
             document.getElementById('query-highlight-note').style.display = 'block';
         }
 
@@ -13795,7 +13808,7 @@ ${domainCtx}${upperCtx}
             };
             el.innerHTML = `
     <div style="border-top:var(--bw-strong) solid var(--border);padding-top:1rem;">
-      <div class="fs-sm row-gap-xs" style="font-weight:var(--fw-bold);color:var(--ink);margin-bottom:.7rem">
+      <div class="fs-sm" style="font-weight:var(--fw-bold);color:var(--ink);margin-bottom:.7rem;display:flex;align-items:center;gap:.4rem">
         <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         추론 규칙 해설  -  각 규칙이 실무에서 의미하는 것
       </div>
@@ -13803,7 +13816,7 @@ ${domainCtx}${upperCtx}
                 const rs = riskStyle[r.risk_level] || riskStyle.LOW;
                 const cascades = (r.cascade_rules || []);
                 return `<div style="border:var(--bw-thin) solid ${rs.border}44;border-left:var(--bw-thick) solid ${rs.border};border-radius:var(--r-md);padding:.75rem 1rem;background:${rs.bg};margin-bottom:.6rem;">
-          <div class="row-gap" style="margin-bottom:.45rem;flex-wrap:wrap">
+          <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.45rem;flex-wrap:wrap;">
             <code class="fs-xs" style="background:var(--c-ink-06);color:var(--ink);padding:.1rem .4rem;border-radius:var(--r-xs);font-weight:var(--fw-bold)">${r.inference_id || 'INF_' + (i + 1).toString().padStart(2, '0')}</code>
             <span class="fs-sm" style="font-weight:var(--fw-bold);color:var(--ink);flex:1">${r.inference_name || ''}</span>
             <span class="fs-xs" style="font-weight:var(--fw-bold);padding:.15rem .5rem;border-radius:var(--r-full);${rs.badge}">${rs.label}</span>
@@ -14164,7 +14177,7 @@ ${domainCtx}${upperCtx}
                     const bidirMark = it.bidir ? `<polygon points="3,3.5 7,1.5 7,5.5" fill="${col}"/>` : '';
                     icon = `<svg width="30" height="11" style="vertical-align:middle;margin-right:4px;flex-shrink:0">${bidirMark}<line x1="2" y1="5.5" x2="26" y2="5.5" stroke="${col}" stroke-width="${strokeW}" stroke-dasharray="${strokeDash}"/><polygon points="25,3.5 30,5.5 25,7.5" fill="${col}"/></svg>`;
                 }
-                html += `<div class="row" style="color:var(--mono-700);white-space:nowrap">${icon}<span>${it.label}</span></div>`;
+                html += `<div style="display:flex;align-items:center;color:var(--mono-700);white-space:nowrap;">${icon}<span>${it.label}</span></div>`;
             });
             div.innerHTML = html;
             el.appendChild(div);
@@ -14446,7 +14459,7 @@ ${domainCtx}${upperCtx}
                 if (S.infRules) allInferred.push(...(S.infRules.inferred_rules || []));
             }
             if (!allTriples.length && !allInferred.length && !allClasses.length) {
-                cont.innerHTML = '<div class="fs-sm center" style="height:100%;color:var(--text3)">Step 4를 먼저 실행하세요</div>';
+                cont.innerHTML = '<div class="fs-sm" style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text3)">Step 4를 먼저 실행하세요</div>';
                 return;
             }
 
@@ -14969,7 +14982,7 @@ ${domainCtx}${upperCtx}
             function _lb(l) { const [b, c] = LY[l] || ['#FAFAFA', '#52525B']; return _badge(l, b, c); }
             function _sps(bc, bg) { _detailEl.style.borderLeftColor = bc; _detailEl.style.background = bg; }
             function _hdr(badges, id, name) {
-                return `<div class="row-gap" style="flex-wrap:wrap;margin-bottom:.65rem;padding-bottom:.5rem;border-bottom:var(--bw-thin) solid var(--border)">
+                return `<div style="display:flex;align-items:center;gap:.38rem;flex-wrap:wrap;margin-bottom:.65rem;padding-bottom:.5rem;border-bottom:var(--bw-thin) solid var(--border);">
                 ${badges.join('')}
                 ${id ? `<code class="fs-xs" style="padding:.08rem .38rem;border-radius:var(--r-sm);background:var(--c-ink-05);color:var(--text2)">${id}</code>` : ''}
                 ${name ? `<span class="fs-sm" style="font-weight:var(--fw-bold);color:var(--text);margin-left:.1rem">${name}</span>` : ''}
@@ -14982,7 +14995,7 @@ ${domainCtx}${upperCtx}
             }
             function _kv(k, v, col) {
                 if (!v) return '';
-                return `<div class="fs-xs stack" style="gap:var(--gap-sm);margin-bottom:.18rem">
+                return `<div class="fs-xs" style="display:flex;gap:.45rem;margin-bottom:.18rem">
                 <span style="color:var(--mono-400);min-width:90px;flex-shrink:0;">${k}</span>
                 <span style="color:${col || '#27272A'};font-weight:var(--fw-medium);">${v}</span></div>`;
             }
@@ -15014,7 +15027,7 @@ ${domainCtx}${upperCtx}
                 </table>`;
             }
             function _spill(s, p, o) {
-                return `<div class="row-gap-xs" style="flex-wrap:wrap;padding:.38rem .55rem;border-radius:var(--r-md);margin-bottom:.4rem;background:${KG_STYLE.triple.bg}">
+                return `<div style="display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;padding:.38rem .55rem;border-radius:var(--r-md);margin-bottom:.4rem;background:${KG_STYLE.triple.bg};">
                 <span class="fs-sm" style="background:var(--mono-100);color:${KG_STYLE.triple.subjCol};padding:.12rem .5rem;border-radius:var(--r-sm);font-weight:var(--fw-bold)">${s}</span>
                 <span class="fs-xs" style="color:var(--mono-500);font-style:italic">— ${p} →</span>
                 <span class="fs-sm" style="background:var(--mono-100);color:${KG_STYLE.triple.subjCol};padding:.12rem .5rem;border-radius:var(--r-sm);font-weight:var(--fw-bold)">${o}</span></div>`;
@@ -15110,7 +15123,7 @@ ${domainCtx}${upperCtx}
                     _sps(KG_STYLE.cascade.bd, KG_STYLE.cascade.bg);
                     _detailEl.innerHTML =
                         _hdr([_wb('SWRL'), _lb('L5 SWRL'), _badge('cascade 연쇄', KG_STYLE.cascade.nodeBg, KG_STYLE.cascade.nodeCol)], '', 'cascade 연쇄 규칙') +
-                        `<div class="row-gap-sm" style="padding:.38rem .55rem;background:${KG_STYLE.cascade.bg};border-radius:var(--r-md);margin-bottom:.45rem;flex-wrap:wrap">
+                        `<div style="display:flex;align-items:center;gap:.45rem;padding:.38rem .55rem;background:${KG_STYLE.cascade.bg};border-radius:var(--r-md);margin-bottom:.45rem;flex-wrap:wrap;">
                         <span class="fs-xs" style="background:${KG_STYLE.cascade.nodeBg};color:${KG_STYLE.cascade.nodeCol};padding:.12rem .5rem;border-radius:var(--r-sm);font-weight:var(--fw-bold)">${fL}</span>
                         <span class="fs-xs" style="color:${KG_STYLE.cascade.textCol}">— cascade →</span>
                         <span class="fs-xs" style="background:${KG_STYLE.cascade.nodeBg};color:${KG_STYLE.cascade.nodeCol};padding:.12rem .5rem;border-radius:var(--r-sm);font-weight:var(--fw-bold)">${tL}</span></div>` +
@@ -15120,7 +15133,7 @@ ${domainCtx}${upperCtx}
                     _sps('#D4D4D8', '#FAFAFA');
                     _detailEl.innerHTML =
                         _hdr([_wb('RDFS'), _lb('L2'), _badge('rdfs:subClassOf', isUp ? '#ede9fe' : '#F4F4F5', isUp ? '#5b21b6' : '#27272A')], '', '클래스 계층 관계') +
-                        `<div class="row-gap-sm" style="padding:.38rem .55rem;background:rgba(67,56,202,.04);border-radius:var(--r-md);margin-bottom:.45rem;flex-wrap:wrap">
+                        `<div style="display:flex;align-items:center;gap:.45rem;padding:.38rem .55rem;background:rgba(67,56,202,.04);border-radius:var(--r-md);margin-bottom:.45rem;flex-wrap:wrap;">
                         <span class="fs-xs" style="background:var(--mono-100);color:var(--mono-800);padding:.12rem .5rem;border-radius:var(--r-sm);font-weight:var(--fw-bold)">${fL}</span>
                         <span class="fs-xs" style="color:var(--mono-700)">rdfs:subClassOf →</span>
                         <span class="fs-xs" style="background:${isUp ? '#ede9fe' : '#F4F4F5'};color:${isUp ? '#5b21b6' : '#27272A'};padding:.12rem .5rem;border-radius:var(--r-sm);font-weight:var(--fw-bold)">${tL}</span></div>` +
@@ -15525,21 +15538,21 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
 
         function renderEval(ev) {
             const mtx = [['accuracy', '정확성'], ['exception_handling', '예외 처리'], ['dept_routing', '부서 라우팅'], ['legal_basis', '법적 근거']];
-            let h = '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--gap-lg);margin-bottom:1rem;">';
+            let h = '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.7rem;margin-bottom:1rem;">';
             mtx.forEach(([k, label]) => {
                 if (!ev[k]) return;
                 const vc = ev[k].C ?? '-', va = ev[k].A ?? '-', vb = ev[k].B ?? '-';
                 h += `<div style="padding:.75rem;background:var(--bg-primary);border-radius:var(--r-md);border:var(--bw-thin) solid var(--c-ink-12);">
             <div class="fs-xs" style="font-weight:var(--fw-bold);margin-bottom:.5rem;color:var(--text2)">${label}</div>
-            <div class="row-gap-sm" style="margin-bottom:.28rem"><span class="fs-xs" style="color:var(--mono-black);width:44px">C: ${vc}/10</span><div style="flex:1;height:5px;background:var(--c-ink-12);border-radius:var(--r-xs);"><div class="sbar" style="width:${vc * 10}%;background:var(--mono-black);"></div></div></div>
-            <div class="row-gap-sm" style="margin-bottom:.28rem"><span class="fs-xs" style="color:var(--mono-700);width:44px">A: ${va}/10</span><div style="flex:1;height:5px;background:var(--c-ink-12);border-radius:var(--r-xs);"><div class="sbar" style="width:${va * 10}%;background:var(--mono-700);"></div></div></div>
-            <div class="row-gap-sm" style="margin-bottom:.28rem"><span class="fs-xs" style="color:var(--ink);width:44px">B: ${vb}/10</span><div style="flex:1;height:5px;background:var(--c-ink-12);border-radius:var(--r-xs);"><div class="sbar" style="width:${vb * 10}%;background:var(--ink);"></div></div></div>
+            <div style="display:flex;align-items:center;gap:.45rem;margin-bottom:.28rem;"><span class="fs-xs" style="color:var(--mono-black);width:44px">C: ${vc}/10</span><div style="flex:1;height:5px;background:var(--c-ink-12);border-radius:var(--r-xs);"><div class="sbar" style="width:${vc * 10}%;background:var(--mono-black);"></div></div></div>
+            <div style="display:flex;align-items:center;gap:.45rem;margin-bottom:.28rem;"><span class="fs-xs" style="color:var(--mono-700);width:44px">A: ${va}/10</span><div style="flex:1;height:5px;background:var(--c-ink-12);border-radius:var(--r-xs);"><div class="sbar" style="width:${va * 10}%;background:var(--mono-700);"></div></div></div>
+            <div style="display:flex;align-items:center;gap:.45rem;margin-bottom:.28rem;"><span class="fs-xs" style="color:var(--ink);width:44px">B: ${vb}/10</span><div style="flex:1;height:5px;background:var(--c-ink-12);border-radius:var(--r-xs);"><div class="sbar" style="width:${vb * 10}%;background:var(--ink);"></div></div></div>
             <div class="fs-xs" style="color:var(--text3);line-height:var(--lh-normal)">${ev[k].comment || ''}</div>
         </div>`;
 
             });
             h += '</div>';
-            h += `<div class="stack" style="gap:var(--gap-lg);margin-bottom:1rem;flex-wrap:wrap">
+            h += `<div style="display:flex;gap:.7rem;margin-bottom:1rem;flex-wrap:wrap;">
         <div style="flex:1;min-width:120px;padding:1rem;background:var(--c-ink-06);border:var(--bw-thin) solid var(--c-ink-20);border-radius:var(--r-md);text-align:center;"><div class="fs-2xl" style="font-weight:var(--fw-heavy);color:var(--mono-black)">${ev.overall_C ?? '-'}</div><div class="fs-xs" style="color:var(--text2);margin-top:.2rem">실험 C (순수 LLM)</div></div>
         <div style="flex:1;min-width:120px;padding:1rem;background:var(--c-ink-04);border:var(--bw-thin) solid var(--c-ink-20);border-radius:var(--r-md);text-align:center;"><div class="fs-2xl" style="font-weight:var(--fw-heavy);color:var(--mono-700)">${ev.overall_A ?? '-'}</div><div class="fs-xs" style="color:var(--text2);margin-top:.2rem">실험 A (일반 RAG)</div></div>
         <div style="flex:1;min-width:120px;padding:1rem;background:var(--c-ink-06);border:var(--bw-thin) solid var(--c-ink-20);border-radius:var(--r-md);text-align:center;"><div class="fs-2xl" style="font-weight:var(--fw-heavy);color:var(--ink)">${ev.overall_B ?? '-'}</div><div class="fs-xs" style="color:var(--text2);margin-top:.2rem">실험 B (온톨로지 주입)</div></div>
@@ -15567,7 +15580,7 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
                 const cleanConds = r ? conds.replace(/<[^>]*>/g, '').trim() : '';
                 const cleanThen = r ? (r.then || '').replace(/<[^>]*>/g, '').trim() : '';
                 const tipHtml = r ? `<div class="inf-badge-tip" style="border:var(--bw-strong) solid var(--border);"><div style="margin-bottom:.3rem;"><span class="fs-small" style="font-weight:var(--fw-bold);background:var(--c-ink-08);color:var(--ink);padding:.05rem .3rem;border-radius:var(--r-full);margin-right:.18rem">W3C SWRL</span><span class="fs-small" style="font-weight:var(--fw-bold);background:var(--c-ink-06);color:var(--mono-700);padding:.05rem .3rem;border-radius:var(--r-full)">예외 규칙</span></div><div class="fs-xs" style="font-weight:var(--fw-bold);color:var(--mono-800);margin-bottom:.18rem">${id}${nm ? ' · ' + nm.substring(0, 30) : ''}</div><div class="fs-small" style="font-weight:var(--fw-bold);color:var(--ink);margin-bottom:.04rem">IF</div><div class="fs-small" style="color:var(--mono-700);margin-bottom:.12rem;line-height:var(--lh-snug)">${cleanConds.substring(0, 120)}</div><div class="fs-small" style="font-weight:var(--fw-bold);color:var(--ink);margin-bottom:.04rem">THEN</div><div class="fs-small" style="color:var(--mono-700);line-height:var(--lh-snug)">${cleanThen.substring(0, 80)}</div></div>` : '';
-                return `<span class="inf-badge fs-xs" style="display:inline-flex;align-items:center;gap:var(--sp-1);font-weight:var(--fw-bold);background:var(--c-ink-06);color:var(--ink);border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.06rem .4rem;margin:0 .12rem;cursor:help;white-space:nowrap;vertical-align:middle">${tipHtml}<code class="fs-small" style="font-weight:var(--fw-heavy);color:var(--ink)">${id}</code>${nm ? `<span class="fs-small" style="font-weight:var(--fw-medium);color:var(--mono-600);border-left:var(--bw-thin) solid var(--border);padding-left:.22rem;max-width:120px;overflow:hidden;text-overflow:ellipsis">${nm.substring(0, 22)}</span>` : ''}</span>`;
+                return `<span class="inf-badge fs-xs" style="display:inline-flex;align-items:center;gap:.22rem;font-weight:var(--fw-bold);background:var(--c-ink-06);color:var(--ink);border:var(--bw-thin) solid var(--border);border-radius:var(--r-sm);padding:.06rem .4rem;margin:0 .12rem;cursor:help;white-space:nowrap;vertical-align:middle">${tipHtml}<code class="fs-small" style="font-weight:var(--fw-heavy);color:var(--ink)">${id}</code>${nm ? `<span class="fs-small" style="font-weight:var(--fw-medium);color:var(--mono-600);border-left:var(--bw-thin) solid var(--border);padding-left:.22rem;max-width:120px;overflow:hidden;text-overflow:ellipsis">${nm.substring(0, 22)}</span>` : ''}</span>`;
             });
             // [INF_XX] - 추론 규칙 badge + 인라인 규칙명 + 위험도
             s = s.replace(/\[?(INF_\d+)\]?/g, (_, id) => {
@@ -15581,7 +15594,7 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
                 const cleanAction = r ? (r.action || '').replace(/<[^>]*>/g, '').trim() : '';
                 const casc = (r?.cascade_rules || []).length ? `<div class="fs-small" style="color:var(--mono-700);font-weight:var(--fw-bold);margin-top:.2rem">cascade → ${r.cascade_rules.join(' → ')}</div>` : '';
                 const tipHtml = r ? `<div class="inf-badge-tip" style="border:var(--bw-strong) solid ${rC}66;"><div style="margin-bottom:.3rem;"><span class="fs-small" style="font-weight:var(--fw-bold);background:var(--c-ink-04);color:var(--ink);padding:.05rem .3rem;border-radius:var(--r-full);margin-right:.18rem">W3C SWRL</span><span class="fs-small" style="font-weight:var(--fw-bold);background:${rBg};color:${rC};padding:.05rem .3rem;border-radius:var(--r-full)">${risk}</span></div><div class="fs-xs" style="font-weight:var(--fw-bold);color:var(--mono-800);margin-bottom:.18rem">${id}${nm ? ' · ' + nm.substring(0, 30) : ''}</div><div class="fs-small" style="font-weight:var(--fw-bold);color:${rC};margin-bottom:.04rem">IF</div><div class="fs-small" style="color:var(--mono-700);margin-bottom:.12rem;line-height:var(--lh-snug)">${cleanCond.substring(0, 120)}</div><div class="fs-small" style="font-weight:var(--fw-bold);color:var(--ink);margin-bottom:.04rem">THEN</div><div class="fs-small" style="color:var(--mono-700);line-height:var(--lh-snug)">${cleanAction.substring(0, 80)}</div>${casc}</div>` : '';
-                return `<span class="inf-badge fs-xs" style="display:inline-flex;align-items:center;gap:var(--sp-1);font-weight:var(--fw-bold);background:${rBg};color:${rFt};border:var(--bw-thin) solid ${rC}55;border-radius:var(--r-sm);padding:.06rem .4rem;margin:0 .12rem;cursor:help;white-space:nowrap;vertical-align:middle">${tipHtml}<code class="fs-small" style="font-weight:var(--fw-heavy);color:${rFt}">${id}</code>${nm ? `<span class="fs-small" style="font-weight:var(--fw-medium);color:${rFt};border-left:var(--bw-thin) solid ${rC}55;padding-left:.22rem;max-width:120px;overflow:hidden;text-overflow:ellipsis">${nm.substring(0, 22)}</span>` : ''}</span>`;
+                return `<span class="inf-badge fs-xs" style="display:inline-flex;align-items:center;gap:.22rem;font-weight:var(--fw-bold);background:${rBg};color:${rFt};border:var(--bw-thin) solid ${rC}55;border-radius:var(--r-sm);padding:.06rem .4rem;margin:0 .12rem;cursor:help;white-space:nowrap;vertical-align:middle">${tipHtml}<code class="fs-small" style="font-weight:var(--fw-heavy);color:${rFt}">${id}</code>${nm ? `<span class="fs-small" style="font-weight:var(--fw-medium);color:${rFt};border-left:var(--bw-thin) solid ${rC}55;padding-left:.22rem;max-width:120px;overflow:hidden;text-overflow:ellipsis">${nm.substring(0, 22)}</span>` : ''}</span>`;
             });
             // 줄바꿈
             s = s.replace(/\n/g, '<br>');
@@ -15986,7 +15999,7 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
 
             // 기본 도메인 (읽기 전용) - 하드코딩된 항목만
             const builtinHtml = builtinOnly.map(h => `
-        <div class="row-gap" style="padding:.45rem .65rem;border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);background:var(--sand)">
+        <div style="display:flex;align-items:center;gap:.5rem;padding:.45rem .65rem;border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);background:var(--sand);">
             <span class="fs-small" style="flex-shrink:0;font-weight:var(--fw-bold);padding:.1rem .35rem;background:var(--c-ink-06);color:var(--ink);border-radius:var(--r-sm)">기본</span>
             <span class="fs-sm" style="flex:1;font-weight:var(--fw-semibold);color:var(--ink)">${h.label}</span>
             <span class="fs-small" style="color:var(--text3)">${h.keys.slice(0, 4).join(', ')}${h.keys.length > 4 ? ' …' : ''}</span>
@@ -16002,7 +16015,7 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
                     const badgeClr = isAI ? 'var(--ink)' : 'var(--text2)';
                     const badgeTxt = isAI ? 'AI 추천' : '수동 추가';
                     return `
-            <div class="row-gap" style="padding:.45rem .65rem;border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);background:var(--card)">
+            <div style="display:flex;align-items:center;gap:.5rem;padding:.45rem .65rem;border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);background:var(--card);">
                 <span class="fs-small" style="flex-shrink:0;font-weight:var(--fw-bold);padding:.1rem .35rem;background:${badgeBg};color:${badgeClr};border-radius:var(--r-sm)">${badgeTxt}</span>
                 <span class="fs-sm" style="flex:1;font-weight:var(--fw-semibold);color:var(--ink)">${h.label}</span>
                 <span class="fs-small" style="color:var(--text3);flex:2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${(h.keys || []).slice(0, 4).join(', ')}${(h.keys || []).length > 4 ? ' …' : ''}</span>
@@ -16117,7 +16130,7 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
                 const card = document.createElement('div');
                 card.style.cssText = 'border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);padding:1rem;background:var(--mono-white);';
                 card.innerHTML = `
-            <div class="row-gap" style="margin-bottom:.6rem;flex-wrap:wrap">
+            <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.6rem;flex-wrap:wrap;">
                 <span class="fs-small" style="font-weight:var(--fw-bold);background:var(--c-ink-06);color:var(--ink);padding:.15rem .45rem;border-radius:var(--r-sm)">${m.step}</span>
                 <span class="fs-ui" style="font-weight:var(--fw-bold);color:var(--ink);flex:1">${m.label}</span>
                 <span class="fs-small" id="badge-${m.id}" style="font-weight:var(--fw-bold);padding:.15rem .45rem;border-radius:var(--r-sm);background:${isCustom ? 'var(--c-ink-06)' : 'var(--c-ink-05)'};color:${isCustom ? 'var(--ink)' : 'var(--text3)'}">&#9679; ${isCustom ? '커스텀' : '기본값'}</span>
@@ -16592,11 +16605,11 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
             // Step 10: 연락처 전용
             if (n === 10) {
                 body.innerHTML = `
-            <div class="col" style="justify-content:center;height:100%;gap:1.4rem;padding:1.2rem 0">
-                <div class="center" style="width:64px;height:64px;border-radius:var(--r-full);background:var(--grad)">
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:1.4rem;padding:1.2rem 0;">
+                <div style="width:64px;height:64px;border-radius:var(--r-full);background:var(--grad);display:flex;align-items:center;justify-content:center;">
                     <svg viewBox="0 0 24 24" style="width:30px;height:30px;stroke:var(--mono-white);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                 </div>
-                <div class="col" style="text-align:center;gap:1.1rem">
+                <div style="text-align:center;display:flex;flex-direction:column;gap:1.1rem;align-items:center;">
                     <div class="fs-xs" style="font-weight:var(--fw-heavy);letter-spacing:.08em;color:var(--ink);text-transform:uppercase;margin-bottom:.2rem">Contact</div>
 
                     <!-- NIA -->
@@ -16608,7 +16621,7 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
                     <!-- 주식회사 워플로지 -->
                     <div style="border:var(--bw-thin) solid var(--border-ink);border-radius:var(--r-md);padding:.7rem 1.2rem;background:var(--c-ink-04);width:100%;">
                         <div class="fs-xs" style="font-weight:var(--fw-bold);color:var(--ink);margin-bottom:.35rem">주식회사 워플로지</div>
-                        <div class="col-gap">
+                        <div style="display:flex;flex-direction:column;gap:.22rem;">
                             <a class="fs-xs" href="https://worflogy.com" target="_blank" style="color:var(--ink);font-weight:var(--fw-medium);text-decoration:none;border-bottom:var(--bw-thin) solid var(--border-a);padding-bottom:.05rem">worflogy.com</a>
                             <a class="fs-xs" href="https://contents.contextonai.com" target="_blank" style="color:var(--ink);font-weight:var(--fw-medium);text-decoration:none;border-bottom:var(--bw-thin) solid var(--border-a);padding-bottom:.05rem">contents.contextonai.com</a>
                             <a class="fs-xs" href="mailto:worflogy@gmail.com" style="color:var(--ink);font-weight:var(--fw-medium);text-decoration:none;border-bottom:var(--bw-thin) solid var(--border-a);padding-bottom:.05rem">worflogy@gmail.com</a>
@@ -16633,21 +16646,21 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
         </div>
         <div>
             <div class="fs-xs" style="font-weight:var(--fw-heavy);letter-spacing:.07em;color:var(--mono-700);text-transform:uppercase;margin-bottom:.55rem">이 단계로 얻는 것</div>
-            <div class="col-gap">${d.gain.map(g => `<div class="fs-xs row-start" style="color:var(--text2);line-height:var(--lh-comfortable)"><span style="width:6px;height:6px;border-radius:var(--r-full);background:var(--ink);flex-shrink:0;margin-top:.48rem;"></span>${g}</div>`).join('')}</div>
+            <div style="display:flex;flex-direction:column;gap:.55rem;">${d.gain.map(g => `<div class="fs-xs" style="display:flex;align-items:flex-start;gap:.55rem;color:var(--text2);line-height:var(--lh-comfortable)"><span style="width:6px;height:6px;border-radius:var(--r-full);background:var(--ink);flex-shrink:0;margin-top:.48rem;"></span>${g}</div>`).join('')}</div>
         </div>
         <div style="background:var(--c-ink-04);border-radius:var(--r-md);padding:1rem 1.1rem;">
             <div class="fs-xs" style="font-weight:var(--fw-heavy);letter-spacing:.07em;color:var(--ink);text-transform:uppercase;margin-bottom:.45rem">쉬운 비유</div>
             <div class="fs-xs" style="color:var(--text2);line-height:var(--lh-loose);font-style:italic">"${d.analogy}"</div>
         </div>
-        <div class="stack" style="flex-wrap:wrap;gap:var(--gap-sm)">${d.kws.map(k => `<span class="help-kw">${k}</span>`).join('')}</div>
+        <div style="display:flex;flex-wrap:wrap;gap:.35rem;">${d.kws.map(k => `<span class="help-kw">${k}</span>`).join('')}</div>
         <div class="help-tip"><strong>팁:</strong> ${d.tip}</div>
         ${d.steps ? ('<div style="margin-top:1.15rem;">'
-                    + '<div class="fs-small row-gap" style="font-weight:var(--fw-heavy);letter-spacing:.07em;color:var(--mono-700);text-transform:uppercase;margin-bottom:.65rem">'
+                    + '<div class="fs-small" style="font-weight:var(--fw-heavy);letter-spacing:.07em;color:var(--mono-700);text-transform:uppercase;margin-bottom:.65rem;display:flex;align-items:center;gap:.38rem">'
                     + '<svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>'
                     + '이렇게 하세요</div>'
-                    + '<ol class="col-gap" style="margin:0;padding:0;list-style:none">'
-                    + d.steps.map((s, i) => ('<li class="fs-xs row-start" style="gap:.58rem;color:var(--text2);line-height:var(--lh-comfortable)">'
-                        + '<span class="fs-small center" style="flex-shrink:0;width:20px;height:20px;border-radius:var(--r-full);background:linear-gradient(135deg,var(--mono-700),var(--mono-950));color:var(--mono-white);font-weight:var(--fw-heavy)">' + (i + 1) + '</span>'
+                    + '<ol style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:.5rem;">'
+                    + d.steps.map((s, i) => ('<li class="fs-xs" style="display:flex;align-items:flex-start;gap:.58rem;color:var(--text2);line-height:var(--lh-comfortable)">'
+                        + '<span class="fs-small" style="flex-shrink:0;width:20px;height:20px;border-radius:var(--r-full);background:linear-gradient(135deg,var(--mono-700),var(--mono-950));color:var(--mono-white);font-weight:var(--fw-heavy);display:flex;align-items:center;justify-content:center">' + (i + 1) + '</span>'
                         + '<span>' + s + '</span></li>')).join('')
                     + '</ol></div>') : ''}
     `;
@@ -16810,7 +16823,7 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
                 const items = json?.response?.body?.items?.item || json?.items || [];
                 if (!items.length) { resultEl.innerHTML = '<p class="fs-xs" style="color:var(--text3)">검색 결과가 없습니다. 다른 키워드를 시도하세요.</p>'; return; }
                 resultEl.innerHTML = items.map((it, i) => `
-            <div class="between" style="padding:.45rem .6rem;border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);margin-bottom:.35rem;gap:var(--gap-md)">
+            <div style="padding:.45rem .6rem;border:var(--bw-thin) solid var(--border);border-radius:var(--r-md);margin-bottom:.35rem;display:flex;align-items:center;gap:.5rem;justify-content:space-between;">
                 <div>
                     <div class="fs-xs" style="font-weight:var(--fw-semibold);color:var(--ink)">${it.title || it.pblonsrDivNm || '데이터셋 ' + (i + 1)}</div>
                     <div class="fs-small" style="color:var(--text3)">${it.orgnNm || it.insttNm || ''}</div>
