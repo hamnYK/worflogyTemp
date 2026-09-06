@@ -13606,7 +13606,7 @@ ${domainCtx}${upperCtx}
             }
             if (notFired.length) {
                 h += `<div style="font-weight:var(--fw-bold);color:var(--ink);margin:var(--sp-3) 0 var(--sp-2);">미발동 규칙 - 조건 불충족 (${notFired.length}개)</div>`;
-                notFired.forEach(r => { h += `<div class="fs-sm p-2 mb-xs" style="border:var(--bw-thin) solid var(--border);border-left:var(--bw-thick) solid var(--text3);border-radius:var(--r-md);background:var(--mono-50)"><div class="row-gap-xs mb-1"><code class="fs-small py-micro px-xs" style="background:rgba(229,231,235,.7);color:var(--text2);border-radius:var(--r-xs)">${r.id}</code><span style="font-weight:var(--fw-bold);">${r.name}</span></div><div class="fs-xs" style="color:var(--text3)">미충족: ${r.missing.join(', ')}</div></div>`; });
+                notFired.forEach(r => { h += `<div class="fs-sm p-2 mb-xs" style="border:var(--bw-thin) solid var(--border);border-left:var(--bw-thick) solid var(--text3);border-radius:var(--r-md);background:var(--mono-50)"><div class="row-gap-xs mb-1"><code class="fs-small py-micro px-xs" style="background:var(--c-ink-06);color:var(--text2);border-radius:var(--r-xs)">${r.id}</code><span style="font-weight:var(--fw-bold);">${r.name}</span></div><div class="fs-xs" style="color:var(--text3)">미충족: ${r.missing.join(', ')}</div></div>`; });
             }
             if (contradictions.length) {
                 h += `<div style="font-weight:var(--fw-bold);color:var(--ink);margin:var(--sp-3) 0 var(--sp-2);">모순 감지 (${contradictions.length}개)</div>`;
@@ -13678,11 +13678,11 @@ ${domainCtx}${upperCtx}
             tbody.innerHTML = insts.map((inst, i) => {
                 const key = String(inst.s || '').trim() + '|' + String(inst.p || '').trim() + '|' + String(inst.o || '').trim();
                 const ruleIds = firedMap[key] || [];
-                const badges = ruleIds.map(rid => `<span class="fs-small py-micro px-sm" style="font-weight:var(--fw-bold);background:rgba(22,163,74,.15);color:var(--mono-700);border:var(--bw-thin) solid rgba(22,163,74,.3);border-radius:var(--r-full);white-space:nowrap">${rid}</span>`).join(' ');
+                const badges = ruleIds.map(rid => `<span class="fs-small py-micro px-sm" style="font-weight:var(--fw-bold);background:var(--c-ink-06);color:var(--ink);border:var(--bw-thin) solid var(--border);border-radius:var(--r-full);white-space:nowrap">${rid}</span>`).join(' ');
                 const rowBg = ruleIds.length ? 'var(--c-ink-04)' : 'transparent';
                 return `<tr style="border-bottom:var(--bw-thin) solid var(--border);background:${rowBg};">
             <td  class="p-1"><input class="fs-sm py-tiny px-1" spellcheck="false" value="${String(inst.s ?? '').replace(/"/g, '&quot;')}" oninput="S.infInstances[${i}].s=this.value" style="width:100%;border:none;border-bottom:var(--bw-thin) solid var(--border2);background:transparent;outline:none" placeholder="예: 홍길동"/></td>
-            <td  class="p-1"><input class="fs-sm py-tiny px-1" spellcheck="false" value="${String(inst.t ?? '').replace(/"/g, '&quot;')}" oninput="S.infInstances[${i}].t=this.value" style="width:100%;border:none;border-bottom:var(--bw-thin) solid rgba(3,103,176,.35);background:rgba(3,103,176,.03);outline:none;color:var(--ink)" placeholder="예: 시민"/></td>
+            <td  class="p-1"><input class="fs-sm py-tiny px-1" spellcheck="false" value="${String(inst.t ?? '').replace(/"/g, '&quot;')}" oninput="S.infInstances[${i}].t=this.value" style="width:100%;border:none;border-bottom:var(--bw-thin) solid var(--border);background:var(--c-ink-04);outline:none;color:var(--ink)" placeholder="예: 시민"/></td>
             <td  class="p-1"><input class="fs-sm py-tiny px-1" spellcheck="false" value="${String(inst.p ?? '').replace(/"/g, '&quot;')}" oninput="S.infInstances[${i}].p=this.value" style="width:100%;border:none;border-bottom:var(--bw-thin) solid var(--border2);background:transparent;outline:none" placeholder="예: 유형"/></td>
             <td  class="p-1"><input class="fs-sm py-tiny px-1" spellcheck="false" value="${String(inst.o ?? '').replace(/"/g, '&quot;')}" oninput="S.infInstances[${i}].o=this.value" style="width:100%;border:none;border-bottom:var(--bw-thin) solid var(--border2);background:transparent;outline:none" placeholder="예: 이재민"/></td>
             ${hasResult ? `<td style="min-width:80px" class="p-1">${badges || '<span class="fs-small" style="color:var(--text3)">-</span>'}</td>` : ''}
