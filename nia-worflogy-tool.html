@@ -570,38 +570,38 @@
             --grad:        linear-gradient(135deg, #1a1f36 0%, #e8613a 100%);
         }
 
-        /* Zen — 집중력 / 선정원 미감 (자극 제로) */
+        /* NIA v2 - NIA Blue + 媛?낆꽦 媛쒖꽑 (?ㅽ겕 ?ㅼ씠鍮꾩감肄??띿뒪??+ ?쒕갚 移대뱶) */
         [data-theme="zen"] {
-            --mono-black:  #0f1410;
-            --mono-950:    #1c2420;
-            --mono-900:    #2e3c32;
-            --mono-800:    #405448;
-            --mono-700:    #556a5c;
-            --mono-600:    #6c8470;
-            --mono-500:    #8aa090;
-            --mono-300:    #b8ccc0;
-            --mono-200:    #d4e4da;
-            --mono-100:    #e8f2ec;
-            --mono-50:     #f2f8f4;
-            --mono-white:  #f8fcf9;
-            --ink:         #1c2420;
-            --ink-hover:   #0f1410;
-            --coral:       #2e3c32;
-            --sand:        #e8f2ec;
-            --sand-dark:   #d4e4da;
-            --bg-primary:  #f2f8f4;
-            --bg-card:     #f8fcf9;
-            --text:        #1c2420;
-            --text2:       #405448;
-            --text3:       #6c8470;
-            --border:      rgba(28,36,32,0.10);
-            --border-a:    rgba(28,36,32,0.25);
-            --c-ink-04:    rgba(28,36,32,0.04);
-            --c-ink-06:    rgba(28,36,32,0.06);
-            --c-ink-10:    rgba(28,36,32,0.10);
-            --c-ink-15:    rgba(28,36,32,0.15);
-            --c-ink-20:    rgba(28,36,32,0.20);
-            --grad:        linear-gradient(135deg, #1c2420 0%, #6c8470 100%);
+            --mono-black:  #0a1628;
+            --mono-950:    #1a2b4a;
+            --mono-900:    #1a428a;
+            --mono-800:    #2a5ca0;
+            --mono-700:    #3672b8;
+            --mono-600:    #5090cc;
+            --mono-500:    #78aedd;
+            --mono-300:    #b4d0ec;
+            --mono-200:    #d4e8f5;
+            --mono-100:    #e8f3fa;
+            --mono-50:     #f2f8fc;
+            --mono-white:  #ffffff;
+            --ink:         #1a2b4a;
+            --ink-hover:   #0a1628;
+            --coral:       #0068b0;
+            --sand:        #e8f3fa;
+            --sand-dark:   #d4e8f5;
+            --bg-primary:  #f4f8fc;
+            --bg-card:     #ffffff;
+            --text:        #1a2b4a;
+            --text2:       #2a5ca0;
+            --text3:       #5090cc;
+            --border:      rgba(26,43,74,0.10);
+            --border-a:    rgba(26,43,74,0.25);
+            --c-ink-04:    rgba(26,43,74,0.04);
+            --c-ink-06:    rgba(26,43,74,0.06);
+            --c-ink-10:    rgba(26,43,74,0.10);
+            --c-ink-15:    rgba(26,43,74,0.15);
+            --c-ink-20:    rgba(26,43,74,0.20);
+            --grad:        linear-gradient(135deg, #1a428a 0%, #0068b0 100%);
         }
 
         /* Calm — 스트레스 해소 / 혈압 안정 (탈이된 슬레이트 블루) */
@@ -17107,7 +17107,7 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
         const THEMES = [
             { name: 'Monochrome', key: null },
             { name: 'Worflogy',   key: 'paper' },
-            { name: 'Zen',        key: 'zen' },
+            { name: 'NIA',        key: 'zen' },
             { name: 'Calm',       key: 'calm' },
             { name: 'Mist',       key: 'mist' }
         ];
@@ -17172,7 +17172,7 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
                 <div style="display:flex;gap:.3rem;margin-left:auto">
                     <div id="theme-dot-0" onclick="applyTheme(0)" title="Monochrome" style="width:14px;height:14px;border-radius:50%;background:#0F172A;border:2px solid rgba(15,23,42,0.5);cursor:pointer;transition:transform var(--t)" onmouseover="this.style.transform='scale(1.25)'" onmouseout="this.style.transform='scale(1)'"></div>
                     <div id="theme-dot-1" onclick="applyTheme(1)" title="Worflogy" style="width:14px;height:14px;border-radius:50%;background:#7b84b0;border:2px solid rgba(26,31,54,0.5);cursor:pointer;transition:transform var(--t)" onmouseover="this.style.transform='scale(1.25)'" onmouseout="this.style.transform='scale(1)'"></div>
-                    <div id="theme-dot-2" onclick="applyTheme(2)" title="Zen" style="width:14px;height:14px;border-radius:50%;background:#6c8470;border:2px solid rgba(28,36,32,0.5);cursor:pointer;transition:transform var(--t)" onmouseover="this.style.transform='scale(1.25)'" onmouseout="this.style.transform='scale(1)'"></div>
+                    <div id="theme-dot-2" onclick="applyTheme(2)" title="NIA" style="width:14px;height:14px;border-radius:50%;background:#0068b0;border:2px solid rgba(26,66,138,0.5);cursor:pointer;transition:transform var(--t)" onmouseover="this.style.transform='scale(1.25)'" onmouseout="this.style.transform='scale(1)'"></div>
                     <div id="theme-dot-3" onclick="applyTheme(3)" title="Calm" style="width:14px;height:14px;border-radius:50%;background:#5070a0;border:2px solid rgba(20,30,56,0.5);cursor:pointer;transition:transform var(--t)" onmouseover="this.style.transform='scale(1.25)'" onmouseout="this.style.transform='scale(1)'"></div>
                     <div id="theme-dot-4" onclick="applyTheme(4)" title="Mist" style="width:14px;height:14px;border-radius:50%;background:#3a8888;border:2px solid rgba(10,40,40,0.5);cursor:pointer;transition:transform var(--t)" onmouseover="this.style.transform='scale(1.25)'" onmouseout="this.style.transform='scale(1)'"></div>
                 </div>
