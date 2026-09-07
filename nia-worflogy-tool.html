@@ -2935,6 +2935,140 @@
             font-family: var(--font-sans);
         }
 
+        .dn-acct-inline {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-2);
+            flex-wrap: wrap;
+        }
+
+        .dn-acct-tag {
+            font-size: var(--fs-xs);
+            font-weight: var(--fw-bold);
+            color: var(--text3);
+            letter-spacing: var(--ls-wider);
+            text-transform: uppercase;
+            margin-right: var(--sp-1);
+            flex-shrink: 0;
+        }
+
+        .dn-acct-bank,
+        .dn-acct-holder {
+            font-size: var(--fs-sm);
+            color: var(--text2);
+            font-weight: var(--fw-medium);
+        }
+
+        .dn-acct-dot {
+            color: var(--text3);
+            font-size: var(--fs-xs);
+        }
+
+        .dn-acct-num2 {
+            font-size: var(--fs-sm);
+            font-family: var(--font-mono);
+            font-weight: var(--fw-bold);
+            color: var(--ink);
+            letter-spacing: var(--ls-wider);
+        }
+
+        .dn-copy-icon {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--gap-xs);
+            padding: var(--sp-1) var(--gap-lg);
+            background: transparent;
+            border: var(--bw-thin) solid var(--border);
+            border-radius: var(--r-sm);
+            color: var(--text3);
+            font-size: var(--fs-xs);
+            font-family: var(--font-ui);
+            cursor: pointer;
+            transition: all var(--t);
+            margin-left: auto;
+            flex-shrink: 0;
+        }
+
+        .dn-copy-icon:hover {
+            background: var(--c-ink-06);
+            color: var(--ink);
+            border-color: var(--border-a);
+        }
+
+        .dn-toss-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: var(--sp-1) var(--sp-3);
+            background: transparent;
+            border: var(--bw-thin) solid var(--coral);
+            border-radius: var(--r-sm);
+            color: var(--coral);
+            font-size: var(--fs-xs);
+            font-family: var(--font-ui);
+            font-weight: var(--fw-bold);
+            letter-spacing: var(--ls-wider);
+            cursor: pointer;
+            transition: all var(--t);
+            flex-shrink: 0;
+        }
+
+        .dn-toss-btn:hover {
+            background: var(--coral);
+            color: var(--mono-white);
+        }
+
+        .dn-qr-pop {
+            flex-direction: column;
+            align-items: center;
+            gap: var(--sp-3);
+            padding: var(--sp-4);
+            background: var(--mono-white);
+            border: var(--bw-thin) solid var(--border);
+            border-radius: var(--r-md);
+            box-shadow: var(--shadow-md);
+        }
+
+        .dn-qr-hd {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            font-size: var(--fs-xs);
+            font-weight: var(--fw-semibold);
+            color: var(--text2);
+            gap: var(--sp-2);
+        }
+
+        .dn-qr-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text3);
+            font-size: var(--fs-lg);
+            line-height: 1;
+            padding: 0;
+            transition: color var(--t);
+            flex-shrink: 0;
+        }
+
+        .dn-qr-close:hover {
+            color: var(--ink);
+        }
+
+        .dn-qr-img {
+            width: 180px;
+            height: 180px;
+            border-radius: var(--r-sm);
+            display: block;
+        }
+
+        .dn-qr-note {
+            font-size: var(--fs-xs);
+            color: var(--text3);
+            text-align: center;
+            line-height: var(--lh-snug);
+        }
+
         .dn-close {
             position: absolute;
             top: 1rem;
@@ -9907,6 +10041,37 @@ for r in results:
         function closeDonate() {
             document.getElementById('dn-modal').classList.remove('open');
         }
+        function copyAccount() {
+            navigator.clipboard.writeText('534-910445-02707').then(function () {
+                var txt = document.getElementById('dn-copy-txt');
+                if (txt) { txt.textContent = '복사됨'; setTimeout(function () { txt.textContent = '복사'; }, 2000); }
+                toast('계좌번호를 클립보드에 복사했습니다', 'ok');
+            }).catch(function () {
+                toast('복사 실패 - 계좌번호를 직접 선택해 주세요', 'error');
+            });
+        }
+        function openTossTransfer() {
+            var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+            var deepLink = 'supertoss://send?bank=%ED%95%98%EB%82%98%EC%9D%80%ED%96%89&accountNo=53491044502707';
+            if (isMobile) {
+                window.location.href = deepLink;
+                setTimeout(function () {
+                    if (!document.hidden) { window.open('https://toss.im', '_blank'); }
+                }, 1800);
+            } else {
+                var pop = document.getElementById('dn-qr-pop');
+                var img = document.getElementById('dn-qr-img');
+                if (!pop || !img) return;
+                if (pop.style.display !== 'none') { pop.style.display = 'none'; return; }
+                img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=' + encodeURIComponent(deepLink);
+                pop.style.display = 'flex';
+            }
+        }
+        function closeQr() {
+            var pop = document.getElementById('dn-qr-pop');
+            if (pop) pop.style.display = 'none';
+        }
+
 
         // ── 라이선스 게이트 ──
         const _GAS_LIC = 'https://script.google.com/macros/s/AKfycbxBsuTAuC2SE0CXE6ycda-AdzGGXeZfQ75Pz0qINdvStz6wVXay1df65IuI62-eL97Qmg/exec';
@@ -17717,19 +17882,37 @@ ${rules ? `[추론 규칙]\n${rules}` : ''}`;
                             <div class="dn-item-dot"></div><span>Human-in-the-Loop 피드백을 통해 동적으로 성장하는 온톨로지 제공</span>
                         </div>
                         <div class="dn-item">
-                            <div class="dn-item-dot"></div><span>모두를 위한 오픈 API 운영 및 교육 콘텐츠 제작</span>
+                            <div class="dn-item-dot"></div><span>모두를 위한 오픈 API 운영 및 공유 기능, 무료 교육 콘텐츠 제작</span>
                         </div>
                         <div class="dn-item">
-                            <div class="dn-item-dot"></div><span>AI RISK 글로벌 학술 활동 및 대응 온톨로지 솔루션 연구개발</span>
+                            <div class="dn-item-dot"></div><span>AI RISK 글로벌 학술 활동 및 대응 온톨로지 솔루션의 오픈이노베이션 추진</span>
                         </div>
                     </div>
                 </div>
-                <div class="dn-cta">
-                    <div class="dn-cta-text">응원 계좌 연동 준비 중입니다.<br><span class="fs-xs" style="color:var(--text3)">[중요] 본
-                            내용은 대한민국의 어떠한 공공기관과도 관련이 없음을
-                            알립니다.</span>
+                <div class="dn-cta" style="flex-direction:column;align-items:stretch;gap:var(--sp-2);">
+                    <div class="dn-acct-inline">
+                        <span class="dn-acct-tag">응원 계좌</span>
+                        <span class="dn-acct-bank">하나은행</span>
+                        <span class="dn-acct-dot">·</span>
+                        <span class="dn-acct-num2">534-910445-02707</span>
+                        <span class="dn-acct-dot">·</span>
+                        <span class="dn-acct-holder">함영국</span>
+                        <button class="dn-copy-icon" data-action="copyAccount" title="계좌번호 복사"><svg viewBox="0 0 24 24"
+                                width="12" height="12" stroke="currentColor" fill="none" stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                            </svg><span id="dn-copy-txt">복사</span></button>
                     </div>
-                    <div class="dn-cta-badge">준비 중</div>
+                    <div style="display:flex;">
+                        <button class="dn-toss-btn" data-action="openTossTransfer">후원하기 (토스)</button>
+                    </div>
+                    <div id="dn-qr-pop" class="dn-qr-pop" style="display:none;">
+                        <div class="dn-qr-hd"><span>모바일 카메라로 스캔 &rarr; Toss 송금</span><button class="dn-qr-close"
+                                data-action="closeQr">&#x2715;</button></div>
+                        <img id="dn-qr-img" class="dn-qr-img" src="" alt="QR" />
+                        <div class="dn-qr-note">모바일 카메라 또는 Toss 앱 QR 스캐너로 스캔하세요<br>Toss 미설치 시 앱 설치 후 이용할 수 있습니다</div>
+                    </div>
+                    <div class="fs-xs" style="color:var(--text3)">[중요] 본 내용은 대한민국의 어떠한 공공기관과도 관련이 없음을 알립니다.</div>
                 </div>
             </div>
         </div>
