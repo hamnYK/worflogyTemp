@@ -12746,7 +12746,6 @@ for r in results:
 
         function setScen(t) {
             document.getElementById('scen-inp').value = SCENS[t] || '';
-            document.getElementById('entity-hint-card').style.display = 'none';
             // 시나리오 칩 선택 표시: 같은 그룹 내 모든 s3-chip의 .sel 제거 후 클릭된 칩에만 적용
             document.querySelectorAll('.s3-chip').forEach(b => b.classList.remove('sel'));
             this.classList.add('sel');
