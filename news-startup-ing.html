@@ -1,0 +1,484 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-GMDREuNQNJynOQvCXFCl/JLp3JtjQWFHx+V4UdEFI34=' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://www.gstatic.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https://www.google.com https://fonts.gstatic.com https://www.gstatic.com https://www.google-analytics.com; connect-src 'self' https://cdn.jsdelivr.net https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests;" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>[아카이브] 워플로지 “시맨틱·온톨로지, 기업 고민 해결과 성장 동시에” — 주식회사 워플로지</title>
+  <meta name="description" content="IT동아 차주경 기자의 워플로지 함영국 대표 인터뷰 기사 아카이브입니다. 시맨틱 온톨로지 기반 지식 아키텍처 R&D의 가치와 비전을 확인해보세요." />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="[아카이브] 워플로지 “시맨틱·온톨로지, 기업 고민 해결과 성장 동시에”" />
+  <meta property="og:description" content="시맨틱 온톨로지 기반 지식 아키텍처 R&D의 가치와 스타트업 워플로지의 비즈니스 비전 인터뷰" />
+  <meta property="og:image" content="https://worflogy.com/assets/media_it_donga.jpg" />
+  <meta property="og:url" content="https://worflogy.com/news-startup-ing.html" />
+
+  <link rel="icon" href="assets/worflogy_logo.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/language-switcher.css" />
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WN1V0G6RJ0"></script>
+  <script src="js/ga4-init.js"></script>
+
+  <style>
+    /* ── 아카이브 칼럼 리더 전용 스타일 ── */
+    .article-container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 40px 24px 80px 24px;
+    }
+
+    .back-btn-container {
+      margin-bottom: 32px;
+    }
+
+    .back-to-footprint {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-sans-en);
+      font-size: var(--fs-ui, 14.5px);
+      font-weight: var(--fw-ui, 600);
+      letter-spacing: var(--ls-ui, 0.2px);
+      line-height: var(--lh-ui, normal);
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color var(--transition-smooth);
+    }
+
+    .back-to-footprint:hover {
+      color: var(--coral);
+    }
+
+    .back-to-footprint svg {
+      width: 16px;
+      height: 16px;
+      transition: transform var(--transition-smooth);
+    }
+
+    .back-to-footprint:hover svg {
+      transform: translateX(-4px);
+    }
+
+    .article-header {
+      border-bottom: 1px solid var(--border-sand);
+      padding-bottom: 24px;
+      margin-bottom: 40px;
+    }
+
+    .archive-tag {
+      font-family: var(--font-serif-en);
+      font-style: italic;
+      font-weight: 400;
+      font-size: var(--fs-label, 12px);
+      line-height: var(--lh-label, 1.35);
+      color: var(--coral);
+      text-transform: uppercase;
+      letter-spacing: var(--ls-label, 0.5px);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .article-title {
+      font-family: var(--font-serif-ko);
+      font-size: var(--fs-h2, 42px);
+      font-weight: var(--fw-h2, 700);
+      line-height: var(--lh-h2, 1.3);
+      letter-spacing: var(--ls-h2, -0.5px);
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+      font-family: var(--font-body);
+      font-size: var(--fs-body-min, 13px);
+      color: var(--text-muted);
+    }
+
+    .meta-separator {
+      color: var(--border-sand);
+    }
+
+    .article-main-visual {
+      margin: 40px 0;
+      border-radius: var(--r-md, 8px);
+      overflow: hidden;
+      border: 1px solid var(--border-sand);
+    }
+
+    .article-main-visual img {
+      width: 100%;
+      display: block;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .visual-caption {
+      padding: 12px 16px;
+      background: rgba(26, 31, 54, 0.03);
+      font-family: var(--font-body);
+      font-size: var(--fs-body-min, 13px);
+      line-height: var(--lh-body-min, 1.7);
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-sand);
+    }
+
+    .article-content {
+      font-family: var(--font-serif-ko);
+      font-size: var(--fs-body, 16px);
+      line-height: var(--lh-body, 1.65);
+      letter-spacing: var(--ls-body, normal);
+      color: var(--text);
+    }
+
+    .article-content p {
+      margin-bottom: 28px;
+      text-align: justify;
+    }
+
+    .article-content strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    /* 개념도 다이어그램 카드 스타일 */
+    .concept-diagram {
+      background: rgba(26, 31, 54, 0.02);
+      border: 1px dashed var(--border-sand);
+      border-radius: var(--r-sm, 6px);
+      padding: 24px;
+      margin: 40px 0;
+    }
+
+    .diagram-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px dashed var(--border);
+      padding-bottom: 10px;
+      margin-bottom: 16px;
+    }
+
+    .diagram-title {
+      font-family: var(--font-serif-ko);
+      font-size: var(--fs-h4, 16px);
+      font-weight: var(--fw-h4, 600);
+      color: var(--coral);
+      letter-spacing: var(--ls-h4, -0.3px);
+    }
+
+    .diagram-source {
+      font-family: var(--font-serif-en);
+      font-style: italic;
+      font-size: var(--fs-small, 11px);
+      color: var(--text-muted);
+    }
+
+    .diagram-box {
+      font-family: var(--font-body);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 8px 0;
+    }
+
+    .diagram-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .diagram-node {
+      background: var(--surface);
+      border: 1px solid var(--border-sand);
+      border-radius: var(--r-sm, 4px);
+      padding: 12px;
+      flex: 1;
+      text-align: center;
+      font-family: var(--font-body);
+      font-size: var(--fs-body-min, 13px);
+      line-height: var(--lh-body-min, 1.7);
+      color: var(--text);
+      transition: background var(--transition-smooth);
+    }
+
+    .diagram-node:hover {
+      background: rgba(235, 94, 85, 0.08);
+      border-color: var(--coral);
+    }
+
+    .diagram-arrow {
+      color: var(--coral);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .diagram-caption {
+      font-family: var(--font-body);
+      font-size: var(--fs-body-min, 13px);
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-top: 14px;
+      border-left: 2px solid var(--coral);
+      padding-left: 10px;
+    }
+
+    /* 에이전트 논쟁 워크플로 시각화 */
+    .flow-step-container {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .flow-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-family: var(--font-body);
+      font-size: var(--fs-body-min, 13px);
+      line-height: var(--lh-body-min, 1.7);
+      background: rgba(26, 31, 54, 0.03);
+      padding: 10px 14px;
+      border-radius: 4px;
+    }
+
+    .flow-num {
+      color: var(--coral);
+      font-family: var(--font-sans-en);
+      font-weight: 700;
+    }
+
+    .flow-text {
+      color: var(--text-muted);
+    }
+
+    .flow-text strong {
+      color: var(--text);
+    }
+
+    @media (max-width: 600px) {
+      .article-container {
+        padding: 24px 16px 60px 16px;
+      }
+      .diagram-row {
+        flex-direction: column;
+        gap: 8px;
+      }
+      .diagram-arrow {
+        transform: rotate(90deg);
+        margin: 2px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <aside class="sidebar"></aside>
+
+  <main class="main">
+
+    <div class="article-container">
+
+      <div class="back-btn-container">
+        <a href="footprint.html" class="back-to-footprint">
+          <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+          </svg>
+          연혁 및 히스토리로 돌아가기
+        </a>
+      </div>
+
+      <header class="article-header">
+        <span class="archive-tag">Media & Press Archive</span>
+        <h1 class="article-title">[스타트업-ing] 워플로지 “시맨틱·온톨로지, 기업 고민 해결과 성장 동시에”</h1>
+        <div class="article-meta">
+          <span class="meta-reporter">IT동아 차주경 기자</span>
+          <span class="meta-separator">|</span>
+          <span class="meta-email">racingcar@itdonga.com</span>
+          <span class="meta-separator">|</span>
+          <span class="meta-date">발행일: 2026.06.17</span>
+        </div>
+      </header>
+
+      <div class="article-main-visual">
+        <img src="assets/media_it_donga.jpg" alt="온톨로지 도구를 소개하는 함영국 워플로지 대표" />
+        <div class="visual-caption">온톨로지 도구를 설명하고 있는 함영국 주식회사 워플로지 대표이사 (출처=IT동아)</div>
+      </div>
+
+      <article class="article-content">
+        <p>수많은 기업이 인공지능을 도입해서 업무 효율 증대, 사세 확장 등 여러 효용을 누릴 것으로 기대한다. 하지만, 기대와 달리 인공지능이 기업에 효용을 가져다주지 못하는 일이 잦다. 심지어 위기 관리나 의사결정 시 인공지능이 잘못된 조언을 건네 기업을 위기로 몰아넣기까지 한다.</p>
+
+        <p>왜 이런 일이 생길까? 대개는 인공지능의 한계인 환각(Hallucination) 탓이다. 오염됐거나 불필요한 데이터를 사용한 경우, 데이터의 해석과 추론과 적용을 잘못할 경우 인공지능은 사실과 전혀 다른 결론을 내놓는 환각에 빠진다. 이에 업계는 인공지능의 환각을 줄이고 정확한 결론을 내놓을 기술의 연구 개발에 몰두했다.</p>
+
+        <p>이 가운데 스타트업 워플로지를 이끄는 함영국 대표는 옛 철학의 한 부문인 온톨로지(Ontology)에서 해결의 실마리를 찾았다. 온톨로지 인공지능 구축에 필수인 시맨틱 데이터(Semantic Data)를 적극 활용하는 것은 물론이다.</p>
+
+        <p>온톨로지와 시맨틱 데이터는 인공지능이 단어·문장의 진짜 의미를 이해하도록, 사람처럼 생각하도록 돕는 기술이다. 우선 온톨로지는 현실에 있는 각종 개념과 관계를 인공지능이 이해하도록 구성한 지식의 지도이자 백과사전이다. 이 온톨로지를 활용해 만드는 것이 시맨틱 데이터다. 이름 그대로 데이터에 ‘의미’와 ‘관계’를 부여해서 인공지능이 읽고 이해하고 추론하는 것을 돕는 데이터다.</p>
+
+        <p>이들 기술을 갖춘 인공지능은 현실 속 각종 개념과 관계를 사람처럼 이해하고 추론한다. 덕분에 환각에 빠질 가능성이 낮다. 인공지능의 대표 환각 사례인 ‘세종대왕이 맥북 프로 노트북을 집어던진 사건’을 되새겨보자. 시맨틱 데이터는 ‘세종대왕’에 ‘15세기 조선의 왕’이라는 개념을, ‘맥북 프로 노트북’에 ‘21세기에 출시된 신형 컴퓨터’라는 개념을 각각 부여한다. 이 경우 ‘15세기’와 ‘21세기’라는 개념이 맞지 않으므로 인공지능은 이 문장을 오류라고 판단했을 것이다.</p>
+
+        <div class="concept-diagram">
+          <div class="diagram-header">
+            <span class="diagram-title">시맨틱 웹 및 온톨로지 기반 지식 검증 메커니즘</span>
+            <span class="diagram-source">출처: 워플로지 R&D 아카이브</span>
+          </div>
+          <div class="diagram-box">
+            <div class="diagram-row">
+              <div class="diagram-node">
+                <strong>세종대왕</strong><br>
+                <span style="font-size: var(--fs-small, 11px); color: var(--text-muted);">[개념: 15세기 조선의 왕]</span>
+              </div>
+              <div class="diagram-arrow">➔</div>
+              <div class="diagram-node" style="border-color: var(--coral);">
+                <strong>불일치 감지 (오류)</strong><br>
+                <span style="font-size: var(--fs-small, 11px); color: var(--coral);">[15세기 vs 21세기]</span>
+              </div>
+              <div class="diagram-arrow">➔</div>
+              <div class="diagram-node">
+                <strong>맥북 프로</strong><br>
+                <span style="font-size: var(--fs-small, 11px); color: var(--text-muted);">[개념: 21세기 컴퓨터]</span>
+              </div>
+            </div>
+            <div class="diagram-caption">
+              <strong>시맨틱 레이어의 인과 관계 검증</strong>: 단어의 개념적 속성(도메인 규칙)을 명확하게 정의하여, 인공지능이 시공간적 인과관계를 스스로 검증하고 환각 현상을 사전 차단하는 원리입니다.
+            </div>
+          </div>
+        </div>
+
+        <p>온톨로지와 시맨틱 데이터는 인공지능의 환각을 줄일뿐만 아니라 추론 과정을 역추적해서 과정 전반을 고도화하도록 돕는다. 새 데이터가 없어도 기존 데이터의 개념과 관계를 활용, 인공지능이 스스로 생각하고 그 범위를 넓히도록 이끌기도 한다. 자연스레 정확한 데이터만 활용하게 되므로 구동 비용과 자원을 줄이는 효용도 발휘한다.</p>
+
+        <p>이런 장점 덕분에 온톨로지와 시맨틱 데이터는 이미 세계 인공지능 시장에서 큰 위력을 떨쳤다. 세계 빅데이터 프로세싱 기업 팔란티어(Palantir)가 사례다. 팔란티어는 빅데이터 수집 후 온톨로지를 반영, 인공지능이 명확한 목적 아래 가장 알맞은 의사결정을 하도록 조율하는 기업으로 꼽힌다.</p>
+
+        <p>워플로지가 가장 주력하는 것도 이 지점, 온톨로지와 시맨틱 데이터가 사용자의 명확한 목표 아래 동작하도록 하는 것이다. 함영국 대표는 모든 데이터를 사용해서 인공지능 연산하는 것은 사실상 불가능하고 효율도 낮다며, 데이터를 활용해 맥락과 명확한 목표를 도출한 후 여기에 맞는 데이터만 쓰는 온톨로지 도구를 구상했다.</p>
+
+        <div class="concept-diagram">
+          <div class="diagram-header">
+            <span class="diagram-title">목적 기반 데이터 필터링 도구 개념</span>
+            <span class="diagram-source">출처: 워플로지 R&D 아카이브</span>
+          </div>
+          <div class="diagram-box">
+            <div class="diagram-row">
+              <div class="diagram-node">
+                <strong>방대한 로우 데이터</strong><br>
+                <span style="font-size: var(--fs-small, 11px); color: var(--text-muted);">전사 비정형 데이터</span>
+              </div>
+              <div class="diagram-arrow">➔</div>
+              <div class="diagram-node" style="border-color: var(--coral);">
+                <strong>맥락 & 목적 필터</strong><br>
+                <span style="font-size: var(--fs-small, 11px); color: var(--coral);">온톨로지 스키마 매핑</span>
+              </div>
+              <div class="diagram-arrow">➔</div>
+              <div class="diagram-node">
+                <strong>최적화 연산 데이터</strong><br>
+                <span style="font-size: var(--fs-small, 11px); color: var(--text-muted);">고효율 의사결정 추론</span>
+              </div>
+            </div>
+            <div class="diagram-caption">
+              <strong>목적 정렬(Goal-Alignment)</strong>: 전체 데이터를 무작위로 연산하는 대신, 비즈니스 목적에 부합하는 의미론적 지식 노드만 필터링하여 비용을 줄이고 추론 정확도를 비약적으로 높입니다.
+            </div>
+          </div>
+        </div>
+
+        <p>함영국 대표의 이력은 사뭇 독특하다. 일본지역학을 전공하고 웹 개발 경력을 쌓은 그는 영국으로 건너가 기업의 경영전략과 위기관리·보안 이론을 배웠다. 이 때 시맨틱 데이터와 디자인 기반 위기 시뮬레이션, 기업의 의사결정 사례와 기법, 프로젝트 리스크, 수행 프로세스 표준화 학습을 통한 시맨틱 데이터 설계와 이를 활용한 의사결정 이론도 연구했다.</p>
+
+        <p>우리나라로 돌아온 그는 항공우주 기업에서 사업화 기획과 타당성 분석, 위기관리 업무에 임한다. 이 때 우리나라 기업들이 유독 위기관리에 소홀한 점, 사내에서 만들어진 수많은 데이터를 모아 관리하지 않는 점, 이 탓에 올바른 의사결정을 하지 못하고 기업과 임직원 모두 쇠퇴하는 것을 목격한다. 이에 자신이 연구한 온톨로지와 시맨틱 데이터 기술을 활용해 기업의 고민을 푸는 온톨로지 도구를 만든다.</p>
+
+        <p>워플로지는 우선 기업이나 연구소에서 쓰기 알맞은 온톨로지 도구를 선보였다. 이 도구는 우선 기업 구성원들의 역량과 경력, 실무 과정에서 만들어진 수많은 데이터를 지식 그래프로 연결해 유기화한다. 이 결과물을 토대로 임직원 채용과 매출 확대, 해외 진출과 업무 고도화 등 기업의 화제 전반을 분석하고 시작점과 도착점을 설정한 후 거기에 닿기까지의 과정을 관리자에게 제안한다. 덕분에 구성원들이 역량을 가장 잘 발휘하고 업무 효율을 높이도록 이끈다.</p>
+
+        <div class="concept-diagram">
+          <div class="diagram-header">
+            <span class="diagram-title">임직원 역량 진단 및 비즈니스 목적 연동 지식 그래프</span>
+            <span class="diagram-source">출처: 워플로지 R&D 아카이브</span>
+          </div>
+          <div class="diagram-box">
+            <div class="diagram-row">
+              <div class="diagram-node">
+                <strong>구성원 프로필 & 이력</strong><br>
+                <span style="font-size: var(--fs-small, 11px); color: var(--text-muted);">실무 산출물 노드</span>
+              </div>
+              <div class="diagram-arrow">➔</div>
+              <div class="diagram-node" style="border-color: var(--coral);">
+                <strong>지식 그래프 연결 (유기화)</strong><br>
+                <span style="font-size: var(--fs-small, 11px); color: var(--coral);">역량-프로젝트 매핑</span>
+              </div>
+              <div class="diagram-arrow">➔</div>
+              <div class="diagram-node">
+                <strong>최적 역할 추천 & 시나리오</strong><br>
+                <span style="font-size: var(--fs-small, 11px); color: var(--text-muted);">성장 경로 자동 제안</span>
+              </div>
+            </div>
+            <div class="diagram-caption">
+              <strong>지식 그래프 기반의 인재 매칭</strong>: 구성원의 단편적 경력 텍스트를 넘어, 실무에서 생성된 성과물과 온톨로지 스키마를 융합하여 기업 목적에 최적화된 역할을 유기적으로 도출합니다.
+            </div>
+          </div>
+        </div>
+
+        <p>나아가 기업의 의사 결정과 위기관리 전반도 돕는다. 기업이 올바른 의사 결정을 하려면 경험이나 추측이 아니라, 명확한 데이터และ 인과관계 분석 결과를 활용해야 한다. 여기에 가장 알맞은 것이 온톨로지다. 기업 내 구성원들의 행동과 성과, 조직과 시장 데이터의 정의를 세밀하게 세우고 이들간의 관계를 기업의 목적 아래 배분하고 해석하는 원리다. 같은 이치로 위기 관리도 가능하다. 기업 앞에 다가올 다양한 위기를 형상화하고 비즈니스 구조의 논리 맹점을 진단하는 셈이다.</p>
+
+        <p>워플로지의 온톨로지 도구는 연구소에서도 활약 가능하다. 연구원들의 이력과 경력, 연구 과정과 성과는 물론 이들이 한 연구 데이터와 아이디어를 노드와 링크 구조로 구조화한다. 이어 연구소가 설정한 명확한 목적 아래 이들 연구 데이터와 아이디어를 보존하고 정리하고 해석한다.</p>
+
+        <p>오늘날 시장에는 기업과 구성원의 정보를 분석해서 업무 효율을 높이는 인공지능 도구가 많다. 함영국 대표는 워플로지의 온톨로지 도구의 동작 원리, 구조가 이들 인공지능 도구와 확연히 다르다고 강조한다. 인공지능 도구는 범용 아키텍처(구조)를 활용해 그저 데이터를 해석할 뿐이다. 반면, 워플로지는 현장의 데이터를 온톨로지로 융합해 지식 그래프를 만든다. 이어 도메인(특정 영역) 지식의 철학을 도구로 활용해 지식 그래프를 활용한다. 범용이 아닌 맞춤형, 현장 데이터 융합형이라는 점이 워플로지의 온톨로지 도구의 가장 큰 장점이자 기술 해자다.</p>
+
+        <div class="concept-diagram">
+          <div class="diagram-header">
+            <span class="diagram-title">지능형 에이전트와 이슈 디베이트 워크플로우 (RAG 특화)</span>
+            <span class="diagram-source">출처: 워플로지 R&D 아카이브</span>
+          </div>
+          <div class="flow-step-container">
+            <div class="flow-step">
+              <span class="flow-num">1.</span>
+              <span class="flow-text"><strong>이슈 식별 및 온톨로지 쿼리 생성</strong>: 비즈니스 현안 발생 시 관련 지식 그래프 탐색</span>
+            </div>
+            <div class="flow-step" style="border-left: 2px solid var(--coral); background: rgba(235, 94, 85, 0.02);">
+              <span class="flow-num">2.</span>
+              <span class="flow-text"><strong>RAG 기반 맥락 추출</strong>: 외부 규정, 내부 성과 자산 및 온톨로지 규칙을 결합하여 맥락 생성</span>
+            </div>
+            <div class="flow-step">
+              <span class="flow-num">3.</span>
+              <span class="flow-text"><strong>에이전트 간 변증법적 디베이트</strong>: AI 에이전트들이 서로 다른 관점에서 타당성 및 논리적 맹점을 입증</span>
+            </div>
+            <div class="flow-step">
+              <span class="flow-num">4.</span>
+              <span class="flow-text"><strong>최종 의사결정 제안</strong>: 인간 관리자에게 위기 요인을 최소화한 입증 가능한 시나리오 보고</span>
+            </div>
+          </div>
+          <div class="diagram-caption" style="margin-top: 14px;">
+            <strong>변증법적 지식 검증 워크플로</strong>: 단순히 AI가 정보를 요약해서 주는 형태를 탈피해, 온톨로지 스키마에 정의된 여러 규칙을 기반으로 AI가 스스로 가설을 세우고 논쟁하여 무결점에 가까운 의사결정을 도출하도록 설계되었습니다.
+          </div>
+        </div>
+
+        <p>워플로지는 온톨로지 도구를 온프레미스(기업이 자체 서버에 서비스를 설치, 자체 운용하는 방식)와 SaaS(클라우드나 온라인상으로 이용하는 서비스) 두 종류로 제공한다. 덕분에 일반 기업이나 연구소는 물론, 방산이나 우주과학 등 고도의 보안이 필요한 환경에서도 활약 가능하다.</p>
+
+        <p>함영국 대표는 온톨로지 도구 구축 전, 시맨틱 데이터와 온톨로지 관련 특허 등록을 마쳤다. 아직 초기 단계지만, 우리나라 방산 기업과 연구소와의 실증도 계획 중이다. 8월까지 기술 장벽을 만들고 실증을 마친 후 워플로지는 기업용 온톨로지 도구를 공식 출시할 예정이다.</p>
+
+        <p>이를 위해 워플로지는 도전 과제인 온톨로지 도구의 고도화와 보급을 시도한다. UI와 UX를 개선해 누구나 손쉽게 시맨틱 데이터 설정과 온톨로지화를 하도록 돕는다. 온톨로지 도구의 진입 장벽을 낮춰 더욱 다양한 기업과 연구소를 고객사로 맞아들일 계획도 세웠다. 이를 위한 투자금도 모은다. 등록을 마친 특허를 토대로 기술혁신형 벤처기업 인증을 취득한 후 국가 연구개발 사업에 참여해 온톨로지의 효용을 알리려 한다.</p>
+
+        <p>함영국 대표는 “시맨틱 데이터와 온톨로지를 활용하면 기업의 각종 지식 데이터를 유기적 맥락으로 연동해서 대체 불가능한 지식 자산으로 만들 수 있다. 이들 기술을 가장 정확하게 구현하고 가장 유용하게 활용하는 곳, 우리나라 기업과 연구소의 성장을 돕는 곳으로 자리매김하겠다.”고 밝혔다.</p>
+
+        <p style="margin-top: 50px; font-family: var(--font-body); font-size: var(--fs-sm, 14px); color: var(--text-muted);">
+          IT동아 차주경 기자(racingcar@itdonga.com) <br>
+          저작권자 ⓒ IT동아. 무단전재 및 재배포 금지. <br>
+          <span style="font-size: 12px; display: inline-block; margin-top: 10px;">본 아카이브는 법인 홈페이지 개편 및 유실 방지를 위한 소장 목적으로 기사 전문을 백업한 페이지입니다. 원본 링크는 연혁 페이지 내 아웃링크를 통해 접속 가능합니다.</span>
+        </p>
+      </article>
+
+    </div>
+
+  </main>
+
+  <script src="js/sidebar.js" defer></script>
+  <script src="js/main.js"></script>
+  <script src="js/language-switcher.js" defer></script>
+</body>
+
+</html>
