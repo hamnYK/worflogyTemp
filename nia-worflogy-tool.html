@@ -1,4 +1,4 @@
-﻿<!--
+<!--
   행정 혁신 온톨로지 워크숍 & NIA 프로젝트
   © 2026 Worflogy Inc. All Rights Reserved.
   
@@ -12003,7 +12003,7 @@ for r in results:
 
         function loadDummyData(type) {
             const d = DUMMY_DATA[type]; if (!d) return;
-            const btn = event.currentTarget;
+            const btn = this;
             const fname = d.label + '_샘플.txt';
             const spec = document.getElementById('dummy-spec');
 
@@ -12747,6 +12747,9 @@ for r in results:
         function setScen(t) {
             document.getElementById('scen-inp').value = SCENS[t] || '';
             document.getElementById('entity-hint-card').style.display = 'none';
+            // 시나리오 칩 선택 표시: 같은 그룹 내 모든 s3-chip의 .sel 제거 후 클릭된 칩에만 적용
+            document.querySelectorAll('.s3-chip').forEach(b => b.classList.remove('sel'));
+            this.classList.add('sel');
             // 하드코딩 칩 → SCEN_HINT_MAP 직접 렌더링 (키워드 매칭·AI 없이)
             _renderChipHint(t);
         }
