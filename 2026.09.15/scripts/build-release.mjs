@@ -6,5 +6,5 @@ const files=['index.html','en.html','nia-ontology-workshop-with-worflogy.html','
 function collect(dir){for(const item of fs.readdirSync(path.join(root,dir),{withFileTypes:true})){const relative=path.join(dir,item.name);if(item.isSymbolicLink())throw new Error('Symbolic links are not allowed: '+relative);if(item.name.startsWith('.'))continue;if(item.isDirectory())collect(relative);else if(/\.(css|js|woff2|png|jpe?g|svg|webp|ico|txt)$/i.test(item.name))files.push(relative);}}
 for(const dir of ['css','js','assets'])collect(dir);
 for(const f of files){const target=path.join(out,f);fs.mkdirSync(path.dirname(target),{recursive:true});fs.copyFileSync(path.join(root,f),target);}
-if(process.argv.includes('--json'))console.log(JSON.stringify({directory:out,files:files.length}));
+if(process.argv.includes('--json'))console.log(JSON.stringify({directory:out,files:files.length}).replace(/[^\x00-\x7f]/g, char => "\\u" + char.charCodeAt(0).toString(16).padStart(4, "0")));
 else {console.log('Release candidate: '+out);console.log(files.length+' files. No deployment performed.');}
