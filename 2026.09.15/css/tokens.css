@@ -10,6 +10,14 @@
   --color-vermilion: #f16c5b;
   --color-apricot: #58b4df;
   --color-surface: #fafbfd;
+  /* Quiet studio atmosphere outside the interactive canvas. */
+  --studio-wash-sky: #58b4df4d;
+  --studio-wash-coral: #f16c5b29;
+  --studio-wash-butter: #f2ce7552;
+  --studio-pixel: #58b4df38;
+  --studio-page-background: radial-gradient(ellipse at 0% 4%, var(--studio-wash-sky), transparent 54%), radial-gradient(ellipse at 100% 35%, var(--studio-wash-butter), transparent 49%), radial-gradient(ellipse at 8% 100%, var(--studio-wash-coral), transparent 50%);
+  --studio-world-art: url("../assets/images/brand/studio-world.svg");
+  --studio-world-opacity: .65;
   --color-surface-subtle: #edf5fa;
   --color-surface-hover: #e1eff7;
   --color-text: #252a34;
@@ -90,6 +98,9 @@
   --radius-control: 4px;
   --radius-card: 6px;
   --radius-dialog: 10px;
+  --dialog-shadow: 0 24px 80px #252a3433, 0 4px 16px #425f7514;
+  --dialog-header-background: linear-gradient(115deg, #edf5fa, #fafbfd 60%, #fbf1d4);
+  --dialog-accent: linear-gradient(90deg, var(--color-coral) 0 38%, var(--color-butter) 38% 65%, var(--color-sky) 65%);
   --radius-pill: 999px;
   --shadow-control: 0 2px 8px #20201e12;
   --shadow-floating: 0 4px 16px #20201e26;

@@ -16,7 +16,7 @@
   up.disabled=index===0;down.disabled=index===sections.length-1;
   for(const [button,offset] of [[up,-1],[down,1]]){
    const label=button.disabled?(en?(offset<0?'First section':'Last section'):(offset<0?'첫 섹션':'마지막 섹션')):(en?(offset<0?'Previous section: ':'Next section: '):(offset<0?'이전 섹션: ':'다음 섹션: '))+heading(index+offset);
-   button.title=label;button.setAttribute('aria-label',label);if(!button.disabled)button.setAttribute('aria-controls',sections[index+offset].id);else button.removeAttribute('aria-controls');
+   button.setAttribute('aria-label',label);if(!button.disabled)button.setAttribute('aria-controls',sections[index+offset].id);else button.removeAttribute('aria-controls');
   }
   position.textContent=String(index+1).padStart(2,'0')+' / '+String(sections.length).padStart(2,'0');
   position.setAttribute('aria-label',(en?'Current section: ':'현재 섹션: ')+heading(index));

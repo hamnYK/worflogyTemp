@@ -12,7 +12,12 @@
   const imageTitle=document.createElement("h2");imageTitle.id="canvas-image-title";imageTitle.textContent="제품 미리보기";
   const imageClose=document.createElement("button");imageClose.type="button";imageClose.textContent="닫기";
   const imageFull=document.createElement("img");imageFull.alt="제품 미리보기";
-  imageDialog.append(imageTitle,imageClose,imageFull);document.body.append(imageDialog);
+  const imageNumber=document.createElement("span");imageNumber.className="canvas-image-number";imageNumber.setAttribute("aria-hidden","true");
+  const imageHeading=document.createElement("div");imageHeading.className="canvas-image-heading";imageHeading.append(imageNumber,imageTitle);
+  const imageActions=document.createElement("div");imageActions.className="canvas-image-actions";imageActions.append(imageClose);
+  const imageHeader=document.createElement("header");imageHeader.className="canvas-image-header";imageHeader.append(imageHeading,imageActions);
+  const imageFrame=document.createElement("div");imageFrame.className="canvas-image-frame";imageFrame.tabIndex=0;imageFrame.setAttribute("role","region");imageFrame.setAttribute("aria-label","제품 이미지");imageFull.draggable=false;imageFrame.append(imageFull);
+  imageDialog.append(imageHeader,imageFrame);document.body.append(imageDialog);
   let imageReturnFocus=null;
   imageClose.addEventListener("click",()=>imageDialog.close());
   imageDialog.addEventListener("click",event=>{if(event.target===imageDialog){const r=imageDialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)imageDialog.close();}});
@@ -32,9 +37,11 @@
       const description=document.createElement("p");description.className="guide-description";
       description.append("인공지능 인문 사회 디자인 : 사유를 맥락으로 연결하고 소통하다.",document.createElement("br"),"Bottom-Up 동적 지식 그래프 디자인의 기술 스타트업");
       section.append(header,description);
+      const overviewTitle=document.createElement("h2");overviewTitle.className="diagram-section-title";overviewTitle.id="overview-summary-title";overviewTitle.textContent="0. 보유 기술 개요";section.append(overviewTitle);
     }else{
       const title=document.createElement("h2");title.className="diagram-section-title";title.id="title-"+diagram.id;
-      title.textContent=diagram.title;
+      const titleText=document.createElement("span");titleText.textContent=diagram.title;
+      title.append(document.createTextNode(index+". "),titleText);
       section.append(title);
       if(diagram.readiness){
         title.classList.add("has-readiness");
@@ -54,7 +61,7 @@
     host.setAttribute("aria-label",diagram.title+" 관계도. 좌우 방향키로 오브젝트 선택, Escape로 선택 해제.");
     let explorer=null,selectedId=null,storyActive=false;
     let exampleCard=null;
-    const previewNumber={overview:"01",platform:"02",problem:"03",risk:"04",research:"05",narrative:"06",npc:"07",creator:"08",bias:"09"}[diagram.id];
+    const previewNumber={overview:"00",platform:"01",problem:"02",risk:"03",research:"04",narrative:"05",npc:"06",creator:"07",bias:"08"}[diagram.id];
     if(previewNumber){
       host.classList.add("canvas-example-enabled");
       exampleCard=document.createElement("button");exampleCard.type="button";exampleCard.className="canvas-example-card";
@@ -66,7 +73,7 @@
       section.querySelector(".diagram-shell").append(exampleCard);
       exampleCard.addEventListener("click",()=>{
         explorer?.select(null);
-        imageReturnFocus=byId("play-story");imageFull.src=photo.src;
+        imageReturnFocus=byId("play-story");imageFull.src=photo.src;imageNumber.textContent=previewNumber;imageFrame.scrollTo(0,0);
         imageDialog.showModal();
       });
     }

@@ -24,3 +24,10 @@ scripts/build-release.mjs의 공개 파일 목록을 사용합니다. 원본 워
 tmp/release-*와 tmp/deploy-*는 확인용으로 남습니다. 실제 사이트 반영 완료 여부는 GitHub Pages 배포 상태와 운영 URL에서 확인해야 합니다. Pages의 게시 원본은 gh-pages 분기의 /(root)를 사용해야 합니다.
 
 검증용 로컬 Git 저장소를 지정할 때만 build.ps1의 -Remote 인수를 사용할 수 있습니다.
+
+---
+# 배포 실행
+
+Set-Location -LiteralPath 'C:\Users\alchera\OneDrive\[주식회사 워플로지]\02. 법인 홈페이지 (도메인 사용권)\2026.04.24_워플로지 홈페이지 개편\2026\2026.09.15'
+
+.\deploy.cmd
