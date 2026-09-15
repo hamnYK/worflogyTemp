@@ -1,319 +1,173 @@
-﻿window.name = "worflogy_main";
+(function () {
+  "use strict";
+  const diagrams=window.WORFLOGY_DIAGRAMS;
+  const copy=window.WORFLOGY_COPY;
+  const root=document.getElementById("diagram-sections");
+  root.replaceChildren();
+  const players=[];
+  const observers=[];
+  const imageDialog=document.createElement("dialog");
+  imageDialog.className="canvas-image-dialog";
+  imageDialog.setAttribute("aria-labelledby","canvas-image-title");
+  const imageTitle=document.createElement("h2");imageTitle.id="canvas-image-title";imageTitle.textContent="제품 미리보기";
+  const imageClose=document.createElement("button");imageClose.type="button";imageClose.textContent="닫기";
+  const imageFull=document.createElement("img");imageFull.alt="제품 미리보기";
+  const imageNumber=document.createElement("span");imageNumber.className="canvas-image-number";imageNumber.setAttribute("aria-hidden","true");
+  const imageHeading=document.createElement("div");imageHeading.className="canvas-image-heading";imageHeading.append(imageNumber,imageTitle);
+  const imageActions=document.createElement("div");imageActions.className="canvas-image-actions";imageActions.append(imageClose);
+  const imageHeader=document.createElement("header");imageHeader.className="canvas-image-header";imageHeader.append(imageHeading,imageActions);
+  const imageFrame=document.createElement("div");imageFrame.className="canvas-image-frame";imageFrame.tabIndex=0;imageFrame.setAttribute("role","region");imageFrame.setAttribute("aria-label","제품 이미지");imageFull.draggable=false;imageFrame.append(imageFull);
+  imageDialog.append(imageHeader,imageFrame);document.body.append(imageDialog);
+  let imageReturnFocus=null;
+  imageClose.addEventListener("click",()=>imageDialog.close());
+  imageDialog.addEventListener("click",event=>{if(event.target===imageDialog){const r=imageDialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)imageDialog.close();}});
+  imageDialog.addEventListener("close",()=>imageReturnFocus?.focus({preventScroll:true}));
 
-document.addEventListener('DOMContentLoaded', () => {
+  diagrams.forEach((diagram,index)=>{
+    const section=document.createElement("section");
+    section.className="diagram-section";
+    section.id="section-"+diagram.id;
+    section.setAttribute("aria-labelledby","title-"+diagram.id);
+    if(index===0){
+      const header=document.createElement("header");header.className="guide-header";
+      const home=document.createElement("a");home.href="#main";home.setAttribute("aria-label","맨 위로");
+      home.innerHTML='<svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><path d="M2 15 16 2l14 13-3 3L16 8 5 18Zm5 2 9-8 9 8v13h-7v-9h-4v9H7Z" fill="currentColor"/></svg>';
+      const title=document.createElement("h1");title.id="title-"+diagram.id;title.textContent='워플로지 “워크플로 온톨로지”';
+      header.append(home,title);
+      const description=document.createElement("p");description.className="guide-description";
+      description.append("인공지능 인문 사회 디자인 : 사유를 맥락으로 연결하고 소통하다.",document.createElement("br"),"Bottom-Up 동적 지식 그래프 디자인의 기술 스타트업");
+      section.append(header,description);
+      const overviewTitle=document.createElement("h2");overviewTitle.className="diagram-section-title";overviewTitle.id="overview-summary-title";overviewTitle.textContent="0. 보유 기술 개요";section.append(overviewTitle);
+    }else{
+      const title=document.createElement("h2");title.className="diagram-section-title";title.id="title-"+diagram.id;
+      const titleText=document.createElement("span");titleText.textContent=diagram.title;
+      title.append(document.createTextNode(index+". "),titleText);
+      section.append(title);
+      if(diagram.readiness){
+        title.classList.add("has-readiness");
+        const readiness=document.createElement("p");
+        readiness.className="diagram-readiness";
+        readiness.textContent=diagram.readiness;
+        if(diagram.readiness==="PoC Ready")readiness.lang="en";
+        section.append(readiness);
+      }
+    }
+    section.append(document.getElementById("diagram-template").content.cloneNode(true));
+    root.append(section);
+    const byId=id=>section.querySelector('[data-ui="'+id+'"]');
+    byId("technology-label").textContent=diagram.technologyLabel;
+    const host=byId("diagram-canvas");
 
-  initGraph();
-
-  document.querySelectorAll('img').forEach(img => {
-    img.addEventListener('contextmenu', (e) => e.preventDefault());
-    img.addEventListener('dragstart',   (e) => e.preventDefault());
-  });
-});
-
-function initGraph() {
-  const svg = document.getElementById('project-graph');
-  if (!svg) return;
-
-  const W = svg.viewBox.baseVal.width  || 680;
-  const H = svg.viewBox.baseVal.height || 580;
-  const cx = W / 2, cy = H / 2;
-  const R  = 190; // orbit radius
-
-  const isEnglish = window.location.href.includes('/en/');
-
-  // 국문/영문에 따른 그래프 텍스트 다국어화
-  const nodes = isEnglish ? [
-    { id: 'root', label: 'Fractal\nOntology', sublabel: 'Design Tech', href: null,
-      x: cx, y: cy, r: 80, primary: true },
-    { id: 'p1', label: 'Team Knowledge\nConnection', sublabel: 'Organic Collab', href: 'project-1.html',
-      x: cx, y: cy - R, r: 64 },
-    { id: 'p2', label: 'Strategic Pivot\n& Linking', sublabel: 'Risk Routing', href: 'project-2.html',
-      x: cx + R, y: cy, r: 64 },
-    { id: 'p3', label: 'R&D Context\n& IP Protection', sublabel: 'IP Value Proof', href: 'project-3.html',
-      x: cx, y: cy + R, r: 64 },
-    { id: 'p4', label: 'Contextual\nNarrative Engine', sublabel: 'Narrative Translation', href: 'project-4.html',
-      x: cx - R, y: cy, r: 64 },
-  ] : [
-    { id: 'root', label: '프랙털\n온톨로지', sublabel: '디자인 기술', href: null,
-      x: cx, y: cy, r: 80, primary: true },
-    { id: 'p1', label: '팀 지식\n유기화', sublabel: '자생적 협업 지능', href: 'project-1.html',
-      x: cx, y: cy - R, r: 64 },
-    { id: 'p2', label: '유연한 피봇\n& 관점 링킹', sublabel: '리스크 경로 진단', href: 'project-2.html',
-      x: cx + R, y: cy, r: 64 },
-    { id: 'p3', label: 'R&D 맥락\n자산화 & IP', sublabel: 'R&D 무형자산 입증', href: 'project-3.html',
-      x: cx, y: cy + R, r: 64 },
-    { id: 'p4', label: '지능형 맥락\n내러티브 엔진', sublabel: 'AI 맥락적 서사 변환', href: 'project-4.html',
-      x: cx - R, y: cy, r: 64 },
-  ];
-
-  const PRIMARY    = '#1A1F36';   // Ink Navy
-  const BORDER     = 'rgba(26,31,54,0.10)';
-  const TEXT_MUTED = '#6B7280';
-
-  // defs
-  const defs = svgEl('defs');
-  // Glow filter
-  const filter = svgEl('filter', { id: 'glow', x: '-30%', y: '-30%', width: '160%', height: '160%' });
-  const blur = svgEl('feGaussianBlur', { stdDeviation: '4', result: 'blur' });
-  const merge = svgEl('feMerge');
-  merge.appendChild(svgEl('feMergeNode', { in: 'blur' }));
-  merge.appendChild(svgEl('feMergeNode', { in: 'SourceGraphic' }));
-  filter.appendChild(blur);
-  filter.appendChild(merge);
-  defs.appendChild(filter);
-  svg.appendChild(defs);
-
-  // edges
-  const edgeGroup = svgEl('g', { class: 'edges' });
-
-  // 1. Interconnected Web (Outer Ring)
-  const childNodes = nodes.slice(1);
-  for (let i = 0; i < childNodes.length; i++) {
-    let nextNode = childNodes[(i + 1) % childNodes.length];
-    const webLine = svgEl('line', {
-      x1: childNodes[i].x, y1: childNodes[i].y, 
-      x2: nextNode.x, y2: nextNode.y,
-      stroke: BORDER, 'stroke-width': '1.5',
-      'stroke-dasharray': '4 4',
-      opacity: '0.6'
-    });
-    edgeGroup.appendChild(webLine);
+    host.setAttribute("aria-label",diagram.title+" 관계도. 좌우 방향키로 오브젝트 선택, Escape로 선택 해제.");
+    let explorer=null,selectedId=null,storyActive=false;
+    let exampleCard=null;
+    const previewNumber={overview:"00",platform:"01",problem:"02",risk:"03",research:"04",narrative:"05",npc:"06",creator:"07",bias:"08"}[diagram.id];
+    if(previewNumber){
+      host.classList.add("canvas-example-enabled");
+      exampleCard=document.createElement("button");exampleCard.type="button";exampleCard.className="canvas-example-card";
+      exampleCard.disabled=true;exampleCard.setAttribute("aria-hidden","true");exampleCard.setAttribute("aria-label","제품 미리보기 확대");
+      const label=document.createElement("span");label.className="canvas-example-label";label.textContent="제품 미리보기";
+      const photo=document.createElement("img");photo.src="assets/images/canvas-bg/canvas-"+previewNumber+".png";photo.alt="";photo.decoding="async";photo.draggable=false;
+      photo.addEventListener("error",()=>{exampleCard.hidden=true;});
+      exampleCard.append(label,photo);
+      section.querySelector(".diagram-shell").append(exampleCard);
+      exampleCard.addEventListener("click",()=>{
+        explorer?.select(null);
+        imageReturnFocus=byId("play-story");imageFull.src=photo.src;imageNumber.textContent=previewNumber;imageFrame.scrollTo(0,0);
+        imageDialog.showModal();
+      });
+    }
+    const objectName=(d,id)=>id==="logic"?"지식 그래프 생산 로직":copy.overrides[d.id]?.[id]||copy.names[id]||id;
+    function caption(speaker,text){
+      byId("speaker").textContent=speaker||"";
+      byId("speaker").hidden=!speaker;
+      byId("story-text").textContent=text;
+    }
+    function showSelection(id){
+      selectedId=id;
+      if(storyActive)return;
+      if(!id){caption("",copy.introductions[diagram.id]);return;}
+      caption(objectName(diagram,id),copy.objectDescriptions?.[diagram.id]?.[id]||copy.descriptions[id]||"이 오브젝트의 상호작용과 영향 관계를 살펴봅니다.");
+    }
+  function showStory(state){
+    const diagram=diagrams[index];
+    storyActive=!["idle","complete","paused"].includes(state.phase);
+    if(exampleCard){
+      exampleCard.classList.toggle("is-visible",storyActive);
+      exampleCard.disabled=!storyActive;exampleCard.setAttribute("aria-hidden",String(!storyActive));
+    }
+    let text="",speaker="";
+    if(state.phase==="platform"||state.phase==="context"){text=state.text;speaker=state.speaker;}
+    else if(state.phase==="overview"){text=state.text;speaker=state.step<=7?"01 / 전통적인 Top-Down":"02 / 워플로지 Bottom-Up";}
+    else if(state.phase==="idle")text=copy.introductions[diagram.id];
+    else if(state.phase==="meet")text="사용자가 에이전트에게 다가갑니다.";
+    else if(state.phase==="talk"){speaker="사용자";text=copy.queries[diagram.id];}
+    else if(state.phase==="infra"){speaker="에이전트";text=copy.objectDescriptions[diagram.id]?.[selectedId];}
+    else if(state.phase==="logic"){speaker="에이전트";text=objectName(diagram,selectedId);}
+    else if(state.phase==="graph"){speaker="에이전트";text="상호작용을 통해 온톨로지 지식 그래프가 생성됩니다.";}
+    else if(state.phase==="complete"){
+      speaker="활용 기술";
+      text=index===0?"워플로지가 고안한 Bottom-Up 네트워크 성장 루프":diagram.id==="platform"?"Top-Down 설계 · W3C RDF/OWL 2 기반":({
+        "top-down":"전통적인 Top-Down 정적 시맨틱 디자인",
+        "bottom-up":"워플로지의 Bottom-Up 동적 지식 그래프 디자인",
+        "hybrid":"Top-Down·Bottom-Up 하이브리드 디자인"
+      }[state.technology]||"온톨로지 지식 그래프가 완성되었습니다.");
+    }
+    caption(speaker,text||"오브젝트 사이의 관계를 살펴봅니다.");
+    byId("story-progress").textContent=state.step?state.step+" / "+state.total:"";
+    const idle=state.phase==="idle",done=state.phase==="complete";
+    byId("next-stage").disabled=idle||done||state.phase==="paused";
+    byId("play-story").setAttribute("aria-label",idle?"재생":"다시 재생");
+    byId("play-story").title=idle?"재생":"다시 재생";
   }
 
-  // 2. Main Spokes (Root to Children)
-  childNodes.forEach((n, i) => {
-    const line = svgEl('line', {
-      x1: cx, y1: cy, x2: n.x, y2: n.y,
-      stroke: PRIMARY, 'stroke-width': '2',
-      'stroke-dasharray': '6 4',
-      opacity: '0.25',
-      class: 'edge-line'
+    try {
+      explorer=window.createDiagramExplorer(host,{
+        select:showSelection,story:showStory,
+        zoom:()=>{}
+      });
+      if(!explorer)throw Error("Phaser is unavailable");
+      explorer.load(diagram);
+      players.push(explorer);
+      const observer=new IntersectionObserver(([entry])=>explorer.setVisible(entry.isIntersecting),{rootMargin:"150px"});
+      observer.observe(host);observers.push(observer);
+    }catch(error){
+      console.error("Diagram initialization failed",diagram.id,error);
+      byId("engine-status").hidden=false;
+      host.hidden=true;
+      const fallback=document.createElement('div');fallback.className='diagram-fallback';
+      const description=document.createElement('p');description.textContent=diagram.desc;fallback.append(description);
+      const list=document.createElement('ul');
+      diagram.nodes.forEach(node=>{const item=document.createElement('li');item.textContent=copy.objectDescriptions?.[diagram.id]?.[node.id]||node.description||node.label.replace(/\n/g,' ');list.append(item);});
+      fallback.append(list);section.append(fallback);
+      section.querySelectorAll(".toolbar button, .canvas-zoom button").forEach(button=>button.disabled=true);
+      caption("","이 도면을 불러오지 못했습니다.");
+    }
+    byId("zoom-in").addEventListener("click",()=>explorer?.zoom(1.2));
+    byId("zoom-out").addEventListener("click",()=>explorer?.zoom(1/1.2));
+    byId("reset").addEventListener("click",()=>explorer?.reset());
+    byId("play-story").addEventListener("click",()=>explorer?.play());
+    byId("next-stage").addEventListener("click",()=>explorer?.next());
+    host.addEventListener("keydown",event=>{
+      if(!["ArrowLeft","ArrowRight","Escape"].includes(event.key))return;
+      event.preventDefault();
+      if(event.key==="Escape"){explorer?.select(null);return;}
+      const nodes=diagram.nodes,current=nodes.findIndex(n=>n.id===selectedId);
+      const next=current<0?(event.key==="ArrowRight"?0:nodes.length-1):(current+(event.key==="ArrowRight"?1:-1)+nodes.length)%nodes.length;
+      if(explorer)explorer.select(nodes[next].id);else showSelection(nodes[next].id);
     });
-    line.style.animation = `dashAnim 2s linear infinite ${i * 0.5}s`;
-    edgeGroup.appendChild(line);
+  });
+  const workshopLink=document.querySelector(".workshop-floating");
+  let workshopWindow=null;
+  workshopLink.addEventListener("click",event=>{
+    if(!workshopWindow||workshopWindow.closed){
+      workshopWindow=window.open(workshopLink.href,"worflogy-workshop");
+      if(!workshopWindow)return;
+      workshopWindow.opener=null;
+    }
+    event.preventDefault();
+    workshopWindow.focus();
   });
 
-  // 3. Fractal Micro Nodes
-  nodes.forEach(n => {
-    for (let j = 0; j < 3; j++) {
-      let angle = Math.random() * Math.PI * 2;
-      let dist = n.r + 15 + Math.random() * 25;
-      let mx = n.x + Math.cos(angle) * dist;
-      let my = n.y + Math.sin(angle) * dist;
-
-      const link = svgEl('line', {
-        x1: n.x, y1: n.y, x2: mx, y2: my,
-        stroke: PRIMARY, 'stroke-width': '1',
-        opacity: '0.15'
-      });
-      edgeGroup.appendChild(link);
-
-      const dot = svgEl('circle', {
-        cx: mx, cy: my, r: 2 + Math.random() * 3,
-        fill: PRIMARY,
-        opacity: '0.3'
-      });
-      edgeGroup.appendChild(dot);
-    }
-  });
-
-  svg.appendChild(edgeGroup);
-
-  // nodes
-  const nodeGroup = svgEl('g', { class: 'nodes' });
-  nodes.forEach(n => {
-    const g = svgEl('g', {
-      class: n.primary ? 'node node-primary' : 'node node-child',
-      transform: `translate(${n.x},${n.y})`,
-      style: n.href ? 'cursor:pointer' : 'cursor:default'
-    });
-
-    // circle – CSS transition
-    const circle = svgEl('circle', {
-      r: n.r,
-      fill: n.primary ? PRIMARY : '#fff',
-      stroke: n.primary ? 'transparent' : PRIMARY,
-      'stroke-width': '1.5',
-      style: 'transition: fill 0.22s ease, stroke-width 0.22s ease;'
-    });
-    g.appendChild(circle);
-
-    // label lines
-    const lines = n.label.split('\n');
-    lines.forEach((line, i) => {
-      const t = svgEl('text', {
-        'text-anchor': 'middle',
-        'dominant-baseline': 'middle',
-        fill: n.primary ? '#fff' : PRIMARY,
-        'font-size': n.primary ? '18' : (isEnglish ? '12' : '15'),
-        'font-weight': '700',
-        'font-family': 'var(--font-serif-ko)',
-        y: (i - (lines.length - 1) / 2) * (isEnglish ? 17 : 21) - 10,
-      });
-      t.textContent = line;
-      g.appendChild(t);
-    });
-
-    // sublabel
-    const sub = svgEl('text', {
-      'text-anchor': 'middle',
-      'dominant-baseline': 'middle',
-      fill: n.primary ? 'rgba(255,255,255,0.7)' : TEXT_MUTED,
-      'font-size': isEnglish ? '10' : '12',
-      'font-weight': '500',
-      'font-family': 'var(--font-body)',
-      y: lines.length * (isEnglish ? 10 : 12) + (isEnglish ? 3 : 0),
-    });
-    sub.textContent = n.sublabel;
-    g.appendChild(sub);
-
-    // hover + click
-    if (n.href) {
-      g.addEventListener('mouseenter', () => {
-        circle.setAttribute('stroke-width', '2.5');
-        circle.setAttribute('fill', '#F5F0E8');
-      });
-      g.addEventListener('mouseleave', () => {
-        circle.setAttribute('stroke-width', '1.5');
-        circle.setAttribute('fill', '#fff');
-      });
-      g.addEventListener('click', () => { location.href = n.href; });
-    }
-
-    nodeGroup.appendChild(g);
-  });
-  svg.appendChild(nodeGroup);
-}
-
-function svgEl(tag, attrs = {}) {
-  const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
-  Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
-  return el;
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  const nodes = document.querySelectorAll('.pm-anim');
-  if (!nodes.length) return;
-  if (!('IntersectionObserver' in window)) {
-    nodes.forEach(n => n.classList.add('visible'));
-    return;
-  }
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        const delay = parseInt(e.target.dataset.delay || 0, 10);
-        setTimeout(() => e.target.classList.add('visible'), delay);
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.15 });
-  nodes.forEach(n => obs.observe(n));
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-  const sliders = document.querySelectorAll('.slider-container');
-  sliders.forEach(container => {
-    const track = container.querySelector('.slider-track');
-    const items = track.querySelectorAll('.slider-item');
-    const prevBtn = container.querySelector('.slider-btn.prev');
-    const nextBtn = container.querySelector('.slider-btn.next');
-    const dotsContainer = container.nextElementSibling;
-
-    if (items.length <= 1) {
-      if (prevBtn) prevBtn.style.display = 'none';
-      if (nextBtn) nextBtn.style.display = 'none';
-      return;
-    }
-
-    let currentIndex = 0;
-    let autoplayTimer = null;
-    let userInteractionTimeout = null;
-    let isHovered = false;
-
-    function startAutoplay() {
-      stopAutoplay();
-      if (isHovered) return;
-      autoplayTimer = setInterval(() => {
-        currentIndex = (currentIndex < items.length - 1) ? currentIndex + 1 : 0;
-        updateSlider();
-      }, 3000);
-    }
-
-    function stopAutoplay() {
-      if (autoplayTimer) {
-        clearInterval(autoplayTimer);
-        autoplayTimer = null;
-      }
-    }
-
-    function handleUserInteraction() {
-      stopAutoplay();
-      if (userInteractionTimeout) {
-        clearTimeout(userInteractionTimeout);
-      }
-      userInteractionTimeout = setTimeout(() => {
-        startAutoplay();
-      }, 5000);
-    }
-
-    container.addEventListener('mouseenter', () => {
-      isHovered = true;
-      stopAutoplay();
-      if (userInteractionTimeout) {
-        clearTimeout(userInteractionTimeout);
-      }
-    });
-
-    container.addEventListener('mouseleave', () => {
-      isHovered = false;
-      startAutoplay();
-    });
-
-    if (dotsContainer && dotsContainer.classList.contains('slider-dots')) {
-      items.forEach((_, i) => {
-        const dot = document.createElement('div');
-        dot.classList.add('slider-dot');
-        if (i === 0) dot.classList.add('active');
-        dot.addEventListener('click', () => {
-          goToSlide(i);
-          handleUserInteraction();
-        });
-        dotsContainer.appendChild(dot);
-      });
-    }
-
-    function updateSlider() {
-      track.style.transform = `translateX(-${currentIndex * 100}%)`;
-      if (dotsContainer) {
-        const dots = dotsContainer.querySelectorAll('.slider-dot');
-        dots.forEach((dot, i) => {
-          dot.classList.toggle('active', i === currentIndex);
-        });
-      }
-    }
-
-    function goToSlide(index) {
-      currentIndex = index;
-      updateSlider();
-    }
-
-    if (prevBtn) {
-      prevBtn.addEventListener('click', () => {
-        currentIndex = (currentIndex > 0) ? currentIndex - 1 : items.length - 1;
-        updateSlider();
-        handleUserInteraction();
-      });
-    }
-
-    if (nextBtn) {
-      nextBtn.addEventListener('click', () => {
-        currentIndex = (currentIndex < items.length - 1) ? currentIndex + 1 : 0;
-        updateSlider();
-        handleUserInteraction();
-      });
-    }
-
-    // 최초 로드 시 자동 롤링 시작
-    startAutoplay();
-  });
-});
+  window.addEventListener("pagehide",event=>{if(!event.persisted){observers.forEach(observer=>observer.disconnect());players.forEach(player=>player.destroy());}});
+})();

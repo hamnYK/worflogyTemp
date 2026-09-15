@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="960" viewBox="0 0 1440 960" fill="none">
+<!-- Static isometric world fragments in the Worflogy sky/coral/butter palette. -->
+<g stroke="#58b4df" stroke-width="1.4" opacity=".32">
+<path d="M-90 160 90 56 270 160 90 264Z M-30 125 150 229 M30 91 210 195 M-30 195 150 91 M30 229 210 125"/>
+<path d="M1230 700 1410 596 1590 700 1410 804Z M1290 665 1470 769 M1350 631 1530 735 M1290 735 1470 631"/>
+<path d="M90 264v68l-56 32v112l76 44" stroke-dasharray="4 7"/>
+<path d="M1380 146v108l-76 44v95l78 46"/>
+</g>
+<g stroke="#58b4df" stroke-width="1.5">
+<path d="m50 141 40-23 40 23-40 23Z" fill="#58b4df" fill-opacity=".2"/>
+<path d="M50 141v30l40 23 40-23v-30M90 164v30" fill="#58b4df" fill-opacity=".08"/>
+<path d="m1350 674 60-35 60 35-60 35Z" fill="#58b4df" fill-opacity=".14"/>
+<path d="M1350 674v38l60 35 60-35v-38M1410 709v38" opacity=".5"/>
+</g>
+<g stroke="#f16c5b" stroke-width="1.5">
+<path d="m1304 298 28-16 28 16-28 16Z" fill="#f16c5b" fill-opacity=".18"/>
+<path d="M1304 298v23l28 16 28-16v-23M1332 314v23" opacity=".6"/>
+<circle cx="34" cy="364" r="6" fill="#fafbfd"/><circle cx="110" cy="520" r="9" fill="#f16c5b" fill-opacity=".14"/>
+</g>
+<g stroke="#f2ce75" stroke-width="2">
+<path d="m-16 794 56-32 56 32-56 32Z" fill="#f2ce75" fill-opacity=".25"/>
+<path d="M-16 794v26l56 32 56-32v-26M40 826v26"/>
+<path d="M1366 146h28m-14-14v28 M170 660h18m-9-9v18"/>
+</g>
+<g fill="#58b4df" opacity=".42"><rect x="20" y="576" width="7" height="7"/><rect x="31" y="576" width="7" height="7"/><rect x="20" y="587" width="7" height="7"/></g>
+</svg>

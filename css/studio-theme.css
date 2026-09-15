@@ -1,0 +1,111 @@
+/* Light, playful platform palette. Roles are defined in tokens.css. */
+.guide-header{background:var(--color-surface-subtle);color:var(--color-text);padding:32px 28px 18px;border:0;border-top:3px solid var(--color-coral);margin-top:24px}
+.guide-header a{color:var(--color-action)}
+.guide-description{background:var(--color-surface-subtle);color:var(--color-text);margin:0 0 32px;padding:0 28px 28px;max-width:none}
+.diagram-shell{border-color:var(--color-border);border-top-color:var(--color-sky)}
+.toolbar{background:var(--color-white);border-color:var(--color-border);color:var(--color-text)}
+.toolbar button,.canvas-zoom button{background:var(--color-white);border-color:var(--color-border-input);color:var(--color-text)}
+.toolbar button:not(:disabled):hover,.canvas-zoom button:not(:disabled):hover{background:var(--color-surface-hover);border-color:var(--color-text-muted)}
+.toolbar [data-ui="play-story"]{background:var(--color-action);border-color:var(--color-action);color:var(--color-on-action)}
+.toolbar [data-ui="play-story"]:not(:disabled):hover{background:var(--color-action-hover)}
+.toolbar-progress,.toolbar-technology,.toolbar output{color:var(--color-text-muted)}
+.canvas-subtitle{background:var(--color-caption-surface);color:var(--color-text);border:1px solid var(--color-border)}
+.canvas-subtitle strong{color:var(--color-text-brand)}
+.ds-page .ds-pan-surface{background:var(--scene-background)}
+.ds-page .ds-pan-surface svg{color:var(--scene-link)}
+.ds-page .ds-pan-surface circle{fill:var(--scene-tile);stroke:var(--scene-active)}
+.ds-page .ds-pan-surface text{fill:var(--scene-ink)}
+@media(max-width:760px){.guide-header{padding:24px 16px 16px;margin-top:18px;align-items:flex-start}.guide-description{padding:0 16px 24px;margin-bottom:24px}.guide-header svg{margin-top:3px}}
+
+
+/* Actual application screenshots stay separate from the animated scene. */
+.canvas-example-card{position:absolute;top:76px;right:64px;z-index:2;width:208px;padding:var(--space-2);text-align:left;border:1px solid var(--color-border-input);border-top:2px solid var(--color-sky);border-radius:var(--radius-card);background:var(--color-white);box-shadow:var(--shadow-control);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .45s ease,visibility .45s;overflow:hidden}
+.canvas-example-card.is-visible{opacity:1;visibility:visible;pointer-events:auto}
+.canvas-example-card:disabled{opacity:0}
+.canvas-example-label{font-size:var(--font-size-xs);font-weight:600;color:var(--color-text)}
+.canvas-example-card img{display:block;width:100%;height:auto;aspect-ratio:2548/1397;object-fit:contain;margin-top:var(--space-2);border-radius:var(--radius-control)}
+.canvas-example-card:focus-visible{outline:2px solid var(--color-action);outline-offset:2px}
+.canvas-image-dialog{width:min(1400px,94vw);max-width:94vw;max-height:92vh;padding:0;border:1px solid var(--color-border-input);border-radius:10px;background:var(--color-surface);color:var(--color-text);overflow:auto}
+.canvas-image-dialog::backdrop{background:#252a34b3}
+.canvas-image-dialog h2{display:inline-block;font-size:18px;margin:0 0 14px}
+.canvas-image-dialog>button{float:right;min-height:44px}
+@media(max-width:900px){.canvas-example-card{position:relative;top:auto;right:auto;width:min(320px,calc(100% - 32px));margin:12px auto}.canvas-image-dialog{padding:0}}
+@media(prefers-reduced-motion:reduce){.canvas-example-card{transition:none}}
+
+/* Static studio atmosphere: no moving layers or interference with canvas input. */
+.studio-home{isolation:isolate;background:var(--color-surface)}
+.studio-home::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:var(--studio-page-background)}
+.studio-home::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:var(--studio-world-art);background-position:center top;background-size:100% auto;background-repeat:repeat-y;opacity:var(--studio-world-opacity);mask-image:linear-gradient(to right,#000,transparent max(32px,calc((100vw - 1240px)/2)),transparent calc(100% - 160px),#000)}
+.studio-background-sample{min-height:180px;padding:var(--space-6);border:1px solid var(--color-border);border-radius:var(--radius-card);background-image:var(--studio-page-background);background-color:var(--color-surface)}
+@media(max-width:760px){.studio-home::after{display:none}}
+
+/* The introduction belongs to the world background, without a separate panel. */
+.studio-home .guide-header{position:relative;background:transparent;border-top:0;padding:32px 0 18px;margin-top:24px}
+.studio-home .guide-header::before{content:"";position:absolute;top:0;left:0;width:88px;height:4px;border-radius:var(--radius-pill);background:linear-gradient(90deg,var(--color-coral) 0 38%,var(--color-butter) 38% 65%,var(--color-sky) 65%)}
+.studio-home .guide-description{background:transparent;padding:0 0 28px}
+.studio-home .diagram-shell{box-shadow:0 8px 28px #425f7508}
+.studio-background-sample{background-image:var(--studio-world-art),var(--studio-page-background);background-size:cover}
+@media(max-width:760px){
+ .studio-home .guide-header{padding:26px 0 14px;margin-top:18px}
+ .studio-home .guide-description{padding:0 0 24px}
+ .studio-home::before{opacity:.8}
+ .studio-background-sample{background-image:var(--studio-page-background)}
+}
+
+/* Studio modal family: quiet white content, a colored editorial header. */
+.studio-home #contact-dialog,.studio-home #press-dialog,.studio-home .canvas-image-dialog,.ds-page #ds-dialog{
+ border:1px solid var(--color-border);border-radius:var(--radius-dialog);box-shadow:var(--dialog-shadow);background:var(--color-white);padding:0;overscroll-behavior:contain
+}
+.studio-home dialog::backdrop,.ds-page #ds-dialog::backdrop{background:var(--color-overlay)}
+.studio-home .contact-header,.studio-home .press-controls,.studio-home .canvas-image-header,.ds-page #ds-dialog .wf-dialog__header{
+ position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);margin:0;padding:var(--space-5) var(--space-6);background:var(--dialog-header-background);border-bottom:1px solid var(--color-border)
+}
+.studio-home .contact-header::before,.studio-home .press-controls::before,.studio-home .canvas-image-header::before,.ds-page #ds-dialog .wf-dialog__header::before{
+ content:"";position:absolute;top:0;left:var(--space-6);width:72px;height:3px;background:var(--dialog-accent)
+}
+.studio-home .contact-header h2,.studio-home .canvas-image-header h2{margin:0;font-family:var(--font-display);font-size:var(--font-size-heading);line-height:1.4;letter-spacing:-.025em}
+.studio-home .press-controls>span{font-family:var(--font-display);font-size:var(--font-size-lead);font-weight:600}
+.studio-home .contact-header button,.studio-home .press-controls button,.studio-home .canvas-image-header button{
+ float:none;flex-shrink:0;min-width:44px;min-height:44px;border:1px solid var(--color-border-input);border-radius:var(--radius-control);background:var(--color-white);color:var(--color-text);box-shadow:var(--shadow-control)
+}
+.studio-home .contact-header button:hover,.studio-home .press-controls button:hover,.studio-home .canvas-image-header button:hover{border-color:var(--color-action);color:var(--color-action);background:var(--color-surface)}
+.studio-home dialog button:focus-visible{outline:2px solid var(--color-action);outline-offset:3px}
+.studio-home #contact-dialog{width:min(520px,calc(100% - 32px))}
+.studio-home #contact-form{padding:var(--space-5) var(--space-6) var(--space-6)}
+.studio-home #contact-form label{font-weight:600}
+.studio-home #contact-form input,.studio-home #contact-form textarea{background:var(--color-surface);border-color:var(--color-border)}
+.studio-home #contact-form input:focus,.studio-home #contact-form textarea:focus{outline:2px solid var(--color-sky);outline-offset:2px;border-color:var(--color-border-input)}
+.studio-home .contact-actions{padding-top:var(--space-4);border-top:1px solid var(--color-border);margin-top:var(--space-2)}
+.studio-home .canvas-image-dialog{max-height:92dvh}
+.ds-page #ds-dialog>p,.ds-page #ds-dialog>.wf-dialog__actions{margin:var(--space-6)}
+@media(max-width:600px){
+ .studio-home .contact-header,.studio-home .press-controls,.studio-home .canvas-image-header{padding:var(--space-4)}
+ .studio-home .contact-header::before,.studio-home .press-controls::before,.studio-home .canvas-image-header::before{left:var(--space-4)}
+ .studio-home .contact-header h2,.studio-home .canvas-image-header h2{font-size:var(--font-size-lead)}
+ .studio-home #contact-form{padding:var(--space-4)}
+}
+
+
+/* Product preview uses the shared light modal system. */
+.studio-home .canvas-image-dialog{width:min(1180px,94vw);max-width:94vw;max-height:90dvh;padding:0;border:1px solid var(--color-border);border-radius:var(--radius-dialog);background:var(--color-white);color:var(--color-text);overflow:hidden;box-shadow:var(--dialog-shadow)}
+.studio-home .canvas-image-dialog[open]{display:flex;flex-direction:column;gap:0}
+.studio-home .canvas-image-dialog::backdrop{background:var(--color-overlay)}
+.studio-home .canvas-image-header{position:relative;flex:0 0 auto;min-height:64px;padding:10px 16px;gap:var(--space-3);background:var(--dialog-header-background);border-bottom:1px solid var(--color-border)}
+.studio-home .canvas-image-header::before{display:block;left:var(--space-4);width:72px;background:var(--dialog-accent)}
+.canvas-image-heading{display:flex;align-items:center;gap:12px;min-width:0}
+.canvas-image-number{display:grid;place-items:center;width:30px;height:30px;flex-shrink:0;border:1px solid var(--color-border);border-radius:var(--radius-control);font:var(--font-size-xs) var(--font-code);color:var(--color-text-brand);background:var(--color-white)}
+.studio-home .canvas-image-header h2{font-family:var(--font-display);font-size:var(--font-size-body);font-weight:600;color:var(--color-text);line-height:1.4;letter-spacing:0;margin:0}
+.canvas-image-actions{display:flex;gap:8px;flex-shrink:0}
+.studio-home .canvas-image-header button{font-size:var(--font-size-xs);line-height:1.4;min-height:44px;padding:var(--space-2) var(--space-3);background:var(--color-white);color:var(--color-text);border:1px solid var(--color-border-input);box-shadow:var(--shadow-control)}
+.studio-home .canvas-image-header button:hover{color:var(--color-action);background:var(--color-surface);border-color:var(--color-action)}
+.studio-home .canvas-image-dialog button:focus-visible,.studio-home .canvas-image-frame:focus-visible{outline:2px solid var(--color-action);outline-offset:-3px}
+.studio-home .canvas-image-frame{min-height:0;display:block;margin:0;padding:0;border:0;line-height:0;background:var(--color-surface);overflow:auto;overscroll-behavior:contain;scrollbar-color:var(--color-border) var(--color-surface)}
+.studio-home .canvas-image-frame>img{display:block;margin:0;width:100%;height:auto;max-width:none;max-height:none;object-fit:contain;padding:0;border:0;border-radius:0;box-shadow:none;background:transparent;filter:none;opacity:1;mask-image:none;-webkit-mask-image:none}
+@media(max-width:600px){
+ .studio-home .canvas-image-dialog{width:calc(100vw - 16px);max-width:calc(100vw - 16px)}
+ .studio-home .canvas-image-header{padding:8px;gap:8px;min-height:60px}
+ .canvas-image-heading{gap:8px}.canvas-image-number{width:24px;height:24px;font-size:10px}
+ .studio-home .canvas-image-header h2{font-size:13px}
+ .canvas-image-actions{gap:4px}
+ .studio-home .canvas-image-header button{padding:6px 8px;min-height:44px;font-size:11px}
+}

@@ -1,1 +1,0 @@
-﻿// Unused config (GTranslate removed)
