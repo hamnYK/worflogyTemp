@@ -1,0 +1,34 @@
+/* Light, playful platform palette. Roles are defined in tokens.css. */
+.guide-header{background:var(--color-surface-subtle);color:var(--color-text);padding:32px 28px 18px;border:0;border-top:3px solid var(--color-coral);margin-top:24px}
+.guide-header a{color:var(--color-action)}
+.guide-description{background:var(--color-surface-subtle);color:var(--color-text);margin:0 0 32px;padding:0 28px 28px;max-width:none}
+.diagram-shell{border-color:var(--color-border);border-top-color:var(--color-sky)}
+.toolbar{background:var(--color-white);border-color:var(--color-border);color:var(--color-text)}
+.toolbar button,.canvas-zoom button{background:var(--color-white);border-color:var(--color-border-input);color:var(--color-text)}
+.toolbar button:not(:disabled):hover,.canvas-zoom button:not(:disabled):hover{background:var(--color-surface-hover);border-color:var(--color-text-muted)}
+.toolbar [data-ui="play-story"]{background:var(--color-action);border-color:var(--color-action);color:var(--color-on-action)}
+.toolbar [data-ui="play-story"]:not(:disabled):hover{background:var(--color-action-hover)}
+.toolbar-progress,.toolbar-technology,.toolbar output{color:var(--color-text-muted)}
+.canvas-subtitle{background:var(--color-caption-surface);color:var(--color-text);border:1px solid var(--color-border)}
+.canvas-subtitle strong{color:var(--color-text-brand)}
+.ds-page .ds-pan-surface{background:var(--scene-background)}
+.ds-page .ds-pan-surface svg{color:var(--scene-link)}
+.ds-page .ds-pan-surface circle{fill:var(--scene-tile);stroke:var(--scene-active)}
+.ds-page .ds-pan-surface text{fill:var(--scene-ink)}
+@media(max-width:760px){.guide-header{padding:24px 16px 16px;margin-top:18px;align-items:flex-start}.guide-description{padding:0 16px 24px;margin-bottom:24px}.guide-header svg{margin-top:3px}}
+
+
+/* Actual application screenshots stay separate from the animated scene. */
+.canvas-example-card{position:absolute;top:76px;right:64px;z-index:2;width:208px;padding:var(--space-2);text-align:left;border:1px solid var(--color-border-input);border-top:2px solid var(--color-sky);border-radius:var(--radius-card);background:var(--color-white);box-shadow:var(--shadow-control);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .45s ease,visibility .45s;overflow:hidden}
+.canvas-example-card.is-visible{opacity:1;visibility:visible;pointer-events:auto}
+.canvas-example-card:disabled{opacity:0}
+.canvas-example-label{font-size:var(--font-size-xs);font-weight:600;color:var(--color-text)}
+.canvas-example-card img{display:block;width:100%;height:auto;aspect-ratio:2548/1397;object-fit:contain;margin-top:var(--space-2);border-radius:var(--radius-control)}
+.canvas-example-card:focus-visible{outline:2px solid var(--color-action);outline-offset:2px}
+.canvas-image-dialog{width:min(1400px,94vw);max-width:94vw;max-height:92vh;padding:18px;border:1px solid var(--color-border-input);border-radius:10px;background:var(--color-surface);color:var(--color-text);overflow:auto}
+.canvas-image-dialog::backdrop{background:#252a34b3}
+.canvas-image-dialog h2{display:inline-block;font-size:18px;margin:0 0 14px}
+.canvas-image-dialog>button{float:right;min-height:44px}
+.canvas-image-dialog>img{display:block;width:100%;height:auto;max-height:77vh;object-fit:contain}
+@media(max-width:900px){.canvas-example-card{position:relative;top:auto;right:auto;width:min(320px,calc(100% - 32px));margin:12px auto}.canvas-image-dialog{padding:12px}}
+@media(prefers-reduced-motion:reduce){.canvas-example-card{transition:none}}

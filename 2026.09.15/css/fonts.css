@@ -1,0 +1,4 @@
+/* Self-hosted fonts. Licenses and upstream sources: assets/fonts/README.md. */
+@font-face{font-family:SUITE;src:url('../assets/fonts/SUITE-Variable.woff2') format('woff2');font-style:normal;font-weight:300 900;font-display:swap}
+@font-face{font-family:'Space Grotesk';src:url('../assets/fonts/SpaceGrotesk-Variable.woff2') format('woff2');font-style:normal;font-weight:300 700;font-display:swap}
+@font-face{font-family:Pretendard;src:url('../assets/fonts/PretendardVariable.woff2') format('woff2');font-style:normal;font-weight:100 900;font-display:swap}

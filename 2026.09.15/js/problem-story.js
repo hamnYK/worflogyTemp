@@ -1,69 +1,26 @@
 /* Company-provided collaboration workflow; scripted visual demonstration. */
 (function(){
 "use strict";
-const INK=0x365646,BLUE=0x668eab,GOLD=0xc99748;
-window.drawProblemObject=function(scene,node,state={}){
- if(["agent","knowledge"].includes(node.id))return window.drawPlatformObject(scene,node,state);
- const g=scene.add.graphics(),id=node.id;
- const line=(a,b,c=INK,w=2)=>{g.lineStyle(w,c,1);g.lineBetween(...a,...b);};
- const dot=(x,y,r=4,c=INK)=>{g.fillStyle(c,1);g.fillCircle(x,y,r);};
- const box=(x,y,w,h,c=INK)=>{g.lineStyle(2,c,1);g.strokeRoundedRect(x,y,w,h,4);};
- const person=(x,y,c=INK)=>{dot(x,y-9,5,c);g.fillStyle(c,1);g.fillRoundedRect(x-7,y,14,12,4);};
- const check=(x,y)=>{line([x-7,y],[x-1,y+6],GOLD,3);line([x-1,y+6],[x+10,y-8],GOLD,3);};
- const bulb=(x,y,c=GOLD)=>{g.lineStyle(2,c,1);g.strokeCircle(x,y,8);line([x-4,y+9],[x+4,y+9],c);};
- if(id==="start"){
-  box(-30,-28,60,43);line([-15,15],[-22,26]);line([-22,26],[0,15]);line([0,-17],[0,-3],GOLD,3);dot(0,6,2.5,GOLD);
- }else if(id==="core"){
-  g.lineStyle(2,BLUE,1);g.strokeEllipse(0,12,66,29);
-  [[-31,-4],[0,23],[31,-4]].forEach(([x,y])=>person(x,y));
-  [-20,0,20].forEach((x,i)=>bulb(x,-30-i%2*8,state.discussed?GOLD:BLUE));
-  if(state.discussed){line([-20,-19],[0,0],GOLD);line([20,-19],[0,0],GOLD);}
- }else if(id==="alternative"){
-  box(-29,-22,58,48,BLUE);bulb(0,-4);
-  g.lineStyle(2,GOLD,state.weakSignal?1:.35);g.beginPath();g.arc(0,-4,36,-1.1,1.1);g.strokePath();
-  g.beginPath();g.arc(0,-4,44,-.8,.8);g.strokePath();
-  if(state.alternativeRecommended)check(-20,30);
- }else if(id==="chosen"){
-  [-15,0,15].forEach((x,i)=>box(x-20,-30+i*5,32,40,i===2?INK:BLUE));
-  if(state.selected)check(15,18);
- }else if(id==="report"){
-  box(-25,-34,50,65);[-18,0,18].forEach(y=>{box(-17,y-4,7,7,BLUE);line([-3,y],[17,y],BLUE);if(state.reported)check(-13,y);});
- }else if(id==="review"){
-  box(-22,-25,44,45,BLUE);person(-33,20);person(33,20);
-  line([-24,18],[-10,5],BLUE);line([24,18],[10,5],BLUE);
-  if(state.reviewed)check(0,-2);else {g.lineStyle(2,INK,1);g.strokeCircle(0,-3,8);}
- }else if(id==="feedback"){
-  box(-25,-31,50,60);[-17,-7,3].forEach(y=>line([-15,y],[15,y],BLUE));
-  g.lineStyle(2,state.policyAdopted?GOLD:BLUE,1);g.strokeCircle(14,21,13);
-  if(state.policyAdopted)check(14,21);
-  if(state.policyRecommended){line([-36,0],[-28,0],GOLD,3);dot(-39,0,3,GOLD);}
- }else if(id==="rag"){
-  box(-31,-31,62,62,BLUE);[-22,-7,8,23].forEach(x=>{line([x,-39],[x,-31],BLUE);line([x,31],[x,39],BLUE);});
-  const pts=[[-19,-13],[16,-17],[-4,4],[20,18],[-20,22]];
-  [[0,2],[1,2],[2,3],[2,4]].forEach(([a,b])=>line(pts[a],pts[b],BLUE));
-  pts.forEach(([x,y])=>dot(x,y,3.5));
-  for(let i=0;i<(state.engineRevision||0);i++){dot(30+i*9,-16+i*13,3,GOLD);line([16,-17],[30+i*9,-16+i*13],GOLD);}
- }
- return g;
-};
+const INK=window.WorfTheme.active,BLUE=window.WorfTheme.link,GOLD=window.WorfTheme.flow;
+window.drawProblemObject=function(scene,node,state={}){return window.WorfArt.draw(scene,node,state);};
 window.createProblemStory=function(scene,options={}){
  const state={discussed:false,selected:false,weakSignal:false,reported:false,reviewed:false,policyAdopted:false,policyRecommended:false,alternativeRecommended:false,knowledgeNodes:0,engineRevision:0};
  const layers=new Map(),tweens=[],particles=[];let settle=null;
  let steps=[
- ["meet","agent","AI AGENT","Bring a problem to the AI agent, the team's interaction interface.",1900],
- ["infrastructure","rag","KNOWLEDGE GRAPH RAG","The ontology engine retrieves knowledge and supports the team's reasoning through the agent.",2500],
- ["discuss","core","TEAM DELIBERATION","Team members meet, discuss the problem and develop several strategies.",2700],
- ["select","chosen","STRATEGY SELECTION","Through deliberation, the team chooses a strategy to carry out.",2400],
- ["retain","alternative","WEAK SIGNALS","Promising unselected strategies remain available as weak signals for continued review.",3000],
- ["execute","report","TASKS & REPORTS","Turn the chosen strategy into tasks, carry them out and report the results.",2800],
- ["review","review","PEER REVIEW","Peers review and evaluate the reported outcomes.",2300],
- ["adopt","feedback","OFFICIAL POLICY","After peer review, adopt the validated approach as official policy for this problem.",2700],
- ["accumulate","knowledge","COLLABORATION → KNOWLEDGE","Connect strategies, decisions, work, reviews and policy in the knowledge graph.",2900],
- ["grow","rag","BOTTOM-UP ONTOLOGY GROWTH","New knowledge and relationships dynamically grow the RAG ontology engine.",2800],
- ["similar","start","A SIMILAR PROBLEM","When a similar problem arises, retrieve the accumulated knowledge.",2400],
- ["policy","feedback","POLICY FIRST","Recommend the established policy first and bring it into the team's discussion.",2700],
- ["reconsider","alternative","RECONSIDER WEAK SIGNALS","Depending on the new problem, an earlier unselected strategy may also be recommended.",3000],
- ["expand","knowledge","NETWORK GROWTH LOOP","Reconsidered strategies add new connections; the growing ontology supports the next collaboration.",3200]
+ ["meet","agent","에이전트","에이전트에게 문제를 설명하고 팀의 논의를 시작합니다.",2885],
+ ["infrastructure","rag","온톨로지 엔진","워크플로 온톨로지 엔진이 관련 지식을 찾아 에이전트를 통한 팀의 논의를 지원합니다.",3990],
+ ["discuss","core","팀의 숙의","팀원들이 문제를 함께 살펴보고 여러 해결 전략을 제안합니다.",3145],
+ ["select","chosen","전략 선택","전략의 가능성과 한계를 충분히 논의한 뒤 실행할 전략을 선택합니다.",3405],
+ ["retain","alternative","위크시그널","이번에 선택하지 않은 전략도 위크시그널로 남겨 두고 다른 가능성을 계속 살펴봅니다.",3990],
+ ["execute","report","과업 수행과 보고","선택한 전략을 구체적인 과업으로 나누어 수행하고 결과를 보고합니다.",3405],
+ ["review","review","동료 검토","동료들이 실행 과정과 결과를 검토하고 해결 방법을 평가합니다.",3210],
+ ["adopt","feedback","공식 정책 채택","동료 검토를 거친 해결 방법을 해당 문제의 공식 정책으로 채택합니다.",3470],
+ ["accumulate","knowledge","협업을 지식으로","전략과 선택의 이유, 실행 결과와 정책을 연결해 협업 경험을 지식 그래프로 쌓습니다.",4055],
+ ["grow","rag","Bottom-Up 온톨로지 성장","새롭게 쌓인 지식과 관계를 반영하면서 워크플로 온톨로지 엔진이 성장합니다.",3665],
+ ["similar","start","유사한 문제","유사한 문제가 생기면 이전에 쌓인 정책과 해결 경험을 찾아봅니다.",3340],
+ ["policy","feedback","정책 우선 추천","이전에 채택한 정책을 우선 추천해 다음 문제 해결의 출발점으로 삼습니다.",3600],
+ ["reconsider","alternative","위크시그널 재검토","새로운 상황에 적합하다면 이전에 선택하지 않았던 전략도 다시 추천합니다.",3600],
+ ["expand","knowledge","네트워크 성장 루프","전략을 재검토하는 과정에서 새로운 관계가 생기고, 성장한 지식이 다음 협업에 활용됩니다.",4185]
  ];
  if(options.steps)steps=options.steps(steps);
  function render(id){layers.get(id)?.destroy();scene.widgets.get(id).list[1].setVisible(false);const g=(options.draw||window.drawProblemObject)(scene,scene.nodes.get(id),state);scene.widgets.get(id).add(g);layers.set(id,g);}

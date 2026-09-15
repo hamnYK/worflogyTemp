@@ -1,72 +1,24 @@
 /* Diagram-based research notebook demonstration. Data, transactions and analysis are illustrative. */
 (function(){
 "use strict";
-const INK=0x365646,BLUE=0x668eab,GOLD=0xc99748;
-window.drawResearchObject=function(scene,node,state={}){
- if(["agent","rag","knowledge"].includes(node.id))return window.drawProblemObject(scene,node,state);
- const g=scene.add.graphics(),id=node.id;
- const line=(a,b,c=INK,w=2)=>{g.lineStyle(w,c,1);g.lineBetween(...a,...b);};
- const dot=(x,y,r=3,c=INK)=>{g.fillStyle(c,1);g.fillCircle(x,y,r);};
- const box=(x,y,w,h,c=BLUE)=>{g.lineStyle(2,c,1);g.strokeRoundedRect(x,y,w,h,3);};
- const arrow=(a,b,c=INK)=>{line(a,b,c);const t=Math.atan2(b[1]-a[1],b[0]-a[0]);line(b,[b[0]-6*Math.cos(t-.5),b[1]-6*Math.sin(t-.5)],c);line(b,[b[0]-6*Math.cos(t+.5),b[1]-6*Math.sin(t+.5)],c);};
- const check=(x,y)=>{line([x-6,y],[x,y+6],GOLD,3);line([x,y+6],[x+11,y-8],GOLD,3);};
- const notebook=()=>{box(-29,-33,58,64);[-22,-8,6,20].forEach(y=>line([-35,y],[-24,y],INK));};
- if(id==="start"){
-  notebook();g.lineStyle(2,GOLD,1);g.strokeCircle(0,-10,10);line([-5,2],[5,2],GOLD);line([-12,17],[13,17],BLUE);
- }else if(id==="core"){
-  notebook();line([-17,-23],[16,-23],BLUE);
-  const pts=[[-15,-4],[14,-4],[0,18]];
-  pts.forEach(p=>dot(...p,4));
-  arrow(pts[0],pts[1],state.drafted?GOLD:BLUE);arrow(pts[1],pts[2],state.drafted?GOLD:BLUE);
-  if(state.designRevision){dot(36,8,4,GOLD);arrow(pts[1],[36,8],GOLD);}
-  if(state.designRevision>1){dot(30,29,4,GOLD);arrow([36,8],[30,29],GOLD);}
- }else if(id==="alternative"){
-  box(-26,-28,47,50);line([-17,-18],[10,-18],BLUE);
-  g.lineStyle(2,GOLD,1);g.strokeCircle(23,16,12);arrow([29,-13],[37,-4],GOLD);arrow([37,-4],[27,0],GOLD);
-  if(state.purchased)check(-10,5);
- }else if(id==="chosen"){
-  notebook();[-20,-8,4].forEach(y=>line([-15,y],[13,y],BLUE));
-  g.lineStyle(2,GOLD,1);g.strokeCircle(25,22,12);
-  if(state.sold)check(25,22);
- }else if(id==="report"){
-  box(-37,-27,43,33);box(-3,0,43,33,GOLD);
-  line([-21,6],[-28,15],BLUE);line([15,33],[22,40],GOLD);
-  if(state.discourse){check(-20,-12);line([18,7],[18,19],GOLD,3);dot(18,26,2,GOLD);}
- }else if(id==="review"){
-  // Read passages, relate statements and surface contested content.
-  box(-28,-33,47,61);[-21,-10,1,12].forEach(y=>line([-19,y],[9,y],BLUE));
-  const p=state.analysisProgress||0;
-  if(p>.15)line([-19,-10],[7,-10],GOLD,4);
-  if(p>.45)line([-19,12],[0,12],GOLD,4);
-  g.lineStyle(2,INK,1);g.strokeCircle(19,10,17);line([31,22],[43,35],INK,4);
-  if(p>.75){dot(16,6,3,GOLD);dot(24,14,3,GOLD);line([16,6],[24,14],GOLD);}
- }else if(id==="feedback"){
-  box(-32,-28,64,45);line([-15,17],[-22,28]);line([-22,28],[0,17]);
-  dot(-15,-9,4);dot(-2,-9,4);line([-16,4],[-2,4]);
-  if(state.suggested){arrow([10,5],[24,-13],GOLD);dot(24,-13,3,GOLD);}
- }else if(id==="api"){
-  [-13,0,13].forEach((x,i)=>box(x-24,-30+i*4,43,50,BLUE));
-  [-16,-5,6].forEach(y=>line([-2,y],[19,y],BLUE));
-  arrow([-43,9],[-25,9],GOLD);arrow([26,9],[43,9],GOLD);
- }
- return g;
-};
+const INK=window.WorfTheme.active,BLUE=window.WorfTheme.link,GOLD=window.WorfTheme.flow;
+window.drawResearchObject=function(scene,node,state={}){return window.WorfArt.draw(scene,node,state);};
 window.createResearchStory=function(scene){
  return window.createProblemStory(scene,{
  draw:window.drawResearchObject,
  steps:()=>[
- ["meet","agent","AI AGENT","Bring a research topic to the AI agent.",1900],
- ["infrastructure","api","RESEARCH INFRASTRUCTURE","External scholarly data and the knowledge graph RAG ontology engine support the agent.",2800],
- ["topic","start","RESEARCH TOPIC","A research topic starts both notebook authoring and suggestions from the AI partner.",2600],
- ["draft","core","CONTENT & CAUSAL RELATIONSHIPS","Write the research content and define the causal relationships of the experimental design.",2800],
- ["purchase","alternative","PURCHASE & IMPROVEMENT","Purchased designs are improved; those improvements return to the content and causal model.",2900],
- ["sell","chosen","SOLD DESIGNS","The experimental design is sold and becomes a basis for agreement and contested points.",2700],
- ["discourse","report","AGREEMENT & CONTESTED POINTS","Collect agreement and contested points concerning the design.",2600],
- ["analysis","review","CONTENT ANALYSIS","Analyze the content of agreement and contested points to identify issues for the design.",2900],
- ["suggestions","feedback","AI PARTNER SUGGESTIONS","Content analysis informs the AI partner's suggestions for the research topic.",2800],
- ["evolve","core","EVOLVING EXPERIMENTAL DESIGN","Use the suggestions to revise the content and causal model for the next design.",2800],
- ["record","knowledge","RESEARCH → KNOWLEDGE","Connect designs, improvements, agreement, contested points, analysis and suggestions in the knowledge graph.",2900],
- ["ontology","rag","BOTTOM-UP ONTOLOGY GROWTH","The accumulated research knowledge dynamically grows the RAG ontology engine.",2900]
+ ["meet","agent","에이전트","에이전트에게 연구 주제를 설명하고 실험 설계에 대한 대화를 시작합니다.",3535],
+ ["infrastructure","api","연구 지원 인프라","외부 학술 자료와 워크플로 온톨로지 엔진을 활용해 연구 주제를 살펴봅니다.",3665],
+ ["topic","start","연구 주제","연구 주제를 바탕으로 노트를 작성하고 AI 파트너의 제안도 함께 검토합니다.",3730],
+ ["draft","core","내용 작성과 인과율 설정","연구 내용을 기록하고 실험에서 살펴볼 원인과 결과의 관계를 설정합니다.",3535],
+ ["purchase","alternative","구매와 개선","설계를 구매해 개선하고, 보완한 내용을 연구 노트와 인과관계에 반영합니다.",3665],
+ ["sell","chosen","판매된 설계","판매된 실험 설계가 검토되면서 동의하는 내용과 논의할 쟁점이 모입니다.",3535],
+ ["discourse","report","동의와 쟁점","설계에서 동의하는 부분과 의견이 갈리는 쟁점을 정리합니다.",3080],
+ ["analysis","review","내용 분석","논의 내용을 분석해 설계에서 더 검토하거나 보완할 부분을 찾습니다.",3405],
+ ["suggestions","feedback","AI 파트너의 제안","AI 파트너가 내용 분석을 바탕으로 연구 설계를 보완할 방향을 제안합니다.",3665],
+ ["evolve","core","진화하는 실험 설계","제안을 연구 내용과 인과관계에 반영해 다음 실험 설계를 보완합니다.",3405],
+ ["record","knowledge","연구를 지식으로","설계, 개선과 논의의 근거를 연결해 연구 경험을 지식 그래프로 쌓습니다.",3600],
+ ["ontology","rag","Bottom-Up 온톨로지 성장","쌓인 연구 지식과 관계를 반영하면서 워크플로 온톨로지 엔진이 성장합니다.",3600]
  ],
  onStep(key,{state,focus,flow,render,animate}){
  switch(key){

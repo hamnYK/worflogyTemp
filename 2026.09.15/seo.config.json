@@ -1,0 +1,17 @@
+{
+  "siteUrl": "https://www.worflogy.com/",
+  "pages": {
+    "ko": "index.html",
+    "en": "en.html"
+  },
+  "defaultLanguage": "en",
+  "title": {
+    "ko": "워플로지 | 워크플로 온톨로지·지식 그래프 솔루션",
+    "en": "Worflogy | Workflow Ontology & Knowledge Graph Solutions"
+  },
+  "description": {
+    "ko": "워플로지는 Bottom-Up 동적 지식 그래프와 워크플로 온톨로지로 업무 협업, 프로젝트 리스크, 연구와 게임 개발의 맥락을 연결합니다. 플랫폼과 솔루션, 활동 및 협업 문의를 확인하세요.",
+    "en": "Worflogy connects work, project risk, research and game development through workflow ontology and Bottom-Up dynamic knowledge graphs. Explore our platform, solutions and collaboration opportunities."
+  },
+  "shareImage": "assets/images/brand/share-card.png"
+}

@@ -1,0 +1,125 @@
+/* Worflogy Design System 1.2. Change semantic tokens here first. */
+:root {
+  --color-coral: #f16c5b;
+  --color-sky: #58b4df;
+  --color-butter: #f2ce75;
+  --color-white: #ffffff;
+  --color-charcoal: #252a34;
+  --color-bone: #fafbfd;
+  --color-stone: #8c9ba9;
+  --color-vermilion: #f16c5b;
+  --color-apricot: #58b4df;
+  --color-surface: #fafbfd;
+  --color-surface-subtle: #edf5fa;
+  --color-surface-hover: #e1eff7;
+  --color-text: #252a34;
+  --color-text-muted: #556575;
+  --color-text-brand: #a7352c;
+  --color-border: #ccdce6;
+  --color-border-input: #849aaa;
+  --color-action: #ba4034;
+  --color-action-hover: #9d3027;
+  --color-on-action: var(--color-white);
+  --color-success: #365c70;
+  --color-success-surface: #e4f1f7;
+  --color-warning: #79591d;
+  --color-warning-surface: #fbf1d4;
+  --color-danger: #a32d3e;
+  --color-danger-surface: #fbe9ed;
+  --color-overlay: rgba(37,42,52,.48);
+  --color-caption-surface: rgba(255,255,255,.97);
+  /* Shared canvas roles, consumed by canvas-theme.js. */
+  --scene-background: var(--color-surface);
+  --scene-plane: #e6f0f7;
+  --scene-plane-secondary: #f1f7fb;
+  --scene-plane-result: #faf1d9;
+  --scene-grid: #cedfe9;
+  --scene-border: #9bb6c8;
+  --scene-link: #66859c;
+  --scene-active: #bc4034;
+  --scene-flow: #986b20;
+  --scene-ink: #344559;
+  --scene-dark: #964c42;
+  --scene-accent: #f16c5b;
+  --scene-highlight: #ffb8a7;
+  --scene-pale: #edf5fa;
+  --scene-secondary: #58b4df;
+  --scene-secondary-dark: #357a9d;
+  --scene-secondary-light: #ceeafa;
+  --scene-gold: #dcaf48;
+  --scene-cream: #fff0be;
+  --scene-paper: #ffffff;
+  --scene-edge: #a9bfcb;
+  --scene-white: #ffffff;
+  --scene-shadow: #425f75;
+  --scene-skin: #e3c8a4;
+  --scene-tile-side: #c6dce9;
+  --scene-tile-front: #9fbdd0;
+  --scene-tile-selected: #ffe2d6;
+  --scene-tile: #ffffff;
+  --font-sans-ko: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --font-sans-en: "Pretendard", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  --font-body: var(--font-sans-ko);
+  --font-display-ko: "SUITE", "Pretendard", sans-serif;
+  --font-display-en: "Space Grotesk", "Pretendard", sans-serif;
+  --font-display: var(--font-display-ko);
+  --font-code: Consolas, monospace;
+  --font-size-xs: 12px;
+  --font-size-sm: 13px;
+  --font-size-body: 16px;
+  --font-size-reading: 17px;
+  --font-size-lead: 18px;
+  --font-size-heading: 24px;
+  --font-size-title: 32px;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --line-height-tight: 1.4;
+  --line-height-body: 1.6;
+  --line-height-reading: 1.85;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --radius-control: 4px;
+  --radius-card: 6px;
+  --radius-dialog: 10px;
+  --radius-pill: 999px;
+  --shadow-control: 0 2px 8px #20201e12;
+  --shadow-floating: 0 4px 16px #20201e26;
+  --shadow-caption: 0 2px 14px #20201e0a;
+  --focus-ring: 2px solid var(--color-action);
+  --focus-offset: 3px;
+  --control-height: 40px;
+  --control-height-touch: 44px;
+  --control-height-prominent: 48px;
+  --content-width: 1320px;
+  --page-gutter: 40px;
+  --floating-gap: 8px;
+  --floating-inset: 24px;
+  --z-caption: 2;
+  --z-canvas-controls: 3;
+  --z-floating: 5;
+  --z-skip: 10;
+  --duration-fast: 120ms;
+  --ease-standard: ease-out;
+  /* Compatibility aliases for the existing homepage. */
+  --ink: var(--color-text);
+  --muted: var(--color-text-muted);
+  --line: var(--color-border);
+  --paper: var(--color-surface);
+  --canvas: var(--scene-background);
+  --accent: var(--color-action);
+}
+@media(max-width:760px) {
+  :root { --page-gutter: 18px; --floating-inset: 16px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  :root { --duration-fast: 0ms; }
+}
