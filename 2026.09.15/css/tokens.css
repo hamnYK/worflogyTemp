@@ -82,6 +82,7 @@
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
+  --font-weight-bold: 700;
   --line-height-tight: 1.4;
   --line-height-body: 1.6;
   --line-height-reading: 1.85;
@@ -102,6 +103,8 @@
   --dialog-header-background: linear-gradient(115deg, #edf5fa, #fafbfd 60%, #fbf1d4);
   --dialog-accent: linear-gradient(90deg, var(--color-coral) 0 38%, var(--color-butter) 38% 65%, var(--color-sky) 65%);
   --radius-pill: 999px;
+  --shadow-diagram: 0 8px 28px #425f7508;
+  --duration-preview: 450ms;
   --shadow-control: 0 2px 8px #20201e12;
   --shadow-floating: 0 4px 16px #20201e26;
   --shadow-caption: 0 2px 14px #20201e0a;

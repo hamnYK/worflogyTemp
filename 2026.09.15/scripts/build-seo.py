@@ -38,8 +38,8 @@ def static_diagrams():
         title_id = 'title-' + item['id']
         parts = ['<section class="diagram-section" id="section-' + item['id'] + '" aria-labelledby="' + title_id + '">']
         if i == 0:
-            parts += ['<header class="guide-header"><h1 id="' + title_id + '">워플로지 “워크플로 온톨로지”</h1></header>', '<p class="guide-description">인공지능 인문 사회 디자인 : 사유를 맥락으로 연결하고 소통하다.<br>Bottom-Up 동적 지식 그래프 디자인의 기술 스타트업</p>']
-            parts.append('<h2 class="diagram-section-title" id="overview-summary-title">0. 보유 기술 개요</h2>')
+            parts += ['<header class="guide-header"><h1 id="' + title_id + '">워플로지 “AI 인문 사회 디자인”</h1></header>', '<p class="guide-description"><strong>한 번의 문제 해결이 다음 문제를 푸는 지식이 되도록.</strong>워플로지는 업무와 창작 과정에서 얻은 경험을 지식 그래프로 연결해,<br>다시 활용하고 발전시킬 수 있는 체계를 설계합니다.</p>']
+            parts.append('<h2 class="diagram-section-title" id="overview-summary-title">0. 워플로지, Bottom-Up 동적 지식 그래프 디자인 기술 회사</h2>')
         else:
             parts.append('<h2 class="diagram-section-title" id="' + title_id + '">' + str(i) + '. <span>' + escape(item['title']) + '</span></h2>')
         if item.get('readiness'):

@@ -19,14 +19,14 @@
 
 
 /* Actual application screenshots stay separate from the animated scene. */
-.canvas-example-card{position:absolute;top:76px;right:64px;z-index:2;width:208px;padding:var(--space-2);text-align:left;border:1px solid var(--color-border-input);border-top:2px solid var(--color-sky);border-radius:var(--radius-card);background:var(--color-white);box-shadow:var(--shadow-control);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .45s ease,visibility .45s;overflow:hidden}
+.canvas-example-card{position:absolute;top:76px;right:64px;z-index:2;width:208px;padding:var(--space-2);text-align:left;border:1px solid var(--color-border-input);border-top:2px solid var(--color-sky);border-radius:var(--radius-card);background:var(--color-white);box-shadow:var(--shadow-control);opacity:0;visibility:hidden;pointer-events:none;transition:opacity var(--duration-preview) var(--ease-standard),visibility var(--duration-preview);overflow:hidden}
 .canvas-example-card.is-visible{opacity:1;visibility:visible;pointer-events:auto}
 .canvas-example-card:disabled{opacity:0}
 .canvas-example-label{font-size:var(--font-size-xs);font-weight:600;color:var(--color-text)}
 .canvas-example-card img{display:block;width:100%;height:auto;aspect-ratio:2548/1397;object-fit:contain;margin-top:var(--space-2);border-radius:var(--radius-control)}
-.canvas-example-card:focus-visible{outline:2px solid var(--color-action);outline-offset:2px}
-.canvas-image-dialog{width:min(1400px,94vw);max-width:94vw;max-height:92vh;padding:0;border:1px solid var(--color-border-input);border-radius:10px;background:var(--color-surface);color:var(--color-text);overflow:auto}
-.canvas-image-dialog::backdrop{background:#252a34b3}
+.canvas-example-card:focus-visible{outline:var(--focus-ring);outline-offset:var(--focus-offset)}
+.canvas-image-dialog{width:min(1400px,94vw);max-width:94vw;max-height:92vh;padding:0;border:1px solid var(--color-border-input);border-radius:var(--radius-dialog);background:var(--color-surface);color:var(--color-text);overflow:auto}
+.canvas-image-dialog::backdrop{background:var(--color-overlay)}
 .canvas-image-dialog h2{display:inline-block;font-size:18px;margin:0 0 14px}
 .canvas-image-dialog>button{float:right;min-height:44px}
 @media(max-width:900px){.canvas-example-card{position:relative;top:auto;right:auto;width:min(320px,calc(100% - 32px));margin:12px auto}.canvas-image-dialog{padding:0}}
@@ -43,7 +43,7 @@
 .studio-home .guide-header{position:relative;background:transparent;border-top:0;padding:32px 0 18px;margin-top:24px}
 .studio-home .guide-header::before{content:"";position:absolute;top:0;left:0;width:88px;height:4px;border-radius:var(--radius-pill);background:linear-gradient(90deg,var(--color-coral) 0 38%,var(--color-butter) 38% 65%,var(--color-sky) 65%)}
 .studio-home .guide-description{background:transparent;padding:0 0 28px}
-.studio-home .diagram-shell{box-shadow:0 8px 28px #425f7508}
+.studio-home .diagram-shell{box-shadow:var(--shadow-diagram)}
 .studio-background-sample{background-image:var(--studio-world-art),var(--studio-page-background);background-size:cover}
 @media(max-width:760px){
  .studio-home .guide-header{padding:26px 0 14px;margin-top:18px}
@@ -69,12 +69,12 @@
  float:none;flex-shrink:0;min-width:44px;min-height:44px;border:1px solid var(--color-border-input);border-radius:var(--radius-control);background:var(--color-white);color:var(--color-text);box-shadow:var(--shadow-control)
 }
 .studio-home .contact-header button:hover,.studio-home .press-controls button:hover,.studio-home .canvas-image-header button:hover{border-color:var(--color-action);color:var(--color-action);background:var(--color-surface)}
-.studio-home dialog button:focus-visible{outline:2px solid var(--color-action);outline-offset:3px}
+.studio-home dialog button:focus-visible{outline:var(--focus-ring);outline-offset:var(--focus-offset)}
 .studio-home #contact-dialog{width:min(520px,calc(100% - 32px))}
 .studio-home #contact-form{padding:var(--space-5) var(--space-6) var(--space-6)}
 .studio-home #contact-form label{font-weight:600}
 .studio-home #contact-form input,.studio-home #contact-form textarea{background:var(--color-surface);border-color:var(--color-border)}
-.studio-home #contact-form input:focus,.studio-home #contact-form textarea:focus{outline:2px solid var(--color-sky);outline-offset:2px;border-color:var(--color-border-input)}
+.studio-home #contact-form input:focus,.studio-home #contact-form textarea:focus{outline:var(--focus-ring);outline-offset:var(--focus-offset);border-color:var(--color-border-input)}
 .studio-home .contact-actions{padding-top:var(--space-4);border-top:1px solid var(--color-border);margin-top:var(--space-2)}
 .studio-home .canvas-image-dialog{max-height:92dvh}
 .ds-page #ds-dialog>p,.ds-page #ds-dialog>.wf-dialog__actions{margin:var(--space-6)}
@@ -98,7 +98,7 @@
 .canvas-image-actions{display:flex;gap:8px;flex-shrink:0}
 .studio-home .canvas-image-header button{font-size:var(--font-size-xs);line-height:1.4;min-height:44px;padding:var(--space-2) var(--space-3);background:var(--color-white);color:var(--color-text);border:1px solid var(--color-border-input);box-shadow:var(--shadow-control)}
 .studio-home .canvas-image-header button:hover{color:var(--color-action);background:var(--color-surface);border-color:var(--color-action)}
-.studio-home .canvas-image-dialog button:focus-visible,.studio-home .canvas-image-frame:focus-visible{outline:2px solid var(--color-action);outline-offset:-3px}
+.studio-home .canvas-image-dialog button:focus-visible,.studio-home .canvas-image-frame:focus-visible{outline:var(--focus-ring);outline-offset:calc(-1 * var(--focus-offset))}
 .studio-home .canvas-image-frame{min-height:0;display:block;margin:0;padding:0;border:0;line-height:0;background:var(--color-surface);overflow:auto;overscroll-behavior:contain;scrollbar-color:var(--color-border) var(--color-surface)}
 .studio-home .canvas-image-frame>img{display:block;margin:0;width:100%;height:auto;max-width:none;max-height:none;object-fit:contain;padding:0;border:0;border-radius:0;box-shadow:none;background:transparent;filter:none;opacity:1;mask-image:none;-webkit-mask-image:none}
 @media(max-width:600px){
@@ -109,3 +109,32 @@
  .canvas-image-actions{gap:4px}
  .studio-home .canvas-image-header button{padding:6px 8px;min-height:44px;font-size:11px}
 }
+
+/* Mobile scenes are view-only; product screenshots remain in the page flow. */
+.canvas-mobile-preview{display:none}
+@media(max-width:760px){
+ .diagram-canvas{pointer-events:none;touch-action:auto;cursor:default}
+ .canvas-zoom,.canvas-example-card{display:none}
+ .canvas-mobile-preview{
+  display:block;width:calc(100% - 2 * var(--space-3));margin:var(--space-3) auto;
+  padding:var(--space-2);box-sizing:border-box;
+  border:1px solid var(--color-border-input);border-top:2px solid var(--color-sky);
+  border-radius:var(--radius-card);background:var(--color-white);
+  box-shadow:var(--shadow-control)
+ }
+ .canvas-mobile-preview[hidden]{display:none}
+ .canvas-mobile-preview img{
+  display:block;width:100%;height:auto;margin:var(--space-2) auto 0;
+  border-radius:var(--radius-control)
+ }
+}
+.guide-mobile-note{display:none}
+@media(max-width:760px){
+ .studio-home .guide-header{display:grid;grid-template-columns:auto minmax(0,1fr)}
+ .guide-mobile-note{
+  display:block;grid-column:1/-1;margin:0 0 var(--space-1);
+
+  color:var(--color-text-muted);word-break:keep-all;overflow-wrap:break-word
+ }
+}
+.guide-description>strong{display:block;margin-bottom:var(--space-2)}
