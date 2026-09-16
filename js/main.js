@@ -6,8 +6,9 @@
   root.replaceChildren();
   const players=[];
   const observers=[];
+  const mobileView=window.matchMedia("(max-width:760px)");
   const imageDialog=document.createElement("dialog");
-  imageDialog.className="canvas-image-dialog";
+  imageDialog.className="wf-dialog canvas-image-dialog";
   imageDialog.setAttribute("aria-labelledby","canvas-image-title");
   const imageTitle=document.createElement("h2");imageTitle.id="canvas-image-title";imageTitle.textContent="제품 미리보기";
   const imageClose=document.createElement("button");imageClose.type="button";imageClose.textContent="닫기";
@@ -32,12 +33,15 @@
       const header=document.createElement("header");header.className="guide-header";
       const home=document.createElement("a");home.href="#main";home.setAttribute("aria-label","맨 위로");
       home.innerHTML='<svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><path d="M2 15 16 2l14 13-3 3L16 8 5 18Zm5 2 9-8 9 8v13h-7v-9h-4v9H7Z" fill="currentColor"/></svg>';
-      const title=document.createElement("h1");title.id="title-"+diagram.id;title.textContent='워플로지 “워크플로 온톨로지”';
-      header.append(home,title);
+      const title=document.createElement("h1");title.id="title-"+diagram.id;title.textContent='워플로지 “AI 인문 사회 디자인”';
+      const mobileNote=document.createElement("p");mobileNote.className="guide-mobile-note";
+      mobileNote.textContent="PC에서는 캔버스 조작, 모바일에서는 재생만 가능합니다.";
+      header.append(mobileNote,home,title);
       const description=document.createElement("p");description.className="guide-description";
-      description.append("인공지능 인문 사회 디자인 : 사유를 맥락으로 연결하고 소통하다.",document.createElement("br"),"Bottom-Up 동적 지식 그래프 디자인의 기술 스타트업");
+      const promise=document.createElement("strong");promise.textContent="한 번의 문제 해결이 다음 문제를 푸는 지식이 되도록.";
+      description.append(promise,"워플로지는 업무와 창작 과정에서 얻은 경험을 지식 그래프로 연결해,",document.createElement("br"),"다시 활용하고 발전시킬 수 있는 체계를 설계합니다.");
       section.append(header,description);
-      const overviewTitle=document.createElement("h2");overviewTitle.className="diagram-section-title";overviewTitle.id="overview-summary-title";overviewTitle.textContent="0. 보유 기술 개요";section.append(overviewTitle);
+      const overviewTitle=document.createElement("h2");overviewTitle.className="diagram-section-title";overviewTitle.id="overview-summary-title";overviewTitle.textContent="0. 워플로지, Bottom-Up 동적 지식 그래프 디자인 기술 회사";section.append(overviewTitle);
     }else{
       const title=document.createElement("h2");title.className="diagram-section-title";title.id="title-"+diagram.id;
       const titleText=document.createElement("span");titleText.textContent=diagram.title;
@@ -48,7 +52,7 @@
         const readiness=document.createElement("p");
         readiness.className="diagram-readiness";
         readiness.textContent=diagram.readiness;
-        if(diagram.readiness==="PoC Ready")readiness.lang="en";
+
         section.append(readiness);
       }
     }
@@ -56,9 +60,35 @@
     root.append(section);
     const byId=id=>section.querySelector('[data-ui="'+id+'"]');
     byId("technology-label").textContent=diagram.technologyLabel;
+    if(diagram.relations?.length){
+      const label=byId("technology-label");
+      const metadata=document.createElement("div");metadata.className="toolbar-metadata";
+      label.replaceWith(metadata);metadata.append(label);
+      const relations=document.createElement("ul");relations.className="wf-relations";
+      relations.setAttribute("aria-label","핵심 연결 관계");
+      diagram.relations.forEach(triple=>{
+        const row=document.createElement("li");row.className="wf-relation";
+        triple.forEach((text,index)=>{
+          if(index){const edge=document.createElement("span");edge.className="wf-relation__edge";edge.setAttribute("aria-hidden","true");row.append(edge);}
+          const chip=document.createElement("span");
+          chip.className="wf-badge"+(index===1?" wf-badge--warning":index===2?" wf-badge--neutral":"");
+          chip.textContent=text;row.append(chip);
+        });
+        relations.append(row);
+      });
+      metadata.append(relations);
+    }
     const host=byId("diagram-canvas");
 
     host.setAttribute("aria-label",diagram.title+" 관계도. 좌우 방향키로 오브젝트 선택, Escape로 선택 해제.");
+    const syncCanvasAccess=()=>{
+      host.tabIndex=mobileView.matches?-1:0;
+      host.setAttribute("role",mobileView.matches?"img":"group");
+      host.setAttribute("aria-label",mobileView.matches?diagram.title:diagram.title+" 관계도. 좌우 방향키로 오브젝트 선택, Escape로 선택 해제.");
+      if(mobileView.matches&&imageDialog.open)imageDialog.close();
+    };
+    syncCanvasAccess();
+    mobileView.addEventListener("change",syncCanvasAccess);
     let explorer=null,selectedId=null,storyActive=false;
     let exampleCard=null;
     const previewNumber={overview:"00",platform:"01",problem:"02",risk:"03",research:"04",narrative:"05",npc:"06",creator:"07",bias:"08"}[diagram.id];
@@ -68,10 +98,17 @@
       exampleCard.disabled=true;exampleCard.setAttribute("aria-hidden","true");exampleCard.setAttribute("aria-label","제품 미리보기 확대");
       const label=document.createElement("span");label.className="canvas-example-label";label.textContent="제품 미리보기";
       const photo=document.createElement("img");photo.src="assets/images/canvas-bg/canvas-"+previewNumber+".png";photo.alt="";photo.decoding="async";photo.draggable=false;
+      const mobilePreview=document.createElement("figure");mobilePreview.className="canvas-mobile-preview";
+      const mobileLabel=document.createElement("figcaption");mobileLabel.className="canvas-example-label";mobileLabel.textContent=label.textContent;
+      const mobilePhoto=photo.cloneNode();mobilePhoto.alt="제품 미리보기";
+      mobilePhoto.addEventListener("error",()=>{mobilePreview.hidden=true;});
+      mobilePreview.append(mobileLabel,mobilePhoto);
+      section.querySelector(".diagram-shell").append(mobilePreview);
       photo.addEventListener("error",()=>{exampleCard.hidden=true;});
       exampleCard.append(label,photo);
       section.querySelector(".diagram-shell").append(exampleCard);
       exampleCard.addEventListener("click",()=>{
+        if(mobileView.matches)return;
         explorer?.select(null);
         imageReturnFocus=byId("play-story");imageFull.src=photo.src;imageNumber.textContent=previewNumber;imageFrame.scrollTo(0,0);
         imageDialog.showModal();
@@ -107,7 +144,7 @@
     else if(state.phase==="graph"){speaker="에이전트";text="상호작용을 통해 온톨로지 지식 그래프가 생성됩니다.";}
     else if(state.phase==="complete"){
       speaker="활용 기술";
-      text=index===0?"워플로지가 고안한 Bottom-Up 네트워크 성장 루프":diagram.id==="platform"?"Top-Down 설계 · W3C RDF/OWL 2 기반":({
+      text=index===0?"워플로지가 고안한 Bottom-Up 네트워크 성장 루프":diagram.id==="platform"?"Top-Down 디자인 · W3C RDF/OWL 2 기반":({
         "top-down":"전통적인 Top-Down 정적 시맨틱 디자인",
         "bottom-up":"워플로지의 Bottom-Up 동적 지식 그래프 디자인",
         "hybrid":"Top-Down·Bottom-Up 하이브리드 디자인"
@@ -149,6 +186,7 @@
     byId("play-story").addEventListener("click",()=>explorer?.play());
     byId("next-stage").addEventListener("click",()=>explorer?.next());
     host.addEventListener("keydown",event=>{
+      if(mobileView.matches)return;
       if(!["ArrowLeft","ArrowRight","Escape"].includes(event.key))return;
       event.preventDefault();
       if(event.key==="Escape"){explorer?.select(null);return;}
