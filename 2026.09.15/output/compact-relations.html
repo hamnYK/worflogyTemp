@@ -1,0 +1,43 @@
+<div id="wf-compact-relations" aria-label="세 가지 칩을 활용한 관계 표현 시안">
+<style>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+#wf-compact-relations {font-family:Pretendard,sans-serif;color:#252a34;color-scheme:light;}
+#wf-compact-relations * {box-sizing:border-box;}
+#wf-compact-relations .wf-caption {font-size:12px;color:#556575;margin:0 0 8px;}
+#wf-compact-relations .wf-example {background:#fafbfd;padding:16px;border-radius:6px;margin-bottom:24px;}
+#wf-compact-relations .wf-meta {font-size:13px;font-weight:500;color:#556575;margin-bottom:8px;text-align:right;line-height:1.6;}
+#wf-compact-relations .wf-triples {display:flex;flex-direction:column;align-items:flex-end;gap:6px;}
+#wf-compact-relations .wf-triple {display:flex;align-items:center;max-width:100%;font-size:12px;line-height:1.4;}
+#wf-compact-relations .wf-chip {padding:4px 9px;border:1px solid;border-radius:999px;text-align:center;word-break:keep-all;}
+#wf-compact-relations .wf-subject {color:#a7352c;border-color:#f16c5b;background:#fff5f2;}
+#wf-compact-relations .wf-predicate {color:#806127;border-color:#ac9567;background:#fff4d4;}
+#wf-compact-relations .wf-object {color:#556575;border-color:#849aaa;background:#edf5fa;}
+#wf-compact-relations .wf-edge {width:10px;flex:0 0 10px;height:1px;background:#849aaa;}
+#wf-compact-relations .wf-mobile {max-width:350px;margin:0 auto;}
+#wf-compact-relations .wf-mobile .wf-meta {text-align:left;}
+#wf-compact-relations .wf-mobile .wf-triples {align-items:flex-start;}
+#wf-compact-relations[data-single="true"] .wf-secondary {display:none;}
+@media(max-width:360px){#wf-compact-relations .wf-chip {padding:4px 7px;}#wf-compact-relations .wf-edge {width:8px;flex-basis:8px;}}
+</style>
+<p class="wf-caption">PC · 기술 문구 아래 우측 정렬</p>
+<div class="wf-example">
+  <div class="wf-meta">Top-Down 설계 · W3C RDF/OWL 2 기반</div>
+  <div class="wf-triples">
+    <div class="wf-triple"><span class="wf-chip wf-subject">역할</span><span class="wf-edge" aria-hidden="true"></span><span class="wf-chip wf-predicate">수행한다</span><span class="wf-edge" aria-hidden="true"></span><span class="wf-chip wf-object">과업</span></div>
+    <div class="wf-triple wf-secondary"><span class="wf-chip wf-subject">역할</span><span class="wf-edge" aria-hidden="true"></span><span class="wf-chip wf-predicate">부담한다</span><span class="wf-edge" aria-hidden="true"></span><span class="wf-chip wf-object">소통 의무</span></div>
+  </div>
+</div>
+<div class="wf-mobile">
+<p class="wf-caption">모바일 · 동일한 크기, 좌측 정렬</p>
+<div class="wf-example">
+  <div class="wf-meta">Top-Down 설계 · W3C RDF/OWL 2 기반</div>
+  <div class="wf-triples">
+    <div class="wf-triple"><span class="wf-chip wf-subject">역할</span><span class="wf-edge" aria-hidden="true"></span><span class="wf-chip wf-predicate">수행한다</span><span class="wf-edge" aria-hidden="true"></span><span class="wf-chip wf-object">과업</span></div>
+    <div class="wf-triple wf-secondary"><span class="wf-chip wf-subject">역할</span><span class="wf-edge" aria-hidden="true"></span><span class="wf-chip wf-predicate">부담한다</span><span class="wf-edge" aria-hidden="true"></span><span class="wf-chip wf-object">소통 의무</span></div>
+  </div>
+</div>
+</div>
+<script>
+(()=>{const root=document.getElementById('wf-compact-relations');const state={single:false};function render(){root.dataset.single=String(state.single);}render();if(globalThis.Tweak){const tweak=new Tweak({container:root,onChange:render});tweak.addToggle(state,'single',{label:'대표 관계 한 줄만 표시'});}})();
+</script>
+</div>

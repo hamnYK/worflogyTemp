@@ -45,6 +45,17 @@ def static_diagrams():
         if item.get('readiness'):
             parts.append('<p class="diagram-readiness">' + escape(item['readiness']) + '</p>')
         parts.append('<p class="static-diagram-description">' + escape(item['desc']) + '</p>')
+        if item.get('relations'):
+            parts.append('<ul class="wf-relations" aria-label="핵심 연결 관계">')
+            for triple in item['relations']:
+                chips = []
+                for position, text in enumerate(triple):
+                    if position:
+                        chips.append('<span class="wf-relation__edge" aria-hidden="true"></span>')
+                    variant = ['', ' wf-badge--warning', ' wf-badge--neutral'][position]
+                    chips.append('<span class="wf-badge' + variant + '">' + escape(text) + '</span>')
+                parts.append('<li class="wf-relation">' + ''.join(chips) + '</li>')
+            parts.append('</ul>')
         parts.append('</section>')
         sections.append('\n'.join(parts))
     return '\n'.join(sections)
