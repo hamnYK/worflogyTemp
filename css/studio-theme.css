@@ -19,7 +19,7 @@
 
 
 /* Actual application screenshots stay separate from the animated scene. */
-.canvas-example-card{position:absolute;top:76px;right:64px;z-index:2;width:208px;padding:var(--space-2);text-align:left;border:1px solid var(--color-border-input);border-top:2px solid var(--color-sky);border-radius:var(--radius-card);background:var(--color-white);box-shadow:var(--shadow-control);opacity:0;visibility:hidden;pointer-events:none;transition:opacity var(--duration-preview) var(--ease-standard),visibility var(--duration-preview);overflow:hidden}
+.canvas-example-card{position:absolute;top:var(--space-3);right:calc(var(--control-height) + var(--space-3) * 2);z-index:2;width:208px;padding:var(--space-2);text-align:left;border:1px solid var(--color-border-input);border-top:2px solid var(--color-sky);border-radius:var(--radius-card);background:var(--color-white);box-shadow:var(--shadow-control);opacity:0;visibility:hidden;pointer-events:none;transition:opacity var(--duration-preview) var(--ease-standard),visibility var(--duration-preview);overflow:hidden}
 .canvas-example-card.is-visible{opacity:1;visibility:visible;pointer-events:auto}
 .canvas-example-card:disabled{opacity:0}
 .canvas-example-label{font-size:var(--font-size-xs);font-weight:600;color:var(--color-text)}
@@ -29,7 +29,7 @@
 .canvas-image-dialog::backdrop{background:var(--color-overlay)}
 .canvas-image-dialog h2{display:inline-block;font-size:18px;margin:0 0 14px}
 .canvas-image-dialog>button{float:right;min-height:44px}
-@media(max-width:900px){.canvas-example-card{position:relative;top:auto;right:auto;width:min(320px,calc(100% - 32px));margin:12px auto}.canvas-image-dialog{padding:0}}
+@media(max-width:900px){.canvas-example-card{width:min(208px,calc(100% - 80px))}.canvas-image-dialog{padding:0}}
 @media(prefers-reduced-motion:reduce){.canvas-example-card{transition:none}}
 
 /* Static studio atmosphere: no moving layers or interference with canvas input. */
@@ -113,7 +113,7 @@
 /* Mobile scenes are view-only; product screenshots remain in the page flow. */
 .canvas-mobile-preview{display:none}
 @media(max-width:760px){
- .diagram-canvas{pointer-events:none;touch-action:auto;cursor:default}
+ .diagram-canvas,.diagram-canvas canvas{pointer-events:none;touch-action:auto;cursor:default}
  .canvas-zoom,.canvas-example-card{display:none}
  .canvas-mobile-preview{
   display:block;width:calc(100% - 2 * var(--space-3));margin:var(--space-3) auto;
