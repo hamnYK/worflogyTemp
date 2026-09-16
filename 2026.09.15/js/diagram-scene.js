@@ -3,7 +3,16 @@
   "use strict";
   window.createDiagramExplorer = function (host, callbacks) {
     if (!window.Phaser) return null;
+    const mobileInput = window.matchMedia("(max-width:760px)");
     let activeScene;
+    const syncInput = () => {
+      if (!activeScene) return;
+      activeScene.input.enabled = !mobileInput.matches;
+      activeScene.pan = null;
+      activeScene.game.canvas.style.pointerEvents = mobileInput.matches ? "none" : "auto";
+      activeScene.game.canvas.style.touchAction = mobileInput.matches ? "auto" : "none";
+    };
+    mobileInput.addEventListener("change", syncInput);
     let pending;
     let visible=true;
     const layouts = new Map();
@@ -11,6 +20,7 @@
     class DiagramScene extends Phaser.Scene {
       create() {
         activeScene = this;
+        syncInput();
         this.frame = this.add.graphics();
         this.edgesLayer = this.add.graphics();
         this.widgets = new Map();
@@ -43,7 +53,7 @@
         });
         this.input.on("gameout", () => { this.pan = null; });
         const wheelHandler=event=>{
-          if(!event.ctrlKey||event.deltaY===0)return;
+          if(mobileInput.matches||!event.ctrlKey||event.deltaY===0)return;
           event.preventDefault();
           const rect=this.game.canvas.getBoundingClientRect();
           this.zoomBy(event.deltaY>0?0.9:1.1,
@@ -193,6 +203,7 @@
       }
 
       selectObject(id) {
+        if(mobileInput.matches)return;
         if(this.storyRunning){
           // Freeze this scene in place; retain drawn story layers until replay/reset.
           this.storyTimer?.remove();this.storyTimer=null;
@@ -392,7 +403,7 @@ createPlayer() {
         // Every initial view uses a scale that fits the largest default diagram.
         // A manually moved node can still require a smaller explicit fit.
         const zoomFor=b=>Math.min(camera.width/(b.maxX-b.minX+35),(camera.height-subtitleSpace)/(b.maxY-b.minY+35),1.3);
-        const commonZoom=Math.min(...window.WORFLOGY_DIAGRAMS.map(diagram=>{
+        const commonZoom=Math.min(...window.WORFLOGY_DIAGRAMS.filter(diagram=>!diagram.placeholder&&!diagram.renderer).map(diagram=>{
           const nodes=new Map(diagram.nodes.map(n=>[n.id,{...n,...this.project(n.x,n.y)}]));
           return zoomFor(this.fitBounds(diagram,nodes));
         }));
@@ -421,7 +432,7 @@ createPlayer() {
     const game=new Phaser.Game({
       type:Phaser.CANVAS,parent:host,backgroundColor:getComputedStyle(host).getPropertyValue("--scene-background").trim(),banner:false,
       audio:{noAudio:true},render:{antialias:true},
-      input:{mouse:{preventDefaultWheel:false,passive:false}},
+      input:{mouse:{preventDefaultWheel:false,passive:false},touch:{capture:false}},
       scale:{mode:Phaser.Scale.RESIZE,width:host.clientWidth,height:host.clientHeight},
       fps:{target:30},scene:DiagramScene
     });
@@ -439,7 +450,7 @@ createPlayer() {
         if(visible){activeScene.scene.resume();game.loop.wake();}
         else {activeScene.scene.pause();game.loop.sleep();}
       },
-      destroy(){game.destroy(true);}
+      destroy(){mobileInput.removeEventListener("change",syncInput);game.destroy(true);}
     };
   };
 })();

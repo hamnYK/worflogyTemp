@@ -29,6 +29,11 @@
     section.className="diagram-section";
     section.id="section-"+diagram.id;
     section.setAttribute("aria-labelledby","title-"+diagram.id);
+    if(diagram.category){
+      const category=document.createElement("p");category.className="diagram-category";
+      const tag=document.createElement("span");tag.className="wf-badge wf-badge--neutral";tag.textContent=diagram.category;
+      category.append(tag);section.append(category);
+    }
     if(index===0){
       const header=document.createElement("header");header.className="guide-header";
       const home=document.createElement("a");home.href="#main";home.setAttribute("aria-label","맨 위로");
@@ -56,6 +61,13 @@
         section.append(readiness);
       }
     }
+    if(diagram.placeholder){
+      const shell=document.createElement("div");shell.className="diagram-shell";
+      const canvas=document.createElement("div");canvas.className="diagram-canvas diagram-canvas--placeholder";
+      canvas.setAttribute("role","img");canvas.setAttribute("aria-label","공간정보 프로젝트 캔버스, 내용 준비 중");
+      shell.append(canvas);section.append(shell);root.append(section);
+      return;
+    }
     section.append(document.getElementById("diagram-template").content.cloneNode(true));
     root.append(section);
     const byId=id=>section.querySelector('[data-ui="'+id+'"]');
@@ -82,16 +94,16 @@
 
     host.setAttribute("aria-label",diagram.title+" 관계도. 좌우 방향키로 오브젝트 선택, Escape로 선택 해제.");
     const syncCanvasAccess=()=>{
-      host.tabIndex=mobileView.matches?-1:0;
+      host.tabIndex=mobileView.matches||diagram.renderer?-1:0;
       host.setAttribute("role",mobileView.matches?"img":"group");
-      host.setAttribute("aria-label",mobileView.matches?diagram.title:diagram.title+" 관계도. 좌우 방향키로 오브젝트 선택, Escape로 선택 해제.");
+      host.setAttribute("aria-label",mobileView.matches||diagram.renderer?diagram.title:diagram.title+" 관계도. 좌우 방향키로 오브젝트 선택, Escape로 선택 해제.");
       if(mobileView.matches&&imageDialog.open)imageDialog.close();
     };
     syncCanvasAccess();
     mobileView.addEventListener("change",syncCanvasAccess);
     let explorer=null,selectedId=null,storyActive=false;
     let exampleCard=null;
-    const previewNumber={overview:"00",platform:"01",problem:"02",risk:"03",research:"04",narrative:"05",npc:"06",creator:"07",bias:"08"}[diagram.id];
+    const previewNumber={overview:"00",platform:"01",problem:"02",risk:"03",research:"04",narrative:"05",npc:"06",creator:"07",bias:"08","spatial-10":"10"}[diagram.id];
     if(previewNumber){
       host.classList.add("canvas-example-enabled");
       exampleCard=document.createElement("button");exampleCard.type="button";exampleCard.className="canvas-example-card";
@@ -106,7 +118,7 @@
       section.querySelector(".diagram-shell").append(mobilePreview);
       photo.addEventListener("error",()=>{exampleCard.hidden=true;});
       exampleCard.append(label,photo);
-      section.querySelector(".diagram-shell").append(exampleCard);
+      section.querySelector(".canvas-viewport").append(exampleCard);
       exampleCard.addEventListener("click",()=>{
         if(mobileView.matches)return;
         explorer?.select(null);
@@ -115,7 +127,9 @@
       });
     }
     const objectName=(d,id)=>id==="logic"?"지식 그래프 생산 로직":copy.overrides[d.id]?.[id]||copy.names[id]||id;
+    if(diagram.noSubtitle)section.querySelector(".canvas-subtitle").hidden=true;
     function caption(speaker,text){
+      if(diagram.noSubtitle)return;
       byId("speaker").textContent=speaker||"";
       byId("speaker").hidden=!speaker;
       byId("story-text").textContent=text;
@@ -151,7 +165,7 @@
       }[state.technology]||"온톨로지 지식 그래프가 완성되었습니다.");
     }
     caption(speaker,text||"오브젝트 사이의 관계를 살펴봅니다.");
-    byId("story-progress").textContent=state.step?state.step+" / "+state.total:"";
+    byId("story-progress").textContent=state.step&&state.phase!=="complete"&&state.phase!=="idle"?state.step+" / "+state.total:"";
     const idle=state.phase==="idle",done=state.phase==="complete";
     byId("next-stage").disabled=idle||done||state.phase==="paused";
     byId("play-story").setAttribute("aria-label",idle?"재생":"다시 재생");
@@ -159,7 +173,8 @@
   }
 
     try {
-      explorer=window.createDiagramExplorer(host,{
+      const createExplorer=({spatial:window.createSpatialExplorer,farm:window.createFarmExplorer})[diagram.renderer]||window.createDiagramExplorer;
+      explorer=createExplorer(host,{
         select:showSelection,story:showStory,
         zoom:()=>{}
       });
@@ -186,7 +201,7 @@
     byId("play-story").addEventListener("click",()=>explorer?.play());
     byId("next-stage").addEventListener("click",()=>explorer?.next());
     host.addEventListener("keydown",event=>{
-      if(mobileView.matches)return;
+      if(mobileView.matches||diagram.renderer)return;
       if(!["ArrowLeft","ArrowRight","Escape"].includes(event.key))return;
       event.preventDefault();
       if(event.key==="Escape"){explorer?.select(null);return;}
