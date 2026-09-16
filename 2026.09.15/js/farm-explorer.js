@@ -3,7 +3,9 @@
  'use strict';
  window.createFarmExplorer=(host,callbacks)=>{
   const NS='http://www.w3.org/2000/svg',mobile=matchMedia('(max-width:760px)'),reduced=matchMedia('(prefers-reduced-motion:reduce)');
-  let stage=0,running=false,visible=true,elapsed=0,last=0,frame,zoom=1,pan={x:0,y:0},drag;
+  const defaultZoom=()=>mobile.matches?1:1/1.2;
+  const preview=host.closest('.diagram-section').querySelector('.canvas-example-card');
+  let stage=0,running=false,visible=true,elapsed=0,last=0,frame,zoom=defaultZoom(),pan={x:0,y:0},drag;
   const svg=document.createElementNS(NS,'svg');svg.setAttribute('role','img');svg.setAttribute('aria-label','식물 센서와 공간정보를 분석해 가상 식물과 아바타로 소통하는 스마트 팜');host.append(svg);host.classList.add('farm-canvas');
   const el=(tag,attrs={},parent=svg)=>{const n=document.createElementNS(NS,tag);for(const [k,v]of Object.entries(attrs))n.setAttribute(k,v);parent.append(n);return n;};
   const color=name=>`var(--scene-${name.replace(/[A-Z]/g,c=>'-'+c.toLowerCase())})`;
@@ -27,10 +29,14 @@
    path(p,'M -9 -45 Q 0 -50 9 -45 L 11 -21 Q 0 -15 -11 -21 Z',farmer?'secondaryDark':'accent',1,farmer?'secondaryDark':'accent');
    rect(p,-3,-51,6,8,'skin',2);ellipse(p,0,-60,9,11,'skin');path(p,'M -9 -61 Q -10 -77 2 -74 Q 12 -73 10 -60 Q 4 -68 -3 -64 Z','dark',1,'dark');
    if(farmer){ellipse(p,0,-69,18,4,'gold');path(p,'M -10 -70 L -7 -80 Q 0 -84 8 -79 L 11 -70','flow',1,'cream');}
-   dot(p,4,-60,.9,'dark');path(p,'M 1 -54 Q 5 -51 7 -54','dark',1);
-   line(p,[[-9,-41],[-16,-29]],farmer?'secondaryDark':'accent',6);dot(p,-17,-27,3,'skin');
+   for(const eyeX of [-3,4])dot(p,eyeX,-60,.85,'dark',{'data-person-eye':''});
+   path(p,'M 1 -59 l 1 3 l -1 0','flow',.6);
+   path(p,'M -2 -53 Q 1 -51 4 -53','dark',.85);
+   path(p,'M -4 -46 Q 0 -42 4 -46','paper',1.2);
+   path(p,'M -6 -39 L -5 -25','paper',.8,'none',{opacity:'.3'});
+   path(p,'M -9 -41 Q -14 -36 -15 -30',farmer?'secondaryDark':'accent',6);dot(p,-16,-28,3,'skin');
    const arm=el('g',{'data-farm-arm':''},p);line(arm,[[9,-40],[18,-36],[20,-46]],farmer?'secondaryDark':'accent',6);dot(arm,20,-48,3,'skin');
-   if(farmer){rect(arm,16,-59,11,16,'ink',2);rect(arm,18,-57,7,11,'paper',1);}
+   if(farmer){rect(arm,16,-59,11,16,'ink',2);rect(arm,18,-57,7,11,'paper',1);dot(arm,21.5,-44.5,.6,'edge');}
    return p;
   }
   function bubble(g,x,y,kind){const b=el('g',{transform:`translate(${x},${y})`},g);rect(b,-18,-13,36,26,'paper',6,{stroke:color('edge'),'stroke-width':1});poly(b,[[-5,12],[-9,19],[4,12]],'paper','paper');if(kind==='heart')path(b,'M 0 7 C -18 -3 -6 -12 0 -5 C 6 -12 18 -3 0 7 Z','accent',1,'accent');else if(kind==='check')line(b,[[-8,0],[-2,6],[9,-6]],'secondaryDark',2.5);else{for(const x of [-8,0,8])dot(b,x,0,2,'secondary');}}
@@ -44,8 +50,19 @@
    }
    const focus=stage>=5?'immersive':'synchronization';
    svg.setAttribute('data-experience',focus);
+   // Translate both scenes together; reserving padding would shrink the artwork.
+   let layoutX=0,layoutY=0;
+   if(!narrow){
+    const viewW=W/defaultZoom(),viewH=H/defaultZoom();
+    const scale=Math.min(host.clientWidth/viewW,host.clientHeight/viewH);
+    const letterboxY=(host.clientHeight-viewH*scale)/2;
+    const cardBottom=preview?preview.getBoundingClientRect().bottom-host.getBoundingClientRect().top:164;
+    layoutX=viewW/2-501;
+    layoutY=(cardBottom+20-letterboxY)/scale-186.5;
+   }
+   const composition=el('g',{'data-farm-composition':'',transform:`translate(${layoutX},${layoutY})`});
    function scene(name,index){
-    return el('g',{'data-farm-experience':name,transform:narrow?'translate(0,-8)':`translate(${index?525:35},125)`,display:narrow&&name!==focus?'none':'inline'});
+    return el('g',{'data-farm-experience':name,transform:narrow?'translate(0,-8)':`translate(${index?525:35},125)`,display:narrow&&name!==focus?'none':'inline'},composition);
    }
    function platform(g){
     ellipse(g,221,337,180,39,'shadow',.06);
@@ -112,11 +129,21 @@
    for(let i=0;i<7;i++){
     const bx=55+i*56,tx=165+i*15;
     path(landscape,`M ${bx} 291 Q ${(bx+tx)/2} 215 ${tx} 168`,'secondary',5,'none',{opacity:'.33'});
-    for(let j=0;j<5;j++){const t=j/5,x=bx+(tx-bx)*t,y=283-107*t;path(landscape,`M ${x} ${y} q -9 -13 -12 -5 q 2 9 12 5 q 9 -13 12 -5 q -2 9 -12 5`,'secondaryDark',.6,'secondary');}
+    for(let j=0;j<5;j++){
+     const t=j/5,x=bx+(tx-bx)*t,y=283-107*t,s=1-t*.55;
+     const seedling=el('g',{transform:`translate(${x},${y}) scale(${s})`},landscape);
+     ellipse(seedling,1,2,10,2.5,'shadow',.08);
+     path(seedling,'M 0 1 Q -2 -4 0 -10','secondaryDark',1);
+     path(seedling,'M 0 -2 Q -14 -1 -12 -10 Q -4 -12 0 -2','secondaryDark',.65,'secondary');
+     path(seedling,'M 0 -3 Q 12 -4 10 -13 Q 2 -14 0 -3','secondaryDark',.65,'secondary');
+     path(seedling,'M -8 -8 L 0 -2 L 7 -10','secondaryLight',.65);
+    }
    }
    for(const [x,y,h]of [[62,223,105],[108,196,113],[153,178,89],[304,191,101],[354,214,126],[398,223,97]]){
     path(landscape,`M ${x} ${y} L ${x-2} ${y-h*.6}`,'dark',3);
-    ellipse(landscape,x,y-h*.7,16,h*.33,'secondary',.85);ellipse(landscape,x-4,y-h*.78,10,h*.23,'secondaryLight',.8);
+    const crown=el('g',{transform:`translate(${x},${y-h*.7}) scale(1,${h/100})`},landscape);
+    path(crown,'M 0 -32 C -11 -32 -17 -19 -14 -9 C -24 4 -13 28 0 31 C 17 27 22 12 15 0 C 20 -14 12 -31 0 -32 Z','secondaryDark',.65,'secondary');
+    path(crown,'M -3 -27 C -12 -22 -12 -9 -8 -3 C -15 9 -8 20 -3 23 C 3 8 -1 -10 4 -24 Z','secondaryLight',.5,'secondaryLight');
     line(landscape,[[x,y-h*.45],[x+9,y-h*.68]],'dark',1.2);
    }
    path(landscape,'M 172 296 Q 218 230 229 172','paper',28);
@@ -154,9 +181,9 @@
    if(stage>=5)for(const arm of svg.querySelectorAll('[data-linked-avatar] [data-farm-arm]'))arm.setAttribute('transform',`rotate(${-12+Math.sin(elapsed/420)*12} 9 -40)`);
    if(stage>=6)for(const arm of svg.querySelectorAll('[data-farmer] [data-farm-arm]'))arm.setAttribute('transform',`rotate(${Math.sin(elapsed/500)*3} 9 -40)`);
   }}frame=requestAnimationFrame(tick);}
-  function reset(){stage=0;running=false;elapsed=0;zoom=1;pan={x:0,y:0};render();notify();}
-  const resize=new ResizeObserver(()=>{zoom=1;pan={x:0,y:0};render();});
-  resize.observe(host);
+  function reset(){stage=0;running=false;elapsed=0;zoom=defaultZoom();pan={x:0,y:0};render();notify();}
+  const resize=new ResizeObserver(()=>{zoom=defaultZoom();pan={x:0,y:0};render();});
+  resize.observe(host);if(preview)resize.observe(preview);
   svg.addEventListener('pointerdown',e=>{if(mobile.matches)return;drag={x:e.clientX,y:e.clientY,pan:{...pan}};svg.setPointerCapture(e.pointerId);});
   svg.addEventListener('pointermove',e=>{if(!drag||mobile.matches)return;const k=1000/svg.getBoundingClientRect().width/zoom;pan={x:drag.pan.x+(e.clientX-drag.x)*k,y:drag.pan.y+(e.clientY-drag.y)*k};render();});
   for(const type of ['pointerup','pointercancel'])svg.addEventListener(type,()=>{drag=null;});

@@ -53,6 +53,8 @@
     poly(g,[[x,y-h+d/2],[x+w/2,y-h],[x+w/2,y],[x,y+d/2]],'--scene-secondary-dark','--scene-border',.5);
     poly(g,[[x-w/2,y-h],[x,y-h-d/2],[x+w/2,y-h],[x,y-h+d/2]],'--scene-paper','--scene-border',.5);
     poly(g,[[x-w*.28,y-h],[x,y-h-d*.28],[x+w*.28,y-h],[x,y-h+d*.28]],'--scene-highlight','--scene-highlight',.5);
+    line(g,[[x-w*.4,y-h+1],[x,y-h+d*.4],[x+w*.4,y-h+1]],'--scene-paper',.8);
+    poly(g,[[x+2,y+d*.25],[x+5,y+d*.1],[x+5,y-5],[x+2,y-4]],'--scene-ink','--scene-secondary-dark',.4);
     for(let level=6;level<h-4;level+=7){
      line(g,[[x+3,y-level+d*.15],[x+w*.36,y-level-d*.1]],'--scene-secondary-light',1.4);
      line(g,[[x-w*.35,y-level],[x-3,y-level+d*.23]],'--scene-paper',1.3);
@@ -61,8 +63,9 @@
    function tree(g,x,y,s=1){
     el('ellipse',{cx:x+2,cy:y+3,rx:9*s,ry:3*s,fill:'var(--scene-shadow)',opacity:'.12'},g);
     path(g,`M ${x} ${y} v ${-15*s}`,'--scene-dark',2*s);
-    el('ellipse',{cx:x,cy:y-17*s,rx:8*s,ry:11*s,fill:'var(--scene-secondary)'},g);
-    el('ellipse',{cx:x-2*s,cy:y-19*s,rx:5*s,ry:8*s,fill:'var(--scene-secondary-light)'},g);
+    const crown=el('g',{transform:`translate(${x},${y-17*s}) scale(${s})`},g);
+    path(crown,'M 0 -12 C -6 -13 -9 -7 -8 -2 C -12 5 -5 12 0 12 C 8 12 12 4 8 -2 C 10 -7 5 -12 0 -12 Z','--scene-secondary-dark',.5,'var(--scene-secondary)');
+    path(crown,'M -2 -10 C -8 -7 -5 -3 -6 1 C -8 6 -3 9 -1 8 Q -4 0 2 -9 Z','--scene-secondary-light',.4,'var(--scene-secondary-light)');
    }
    // Terrain contours follow two elevations rather than decorative concentric circles.
    const ys=[721,655,589,523];
@@ -194,12 +197,14 @@
     el('ellipse',{cx:0,cy:-55,rx:9,ry:10,fill:'var(--scene-skin)'},person);
     path(person,feminine?'M -9 -54 Q -12 -68 0 -67 Q 12 -66 9 -55 L 4 -60 Q -1 -57 -9 -54 Z':'M -9 -55 Q -10 -69 3 -67 Q 12 -66 9 -58 Q 3 -64 -5 -58 Z','--scene-dark',1,'var(--scene-dark)');
     for(const eyeX of [-2,4])dot(person,eyeX,-54,.9,'--scene-dark',{'data-person-eye':''});
-    if(stage>=5)path(person,'M 2 -49 Q 5 -46 7 -49','--scene-dark',1);
+    path(person,'M 1 -53 l 1 2 l -1 0','--scene-flow',.6);
+    path(person,stage>=5?'M -2 -48 Q 1 -45 4 -48':'M -2 -48 Q 1 -47 4 -48','--scene-dark',.85);
+    path(person,'M -4 -41 Q 0 -37 4 -41','--scene-paper',1.1);
     path(person,'M -9 -38 Q -15 -32 -13 -26',shirt,6);
     dot(person,-13,-24,3,'--scene-skin');
     const arm=el('g',{'data-arm':i},person);
     path(arm,'M 9 -38 Q 17 -33 18 -43',shirt,6);dot(arm,18,-44,3,'--scene-skin');
-    rect(arm,14,-54,10,15,'--scene-ink',2);rect(arm,16,-52,6,10,'--scene-paper',1);
+    rect(arm,14,-54,10,15,'--scene-ink',2);rect(arm,16,-52,6,10,'--scene-paper',1);dot(arm,19,-40,.55,'--scene-border');
     if(stage>=5){
      const bubble=el('g',{transform:'translate(8,-86)'},person);rect(bubble,-14,-10,28,22,'--scene-paper',6,{stroke:'var(--scene-border)','stroke-width':1});poly(bubble,[[1,11],[5,16],[7,11]],'--scene-paper','--scene-paper',.5);
      if(i%2===0)path(bubble,'M -6 1 L -1 6 L 7 -4','--scene-secondary-dark',2.3);

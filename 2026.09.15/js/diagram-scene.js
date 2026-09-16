@@ -409,9 +409,12 @@ createPlayer() {
         }));
         const baseZoom=Math.min(zoomFor(bounds),commonZoom);
         // Overview starts at the equivalent of two + clicks (1.2 squared).
-        camera.setZoom(baseZoom*(this.diagram.id==="overview"?1.44:1));
+        const initialZoom=baseZoom*(this.diagram.id==="overview"?1.44:1);
+        camera.setZoom(initialZoom*(!mobileInput.matches&&this.diagram.id!=="overview"?1.2:1));
         // Keep the enlarged overview below the toolbar with balanced caption clearance.
-        const centerOffset=this.diagram.id==="overview"?40:subtitleSpace/2;
+        // Taller lower connection paths need a little more clearance above captions.
+        const captionClearance=!mobileInput.matches?({creator:16,bias:8}[this.diagram.id]||0):0;
+        const centerOffset=(this.diagram.id==="overview"?40:subtitleSpace/2)+captionClearance;
         camera.centerOn((bounds.minX+bounds.maxX)/2,(bounds.minY+bounds.maxY)/2+centerOffset/camera.zoom);
         callbacks.zoom(camera.zoom);this.saveView();
       }
@@ -443,7 +446,7 @@ createPlayer() {
       next(){if(activeScene)activeScene.nextStage();},
       zoom(factor){if(activeScene)activeScene.zoomBy(factor);},
       fit(){if(activeScene){activeScene.manualView=true;activeScene.fit();}},
-      reset(){if(activeScene?.diagram){const diagram=activeScene.diagram;activeScene.diagram=null;layouts.delete(diagram.id);views.delete(diagram.id);activeScene.loadDiagram(diagram);}},
+      reset(){if(activeScene?.diagram){const diagram=activeScene.diagram;activeScene.cancelStory();activeScene.diagram=null;layouts.delete(diagram.id);views.delete(diagram.id);activeScene.loadDiagram(diagram);}},
       setVisible(value){
         visible=value;
         if(!activeScene)return;

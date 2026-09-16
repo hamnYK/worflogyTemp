@@ -647,6 +647,7 @@ window.WORFLOGY_EN = {
   "공간정보 프로젝트 (온톨로지 공간정보 플랫폼)": "Geospatial Project (Ontology Geospatial Platform)",
   "기획 중": "In Planning",
   "연구개발 중": "Under R&D",
+  "시나리오 연구개발 중": "Scenario R&D in progress",
   "수치 지형도의 지형·수계·도로·건물 레이어를 온톨로지와 연결하여 시나리오별 시민 서비스를 구성하는 플랫폼을 기획합니다.": "A planned platform connecting terrain, water, road and building layers through an ontology to deliver scenario-based services for citizens.",
   "공간정보 레이어와 온톨로지, 시나리오 서비스의 연결": "Geospatial layers, ontology and scenario services",
   "수치 지형도에서 온톨로지와 시민 서비스로": "From digital topographic layers to ontology and citizen services",

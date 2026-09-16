@@ -18,15 +18,17 @@ function kit(g){
  const check=(x,y,s=1)=>{line([x-7*s,y],[x-1*s,y+6*s],C.dark,2.8*s);line([x-1*s,y+6*s],[x+11*s,y-8*s],C.dark,2.8*s);};
  const badge=(x,y,kind="check")=>{dot(x+1,y+2,12,C.shadow);dot(x,y,12,C.gold);ring(x,y,9,C.cream,1);if(kind==="check")check(x,y,.65);else if(kind==="coin"){line([x,y-6],[x,y+6],C.paper,2);line([x-4,y-3],[x+4,y-3],C.paper,2);line([x-4,y+3],[x+4,y+3],C.paper,2);}else{line([x,y-6],[x,y+1],C.dark,2.5);dot(x,y+5,1.8,C.dark);}};
  const slab=(x,y,w=70,h=28,z=7,color=C.paper)=>{
-  poly([[x-w/2,y],[x,y+h/2],[x+w/2,y],[x+w/2,y+z],[x,y+h/2+z],[x-w/2,y+z]],C.edge);
+  poly([[x-w/2,y],[x,y+h/2],[x,y+h/2+z],[x-w/2,y+z]],window.WorfTheme.tileSide);
+  poly([[x,y+h/2],[x+w/2,y],[x+w/2,y+z],[x,y+h/2+z]],window.WorfTheme.tileFront);
   poly([[x-w/2,y],[x,y-h/2],[x+w/2,y],[x,y+h/2]],color);
   line([x-w/2+2,y],[x,y-h/2+1],C.white,1.4);
  };
  const cube=(x,y,w=54,d=25,h=44,color=C.green)=>{
   const top=[[x-w/2,y-h],[x,y-h-d/2],[x+w/2,y-h],[x,y-h+d/2]];
   poly([[x-w/2,y-h],[x,y-h+d/2],[x,y+d/2],[x-w/2,y]],color);
-  poly([[x,y-h+d/2],[x+w/2,y-h],[x+w/2,y],[x,y+d/2]],C.dark);
-  poly(top,C.mint);
+  const cool=color===C.blue||color===C.sky||color===C.navy;
+  poly([[x,y-h+d/2],[x+w/2,y-h],[x+w/2,y],[x,y+d/2]],cool?C.navy:color===C.gold?window.WorfTheme.flow:C.dark);
+  poly(top,cool?C.sky:color===C.gold?C.cream:C.mint);
   line([x-w/2+1,y-h],[x,y-h-d/2+1],C.white,1.2);
  };
  const paper=(x=0,y=-17,w=52,h=68)=>{
@@ -36,11 +38,20 @@ function kit(g){
  };
  const rows=(x,y,w=28,count=3,color=C.edge)=>{for(let i=0;i<count;i++)line([x,y+i*9],[x+w-(i%2)*6,y+i*9],color,2);};
  const person=(x,y,s=1,color=C.green)=>{
-  ellipse(x+2*s,y+21*s,24*s,9*s,C.shadow,.14);
-  rr(x-9*s,y-2*s,18*s,22*s,color,5*s);
+  ellipse(x+s,y+29*s,25*s,7*s,C.shadow,.12);
   line([x-5*s,y+18*s],[x-6*s,y+28*s],C.dark,3*s);line([x+5*s,y+18*s],[x+6*s,y+28*s],C.dark,3*s);
+  line([x-6*s,y+28*s],[x-9*s,y+29*s],C.ink,3*s);line([x+6*s,y+28*s],[x+9*s,y+29*s],C.ink,3*s);
+  rr(x-9*s,y-2*s,18*s,22*s,color,5*s);
+  rr(x-2.5*s,y-7*s,5*s,7*s,window.WorfTheme.skin,2*s);
   dot(x,y-13*s,8*s,window.WorfTheme.skin);arc(x,y-14*s,8.1*s,Math.PI,Math.PI*2,C.dark,3*s);
-  line([x-9*s,y+2*s],[x-13*s,y+10*s],color,4*s);line([x+9*s,y+2*s],[x+13*s,y+10*s],color,4*s);
+  arc(x-1*s,y-14*s,6.5*s,3.45,4.9,C.dark,2*s);
+  dot(x-2.5*s,y-13*s,.8*s,C.dark);dot(x+3*s,y-13*s,.8*s,C.dark);
+  arc(x+.3*s,y-10*s,2.4*s,.25,2.8,C.dark,.75*s);
+  arc(x,y-2*s,3.6*s,.25,2.9,C.paper,.9*s);
+  line([x-5*s,y+4*s],[x-4*s,y+14*s],C.paper,.8*s,.3);
+  line([x-8*s,y+2*s],[x-12*s,y+8*s],color,4*s);line([x-12*s,y+8*s],[x-12*s,y+12*s],color,3.5*s);
+  line([x+8*s,y+2*s],[x+12*s,y+8*s],color,4*s);line([x+12*s,y+8*s],[x+12*s,y+12*s],color,3.5*s);
+  dot(x-12*s,y+13*s,2*s,window.WorfTheme.skin);dot(x+12*s,y+13*s,2*s,window.WorfTheme.skin);
  };
  const robot=(x=0,y=-18,s=1)=>{
   ellipse(x+3*s,y+42*s,47*s,12*s,C.shadow,.15);
@@ -48,10 +59,13 @@ function kit(g){
   rr(x-11*s,y+17*s,22*s,14*s,C.mint,5*s);
   dot(x,y+24*s,3*s,C.gold);
   line([x-18*s,y+21*s],[x-22*s,y+32*s],C.green,7*s);line([x+18*s,y+21*s],[x+22*s,y+32*s],C.green,7*s);
+  dot(x-22*s,y+33*s,3.5*s,C.mint);dot(x+22*s,y+33*s,3.5*s,C.mint);
+  rr(x-13*s,y+37*s,10*s,6*s,C.dark,2*s);rr(x+3*s,y+37*s,10*s,6*s,C.dark,2*s);
   rr(x-26*s,y-20*s,52*s,37*s,C.dark,10*s);
   rr(x-24*s,y-24*s,48*s,36*s,C.mint,10*s);
   rr(x-20*s,y-17*s,40*s,20*s,C.dark,7*s);
   rr(x-13*s,y-12*s,7*s,5*s,C.paper,2*s);rr(x+6*s,y-12*s,7*s,5*s,C.paper,2*s);
+  line([x-3*s,y-3*s],[x+3*s,y-3*s],C.mint,1.3*s);
   line([x,y-24*s],[x,y-35*s],C.ink,2*s);sphere(x,y-37*s,3.6*s,C.gold);
   line([x-14*s,y-22*s],[x+7*s,y-22*s],C.white,1.6*s);
  };
