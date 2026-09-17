@@ -74,6 +74,7 @@
   --font-code: Consolas, monospace;
   --font-size-xs: 12px;
   --font-size-sm: 13px;
+  --font-size-ui: 14px;
   --font-size-body: 16px;
   --font-size-reading: 17px;
   --font-size-lead: 18px;
@@ -84,7 +85,7 @@
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
   --line-height-tight: 1.4;
-  --line-height-body: 1.6;
+  --line-height-body: 1.75;
   --line-height-reading: 1.85;
   --space-1: 4px;
   --space-2: 8px;
