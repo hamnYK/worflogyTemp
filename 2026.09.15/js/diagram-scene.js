@@ -17,6 +17,9 @@
     let visible=true;
     const layouts = new Map();
     const views = new Map();
+    const heritageLayer=document.createElement("div");
+    heritageLayer.className="canvas-heritage";
+    host.append(heritageLayer);
     class DiagramScene extends Phaser.Scene {
       create() {
         activeScene = this;
@@ -101,6 +104,16 @@
         this.decorations.forEach(item=>item.destroy());
         this.decorations = [];
         this.nodes = new Map(diagram.nodes.map(n => [n.id, {...n, ...this.project(n.x,n.y), ...(layouts.get(diagram.id)?.get(n.id)||{})}]));
+        heritageLayer.replaceChildren();
+        this.heritageLabels=new Map();
+        this.nodes.forEach(n=>{
+          if(!n.heritage)return;
+          const label=document.createElement("div");label.className="canvas-heritage__label";
+          const person=document.createElement("strong");person.textContent=n.heritage.person;
+          const perspective=document.createElement("span");perspective.textContent=n.heritage.perspective;
+          label.append(person,perspective);heritageLayer.append(label);
+          this.heritageLabels.set(n.id,label);
+        });
         this.drawFrame();
         this.nodes.forEach(n => {
           const box = this.add.graphics();
@@ -124,6 +137,20 @@
         callbacks.story?.({phase:"idle",text:diagram.group?"플레이어가 에이전트를 만나 질의를 전달합니다.":"회사 철학과 핵심 기술의 관계를 살펴봅니다."});
       }
 
+      update() {
+        if(!this.heritageLabels?.size)return;
+        const camera=this.cameras.main,z=camera.zoom;
+        this.heritageLabels.forEach((label,id)=>{
+          const n=this.nodes.get(id);
+          const x=(n.x+66-camera.scrollX-camera.width/2)*z+camera.width/2;
+          const y=(n.y-24-camera.scrollY-camera.height/2)*z+camera.height/2;
+          // Render text at native CSS resolution; avoid scaling a rasterized text layer.
+          label.style.transform="translate("+Math.round(x)+"px,"+Math.round(y)+"px)";
+          label.style.width=Math.max(170,200*z)+"px";
+          label.style.fontSize=Math.max(14,17*z)+"px";
+          label.style.opacity=this.widgets.get(id)?.alpha??1;
+        });
+      }
       drawIcon(n) {return window.WorfArt.draw(this,n);}
       drawFrame() {
         this.frame.clear();this.frame.setDepth(-10);
@@ -380,6 +407,7 @@ createPlayer() {
         const node=this.nodes?.get(id);if(!node)return;
         const camera=this.cameras.main;
         let x=node.x,y=node.y,zoom=.72*(this.diagram.id==="overview"?1.44:1);
+        if(node.heritage){x+=108;zoom=Math.min(zoom,camera.width/350);}
         if(meeting&&this.player){x=(x+this.player.x)/2;y=(y+this.player.y)/2;zoom=Math.min(.72,camera.width/(Math.abs(node.x-this.player.x)+190));}
         camera.setZoom(zoom);camera.centerOn(x,y);
         callbacks.zoom(zoom);
@@ -453,7 +481,7 @@ createPlayer() {
         if(visible){activeScene.scene.resume();game.loop.wake();}
         else {activeScene.scene.pause();game.loop.sleep();}
       },
-      destroy(){mobileInput.removeEventListener("change",syncInput);game.destroy(true);}
+      destroy(){mobileInput.removeEventListener("change",syncInput);heritageLayer.remove();game.destroy(true);}
     };
   };
 })();
