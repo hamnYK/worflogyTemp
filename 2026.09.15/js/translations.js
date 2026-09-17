@@ -679,10 +679,7 @@ window.WORFLOGY_EN = {
   "2017 스마트 팜 (IoT-MR)의 고도화 (Edge AI-XR)": "Advancing the 2017 Smart Farm (IoT-MR) with Edge AI-XR",
   "온톨로지 적용 방향 연구개발 중 (특허 2017, 2018, 2020)": "Ontology Integration under R&D (Patents: 2017, 2018, 2020)",
   "파트너": "Partners",
-  "고려대학교 Human-inspired AI 연구원 (HIAI)": "Korea University Human-inspired AI Research (HIAI)"
-};
-
-Object.assign(window.WORFLOGY_EN,{
+  "고려대학교 Human-inspired AI 연구원 (HIAI)": "Korea University Human-inspired AI Research (HIAI)",
   "톰 그루버": "Tom Gruber",
   "개념 · 관계 · 공유": "Concepts · Relations · Sharing",
   "루트비히 폰 베르탈란피": "Ludwig von Bertalanffy",
@@ -695,7 +692,6 @@ Object.assign(window.WORFLOGY_EN,{
   "식별 · 연결 · 개방": "Identity · Linking · Openness",
   "알프레트 타르스키": "Alfred Tarski",
   "해석 · 논리 · 진리조건": "Interpretation · Logic · Truth conditions",
-  "함영국": "Youngkuk Hamn",
   "워플로지 창업자": "Founder of Worflogy",
   "경험 · 관계 생성 · 성장": "Experience · New relations · Growth"
-});
+};
