@@ -14,7 +14,7 @@
   form.addEventListener("submit",async event=>{
     event.preventDefault();
     if(pending||!form.reportValidity())return;
-    pending=true;submit.disabled=true;submit.textContent="전송 중…";
+    pending=true;submit.disabled=true;submit.setAttribute("aria-busy","true");submit.textContent="전송 중…";
     status.textContent="";
     notice.hidden=true;
     const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),30000);
@@ -35,7 +35,7 @@
       status.textContent=message;notice.textContent=message;notice.hidden=false;
     }finally{
       clearTimeout(timer);
-      pending=false;submit.disabled=false;submit.textContent="문의 제출하기";
+      pending=false;submit.disabled=false;submit.removeAttribute("aria-busy");submit.textContent="문의 제출하기";
     }
   });
 })();

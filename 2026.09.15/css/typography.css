@@ -55,3 +55,7 @@ html[lang="en"] .guide-header h1,html[lang="en"] .diagram-section-title{letter-s
 .guide-description>strong{font-weight:var(--font-weight-bold)}
 .guide-mobile-note{font-size:var(--font-size-xs);font-weight:var(--font-weight-regular);line-height:1.65}
 .wf-relation .wf-badge{font-family:var(--font-body);font-size:var(--font-size-xs);font-weight:var(--font-weight-regular);line-height:var(--line-height-tight)}
+
+/* Compact navigation is distinct from body copy. */
+.solution-directory__group h2{font-family:var(--font-display);font-size:var(--font-size-lead);font-weight:var(--font-weight-bold);line-height:1.5}
+.solution-directory a{font-size:var(--font-size-ui);line-height:var(--line-height-body)}

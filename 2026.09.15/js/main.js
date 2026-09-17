@@ -3,6 +3,7 @@
   const diagrams=window.WORFLOGY_DIAGRAMS;
   const copy=window.WORFLOGY_COPY;
   const root=document.getElementById("diagram-sections");
+  const directory=root.querySelector(".solution-directory");
   root.replaceChildren();
   const players=[];
   const observers=[];
@@ -46,6 +47,7 @@
       const promise=document.createElement("strong");promise.textContent="한 번의 문제 해결이 다음 문제를 푸는 지식이 되도록.";
       description.append(promise,"워플로지는 업무와 창작 과정에서 얻은 경험을 지식 그래프로 연결해,",document.createElement("br"),"다시 활용하고 발전시킬 수 있는 체계를 설계합니다.");
       section.append(header,description);
+      if(directory)section.append(directory);
       const overviewTitle=document.createElement("h2");overviewTitle.className="diagram-section-title";overviewTitle.id="overview-summary-title";overviewTitle.textContent="0. 워플로지, Bottom-Up 동적 지식 그래프 디자인 기술 회사";section.append(overviewTitle);
     }else{
       const title=document.createElement("h2");title.className="diagram-section-title";title.id="title-"+diagram.id;
