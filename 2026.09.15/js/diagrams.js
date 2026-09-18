@@ -28,7 +28,7 @@ Object.entries({
     "해석 · 논리 · 진리조건"
   ],
   "worflogy": [
-    "워플로지 창업자",
+    "워플로지 연구개발",
     "경험 · 관계 생성 · 성장"
   ]
 }).forEach(([id,[person,perspective]])=>{

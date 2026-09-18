@@ -692,6 +692,6 @@ window.WORFLOGY_EN = {
   "식별 · 연결 · 개방": "Identity · Linking · Openness",
   "알프레트 타르스키": "Alfred Tarski",
   "해석 · 논리 · 진리조건": "Interpretation · Logic · Truth conditions",
-  "워플로지 창업자": "Founder of Worflogy",
+  "워플로지 연구개발": "Worflogy R&D",
   "경험 · 관계 생성 · 성장": "Experience · New relations · Growth"
 };
