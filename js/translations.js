@@ -693,5 +693,6 @@ window.WORFLOGY_EN = {
   "알프레트 타르스키": "Alfred Tarski",
   "해석 · 논리 · 진리조건": "Interpretation · Logic · Truth conditions",
   "워플로지 연구개발": "Worflogy R&D",
-  "경험 · 관계 생성 · 성장": "Experience · New relations · Growth"
+  "경험 · 관계 생성 · 성장": "Experience · New relations · Growth",
+  "전문 분야 : 시맨틱 기반 운영 리스크 최적화": "Specialty: Semantic-based operational risk optimization"
 };
