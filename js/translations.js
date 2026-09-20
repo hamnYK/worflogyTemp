@@ -247,7 +247,7 @@ window.WORFLOGY_EN = {
   "링크드데이터\nTop-Down 디자인\n네트워크 강화 루프": "Linked Data\nTop-Down Design\nNetwork reinforcement loop",
   "워플로지\nBottom-Up 디자인\n네트워크 성장 루프": "Worflogy\nBottom-Up Design\nNetwork growth loop",
   "워플로지가 고안한 Bottom-Up 디자인. 전체론적 해석과 위크시그널 이론을 반영한 체계역학 디자인에서 이어지며, 노드와 관계를 반복적으로 늘리는 네트워크 성장 루프. 2017년 독창적 IP 확보.": "Worflogy's original Bottom-Up design follows system dynamics design informed by holistic interpretation and weak signal theory. Its network growth loop repeatedly adds nodes and relationships. Original IP secured in 2017.",
-  "워플로지 시맨틱 기술 개요 (논문 2010 | 특허 2017, 2026)": "Worflogy Semantic Technology Overview (Paper 2010 | Patents 2017, 2026)",
+  "워플로지 시맨틱 기술 개요 (논문 2010 | 특허 2017, 2025)": "Worflogy Semantic Technology Overview (Paper 2010 | Patents 2017, 2025)",
   "플랫폼": "Platform",
   "프로필과 커리어 진단, 포지션별 WBS 업무 소통 가이드, 대응 보고 진단과 성장 모니터링. 축적된 지식 그래프가 에이전트와 온톨로지 엔진을 성장시킵니다.": "Profile and career assessment, role-based WBS communication guidance, response report assessment and growth monitoring. The accumulated knowledge graph develops the agent and ontology engines.",
   "업무 생산성·협업 도구 이벤트\n민원(VOC)": "Productivity and collaboration events\nCustomer feedback (VOC)",
