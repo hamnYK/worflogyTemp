@@ -105,7 +105,7 @@
     mobileView.addEventListener("change",syncCanvasAccess);
     let explorer=null,selectedId=null,storyActive=false;
     let exampleCard=null;
-    const previewNumber={overview:"00",platform:"01",problem:"02",risk:"03",research:"04",narrative:"05",npc:"06",creator:"07",bias:"08","spatial-10":"10"}[diagram.id];
+    const previewNumber={overview:"00",platform:"01",problem:"02",risk:"03",research:"04",narrative:"05",npc:"06",creator:"07",bias:"08","spatial-9":"09","spatial-10":"10"}[diagram.id];
     if(previewNumber){
       host.classList.add("canvas-example-enabled");
       exampleCard=document.createElement("button");exampleCard.type="button";exampleCard.className="canvas-example-card";
