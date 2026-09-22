@@ -143,6 +143,7 @@
 .solution-directory{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:0 0 var(--space-8);border-top:2px solid var(--color-sky)}
 .solution-directory__group{min-width:0;padding:var(--space-3) var(--space-4)}
 .solution-directory__group+ .solution-directory__group{border-left:1px solid var(--color-border)}
+@media(min-width:1001px){.solution-directory__group:nth-child(4n+1){border-left:0}.solution-directory__group:nth-child(n+5){border-top:2px solid var(--color-sky)}}
 .solution-directory__group h2{margin:0 0 var(--space-3);padding-bottom:var(--space-3);border-bottom:1px solid var(--color-border);word-break:keep-all;overflow-wrap:anywhere}
 .solution-directory ul{list-style:none;padding:0;margin:0}
 .solution-directory li+li{margin-top:var(--space-1)}
@@ -151,7 +152,7 @@
 .solution-directory a:is(:hover,:focus-visible){color:var(--color-action);background:var(--color-surface-hover);box-shadow:inset 3px 0 var(--color-coral);text-decoration:none}
 .solution-directory a:is(:hover,:focus-visible)::after{opacity:1;transform:translate(0,-50%) rotate(45deg)}
 #overview-summary-title,.diagram-section{scroll-margin-top:0}
-@media(max-width:1000px){.solution-directory{grid-template-columns:repeat(2,minmax(0,1fr))}.solution-directory__group:nth-child(3){border-left:0}.solution-directory__group:nth-child(n+3){border-top:1px solid var(--color-border)}}
+@media(max-width:1000px){.solution-directory{grid-template-columns:repeat(2,minmax(0,1fr))}.solution-directory__group:nth-child(2n+1){border-left:0}.solution-directory__group:nth-child(n+3){border-top:1px solid var(--color-border)}}
 @media(max-width:520px){.solution-directory{grid-template-columns:minmax(0,1fr)}.solution-directory__group+.solution-directory__group{border-left:0;border-top:1px solid var(--color-border)}}
 
 /* Partner logos share the company information floor. */
