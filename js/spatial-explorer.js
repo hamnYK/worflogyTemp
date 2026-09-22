@@ -219,11 +219,26 @@
     if(stage>=5)for(const arm of svg.querySelectorAll('[data-arm]'))arm.setAttribute('transform',`rotate(${Math.sin(elapsed/480+Number(arm.dataset.arm))*4} 9 -38)`);
    }}frame=requestAnimationFrame(tick);}
   function reset(){stage=0;running=false;elapsed=0;zoom=1;pan={x:0,y:0};notify();render();}
+  // Match the earlier canvases: Ctrl+wheel zooms around the cursor.
+  const wheelHandler=event=>{
+   if(mobile.matches||!event.ctrlKey||event.deltaY===0)return;
+   event.preventDefault();
+   const matrix=svg.getScreenCTM();if(!matrix)return;
+   const cursor=new DOMPoint(event.clientX,event.clientY);
+   const before=cursor.matrixTransform(matrix.inverse());
+   const nextZoom=Math.max(.7,Math.min(2,zoom*(event.deltaY>0?.9:1.1)));
+   if(nextZoom===zoom)return;
+   zoom=nextZoom;render();
+   const after=cursor.matrixTransform(svg.getScreenCTM().inverse());
+   pan={x:pan.x+after.x-before.x,y:pan.y+after.y-before.y};
+   render();
+  };
+  host.addEventListener("wheel",wheelHandler,{passive:false});
   const resize=new ResizeObserver(()=>{pan={x:0,y:0};zoom=1;render();});resize.observe(host);
   const down=e=>{if(mobile.matches)return;drag={x:e.clientX,y:e.clientY,pan:{...pan}};svg.setPointerCapture(e.pointerId);};
   const move=e=>{if(!drag||mobile.matches)return;const ratio=700/svg.getBoundingClientRect().width/zoom;pan={x:drag.pan.x+(e.clientX-drag.x)*ratio,y:drag.pan.y+(e.clientY-drag.y)*ratio};render();};
   const up=()=>{drag=null;};svg.addEventListener('pointerdown',down);svg.addEventListener('pointermove',move);svg.addEventListener('pointerup',up);svg.addEventListener('pointercancel',up);
   frame=requestAnimationFrame(tick);
-  return {load(value){diagram=value;reset();},play(){stage=1;elapsed=0;running=true;notify();render();},next(){if(running)advance();},reset,select(){},zoom(factor){if(mobile.matches)return;zoom=Math.max(.7,Math.min(2,zoom*factor));render();},setVisible(value){visible=value;last=0;},destroy(){cancelAnimationFrame(frame);resize.disconnect();svg.remove();}};
+  return {load(value){diagram=value;reset();},play(){stage=1;elapsed=0;running=true;notify();render();},next(){if(running)advance();},reset,select(){},zoom(factor){if(mobile.matches)return;zoom=Math.max(.7,Math.min(2,zoom*factor));render();},setVisible(value){visible=value;last=0;},destroy(){host.removeEventListener("wheel",wheelHandler);cancelAnimationFrame(frame);resize.disconnect();svg.remove();}};
  };
 })();
