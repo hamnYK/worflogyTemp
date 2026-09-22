@@ -167,10 +167,10 @@
   }
   function stop(){cancelAnimationFrame(frame);frame=0;last=0;}
   function schedule(){if(!frame&&running&&visible&&!document.hidden&&!destroyed)frame=requestAnimationFrame(tick);}
-  function tick(time){frame=0;const dt=last?Math.min(time-last,100):0;last=time;elapsed+=dt;if(elapsed>=duration){if(stage<4){stage++;elapsed=0;notify();}else{cycle++;stage=1;elapsed=0;notify();}}update();schedule();}
+  function tick(time){frame=0;const dt=last?Math.min(time-last,100):0;last=time;elapsed+=dt;if(elapsed>=duration){if(stage<4){stage++;elapsed=0;notify();}else{elapsed=duration;running=false;stop();notify();}}update();schedule();}
   function reset(){stop();cycle=0;stage=0;running=false;paused=false;elapsed=0;zoom=1;pan={x:0,y:0};layout();update();notify();}
   function play(){stop();cycle=0;stage=1;running=true;paused=false;elapsed=0;update();notify();schedule();}
-  function next(){if(!running)return;if(stage<4){stage++;elapsed=0;}else{cycle++;stage=1;elapsed=0;}update();notify();}
+  function next(){if(!running)return;if(stage<4){stage++;elapsed=0;}else{elapsed=duration;running=false;stop();}update();notify();}
   function visibility(){last=0;if(document.hidden)stop();else schedule();}
   function responsive(){zoom=1;pan={x:0,y:0};layout();update();}
   function pointerDown(e){if(mobile.matches||e.button!==0)return;drag={x:e.clientX,y:e.clientY,pan:{...pan}};svg.setPointerCapture(e.pointerId);}
