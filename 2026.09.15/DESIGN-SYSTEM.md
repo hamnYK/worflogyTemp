@@ -327,3 +327,10 @@ PC에서 캔버스 안의 Ctrl + 마우스휠은 커서가 가리키는 좌표�
 ### 영상 위 텍스트 제목
 
 AFTER HOURS 브랜드 제목은 박스 없이 24px·700 영문 제목으로 표시한다. 글자색은 --color-on-media, 얇은 윤곽은 --media-text-stroke, 글자 그림자는 --shadow-media-text를 사용한다. 카드 배경·테두리·박스 그림자는 적용하지 않는다.
+### Compact glass cards
+
+Use `wf-card wf-card--glass wf-card--compact` for dense game catalogs. Padding: `--space-4`; gap: `--space-1`; title: `--font-size-lead` (18px), using the existing display font and weight. Glass colors, borders, focus states and the 44px action hit area remain shared. The arcade uses an auto-wrapping grid with a 220px minimum track and `--space-4` gaps; narrow screens use the available width.
+
+### Glass icon button
+
+Use `wf-button wf-button--glass` for controls over the arcade video. It shares teal glass surface, border and blur tokens, with the shared control radius and a 44px touch target. The lobby music control uses a speaker icon, an accessible label and aria-pressed for mute state.

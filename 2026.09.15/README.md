@@ -88,3 +88,4 @@ The arcade lazy-loads js/chip-football.bundle.js as a classic script so index.ht
     node scripts/build-chip-football.cjs
 
 The release includes the generated bundle, lib/THREE-LICENSE.txt and assets/images/hidden-bg.mp4. Browsers do not need a build tool or an external CDN at runtime.
+Basketball tosses use vendored cannon-es 0.20.0 (lib/cannon-es.mjs, MIT license in lib/CANNON-LICENSE.txt). The cylinder orientation is shared by collision physics and rendering; no random bounce direction is injected. Rebuild with the existing arcade build command.

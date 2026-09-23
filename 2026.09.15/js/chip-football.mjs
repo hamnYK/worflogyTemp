@@ -1,4 +1,6 @@
+import {footballGuide,syncGuide} from './game-guides.mjs';
 import * as THREE from '../lib/three.module.min.js';
+import {createTablePan} from './table-pan.mjs';
 import {createArcadeFinish} from './arcade-finish.mjs';
 import {ChipFootball,FIELD} from './chip-football-rules.mjs';
 
@@ -12,9 +14,10 @@ export function mountFootball(host,{onExit,onWin,english=false}={}){
  renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;
  const scene=new THREE.Scene();scene.background=new THREE.Color('#101d29');scene.fog=new THREE.Fog('#101d29',35,80);
  const camera=new THREE.PerspectiveCamera(38,1,.1,100);
- let azimuth=.56,elevation=.91,distance=30,angle=-Math.PI/2,disposed=false,frame,timer,acc=0,last=performance.now(),pointer=null,aimPoint=null;
+ let azimuth=.56,elevation=.91,distance=14,angle=-Math.PI/2,disposed=false,frame,timer,acc=0,last=performance.now(),pointer=null,aimPoint=null;
  const raycaster=new THREE.Raycaster(),plane=new THREE.Plane(new THREE.Vector3(0,1,0),-.16);
- function view(){camera.position.set(Math.sin(azimuth)*Math.cos(elevation)*distance*Math.max(1,1.2/camera.aspect),Math.sin(elevation)*distance*Math.max(1,1.2/camera.aspect),Math.cos(azimuth)*Math.cos(elevation)*distance*Math.max(1,1.2/camera.aspect));camera.lookAt(0,0,0);camera.updateMatrixWorld();}
+ const pan=createTablePan(camera,canvas);
+ function view(){camera.position.set(Math.sin(azimuth)*Math.cos(elevation)*distance*Math.max(1,1.2/camera.aspect),Math.sin(elevation)*distance*Math.max(1,1.2/camera.aspect),Math.cos(azimuth)*Math.cos(elevation)*distance*Math.max(1,1.2/camera.aspect));camera.position.add(pan.offset);camera.lookAt(pan.offset);camera.updateMatrixWorld();}
  function resize(){const {width,height}=canvas.parentElement.getBoundingClientRect();renderer.setSize(width,height,false);camera.aspect=width/height;camera.updateProjectionMatrix();view();}
  const ro=new ResizeObserver(resize);ro.observe(canvas.parentElement);
  scene.add(new THREE.HemisphereLight(0xc8e9ff,0x243321,2));
@@ -63,43 +66,50 @@ export function mountFootball(host,{onExit,onWin,english=false}={}){
  const ringMat=new THREE.MeshBasicMaterial({color:0xffe39a,transparent:true,opacity:.8,side:THREE.DoubleSide});materials.add(ringMat);const ring=mesh(new THREE.RingGeometry(.4,.43,64),ringMat,0,.025,0);ring.rotation.x=-Math.PI/2;ring.castShadow=false;rings.push(ring);
  }
  const arrow=new THREE.ArrowHelper(new THREE.Vector3(0,0,-1),new THREE.Vector3(),2,0xffe39a,.35,.2);scene.add(arrow);
- let previousPhase='ready',previousResult=null;
+ let previousPhase='ready',previousResult=null,bestTurns=null;
  const picks=root.querySelector('.chip-picks');
  for(let i=0;i<3;i++){const b=document.createElement('button');b.type='button';b.className='wf-button';b.dataset.chip=i;b.onclick=()=>choose(i);picks.append(b);}
  function say(s){status.textContent=s;}
  function updateUI(){
- progress.textContent=t('패스 완료 ','PASSES ')+game.chips.filter(c=>c.passed).length+'/3 · '+(game.canShoot?t('슈팅 가능','SHOT UNLOCKED'):t('슈팅 잠김','SHOT LOCKED'));
+ progress.textContent=(game.opening?t('시작 배치 · 횟수 제외 · ','OPENING · UNCOUNTED · '):game.turns+t('회 / 목표 4회 · ',' SHOTS / TARGET 4 · '))+(bestTurns===null?'':t('최고 ','BEST ')+bestTurns+' · ')+t('패스 완료 ','PASSES ')+game.chips.filter(c=>c.passed).length+'/3 · '+(game.canShoot?t('슈팅 가능','SHOT UNLOCKED'):t('슈팅 잠김','SHOT LOCKED'));
  [...picks.children].forEach((b,i)=>{b.textContent=(i+1)+(game.chips[i].passed?' ✓':'');b.setAttribute('aria-label',t('칩 ','Chip ')+(i+1)+(game.chips[i].passed?t(' 패스 완료',' passed'):''));b.disabled=game.phase!=='ready'||i===game.previous||(game.selected!==null&&i!==game.selected);b.setAttribute('aria-pressed',String(i===game.selected));});
  root.querySelector('.chip-fire').disabled=game.phase!=='ready'||game.selected===null;
- root.dataset.phase=game.phase;
+ root.dataset.phase=game.phase;root.dataset.turns=game.turns;root.dataset.opening=String(game.opening);
  }
- function choose(i){if(!game.select(i)){say(t('선택을 바꿀 수 없거나 직전 패스 칩입니다.','Selection is locked, or this chip made the previous pass.'));return;}say(t('칩 ','Chip ')+(i+1)+t(' 선택 고정 · 다른 두 칩 사이로 통과시키세요.',' locked · Pass through the other two chips.'));updateUI();}
- function fire(vx,vz){if(game.launch(vx,vz)){aimPoint=null;say(game.readyAtLaunch?t('슈팅! 두 칩 사이를 통과해 골대로.','Shoot through the gap and into the goal.'):t('패스 중 · 아직 골을 넣으면 FAIL입니다.','Passing · Scoring before unlock is a FAIL.'));updateUI();}}
+ function choose(i){if(game.phase!=='ready')return;if(!game.select(i)){say(t('선택을 바꿀 수 없거나 직전 패스 칩입니다.','Selection is locked, or this chip made the previous pass.'));return;}say(game.opening?t('발사하면 모인 칩을 펼칩니다. 시작 동작은 횟수에 포함하지 않습니다.','Launch to spread the chips. This opening does not count.'):t('칩 ','Chip ')+(i+1)+t(' 선택 고정 · 다른 두 칩 사이로 통과시키세요.',' locked · Pass through the other two chips.'));updateUI();}
+ function fire(vx,vz){if(game.launch(vx,vz)){aimPoint=null;say(game.phase==='breaking'?t('칩을 펼치는 중입니다.','Spreading the chips.'):game.readyAtLaunch?t('슈팅! 두 칩 사이를 통과해 골대로.','Shoot through the gap and into the goal.'):t('패스 중 · 아직 골을 넣으면 FAIL입니다.','Passing · Scoring before unlock is a FAIL.'));updateUI();}}
  function launchKey(){const power=+root.querySelector('.chip-power').value;fire(Math.cos(angle)*power,Math.sin(angle)*power);}
  root.querySelector('.chip-fire').onclick=launchKey;root.querySelector('.chip-back').onclick=onExit;
  function world(e){const rect=canvas.getBoundingClientRect();raycaster.setFromCamera(new THREE.Vector2((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1),camera);const p=new THREE.Vector3();return raycaster.ray.intersectPlane(plane,p)?p:null;}
  canvas.oncontextmenu=e=>e.preventDefault();
  canvas.onpointerdown=e=>{
- if(pointer)return;const p=world(e);const i=p?game.chips.findIndex(c=>Math.hypot(c.x-p.x,c.z-p.z)<.55):-1;
+ if(pointer)return;const p=world(e);const i=p?game.chips.map((c,i)=>({i,d:Math.hypot(c.x-p.x,c.z-p.z)})).sort((a,b)=>a.d-b.d).find(c=>c.d<.55)?.i??-1:-1;
  if(e.button===0&&i>=0&&game.phase==='ready'){if(!game.select(i)){choose(i);return;}choose(i);pointer={id:e.pointerId,mode:'aim',x:e.clientX,y:e.clientY};aimPoint=p;}
- else{pointer={id:e.pointerId,mode:'orbit',x:e.clientX,y:e.clientY};}
+ else{pointer={id:e.pointerId,mode:e.button===2?'orbit':'pan',x:e.clientX,y:e.clientY};}
  canvas.setPointerCapture(e.pointerId);canvas.focus({preventScroll:true});
  };
- canvas.onpointermove=e=>{if(!pointer||pointer.id!==e.pointerId)return;if(pointer.mode==='aim'){aimPoint=world(e);}else{azimuth-=(e.clientX-pointer.x)*.007;elevation=THREE.MathUtils.clamp(elevation+(e.clientY-pointer.y)*.004,.62,1.16);pointer.x=e.clientX;pointer.y=e.clientY;view();}};
+ canvas.onpointermove=e=>{if(!pointer||pointer.id!==e.pointerId)return;if(pointer.mode==='pan'){pan.move(pointer.x,pointer.y,e.clientX,e.clientY);pointer.x=e.clientX;pointer.y=e.clientY;view();return;}if(pointer.mode==='aim'){aimPoint=world(e);}else{azimuth-=(e.clientX-pointer.x)*.007;elevation=THREE.MathUtils.clamp(elevation+(e.clientY-pointer.y)*.004,.62,1.16);pointer.x=e.clientX;pointer.y=e.clientY;view();}};
  canvas.onpointerup=e=>{if(!pointer||pointer.id!==e.pointerId)return;if(pointer.mode==='aim'&&game.selected!==null){const p=world(e),c=game.chips[game.selected];if(p)fire((c.x-p.x)*5,(c.z-p.z)*5);}pointer=null;aimPoint=null;};
  canvas.onpointercancel=()=>{pointer=null;aimPoint=null;};
- canvas.addEventListener('wheel',e=>{e.preventDefault();distance=THREE.MathUtils.clamp(distance*Math.exp(e.deltaY*.001),17,40);view();},{passive:false});
- canvas.onkeydown=e=>{if(['1','2','3'].includes(e.key)){e.preventDefault();choose(+e.key-1);}if(['ArrowLeft','ArrowRight',' '].includes(e.key)){e.preventDefault();if(e.key===' ')launchKey();else angle+=(e.key==='ArrowLeft'?-.08:.08);}if(e.key==='+'||e.key==='='){distance=Math.max(17,distance-2);view();}if(e.key==='-'){distance=Math.min(40,distance+2);view();}};
- root.querySelectorAll('[data-camera]').forEach(b=>b.onclick=()=>{const a=b.dataset.camera;if(a==='in')distance=Math.max(17,distance-2);if(a==='out')distance=Math.min(40,distance+2);if(a==='left')azimuth-=.2;if(a==='right')azimuth+=.2;if(a==='home'){azimuth=.56;elevation=.91;distance=30;}view();});
- function reset(){game.reset();previousPhase='ready';previousResult=null;result.textContent='';result.className='chip-result';updateUI();say(t('칩을 선택하여 두 칩 사이를 통과하세요. 세 칩 모두 통과해야 슈팅을 할 수 있습니다.','Choose a chip. Complete a pass with all three before shooting.'));}
+ canvas.addEventListener('wheel',e=>{e.preventDefault();distance=THREE.MathUtils.clamp(distance*Math.exp(e.deltaY*.001),10,33);view();},{passive:false});
+ canvas.onkeydown=e=>{if(['1','2','3'].includes(e.key)){e.preventDefault();choose(+e.key-1);}if(['ArrowLeft','ArrowRight',' '].includes(e.key)){e.preventDefault();if(e.key===' ')launchKey();else angle+=(e.key==='ArrowLeft'?-.08:.08);}if(e.key==='+'||e.key==='='){distance=Math.max(10,distance-2);view();}if(e.key==='-'){distance=Math.min(33,distance+2);view();}};
+ root.querySelectorAll('[data-camera]').forEach(b=>b.onclick=()=>{const a=b.dataset.camera;if(a==='in')distance=Math.max(10,distance-2);if(a==='out')distance=Math.min(33,distance+2);if(a==='left')azimuth-=.2;if(a==='right')azimuth+=.2;if(a==='home'){pan.reset();azimuth=.56;elevation=.91;distance=14;}view();});
+ function reset(){game.reset();angle=-Math.PI/2;pointer=null;aimPoint=null;previousPhase='ready';previousResult=null;result.textContent='';result.className='chip-result';updateUI();say(t('칩 하나를 선택하고 발사하여 모인 칩을 펼치세요. 시작 동작은 횟수에서 제외됩니다.','Choose a chip and launch to spread the cluster. The opening does not count.'));}
  function checkOutcome(){
  if(game.phase!==previousPhase||game.result!==previousResult){
  updateUI();
  if(game.phase==='fail'){
- const reasons={'early-goal':t('세 칩의 패스가 끝나기 전에 슈팅했습니다.','Shot before all three chips completed a pass.'),'missed-gate':t('두 칩 사이를 통과하지 못했습니다.','The chip did not pass through the gap.'),'collision':t('다른 칩에 부딪혔습니다.','Hit another chip.')};
- result.textContent='FAIL';result.classList.add('show');say(reasons[game.result]+' '+t('자동으로 다시 시작합니다.','Restarting automatically.'));timer=setTimeout(reset,1500);
- }else if(game.phase==='won'){result.textContent='GOAL';result.classList.add('show');say(t('성공! AFTER HOURS로 돌아갑니다.','Goal! Returning to AFTER HOURS.'));timer=setTimeout(()=>{if(!disposed)onWin();},1400);}
- else if(game.result==='pass')say(t('패스 성공! 다른 칩을 선택하세요.','Pass complete! Select a different chip.'));
+ const reasons={'early-goal':t('세 칩의 패스가 끝나기 전에 골을 넣었습니다.','Scored before all three chips completed a pass.'),'missed-gate':t('두 칩 사이를 통과하지 못했습니다.','The chip did not pass through the gap.'),'collision':t('다른 칩에 부딪혔습니다.','Hit another chip.')};
+ result.textContent='FAILURE';result.classList.add('show');say(reasons[game.result]+' '+t('자동으로 다시 시작합니다.','Restarting automatically.'));timer=setTimeout(reset,1500);
+ }else if(game.phase==='won'){
+ bestTurns=Math.min(bestTurns??Infinity,game.turns);updateUI();
+ const perfect=game.turns===4;
+ result.textContent=perfect?'CONGRATULATIONS':'GOAL · '+game.turns;result.classList.add('show');result.classList.toggle('chip-result-perfect',perfect);
+ say(perfect?t('최소 4회 득점 성공! AFTER HOURS로 돌아갑니다.','Perfect 4-shot goal! Returning to AFTER HOURS.'):game.turns+t('회 득점! 최소 4회에 다시 도전합니다.','-shot goal! Try again for the 4-shot minimum.'));
+ timer=setTimeout(()=>{if(!disposed){if(perfect)onWin();else reset();}},perfect?2400:2200);
+ }
+ else if(game.phase==='ready'&&game.result==='opened')say(t('이제 시작입니다. 세 칩 모두 통과한 뒤 4회째 슈팅에 도전하세요.','Ready. Pass with all three chips, then shoot on turn 4.'));
+ else if(game.phase==='ready'&&game.result==='pass')say(t('패스 성공! 다른 칩을 선택하세요.','Pass complete! Select a different chip.'));
  previousPhase=game.phase;previousResult=game.result;
  }
  }
@@ -108,6 +118,7 @@ export function mountFootball(host,{onExit,onWin,english=false}={}){
  const elapsed=document.hidden?0:Math.min((now-last)/1000,.05);last=now;acc+=elapsed;
  while(acc>=1/240){game.step(1/240);acc-=1/240;}
  checkOutcome();
+ syncGuide(status,footballGuide(game,t,pointer?.mode==='aim'));
  game.chips.forEach((c,i)=>{const g=chipMeshes[i];g.position.set(c.x,0,c.z);if(game.phase==='moving'&&i===game.selected)g.rotation.y+=Math.hypot(game.vx,game.vz)*elapsed*.7;rings[i].position.set(c.x,.025,c.z);rings[i].visible=i===game.selected||c.passed;rings[i].material.color.set(i===game.selected?0xffe39a:0x8ddbb6);});
  arrow.visible=game.phase==='ready'&&game.selected!==null;
  if(arrow.visible){const c=game.chips[game.selected];let dx=Math.cos(angle),dz=Math.sin(angle),length=2;if(aimPoint){dx=c.x-aimPoint.x;dz=c.z-aimPoint.z;length=Math.min(4,Math.hypot(dx,dz));}const v=new THREE.Vector3(dx,0,dz);if(v.length()>.01){v.normalize();arrow.position.set(c.x,.2,c.z);arrow.setDirection(v);arrow.setLength(Math.max(.2,length),.3,.17);}}
@@ -120,3 +131,9 @@ export function mountFootball(host,{onExit,onWin,english=false}={}){
 export {mountBasketball} from './chip-basketball.mjs';
 
 export {mountCurling} from './chip-curling.mjs';
+
+export {mountBookFlip} from './chip-book-flip.mjs';
+
+export {mountEraserWrestling} from './eraser-wrestling.mjs';
+
+export {mountChalkboardPingPong} from './chalkboard-ping-pong.mjs';
