@@ -83,3 +83,17 @@ textarea.wf-input {min-height:100px;resize:vertical}
 .wf-card--glass .wf-card__title,.wf-card--glass .wf-card__action,.wf-card--glass .wf-card__status{text-shadow:var(--shadow-media-text)}
 .wf-card--glass .wf-card__action:hover,.wf-card--glass .wf-card__action:focus-visible{text-shadow:none}
 @media(forced-colors:active){.wf-card--glass .wf-card__title,.wf-card--glass .wf-card__action,.wf-card--glass .wf-card__status{text-shadow:none}}
+
+/* Compact glass cards for growing game and tool catalogs. */
+.wf-card--glass.wf-card--compact{padding:var(--space-4);gap:var(--space-1)}
+.wf-card--glass.wf-card--compact .wf-card__title{font-size:var(--font-size-lead)}
+
+/* Glass icon controls share the arcade surface and accessibility tokens. */
+.wf-button--glass{background:var(--glass-card-teal-solid);color:var(--color-on-glass);border-color:var(--glass-card-teal-border);box-shadow:var(--shadow-control)}
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+ .wf-button--glass{background:var(--glass-card-teal-surface);backdrop-filter:blur(var(--glass-card-blur));-webkit-backdrop-filter:blur(var(--glass-card-blur))}
+}
+.wf-button--glass:hover,.wf-button--glass:active{background:var(--glass-card-teal-solid);color:var(--color-on-glass);border-color:var(--color-on-glass)}
+.wf-button--glass:focus-visible{outline:var(--glass-card-focus-ring);outline-offset:var(--focus-offset)}
+@media(prefers-reduced-transparency:reduce){.wf-button--glass{background:var(--glass-card-teal-solid);backdrop-filter:none;-webkit-backdrop-filter:none}}
+@media(forced-colors:active){.wf-button--glass{background:ButtonFace;color:ButtonText;border-color:ButtonText;backdrop-filter:none;-webkit-backdrop-filter:none}}
