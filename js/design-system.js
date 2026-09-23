@@ -15,3 +15,5 @@
 })();
 
 (()=>{let floor=1;const up=document.getElementById('ds-floor-up'),down=document.getElementById('ds-floor-down'),out=document.getElementById('ds-floor-position');if(!up)return;function render(){up.disabled=floor===1;down.disabled=floor===3;out.textContent='0'+floor+' / 03';}up.onclick=()=>{floor--;render();};down.onclick=()=>{floor++;render();};render();})();
+
+document.getElementById("ds-glass-play")?.addEventListener("click",()=>{document.getElementById("ds-glass-status").textContent="PLAY 동작을 확인했습니다. 이 화면은 컴포넌트 예시입니다.";});

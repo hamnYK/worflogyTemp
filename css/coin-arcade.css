@@ -1,0 +1,92 @@
+/* Transparent display surfaces are scoped to the hidden arcade. */
+.section-elevator .arcade-open{position:absolute;top:calc(100% + var(--space-4));left:-1px;width:76px;min-height:var(--space-16);border:1px solid var(--color-border-input);border-radius:var(--radius-control);background:var(--color-white);box-shadow:var(--shadow-floating);color:var(--color-action)}
+.coin-arcade{--glass-ink:#dffbf3;position:fixed;inset:0;width:100vw;max-width:none;height:100dvh;max-height:none;margin:0;padding:0;border:0;color:var(--glass-ink);background:#17333a;overflow:auto;font-family:var(--font-body)}
+.coin-arcade::backdrop{background:var(--color-overlay)}.coin-arcade *{box-sizing:border-box}
+.coin-arcade button{font:inherit;cursor:pointer}.coin-arcade button:focus-visible,.coin-arcade canvas:focus-visible{outline:3px solid #d4ff96;outline-offset:5px}
+.arcade-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 20% 40%,#1b987b30,transparent 55%),radial-gradient(ellipse at 90% 80%,#5671c428,transparent 55%),repeating-linear-gradient(0deg,transparent 0 3px,#afffe903 3px 4px)}
+.arcade-shell{position:relative;max-width:1160px;min-height:100%;margin:auto;padding:28px 48px;display:flex;flex-direction:column}
+.arcade-header,.arcade-footer{display:flex;justify-content:space-between;align-items:center;gap:20px;font-size:11px;letter-spacing:2px;color:#a0beb9}
+.coin-arcade .arcade-close,.coin-arcade .game-back,.coin-arcade .game-reset{border:1px solid #88d7c54d;background:#ffffff08;color:#dffbf3;padding:10px 16px;border-radius:5px;min-height:44px;letter-spacing:0}
+.arcade-content{flex:1;padding:40px 0}.arcade-intro{text-align:center;margin-bottom:36px}.arcade-eyebrow{color:#b6f894;font-size:11px;letter-spacing:4px;margin:0 0 16px}
+.coin-arcade h2{color:inherit;margin:0;font-size:clamp(24px,3vw,38px);line-height:1.3}.arcade-intro>p:last-child{color:#9abdb5;font-size:14px;margin:16px 0}
+.arcade-cards{display:grid;grid-template-columns:repeat(2,minmax(0,280px));align-items:start;gap:var(--space-6);max-width:584px;margin:auto}
+
+.arcade-footer{padding-top:18px;border-top:1px solid #aaffdf20;letter-spacing:1px}.game-heading{display:flex;align-items:center;justify-content:space-between;gap:16px}.coin-arcade .game-heading h2{font-size:22px}.game-score{font-size:13px;color:#ccffa3;white-space:nowrap}.game-help,.game-keyboard{font-size:13px;color:#a5c9bd;line-height:1.7}.coin-pitch{display:block;width:100%;aspect-ratio:900/560;object-fit:contain;border:1px solid #73d9b955;border-radius:8px;touch-action:none;background:#092b30}.game-bottom{display:flex;gap:16px;justify-content:space-between;align-items:center}.game-status{font-size:14px;line-height:1.6;color:#d4f2bf;flex:1}.game-reset{flex-shrink:0}.game-keyboard{font-size:11px}
+.arcade-doors{position:fixed;inset:0;z-index:10;pointer-events:none;overflow:hidden}.arcade-door{position:absolute;top:0;bottom:0;width:50%;overflow:hidden;background:var(--color-white,#fff);transition:transform 1s cubic-bezier(.65,0,.2,1);box-shadow:0 0 50px #0008}.arcade-door.left{left:0;border-right:1px solid #b9fff8}.arcade-door.right{right:0;border-left:1px solid #b9fff8}.arcade-page{position:absolute;left:0;color:var(--color-text);background:var(--color-white,#fff);pointer-events:none}.right .arcade-page{left:-50vw}.opened .left{transform:translateX(-101%)}.opened .right{transform:translateX(101%)}
+@media(max-width:999px),(max-height:599px){.section-elevator{display:flex;position:fixed;right:12px;top:45%;z-index:90;padding:4px;border:1px solid var(--color-border);border-radius:8px;background:var(--color-white)}.section-elevator>button:not(.arcade-open),.section-elevator>output{display:none}.section-elevator .arcade-open{position:static;display:flex;flex-direction:column;align-items:center;gap:4px;width:auto;border:0;min-height:48px;font-size:11px;background:transparent;box-shadow:none}}
+@media(max-width:650px){.arcade-shell{padding:20px}.arcade-content{padding:28px 0}.arcade-cards{gap:16px;grid-template-columns:1fr}.arcade-header{font-size:9px;letter-spacing:1px}.arcade-footer{font-size:9px;align-items:flex-start}.game-heading{flex-wrap:wrap}.coin-arcade .game-heading h2{font-size:18px}.coin-pitch{max-height:none}.game-bottom{align-items:flex-start}.game-status{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.arcade-door{transition:none}}
+
+/* Elevator door control: shared design-system states and motion. */
+.section-elevator .arcade-open{
+ transition:background-color var(--duration-fast) var(--ease-standard),border-color var(--duration-fast) var(--ease-standard),color var(--duration-fast) var(--ease-standard),box-shadow var(--duration-fast) var(--ease-standard),transform var(--duration-fast) var(--ease-standard);
+}
+.section-elevator .arcade-open span:first-child{color:inherit}
+@media(hover:hover){
+ .section-elevator .arcade-open:hover{background:var(--color-surface-hover);border-color:var(--color-action);color:var(--color-action-hover);box-shadow:var(--shadow-floating);transform:translateY(calc(var(--space-1) / -2))}
+}
+.section-elevator .arcade-open:focus-visible{outline:var(--focus-ring);outline-offset:var(--focus-offset);background:var(--color-surface-hover);border-color:var(--color-action)}
+.section-elevator .arcade-open:active{background:var(--color-surface-subtle);border-color:var(--color-action-hover);box-shadow:var(--shadow-control);transform:translateY(0)}
+@media(prefers-reduced-motion:reduce){.section-elevator .arcade-open{transition:none}.section-elevator .arcade-open:hover{transform:none}}
+/* Bottom-centered elevator return control, using shared control tokens. */
+.arcade-header{min-height:var(--space-16)}
+.coin-arcade .arcade-close{position:fixed;z-index:var(--z-floating);top:auto;bottom:calc(var(--space-4) + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--space-1);width:calc(var(--space-16) + var(--space-3));min-height:var(--space-16);padding:var(--space-2);border:1px solid var(--color-border-input);border-radius:var(--radius-control);background:var(--color-surface);color:var(--color-action);box-shadow:var(--shadow-floating);font-family:var(--font-body);font-size:var(--font-size-xs);font-weight:var(--font-weight-semibold);line-height:var(--line-height-tight);letter-spacing:normal;text-shadow:none;transition:background-color var(--duration-fast) var(--ease-standard),border-color var(--duration-fast) var(--ease-standard),color var(--duration-fast) var(--ease-standard),box-shadow var(--duration-fast) var(--ease-standard)}
+.coin-arcade .arcade-close span:first-child{font-size:var(--font-size-ui)}
+.coin-arcade .arcade-close:hover{background:var(--color-surface-hover);border-color:var(--color-action);color:var(--color-action-hover)}
+.coin-arcade .arcade-close:focus-visible{outline:var(--focus-ring);outline-offset:var(--focus-offset)}
+.coin-arcade .arcade-close:active{background:var(--color-surface-subtle);box-shadow:var(--shadow-control)}
+@media(max-width:650px){.arcade-header{min-height:100px;align-items:flex-end;justify-content:center}}
+
+/* Wordmark at the top; reserve bottom space for the close control. */
+.coin-arcade .arcade-shell{padding-top:var(--space-4);padding-bottom:calc(var(--space-16) + var(--space-8) + env(safe-area-inset-bottom,0px))}
+.coin-arcade .arcade-header{min-height:0;justify-content:center;align-items:center;text-align:center}
+
+/* Fine reflections on the see-through display overlooking the mountain valley. */
+.coin-arcade .arcade-glow{position:fixed;box-shadow:inset 0 0 0 1px #c5fff438;background:linear-gradient(115deg,transparent 12%,#d0fff509 32%,transparent 46%,#d8eaff0d 77%,transparent 90%),repeating-linear-gradient(0deg,transparent 0 3px,#afffe905 3px 4px)}
+.coin-arcade .arcade-header{font-family:var(--font-display-en);font-size:var(--font-size-heading);font-weight:var(--font-weight-bold);line-height:var(--line-height-tight);letter-spacing:normal;color:var(--color-text-muted);text-shadow:none}
+.coin-arcade .arcade-wordmark{max-width:100%;overflow-wrap:anywhere;padding:var(--space-2) 0;border:0;border-radius:0;background:transparent;box-shadow:none;color:var(--color-on-media);text-shadow:var(--shadow-media-text);-webkit-text-stroke:var(--media-text-stroke);paint-order:stroke fill}
+.coin-arcade .game-help,.coin-arcade .game-keyboard{color:var(--glass-ink);text-shadow:0 1px 4px #06171c}
+
+/* Card presentation is shared in components.css; only layout lives here. */
+@media(max-width:650px){.arcade-cards > .wf-card{width:100%;max-width:280px;justify-self:center}}
+
+
+/* 3D tabletop controls use the shared site design system. */
+.coin-arcade .chip-game{padding:var(--space-4);border:1px solid var(--color-border);border-radius:var(--radius-card);background:var(--color-caption-surface);color:var(--color-text);box-shadow:var(--shadow-floating)}
+.chip-game-heading{display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);flex-wrap:wrap;margin-bottom:var(--space-4)}
+.coin-arcade .chip-game h2{font-family:var(--font-display-en);font-size:var(--font-size-heading);font-weight:var(--font-weight-bold);color:var(--color-text)}
+.chip-progress{font-size:var(--font-size-xs);font-weight:var(--font-weight-semibold);color:var(--color-text-muted)}
+.chip-viewport{position:relative;height:clamp(360px,60vh,660px);overflow:hidden;border-radius:var(--radius-card);background:var(--color-charcoal)}
+.chip-viewport canvas{display:block;width:100%;height:100%;touch-action:none}
+.chip-camera{position:absolute;right:var(--space-2);bottom:var(--space-2);display:flex;gap:var(--space-1)}
+.coin-arcade .chip-game button{min-height:var(--control-height-touch);background:var(--color-surface);color:var(--color-text);border:1px solid var(--color-border-input);border-radius:var(--radius-control);font-family:var(--font-body);font-size:var(--font-size-sm)}
+.coin-arcade .chip-game button:not(:disabled):hover{background:var(--color-surface-hover)}
+.coin-arcade .chip-game button:focus-visible,.coin-arcade .chip-game canvas:focus-visible{outline:var(--focus-ring);outline-offset:var(--focus-offset)}
+.coin-arcade .chip-game button[aria-pressed="true"]{border-color:var(--color-action);background:var(--color-surface-hover);color:var(--color-action)}
+.coin-arcade .chip-game button:disabled{opacity:.45;cursor:default}
+.chip-controls,.chip-picks{display:flex;align-items:center;gap:var(--space-2);flex-wrap:wrap}
+.chip-controls{margin-top:var(--space-3);justify-content:space-between}
+.chip-controls label{display:flex;align-items:center;gap:var(--space-2);font-size:var(--font-size-sm)}
+.chip-power{width:120px;accent-color:var(--color-action)}
+.chip-status{margin:var(--space-3) 0;font-size:var(--font-size-ui);font-weight:var(--font-weight-semibold);line-height:var(--line-height-body)}
+.chip-help,.chip-rules{font-size:var(--font-size-xs);color:var(--color-text-muted);line-height:var(--line-height-body)}
+.chip-rules summary{cursor:pointer;min-height:var(--control-height-touch);display:list-item;padding-top:var(--space-2)}
+.chip-result{position:absolute;inset:0;display:none;align-items:center;justify-content:center;pointer-events:none;background:var(--color-overlay);color:var(--color-white);font-family:var(--font-display-en);font-size:clamp(48px,9vw,100px);font-weight:var(--font-weight-bold);letter-spacing:.06em}
+.chip-result.show{display:flex}
+@media(max-width:650px){.coin-arcade .chip-game{padding:var(--space-2)}.chip-viewport{height:420px}.chip-camera button{padding:var(--space-1) var(--space-2)}.chip-game-heading{gap:var(--space-2)}.coin-arcade .chip-game h2{font-size:var(--font-size-heading)}}
+
+/* Video is confined to the arcade and sits behind the glass and cards. */
+.coin-arcade .arcade-background-video{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;pointer-events:none;z-index:0}
+.coin-arcade .arcade-glow{z-index:1}
+.coin-arcade .arcade-shell{z-index:2}
+
+/* Basketball catch timing and aim controls reuse system colors and spacing. */
+.basket-aim{width:100px;accent-color:var(--color-action)}
+.basket-catch-meter{position:absolute;left:50%;top:var(--space-4);transform:translateX(-50%);width:160px;height:var(--space-4);border:1px solid var(--color-border-input);border-radius:var(--radius-pill);background:linear-gradient(90deg,var(--color-surface) 0 33%,var(--color-success-surface) 33% 67%,var(--color-surface) 67%);box-shadow:var(--shadow-control)}
+.basket-catch-meter[hidden]{display:none}
+.basket-catch-meter span{position:absolute;left:calc(50% - 3px);top:-3px;width:6px;height:20px;background:var(--color-action);border-radius:var(--radius-control)}
+.basket-catch-meter.is-ready{outline:var(--focus-ring);outline-offset:var(--focus-offset)}
+.coin-arcade .chip-game .basket-catch-ready{background:var(--color-success-surface);border-color:var(--color-success)}
+
+/* Three compact game cards, wrapping with the available display width. */
+@media(min-width:1000px){.arcade-cards{grid-template-columns:repeat(3,minmax(0,280px));max-width:888px}}

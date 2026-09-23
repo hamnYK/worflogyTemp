@@ -16,3 +16,7 @@
 /* Shared display typography specimens. */
 .ds-type-title,.ds-type-heading,.ds-hero h1,.ds-section h2{font-family:var(--font-display);font-weight:700}
 .ds-type-english{font-family:var(--font-display-en);font-size:var(--font-size-title);font-weight:600;line-height:1.3}
+
+/* Specimen composition only; all card styles come from components.css. */
+.ds-glass-stage{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:var(--space-6);padding:var(--space-8);margin-bottom:var(--space-4);border-radius:var(--radius-card);background:linear-gradient(120deg,var(--color-surface) 0 40%,var(--color-sky) 40% 65%,var(--color-charcoal) 65%)}
+@media(max-width:760px){.ds-glass-stage{grid-template-columns:1fr;padding:var(--space-4)}}
