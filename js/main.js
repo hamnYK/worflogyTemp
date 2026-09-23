@@ -160,7 +160,7 @@
     else if(state.phase==="graph"){speaker="에이전트";text="상호작용을 통해 온톨로지 지식 그래프가 생성됩니다.";}
     else if(state.phase==="complete"){
       speaker="활용 기술";
-      text=index===0?"워플로지가 고안한 Bottom-Up 네트워크 성장 루프":diagram.id==="platform"?"Top-Down 디자인 · W3C RDF/OWL 2 기반":({
+      text=index===0?"워플로지가 고안한 Bottom-Up 네트워크 성장 루프":diagram.id==="platform"?"Top-Down 시맨틱 디자인 · W3C RDF/OWL 2 기반":({
         "top-down":"전통적인 Top-Down 정적 시맨틱 디자인",
         "bottom-up":"워플로지의 Bottom-Up 동적 지식 그래프 디자인",
         "hybrid":"Top-Down·Bottom-Up 하이브리드 디자인"
