@@ -1,4 +1,4 @@
-/* Worflogy Design System 1.2. Change semantic tokens here first. */
+/* Worflogy Design System 1.3. Change semantic tokens here first. */
 :root {
   --color-coral: #f16c5b;
   --color-sky: #58b4df;
@@ -36,6 +36,20 @@
   --color-danger-surface: #fbe9ed;
   --color-overlay: rgba(37,42,52,.48);
   --color-caption-surface: rgba(255,255,255,.97);
+  /* Glass cards: bounded surfaces over photography/video, never whole-page opacity. */
+  --glass-card-teal-surface: linear-gradient(135deg,rgba(15,60,58,.42),rgba(8,35,40,.38) 55%,rgba(27,91,78,.46));
+  --glass-card-teal-solid: #153d3b;
+  --glass-card-teal-border: #8debd25c;
+  --glass-card-slate-surface: linear-gradient(135deg,rgba(42,54,82,.42),rgba(16,36,52,.38));
+  --glass-card-slate-solid: #26364b;
+  --glass-card-slate-border: #b5bcff40;
+  --color-on-glass: var(--color-white);
+  --color-on-media: var(--color-white);
+  --media-text-stroke: .5px var(--color-charcoal);
+  --shadow-media-text: 0 1px 2px var(--color-charcoal), 0 2px 8px var(--color-charcoal);
+  --glass-card-blur: 8px;
+  --glass-card-shadow: inset 0 0 32px #94ffe508, 0 25px 55px #0004;
+  --glass-card-focus-ring: 2px solid var(--color-on-glass);
   /* Shared canvas roles, consumed by canvas-theme.js. */
   --scene-background: var(--color-surface);
   --scene-plane: #e6f0f7;

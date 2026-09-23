@@ -79,3 +79,12 @@ Phaser 출처: https://cdn.jsdelivr.net/npm/phaser@3.90.0/dist/phaser.min.js
 ## 새 홈페이지 배포 실행
 
 이 폴더의 **deploy.cmd**를 실행합니다. 새 홈페이지 공개 파일만 gh-pages에 반영합니다. 상위 폴더의 기존 build.ps1과 별개입니다. 실행 방법·필수 도구·실패 처리는 [배포 안내](./DEPLOY.md)를 참고하세요.
+
+## Arcade build and local-file preview
+
+The arcade lazy-loads js/chip-football.bundle.js as a classic script so index.html and en.html can also be opened directly with file://. The editable sources remain js/chip-football.mjs and js/chip-football-rules.mjs. After changing those sources, rebuild the checked-in bundle:
+
+    npm install --prefix tmp/chip-bundler --no-save esbuild@0.25.10
+    node scripts/build-chip-football.cjs
+
+The release includes the generated bundle, lib/THREE-LICENSE.txt and assets/images/hidden-bg.mp4. Browsers do not need a build tool or an external CDN at runtime.

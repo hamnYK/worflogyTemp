@@ -1,4 +1,4 @@
-# 워플로지 디자인 시스템 v1.0
+# 워플로지 디자인 시스템 v1.3
 
 ## 범위와 시작점
 
@@ -86,6 +86,33 @@ native dialog와 wf-dialog를 사용한다. 제목을 aria-labelledby로 연결�
 - wf-badge: 짧은 상태 표시. warning, neutral 변형을 제공한다.
 - wf-notice: 설명이 필요한 상태. 오류에는 wf-notice--error를 사용한다.
 - 언론보도와 활동 이미지는 같은 비율(8:3)과 메타데이터 순서를 유지한다. 언론 이미지는 cover, 활동 이미지는 contain을 기본으로 한다.
+
+
+### 유리 카드 (Glass card)
+
+사진·영상 위에 겹쳐 놓는 콘텐츠 카드의 공식 변형이다. 기본 밝은 카드와 구분하며, 카드 전체에 opacity를 적용하지 않는다.
+
+- 구조: `wf-card wf-card--glass`. 청록색을 기본으로 사용하고, 슬레이트색은 `wf-card--glass-slate`를 추가한다.
+- 표면: `--glass-card-*-surface`, `--glass-card-*-solid`, `--glass-card-*-border`. 색상을 바꾸려면 tokens.css에서 변경한다.
+- 재질: `--glass-card-blur` 8px, `--glass-card-shadow`. 카드 반투명도는 표면에만 적용한다.
+- 공통 형태: `--radius-card` 6px, `--space-6` 24px 안쪽 여백, `--space-3` 12px 간격. 너비와 열 수는 사용하는 화면의 레이아웃에서 결정한다.
+- 제목: `wf-card__title`, `--font-size-heading` 24px, `--font-weight-bold` 700, 줄높이 1.4. 영문 제목에는 `lang="en"`을 지정해 Space Grotesk를 사용한다. 모바일에서도 제목 크기를 임의로 줄이지 않는다.
+- 텍스트: `--color-on-glass`. 밝은 배경 위에서도 글자를 읽을 수 있도록 지정된 표면의 알파 값을 유지한다. 배경 영상의 흰 프레임과 검은 프레임 모두 확인한다.
+- 행동: `wf-card__action`. 게임 시작은 button, 페이지 이동은 a. 13px·600, 최소 44px 높이, 밑줄을 사용한다. 카드 전체에는 클릭 이벤트나 불필요한 tabIndex를 주지 않는다.
+- 준비 중: 클릭할 수 없는 `wf-card__status`로 표시한다. 색상만으로 상태를 전달하지 않는다.
+- 상태: 행동에만 공통 hover/active 색상과 `--glass-card-focus-ring` / `--focus-offset`을 적용한다. 전환은 `--duration-fast` / `--ease-standard`를 사용한다.
+- 대체 표현: backdrop-filter 미지원 및 prefers-reduced-transparency에서는 불투명 표면을 사용한다. forced-colors에서는 시스템 색상을 사용한다.
+- 예시: [유리 카드 구성과 동작](./design-system.html#glass-cards).
+- 현재 적용: AFTER HOURS의 축구·농구 진입 카드. 게임 내부 3D 재질, 배경 영상 및 화면 전환은 이 컴포넌트의 범위에 포함되지 않는다.
+
+```html
+<article class="wf-card wf-card--glass">
+  <h2 class="wf-card__title" lang="en">3 CHIPS FOOTBALL</h2>
+  <button type="button" class="wf-card__action">
+    <span aria-hidden="true">▶</span> PLAY
+  </button>
+</article>
+```
 
 ## 6. 홈페이지 패턴
 
@@ -296,3 +323,7 @@ PC 스마트 팜은 미리보기 높이를 캔버스 전체 패딩으로 확보�
 PC에서 캔버스 안의 Ctrl + 마우스휠은 커서가 가리키는 좌표를 고정한 채 확대(1.1배)·축소(0.9배)한다. 각 캔버스의 기존 줌 한계를 유지하고 초기화로 기본 배율·위치로 복귀한다. 일반 휠과 모바일 스크롤은 가로채지 않는다. 캔버스 해제 시 휠 이벤트도 제거한다.
 
 - 11번 캔버스의 별도 높이·종횡비 설정을 제거하고 공통 .diagram-canvas 크기를 그대로 사용한다. PC 620px, 모바일(760px 이하) 360px이며 SVG는 해당 영역에 맞춰 비율을 유지한다.
+
+### 영상 위 텍스트 제목
+
+AFTER HOURS 브랜드 제목은 박스 없이 24px·700 영문 제목으로 표시한다. 글자색은 --color-on-media, 얇은 윤곽은 --media-text-stroke, 글자 그림자는 --shadow-media-text를 사용한다. 카드 배경·테두리·박스 그림자는 적용하지 않는다.

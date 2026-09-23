@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import {ChipCurling} from '../js/chip-curling-rules.mjs';
+const g=new ChipCurling();
+assert.equal(g.launch(NaN),false);assert(g.launch(4.38));assert.equal(g.launch(4),false);g.advance(12);assert.equal(g.score,3);
+const straight=g.chips[0].x;
+const curved=new ChipCurling();curved.launch(4.38,0,1);curved.advance(12);assert(curved.chips[0].x>straight+.5);
+const miss=new ChipCurling();for(let i=0;i<3;i++){miss.launch(1);miss.advance(12);}assert.equal(miss.phase,'fail');
+g.launch(4.30,.055,0);g.advance(12);g.launch(4.30,-.055,0);g.advance(12);
+console.log('WIN ROUTE',g.phase,g.score,g.chips.map(c=>[c.x,c.z]));
+assert.equal(g.phase,'won');
+const hit=new ChipCurling();hit.launch(4.38);hit.advance(12);const before=hit.chips[0].z;hit.launch(4.7);hit.advance(12);assert(hit.chips[0].z<before-.1);
+g.reset();assert.equal(g.phase,'ready');assert.equal(g.chips.length,0);
+console.log('PASS: curl, friction, score, collisions, shot lock, win, fail, reset');
