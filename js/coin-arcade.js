@@ -49,6 +49,26 @@ function syncBackground(){
  video.muted=true;video.play().catch(()=>{});
 }
 document.addEventListener('visibilitychange',syncBackground);
+function watchBackground(video){
+ let recoveryTimer;
+ // WebGL startup can stall a fully buffered video without setting paused.
+ // Re-seek only when playback has actually stopped, preserving its position.
+ function recover(){
+  if(recoveryTimer)return;
+  const time=video.currentTime;
+  recoveryTimer=setTimeout(()=>{
+   recoveryTimer=null;
+   if(!video.isConnected||!dialog.open||closing||document.hidden||video.seeking||video.currentTime!==time)return;
+   for(let i=0;i<video.buffered.length;i++){
+    if(video.buffered.start(i)<=time&&video.buffered.end(i)>time+.1){
+     video.currentTime=time;syncBackground();break;
+    }
+   }
+  },400);
+ }
+ video.addEventListener('waiting',recover);
+ video.addEventListener('stalled',recover);
+}
 function stopGame(){gameGeneration++;gameHandle?.dispose();gameHandle=null;}
 function label(){trigger.lastChild.textContent='OPEN';trigger.setAttribute('aria-label',t('문 열기 · 코인 오락실','Open doors · Coin arcade'));}
 label();new MutationObserver(label).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
@@ -56,6 +76,7 @@ function open(){
  closing=false;
  oldOverflow=document.body.style.overflow;document.body.style.overflow='hidden';
  dialog.innerHTML='<video class="arcade-background-video" src="./assets/images/hidden-bg.mp4" muted loop playsinline preload="auto" inert disablepictureinpicture></video><div class="arcade-glow"></div><div class="arcade-shell"><header class="arcade-header"><button type="button" class="arcade-mute wf-button wf-button--glass" aria-label="Mute background music" aria-pressed="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4Z"/><g class="sound-waves"><path d="M15 8a6 6 0 0 1 0 8M18 5a10 10 0 0 1 0 14"/></g><path class="sound-off" d="m16 9 5 6m0-6-5 6"/></svg></button><span class="arcade-wordmark">WORFLOGY | AFTER HOURS</span><button type="button" class="arcade-close wf-button" autofocus aria-label="Close elevator doors"><span aria-hidden="true">▶ | ◀</span><span>CLOSE</span></button></header><div class="arcade-content"></div></div>';
+ watchBackground(dialog.querySelector('.arcade-background-video'));
  dialog.querySelector('.arcade-mute').onclick=()=>{
  if(musicBlocked){music.muted=false;musicBlocked=false;}else music.muted=!music.muted;
  try{localStorage.setItem('worflogy-arcade-muted',String(music.muted));}catch{}
