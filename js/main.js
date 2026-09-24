@@ -63,6 +63,24 @@
         section.append(readiness);
       }
     }
+    if(diagram.video){
+      const shell=document.createElement("div");shell.className="diagram-shell";
+      const toolbar=document.createElement("div");toolbar.className="toolbar";
+      const technology=document.createElement("strong");technology.className="toolbar-technology";technology.textContent=diagram.technologyLabel;
+      toolbar.append(technology);
+      const video=document.createElement("video");video.className="diagram-canvas diagram-canvas--video";
+      video.muted=true;video.autoplay=true;video.loop=true;video.playsInline=true;video.preload="metadata";
+      video.setAttribute("muted","");video.setAttribute("playsinline","");video.setAttribute("aria-label",diagram.title);
+      video.src=diagram.video;
+      shell.append(toolbar,video);section.append(shell);root.append(section);
+      let visible=false;
+      const syncVideo=()=>{if(visible&&!document.hidden)video.play().catch(()=>{});else video.pause();};
+      const observer=new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;syncVideo();});
+      observer.observe(video);observers.push(observer);
+      document.addEventListener("visibilitychange",syncVideo);
+      players.push({destroy(){video.pause();document.removeEventListener("visibilitychange",syncVideo);}});
+      return;
+    }
     if(diagram.placeholder){
       const shell=document.createElement("div");shell.className="diagram-shell";
       const canvas=document.createElement("div");canvas.className="diagram-canvas diagram-canvas--placeholder";

@@ -1,3 +1,10 @@
+/* Pebble territory shares the arcade controls and contextual status layout. */
+.pebble-score{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:var(--space-3);font-weight:var(--font-weight-semibold)}
+.pebble-you{color:#187465}.pebble-ai{color:#a54d36}
+.pebble-turn{font-size:var(--font-size-xs);color:var(--color-text-muted)}
+.pebble-aim{width:110px;accent-color:var(--color-action)}
+.pebble-game .chip-controls output{min-width:36px;font-variant-numeric:tabular-nums}
+@media(max-width:650px){.pebble-game .chip-game-heading h2{font-size:20px}.pebble-game .chip-controls label{flex:1 1 42%}.pebble-game .chip-controls input{width:80px}.pebble-score{font-size:13px}.pebble-turn{font-size:11px}}
 /* Transparent display surfaces are scoped to the hidden arcade. */
 .section-elevator .arcade-open{position:absolute;top:calc(100% + var(--space-4));left:-1px;width:76px;min-height:var(--space-16);border:1px solid var(--color-border-input);border-radius:var(--radius-control);background:var(--color-white);box-shadow:var(--shadow-floating);color:var(--color-action)}
 .coin-arcade{--glass-ink:#dffbf3;position:fixed;inset:0;width:100vw;max-width:none;height:100dvh;max-height:none;margin:0;padding:0;border:0;color:var(--glass-ink);background:#17333a;overflow:auto;font-family:var(--font-body)}
@@ -115,3 +122,38 @@
 .coin-arcade .arcade-mute{position:absolute;right:0;top:0;display:inline-flex;align-items:center;justify-content:center;width:var(--control-height-touch);height:var(--control-height-touch);padding:0;min-height:var(--control-height-touch)}
 .coin-arcade .arcade-mute[hidden]{display:none}
 .coin-arcade .arcade-mute:focus-visible{outline:var(--glass-card-focus-ring);outline-offset:var(--focus-offset)}
+
+/* Paper-and-pencil triangle territory. Native buttons support touch and keys. */
+.triangle-score{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0 16px;font-size:var(--font-size-sm);font-weight:var(--font-weight-semibold)}
+.triangle-score strong{font-size:24px;margin-left:8px;font-variant-numeric:tabular-nums}
+.triangle-you{color:#116e65}.triangle-ai{color:#a64f3c}.triangle-turn{font-size:var(--font-size-xs);text-align:center;color:var(--color-text-muted)}
+.triangle-board{position:relative;isolation:isolate;aspect-ratio:1000/640;background:repeating-linear-gradient(0deg,transparent 0 31px,#69899916 31px 32px),#faf6e9;border:1px solid #d2c9b5;border-radius:var(--radius-card);overflow:hidden;box-shadow:inset 0 0 35px #90734612}
+.triangle-board svg,.triangle-dots{position:absolute;inset:0;width:100%;height:100%}
+.triangle-board svg{pointer-events:none}
+.triangle-lines line{stroke:#3c494d;stroke-width:2.5;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.triangle-lines .triangle-last-edge{stroke:#8f6a19;stroke-width:3.5}
+.triangle-owned-you{fill:#57b9a766}.triangle-owned-ai{fill:#e391706b}
+.triangle-owner-label{font:600 18px var(--font-body);fill:#35484b;pointer-events:none}
+.coin-arcade .triangle-game .triangle-dot{position:absolute;transform:translate(-50%,-50%);width:36px;height:36px;min-height:36px;padding:0 0 20px;border:0;border-radius:50%;background:transparent;color:#4b575a;font-size:10px;line-height:16px;touch-action:manipulation;opacity:1}
+.triangle-dot::after{content:'';position:absolute;left:50%;top:50%;width:8px;height:8px;border-radius:50%;background:#36484e;transform:translate(-50%,-50%);box-shadow:0 0 0 3px #faf6e9}
+.coin-arcade .triangle-game .triangle-dot:hover:not(:disabled){background:#116e6519}
+.coin-arcade .triangle-game .triangle-dot[aria-pressed="true"]{background:#116e6533;box-shadow:0 0 0 2px #116e65}
+.triangle-dot[aria-pressed="true"]::after{background:#116e65}
+.triangle-dot.triangle-available::after{background:#116e65;box-shadow:0 0 0 3px #faf6e9,0 0 0 5px #116e6555}
+.coin-arcade .triangle-game .triangle-dot:focus-visible{outline:3px solid #116e65;outline-offset:1px}
+.triangle-count{font-size:var(--font-size-xs);color:var(--color-text-muted);line-height:1.7}
+.triangle-game .chip-status{min-height:2.8em}
+.triangle-board{max-width:900px;margin-inline:auto}
+@media(max-width:650px){.triangle-owner-label{font-size:28px}}
+@media(max-width:650px){.triangle-board{aspect-ratio:1000/900}.triangle-score{gap:6px}.triangle-score strong{font-size:20px}.triangle-game .chip-game-heading h2{font-size:20px}.triangle-game .chip-controls{justify-content:space-between}}
+.triangle-table-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.triangle-3d{max-width:none;border-color:#49605c;background:#233b43;box-shadow:var(--shadow-floating);aspect-ratio:1000/690}
+.triangle-3d>svg{visibility:hidden}
+.triangle-3d{touch-action:none;cursor:grab}
+.triangle-3d.triangle-dragging{cursor:grabbing}
+.triangle-camera{z-index:3;cursor:default;flex-wrap:wrap;max-width:calc(100% - 16px)}
+.coin-arcade .triangle-game .triangle-dot[hidden]{display:none}
+.coin-arcade .triangle-game .triangle-3d .triangle-dot{color:#334b45;padding:0 0 20px;font-size:10px}
+.triangle-3d .triangle-dot::after{display:block;width:6px;height:6px;background:#2e423d;box-shadow:none}
+.coin-arcade .triangle-game .triangle-3d .triangle-dot.triangle-available{box-shadow:inset 0 0 0 1px #18735a66}
+@media(max-width:650px){.triangle-3d{aspect-ratio:1/1.15}.coin-arcade .triangle-game .triangle-3d .triangle-dot{width:30px;height:30px;min-height:30px}}

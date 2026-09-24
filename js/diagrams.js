@@ -36,3 +36,5 @@ Object.entries({
 });
 
 window.WORFLOGY_DIAGRAMS.push({"id":"game-11","title":"장기·바둑-like 보드 게임 \"한 수 축구\"","category":"게임 콘텐츠","readiness":"플레이 가능","technologyLabel":"하이브리드 시맨틱 디자인","renderer":"football","noSubtitle":true,"nodes":[],"edges":[],"desc":"바둑·장기 LIKE 축구 보드 게임. 온톨로지 추론 - AI 학습의 상대 플레이어. 온톨로지 고도화 연구개발 중."});
+
+window.WORFLOGY_DIAGRAMS.push({"id":"game-12","title":"가제 : 스테이지 피지컬 택틱스","category":"게임 콘텐츠","readiness":"개발 진행 중","technology":"bottom-up","technologyLabel":"Bottom-Up 시맨틱 디자인","video":"assets/images/to-be-done.mp4","nodes":[],"edges":[],"desc":""});

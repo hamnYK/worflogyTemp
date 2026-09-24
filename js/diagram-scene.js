@@ -431,7 +431,7 @@ createPlayer() {
         // Every initial view uses a scale that fits the largest default diagram.
         // A manually moved node can still require a smaller explicit fit.
         const zoomFor=b=>Math.min(camera.width/(b.maxX-b.minX+35),(camera.height-subtitleSpace)/(b.maxY-b.minY+35),1.3);
-        const commonZoom=Math.min(...window.WORFLOGY_DIAGRAMS.filter(diagram=>!diagram.placeholder&&!diagram.renderer).map(diagram=>{
+        const commonZoom=Math.min(...window.WORFLOGY_DIAGRAMS.filter(diagram=>!diagram.placeholder&&!diagram.renderer&&!diagram.video).map(diagram=>{
           const nodes=new Map(diagram.nodes.map(n=>[n.id,{...n,...this.project(n.x,n.y)}]));
           return zoomFor(this.fitBounds(diagram,nodes));
         }));
