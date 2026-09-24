@@ -200,4 +200,4 @@ footer{padding-bottom:calc(var(--space-16) + 96px)}
 @media(max-width:760px){.football-canvas{touch-action:auto}.football-canvas>svg{pointer-events:none;touch-action:auto}}
 
 /* Upcoming game canvas: preserve the entire video on desktop and mobile. */
-.diagram-canvas.diagram-canvas--video{display:block;height:clamp(180px,28vw,320px);object-fit:contain;background:#000;cursor:default;touch-action:auto}
+.diagram-canvas.diagram-canvas--video{display:block;height:auto;object-fit:contain;background:#fff;cursor:default;touch-action:auto}

@@ -1,5 +1,9 @@
 (function () {
   "use strict";
+  // Discourage casual saving while keeping text and game controls accessible.
+  document.addEventListener("contextmenu",event=>{
+    if(event.target instanceof Element&&event.target.closest("img,video,canvas,.diagram-canvas,.canvas-viewport"))event.preventDefault();
+  },{capture:true});
   const diagrams=window.WORFLOGY_DIAGRAMS;
   const copy=window.WORFLOGY_COPY;
   const root=document.getElementById("diagram-sections");
