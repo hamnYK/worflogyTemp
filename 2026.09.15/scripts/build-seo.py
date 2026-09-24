@@ -51,7 +51,10 @@ def static_diagrams():
             continue
         if item.get('readiness'):
             parts.append('<p class="diagram-readiness">' + escape(item['readiness']) + '</p>')
-        parts.append('<p class="static-diagram-description">' + escape(item['desc']) + '</p>')
+        if item.get('video'):
+            parts.append('<div class="diagram-shell"><div class="toolbar"><strong class="toolbar-technology">' + escape(item['technologyLabel']) + '</strong></div><video class="diagram-canvas diagram-canvas--video" src="' + escape(item['video'], quote=True) + '" autoplay muted loop playsinline preload="metadata" aria-label="' + escape(item['title'], quote=True) + '"></video></div>')
+        elif item.get('desc'):
+            parts.append('<p class="static-diagram-description">' + escape(item['desc']) + '</p>')
         if item.get('relations'):
             parts.append('<ul class="wf-relations" aria-label="핵심 연결 관계">')
             for triple in item['relations']:
