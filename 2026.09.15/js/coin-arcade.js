@@ -129,6 +129,10 @@ function lobby(){
  dialog.querySelector('.arcade-eraser-play').onclick=()=>start('eraser');
  dialog.querySelector('.arcade-cards').insertAdjacentHTML('beforeend','<div class="wf-card wf-card--glass wf-card--compact ping-card"><h2 class="wf-card__title" lang="en">CHALKBOARD PING PONG</h2><button type="button" class="wf-card__action arcade-ping-play"><span aria-hidden="true">&#9654;</span> PLAY</button></div>');
  dialog.querySelector('.arcade-ping-play').onclick=()=>start('ping');
+ dialog.querySelector('.arcade-cards').insertAdjacentHTML('beforeend','<div class="wf-card wf-card--glass wf-card--compact wf-card--glass-slate triangle-card"><h2 class="wf-card__title" lang="en">TRIANGLE TERRITORY</h2><button type="button" class="wf-card__action arcade-triangle-play"><span aria-hidden="true">&#9654;</span> PLAY</button></div>');
+ dialog.querySelector('.arcade-triangle-play').onclick=()=>start('triangle');
+ dialog.querySelector('.arcade-cards').insertAdjacentHTML('beforeend','<div class="wf-card wf-card--glass wf-card--compact pebble-card"><h2 class="wf-card__title" lang="en">PEBBLE TERRITORY</h2><button type="button" class="wf-card__action arcade-pebble-play"><span aria-hidden="true">&#9654;</span> PLAY</button></div>');
+ dialog.querySelector('.arcade-pebble-play').onclick=()=>start('pebble');
  dialog.querySelector('.arcade-play').onclick=()=>start('football');
  dialog.querySelector('.arcade-basketball-play').onclick=()=>start('basketball');
  dialog.querySelector('.arcade-curling-play').onclick=()=>start('curling');
@@ -137,14 +141,14 @@ function lobby(){
 async function start(kind='football'){
  stopGame();inLobby=false;syncMusic();const generation=gameGeneration;
  const host=dialog.querySelector('.arcade-content');
- host.innerHTML='<p class="arcade-loading" role="status">'+t('3D 경기장을 준비하고 있습니다.','Preparing the 3D table.')+'</p>';
+ host.innerHTML='<p class="arcade-loading" role="status">'+t('게임을 준비하고 있습니다.','Preparing the game.')+'</p>';
  try{
  const games=await loadFootball();
  if(generation!==gameGeneration||!dialog.open||closing)return;
- gameHandle=(kind==='ping'?games.mountChalkboardPingPong:kind==='eraser'?games.mountEraserWrestling:kind==='book-flip'?games.mountBookFlip:kind==='curling'?games.mountCurling:kind==='basketball'?games.mountBasketball:games.mountFootball)(host,{onExit:lobby,onWin:lobby,english:en()});
+ gameHandle=(kind==='pebble'?games.mountPebbleTerritory:kind==='triangle'?games.mountTriangleTerritory:kind==='ping'?games.mountChalkboardPingPong:kind==='eraser'?games.mountEraserWrestling:kind==='book-flip'?games.mountBookFlip:kind==='curling'?games.mountCurling:kind==='basketball'?games.mountBasketball:games.mountFootball)(host,{onExit:lobby,onWin:lobby,english:en()});
  }catch(error){
  if(generation!==gameGeneration||!dialog.open||closing)return;
- host.innerHTML='<p>'+t('3D 경기장을 불러오지 못했습니다.','Could not load the 3D table.')+'</p><button type="button" class="wf-button">BACK</button>';
+ host.innerHTML='<p>'+t('게임을 불러오지 못했습니다.','Could not load the game.')+'</p><button type="button" class="wf-button">BACK</button>';
  host.querySelector('button').onclick=lobby;console.error(error);
  }
 }

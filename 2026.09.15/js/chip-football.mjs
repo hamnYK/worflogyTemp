@@ -148,3 +148,5 @@ export {mountBookFlip} from './chip-book-flip.mjs';
 export {mountEraserWrestling} from './eraser-wrestling.mjs';
 
 export {mountChalkboardPingPong} from './chalkboard-ping-pong.mjs';
+export {mountTriangleTerritory} from './triangle-territory.mjs';
+export {mountPebbleTerritory} from './pebble-territory.mjs';

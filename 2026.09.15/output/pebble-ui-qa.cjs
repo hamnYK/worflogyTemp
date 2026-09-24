@@ -1,0 +1,26 @@
+const assert=require('node:assert/strict'),path=require('node:path'),{pathToFileURL}=require('node:url');
+const {chromium}=require('C:/Users/alchera/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+(async()=>{const browser=await chromium.launch({executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true});try{
+ const p=await browser.newPage({viewport:{width:1440,height:1100}}),errors=[];p.on('pageerror',e=>errors.push(e.message));
+ await p.addInitScript(()=>Math.random=()=>.123);await p.goto(pathToFileURL(path.resolve('index.html')).href);await p.locator('body > .section-elevator > .arcade-open').click();await p.locator('.arcade-pebble-play').click();
+ const canvas=p.locator('.pebble-game canvas'),game=p.locator('.pebble-game'),power=p.locator('.pebble-game .chip-power'),aim=p.locator('.pebble-aim');await canvas.waitFor();
+ assert.equal(await p.locator('.pebble-game h2').innerText(),'PEBBLE TERRITORY');assert.equal(await game.locator('details').count(),0);assert(+await game.getAttribute('data-obstacles')>=3&&+await game.getAttribute('data-obstacles')<=5);
+ await canvas.focus();await p.keyboard.press('ArrowUp');assert.equal(await power.inputValue(),'47');await p.keyboard.press('PageDown');assert.equal(await power.inputValue(),'45');await p.keyboard.press('ArrowRight');assert.equal(await aim.inputValue(),'3');assert.equal(await p.locator('.pebble-angle').innerText(),'3°');
+ await power.fill('55');await power.dispatchEvent('input');assert.equal(await p.locator('.pebble-power').innerText(),'55%');
+ await p.locator('[data-camera="home"]').click();
+ let stone=await canvas.evaluate(e=>({x:+e.dataset.stoneX,y:+e.dataset.stoneY}));
+ await p.mouse.move(stone.x,stone.y);await p.mouse.down();await p.mouse.move(stone.x-65,stone.y-12,{steps:8});assert.notEqual(await power.inputValue(),'55');assert.equal(await p.locator('.pebble-power').innerText(),await power.inputValue()+'%');await p.mouse.up();
+ assert.equal(await game.getAttribute('data-phase'),'moving');assert(await power.isDisabled());await p.waitForFunction(()=>document.querySelector('.pebble-game').dataset.phase==='ready');assert.equal(await game.getAttribute('data-shots'),'1');assert(+await game.getAttribute('data-trails')>0);
+ const turns=await game.getAttribute('data-turns');
+ await p.mouse.move(stone.x,stone.y);await p.mouse.down({button:'right'});await p.mouse.move(stone.x+80,stone.y+20,{steps:5});await p.mouse.up({button:'right'});assert.equal(await game.getAttribute('data-turns'),turns);
+ await p.mouse.wheel(0,-120);await p.locator('[data-camera="home"]').click();
+ await game.screenshot({path:'output/pebble-desktop.png'});
+ await p.locator('.pebble-pass').click();assert.equal(await game.getAttribute('data-turn'),'1');
+ await p.waitForFunction(()=>{const e=document.querySelector('.pebble-game');return e.dataset.turn==='0'&&e.dataset.phase==='ready';},{},{timeout:20000});
+ assert(+await game.getAttribute('data-turns')>=2);
+ await p.setViewportSize({width:390,height:844});await game.screenshot({path:'output/pebble-mobile.png'});assert(await game.evaluate(e=>e.scrollWidth<=e.clientWidth));
+ await p.locator('.pebble-pass').click();await p.locator('.pebble-game .chip-back').click();await p.waitForTimeout(1200);assert.equal(await game.count(),0);
+ await p.locator('.arcade-pebble-play').click();assert.equal(await p.locator('.pebble-game').getAttribute('data-turns'),'0');assert.deepEqual(errors,[]);
+ const touch=await browser.newPage({viewport:{width:390,height:844},hasTouch:true});await touch.goto(pathToFileURL(path.resolve('en.html')).href);await touch.locator('body > .section-elevator > .arcade-open').click();await touch.locator('.arcade-pebble-play').click();await touch.locator('.pebble-game canvas').waitFor();await touch.locator('.pebble-fire').tap();await touch.waitForFunction(()=>document.querySelector('.pebble-game').dataset.shots==='1');await touch.close();
+ console.log('PASS: actual bundle/menu, drag-linked power, keyboard/ranges, shot animation, camera, AI turns, mobile/touch, EN and exit/re-entry.');
+}finally{await browser.close();}})().catch(e=>{console.error(e);process.exitCode=1;});
