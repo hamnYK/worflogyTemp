@@ -1,3 +1,4 @@
+import {adjustPower} from './game-input.mjs';
 import {footballGuide,syncGuide} from './game-guides.mjs';
 import * as THREE from '../lib/three.module.min.js';
 import {createTablePan} from './table-pan.mjs';
@@ -7,14 +8,14 @@ import {ChipFootball,FIELD} from './chip-football-rules.mjs';
 export function mountFootball(host,{onExit,onWin,english=false}={}){
  const t=(ko,en)=>english?en:ko;
  const game=new ChipFootball();
- host.innerHTML=`<div class="chip-game"><div class="chip-game-heading"><button type="button" class="wf-button chip-back">${t('게임 선택','Games')}</button><h2>3 CHIPS FOOTBALL</h2><output class="chip-progress"></output></div><div class="chip-viewport"><canvas tabindex="0" aria-label="${t('칩 축구. 1, 2, 3 선택. 좌우 방향키 조준. 스페이스 발사.','Chip football. Select 1, 2, 3. Arrow keys aim. Space launches.')}"></canvas><div class="chip-result" aria-hidden="true"></div><div class="chip-camera"><button type="button" data-camera="in" aria-label="${t('확대','Zoom in')}">+</button><button type="button" data-camera="out" aria-label="${t('축소','Zoom out')}">−</button><button type="button" data-camera="left" aria-label="${t('왼쪽 회전','Rotate left')}">↶</button><button type="button" data-camera="right" aria-label="${t('오른쪽 회전','Rotate right')}">↷</button><button type="button" data-camera="home">${t('기본 뷰','Reset view')}</button></div></div><div class="chip-controls"><div class="chip-picks"></div><label>${t('힘','Power')} <input class="chip-power" aria-label="${t('발사 강도','Launch power')}" type="range" min="2" max="22" step=".5" value="8"></label><button type="button" class="wf-button chip-fire">${t('발사','Launch')}</button></div><p class="chip-status" role="status" aria-live="polite"></p></div>`;
+ host.innerHTML=`<div class="chip-game"><div class="chip-game-heading"><button type="button" class="wf-button chip-back">${t('게임 선택','Games')}</button><h2>3 CHIPS FOOTBALL</h2><output class="chip-progress"></output></div><div class="chip-viewport"><canvas tabindex="0" aria-label="${t('칩 축구. 1, 2, 3 선택. 좌우 방향키 조준. 스페이스 발사.','Chip football. Select 1, 2, 3. Arrow keys aim. Space launches.')}"></canvas><div class="chip-result" aria-hidden="true"></div><div class="chip-camera"><button type="button" data-camera="in" aria-label="${t('확대','Zoom in')}">+</button><button type="button" data-camera="out" aria-label="${t('축소','Zoom out')}">−</button><button type="button" data-camera="left" aria-label="${t('왼쪽 회전','Rotate left')}">↶</button><button type="button" data-camera="right" aria-label="${t('오른쪽 회전','Rotate right')}">↷</button><button type="button" data-camera="home">${t('기본 뷰','Reset view')}</button></div></div><div class="chip-controls"><div class="chip-picks"></div><label>${t('힘','Power')} <input class="chip-power" aria-keyshortcuts="PageUp PageDown" aria-label="${t('발사 강도','Launch power')}" type="range" min=".6" max="22" step=".1" value="8"></label><button type="button" class="wf-button chip-fire">${t('발사','Launch')}</button></div><p class="chip-status" role="status" aria-live="polite"></p></div>`;
  const root=host.querySelector('.chip-game'),canvas=root.querySelector('canvas'),status=root.querySelector('.chip-status'),progress=root.querySelector('.chip-progress'),result=root.querySelector('.chip-result');
  let renderer;
  try{renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:false});}catch(error){root.innerHTML='<p>'+t('3D 화면을 시작할 수 없습니다. 브라우저의 하드웨어 가속 설정을 확인해 주세요.','Unable to start 3D. Check hardware acceleration in your browser.')+'</p><button class="wf-button" type="button">'+t('게임 선택','Games')+'</button>';root.querySelector('button').onclick=onExit;return{dispose(){}};}
  renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;
  const scene=new THREE.Scene();scene.background=new THREE.Color('#101d29');scene.fog=new THREE.Fog('#101d29',35,80);
  const camera=new THREE.PerspectiveCamera(38,1,.1,100);
- let azimuth=.56,elevation=.91,distance=14,angle=-Math.PI/2,disposed=false,frame,timer,acc=0,last=performance.now(),pointer=null,aimPoint=null;
+ let azimuth=.56,elevation=.91,distance=14,angle=-Math.PI/2,disposed=false,frame,timer,acc=0,last=performance.now(),pointer=null;
  const raycaster=new THREE.Raycaster(),plane=new THREE.Plane(new THREE.Vector3(0,1,0),-.16);
  const pan=createTablePan(camera,canvas);
  function view(){camera.position.set(Math.sin(azimuth)*Math.cos(elevation)*distance*Math.max(1,1.2/camera.aspect),Math.sin(elevation)*distance*Math.max(1,1.2/camera.aspect),Math.cos(azimuth)*Math.cos(elevation)*distance*Math.max(1,1.2/camera.aspect));camera.position.add(pan.offset);camera.lookAt(pan.offset);camera.updateMatrixWorld();}
@@ -73,28 +74,38 @@ export function mountFootball(host,{onExit,onWin,english=false}={}){
  function updateUI(){
  progress.textContent=(game.opening?t('시작 배치 · 횟수 제외 · ','OPENING · UNCOUNTED · '):game.turns+t('회 / 목표 4회 · ',' SHOTS / TARGET 4 · '))+(bestTurns===null?'':t('최고 ','BEST ')+bestTurns+' · ')+t('패스 완료 ','PASSES ')+game.chips.filter(c=>c.passed).length+'/3 · '+(game.canShoot?t('슈팅 가능','SHOT UNLOCKED'):t('슈팅 잠김','SHOT LOCKED'));
  [...picks.children].forEach((b,i)=>{b.textContent=(i+1)+(game.chips[i].passed?' ✓':'');b.setAttribute('aria-label',t('칩 ','Chip ')+(i+1)+(game.chips[i].passed?t(' 패스 완료',' passed'):''));b.disabled=game.phase!=='ready'||i===game.previous||(game.selected!==null&&i!==game.selected);b.setAttribute('aria-pressed',String(i===game.selected));});
+ power.disabled=game.phase!=='ready';
  root.querySelector('.chip-fire').disabled=game.phase!=='ready'||game.selected===null;
  root.dataset.phase=game.phase;root.dataset.turns=game.turns;root.dataset.opening=String(game.opening);
  }
  function choose(i){if(game.phase!=='ready')return;if(!game.select(i)){say(t('선택을 바꿀 수 없거나 직전 패스 칩입니다.','Selection is locked, or this chip made the previous pass.'));return;}say(game.opening?t('발사하면 모인 칩을 펼칩니다. 시작 동작은 횟수에 포함하지 않습니다.','Launch to spread the chips. This opening does not count.'):t('칩 ','Chip ')+(i+1)+t(' 선택 고정 · 다른 두 칩 사이로 통과시키세요.',' locked · Pass through the other two chips.'));updateUI();}
- function fire(vx,vz){if(game.launch(vx,vz)){aimPoint=null;say(game.phase==='breaking'?t('칩을 펼치는 중입니다.','Spreading the chips.'):game.readyAtLaunch?t('슈팅! 두 칩 사이를 통과해 골대로.','Shoot through the gap and into the goal.'):t('패스 중 · 아직 골을 넣으면 FAIL입니다.','Passing · Scoring before unlock is a FAIL.'));updateUI();}}
- function launchKey(){const power=+root.querySelector('.chip-power').value;fire(Math.cos(angle)*power,Math.sin(angle)*power);}
+ function fire(vx,vz){if(game.launch(vx,vz)){say(game.phase==='breaking'?t('칩을 펼치는 중입니다.','Spreading the chips.'):game.readyAtLaunch?t('슈팅! 두 칩 사이를 통과해 골대로.','Shoot through the gap and into the goal.'):t('패스 중 · 아직 골을 넣으면 FAIL입니다.','Passing · Scoring before unlock is a FAIL.'));updateUI();}}
+ const power=root.querySelector('.chip-power');
+ canvas.setAttribute('aria-label',t('칩 축구. 1, 2, 3 선택. 좌우 방향키 조준. 위아래 방향키 힘 조절. 스페이스 발사.','Chip football. Select 1, 2, 3. Left/right aim. Up/down adjust power. Space launches.'));
+ function launchKey(){fire(Math.cos(angle)*+power.value,Math.sin(angle)*+power.value);}
+ function dragAim(p){
+  if(!p||game.selected===null||game.phase!=='ready')return false;
+  const c=game.chips[game.selected],dx=c.x-p.x,dz=c.z-p.z,speed=Math.hypot(dx,dz)*5;
+  if(speed>.001)angle=Math.atan2(dz,dx);
+  power.value=THREE.MathUtils.clamp(speed,+power.min,+power.max);
+  return speed>=.6;
+ }
  root.querySelector('.chip-fire').onclick=launchKey;root.querySelector('.chip-back').onclick=onExit;
  function world(e){const rect=canvas.getBoundingClientRect();raycaster.setFromCamera(new THREE.Vector2((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1),camera);const p=new THREE.Vector3();return raycaster.ray.intersectPlane(plane,p)?p:null;}
  canvas.oncontextmenu=e=>e.preventDefault();
  canvas.onpointerdown=e=>{
  if(pointer)return;const p=world(e);const i=p?game.chips.map((c,i)=>({i,d:Math.hypot(c.x-p.x,c.z-p.z)})).sort((a,b)=>a.d-b.d).find(c=>c.d<.55)?.i??-1:-1;
- if(e.button===0&&i>=0&&game.phase==='ready'){if(!game.select(i)){choose(i);return;}choose(i);pointer={id:e.pointerId,mode:'aim',x:e.clientX,y:e.clientY};aimPoint=p;}
+ if(e.button===0&&i>=0&&game.phase==='ready'){if(!game.select(i)){choose(i);return;}choose(i);pointer={id:e.pointerId,mode:'aim',x:e.clientX,y:e.clientY};}
  else{pointer={id:e.pointerId,mode:e.button===2?'orbit':'pan',x:e.clientX,y:e.clientY};}
  canvas.setPointerCapture(e.pointerId);canvas.focus({preventScroll:true});
  };
- canvas.onpointermove=e=>{if(!pointer||pointer.id!==e.pointerId)return;if(pointer.mode==='pan'){pan.move(pointer.x,pointer.y,e.clientX,e.clientY);pointer.x=e.clientX;pointer.y=e.clientY;view();return;}if(pointer.mode==='aim'){aimPoint=world(e);}else{azimuth-=(e.clientX-pointer.x)*.007;elevation=THREE.MathUtils.clamp(elevation+(e.clientY-pointer.y)*.004,.62,1.16);pointer.x=e.clientX;pointer.y=e.clientY;view();}};
- canvas.onpointerup=e=>{if(!pointer||pointer.id!==e.pointerId)return;if(pointer.mode==='aim'&&game.selected!==null){const p=world(e),c=game.chips[game.selected];if(p)fire((c.x-p.x)*5,(c.z-p.z)*5);}pointer=null;aimPoint=null;};
- canvas.onpointercancel=()=>{pointer=null;aimPoint=null;};
+ canvas.onpointermove=e=>{if(!pointer||pointer.id!==e.pointerId)return;if(pointer.mode==='pan'){pan.move(pointer.x,pointer.y,e.clientX,e.clientY);pointer.x=e.clientX;pointer.y=e.clientY;view();return;}if(pointer.mode==='aim'){dragAim(world(e));}else{azimuth-=(e.clientX-pointer.x)*.007;elevation=THREE.MathUtils.clamp(elevation+(e.clientY-pointer.y)*.004,.62,1.16);pointer.x=e.clientX;pointer.y=e.clientY;view();}};
+ canvas.onpointerup=e=>{if(!pointer||pointer.id!==e.pointerId)return;if(pointer.mode==='aim'&&dragAim(world(e)))launchKey();pointer=null;};
+ canvas.onpointercancel=()=>{pointer=null;};
  canvas.addEventListener('wheel',e=>{e.preventDefault();distance=THREE.MathUtils.clamp(distance*Math.exp(e.deltaY*.001),10,33);view();},{passive:false});
- canvas.onkeydown=e=>{if(['1','2','3'].includes(e.key)){e.preventDefault();choose(+e.key-1);}if(['ArrowLeft','ArrowRight',' '].includes(e.key)){e.preventDefault();if(e.key===' ')launchKey();else angle+=(e.key==='ArrowLeft'?-.08:.08);}if(e.key==='+'||e.key==='='){distance=Math.max(10,distance-2);view();}if(e.key==='-'){distance=Math.min(33,distance+2);view();}};
+ canvas.onkeydown=e=>{if(adjustPower(e,power,!!pointer))return;if(['1','2','3'].includes(e.key)){e.preventDefault();choose(+e.key-1);}if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown',' '].includes(e.key)){e.preventDefault();if(game.phase==='ready'&&!pointer){if(e.key===' '){if(!e.repeat)launchKey();}else if(e.key==='ArrowUp'||e.key==='ArrowDown')power.value=THREE.MathUtils.clamp(+power.value+(e.key==='ArrowUp'?.5:-.5),+power.min,+power.max);else angle+=(e.key==='ArrowLeft'?-.08:.08);}}if(e.key==='+'||e.key==='='){distance=Math.max(10,distance-2);view();}if(e.key==='-'){distance=Math.min(33,distance+2);view();}};
  root.querySelectorAll('[data-camera]').forEach(b=>b.onclick=()=>{const a=b.dataset.camera;if(a==='in')distance=Math.max(10,distance-2);if(a==='out')distance=Math.min(33,distance+2);if(a==='left')azimuth-=.2;if(a==='right')azimuth+=.2;if(a==='home'){pan.reset();azimuth=.56;elevation=.91;distance=14;}view();});
- function reset(){game.reset();angle=-Math.PI/2;pointer=null;aimPoint=null;previousPhase='ready';previousResult=null;result.textContent='';result.className='chip-result';updateUI();say(t('칩 하나를 선택하고 발사하여 모인 칩을 펼치세요. 시작 동작은 횟수에서 제외됩니다.','Choose a chip and launch to spread the cluster. The opening does not count.'));}
+ function reset(){game.reset();angle=-Math.PI/2;pointer=null;previousPhase='ready';previousResult=null;result.textContent='';result.className='chip-result';updateUI();say(t('칩 하나를 선택하고 발사하여 모인 칩을 펼치세요. 시작 동작은 횟수에서 제외됩니다.','Choose a chip and launch to spread the cluster. The opening does not count.'));}
  function checkOutcome(){
  if(game.phase!==previousPhase||game.result!==previousResult){
  updateUI();
@@ -121,7 +132,7 @@ export function mountFootball(host,{onExit,onWin,english=false}={}){
  syncGuide(status,footballGuide(game,t,pointer?.mode==='aim'));
  game.chips.forEach((c,i)=>{const g=chipMeshes[i];g.position.set(c.x,0,c.z);if(game.phase==='moving'&&i===game.selected)g.rotation.y+=Math.hypot(game.vx,game.vz)*elapsed*.7;rings[i].position.set(c.x,.025,c.z);rings[i].visible=i===game.selected||c.passed;rings[i].material.color.set(i===game.selected?0xffe39a:0x8ddbb6);});
  arrow.visible=game.phase==='ready'&&game.selected!==null;
- if(arrow.visible){const c=game.chips[game.selected];let dx=Math.cos(angle),dz=Math.sin(angle),length=2;if(aimPoint){dx=c.x-aimPoint.x;dz=c.z-aimPoint.z;length=Math.min(4,Math.hypot(dx,dz));}const v=new THREE.Vector3(dx,0,dz);if(v.length()>.01){v.normalize();arrow.position.set(c.x,.2,c.z);arrow.setDirection(v);arrow.setLength(Math.max(.2,length),.3,.17);}}
+ if(arrow.visible){const c=game.chips[game.selected],v=new THREE.Vector3(Math.cos(angle),0,Math.sin(angle));arrow.position.set(c.x,.2,c.z);arrow.setDirection(v);arrow.setLength(Math.max(.2,+power.value/5),.3,.17);}
  renderer.render(scene,camera);frame=requestAnimationFrame(render);
  }
  reset();resize();frame=requestAnimationFrame(render);

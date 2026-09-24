@@ -1,3 +1,4 @@
+import {adjustPower} from './game-input.mjs';
 import {basketballGuide,basketballResult,syncGuide} from './game-guides.mjs';
 import * as THREE from '../lib/three.module.min.js';
 import {createTablePan} from './table-pan.mjs';
@@ -6,7 +7,7 @@ import {ChipBasketball,BASKET} from './chip-basketball-rules.mjs';
 
 export function mountBasketball(host,{onExit,onWin,english=false}={}){
  const t=(ko,en)=>english?en:ko,game=new ChipBasketball();
- host.innerHTML=`<div class="chip-game basketball-game"><div class="chip-game-heading"><button type="button" class="wf-button chip-back">${t('게임 선택','Games')}</button><h2>1 CHIP BASKETBALL</h2><output class="chip-progress"></output></div><div class="chip-viewport"><canvas tabindex="0" aria-label="${t('칩 농구. 마우스로 집게 이동, 클릭으로 잡기. 방향키로 이동, 잡은 뒤 위아래 키로 슛 높이 조절. 왼쪽 드래그 후 놓으면 슛.','Chip basketball. Move the grippers with the pointer or arrow keys. Click to catch. Once held, up/down changes elevation; left-drag and release shoots.')}"></canvas><div class="chip-result" aria-hidden="true"></div><div class="basket-catch-meter" aria-hidden="true"><span></span></div><div class="chip-camera"><button type="button" data-camera="in" aria-label="${t('확대','Zoom in')}">+</button><button type="button" data-camera="out" aria-label="${t('축소','Zoom out')}">−</button><button type="button" data-camera="left" aria-label="${t('왼쪽 회전','Rotate left')}">↶</button><button type="button" data-camera="right" aria-label="${t('오른쪽 회전','Rotate right')}">↷</button><button type="button" data-camera="home">${t('기본 뷰','Reset view')}</button></div></div><div class="chip-controls"><button type="button" class="wf-button basket-action"></button><label>${t('던질 방향','Toss direction')} <input class="basket-aim" type="range" min="-180" max="180" step="1" value="-30" aria-label="${t('좌우 조준','Horizontal aim')}"></label><label>${t('힘','Power')} <input class="chip-power" type="range" min="4" max="14" step=".1" value="8" aria-label="${t('발사 강도','Launch power')}"></label><label>${t('높이','Elevation')} <input class="basket-loft basket-aim" type="range" min="40" max="80" step="1" value="65"></label></div><p class="chip-status" role="status" aria-live="polite"></p></div>`;
+ host.innerHTML=`<div class="chip-game basketball-game"><div class="chip-game-heading"><button type="button" class="wf-button chip-back">${t('게임 선택','Games')}</button><h2>1 CHIP BASKETBALL</h2><output class="chip-progress"></output></div><div class="chip-viewport"><canvas tabindex="0" aria-label="${t('칩 농구. 마우스로 집게 이동, 클릭으로 잡기. 방향키로 이동, 잡은 뒤 위아래 키로 슛 높이 조절. 왼쪽 드래그 후 놓으면 슛.','Chip basketball. Move the grippers with the pointer or arrow keys. Click to catch. Once held, up/down changes elevation; left-drag and release shoots.')}"></canvas><div class="chip-result" aria-hidden="true"></div><div class="basket-catch-meter" aria-hidden="true"><span></span></div><div class="chip-camera"><button type="button" data-camera="in" aria-label="${t('확대','Zoom in')}">+</button><button type="button" data-camera="out" aria-label="${t('축소','Zoom out')}">−</button><button type="button" data-camera="left" aria-label="${t('왼쪽 회전','Rotate left')}">↶</button><button type="button" data-camera="right" aria-label="${t('오른쪽 회전','Rotate right')}">↷</button><button type="button" data-camera="home">${t('기본 뷰','Reset view')}</button></div></div><div class="chip-controls"><button type="button" class="wf-button basket-action"></button><label>${t('던질 방향','Toss direction')} <input class="basket-aim" type="range" min="-180" max="180" step="1" value="-30" aria-label="${t('좌우 조준','Horizontal aim')}"></label><label>${t('힘','Power')} <input class="chip-power" aria-keyshortcuts="PageUp PageDown" type="range" min="4" max="14" step=".1" value="8" aria-label="${t('발사 강도','Launch power')}"></label><label>${t('높이','Elevation')} <input class="basket-loft basket-aim" type="range" min="40" max="80" step="1" value="65"></label></div><p class="chip-status" role="status" aria-live="polite"></p></div>`;
  const root=host.querySelector('.chip-game'),canvas=root.querySelector('canvas'),status=root.querySelector('.chip-status'),action=root.querySelector('.basket-action'),aim=root.querySelector('.basket-aim'),power=root.querySelector('.chip-power'),progress=root.querySelector('.chip-progress'),result=root.querySelector('.chip-result'),meter=root.querySelector('.basket-catch-meter'),needle=meter.firstElementChild;
  let renderer;try{renderer=new THREE.WebGLRenderer({canvas,antialias:true});}catch{root.innerHTML='<p>'+t('3D 화면을 시작할 수 없습니다.','Unable to start the 3D table.')+'</p><button type="button" class="wf-button">BACK</button>';root.querySelector('button').onclick=onExit;return{dispose(){}};}
  renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.02;
@@ -116,20 +117,21 @@ export function mountBasketball(host,{onExit,onWin,english=false}={}){
  pointer={id:e.pointerId,mode:e.button===0&&onChip&&game.phase==='held'?'aim':e.button===2?'orbit':'pan',x:e.clientX,y:e.clientY};
  canvas.setPointerCapture(e.pointerId);
  };
+ function dragPower(e,mode){const p=world(e,mode==='toss'?game.p.y:.6);if(p)power.value=THREE.MathUtils.clamp(Math.hypot(game.p.x-p.x,game.p.z-p.z)*3,4,14);}
  canvas.onpointermove=e=>{
  if(game.phase==='spinning'&&(!pointer||pointer.mode==='track'))track(e);
  if(!pointer||pointer.id!==e.pointerId)return;
  if(pointer.mode==='pan'){pan.move(pointer.x,pointer.y,e.clientX,e.clientY);pointer.x=e.clientX;pointer.y=e.clientY;view();}
  else if(pointer.mode==='orbit'){azimuth-=(e.clientX-pointer.x)*.007;elevation=THREE.MathUtils.clamp(elevation+(e.clientY-pointer.y)*.004,.45,1.05);pointer.x=e.clientX;pointer.y=e.clientY;view();}
- else if(pointer.mode==='toss'){const p=world(e,game.p.y);if(p){const dx=game.p.x-p.x,dz=game.p.z-p.z;power.value=THREE.MathUtils.clamp(Math.hypot(dx,dz)*3,4,14);}}
- else if(pointer.mode==='aim'){const p=world(e);if(p){const dx=game.p.x-p.x,dz=game.p.z-p.z;power.value=THREE.MathUtils.clamp(Math.hypot(dx,dz)*3,4,14);}}
+ else if(pointer.mode==='toss'||pointer.mode==='aim')dragPower(e,pointer.mode);
  };
- canvas.onpointerup=e=>{if(!pointer||pointer.id!==e.pointerId)return;const mode=pointer.mode,moved=Math.hypot(e.clientX-pointer.x,e.clientY-pointer.y);pointer=null;if(mode==='track')act();else if(['aim','toss'].includes(mode)&&moved>8)act();};
+ canvas.onpointerup=e=>{if(!pointer||pointer.id!==e.pointerId)return;const mode=pointer.mode,moved=Math.hypot(e.clientX-pointer.x,e.clientY-pointer.y);pointer=null;if(mode==='track')act();else if(['aim','toss'].includes(mode)&&moved>8){dragPower(e,mode);act();}};
  canvas.onpointercancel=()=>pointer=null;
  canvas.addEventListener('wheel',e=>{e.preventDefault();distance=THREE.MathUtils.clamp(distance*Math.exp(e.deltaY*.001),8,32);view();},{passive:false});
  canvas.onkeydown=e=>{
+ if(adjustPower(e,power,!!pointer))return;
  if(game.phase==='held'&&['ArrowUp','ArrowDown'].includes(e.key)){e.preventDefault();loft.value=THREE.MathUtils.clamp(+loft.value+(e.key==='ArrowUp'?2:-2),40,80);say(t('슛 높이 ','Shot elevation ')+loft.value+'°');return;}
- if(e.key===' '){e.preventDefault();if(!e.repeat)act();}
+ if(e.key===' '){e.preventDefault();if(!e.repeat&&!pointer)act();}
  if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','w','a','s','d'].includes(e.key)){e.preventDefault();keys.add(e.key);}
  };
  canvas.onkeyup=e=>keys.delete(e.key);canvas.onblur=()=>keys.clear();
