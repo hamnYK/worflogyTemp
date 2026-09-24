@@ -45,7 +45,7 @@ export function mountChalkboardPingPong(host,{onExit,onWin,english=false}={}){
  for(let y=28;y<256;y+=22){px.beginPath();px.moveTo(0,y);px.lineTo(1024,y);px.stroke();}
  px.strokeStyle='#cf7c7755';for(const xx of [50,562]){px.beginPath();px.moveTo(xx,0);px.lineTo(xx,256);px.stroke();}
  px.fillStyle='#627482';px.font='italic 23px Georgia';px.fillText('AFTER HOURS',135,95);px.fillText('WORFLOGY',660,165);
- const pages=material({map:texture(paperCanvas),roughness:.9}),cover=material({color:'#476e84',roughness:.75});
+ const pages=material({map:texture(paperCanvas),roughness:.9,bumpMap:finish.grain('paper'),bumpScale:.004}),cover=material({color:'#476e84',roughness:.75});
  details.notebook(pages,cover);
  const binding=material({color:'#b7afa0',roughness:.5,metalness:.4});
  const rackets=[0,1].map(i=>{
@@ -56,7 +56,7 @@ export function mountChalkboardPingPong(host,{onExit,onWin,english=false}={}){
  details.eraserWear(g);
  return g;
  });
- const ball=mesh(new THREE.SphereGeometry(PING.radius,32,24),material({color:'#fff7e6',roughness:.5,clearcoat:.15}));
+ const ball=mesh(new THREE.SphereGeometry(PING.radius,32,24),material({color:'#fff7e6',roughness:.56,clearcoat:.1,bumpMap:finish.grain('paper'),bumpScale:.0006}));
  const seam=mesh(new THREE.TorusGeometry(PING.radius,.0015,5,48),material({color:'#cfbfa5',roughness:.6}),ball);seam.rotation.x=.6;
  const shadowCanvas=document.createElement('canvas');shadowCanvas.width=shadowCanvas.height=64;const sx=shadowCanvas.getContext('2d'),gr=sx.createRadialGradient(32,32,2,32,32,32);gr.addColorStop(0,'#17232b88');gr.addColorStop(1,'#17232b00');sx.fillStyle=gr;sx.fillRect(0,0,64,64);
  const shadow=mesh(new THREE.PlaneGeometry(.45,.45),material({map:texture(shadowCanvas),transparent:true,depthWrite:false}),scene);shadow.rotation.x=-Math.PI/2;shadow.castShadow=false;

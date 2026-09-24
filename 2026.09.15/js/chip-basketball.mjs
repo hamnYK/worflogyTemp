@@ -14,9 +14,9 @@ export function mountBasketball(host,{onExit,onWin,english=false}={}){
  const scene=new THREE.Scene();scene.background=new THREE.Color('#142130');
  const camera=new THREE.PerspectiveCamera(38,1,.1,100);let azimuth=.48,elevation=.68,distance=14,disposed=false,frame,timer,last=performance.now(),acc=0,pointer=null,phase='',lastCatchable=false;
  const geos=new Set(),mats=new Set(),textures=new Set();
- function material(color,roughness=.45,metalness=0){const m=new THREE.MeshStandardMaterial({color,roughness,metalness});mats.add(m);return m;}
+ function material(color,roughness=.45,metalness=0){const m=finish.material({color,roughness,metalness});mats.add(m);return m;}
  function mesh(g,m,x=0,y=0,z=0,parent=scene){geos.add(g);const o=new THREE.Mesh(g,m);o.position.set(x,y,z);o.castShadow=true;o.receiveShadow=true;parent.add(o);return o;}
- function box(w,h,d,m,x,y,z,parent){return mesh(new THREE.BoxGeometry(w,h,d),m,x,y,z,parent);}
+ function box(w,h,d,m,x,y,z,parent){return mesh(finish.beveledBox(w,h,d),m,x,y,z,parent);}
  function line(points,color){const g=new THREE.BufferGeometry().setFromPoints(points.map(p=>new THREE.Vector3(...p)));geos.add(g);const m=new THREE.LineBasicMaterial({color,transparent:true,opacity:.7});mats.add(m);const o=new THREE.Line(g,m);scene.add(o);return o;}
  scene.add(new THREE.HemisphereLight(0xd7efff,0x292c35,2.1));
  const sun=new THREE.DirectionalLight(0xffe7c2,3.2);sun.position.set(-5,13,6);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-9,right:9,top:10,bottom:-10,near:.5,far:35});sun.shadow.normalBias=.02;scene.add(sun);
@@ -36,7 +36,7 @@ export function mountBasketball(host,{onExit,onWin,english=false}={}){
  ctx.textAlign='center';ctx.fillStyle='#fff0d6';ctx.font='bold 30px Arial';
  for(const [z,label] of [[3,'2 PTS'],[6,'3 PTS'],[-3,'4 PTS'],[-6,'6 PTS']])ctx.fillText(label,512,(z+8)*64);
  ctx.font='bold 18px Arial';ctx.fillText('WORFLOGY / AFTER HOURS',512,970);
- const tex=new THREE.CanvasTexture(c);tex.colorSpace=THREE.SRGBColorSpace;tex.anisotropy=renderer.capabilities.getMaxAnisotropy();textures.add(tex);const floor=finish.material({color:'#ffffff',roughness:.32,clearcoat:.75,clearcoatRoughness:.25});floor.map=tex;floor.bumpMap=finish.grain('wood');floor.bumpScale=.009;const board=mesh(new THREE.PlaneGeometry(16,16),floor,0,.012,0);board.rotation.x=-Math.PI/2;board.castShadow=false;
+ const tex=new THREE.CanvasTexture(c);tex.colorSpace=THREE.SRGBColorSpace;tex.anisotropy=renderer.capabilities.getMaxAnisotropy();textures.add(tex);const floor=finish.material({color:'#ffffff',roughness:.32,clearcoat:.75,clearcoatRoughness:.25});floor.map=tex;floor.bumpMap=finish.grain('wood');floor.bumpScale=.006;floor.clearcoatRoughness=.32;const board=mesh(new THREE.PlaneGeometry(16,16),floor,0,.012,0);board.rotation.x=-Math.PI/2;board.castShadow=false;
  for(const sign of [-1,1]){box(.13,.3,16.4,trim,sign*8.13,.08,0);box(16.4,.3,.13,trim,0,.08,sign*8.13);}
  const ground=mesh(new THREE.PlaneGeometry(100,100),material('#192736',.95),0,-.85,0);ground.rotation.x=-Math.PI/2;ground.castShadow=false;
  box(.16,4.5,.16,trim,0,2.25,-1.45);box(.13,.13,.65,trim,0,3.6,-1.15);

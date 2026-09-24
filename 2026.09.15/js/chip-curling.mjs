@@ -17,7 +17,7 @@ export function mountCurling(host,{onExit,onWin,english=false}={}){
  const camera=new THREE.PerspectiveCamera(38,1,.1,100),geos=new Set(),mats=new Set(),textures=new Set(),finish=createArcadeFinish(renderer,scene,geos,mats,textures);
  const mat=(color,roughness=.4,metalness=0)=>finish.material({color,roughness,metalness});
  function mesh(g,m,x=0,y=0,z=0){geos.add(g);const o=new THREE.Mesh(g,m);o.position.set(x,y,z);o.castShadow=true;o.receiveShadow=true;scene.add(o);return o;}
- const box=(w,h,d,m,x,y,z)=>mesh(new THREE.BoxGeometry(w,h,d),m,x,y,z);
+ const box=(w,h,d,m,x,y,z)=>mesh(finish.beveledBox(w,h,d),m,x,y,z);
  scene.add(new THREE.HemisphereLight(0xcfeaff,0x283747,1.8));const sun=new THREE.DirectionalLight(0xfff0df,3);sun.position.set(-6,14,5);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-12,right:12,top:14,bottom:-14,near:.5,far:40});sun.shadow.normalBias=.02;scene.add(sun);
  const fill=new THREE.DirectionalLight(0x8dcfff,1.4);fill.position.set(8,5,-7);scene.add(fill);
  finish.plinth(7.3,18.5,-.65,'#63c7dc');const rail=mat('#253e50',.28,.6),metal=mat('#a5becb',.25,.8);
@@ -33,7 +33,7 @@ export function mountCurling(host,{onExit,onWin,english=false}={}){
  for(const z of [-1.8,5.5]){ctx.fillStyle='#b9433c';ctx.fillRect(0,(z+9)/18*2048,768,8);}
  ctx.fillStyle='#31556e';ctx.textAlign='center';ctx.font='bold 28px Arial';ctx.fillText('WORFLOGY',384,1170);ctx.font='15px Arial';ctx.fillText('A F T E R   H O U R S',384,1200);
  const tex=new THREE.CanvasTexture(c);tex.colorSpace=THREE.SRGBColorSpace;tex.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());textures.add(tex);
- const ice=finish.material({map:tex,roughness:.24,clearcoat:1,clearcoatRoughness:.2});ice.bumpMap=finish.grain('wood');ice.bumpScale=.002;
+ const ice=finish.material({map:tex,roughness:.24,clearcoat:1,clearcoatRoughness:.2});ice.bumpMap=finish.grain('ice');ice.bumpScale=.012;ice.roughness=.3;ice.clearcoatRoughness=.26;
  const sheet=mesh(new THREE.PlaneGeometry(6.8,18),ice,0,.01,0);sheet.rotation.x=-Math.PI/2;sheet.castShadow=false;
  for(const sign of [-1,1]){box(.2,.32,18.3,rail,sign*3.5,.12,0);box(.025,.025,18.3,metal,sign*3.5,.29,0);box(7.2,.32,.2,rail,0,.12,sign*9.1);}
  const ground=mesh(new THREE.PlaneGeometry(150,150),mat('#172a3a',.95),0,-.86,0);ground.rotation.x=-Math.PI/2;ground.castShadow=false;

@@ -131,6 +131,8 @@ function lobby(){
  dialog.querySelector('.arcade-ping-play').onclick=()=>start('ping');
  dialog.querySelector('.arcade-cards').insertAdjacentHTML('beforeend','<div class="wf-card wf-card--glass wf-card--compact wf-card--glass-slate triangle-card"><h2 class="wf-card__title" lang="en">TRIANGLE TERRITORY</h2><button type="button" class="wf-card__action arcade-triangle-play"><span aria-hidden="true">&#9654;</span> PLAY</button></div>');
  dialog.querySelector('.arcade-triangle-play').onclick=()=>start('triangle');
+ dialog.querySelector('.arcade-cards').insertAdjacentHTML('beforeend','<div class="wf-card wf-card--glass wf-card--compact dots-boxes-card"><h2 class="wf-card__title" lang="en">DOTS AND BOXES</h2><button type="button" class="wf-card__action arcade-boxes-play"><span aria-hidden="true">&#9654;</span> PLAY</button></div>');
+ dialog.querySelector('.arcade-boxes-play').onclick=()=>start('boxes');
  dialog.querySelector('.arcade-cards').insertAdjacentHTML('beforeend','<div class="wf-card wf-card--glass wf-card--compact pebble-card"><h2 class="wf-card__title" lang="en">PEBBLE TERRITORY</h2><button type="button" class="wf-card__action arcade-pebble-play"><span aria-hidden="true">&#9654;</span> PLAY</button></div>');
  dialog.querySelector('.arcade-pebble-play').onclick=()=>start('pebble');
  dialog.querySelector('.arcade-play').onclick=()=>start('football');
@@ -145,7 +147,7 @@ async function start(kind='football'){
  try{
  const games=await loadFootball();
  if(generation!==gameGeneration||!dialog.open||closing)return;
- gameHandle=(kind==='pebble'?games.mountPebbleTerritory:kind==='triangle'?games.mountTriangleTerritory:kind==='ping'?games.mountChalkboardPingPong:kind==='eraser'?games.mountEraserWrestling:kind==='book-flip'?games.mountBookFlip:kind==='curling'?games.mountCurling:kind==='basketball'?games.mountBasketball:games.mountFootball)(host,{onExit:lobby,onWin:lobby,english:en()});
+ gameHandle=(kind==='boxes'?games.mountDotsAndBoxes:kind==='pebble'?games.mountPebbleTerritory:kind==='triangle'?games.mountTriangleTerritory:kind==='ping'?games.mountChalkboardPingPong:kind==='eraser'?games.mountEraserWrestling:kind==='book-flip'?games.mountBookFlip:kind==='curling'?games.mountCurling:kind==='basketball'?games.mountBasketball:games.mountFootball)(host,{onExit:lobby,onWin:lobby,english:en()});
  }catch(error){
  if(generation!==gameGeneration||!dialog.open||closing)return;
  host.innerHTML='<p>'+t('게임을 불러오지 못했습니다.','Could not load the game.')+'</p><button type="button" class="wf-button">BACK</button>';

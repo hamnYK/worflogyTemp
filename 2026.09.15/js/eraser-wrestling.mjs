@@ -22,22 +22,22 @@ export function mountEraserWrestling(host,{onExit,onWin,english=false}={}){
  }
  scene.add(new THREE.HemisphereLight(0xcfeaff,0x62513d,1.7));const sun=new THREE.DirectionalLight(0xffe5c3,2.8);sun.position.set(-5,11,6);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-8,right:8,top:9,bottom:-9,near:.1,far:35});sun.shadow.normalBias=.009;scene.add(sun);
  const fill=new THREE.DirectionalLight(0x9fcefa,1.2);fill.position.set(7,5,-5);scene.add(fill);
- const wood=mat({color:'#77664f',roughness:.6,map:finish.grain('wood')});mesh(rounded(17,.3,17,.18),wood,scene,0,-.22,0);
+ const wood=mat({color:'#b4a48b',roughness:.62,map:finish.grain('oak'),bumpMap:finish.grain('wood'),bumpScale:.014});mesh(finish.beveledBox(17,.3,17),wood,scene,0,-.22,0);
  const paper=document.createElement('canvas');paper.width=paper.height=1024;const ctx=paper.getContext('2d');ctx.fillStyle='#eee6cf';ctx.fillRect(0,0,1024,1024);
  let seed=61;for(let i=0;i<18000;i++){seed=(Math.imul(seed,1664525)+1013904223)>>>0;ctx.fillStyle=i%2?'#998b6410':'#ffffff20';ctx.fillRect(seed%1024,(seed>>>10)%1024,1,2);}
  ctx.strokeStyle='#56799224';ctx.lineWidth=1;for(let i=0;i<1024;i+=32){ctx.beginPath();ctx.moveTo(i,0);ctx.lineTo(i,1024);ctx.moveTo(0,i);ctx.lineTo(1024,i);ctx.stroke();}
  ctx.strokeStyle='#334d65';ctx.lineWidth=5;ctx.strokeRect(102.4,51.2,819.2,921.6);ctx.lineWidth=1;ctx.strokeRect(110,59,804,906);
  ctx.fillStyle='#35536a';ctx.textAlign='center';ctx.font='bold 31px Arial';ctx.fillText('ERASER WRESTLING',512,145);ctx.font='18px Arial';ctx.fillText('WORFLOGY  /  AFTER HOURS',512,907);
  ctx.setLineDash([8,9]);ctx.beginPath();ctx.moveTo(135,512);ctx.lineTo(889,512);ctx.stroke();ctx.setLineDash([]);
- const sheetMat=mat({map:texture(paper),roughness:.87});const sheet=mesh(new THREE.PlaneGeometry(10,10),sheetMat,scene,0,-.001,0);sheet.rotation.x=-Math.PI/2;sheet.castShadow=false;
+ const sheetMat=mat({map:texture(paper),roughness:.9,bumpMap:finish.grain('paper'),bumpScale:.006});const sheet=mesh(new THREE.PlaneGeometry(10,10),sheetMat,scene,0,-.001,0);sheet.rotation.x=-Math.PI/2;sheet.castShadow=false;
  // The visible border is x +/-4, z +/-4.5, matching the rules exactly.
  const models=game.bodies.map((_,i)=>{
  const g=new THREE.Group();scene.add(g);
  const rubber=mat({color:i?'#edb3a3':'#e8e5d9',roughness:.87,bumpMap:finish.grain('cloth'),bumpScale:.0015});
  mesh(rounded(1.8,.3,.84,.07),rubber,g);
- const band=mat({color:i?'#a94f45':'#375e89',roughness:.53,clearcoat:.15});mesh(rounded(1.02,.309,.849,.035),band,g,-.04,0,0);
+ const band=mat({color:i?'#a94f45':'#375e89',roughness:.66,clearcoat:.08,bumpMap:finish.grain('paper'),bumpScale:.004});mesh(rounded(1.02,.309,.849,.035),band,g,-.04,0,0);
  const c=document.createElement('canvas');c.width=512;c.height=256;const x=c.getContext('2d');x.fillStyle=i?'#a94f45':'#375e89';x.fillRect(0,0,512,256);x.strokeStyle='#f5e9cc';x.lineWidth=3;x.strokeRect(14,14,484,228);x.fillStyle='#f5e9cc';x.textAlign='center';x.font='bold 75px Arial';x.fillText(i?'RIVAL':'PLAYER',256,118);x.font='24px Arial';x.fillText('SOFT RUBBER  /  01',256,168);x.font='18px Arial';x.fillText('WORFLOGY',256,210);
- const label=mat({map:texture(c),roughness:.6});
+ const label=mat({map:texture(c),roughness:.7,bumpMap:finish.grain('paper'),bumpScale:.003});
  for(const sign of [-1,1]){const face=mesh(new THREE.PlaneGeometry(.94,.76),label,g,-.04,sign*.157,0);face.rotation.x=-sign*Math.PI/2;face.castShadow=false;}
  // Shallow wear lines on the exposed ends.
  for(const sign of [-1,1])for(let j=0;j<4;j++){const line=mesh(new THREE.BoxGeometry(.16,.001,.005),mat({color:i?'#ce998a':'#c3bdac',roughness:1}),g,sign*.7,.151,(j-1.5)*.11);line.rotation.y=sign*.25;line.castShadow=false;}

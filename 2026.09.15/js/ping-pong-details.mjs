@@ -64,7 +64,7 @@ export function createPingDetails({THREE,scene,mesh,box,material,texture,finish}
  const shades=['#557386','#8a7160','#657b66','#7c6f89'];
  for(let book=0;book<4;book++){
  const center=-1.95+book*1.3,lean=[.24,-.2,.29,-.25][book],height=[.69,.73,.7,.67][book];
- const jacket=material({color:shades[book],roughness:.86,side:THREE.DoubleSide});
+ const jacket=material({color:shades[book],roughness:.86,bumpMap:finish.grain('paper'),bumpScale:.004,sheen:.12,side:THREE.DoubleSide});
  for(let layer=0;layer<7;layer++){
  const isCover=layer===0||layer===6,w=isCover?1.33:1.29,h=height-(isCover?0:.018);
  const geo=new THREE.PlaneGeometry(w,h,24,18),pos=geo.attributes.position;

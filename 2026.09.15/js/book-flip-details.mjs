@@ -15,7 +15,7 @@ export function createBookDetails({scene,finish,geos,textures,BOOK,BOOKS,rendere
  const cloth=tex(grainCanvas,false);cloth.wrapS=cloth.wrapT=THREE.RepeatWrapping;cloth.repeat.set(5,7);
  const woodCanvas=canvas(1024,1024),wx=woodCanvas.getContext('2d');wx.fillStyle='#917053';wx.fillRect(0,0,1024,1024);
  for(let i=0;i<1300;i++){const y=rand()*1024;wx.strokeStyle=rand()>.5?'rgba(40,24,15,.13)':'rgba(240,200,145,.12)';wx.lineWidth=.4+rand()*1.5;wx.beginPath();wx.moveTo(0,y);for(let x=0;x<=1024;x+=16)wx.lineTo(x,y+Math.sin(x*.008+y*.017)*5+Math.sin(x*.03)*1.5);wx.stroke();}
- const woodTex=tex(woodCanvas),deskMat=material({map:woodTex,roughness:.5,clearcoat:.25,clearcoatRoughness:.45});
+ const woodTex=tex(woodCanvas),deskMat=material({map:woodTex,bumpMap:finish.grain('wood'),bumpScale:.012,roughness:.54,clearcoat:.22,clearcoatRoughness:.4});
  const desk=mesh(rounded(15,.35,14,.25),deskMat,scene);
  const uv=desk.geometry.attributes.uv,position=desk.geometry.attributes.position;for(let i=0;i<uv.count;i++)uv.setXY(i,position.getX(i)/15+.5,position.getZ(i)/14+.5);uv.needsUpdate=true;deskMat.color.set('#b09a86');
  const group=new THREE.Group();scene.add(group);
@@ -24,7 +24,7 @@ export function createBookDetails({scene,finish,geos,textures,BOOK,BOOKS,rendere
  const bottom=mesh(rounded(6,.055,8),coverMat,group);
  const pagesCanvas=canvas(512,512),px=pagesCanvas.getContext('2d');px.fillStyle='#e8dfc8';px.fillRect(0,0,512,512);
  for(let y=0;y<512;y+=3){px.fillStyle='rgba(92,75,50,'+(.06+rand()*.15)+')';px.fillRect(0,y,512,.5+rand());}
- const pageTexture=tex(pagesCanvas),pageMat=material({map:pageTexture,roughness:.95});
+ const pageTexture=tex(pagesCanvas),pageMat=material({map:pageTexture,roughness:.95,bumpMap:finish.grain('paper'),bumpScale:.005});
  const pages=mesh(new THREE.BoxGeometry(5.84,1,7.82),pageMat,group);
  const spine=mesh(rounded(.18,1,7.99,.06),coverMat,group,-2.93,0,0);
  const creaseMat=material({color:'#38291d',transparent:true,opacity:.24,roughness:.9});
@@ -41,7 +41,7 @@ export function createBookDetails({scene,finish,geos,textures,BOOK,BOOKS,rendere
  function update(kind){
  const b=BOOKS[kind],th=b.thickness,hard=kind==='hardcover';
  desk.position.y=BOOK.top-th-.23;shadow.position.y=desk.position.y+.178;
- coverMat.color.set(b.color).multiplyScalar(.78);coverMat.roughness=hard?.75:kind==='softcover'?.4:.63;coverMat.bumpScale=hard?.018:.005;coverMat.clearcoat=hard?.08:.3;
+ coverMat.color.set(b.color).multiplyScalar(.78);coverMat.roughness=hard?.75:kind==='softcover'?.4:.63;coverMat.bumpMap=hard?finish.grain('cloth'):finish.grain('paper');coverMat.sheen=hard?.28:0;coverMat.sheenRoughness=.8;coverMat.bumpScale=hard?.023:.007;coverMat.clearcoat=hard?.08:.3;
  pages.scale.y=th-.07;pages.position.y=BOOK.top-th/2-.0275;bottom.position.y=BOOK.top-th;
  spine.scale.y=th;spine.position.y=BOOK.top-th/2;creases.forEach(m=>m.visible=hard);ribbon.visible=hard;ribbon.position.y=BOOK.top-th*.6;headbands.forEach(m=>{m.visible=hard;m.position.y=BOOK.top-th*.5;});
  ax.clearRect(0,0,1024,1536);ax.strokeStyle='#fff';ax.fillStyle='#fff';ax.lineWidth=2;ax.strokeRect(56,56,912,1424);ax.lineWidth=1;ax.strokeRect(70,70,884,1396);

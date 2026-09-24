@@ -8,7 +8,7 @@ export function createPebbleTable(canvas){
  const camera=new THREE.PerspectiveCamera(38,1,.1,120),geos=new Set(),mats=new Set(),textures=new Set(),finish=createArcadeFinish(renderer,scene,geos,mats,textures);
  const material=(color,roughness=.8,metalness=0)=>finish.material({color,roughness,metalness});
  function mesh(g,m,x=0,y=0,z=0){geos.add(g);const o=new THREE.Mesh(g,m);o.position.set(x,y,z);o.castShadow=o.receiveShadow=true;scene.add(o);return o;}
- const box=(w,h,d,m,x,y,z)=>mesh(new THREE.BoxGeometry(w,h,d),m,x,y,z);
+ const box=(w,h,d,m,x,y,z)=>mesh(finish.beveledBox(w,h,d),m,x,y,z);
  scene.add(new THREE.HemisphereLight(0xdcecf2,0x685137,1.7));
  const sun=new THREE.DirectionalLight(0xffe4bb,3.2);sun.position.set(-8,16,6);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-13,right:13,top:12,bottom:-12,near:.1,far:45});sun.shadow.normalBias=.02;scene.add(sun);
  const rim=new THREE.DirectionalLight(0x97c6d7,1.1);rim.position.set(9,8,-8);scene.add(rim);
@@ -24,7 +24,7 @@ export function createPebbleTable(canvas){
  const soil=finish.material({map,roughness:.98,bumpMap:reliefMap,bumpScale:.045});
  box(17,.55,11.24,material('#705137'),0,-.36,0);
  const ground=mesh(new THREE.PlaneGeometry(16,10.24),soil,0,0,0);ground.rotation.x=-Math.PI/2;ground.castShadow=false;
- const stoneMat=material('#b7ada0',.92),wood=material('#795334',.65);wood.bumpMap=finish.grain('wood');wood.bumpScale=.02;
+ const stoneMat=material('#b7ada0',.92);stoneMat.bumpMap=finish.grain('stone');stoneMat.bumpScale=.025;const wood=material('#795334',.65);wood.bumpMap=finish.grain('wood');wood.bumpScale=.02;
  for(let i=0;i<22;i++){box(.73,.14,.32,stoneMat,-8.05+i*.77,.015,-5.3);box(.73,.14,.32,stoneMat,-8.05+i*.77,.015,5.3);}
  for(let i=0;i<13;i++)for(const side of [-1,1])box(.32,.14,.73,stoneMat,side*8.25,.015,-4.7+i*.78);
  // Weathered schoolyard bench and grass beyond the playable rectangle.

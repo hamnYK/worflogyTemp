@@ -25,9 +25,9 @@ export function mountFootball(host,{onExit,onWin,english=false}={}){
  const sun=new THREE.DirectionalLight(0xffe7c2,3.5);sun.position.set(-6,15,7);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-12,right:12,top:13,bottom:-13,near:.5,far:40});sun.shadow.normalBias=.025;scene.add(sun);
  const rim=new THREE.DirectionalLight(0x81dfff,2);rim.position.set(9,7,-10);scene.add(rim);
  const materials=new Set(),geometries=new Set(),textures=new Set();
- function mat(color,roughness=.5,metalness=0){const m=new THREE.MeshStandardMaterial({color,roughness,metalness});materials.add(m);return m;}
+ function mat(color,roughness=.5,metalness=0){const m=finish.material({color,roughness,metalness});materials.add(m);return m;}
  function mesh(geometry,material,x=0,y=0,z=0,parent=scene){geometries.add(geometry);const m=new THREE.Mesh(geometry,material);m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;parent.add(m);return m;}
- function box(w,h,d,m,x,y,z,parent){return mesh(new THREE.BoxGeometry(w,h,d),m,x,y,z,parent);}
+ function box(w,h,d,m,x,y,z,parent){return mesh(finish.beveledBox(w,h,d),m,x,y,z,parent);}
  const finish=createArcadeFinish(renderer,scene,geometries,materials,textures);
  finish.plinth(11.1,17.1,-.78,'#458f91');
  const walnut=mat('#392d29',.42),rail=mat('#172831',.32,.55),brass=mat('#bd9a52',.26,.75),white=mat('#eef5df',.55);
@@ -40,7 +40,7 @@ export function mountFootball(host,{onExit,onWin,english=false}={}){
  ctx.strokeStyle='#e5eed0ab';ctx.lineWidth=3;ctx.strokeRect(16,16,608,992);ctx.beginPath();ctx.moveTo(16,512);ctx.lineTo(624,512);ctx.stroke();ctx.beginPath();ctx.arc(320,512,85,0,Math.PI*2);ctx.stroke();ctx.strokeRect(175,16,290,168);ctx.strokeRect(245,16,150,66);ctx.strokeRect(175,840,290,168);ctx.strokeRect(245,942,150,66);
  ctx.fillStyle='#e5eed0';ctx.beginPath();ctx.arc(320,512,4,0,Math.PI*2);ctx.fill();
  const feltTexture=new THREE.CanvasTexture(textureCanvas);feltTexture.colorSpace=THREE.SRGBColorSpace;feltTexture.anisotropy=renderer.capabilities.getMaxAnisotropy();textures.add(feltTexture);
- const felt=mat('#ffffff',.91);felt.map=feltTexture;felt.bumpMap=finish.grain('felt');felt.bumpScale=.035;
+ const felt=mat('#ffffff',.91);felt.map=feltTexture;felt.bumpMap=finish.grain('felt');felt.bumpScale=.025;felt.sheen=.3;felt.sheenRoughness=.9;
  walnut.bumpMap=finish.grain('wood');walnut.bumpScale=.018;walnut.roughness=.3;
  const turf=mesh(new THREE.PlaneGeometry(10,16),felt,0,.005,0);turf.rotation.x=-Math.PI/2;turf.castShadow=false;
  box(.24,.4,16.5,rail,-5.15,.15,0);box(.24,.4,16.5,rail,5.15,.15,0);box(10.5,.4,.24,rail,0,.15,8.15);
@@ -150,3 +150,5 @@ export {mountEraserWrestling} from './eraser-wrestling.mjs';
 export {mountChalkboardPingPong} from './chalkboard-ping-pong.mjs';
 export {mountTriangleTerritory} from './triangle-territory.mjs';
 export {mountPebbleTerritory} from './pebble-territory.mjs';
+
+export {mountDotsAndBoxes} from './dots-and-boxes.mjs';
