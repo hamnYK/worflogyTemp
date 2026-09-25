@@ -119,6 +119,7 @@ function closeDoors(){
 trigger.onclick=open;
 dialog.addEventListener('cancel',e=>{e.preventDefault();closeDoors();});
 dialog.addEventListener('close',()=>{syncBackground();syncMusic();stopGame();clearTimeout(doorTimer);document.body.style.overflow=oldOverflow;dialog.querySelectorAll('.arcade-doors').forEach(node=>node.remove());closing=false;trigger.focus({preventScroll:true});});
+window.addEventListener('null-sector-registered',()=>{if(dialog.open&&inLobby&&!closing)lobby();});
 function lobby(){
  stopGame();inLobby=true;syncMusic();
  
@@ -135,16 +136,41 @@ function lobby(){
  dialog.querySelector('.arcade-boxes-play').onclick=()=>start('boxes');
  dialog.querySelector('.arcade-cards').insertAdjacentHTML('beforeend','<div class="wf-card wf-card--glass wf-card--compact pebble-card"><h2 class="wf-card__title" lang="en">PEBBLE TERRITORY</h2><button type="button" class="wf-card__action arcade-pebble-play"><span aria-hidden="true">&#9654;</span> PLAY</button></div>');
  dialog.querySelector('.arcade-pebble-play').onclick=()=>start('pebble');
+ const ready=!!window.WorflogyNullSector?.mount;
+ dialog.querySelector('.arcade-cards').insertAdjacentHTML('beforeend','<div class="wf-card null-sector-card"><h2 class="wf-card__title" lang="en" aria-label="NULL SECTOR : PRE-DEMO"><span>NULL SECTOR</span><span class="wf-badge wf-badge--neutral null-sector-edition">PRE-DEMO</span></h2><button type="button" class="wf-button wf-button--primary arcade-null-sector-play" '+(ready?'':'disabled')+'>'+(ready?'PLAY':t('준비 중','COMING SOON'))+'</button></div>');
+ dialog.querySelector('.arcade-null-sector-play').onclick=nullSectorEntry;
  dialog.querySelector('.arcade-play').onclick=()=>start('football');
  dialog.querySelector('.arcade-basketball-play').onclick=()=>start('basketball');
  dialog.querySelector('.arcade-curling-play').onclick=()=>start('curling');
 }
 
+function nullSectorEntry(){
+ if(!window.WorflogyNullSector?.mount)return;
+ const host=dialog.querySelector('.arcade-content');
+ host.innerHTML='<form class="null-sector-entry wf-card wf-card--glass" data-language-control aria-labelledby="null-sector-entry-title"><h2 class="wf-card__title" id="null-sector-entry-title" lang="en">NULL SECTOR : PRE-DEMO</h2><div class="wf-field"><label for="null-sector-key">'+t('캔버스 12의 4자리 코드를 입력하세요.','Enter the four-digit code from canvas 12.')+'</label><input class="wf-input" id="null-sector-key" name="code" type="text" inputmode="numeric" pattern="[0-9]{4}" minlength="4" maxlength="4" autocomplete="off" required aria-describedby="null-sector-error"></div><p class="wf-notice wf-notice--error" id="null-sector-error" role="status" hidden></p><div class="null-sector-entry-actions"><button class="wf-button wf-button--primary" type="submit">START</button><button class="wf-button null-sector-back" type="button">BACK</button></div></form>';
+ host.querySelector('.null-sector-back').onclick=lobby;
+ const input=host.querySelector('input');input.focus();
+ input.oninput=()=>{input.removeAttribute('aria-invalid');host.querySelector('[role="status"]').hidden=true;};
+ host.querySelector('form').onsubmit=event=>{
+  event.preventDefault();
+  if(!window.WorflogyNullSector.accepts(input.value)){
+   input.setAttribute('aria-invalid','true');host.querySelector('[role="status"]').hidden=false;
+   host.querySelector('[role="status"]').textContent=t('코드가 일치하지 않습니다. 캔버스 12의 현재 코드를 확인하세요.','Code does not match. Check the current code on canvas 12.');input.select();return;
+  }
+  // Validate only at entry. No expiry timer is attached to a game session.
+  start('null-sector');
+ };
+}
 async function start(kind='football'){
  stopGame();inLobby=false;syncMusic();const generation=gameGeneration;
  const host=dialog.querySelector('.arcade-content');
  host.innerHTML='<p class="arcade-loading" role="status">'+t('게임을 준비하고 있습니다.','Preparing the game.')+'</p>';
  try{
+ if(kind==='null-sector'){
+  const handle=await window.WorflogyNullSector.mount(host,{onExit:lobby,onWin:lobby,english:en()});
+  if(generation!==gameGeneration||!dialog.open||closing){handle?.dispose();return;}
+  gameHandle=handle;return;
+ }
  const games=await loadFootball();
  if(generation!==gameGeneration||!dialog.open||closing)return;
  gameHandle=(kind==='boxes'?games.mountDotsAndBoxes:kind==='pebble'?games.mountPebbleTerritory:kind==='triangle'?games.mountTriangleTerritory:kind==='ping'?games.mountChalkboardPingPong:kind==='eraser'?games.mountEraserWrestling:kind==='book-flip'?games.mountBookFlip:kind==='curling'?games.mountCurling:kind==='basketball'?games.mountBasketball:games.mountFootball)(host,{onExit:lobby,onWin:lobby,english:en()});

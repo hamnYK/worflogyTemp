@@ -164,3 +164,33 @@
 .triangle-board[data-desk-theme="eastern"] .triangle-lines line{stroke:#303b35}
 .triangle-board[data-desk-theme="eastern"] .triangle-lines .triangle-last-edge{stroke:#a04d38}
 .triangle-board[data-desk-theme="western"] .triangle-lines line{stroke:#4b4030}
+
+/* Canvas 12: plain, centered elevator hint over the existing video. */
+.null-sector-stage{position:relative;isolation:isolate}
+.null-sector-access{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--space-4);text-align:center;color:var(--color-on-media);text-shadow:var(--shadow-media-text);-webkit-text-stroke:var(--media-text-stroke);paint-order:stroke fill;pointer-events:none}
+.null-sector-code{font-family:var(--font-display-en);font-size:var(--font-size-title);font-weight:var(--font-weight-bold);line-height:var(--line-height-tight);font-variant-numeric:tabular-nums;letter-spacing:0}
+.null-sector-open{display:flex;flex-direction:column;gap:var(--space-1);font-family:var(--font-body);font-size:var(--font-size-ui);font-weight:var(--font-weight-medium);line-height:var(--line-height-tight);letter-spacing:0}
+.null-sector-entry{max-width:420px;margin:var(--space-10) auto;gap:var(--space-5)}
+.null-sector-entry .wf-input{min-width:0;text-align:center;font-variant-numeric:tabular-nums}
+.coin-arcade .null-sector-entry .wf-button{min-height:var(--control-height-touch);font-size:var(--font-size-sm)}
+.null-sector-entry [role=status]{margin:0}
+.null-sector-entry-actions{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-2)}
+.null-sector-card button:disabled{opacity:.6;cursor:default}
+
+/* Keep the standalone game's viewport and styles isolated inside AFTER HOURS. */
+.coin-arcade.null-sector-active{overflow:hidden}
+.coin-arcade.null-sector-active .arcade-header{display:none}
+.coin-arcade.null-sector-active .arcade-shell{width:100%;max-width:none;height:100dvh;padding:0;margin:0}
+.coin-arcade.null-sector-active .arcade-content{height:100%;padding:0}
+.null-sector-player{display:flex;flex-direction:column;height:100%;min-height:0;background:var(--color-surface);color:var(--color-text)}
+.null-sector-player-bar{display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);padding:var(--space-2) var(--space-4);border-bottom:1px solid var(--color-border);flex-shrink:0}
+.null-sector-player-bar strong{font-family:var(--font-display-en);font-size:var(--font-size-lead)}
+.null-sector-frame{display:block;width:100%;flex:1;min-height:0;border:0;background:var(--color-surface)}
+.null-sector-load-status{margin:0;padding:var(--space-3);font-size:var(--font-size-ui)}
+
+/* Featured lobby card composed from the homepage's existing components. */
+.coin-arcade .null-sector-card{display:flex;flex-direction:column;align-items:flex-start;gap:var(--space-3);padding:var(--space-4);color:var(--color-text)}
+.coin-arcade .null-sector-card .wf-card__title{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-2);margin:0;font-family:var(--font-display-en);font-size:var(--font-size-lead);font-weight:var(--font-weight-bold);line-height:var(--line-height-tight);color:var(--color-text);text-shadow:none}
+.coin-arcade .null-sector-card .null-sector-edition{font-family:var(--font-body);font-size:var(--font-size-xs);font-weight:var(--font-weight-medium);line-height:var(--line-height-tight);white-space:nowrap}
+.coin-arcade .null-sector-card .arcade-null-sector-play{margin-top:auto;min-height:var(--control-height-touch);font-family:var(--font-body);font-size:var(--font-size-sm);font-weight:var(--font-weight-semibold)}
+.coin-arcade .null-sector-card .arcade-null-sector-play:focus-visible{outline:var(--focus-ring);outline-offset:var(--focus-offset)}

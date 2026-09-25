@@ -1,5 +1,5 @@
 window.WORFLOGY_EN = {
-  "가제 : 스테이지 피지컬 택틱스": "Working title: Stage Physical Tactics",
+  "가제 : NULL SECTOR": "Working title: NULL SECTOR",
   "개발 진행 중": "In development",
   "실증 테스트 가능": "Available for proof-of-concept testing",
   "PC에서는 캔버스 조작, 모바일에서는 재생만 가능합니다.": "Interact with the canvas on desktop; playback only on mobile.",
