@@ -1,3 +1,6 @@
 # Regenerable build/deploy staging and generated QA screenshots
 /tmp/
 /output/*.png
+
+/output/*.log
+/output/*.json
