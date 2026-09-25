@@ -1,0 +1,2835 @@
+{
+  "summary": [
+    {
+      "variant": "legacy-hold",
+      "runs": 100,
+      "wins": 100,
+      "breachLosses": 0,
+      "meanTurns": 8
+    },
+    {
+      "variant": "new-hold",
+      "runs": 100,
+      "wins": 93,
+      "breachLosses": 3,
+      "meanTurns": 7.75
+    },
+    {
+      "variant": "new-repair",
+      "runs": 100,
+      "wins": 93,
+      "breachLosses": 2,
+      "meanTurns": 7.77
+    },
+    {
+      "variant": "new-idle",
+      "runs": 100,
+      "wins": 0,
+      "breachLosses": 100,
+      "meanTurns": 4
+    }
+  ],
+  "results": [
+    {
+      "variant": "legacy-hold",
+      "seed": 0,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 1,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 2,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 3,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 4,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 5,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 6,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 7,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 8,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 9,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 10,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 11,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 12,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 13,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 14,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 15,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 16,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 17,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 18,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 19,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 20,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 21,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 22,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 23,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 24,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 25,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 26,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 27,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 28,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 29,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 30,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 31,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 32,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 33,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 34,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 35,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 36,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 37,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 38,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 39,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 40,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 41,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 42,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 43,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 44,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 45,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 46,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 47,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 48,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 49,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 50,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 51,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 52,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 53,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 54,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 55,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 56,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 57,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 58,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 59,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 60,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 61,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 62,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 63,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 64,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 65,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 66,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 67,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 68,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 69,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 70,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 71,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 72,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 73,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 74,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 75,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 76,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 77,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 78,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 79,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 80,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 81,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 82,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 83,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 84,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 85,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 86,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 87,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 88,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 89,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 90,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 91,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 92,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 93,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 94,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 95,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 96,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 97,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 98,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "legacy-hold",
+      "seed": 99,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 0,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 1,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 2,
+      "won": true,
+      "turn": 7,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 3,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 4,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 5,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 6,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 7,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 8,
+      "won": true,
+      "turn": 7,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 9,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 10,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 11,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 12,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 13,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 14,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 15,
+      "won": true,
+      "turn": 7,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 16,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 17,
+      "won": false,
+      "turn": 8,
+      "breached": true
+    },
+    {
+      "variant": "new-hold",
+      "seed": 18,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 19,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 20,
+      "won": false,
+      "turn": 7,
+      "breached": true
+    },
+    {
+      "variant": "new-hold",
+      "seed": 21,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 22,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 23,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 24,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 25,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 26,
+      "won": true,
+      "turn": 7,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 27,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 28,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 29,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 30,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 31,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 32,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 33,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 34,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 35,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 36,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 37,
+      "won": true,
+      "turn": 7,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 38,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 39,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 40,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 41,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 42,
+      "won": true,
+      "turn": 7,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 43,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 44,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 45,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 46,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 47,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 48,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 49,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 50,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 51,
+      "won": true,
+      "turn": 7,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 52,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 53,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 54,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 55,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 56,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 57,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 58,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 59,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 60,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 61,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 62,
+      "won": true,
+      "turn": 7,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 63,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 64,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 65,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 66,
+      "won": true,
+      "turn": 7,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 67,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 68,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 69,
+      "won": true,
+      "turn": 7,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 70,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 71,
+      "won": true,
+      "turn": 7,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 72,
+      "won": false,
+      "turn": 7,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 73,
+      "won": false,
+      "turn": 4,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 74,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 75,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 76,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 77,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 78,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 79,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 80,
+      "won": false,
+      "turn": 6,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 81,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 82,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 83,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 84,
+      "won": false,
+      "turn": 5,
+      "breached": true
+    },
+    {
+      "variant": "new-hold",
+      "seed": 85,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 86,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 87,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 88,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 89,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 90,
+      "won": true,
+      "turn": 7,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 91,
+      "won": false,
+      "turn": 7,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 92,
+      "won": true,
+      "turn": 7,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 93,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 94,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 95,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 96,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 97,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 98,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-hold",
+      "seed": 99,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 0,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 1,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 2,
+      "won": true,
+      "turn": 7,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 3,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 4,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 5,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 6,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 7,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 8,
+      "won": true,
+      "turn": 7,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 9,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 10,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 11,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 12,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 13,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 14,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 15,
+      "won": true,
+      "turn": 7,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 16,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 17,
+      "won": false,
+      "turn": 8,
+      "breached": true
+    },
+    {
+      "variant": "new-repair",
+      "seed": 18,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 19,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 20,
+      "won": false,
+      "turn": 7,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 21,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 22,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 23,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 24,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 25,
+      "won": true,
+      "turn": 7,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 26,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 27,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 28,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 29,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 30,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 31,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 32,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 33,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 34,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 35,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 36,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 37,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 38,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 39,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 40,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 41,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 42,
+      "won": true,
+      "turn": 7,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 43,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 44,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 45,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 46,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 47,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 48,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 49,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 50,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 51,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 52,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 53,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 54,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 55,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 56,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 57,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 58,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 59,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 60,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 61,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 62,
+      "won": true,
+      "turn": 7,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 63,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 64,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 65,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 66,
+      "won": true,
+      "turn": 7,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 67,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 68,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 69,
+      "won": true,
+      "turn": 7,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 70,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 71,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 72,
+      "won": false,
+      "turn": 7,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 73,
+      "won": false,
+      "turn": 4,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 74,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 75,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 76,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 77,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 78,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 79,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 80,
+      "won": false,
+      "turn": 5,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 81,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 82,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 83,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 84,
+      "won": false,
+      "turn": 5,
+      "breached": true
+    },
+    {
+      "variant": "new-repair",
+      "seed": 85,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 86,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 87,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 88,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 89,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 90,
+      "won": true,
+      "turn": 7,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 91,
+      "won": false,
+      "turn": 7,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 92,
+      "won": true,
+      "turn": 7,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 93,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 94,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 95,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 96,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 97,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 98,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-repair",
+      "seed": 99,
+      "won": true,
+      "turn": 8,
+      "breached": false
+    },
+    {
+      "variant": "new-idle",
+      "seed": 0,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 1,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 2,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 3,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 4,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 5,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 6,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 7,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 8,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 9,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 10,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 11,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 12,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 13,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 14,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 15,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 16,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 17,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 18,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 19,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 20,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 21,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 22,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 23,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 24,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 25,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 26,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 27,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 28,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 29,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 30,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 31,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 32,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 33,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 34,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 35,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 36,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 37,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 38,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 39,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 40,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 41,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 42,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 43,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 44,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 45,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 46,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 47,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 48,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 49,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 50,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 51,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 52,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 53,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 54,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 55,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 56,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 57,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 58,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 59,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 60,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 61,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 62,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 63,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 64,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 65,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 66,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 67,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 68,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 69,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 70,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 71,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 72,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 73,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 74,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 75,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 76,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 77,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 78,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 79,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 80,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 81,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 82,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 83,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 84,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 85,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 86,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 87,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 88,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 89,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 90,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 91,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 92,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 93,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 94,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 95,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 96,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 97,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 98,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    },
+    {
+      "variant": "new-idle",
+      "seed": 99,
+      "won": false,
+      "turn": 4,
+      "breached": true
+    }
+  ],
+  "limits": "Heuristic bots; same 100 seeds, current sniper equipment, fixed map and recommended roster; not player win rates"
+}

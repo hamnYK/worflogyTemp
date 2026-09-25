@@ -1,0 +1,77 @@
+body :is(#app,.ds-live-components) button.unit-card.shared-unit-card{min-height:90px;margin:0;padding:6px;gap:9px;line-height:1.2;border:0;border-bottom:1px solid #263e5026;background:transparent;box-shadow:none;transition:background .15s ease}
+body :is(#app,.ds-live-components) button.unit-card.shared-unit-card>.ink-portrait{width:58px;height:72px;border:0;filter:drop-shadow(2px 3px 1px #263e5020);align-self:center}
+body :is(#app,.ds-live-components) button.unit-card.shared-unit-card>div{flex:1;min-width:0}
+body :is(#app,.ds-live-components) button.unit-card.shared-unit-card strong{display:block;font:700 15px/1.1 var(--font-tactical);letter-spacing:1px}
+body :is(#app,.ds-live-components) button.unit-card.shared-unit-card small{font-size:12px;margin:2px 0 3px;line-height:1.2}
+body :is(#app,.ds-live-components) button.unit-card.shared-unit-card.selected{background:var(--hud-ink);color:#fff9e9;box-shadow:none;border-bottom-color:var(--hud-ink)}
+body :is(#app,.ds-live-components) button.unit-card.shared-unit-card.selected small,body :is(#app,.ds-live-components) button.unit-card.shared-unit-card.selected .unit-meta,body :is(#app,.ds-live-components) button.unit-card.shared-unit-card.selected .unit-condition{color:#e0e5e3!important}
+body :is(#app,.ds-live-components) button.unit-card.shared-unit-card.selected .hp{background:#ffffff25}
+body :is(#app,.ds-live-components) button.unit-card.shared-unit-card.selected .hp i{background:#c8ab77}
+body :is(#app,.ds-live-components) button.unit-card.shared-unit-card:not(.selected):hover{background:#ffffffb0}
+body :is(#app,.ds-live-components) button.unit-card.shared-unit-card .hp{height:3px;background:#263e5020;margin:3px 0}
+body :is(#app,.ds-live-components) button.unit-card.shared-unit-card .hp i{background:var(--hud-accent)}
+.charge-meter{display:inline-flex;gap:2px;align-items:center}
+.charge-meter i{display:block;width:4px;height:7px;background:#82909b44}
+.charge-meter i.filled{background:var(--hud-accent)}
+.selected .charge-meter i.filled{background:#d9ba81}
+.charge-meter b{font:11px var(--font-tactical);margin-left:3px}
+body :is(#app,.ds-live-components) .world-label.unit-status-icon{width:25px;height:25px;display:grid;place-items:center;padding:3px;border:1px solid #a5b0b5;border-radius:50%;background:#faf7edef;color:#365a70;box-shadow:0 1px 3px #182d3d26}
+body :is(#app,.ds-live-components) .world-label.unit-status-icon[hidden]{display:none}
+body :is(#app,.ds-live-components) .world-label.unit-status-icon::before{content:none}
+body :is(#app,.ds-live-components) .world-label.unit-status-icon svg{display:block;width:18px;height:18px}
+body :is(#app,.ds-live-components) .world-label.unit-status-icon.is-selected{border-color:#28465e;box-shadow:0 0 0 2px #faf7ed}
+body :is(#app,.ds-live-components) .world-label.unit-status-icon.status-wounded{color:#8e6229;background:#fff3d9}
+body :is(#app,.ds-live-components) .world-label.unit-status-icon.status-critical{color:#ab3347;background:#fff0ed}
+body :is(#app,.ds-live-components) .world-label.unit-status-icon.status-downed{color:#fff;background:#a1384a;border-color:#a1384a}
+body :is(#app,.ds-live-components) .world-label.unit-status-icon.status-signal{color:#637384;background:#eff1edde;border-style:dashed}
+body :is(#app,.ds-live-components) .enemy-card.contact-card.shared-enemy-card{display:block;padding:10px 8px;background:#f4efe5;border-left:2px solid #a96770;color:#273f50}
+body :is(#app,.ds-live-components) .contact-card .contact-stage{display:flex;align-items:center;gap:6px;font-size:11px;color:#6a7782;margin-bottom:8px}
+body :is(#app,.ds-live-components) .contact-card .contact-stage svg{width:15px;height:15px}
+body :is(#app,.ds-live-components) .contact-card .contact-identity{display:flex;gap:8px;align-items:center}
+body :is(#app,.ds-live-components) .contact-card .ink-portrait,body :is(#app,.ds-live-components) .contact-card .contact-portrait{display:block;flex:0 0 58px;width:58px;height:74px;border:0;background-color:#e6e2d6;overflow:hidden}
+body :is(#app,.ds-live-components) .contact-card .ink-portrait{background-size:400% 400%;height:58px;align-self:start}
+body :is(#app,.ds-live-components) .contact-card .contact-copy{display:block;min-width:0;flex:1}
+body :is(#app,.ds-live-components) .contact-card strong{font-size:15px;letter-spacing:.6px;display:block;overflow-wrap:anywhere}
+body :is(#app,.ds-live-components) .contact-card small{font-size:11px;color:#667583;line-height:1.5;margin:3px 0}
+body :is(#app,.ds-live-components) .contact-card .contact-health{display:block;height:5px;background:#d6d6cf;margin:7px 0 5px;overflow:hidden}
+body :is(#app,.ds-live-components) .contact-health i{display:block;height:100%;background:#ae6974}
+body :is(#app,.ds-live-components) .contact-card .unknown-health{background:repeating-linear-gradient(90deg,#8d9ca14d 0 5px,transparent 5px 9px)}
+body :is(#app,.ds-live-components) .contact-condition{display:flex;align-items:center;gap:4px;font-size:11px;color:#965263;line-height:1.5}
+body :is(#app,.ds-live-components) .contact-condition svg{width:16px;height:16px;flex-shrink:0}
+body :is(#app,.ds-live-components) .contact-card .contact-ability{display:flex;gap:6px;align-items:center;margin-top:10px;padding-top:7px;border-top:1px solid #c9c9be;color:#7b8790;font-size:11px}
+body :is(#app,.ds-live-components) .contact-ability svg{width:17px;height:17px;flex-shrink:0}
+body :is(#app,.ds-live-components) .contact-card .contact-ability.confirmed{color:#354e63}
+body :is(#app,.ds-live-components) .contact-card.unidentified{border-left:2px dashed #8d9ca1;background:#e9ece7}
+body :is(#app,.ds-live-components) .contact-portrait svg{display:block;width:100%;height:100%}
+body :is(#app,.ds-live-components) .contact-shadow{fill:#334252;stroke:#1e2b39;stroke-width:1.5}
+body :is(#app,.ds-live-components) .contact-facet{fill:#536477}
+body :is(#app,.ds-live-components) .contact-portrait.ai .contact-facet{fill:#6e607e}
+body :is(#app,.ds-live-components) .contact-mask{fill:#e4deca}.contact-visor{fill:#152839}
+body :is(#app,.ds-live-components) .unknown .contact-shadow{fill:#586773;stroke:#435460}
+body :is(#app,.ds-live-components) .unknown .contact-facet{fill:#78858c}
+body :is(#app,.ds-live-components) .contact-scan{stroke:#b5c3c5;stroke-width:1;opacity:.55}
+body :is(#app,.ds-live-components) .contact-brackets{stroke:#e7eeea;stroke-width:1.5;fill:none}
+body :is(#app,.ds-live-components) .contact-card .action-icon{position:static;inset:auto;margin:0;transform:none;flex-shrink:0;color:inherit}
+body :is(#app,.ds-live-components) .contact-card.unidentified strong{font-family:var(--font-ui);font-size:12px;letter-spacing:0;word-break:keep-all}
+body :is(#app,.ds-live-components) .contact-portrait.unknown .contact-facet{fill:#78858c}
+body :is(#app,.ds-live-components) button.unit-card.shared-unit-card,body :is(#app,.ds-live-components) .enemy-card.contact-card.shared-enemy-card{box-sizing:border-box;height:90px;min-height:90px;margin:0 0 1px}
+body :is(#app,.ds-live-components) .enemy-card.contact-card.shared-enemy-card{position:relative;padding:7px 6px}
+body :is(#app,.ds-live-components) .contact-card .contact-identity{height:100%;gap:7px}
+body :is(#app,.ds-live-components) .contact-card .ink-portrait,body :is(#app,.ds-live-components) .contact-card .contact-portrait{flex-basis:44px;width:44px;height:55px;align-self:flex-start;margin-top:1px}
+body :is(#app,.ds-live-components) .contact-card .contact-stage,body :is(#app,.ds-live-components) .contact-card .contact-ability{position:absolute;bottom:5px;left:8px;display:grid;place-items:center;width:19px;height:18px;padding:0;margin:0;border:0;background:#f4efe5;color:#657886}
+body :is(#app,.ds-live-components) .contact-card .contact-ability{left:30px}
+body :is(#app,.ds-live-components) .contact-card.observed .contact-stage,body :is(#app,.ds-live-components) .contact-card .contact-ability.confirmed{color:#8e4f5c}
+body :is(#app,.ds-live-components) .contact-card .contact-copy{align-self:center}
+body :is(#app,.ds-live-components) .contact-card strong{font-size:14px;line-height:1.15}
+body :is(#app,.ds-live-components) .contact-card small{font-size:11px;line-height:1.3;margin:3px 0}
+body :is(#app,.ds-live-components) .contact-card .contact-health{height:3px;margin:5px 0}
+body :is(#app,.ds-live-components) .contact-card .contact-condition{font-size:11px;line-height:1.3;white-space:nowrap}
+body :is(#app,.ds-live-components) button.unit-card.shared-unit-card .unit-num{display:none}
+body :is(#app,.ds-live-components) button.unit-card.shared-unit-card .unit-condition{display:flex;align-items:center;justify-content:space-between;gap:4px;font-size:11px;line-height:1.2;color:#66727e;margin-top:3px}
+body :is(#app,.ds-live-components) button.unit-card.shared-unit-card .unit-meta{font-size:12px;line-height:1.3}
+body :is(#app,.ds-live-components) button.unit-card.shared-unit-card.incapacitated{opacity:.7}
+body :is(#app,.ds-live-components) button.enemy-card.shared-enemy-card{border:0;border-left:2px solid #a96770;border-bottom:1px solid #b7777838;box-shadow:none;text-align:left}
+body :is(#app,.ds-live-components) button.enemy-card.shared-enemy-card.unidentified{border-left-style:dashed}
+@media(max-width:1300px){body :is(#app,.ds-live-components) button.unit-card.shared-unit-card>.ink-portrait{width:48px;height:64px}}
+
+body :is(#app,.ds-live-components) button.shared-unit-card,body :is(#app,.ds-live-components) button.shared-enemy-card{border-radius:0;font-size:13px}

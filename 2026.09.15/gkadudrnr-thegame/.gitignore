@@ -1,0 +1,19 @@
+node_modules/
+dist/
+local/
+output/
+backups/
+*.log
+
+# Local credentials and machine-specific files
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.DS_Store
+Thumbs.db
+
+# Browser test artifacts
+test-results/
+playwright-report/

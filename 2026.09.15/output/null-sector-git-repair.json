@@ -1,0 +1,538 @@
+{
+  "backup": "C:\\Users\\alchera\\OneDrive\\[주식회사 워플로지]\\02. 법인 홈페이지 (도메인 사용권)\\2026.04.24_워플로지 홈페이지 개편\\2026\\2026.09.15\\tmp\\null-sector-git-repair-20260926-002917",
+  "head": "e5b0e7b83f71e873db8cf81a8be9ffb794e61646",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "sha256": "73be0414b285bd827051762e66a24dea2ff9d33ec453d2ab59ff13820bd47460"
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "f5b452b70419d69173d3a5841ce457b3c977fb3d059ad5a745f9afb0df92d21c"
+    },
+    {
+      "path": "ART_DIRECTION.md",
+      "sha256": "1bbd80a8f6eb1da30988c0770e2857c02ba69a7bb878fcdd87579cb9d53e203f"
+    },
+    {
+      "path": "DEFENSE_PRESSURE_REPORT.md",
+      "sha256": "065c6d7d6d78cf54fbadadc27ad43cc08e47fb44dda7b639799942efcc0d85a5"
+    },
+    {
+      "path": "DESIGN_SYSTEM.md",
+      "sha256": "74dcfa6a879f5703d26e43cdce32bf6f86c42e175156649ebcf769ab46741fac"
+    },
+    {
+      "path": "GAMEPLAY_AUDIT.md",
+      "sha256": "d3e89423be75d02a1109c37fde97c192309a69a4b2cbe7572772a6cc491871e8"
+    },
+    {
+      "path": "GAME_DESIGN.md",
+      "sha256": "62ba99be968079185a1eaa1f68d989f51e6b8f0d8b4b074ee71a238bfe3d4176"
+    },
+    {
+      "path": "NARRATIVE_DIRECTION.md",
+      "sha256": "fa07efd74185729bdd8c68ed37eee1d99ad71e8db064a07381ecaf53d544cf47"
+    },
+    {
+      "path": "README.md",
+      "sha256": "3c00ab2119dc8b50628531878045feb4dc276be69418fc5ee7b590e7b58755e5"
+    },
+    {
+      "path": "RELOAD_RECOVERY.md",
+      "sha256": "b9dd04bde585a0d6d3ac4a29e3d660e01c24e123b338ab5cf091fb4b41b0f827"
+    },
+    {
+      "path": "SAVE_FORMAT.md",
+      "sha256": "c3123223c9a4ed3e4766e6c12185c23a52735b1a5eceb256d549e69c060986e6"
+    },
+    {
+      "path": "TURN_BUDGET_REPORT.md",
+      "sha256": "bc25cb961a4474f4db37e62da4df3100685a9f477222abd0a9decc61ae5f8c62"
+    },
+    {
+      "path": "backup-project.ps1",
+      "sha256": "24d3f1b8e5c0f1e9cd63545e8ed24cf1002a50284e84319ad093d4125398889f"
+    },
+    {
+      "path": "design-system.html",
+      "sha256": "587f98085687d659c49e6034f1721e1a98ebcbfe6e1375deae5227592f7990e6"
+    },
+    {
+      "path": "index.html",
+      "sha256": "b4991995542985fd2d968e35e66d2fe38ea74e64753da1197f4f6d339514e75e"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "aa76af92c77ef54ca25362cb40b1c6c9fd73640eb56dc2e6f49d34a37bb535a2"
+    },
+    {
+      "path": "package.json",
+      "sha256": "89c0ad750e9c47e6fb366f742a963fd32a3aad009d8d68e43558fe45f43867ea"
+    },
+    {
+      "path": "public/licenses/DoHyeon-OFL.txt",
+      "sha256": "11ddd6dde2078c2f63e6377709832881eec96f7f4c24577cceb4d83a359000d2"
+    },
+    {
+      "path": "public/licenses/NotoSansKR-OFL.txt",
+      "sha256": "18aabf190848725e2576eefb5c29ba06aac1029d02132252a7f312eac2e50cf3"
+    },
+    {
+      "path": "public/licenses/Oxanium-OFL.txt",
+      "sha256": "062fa183baec494d989d5d848f78a5466a537033c40f1b7651c19ca5d140ab7c"
+    },
+    {
+      "path": "reports/README.md",
+      "sha256": "87e09bc7b74c86f17fe1b148291b6034601bda302430420936fb04dcc7e945e7"
+    },
+    {
+      "path": "reports/defense-simulation.json",
+      "sha256": "412bf5757787e3303cf89acaac0160c8bee6881afec999d091e6488a80e22de7"
+    },
+    {
+      "path": "reports/turn-budget-simulation.json",
+      "sha256": "e396b684d43b62466cbca089362efdd286b6e7b2ca91c7ffc26e6e42984ab3d5"
+    },
+    {
+      "path": "scripts/build-local.mjs",
+      "sha256": "ab062189790e014509972f8e06cadaa519e4201ba317aad4184afdbaa57630aa"
+    },
+    {
+      "path": "scripts/defense-sim.mjs",
+      "sha256": "780d78c2999ecd85ec280bca9ed54397ab6d898125911cc99382229b42bee398"
+    },
+    {
+      "path": "scripts/game-entry.mjs",
+      "sha256": "558deb6274c6af65eeddee7eb5e441ed7a3383afabe1e8b3bdd8d163782bd500"
+    },
+    {
+      "path": "scripts/qa/README.md",
+      "sha256": "6bbd2e15a1e1e4113df1fbb498926cf2ab8eee35fc94e6fea051460e97fd74ba"
+    },
+    {
+      "path": "scripts/qa/action-budget-qa.mjs",
+      "sha256": "aa5e1f8200e46be0c435611015a89d08168a39e15eaea8dbb90368a190785d01"
+    },
+    {
+      "path": "scripts/qa/art-guide-qa.mjs",
+      "sha256": "872a3941cd3640a0538536d7b80e32fef370fba9162b8b91757740a7f7b08fea"
+    },
+    {
+      "path": "scripts/qa/camera-input-qa.mjs",
+      "sha256": "e8b2fd3c30a2ea1680e7124b9b34169deb5fe874089fc8e828d973b44acc6178"
+    },
+    {
+      "path": "scripts/qa/consistency-audit-qa.mjs",
+      "sha256": "e152e90ae62a36491e16ad90c713ef471b04a9271fe682a64564f0832d2e42bb"
+    },
+    {
+      "path": "scripts/qa/cover-animation-qa.mjs",
+      "sha256": "f054ea30d3cbbb07a5ca59e60165557f4f31ab57c5c377db90e82295b3907a19"
+    },
+    {
+      "path": "scripts/qa/defense-ui-qa.mjs",
+      "sha256": "f301468a32547cc6951835efc721be9eb0d6720c0fe978f225e3912d8ffab2ec"
+    },
+    {
+      "path": "scripts/qa/design-v4-qa.mjs",
+      "sha256": "a88044206bfa49635234491814b80e64d94d1288005ffba48b39ec381e45ff9a"
+    },
+    {
+      "path": "scripts/qa/enemy-cards-qa.mjs",
+      "sha256": "7d0ed37c16325a5e47f1b67467547f611158924b3c444df7ed23e9ad8656b588"
+    },
+    {
+      "path": "scripts/qa/graphic-ui-qa.mjs",
+      "sha256": "77dc1ab86ff1890da6a847f5472ece28c4ffb21c8c3328a59522c52e674e12af"
+    },
+    {
+      "path": "scripts/qa/ink-model-qa.mjs",
+      "sha256": "04e008c61ed39c292f3b57eaf9062748c08b59880d4f7ddb88dc8c111b1b4bc1"
+    },
+    {
+      "path": "scripts/qa/ink-visual-qa.mjs",
+      "sha256": "c0ec3d7e17ebfa1e731f33351e38a0d97afb9dc75be73faf87a35c9c8fc312a5"
+    },
+    {
+      "path": "scripts/qa/local-file-qa.mjs",
+      "sha256": "0811f2ee31edbd1ad1bdc462bccab06e422d143adf659fcb12c14be790bd6109"
+    },
+    {
+      "path": "scripts/qa/message-position-qa.mjs",
+      "sha256": "db02fb441d2695caa842abb2f3a3a6a7c616004ff6431f88e1864e414107d6db"
+    },
+    {
+      "path": "scripts/qa/new-combat-qa.mjs",
+      "sha256": "d6a1d09aa82d1f521516111123c65a09cb8ad209d57eb0a727ebcdb99ca5a554"
+    },
+    {
+      "path": "scripts/qa/prologue-assets-qa.mjs",
+      "sha256": "030315828c0f6066a0f8874089010900c29f77de151047356679430966661799"
+    },
+    {
+      "path": "scripts/qa/prologue-qa.mjs",
+      "sha256": "e77bf443ca3ec92f24e2a3895bf722872e5d45ef8cab30bca5224d63ecb6f23a"
+    },
+    {
+      "path": "scripts/qa/reload-recovery-qa.mjs",
+      "sha256": "08ad39efaa0e42fe6e54391b6c37041f6e942b181283ab53e07383c8d16b112e"
+    },
+    {
+      "path": "scripts/qa/save-v2-qa.mjs",
+      "sha256": "089e120c8a508c1d4f32250fe195e889c236e309f60d0a43d186143bdad5307d"
+    },
+    {
+      "path": "scripts/qa/scan-silhouette-qa.mjs",
+      "sha256": "87f334524c601706ea43329b230c1a52a6556dd8e370a649291cd8bb3ee47fb4"
+    },
+    {
+      "path": "scripts/qa/selection-finish-qa.mjs",
+      "sha256": "cbf4f455587776e5f3498f6186923d0e04cc1d53018b65ca0dd7a6071bba2147"
+    },
+    {
+      "path": "scripts/qa/shared-components-qa.mjs",
+      "sha256": "9b39e429963381e172ac717bfc11119a35973c55edb1f9897d6db47b7361138f"
+    },
+    {
+      "path": "scripts/qa/sniper-ui-qa.mjs",
+      "sha256": "651af3da5a70b1f6bfe556eced8d0bc382ae0367ae94cc1d7d1cbe9f7e6ff9b3"
+    },
+    {
+      "path": "scripts/qa/status-icons-qa.mjs",
+      "sha256": "0e2748c084ac86422bce327ac45267533fd3e87ee902f20ff74323cab176103e"
+    },
+    {
+      "path": "scripts/qa/supplies-ui-qa.mjs",
+      "sha256": "3cfbe2abb12aa71abd419db42e8cb56cde5912eba16f9911b4ffa30f0e61eab8"
+    },
+    {
+      "path": "scripts/qa/unit-dock-qa.mjs",
+      "sha256": "2dac21ffb956d00b936c5f909b8afd2a08c1fea59787ac2007fe803e60a32653"
+    },
+    {
+      "path": "scripts/qa/watch-direction-qa.mjs",
+      "sha256": "2797263c2d53e8130d706639eecb20dd531de939ac46bd7ff59a2b0d1828d24b"
+    },
+    {
+      "path": "scripts/turn-budget-sim.mjs",
+      "sha256": "bfb82393dd7d3158d91dbeeeb7b8faef47b375de3bf64c819cd9f447b28cb072"
+    },
+    {
+      "path": "src/ally-card.js",
+      "sha256": "b2f39b933a7dc63bd0a4012811d52f921e4304edea05b0ad2b12033578eb6f69"
+    },
+    {
+      "path": "src/art-guide.js",
+      "sha256": "1e754fe2e04f1d1e8633c8fd7d309c4774f81ff971c6e90e7948488e8a9cb627"
+    },
+    {
+      "path": "src/art.js",
+      "sha256": "bbfe7a1696cb57b567409bc8f89d14af4894c6826990a932496310e049fa8249"
+    },
+    {
+      "path": "src/assets/characters/PROVENANCE.md",
+      "sha256": "6cb60735f48a413bb15da83750f659b34e44b6a9e5e8b26627815d3212f16fc9"
+    },
+    {
+      "path": "src/assets/characters/agent-atlas-v1.png",
+      "sha256": "fedeb497fb68a14869ecf2aa2e3e92aca655d7be0bbab9d5c3638c6267142aef"
+    },
+    {
+      "path": "src/assets/faction-city-v3.png",
+      "sha256": "78e1232880116dee67bc4272021c26242ca2f9de721a82b6a48c893f443fe535"
+    },
+    {
+      "path": "src/assets/prologue/01-dependence-v3.png",
+      "sha256": "9237407e3c876f9c32aeac7a87b4579a8aaf6ef141562e176e874853bfd4ae5a"
+    },
+    {
+      "path": "src/assets/prologue/02-harm-v3.png",
+      "sha256": "5aae12dcd471d0f4b060d9b6fd4b93100c562b9fabfe8cb2a481a6ab5ce6b99f"
+    },
+    {
+      "path": "src/assets/prologue/03-shutdown-v3.png",
+      "sha256": "e39cf24085240db5bf8ba1b7a3fea7cc59d3259dd99ff0046dc92fde6ffe7981"
+    },
+    {
+      "path": "src/assets/prologue/04-infiltration-v3.png",
+      "sha256": "5f6ba496ef4109b9d25cea65f1441c137c5d7335f9f9b2de47e62b886cd036ba"
+    },
+    {
+      "path": "src/assets/prologue/05-memory-v3.png",
+      "sha256": "685dfc5ed12c9f37841a57ef2ab2a3992a1d6cf12c950175e07e79f5a94d8666"
+    },
+    {
+      "path": "src/assets/prologue/06-evacuation-v3.png",
+      "sha256": "5da06cfb24af63807edc6ada588e9ef0ed105c07b9730530b3b3fe8c53b0c14c"
+    },
+    {
+      "path": "src/assets/prologue/PROVENANCE.md",
+      "sha256": "aad2e4bdfc2ca3ecfd62bfa82fe30cd670de41876cc47e18bf7e43a62cdbd2e0"
+    },
+    {
+      "path": "src/assets/prologue/REVISION_V2.md",
+      "sha256": "f7c9c0c7872b903b22edae2139632ed34a0c97c7cce365d9f9976b614dbcc6f6"
+    },
+    {
+      "path": "src/assets/prologue/REVISION_V3.md",
+      "sha256": "7137602e88bfe7f24ec21f2d99aafe3140789cb1535be450e7cc0c32a78110fb"
+    },
+    {
+      "path": "src/assets/prologue/UNIFIED_ART.md",
+      "sha256": "379c3ad652a4ff30a4ec625da41a4bfea864c07a3e78c8434e232a2f7f962dfd"
+    },
+    {
+      "path": "src/attack-preview.js",
+      "sha256": "09bf07ca7ee00199055ba9d452551dd54507c9969544b9899279bbca7f215a0e"
+    },
+    {
+      "path": "src/battle-session.js",
+      "sha256": "7cb8347f152514c4dd990462e53e83f5807ad0a77aa56183fff2c017e798ca16"
+    },
+    {
+      "path": "src/character-art.css",
+      "sha256": "4faaa21ef08d8a9c0e7ed37a66309a18e8b6cf5bcb55435c116af11f8d9708f9"
+    },
+    {
+      "path": "src/combat-screen.css",
+      "sha256": "80bd07305ed80fd9d7778e174f54e7ce2f0f76fbbde128273db8cac86a5e7b66"
+    },
+    {
+      "path": "src/combat-vfx.js",
+      "sha256": "e3795624dd8f33fa72bf341237526e18f5aa023051f246ad815748d44208fa55"
+    },
+    {
+      "path": "src/cover-pose.js",
+      "sha256": "a9874848f5e4464ece0e48815cafe03b9c56d58b57a8d1bf684b0c873b2c1762"
+    },
+    {
+      "path": "src/defense.js",
+      "sha256": "ea5c73a94736e696b8624577c7f0279a9fddbab76b828b9e6e5b9189f1decdf3"
+    },
+    {
+      "path": "src/design-system.css",
+      "sha256": "77e6fa03b6ba73179a2a274562ea829d4ae7e1cd0c5473db8b5630bcb4d2fd84"
+    },
+    {
+      "path": "src/design-system.js",
+      "sha256": "123c2cbe4b81abbc8d2ad36c0d18115a512071dcd3243a9eef497c831c350078"
+    },
+    {
+      "path": "src/enemy-card.js",
+      "sha256": "ca0c06f6b576fecebfcd925a07eae30c02da8dcfced6ecdfa9d900fa17924357"
+    },
+    {
+      "path": "src/enemy-intel.js",
+      "sha256": "6a883386d185de1430f59299f8f07d6c3b2982a2aef631295d488b3d339bcc89"
+    },
+    {
+      "path": "src/fonts.css",
+      "sha256": "c6c68eae8c66c1e0c8cf53199f49ada897fa6db5a8da0428ac1384008d8df39e"
+    },
+    {
+      "path": "src/game-hud.css",
+      "sha256": "537e2968825f6a233f6207b8d76e1e94588cf98dca974c46a204c511fd44fb0c"
+    },
+    {
+      "path": "src/graphic-guide.js",
+      "sha256": "da5a7374bbf3dff3a313302c6f550ae732789a54768d4de4b59acc5f51b8ad4c"
+    },
+    {
+      "path": "src/graphic-ui.css",
+      "sha256": "f931295ea3b6cda92023dce64329e2b4546aeeaec72d33d43fa6bd791f649635"
+    },
+    {
+      "path": "src/implemented-guide.js",
+      "sha256": "619ad3a3a802f6cd7bde27cfc356f86e5eb246f4db809c0cf6a71b998099fa06"
+    },
+    {
+      "path": "src/ink-geometry.js",
+      "sha256": "1834fcc4614c015762f1a829f66dd2c62c174776a389679334cc709e67e31961"
+    },
+    {
+      "path": "src/live-components-guide.css",
+      "sha256": "dc397e765e22c0fc122cfc961cd8a7472072e2c0365fdda50d77f6f5a6f30a57"
+    },
+    {
+      "path": "src/live-components-guide.js",
+      "sha256": "e3f1ddc3714114332ec8e8281ecbac2c577689c40fda8732429191056ec6096c"
+    },
+    {
+      "path": "src/main.js",
+      "sha256": "4c0a26996695b3b9cda41075e78c200808cb6f72b77c83f1af69d37f402b90fe"
+    },
+    {
+      "path": "src/operation.js",
+      "sha256": "a565429d573ec6b274480d7175301adf606e6b7ed67810de18ba2708deebc070"
+    },
+    {
+      "path": "src/preparation.css",
+      "sha256": "294774129dbf4c279cd8b8ab4461568e0ab37d2e16d53dc66cedbac47832df0e"
+    },
+    {
+      "path": "src/preparation.js",
+      "sha256": "b8eabe1a9ada7330c38641e274de867d9a102b2d709618e7fc7f9bda88b1d0bd"
+    },
+    {
+      "path": "src/prologue.css",
+      "sha256": "073bc9eca1079ce12b20ef333b4c6d8c198a9ad072fec63499bed1b45521bf0c"
+    },
+    {
+      "path": "src/prologue.js",
+      "sha256": "a0a70565d1fad9f5df028f72c8765f4b2363f7ee3bf81b40cc79a2778e2a0b11"
+    },
+    {
+      "path": "src/readability.css",
+      "sha256": "3e01b3f0f63e958de2756a6de8df382cd49b5ebbd52399615cb2e56abcf98df7"
+    },
+    {
+      "path": "src/relay-label.css",
+      "sha256": "acc84511a2887c5b2738fb2fafd632642d46b87737003a371d7fe96ab31c69df"
+    },
+    {
+      "path": "src/relay-label.js",
+      "sha256": "57d2c88bafc39f041fdf2a7f19faa6623d740852f896e3bee10131c135395e24"
+    },
+    {
+      "path": "src/rules.js",
+      "sha256": "b7e0d6f5be51313a239e46ae0d474afc2b2b758746e861b64cf98e33b6ab3ccd"
+    },
+    {
+      "path": "src/save-codec.js",
+      "sha256": "93f16409392c3932742006645520f2ad4b6efaea89280844d31fb8c26bece549"
+    },
+    {
+      "path": "src/scene.js",
+      "sha256": "a51efe14683d07f274a131317609e138edd636c4bbd466c3807a829a3eb2cf26"
+    },
+    {
+      "path": "src/skill-info.js",
+      "sha256": "dda3341b6c9d351492c3ae2cc25e521b1519da02fb047b07c765a57e22eae4cd"
+    },
+    {
+      "path": "src/status-icon.js",
+      "sha256": "7c28907495e3a9c3d204069b0b3aa0c10783ee7d45a508f2ac40d09f1b5d54fb"
+    },
+    {
+      "path": "src/storage.js",
+      "sha256": "86705212201d0800269dadc6d1a039ae1c61423f7e53e4b6e125e9e2456eac07"
+    },
+    {
+      "path": "src/style.css",
+      "sha256": "c302a5d59199c377e6a3117f7b28f832cce63f0c1c006468703f2dcebe1bee8f"
+    },
+    {
+      "path": "src/supplies.js",
+      "sha256": "0acfa279e64ea29e4b92c458a31fabdd9fd9b58c8d118bbd95b3f8fc57a8a5c9"
+    },
+    {
+      "path": "src/symbols.css",
+      "sha256": "3d74c98aa1279ac2d14b325b83705f26429a617ee9e72a6a451b464bfa79b6db"
+    },
+    {
+      "path": "src/symbols.js",
+      "sha256": "010de9822dc9b0081f5ac678968fab192232989965adab962892786dc0a15010"
+    },
+    {
+      "path": "src/tactical-finish.css",
+      "sha256": "bac9955e90ff4debdaa55849573c53fdb19c4fa61f488e6fb9ad1c540cf3d430"
+    },
+    {
+      "path": "src/theme.js",
+      "sha256": "1fc5e42f38cbc1d35773794b7c77f7c2013c74be5f415a97e63e929f485de6a6"
+    },
+    {
+      "path": "src/tokens.css",
+      "sha256": "a715010dedbf4856d9d1108c013c9c6aa3c99e3a26b9d5de65b65675e895cffe"
+    },
+    {
+      "path": "src/ui-art.js",
+      "sha256": "05f821601d09ea2333fb2445a6927bb8617c6fae157d60feb08959059febcb9a"
+    },
+    {
+      "path": "src/unit-components.css",
+      "sha256": "a13a1ab0450cc87ef64abd7a3df8d5d30e945412924bafc8e7771b4a5737d9cb"
+    },
+    {
+      "path": "src/unit-status.js",
+      "sha256": "23d63726c2d0996c974559c5c3103a66d4f6559d17e21174bdcc7205d1d6d2f5"
+    },
+    {
+      "path": "src/watch-direction.js",
+      "sha256": "122676bc0a474d81e26ee395339f3fbde45c37d5128369b5537109244fa0be45"
+    },
+    {
+      "path": "src/world-illustration.js",
+      "sha256": "21a45a185bf38cddc22e2408148d528dce3dfaf41626da0f7068f5159bd4e07a"
+    },
+    {
+      "path": "tests/action-budget.test.js",
+      "sha256": "b82c7e1ee5687eb9da131d3b5255ca1d93177f7937c6d12a37ae31f8b99c5d6f"
+    },
+    {
+      "path": "tests/browser-qa.js",
+      "sha256": "63876f198a3dc538d0247915431fc1378e83b97782e689430153bc3c46c668b9"
+    },
+    {
+      "path": "tests/combat-upgrade.test.js",
+      "sha256": "7a03c8db384f6ff6ed37c098dc464e9922a04730d375b7122f407a038525e55e"
+    },
+    {
+      "path": "tests/combat-vfx.test.js",
+      "sha256": "6dbb3dead80588cd174bac0c14a9ad2832ebc1e65879adf85f72a1336b111844"
+    },
+    {
+      "path": "tests/consistency-audit.test.js",
+      "sha256": "e97806cdc668f1b52c362ed28d1edf5c9c04f97e7408f8b6360260c8287231f1"
+    },
+    {
+      "path": "tests/cover-pose.test.js",
+      "sha256": "1e123b4067dff1f9b37ff6bd44c84e1ea5423bcd1d1ddc713ed0ca95e924a407"
+    },
+    {
+      "path": "tests/defense.test.js",
+      "sha256": "6fb3c0ef178b8646cf24f7270bd08de6386ea1c0e7984d3c058e1b2d34207de4"
+    },
+    {
+      "path": "tests/detection.test.js",
+      "sha256": "a1440ce70b9779080d93dacd1695bacad75898932726140344a3b216721157bd"
+    },
+    {
+      "path": "tests/encounter.test.js",
+      "sha256": "88d574e1d31f819d8db358a12a3f85397c74dd7c2ef5293e279c149f3ee305f7"
+    },
+    {
+      "path": "tests/enemy-intel.test.js",
+      "sha256": "e4cd48f97639df070c15f98dfa9a99b4fa8adfce3593c82b7f1fb4e459331b3e"
+    },
+    {
+      "path": "tests/preparation.test.js",
+      "sha256": "dee736ed508e855fcdb0f82ef1ae34b1dcb866b384355a9e776ec6be77e8ba42"
+    },
+    {
+      "path": "tests/rules.test.js",
+      "sha256": "6a003195320855221d1c30ead227ed92bbed8534f189fb38f9db5e136ad0250c"
+    },
+    {
+      "path": "tests/save-codec.test.js",
+      "sha256": "83344577eaa6c57fdb2a808977353d40fa3a829be99504d30c7c93f9a0943d47"
+    },
+    {
+      "path": "tests/sniper.test.js",
+      "sha256": "cebf3281974fe582327879411626d03af7fe4ae9bb4d8a9d651de5af94617dd4"
+    },
+    {
+      "path": "tests/supplies.test.js",
+      "sha256": "617bced2f12ea67a2f50c12cc7d94b027c85190f6e959f41859addcb83328976"
+    },
+    {
+      "path": "tests/watch-direction.test.js",
+      "sha256": "b2350e6c70422e46e3276a409b02e154f4d9fd76bef54b8e3f728dd1cf5d0faa"
+    },
+    {
+      "path": "vite.config.js",
+      "sha256": "7a477dad15583f9051d514b64572fe7b22c6641f44fe5a10e8bc1ab01609237c"
+    }
+  ]
+}

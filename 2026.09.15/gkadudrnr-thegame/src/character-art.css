@@ -1,0 +1,10 @@
+.agent-portrait.ink-portrait{background-image:var(--portrait-atlas);background-size:400% 400%;background-position:var(--portrait-x) var(--portrait-y);background-repeat:no-repeat;background-color:#f8f5e8;border-color:#344254;filter:none;aspect-ratio:1;object-fit:initial}
+.agent-inspect .agent-portrait.ink-portrait{width:76px;height:76px;filter:none}
+.detail-identity{align-items:end;position:relative;min-height:260px;background:#f8f5e8;border:1px solid var(--paper-line);overflow:hidden}
+.detail-identity>.agent-portrait.ink-portrait{width:260px;height:260px;border:0;filter:none;flex-shrink:0}
+.detail-identity>div{padding:18px 14px 18px 0;min-width:0}.detail-identity h2{font-size:27px;overflow-wrap:anywhere}
+.detail-identity p{line-height:1.8}
+:is(body:not(.ds-page),.ds-game-preview) .unit-card .ink-portrait{width:52px;height:58px}
+.active-agent>.ink-portrait{width:58px;height:66px}
+@media(max-width:1300px){.detail-identity{min-height:205px;gap:10px}.detail-identity>.agent-portrait.ink-portrait{width:205px;height:205px}.detail-identity h2{font-size:23px}.agent-inspect .agent-portrait.ink-portrait{width:62px;height:68px}}
+@media(max-width:760px){.detail-identity>.agent-portrait.ink-portrait{width:180px;height:180px}.detail-identity{min-height:180px}}

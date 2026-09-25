@@ -1,0 +1,27 @@
+/* Readable desktop text, shared by the game and component gallery. */
+.prep-shell{font-size:14px}
+.prep-shell .eyebrow,.prep-top,.faction-cta,.landing-bottom p,.landing-bottom small,.prep-fine,.gear-label,.prep-bottom small{font-size:12px}
+.faction-copy p,.brief-heading>p,.brief-objectives ol{font-size:14px}
+.brief-hints p,.brief-objectives>p,.detail-identity p,.skill-guide p{font-size:13px}
+.agent-inspect small,.agent-inspect em,.enlist,.skill-guide small,.loadout-stats span{font-size:12px}
+.agent-inspect{padding:12px 10px}.agent-inspect b{font-size:19px}
+.enlist{min-height:36px;min-width:48px}
+#agent-detail select,.ds-paper select{font-size:13px;min-height:42px}
+.prologue-reading #prologue-text p{font-size:15px;line-height:1.95}
+.prologue-reading h1{font-size:36px}
+.prologue-note,.prologue-figure figcaption,.prologue-summary .eyebrow{font-size:12px}
+#prologue-orders b,#prologue-orders p,.prologue-pagination button,.landing-tools button{font-size:13px}
+:is(body:not(.ds-page),.ds-game-preview) .unit-card small,
+:is(body:not(.ds-page),.ds-game-preview) .unit-meta,
+:is(body:not(.ds-page),.ds-game-preview) .objective,
+:is(body:not(.ds-page),.ds-game-preview) .objective small,
+:is(body:not(.ds-page),.ds-game-preview) .action strong,
+:is(body:not(.ds-page),.ds-game-preview) .action small,
+:is(body:not(.ds-page),.ds-game-preview) .map-caption,
+:is(body:not(.ds-page),.ds-game-preview) .map-caption button{font-size:12px}
+:is(body:not(.ds-page),.ds-game-preview) .unit-card strong{font-size:14px}
+:is(body:not(.ds-page),.ds-game-preview) .unit-card{min-height:88px}
+.world-label{font-size:12px}.game-copyright{font-size:12px}
+select:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+@media(max-height:800px) and (min-width:761px){.prologue-reading h1{font-size:30px}.prologue-reading{padding:24px 28px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.faction-choice:hover{transform:none}}

@@ -1,0 +1,8173 @@
+{
+  "samples": 100,
+  "cap": 24,
+  "limitations": [
+    "Heuristic policies, not optimal play or human win rates",
+    "Current fixed maps and level-one standard loadouts only",
+    "AI mission still uses its production survival objective"
+  ],
+  "summaries": [
+    {
+      "policy": "human:combat:24",
+      "runs": 100,
+      "wins": 37,
+      "losses": 63,
+      "unfinished": 0,
+      "median": 8,
+      "p90": 9,
+      "limits": {
+        "6": 0,
+        "8": 23,
+        "10": 37,
+        "12": 37,
+        "14": 37,
+        "16": 37,
+        "20": 37,
+        "24": 37
+      },
+      "averageReactions": 0
+    },
+    {
+      "policy": "human:objective:24",
+      "runs": 100,
+      "wins": 74,
+      "losses": 26,
+      "unfinished": 0,
+      "median": 8,
+      "p90": 10,
+      "limits": {
+        "6": 0,
+        "8": 48,
+        "10": 71,
+        "12": 74,
+        "14": 74,
+        "16": 74,
+        "20": 74,
+        "24": 74
+      },
+      "averageReactions": 0
+    },
+    {
+      "policy": "ai:hold:6",
+      "runs": 100,
+      "wins": 99,
+      "losses": 1,
+      "unfinished": 0,
+      "median": 6,
+      "p90": 6,
+      "limits": {
+        "6": 99,
+        "8": 99,
+        "10": 99,
+        "12": 99,
+        "14": 99,
+        "16": 99,
+        "20": 99,
+        "24": 99
+      },
+      "averageReactions": 7.03
+    },
+    {
+      "policy": "ai:advance:6",
+      "runs": 100,
+      "wins": 98,
+      "losses": 2,
+      "unfinished": 0,
+      "median": 6,
+      "p90": 6,
+      "limits": {
+        "6": 98,
+        "8": 98,
+        "10": 98,
+        "12": 98,
+        "14": 98,
+        "16": 98,
+        "20": 98,
+        "24": 98
+      },
+      "averageReactions": 2.15
+    },
+    {
+      "policy": "ai:hold:8",
+      "runs": 100,
+      "wins": 94,
+      "losses": 6,
+      "unfinished": 0,
+      "median": 8,
+      "p90": 8,
+      "limits": {
+        "6": 0,
+        "8": 94,
+        "10": 94,
+        "12": 94,
+        "14": 94,
+        "16": 94,
+        "20": 94,
+        "24": 94
+      },
+      "averageReactions": 7.73
+    },
+    {
+      "policy": "ai:advance:8",
+      "runs": 100,
+      "wins": 96,
+      "losses": 4,
+      "unfinished": 0,
+      "median": 8,
+      "p90": 8,
+      "limits": {
+        "6": 0,
+        "8": 96,
+        "10": 96,
+        "12": 96,
+        "14": 96,
+        "16": 96,
+        "20": 96,
+        "24": 96
+      },
+      "averageReactions": 2.24
+    },
+    {
+      "policy": "ai:hold:10",
+      "runs": 100,
+      "wins": 91,
+      "losses": 9,
+      "unfinished": 0,
+      "median": 10,
+      "p90": 10,
+      "limits": {
+        "6": 0,
+        "8": 21,
+        "10": 91,
+        "12": 91,
+        "14": 91,
+        "16": 91,
+        "20": 91,
+        "24": 91
+      },
+      "averageReactions": 7.87
+    },
+    {
+      "policy": "ai:advance:10",
+      "runs": 100,
+      "wins": 96,
+      "losses": 4,
+      "unfinished": 0,
+      "median": 9,
+      "p90": 10,
+      "limits": {
+        "6": 0,
+        "8": 43,
+        "10": 96,
+        "12": 96,
+        "14": 96,
+        "16": 96,
+        "20": 96,
+        "24": 96
+      },
+      "averageReactions": 2.27
+    }
+  ],
+  "results": [
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 0,
+      "status": "won",
+      "turn": 7,
+      "alive": 2,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 1,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 2,
+      "status": "lost",
+      "turn": 4,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 3,
+      "status": "won",
+      "turn": 9,
+      "alive": 2,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 4,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 5,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 6,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 7,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 8,
+      "status": "won",
+      "turn": 9,
+      "alive": 1,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 9,
+      "status": "lost",
+      "turn": 3,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 10,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 11,
+      "status": "lost",
+      "turn": 4,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 12,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 13,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 14,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 15,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 16,
+      "status": "won",
+      "turn": 7,
+      "alive": 2,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 17,
+      "status": "lost",
+      "turn": 6,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 18,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 19,
+      "status": "lost",
+      "turn": 4,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 20,
+      "status": "won",
+      "turn": 7,
+      "alive": 3,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 21,
+      "status": "won",
+      "turn": 10,
+      "alive": 1,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 22,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 23,
+      "status": "won",
+      "turn": 7,
+      "alive": 3,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 24,
+      "status": "won",
+      "turn": 8,
+      "alive": 1,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 25,
+      "status": "lost",
+      "turn": 4,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 26,
+      "status": "lost",
+      "turn": 6,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 27,
+      "status": "won",
+      "turn": 9,
+      "alive": 1,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 28,
+      "status": "lost",
+      "turn": 6,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 29,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 30,
+      "status": "won",
+      "turn": 9,
+      "alive": 1,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 31,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 32,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 33,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 34,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 35,
+      "status": "won",
+      "turn": 9,
+      "alive": 1,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 36,
+      "status": "lost",
+      "turn": 4,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 37,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 38,
+      "status": "lost",
+      "turn": 4,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 39,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 40,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 41,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 42,
+      "status": "lost",
+      "turn": 3,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 43,
+      "status": "won",
+      "turn": 9,
+      "alive": 1,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 44,
+      "status": "lost",
+      "turn": 7,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 45,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 46,
+      "status": "lost",
+      "turn": 6,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 47,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 48,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 49,
+      "status": "won",
+      "turn": 7,
+      "alive": 3,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 50,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 51,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 52,
+      "status": "won",
+      "turn": 7,
+      "alive": 2,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 53,
+      "status": "lost",
+      "turn": 6,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 54,
+      "status": "won",
+      "turn": 10,
+      "alive": 1,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 55,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 56,
+      "status": "won",
+      "turn": 9,
+      "alive": 2,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 57,
+      "status": "won",
+      "turn": 7,
+      "alive": 3,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 58,
+      "status": "lost",
+      "turn": 4,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 59,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 60,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 61,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 62,
+      "status": "lost",
+      "turn": 4,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 63,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 64,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 65,
+      "status": "lost",
+      "turn": 4,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 66,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 67,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 68,
+      "status": "lost",
+      "turn": 3,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 69,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 70,
+      "status": "lost",
+      "turn": 6,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 71,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 72,
+      "status": "won",
+      "turn": 9,
+      "alive": 1,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 73,
+      "status": "lost",
+      "turn": 6,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 74,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 75,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 76,
+      "status": "lost",
+      "turn": 4,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 77,
+      "status": "won",
+      "turn": 9,
+      "alive": 1,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 78,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 79,
+      "status": "lost",
+      "turn": 3,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 80,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 81,
+      "status": "won",
+      "turn": 8,
+      "alive": 1,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 82,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 83,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 84,
+      "status": "lost",
+      "turn": 4,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 85,
+      "status": "lost",
+      "turn": 4,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 86,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 87,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 88,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 89,
+      "status": "won",
+      "turn": 9,
+      "alive": 1,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 90,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 91,
+      "status": "lost",
+      "turn": 6,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 92,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 93,
+      "status": "lost",
+      "turn": 4,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 94,
+      "status": "lost",
+      "turn": 4,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 95,
+      "status": "lost",
+      "turn": 4,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 96,
+      "status": "won",
+      "turn": 9,
+      "alive": 1,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 97,
+      "status": "won",
+      "turn": 9,
+      "alive": 1,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 98,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "combat",
+      "budget": 24,
+      "seed": 99,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 0,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 1,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 2,
+      "status": "won",
+      "turn": 10,
+      "alive": 1,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 3,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 4,
+      "status": "won",
+      "turn": 9,
+      "alive": 1,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 5,
+      "status": "won",
+      "turn": 10,
+      "alive": 1,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 6,
+      "status": "lost",
+      "turn": 4,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 7,
+      "status": "won",
+      "turn": 9,
+      "alive": 3,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 8,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 9,
+      "status": "won",
+      "turn": 9,
+      "alive": 1,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 10,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 11,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 12,
+      "status": "lost",
+      "turn": 6,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 13,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 14,
+      "status": "won",
+      "turn": 10,
+      "alive": 3,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 15,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 16,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 17,
+      "status": "lost",
+      "turn": 4,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 18,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 19,
+      "status": "lost",
+      "turn": 4,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 20,
+      "status": "lost",
+      "turn": 5,
+      "alive": 2,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 21,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 22,
+      "status": "won",
+      "turn": 9,
+      "alive": 2,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 23,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 24,
+      "status": "won",
+      "turn": 8,
+      "alive": 1,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 25,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 26,
+      "status": "lost",
+      "turn": 4,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 27,
+      "status": "lost",
+      "turn": 4,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 28,
+      "status": "lost",
+      "turn": 3,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 29,
+      "status": "lost",
+      "turn": 4,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 30,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 31,
+      "status": "won",
+      "turn": 10,
+      "alive": 3,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 32,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 33,
+      "status": "won",
+      "turn": 9,
+      "alive": 3,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 34,
+      "status": "lost",
+      "turn": 4,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 35,
+      "status": "won",
+      "turn": 9,
+      "alive": 3,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 36,
+      "status": "lost",
+      "turn": 4,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 37,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 38,
+      "status": "won",
+      "turn": 9,
+      "alive": 2,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 39,
+      "status": "lost",
+      "turn": 4,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 40,
+      "status": "won",
+      "turn": 9,
+      "alive": 3,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 41,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 42,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 43,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 44,
+      "status": "won",
+      "turn": 9,
+      "alive": 2,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 45,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 46,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 47,
+      "status": "lost",
+      "turn": 6,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 48,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 49,
+      "status": "lost",
+      "turn": 5,
+      "alive": 1,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 50,
+      "status": "won",
+      "turn": 9,
+      "alive": 3,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 51,
+      "status": "won",
+      "turn": 11,
+      "alive": 1,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 52,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 53,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 54,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 55,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 56,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 57,
+      "status": "won",
+      "turn": 10,
+      "alive": 3,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 58,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 59,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 60,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 61,
+      "status": "won",
+      "turn": 9,
+      "alive": 4,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 62,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 63,
+      "status": "won",
+      "turn": 11,
+      "alive": 1,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 64,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 65,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 66,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 67,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 68,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 69,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 70,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 71,
+      "status": "won",
+      "turn": 10,
+      "alive": 1,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 72,
+      "status": "won",
+      "turn": 10,
+      "alive": 1,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 73,
+      "status": "lost",
+      "turn": 6,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 74,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 75,
+      "status": "lost",
+      "turn": 4,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 76,
+      "status": "won",
+      "turn": 10,
+      "alive": 1,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 77,
+      "status": "lost",
+      "turn": 4,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 78,
+      "status": "lost",
+      "turn": 4,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 79,
+      "status": "lost",
+      "turn": 4,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 80,
+      "status": "won",
+      "turn": 9,
+      "alive": 2,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 81,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 82,
+      "status": "won",
+      "turn": 9,
+      "alive": 3,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 83,
+      "status": "won",
+      "turn": 9,
+      "alive": 2,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 84,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 85,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 86,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 87,
+      "status": "won",
+      "turn": 7,
+      "alive": 4,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 88,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 89,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 90,
+      "status": "won",
+      "turn": 7,
+      "alive": 4,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 91,
+      "status": "won",
+      "turn": 12,
+      "alive": 2,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 92,
+      "status": "lost",
+      "turn": 4,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 93,
+      "status": "lost",
+      "turn": 4,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 94,
+      "status": "won",
+      "turn": 9,
+      "alive": 2,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 95,
+      "status": "lost",
+      "turn": 5,
+      "alive": 0,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 96,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 97,
+      "status": "lost",
+      "turn": 11,
+      "alive": 1,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 98,
+      "status": "won",
+      "turn": 7,
+      "alive": 1,
+      "reactions": 0
+    },
+    {
+      "faction": "human",
+      "style": "objective",
+      "budget": 24,
+      "seed": 99,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 0
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 0,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 1,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 2,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 3,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 4,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 5,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 6,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 7,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 8,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 9,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 10,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 11,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 12,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 13,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 9
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 14,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 15,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 16,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 17,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 18,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 19,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 20,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 21,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 22,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 23,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 24,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 25,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 26,
+      "status": "won",
+      "turn": 6,
+      "alive": 1,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 27,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 28,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 29,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 30,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 31,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 32,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 33,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 34,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 35,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 36,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 37,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 38,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 39,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 40,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 41,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 42,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 43,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 44,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 45,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 46,
+      "status": "won",
+      "turn": 6,
+      "alive": 1,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 47,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 48,
+      "status": "won",
+      "turn": 6,
+      "alive": 1,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 49,
+      "status": "lost",
+      "turn": 6,
+      "alive": 0,
+      "reactions": 10
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 50,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 51,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 52,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 53,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 54,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 55,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 56,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 57,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 58,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 59,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 60,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 61,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 62,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 63,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 64,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 65,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 66,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 67,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 68,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 69,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 70,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 71,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 72,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 73,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 74,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 75,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 76,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 77,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 78,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 79,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 80,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 81,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 82,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 83,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 84,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 85,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 86,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 87,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 88,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 89,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 90,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 91,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 92,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 93,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 94,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 95,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 96,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 97,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 98,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 6,
+      "seed": 99,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 0,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 1,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 2,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 3,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 4,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 5,
+      "status": "lost",
+      "turn": 6,
+      "alive": 0,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 6,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 7,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 8,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 9,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 10,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 11,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 12,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 13,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 5
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 14,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 15,
+      "status": "won",
+      "turn": 6,
+      "alive": 1,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 16,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 17,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 18,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 19,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 3
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 20,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 21,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 4
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 22,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 23,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 24,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 25,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 26,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 27,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 28,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 29,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 30,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 31,
+      "status": "won",
+      "turn": 6,
+      "alive": 1,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 32,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 33,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 34,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 35,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 36,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 37,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 38,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 39,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 40,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 41,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 42,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 43,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 44,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 45,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 46,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 47,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 48,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 49,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 50,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 51,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 52,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 53,
+      "status": "won",
+      "turn": 6,
+      "alive": 1,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 54,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 3
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 55,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 56,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 57,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 58,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 59,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 60,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 61,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 62,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 63,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 5
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 64,
+      "status": "won",
+      "turn": 6,
+      "alive": 1,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 65,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 66,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 67,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 68,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 69,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 70,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 71,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 72,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 73,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 74,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 75,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 76,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 77,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 78,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 79,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 80,
+      "status": "lost",
+      "turn": 6,
+      "alive": 0,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 81,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 82,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 83,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 84,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 85,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 86,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 87,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 88,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 89,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 90,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 91,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 92,
+      "status": "won",
+      "turn": 6,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 93,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 3
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 94,
+      "status": "won",
+      "turn": 6,
+      "alive": 1,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 95,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 96,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 97,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 98,
+      "status": "won",
+      "turn": 6,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 6,
+      "seed": 99,
+      "status": "won",
+      "turn": 6,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 0,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 1,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 2,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 3,
+      "status": "lost",
+      "turn": 8,
+      "alive": 0,
+      "reactions": 9
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 4,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 5,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 6,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 7,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 9
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 8,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 9,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 10,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 11,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 12,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 13,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 9
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 14,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 15,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 16,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 17,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 18,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 19,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 20,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 21,
+      "status": "won",
+      "turn": 8,
+      "alive": 1,
+      "reactions": 11
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 22,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 9
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 23,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 11
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 24,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 25,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 26,
+      "status": "lost",
+      "turn": 7,
+      "alive": 0,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 27,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 28,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 29,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 9
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 30,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 9
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 31,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 32,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 9
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 33,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 10
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 34,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 35,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 36,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 37,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 38,
+      "status": "won",
+      "turn": 8,
+      "alive": 1,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 39,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 10
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 40,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 41,
+      "status": "won",
+      "turn": 8,
+      "alive": 1,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 42,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 43,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 9
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 44,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 45,
+      "status": "lost",
+      "turn": 8,
+      "alive": 0,
+      "reactions": 10
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 46,
+      "status": "lost",
+      "turn": 7,
+      "alive": 0,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 47,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 48,
+      "status": "lost",
+      "turn": 7,
+      "alive": 0,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 49,
+      "status": "lost",
+      "turn": 6,
+      "alive": 0,
+      "reactions": 10
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 50,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 51,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 52,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 53,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 54,
+      "status": "won",
+      "turn": 8,
+      "alive": 1,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 55,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 56,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 57,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 9
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 58,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 59,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 60,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 61,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 9
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 62,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 63,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 64,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 65,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 9
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 66,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 67,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 68,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 69,
+      "status": "won",
+      "turn": 8,
+      "alive": 1,
+      "reactions": 9
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 70,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 9
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 71,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 72,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 73,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 10
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 74,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 75,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 76,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 77,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 10
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 78,
+      "status": "won",
+      "turn": 8,
+      "alive": 1,
+      "reactions": 9
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 79,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 9
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 80,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 11
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 81,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 82,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 83,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 9
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 84,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 85,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 86,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 87,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 88,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 89,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 90,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 91,
+      "status": "won",
+      "turn": 8,
+      "alive": 1,
+      "reactions": 9
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 92,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 93,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 94,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 95,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 96,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 97,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 98,
+      "status": "won",
+      "turn": 8,
+      "alive": 1,
+      "reactions": 10
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 8,
+      "seed": 99,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 0,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 1,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 2,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 3,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 4,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 5,
+      "status": "lost",
+      "turn": 6,
+      "alive": 0,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 6,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 7,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 8,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 9,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 10,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 11,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 12,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 13,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 5
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 14,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 15,
+      "status": "won",
+      "turn": 8,
+      "alive": 1,
+      "reactions": 3
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 16,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 17,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 18,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 19,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 3
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 20,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 21,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 22,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 23,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 24,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 25,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 26,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 27,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 28,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 29,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 30,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 31,
+      "status": "lost",
+      "turn": 8,
+      "alive": 0,
+      "reactions": 3
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 32,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 33,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 34,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 35,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 36,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 37,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 38,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 5
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 39,
+      "status": "won",
+      "turn": 8,
+      "alive": 1,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 40,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 41,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 42,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 43,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 44,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 45,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 46,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 47,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 48,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 49,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 50,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 51,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 52,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 53,
+      "status": "won",
+      "turn": 8,
+      "alive": 1,
+      "reactions": 3
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 54,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 3
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 55,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 56,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 57,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 58,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 59,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 60,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 61,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 62,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 63,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 5
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 64,
+      "status": "lost",
+      "turn": 7,
+      "alive": 0,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 65,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 66,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 67,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 68,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 69,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 70,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 71,
+      "status": "won",
+      "turn": 7,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 72,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 73,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 74,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 75,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 76,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 77,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 78,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 79,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 80,
+      "status": "lost",
+      "turn": 6,
+      "alive": 0,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 81,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 82,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 83,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 84,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 85,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 86,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 87,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 88,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 89,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 90,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 91,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 92,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 93,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 3
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 94,
+      "status": "won",
+      "turn": 8,
+      "alive": 1,
+      "reactions": 3
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 95,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 96,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 97,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 98,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 8,
+      "seed": 99,
+      "status": "won",
+      "turn": 8,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 0,
+      "status": "won",
+      "turn": 9,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 1,
+      "status": "won",
+      "turn": 9,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 2,
+      "status": "won",
+      "turn": 10,
+      "alive": 4,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 3,
+      "status": "lost",
+      "turn": 8,
+      "alive": 0,
+      "reactions": 9
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 4,
+      "status": "won",
+      "turn": 10,
+      "alive": 2,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 5,
+      "status": "won",
+      "turn": 10,
+      "alive": 4,
+      "reactions": 9
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 6,
+      "status": "won",
+      "turn": 10,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 7,
+      "status": "won",
+      "turn": 10,
+      "alive": 4,
+      "reactions": 9
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 8,
+      "status": "won",
+      "turn": 10,
+      "alive": 3,
+      "reactions": 9
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 9,
+      "status": "won",
+      "turn": 9,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 10,
+      "status": "won",
+      "turn": 10,
+      "alive": 3,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 11,
+      "status": "won",
+      "turn": 10,
+      "alive": 3,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 12,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 13,
+      "status": "won",
+      "turn": 10,
+      "alive": 3,
+      "reactions": 11
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 14,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 15,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 16,
+      "status": "won",
+      "turn": 10,
+      "alive": 3,
+      "reactions": 10
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 17,
+      "status": "won",
+      "turn": 10,
+      "alive": 3,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 18,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 19,
+      "status": "won",
+      "turn": 10,
+      "alive": 4,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 20,
+      "status": "won",
+      "turn": 9,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 21,
+      "status": "lost",
+      "turn": 10,
+      "alive": 0,
+      "reactions": 11
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 22,
+      "status": "won",
+      "turn": 10,
+      "alive": 1,
+      "reactions": 10
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 23,
+      "status": "won",
+      "turn": 10,
+      "alive": 3,
+      "reactions": 11
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 24,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 25,
+      "status": "won",
+      "turn": 10,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 26,
+      "status": "lost",
+      "turn": 7,
+      "alive": 0,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 27,
+      "status": "won",
+      "turn": 9,
+      "alive": 4,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 28,
+      "status": "won",
+      "turn": 9,
+      "alive": 4,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 29,
+      "status": "won",
+      "turn": 10,
+      "alive": 3,
+      "reactions": 9
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 30,
+      "status": "won",
+      "turn": 10,
+      "alive": 4,
+      "reactions": 9
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 31,
+      "status": "won",
+      "turn": 10,
+      "alive": 3,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 32,
+      "status": "won",
+      "turn": 10,
+      "alive": 3,
+      "reactions": 9
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 33,
+      "status": "won",
+      "turn": 10,
+      "alive": 4,
+      "reactions": 10
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 34,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 35,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 36,
+      "status": "won",
+      "turn": 10,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 37,
+      "status": "won",
+      "turn": 9,
+      "alive": 4,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 38,
+      "status": "lost",
+      "turn": 10,
+      "alive": 0,
+      "reactions": 9
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 39,
+      "status": "won",
+      "turn": 10,
+      "alive": 3,
+      "reactions": 10
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 40,
+      "status": "won",
+      "turn": 9,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 41,
+      "status": "won",
+      "turn": 10,
+      "alive": 1,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 42,
+      "status": "won",
+      "turn": 10,
+      "alive": 3,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 43,
+      "status": "won",
+      "turn": 10,
+      "alive": 4,
+      "reactions": 9
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 44,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 45,
+      "status": "lost",
+      "turn": 8,
+      "alive": 0,
+      "reactions": 10
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 46,
+      "status": "lost",
+      "turn": 7,
+      "alive": 0,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 47,
+      "status": "won",
+      "turn": 10,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 48,
+      "status": "lost",
+      "turn": 7,
+      "alive": 0,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 49,
+      "status": "lost",
+      "turn": 6,
+      "alive": 0,
+      "reactions": 10
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 50,
+      "status": "won",
+      "turn": 10,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 51,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 52,
+      "status": "won",
+      "turn": 9,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 53,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 54,
+      "status": "won",
+      "turn": 10,
+      "alive": 1,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 55,
+      "status": "won",
+      "turn": 9,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 56,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 57,
+      "status": "won",
+      "turn": 10,
+      "alive": 3,
+      "reactions": 9
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 58,
+      "status": "won",
+      "turn": 10,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 59,
+      "status": "won",
+      "turn": 10,
+      "alive": 3,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 60,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 61,
+      "status": "won",
+      "turn": 10,
+      "alive": 4,
+      "reactions": 9
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 62,
+      "status": "won",
+      "turn": 10,
+      "alive": 2,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 63,
+      "status": "won",
+      "turn": 10,
+      "alive": 3,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 64,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 65,
+      "status": "won",
+      "turn": 10,
+      "alive": 4,
+      "reactions": 9
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 66,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 67,
+      "status": "won",
+      "turn": 10,
+      "alive": 3,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 68,
+      "status": "won",
+      "turn": 10,
+      "alive": 3,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 69,
+      "status": "won",
+      "turn": 10,
+      "alive": 1,
+      "reactions": 9
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 70,
+      "status": "won",
+      "turn": 10,
+      "alive": 3,
+      "reactions": 9
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 71,
+      "status": "won",
+      "turn": 10,
+      "alive": 3,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 72,
+      "status": "won",
+      "turn": 10,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 73,
+      "status": "won",
+      "turn": 10,
+      "alive": 4,
+      "reactions": 10
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 74,
+      "status": "won",
+      "turn": 10,
+      "alive": 4,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 75,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 76,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 77,
+      "status": "won",
+      "turn": 10,
+      "alive": 4,
+      "reactions": 10
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 78,
+      "status": "won",
+      "turn": 10,
+      "alive": 1,
+      "reactions": 9
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 79,
+      "status": "won",
+      "turn": 10,
+      "alive": 2,
+      "reactions": 9
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 80,
+      "status": "won",
+      "turn": 10,
+      "alive": 3,
+      "reactions": 11
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 81,
+      "status": "won",
+      "turn": 10,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 82,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 83,
+      "status": "won",
+      "turn": 10,
+      "alive": 4,
+      "reactions": 9
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 84,
+      "status": "won",
+      "turn": 9,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 85,
+      "status": "won",
+      "turn": 10,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 86,
+      "status": "won",
+      "turn": 10,
+      "alive": 3,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 87,
+      "status": "won",
+      "turn": 10,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 88,
+      "status": "won",
+      "turn": 10,
+      "alive": 2,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 89,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 90,
+      "status": "won",
+      "turn": 9,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 91,
+      "status": "lost",
+      "turn": 10,
+      "alive": 0,
+      "reactions": 11
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 92,
+      "status": "won",
+      "turn": 10,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 93,
+      "status": "won",
+      "turn": 10,
+      "alive": 3,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 94,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 95,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 96,
+      "status": "won",
+      "turn": 10,
+      "alive": 3,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 97,
+      "status": "won",
+      "turn": 9,
+      "alive": 4,
+      "reactions": 7
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 98,
+      "status": "won",
+      "turn": 10,
+      "alive": 1,
+      "reactions": 10
+    },
+    {
+      "faction": "ai",
+      "style": "hold",
+      "budget": 10,
+      "seed": 99,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 8
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 0,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 1,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 2,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 3,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 4,
+      "status": "won",
+      "turn": 9,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 5,
+      "status": "lost",
+      "turn": 6,
+      "alive": 0,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 6,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 7,
+      "status": "won",
+      "turn": 10,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 8,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 9,
+      "status": "won",
+      "turn": 9,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 10,
+      "status": "won",
+      "turn": 9,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 11,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 12,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 13,
+      "status": "won",
+      "turn": 10,
+      "alive": 2,
+      "reactions": 5
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 14,
+      "status": "won",
+      "turn": 9,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 15,
+      "status": "won",
+      "turn": 10,
+      "alive": 1,
+      "reactions": 3
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 16,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 17,
+      "status": "won",
+      "turn": 9,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 18,
+      "status": "won",
+      "turn": 10,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 19,
+      "status": "won",
+      "turn": 10,
+      "alive": 2,
+      "reactions": 3
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 20,
+      "status": "won",
+      "turn": 10,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 21,
+      "status": "won",
+      "turn": 10,
+      "alive": 2,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 22,
+      "status": "won",
+      "turn": 9,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 23,
+      "status": "won",
+      "turn": 10,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 24,
+      "status": "won",
+      "turn": 9,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 25,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 26,
+      "status": "won",
+      "turn": 10,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 27,
+      "status": "won",
+      "turn": 9,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 28,
+      "status": "won",
+      "turn": 9,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 29,
+      "status": "won",
+      "turn": 9,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 30,
+      "status": "won",
+      "turn": 9,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 31,
+      "status": "lost",
+      "turn": 8,
+      "alive": 0,
+      "reactions": 3
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 32,
+      "status": "won",
+      "turn": 9,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 33,
+      "status": "won",
+      "turn": 9,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 34,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 35,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 36,
+      "status": "won",
+      "turn": 9,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 37,
+      "status": "won",
+      "turn": 9,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 38,
+      "status": "won",
+      "turn": 10,
+      "alive": 3,
+      "reactions": 5
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 39,
+      "status": "won",
+      "turn": 10,
+      "alive": 1,
+      "reactions": 3
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 40,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 41,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 42,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 43,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 44,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 45,
+      "status": "won",
+      "turn": 10,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 46,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 47,
+      "status": "won",
+      "turn": 9,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 48,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 49,
+      "status": "won",
+      "turn": 9,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 50,
+      "status": "won",
+      "turn": 10,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 51,
+      "status": "won",
+      "turn": 10,
+      "alive": 2,
+      "reactions": 6
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 52,
+      "status": "won",
+      "turn": 9,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 53,
+      "status": "won",
+      "turn": 10,
+      "alive": 1,
+      "reactions": 3
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 54,
+      "status": "won",
+      "turn": 10,
+      "alive": 2,
+      "reactions": 3
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 55,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 56,
+      "status": "won",
+      "turn": 9,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 57,
+      "status": "won",
+      "turn": 9,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 58,
+      "status": "won",
+      "turn": 9,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 59,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 60,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 61,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 62,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 63,
+      "status": "won",
+      "turn": 10,
+      "alive": 2,
+      "reactions": 5
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 64,
+      "status": "lost",
+      "turn": 7,
+      "alive": 0,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 65,
+      "status": "won",
+      "turn": 9,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 66,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 67,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 68,
+      "status": "won",
+      "turn": 10,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 69,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 70,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 71,
+      "status": "won",
+      "turn": 7,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 72,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 73,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 74,
+      "status": "won",
+      "turn": 9,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 75,
+      "status": "won",
+      "turn": 9,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 76,
+      "status": "won",
+      "turn": 9,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 77,
+      "status": "won",
+      "turn": 9,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 78,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 79,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 80,
+      "status": "lost",
+      "turn": 6,
+      "alive": 0,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 81,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 82,
+      "status": "won",
+      "turn": 10,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 83,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 84,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 85,
+      "status": "won",
+      "turn": 9,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 86,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 87,
+      "status": "won",
+      "turn": 9,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 88,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 89,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 90,
+      "status": "won",
+      "turn": 10,
+      "alive": 3,
+      "reactions": 4
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 91,
+      "status": "won",
+      "turn": 9,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 92,
+      "status": "won",
+      "turn": 8,
+      "alive": 3,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 93,
+      "status": "won",
+      "turn": 10,
+      "alive": 2,
+      "reactions": 3
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 94,
+      "status": "won",
+      "turn": 10,
+      "alive": 1,
+      "reactions": 3
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 95,
+      "status": "won",
+      "turn": 9,
+      "alive": 2,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 96,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 97,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 98,
+      "status": "won",
+      "turn": 8,
+      "alive": 4,
+      "reactions": 2
+    },
+    {
+      "faction": "ai",
+      "style": "advance",
+      "budget": 10,
+      "seed": 99,
+      "status": "won",
+      "turn": 9,
+      "alive": 2,
+      "reactions": 2
+    }
+  ]
+}
