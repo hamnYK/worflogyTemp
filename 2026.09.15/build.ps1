@@ -11,7 +11,7 @@ $branch = "gh-pages"
 
 function Invoke-Git {
     param([Parameter(ValueFromRemainingArguments=$true)][string[]]$Arguments)
-    & git @Arguments
+    & git --no-pager @Arguments
     if ($LASTEXITCODE -ne 0) { throw "git failed (exit $LASTEXITCODE): $($Arguments[0])" }
 }
 
@@ -64,7 +64,7 @@ try {
     $diffExit = $LASTEXITCODE
     if ($diffExit -eq 0) { Write-Host "No publication changes."; return }
     if ($diffExit -ne 1) { throw "Could not inspect staged publication changes." }
-    Invoke-Git diff --cached --stat
+    Invoke-Git diff --cached --shortstat
     Invoke-Git commit --quiet -m ("deploy: new homepage 2026.09.15 " + (Get-Date -Format "yyyy-MM-dd HH:mm:ss"))
     # Concurrent publication changes cause rejection, never overwrite them.
     Invoke-Git push origin "HEAD:refs/heads/$branch"
