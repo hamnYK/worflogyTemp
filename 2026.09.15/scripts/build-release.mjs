@@ -3,7 +3,11 @@ import {spawnSync} from 'node:child_process';
 import fs from 'node:fs';import path from 'node:path';import {fileURLToPath} from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 // Rebuild the linked game so every release includes its current static assets.
-const gameBuild=spawnSync(process.platform==='win32'?'npm.cmd':'npm',['run','build'],{cwd:path.join(root,'gkadudrnr-thegame'),shell:process.platform==='win32',encoding:'utf8'});
+const gameOptions={cwd:path.join(root,'gkadudrnr-thegame'),encoding:'utf8'};
+// Windows needs cmd for npm.cmd; the command is constant, with no interpolated input.
+const gameBuild=process.platform==='win32'
+ ?spawnSync('npm.cmd run build',{...gameOptions,shell:true})
+ :spawnSync('npm',['run','build'],gameOptions);
 if(gameBuild.status!==0)throw new Error('NULL SECTOR build failed: '+(gameBuild.error?.message||gameBuild.stderr||gameBuild.stdout));
 const out=path.join(root,'tmp','release-'+Date.now());fs.mkdirSync(out,{recursive:true});
 const files=['index.html','en.html','nia-ontology-workshop-with-worflogy.html','robots.txt','sitemap.xml','CNAME','.nojekyll','lib/phaser.min.js','lib/mammoth.browser.min.js','lib/vis-network.min.js','lib/workshop-safety.js','lib/PHASER-LICENSE.txt','lib/THREE-LICENSE.txt','lib/CANNON-LICENSE.txt'];
@@ -14,7 +18,7 @@ function collectGame(dir){for(const item of fs.readdirSync(path.join(root,dir),{
  if(item.isSymbolicLink())throw new Error('Symbolic links are not allowed: '+relative);
  if(item.isDirectory())collectGame(relative);else files.push(relative);
 }}
-for(const entry of ['dist/index.html','local/index.html','local/design-system.html']){
+for(const entry of ['dist/index.html','dist/design-system.html','local/index.html','local/design-system.html']){
  if(!fs.existsSync(path.join(root,'gkadudrnr-thegame',entry)))throw new Error('Missing NULL SECTOR build entry: '+entry);
 }
 collectGame('gkadudrnr-thegame/dist');
