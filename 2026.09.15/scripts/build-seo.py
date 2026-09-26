@@ -52,7 +52,7 @@ def static_diagrams():
         if item.get('readiness'):
             parts.append('<p class="diagram-readiness">' + escape(item['readiness']) + '</p>')
         if item.get('video'):
-            parts.append('<div class="diagram-shell"><div class="toolbar"><strong class="toolbar-technology">' + escape(item['technologyLabel']) + '</strong></div><video class="diagram-canvas diagram-canvas--video" src="' + escape(item['video'], quote=True) + '" autoplay muted loop playsinline preload="metadata" aria-label="' + escape(item['title'], quote=True) + '"></video></div>')
+            parts.append('<div class="diagram-shell"><div class="toolbar"><strong class="toolbar-technology">' + escape(item['technologyLabel']) + '</strong></div><video class="diagram-canvas diagram-canvas--video" src="' + escape(item['video'], quote=True) + '" autoplay muted loop playsinline preload="metadata" inert disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback" aria-label="' + escape(item['title'], quote=True) + '"></video></div>')
         elif item.get('desc'):
             parts.append('<p class="static-diagram-description">' + escape(item['desc']) + '</p>')
         if item.get('relations'):

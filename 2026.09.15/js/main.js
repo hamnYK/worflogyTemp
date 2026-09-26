@@ -75,7 +75,9 @@
       const video=document.createElement("video");video.className="diagram-canvas diagram-canvas--video";
       video.muted=true;video.autoplay=true;video.loop=true;video.playsInline=true;video.preload="metadata";
       video.setAttribute("muted","");video.setAttribute("playsinline","");video.setAttribute("aria-label",diagram.title);
-      video.src=diagram.video;
+   video.setAttribute("disablepictureinpicture","");video.setAttribute("disableremoteplayback","");
+   video.setAttribute("controlslist","nodownload nofullscreen noremoteplayback");video.setAttribute("inert","");
+   video.src=diagram.video;
       shell.append(toolbar,video);section.append(shell);root.append(section);
       let visible=false;
       const syncVideo=()=>{if(visible&&!document.hidden)video.play().catch(()=>{});else video.pause();};
