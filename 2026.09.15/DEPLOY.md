@@ -15,12 +15,14 @@
 
  deploy.cmd는 build.ps1을 호출하므로 실행 방법은 그대로입니다. 빌드 단계에서 다음을 자동 수행합니다.
 
-1. 게임 폴더에서 package-lock.json 기준으로 npm ci --include=dev를 실행합니다. node_modules는 재생성되며 게임 소스와 저장 데이터는 변경하지 않습니다.
-2. 홈페이지와 NULL SECTOR를 빌드합니다.
-3. 웹 실행용 gkadudrnr-thegame/dist와 파일 실행용 gkadudrnr-thegame/local을 배포 묶음에 포함합니다.
+1. null-sector.config.json의 source에 지정된 외부 개발 폴더를 새 tmp/ns-build-* 폴더로 복사합니다. NULL_SECTOR_SOURCE 환경 변수로 경로를 재지정할 수도 있습니다. 소스가 없으면 중단하며 이전 복사본으로 대체하지 않습니다.
+2. 임시 폴더에서 package-lock.json 기준 npm ci --include=dev와 npm run build를 실행합니다. 외부 개발 폴더의 소스와 node_modules는 변경하지 않습니다.
+3. 웹 실행용 ns/dist와 파일 실행용 ns/local만 새 배포 묶음에 포함합니다. 홈페이지 루트의 ns도 새 결과물로 교체하며 이전 결과물은 tmp/ns-previous-*로 보관합니다.
 4. 두 실행 페이지와 게임 디자인 시스템 페이지가 모두 있는지 확인합니다. 설치·빌드·검사에 실패하면 푸시 단계로 진행하지 않습니다.
 
 게임 node_modules, 소스, 테스트, Git 이력 백업은 배포하지 않습니다. 게임에서 연결하는 디자인 시스템 페이지는 게임 빌드의 일부로 포함합니다. main 분기에 소스를 푸시하는 것과 gh-pages에 완성된 사이트를 배포하는 것은 별도입니다.
+
+개발 소스를 삭제·이동·이름 변경하면 다음 빌드에 반영됩니다. 이전 dist/local을 복사하거나 기존 ns에 덮어쓰지 않으므로 오래된 결과물은 남지 않습니다. ns는 생성물 전용으로 직접 수정하지 마세요. 비워도 다음 빌드에서 생성되지만, 빌드 전에는 로컬 홈페이지에서 게임을 실행할 수 없습니다. 저장 즉시 운영 사이트가 바뀌지는 않으며 deploy.cmd 실행 후 반영됩니다.
 
 ## 빌드만 확인
 

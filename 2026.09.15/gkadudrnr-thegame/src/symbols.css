@@ -1,4 +1,0 @@
-.ui-symbol{display:inline-block;width:1em;height:1em;vertical-align:-.14em;flex-shrink:0;position:static}
-.enlist .ui-symbol{margin-right:4px}.target-icon .ui-symbol{width:20px;height:20px}
-.ap-pips{display:inline-flex;gap:4px;align-items:center}.ap-pips i{width:7px;height:7px;border:1px solid currentColor;border-radius:50%;display:block}.ap-pips i.filled{background:currentColor}
-.world-label.hostile::before{content:'';display:inline-block;width:5px;height:5px;border:1px solid currentColor;transform:rotate(45deg);margin-right:5px}

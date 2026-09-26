@@ -1,14 +1,16 @@
 # NULL SECTOR : PRE-DEMO — 홈페이지 연결
 
-홈페이지와 게임은 서로 다른 디자인 시스템을 사용한다. AFTER HOURS 카드, 4자리 코드 입력, 상단 복귀 바는 홈페이지의 공통 컴포넌트를 사용한다. iframe 내부 게임은 gkadudrnr-thegame/design-system.html 및 DESIGN_SYSTEM.md 기준이다.
+홈페이지와 게임은 서로 다른 디자인 시스템을 사용한다. AFTER HOURS 카드, 4자리 코드 입력, 상단 복귀 바는 홈페이지의 공통 컴포넌트를 사용한다. iframe 내부 게임은 외부 개발 폴더의 design-system.html 및 DESIGN_SYSTEM.md 기준이다.
 
 ## 실행과 배포
 
-- 웹 HTTP(S): gkadudrnr-thegame/dist/index.html
-- 파일 직접 실행: gkadudrnr-thegame/local/index.html
+- 웹 HTTP(S): ns/dist/index.html
+- 파일 직접 실행: ns/local/index.html
 - 게임의 npm run build는 dist와 local을 함께 생성한다. 이전 dist/file 경로는 사용하지 않는다.
 - scripts/build-release.mjs는 게임을 재빌드하고 두 결과 디렉터리를 배포 묶음에 포함한다. local/design-system.html도 포함한다.
-- 게임 원본을 교체한 뒤에는 scripts/build-release.mjs로 다시 빌드하고 새 배포 묶음을 검증한다. 이전 tmp/release-*는 해당 생성 시점의 스냅샷이다.
+- 원본 경로는 null-sector.config.json의 source 또는 NULL_SECTOR_SOURCE 환경 변수로 지정한다. scripts/build-null-sector.mjs가 매번 새 tmp/ns-build-*에서 의존성 설치와 빌드를 수행한다. 원본 삭제도 다음 빌드에 반영되며 외부 원본은 변경하지 않는다.
+- 홈페이지의 ns는 dist/local 생성물 전용이다. 빌드 성공 후 교체하고 이전 결과는 tmp/ns-previous-*로 보관한다. 이전 tmp/release-*는 해당 생성 시점의 스냅샷이다.
+- 외부 게임에 홈페이지 초기화 메시지가 없으면 빌드 복사본에 준비 완료/실패 알림을 추가한다. 초기화 구조가 변경되면 빌드를 중단하여 어댑터 점검을 요구한다.
 
 ## 홈페이지와 게임 사이의 연결 규칙
 

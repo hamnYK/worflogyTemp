@@ -19,13 +19,7 @@ try {
     Set-Location -LiteralPath $siteRoot
     foreach ($tool in @("node", "npm.cmd", "python")) { Get-Command $tool -ErrorAction Stop | Out-Null }
     if ($Deploy) { Get-Command git -ErrorAction Stop | Out-Null }
-    $gameRoot = Join-Path $siteRoot "gkadudrnr-thegame"
-    foreach ($file in @("package.json", "package-lock.json")) {
-        if (-not (Test-Path -LiteralPath (Join-Path $gameRoot $file) -PathType Leaf)) { throw "NULL SECTOR source missing: $file" }
-    }
-    Write-Host "Installing locked NULL SECTOR build dependencies..."
-    & npm.cmd --prefix $gameRoot ci --include=dev --no-audit --no-fund
-    if ($LASTEXITCODE -ne 0) { throw "NULL SECTOR dependency install failed. Check network access and package-lock.json." }
+    # build-release snapshots the external source and installs/builds in site/tmp.
     Write-Host "Building homepage and NULL SECTOR (web and local editions)..."
     & python (Join-Path $siteRoot "scripts/build-seo.py")
     if ($LASTEXITCODE -ne 0) { throw "SEO build failed." }
@@ -35,7 +29,7 @@ try {
     $releaseDir = [System.IO.Path]::GetFullPath($release.directory)
     $allowedRoot = [System.IO.Path]::GetFullPath((Join-Path $siteRoot "tmp")) + [System.IO.Path]::DirectorySeparatorChar
     if (-not $releaseDir.StartsWith($allowedRoot, [System.StringComparison]::OrdinalIgnoreCase)) { throw "Release path is outside site/tmp." }
-    foreach ($file in @("index.html","en.html","CNAME",".nojekyll","lib/workshop-safety.js","nia-ontology-workshop-with-worflogy.html","js/null-sector-access.js","gkadudrnr-thegame/dist/index.html","gkadudrnr-thegame/dist/design-system.html","gkadudrnr-thegame/local/index.html","gkadudrnr-thegame/local/design-system.html")) {
+    foreach ($file in @("index.html","en.html","CNAME",".nojekyll","lib/workshop-safety.js","nia-ontology-workshop-with-worflogy.html","js/null-sector-access.js","ns/dist/index.html","ns/dist/design-system.html","ns/local/index.html","ns/local/design-system.html")) {
         if (-not (Test-Path -LiteralPath (Join-Path $releaseDir $file) -PathType Leaf)) { throw "Required public file missing: $file" }
     }
     Write-Host "Build ready: $releaseDir ($($release.files) files)"

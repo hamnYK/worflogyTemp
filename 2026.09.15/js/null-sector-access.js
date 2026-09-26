@@ -22,7 +22,7 @@ function mountEmbeddedGame(host,{onExit,english=false}){
  bar.append(title,back);
  const status=document.createElement('p');status.className='null-sector-load-status';status.setAttribute('role','status');status.textContent=english?'Loading NULL SECTOR…':'NULL SECTOR를 불러오는 중…';
  const frame=document.createElement('iframe');frame.className='null-sector-frame';frame.title='NULL SECTOR : PRE-DEMO';frame.allow='fullscreen';
- frame.src=new URL(location.protocol==='file:'?'./gkadudrnr-thegame/local/index.html':'./gkadudrnr-thegame/dist/index.html',document.baseURI).href;
+ frame.src=new URL(location.protocol==='file:'?'./ns/local/index.html':'./ns/dist/index.html',document.baseURI).href;
  const failed=()=>{status.hidden=false;status.textContent=english?'Could not load NULL SECTOR. Return to AFTER HOURS and try again.':'NULL SECTOR를 불러오지 못했습니다. AFTER HOURS로 돌아가 다시 시도하세요.';};
  const ready=event=>{
   if(event.source!==frame.contentWindow)return;

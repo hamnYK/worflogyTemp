@@ -4,3 +4,6 @@
 
 /output/*.log
 /output/*.json
+
+# Generated NULL SECTOR artifacts; source lives in the external development folder.
+/ns/
