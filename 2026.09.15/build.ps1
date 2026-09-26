@@ -1,3 +1,17 @@
+# PowerShell 실행 안내 (아래 명령은 앞의 #을 제외하고 실행)
+#
+# 1. 홈페이지 작업 디렉터리로 이동
+# Set-Location -LiteralPath 'C:\Users\alchera\OneDrive\[주식회사 워플로지]\02. 법인 홈페이지 (도메인 사용권)\2026.04.24_워플로지 홈페이지 개편\2026\2026.09.15'
+#
+# 2. 빌드만 실행 (외부 게임 소스로 ns 갱신, GitHub 배포 없음)
+# powershell -NoProfile -ExecutionPolicy Bypass -File .\build.ps1
+#
+# 3. 최신 소스로 다시 빌드한 뒤 GitHub에 배포
+# .\deploy.cmd
+# 또는 아래 명령으로 직접 실행
+# powershell -NoProfile -ExecutionPolicy Bypass -File .\build.ps1 -Deploy
+#
+
 [CmdletBinding()]
 param(
     [switch]$Deploy,
