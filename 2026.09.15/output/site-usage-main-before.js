@@ -239,8 +239,6 @@
   const workshopLink=document.querySelector(".workshop-floating");
   let workshopWindow=null;
   workshopLink.addEventListener("click",event=>{
-    // Preserve native new-tab/new-window and other modified link actions.
-    if(event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
     if(!workshopWindow||workshopWindow.closed){
       workshopWindow=window.open(workshopLink.href,"worflogy-workshop");
       if(!workshopWindow)return;
