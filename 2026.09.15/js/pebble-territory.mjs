@@ -105,7 +105,7 @@ export function mountPebbleTerritory(host,{onExit,onWin=onExit,english=false}={}
  };
  const blur=()=>{releasePointer();};window.addEventListener('blur',blur);
  function animate(now){
-  if(disposed)return;const dt=document.hidden?0:Math.min((now-last)/1000,.05);last=now;
+  if(disposed)return;if(document.hidden){last=now;frame=requestAnimationFrame(animate);return;}const dt=document.hidden?0:Math.min((now-last)/1000,.05);last=now;
   if(motion){
    motion.elapsed+=dt;
    while(motion.index<motion.flight.frames.length-1&&motion.flight.frames[motion.index+1].time<=motion.elapsed)motion.index++;

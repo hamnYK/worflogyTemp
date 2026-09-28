@@ -1,3 +1,4 @@
+import {resizeArcadeRenderer} from './arcade-rendering.mjs';
 import {adjustPower} from './game-input.mjs';
 import {eraserGuide,syncGuide} from './game-guides.mjs';
 import * as THREE from '../lib/three.module.min.js';
@@ -9,7 +10,7 @@ export function mountEraserWrestling(host,{onExit,onWin,english=false}={}){
  host.innerHTML=`<div class="chip-game eraser-game"><div class="chip-game-heading"><button class="wf-button chip-back">${t('게임 선택','Games')}</button><h2>ERASER WRESTLING</h2><output class="chip-progress"></output></div><div class="chip-viewport"><canvas tabindex="0" aria-label="${t('지우개 레슬링. 내 파란 지우개의 가장자리를 눌렀다 놓으세요. 1부터 8로 누를 위치 선택, Space로 뒤집기.','Eraser wrestling. Hold and release an edge of your blue eraser. Keys 1 to 8 select an edge; Space flips.') }"></canvas><div class="chip-result" aria-hidden="true"></div><div class="chip-camera"><button data-camera="in" aria-label="${t('확대','Zoom in')}">+</button><button data-camera="out" aria-label="${t('축소','Zoom out')}">−</button><button data-camera="left" aria-label="${t('왼쪽 회전','Rotate left')}">↶</button><button data-camera="right" aria-label="${t('오른쪽 회전','Rotate right')}">↷</button><button data-camera="home">${t('기본 뷰','Reset view')}</button></div></div><div class="chip-controls"><label>${t('누를 위치','Press point')} <select class="eraser-edge">${PRESS.map((_,i)=>'<option value="'+i+'">'+(i+1)+'</option>').join('')}</select></label><label>${t('힘','Power')} <input class="chip-power" aria-keyshortcuts="PageUp PageDown" type="range" min="1" max="10" step=".1" value="5"></label><button class="wf-button eraser-flip">${t('뒤집기','Flip')}</button></div><p class="chip-status" role="status" aria-live="polite"></p></div>`;
  const root=host.firstElementChild,canvas=root.querySelector('canvas'),progress=root.querySelector('.chip-progress'),status=root.querySelector('.chip-status'),result=root.querySelector('.chip-result'),power=root.querySelector('.chip-power'),edge=root.querySelector('.eraser-edge'),flip=root.querySelector('.eraser-flip');
  let renderer;try{renderer=new THREE.WebGLRenderer({canvas,antialias:true});}catch{root.innerHTML='<p>'+t('3D 화면을 시작할 수 없습니다.','Unable to start 3D.')+'</p><button class="wf-button">BACK</button>';root.querySelector('button').onclick=onExit;return{dispose(){}};}
- renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=.92;
+ renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=.92;
  const scene=new THREE.Scene();scene.background=new THREE.Color('#233947');
  const camera=new THREE.PerspectiveCamera(38,1,.1,100),geos=new Set(),mats=new Set(),textures=new Set(),finish=createArcadeFinish(renderer,scene,geos,mats,textures),pan=createTablePan(camera,canvas);
  const mat=options=>finish.material(options);
@@ -51,7 +52,7 @@ export function mountEraserWrestling(host,{onExit,onWin,english=false}={}){
  let selected=1,distance=17,azimuth=.36,elevation=.88,pointer=null,last=performance.now(),acc=0,frame,timer,disposed=false,phaseKey='',aiDelay=0;
  edge.value=selected;
  function view(){const d=distance*Math.max(1,1.1/camera.aspect);camera.position.set(Math.sin(azimuth)*Math.cos(elevation)*d,Math.sin(elevation)*d,Math.cos(azimuth)*Math.cos(elevation)*d).add(pan.offset);camera.lookAt(pan.offset);camera.updateMatrixWorld();}
- function resize(){const r=canvas.parentElement.getBoundingClientRect();renderer.setSize(r.width,r.height,false);camera.aspect=r.width/r.height;camera.updateProjectionMatrix();view();}
+ function resize(){const r=canvas.parentElement.getBoundingClientRect();resizeArcadeRenderer(renderer,r.width,r.height);camera.aspect=r.width/r.height;camera.updateProjectionMatrix();view();}
  const ro=new ResizeObserver(resize);ro.observe(canvas.parentElement);
  function refresh(){
  const mine=game.phase==='ready'&&game.turn===0;
@@ -83,7 +84,7 @@ export function mountEraserWrestling(host,{onExit,onWin,english=false}={}){
  root.querySelectorAll('[data-camera]').forEach(b=>b.onclick=()=>{const k=b.dataset.camera;if(k==='in')distance=Math.max(10,distance-2);if(k==='out')distance=Math.min(26,distance+2);if(k==='left')azimuth-=.2;if(k==='right')azimuth+=.2;if(k==='home'){distance=17;azimuth=.36;elevation=.88;pan.reset();}view();});
  function reset(){clearTimeout(timer);game.reset();pointer=null;phaseKey='';aiDelay=0;selected=1;edge.value=selected;power.value=5;result.className='chip-result';result.textContent='';refresh();guide();}
  function animate(now){
- if(disposed)return;const dt=document.hidden?0:Math.min((now-last)/1000,.05);last=now;acc+=dt;while(acc>=1/240){game.step(1/240);acc-=1/240;}
+ if(disposed)return;if(document.hidden){last=now;frame=requestAnimationFrame(animate);return;}const dt=document.hidden?0:Math.min((now-last)/1000,.05);last=now;acc+=dt;while(acc>=1/240){game.step(1/240);acc-=1/240;}
  const key=game.phase+game.turn;
  if(key!==phaseKey){phaseKey=key;refresh();aiDelay=0;
  if(game.phase==='won'||game.phase==='lost'){

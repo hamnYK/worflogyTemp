@@ -175,13 +175,17 @@
   }
   function notify(){callbacks.story?.({phase:running?'farm':stage?'complete':'idle',step:stage,total:8});}
   function advance(){stage=Math.min(8,stage+1);elapsed=0;if(stage===8)running=false;notify();render();}
-  function tick(time){const dt=last?Math.min(time-last,100):0;last=time;if(visible&&running){elapsed+=dt;if(elapsed>=2200)advance();else if(!reduced.matches){
+  function stop(){cancelAnimationFrame(frame);frame=0;last=0;}
+  function schedule(){if(!frame&&visible&&running&&!document.hidden)frame=requestAnimationFrame(tick);}
+  function visibility(){if(document.hidden)stop();else schedule();}
+  document.addEventListener("visibilitychange",visibility);
+  function tick(time){frame=0;const dt=last?Math.min(time-last,100):0;last=time;if(visible&&running){elapsed+=dt;if(elapsed>=2200)advance();else if(!reduced.matches){
    for(const packet of svg.querySelectorAll('[data-farm-packet]')){const a=packet.dataset.from.split(',').map(Number),b=packet.dataset.to.split(',').map(Number),t=(elapsed%1200)/1200;packet.setAttribute('cx',a[0]+(b[0]-a[0])*t);packet.setAttribute('cy',a[1]+(b[1]-a[1])*t);}
    if(stage===3||stage===4){const plant=svg.querySelector('[data-virtual-plant]');if(plant)plant.setAttribute('transform',`translate(250,230) scale(.86) rotate(${Math.sin(elapsed/360)*2})`);}
    if(stage>=5)for(const arm of svg.querySelectorAll('[data-linked-avatar] [data-farm-arm]'))arm.setAttribute('transform',`rotate(${-12+Math.sin(elapsed/420)*12} 9 -40)`);
    if(stage>=6)for(const arm of svg.querySelectorAll('[data-farmer] [data-farm-arm]'))arm.setAttribute('transform',`rotate(${Math.sin(elapsed/500)*3} 9 -40)`);
-  }}frame=requestAnimationFrame(tick);}
-  function reset(){stage=0;running=false;elapsed=0;zoom=defaultZoom();pan={x:0,y:0};render();notify();}
+  }}schedule();}
+  function reset(){stop();stage=0;running=false;elapsed=0;zoom=defaultZoom();pan={x:0,y:0};render();notify();}
   // Match the earlier canvases: Ctrl+wheel zooms around the cursor.
   const wheelHandler=event=>{
    if(mobile.matches||!event.ctrlKey||event.deltaY===0)return;
@@ -202,7 +206,7 @@
   svg.addEventListener('pointerdown',e=>{if(mobile.matches)return;drag={x:e.clientX,y:e.clientY,pan:{...pan}};svg.setPointerCapture(e.pointerId);});
   svg.addEventListener('pointermove',e=>{if(!drag||mobile.matches)return;const k=1000/svg.getBoundingClientRect().width/zoom;pan={x:drag.pan.x+(e.clientX-drag.x)*k,y:drag.pan.y+(e.clientY-drag.y)*k};render();});
   for(const type of ['pointerup','pointercancel'])svg.addEventListener(type,()=>{drag=null;});
-  frame=requestAnimationFrame(tick);
-  return{load(){reset();},play(){stage=1;elapsed=0;running=true;render();notify();},next(){if(running)advance();},reset,select(){},zoom(factor){if(mobile.matches)return;zoom=Math.max(.7,Math.min(2,zoom*factor));render();},setVisible(v){visible=v;last=0;},destroy(){host.removeEventListener("wheel",wheelHandler);cancelAnimationFrame(frame);resize.disconnect();svg.remove();}};
+  schedule();
+  return{load(){reset();},play(){stage=1;elapsed=0;running=true;schedule();render();notify();},next(){if(running)advance();},reset,select(){},zoom(factor){if(mobile.matches)return;zoom=Math.max(.7,Math.min(2,zoom*factor));render();},setVisible(v){visible=v;stop();schedule();},destroy(){stop();document.removeEventListener("visibilitychange",visibility);host.removeEventListener("wheel",wheelHandler);cancelAnimationFrame(frame);resize.disconnect();svg.remove();}};
  };
 })();

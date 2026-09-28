@@ -1,9 +1,10 @@
+import {resizeArcadeRenderer} from './arcade-rendering.mjs';
 import * as THREE from '../lib/three.module.min.js';
 import {createArcadeFinish} from './arcade-finish.mjs';
 import {createTablePan} from './table-pan.mjs';
 import {PEBBLE} from './pebble-physics.mjs';
 export function createPebbleTable(canvas){
- const renderer=new THREE.WebGLRenderer({canvas,antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;
+ const renderer=new THREE.WebGLRenderer({canvas,antialias:true});renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;
  const scene=new THREE.Scene();scene.background=new THREE.Color('#233b43');
  const camera=new THREE.PerspectiveCamera(38,1,.1,120),geos=new Set(),mats=new Set(),textures=new Set(),finish=createArcadeFinish(renderer,scene,geos,mats,textures);
  const material=(color,roughness=.8,metalness=0)=>finish.material({color,roughness,metalness});
@@ -51,7 +52,11 @@ export function createPebbleTable(canvas){
  pan.offset.set(defaultView.x,0,defaultView.z);
  let disposed=false,frame,dirty=true,lastKey='';
  const world=p=>new THREE.Vector3((p.x-500)*.016,.01,(p.y-320)*.016);
- function view(){const d=19*zoom*Math.max(1,1.18/camera.aspect);camera.position.set(Math.sin(azimuth)*Math.cos(elevation)*d,Math.sin(elevation)*d,Math.cos(azimuth)*Math.cos(elevation)*d).add(pan.offset);camera.lookAt(pan.offset);camera.updateMatrixWorld();dirty=true;}
+ function schedule(){if(!disposed&&!frame&&!document.hidden)frame=requestAnimationFrame(animate);}
+ function invalidate(){dirty=true;schedule();}
+ function visibility(){if(document.hidden){cancelAnimationFrame(frame);frame=0;}else if(dirty)schedule();}
+ document.addEventListener("visibilitychange",visibility);
+ function view(){const d=19*zoom*Math.max(1,1.18/camera.aspect);camera.position.set(Math.sin(azimuth)*Math.cos(elevation)*d,Math.sin(elevation)*d,Math.cos(azimuth)*Math.cos(elevation)*d).add(pan.offset);camera.lookAt(pan.offset);camera.updateMatrixWorld();invalidate();}
  function hit(x,y){const r=canvas.getBoundingClientRect();ray.setFromCamera(new THREE.Vector2((x-r.left)/r.width*2-1,1-(y-r.top)/r.height*2),camera);const p=ray.ray.intersectPlane(plane,new THREE.Vector3());return p?{x:p.x/.016+500,y:p.z/.016+320}:null;}
  function control(action){if(action==='in')zoom=Math.max(.55,zoom/1.15);if(action==='out')zoom=Math.min(1.7,zoom*1.15);if(action==='left')azimuth-=.2;if(action==='right')azimuth+=.2;if(action==='home'){({zoom,azimuth,elevation}=defaultView);pan.offset.set(defaultView.x,0,defaultView.z);}view();}
  function move(mode,x,y,nx,ny){if(mode==='orbit'){azimuth-=(nx-x)*.007;elevation=THREE.MathUtils.clamp(elevation+(ny-y)*.004,.65,1.45);}else{pan.move(x,y,nx,ny);pan.offset.x=THREE.MathUtils.clamp(pan.offset.x,-7,7);pan.offset.z=THREE.MathUtils.clamp(pan.offset.z,-5,5);}view();}
@@ -85,10 +90,10 @@ export function createPebbleTable(canvas){
   for(let i=0;i<2;i++){const p=i===game.turn?(sample?.stone||game.stone):game.home(i);rocks[i].visible=!!p;if(p){const v=world(p),r=p.rotation||0;rocks[i].position.set(v.x,.13+Math.abs(Math.sin(r*2))*.012,v.z);rocks[i].rotation.set(Math.sin(r)*.2,r*.3,Math.cos(r*1.3)*.16);}}
   while(obstacleModels.length<surface.obstacles.length)obstacleModels.push(rock(30,['#9a9487','#827c73','#aaa08b','#88877c','#958d7c'][obstacleModels.length],obstacleModels.length+3));
   obstacleModels.forEach((o,i)=>{const b=surface.obstacles[i];o.visible=!!b;if(b){const p=sample?.rocks[i]||b,v=world(p);o.scale.setScalar(b.radius*.016);o.position.set(v.x,b.radius*.016*.74,v.z);o.rotation.set(Math.sin(p.rotation)*.13,p.rotation,Math.cos(p.rotation)*.1);}});
-  dirty=true;
+  invalidate();
  }
- function resize(){const r=canvas.parentElement.getBoundingClientRect();renderer.setSize(r.width,r.height,false);camera.aspect=r.width/r.height;camera.updateProjectionMatrix();view();}
+ function resize(){const r=canvas.parentElement.getBoundingClientRect();resizeArcadeRenderer(renderer,r.width,r.height);camera.aspect=r.width/r.height;camera.updateProjectionMatrix();view();}
  const observer=new ResizeObserver(resize);observer.observe(canvas.parentElement);resize();
- function animate(){if(disposed)return;if(dirty&&!document.hidden){renderer.render(scene,camera);dirty=false;}frame=requestAnimationFrame(animate);}animate();
- return{sync,hit,control,move,project(p){const q=world(p).project(camera),r=canvas.getBoundingClientRect();return{x:r.left+(q.x+1)*r.width/2,y:r.top+(1-q.y)*r.height/2};},dispose(){disposed=true;cancelAnimationFrame(frame);observer.disconnect();finish.dispose();sun.shadow.dispose();geos.forEach(g=>g.dispose());mats.forEach(m=>m.dispose());textures.forEach(t=>t.dispose());renderer.dispose();renderer.forceContextLoss();}};
+ function animate(){frame=0;if(disposed||document.hidden)return;if(dirty){renderer.render(scene,camera);dirty=false;}}schedule();
+ return{sync,hit,control,move,project(p){const q=world(p).project(camera),r=canvas.getBoundingClientRect();return{x:r.left+(q.x+1)*r.width/2,y:r.top+(1-q.y)*r.height/2};},dispose(){disposed=true;document.removeEventListener("visibilitychange",visibility);cancelAnimationFrame(frame);observer.disconnect();finish.dispose();sun.shadow.dispose();geos.forEach(g=>g.dispose());mats.forEach(m=>m.dispose());textures.forEach(t=>t.dispose());renderer.dispose();renderer.forceContextLoss();}};
 }

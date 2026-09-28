@@ -1,3 +1,4 @@
+import {resizeArcadeRenderer} from './arcade-rendering.mjs';
 import {adjustPower} from './game-input.mjs';
 import {footballGuide,syncGuide} from './game-guides.mjs';
 import * as THREE from '../lib/three.module.min.js';
@@ -12,14 +13,14 @@ export function mountFootball(host,{onExit,onWin,english=false}={}){
  const root=host.querySelector('.chip-game'),canvas=root.querySelector('canvas'),status=root.querySelector('.chip-status'),progress=root.querySelector('.chip-progress'),result=root.querySelector('.chip-result');
  let renderer;
  try{renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:false});}catch(error){root.innerHTML='<p>'+t('3D 화면을 시작할 수 없습니다. 브라우저의 하드웨어 가속 설정을 확인해 주세요.','Unable to start 3D. Check hardware acceleration in your browser.')+'</p><button class="wf-button" type="button">'+t('게임 선택','Games')+'</button>';root.querySelector('button').onclick=onExit;return{dispose(){}};}
- renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;
+ renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;
  const scene=new THREE.Scene();scene.background=new THREE.Color('#101d29');scene.fog=new THREE.Fog('#101d29',35,80);
  const camera=new THREE.PerspectiveCamera(38,1,.1,100);
  let azimuth=.56,elevation=.91,distance=14,angle=-Math.PI/2,disposed=false,frame,timer,acc=0,last=performance.now(),pointer=null;
  const raycaster=new THREE.Raycaster(),plane=new THREE.Plane(new THREE.Vector3(0,1,0),-.16);
  const pan=createTablePan(camera,canvas);
  function view(){camera.position.set(Math.sin(azimuth)*Math.cos(elevation)*distance*Math.max(1,1.2/camera.aspect),Math.sin(elevation)*distance*Math.max(1,1.2/camera.aspect),Math.cos(azimuth)*Math.cos(elevation)*distance*Math.max(1,1.2/camera.aspect));camera.position.add(pan.offset);camera.lookAt(pan.offset);camera.updateMatrixWorld();}
- function resize(){const {width,height}=canvas.parentElement.getBoundingClientRect();renderer.setSize(width,height,false);camera.aspect=width/height;camera.updateProjectionMatrix();view();}
+ function resize(){const {width,height}=canvas.parentElement.getBoundingClientRect();resizeArcadeRenderer(renderer,width,height);camera.aspect=width/height;camera.updateProjectionMatrix();view();}
  const ro=new ResizeObserver(resize);ro.observe(canvas.parentElement);
  scene.add(new THREE.HemisphereLight(0xc8e9ff,0x243321,2));
  const sun=new THREE.DirectionalLight(0xffe7c2,3.5);sun.position.set(-6,15,7);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-12,right:12,top:13,bottom:-13,near:.5,far:40});sun.shadow.normalBias=.025;scene.add(sun);
@@ -125,7 +126,7 @@ export function mountFootball(host,{onExit,onWin,english=false}={}){
  }
  }
  function render(now){
- if(disposed)return;
+ if(disposed)return;if(document.hidden){last=now;frame=requestAnimationFrame(render);return;}
  const elapsed=document.hidden?0:Math.min((now-last)/1000,.05);last=now;acc+=elapsed;
  while(acc>=1/240){game.step(1/240);acc-=1/240;}
  checkOutcome();

@@ -1,3 +1,4 @@
+import {resizeArcadeRenderer} from './arcade-rendering.mjs';
 import {adjustPower} from './game-input.mjs';
 import {basketballGuide,basketballResult,syncGuide} from './game-guides.mjs';
 import * as THREE from '../lib/three.module.min.js';
@@ -10,7 +11,7 @@ export function mountBasketball(host,{onExit,onWin,english=false}={}){
  host.innerHTML=`<div class="chip-game basketball-game"><div class="chip-game-heading"><button type="button" class="wf-button chip-back">${t('게임 선택','Games')}</button><h2>1 CHIP BASKETBALL</h2><output class="chip-progress"></output></div><div class="chip-viewport"><canvas tabindex="0" aria-label="${t('칩 농구. 마우스로 집게 이동, 클릭으로 잡기. 방향키로 이동, 잡은 뒤 위아래 키로 슛 높이 조절. 왼쪽 드래그 후 놓으면 슛.','Chip basketball. Move the grippers with the pointer or arrow keys. Click to catch. Once held, up/down changes elevation; left-drag and release shoots.')}"></canvas><div class="chip-result" aria-hidden="true"></div><div class="basket-catch-meter" aria-hidden="true"><span></span></div><div class="chip-camera"><button type="button" data-camera="in" aria-label="${t('확대','Zoom in')}">+</button><button type="button" data-camera="out" aria-label="${t('축소','Zoom out')}">−</button><button type="button" data-camera="left" aria-label="${t('왼쪽 회전','Rotate left')}">↶</button><button type="button" data-camera="right" aria-label="${t('오른쪽 회전','Rotate right')}">↷</button><button type="button" data-camera="home">${t('기본 뷰','Reset view')}</button></div></div><div class="chip-controls"><button type="button" class="wf-button basket-action"></button><label>${t('던질 방향','Toss direction')} <input class="basket-aim" type="range" min="-180" max="180" step="1" value="-30" aria-label="${t('좌우 조준','Horizontal aim')}"></label><label>${t('힘','Power')} <input class="chip-power" aria-keyshortcuts="PageUp PageDown" type="range" min="4" max="14" step=".1" value="8" aria-label="${t('발사 강도','Launch power')}"></label><label>${t('높이','Elevation')} <input class="basket-loft basket-aim" type="range" min="40" max="80" step="1" value="65"></label></div><p class="chip-status" role="status" aria-live="polite"></p></div>`;
  const root=host.querySelector('.chip-game'),canvas=root.querySelector('canvas'),status=root.querySelector('.chip-status'),action=root.querySelector('.basket-action'),aim=root.querySelector('.basket-aim'),power=root.querySelector('.chip-power'),progress=root.querySelector('.chip-progress'),result=root.querySelector('.chip-result'),meter=root.querySelector('.basket-catch-meter'),needle=meter.firstElementChild;
  let renderer;try{renderer=new THREE.WebGLRenderer({canvas,antialias:true});}catch{root.innerHTML='<p>'+t('3D 화면을 시작할 수 없습니다.','Unable to start the 3D table.')+'</p><button type="button" class="wf-button">BACK</button>';root.querySelector('button').onclick=onExit;return{dispose(){}};}
- renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.02;
+ renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.02;
  const scene=new THREE.Scene();scene.background=new THREE.Color('#142130');
  const camera=new THREE.PerspectiveCamera(38,1,.1,100);let azimuth=.48,elevation=.68,distance=14,disposed=false,frame,timer,last=performance.now(),acc=0,pointer=null,phase='',lastCatchable=false;
  const geos=new Set(),mats=new Set(),textures=new Set();
@@ -85,7 +86,7 @@ export function mountBasketball(host,{onExit,onWin,english=false}={}){
  function resetCourtPosition(){pan.offset.set(Math.sin(.48)*3.2,0,Math.cos(.48)*3.2);}
  resetCourtPosition();
  function view(){const d=distance*Math.max(1,1.05/camera.aspect);camera.position.set(Math.sin(azimuth)*Math.cos(elevation)*d,1+Math.sin(elevation)*d,Math.cos(azimuth)*Math.cos(elevation)*d);camera.position.add(pan.offset);camera.lookAt(pan.offset.x,1,pan.offset.z);camera.updateMatrixWorld();}
- function resize(){const {width,height}=canvas.parentElement.getBoundingClientRect();renderer.setSize(width,height,false);camera.aspect=width/height;camera.updateProjectionMatrix();view();}
+ function resize(){const {width,height}=canvas.parentElement.getBoundingClientRect();resizeArcadeRenderer(renderer,width,height);camera.aspect=width/height;camera.updateProjectionMatrix();view();}
  const ro=new ResizeObserver(resize);ro.observe(canvas.parentElement);
  function say(text){status.textContent=text;}
  let best=0;try{const saved=Number(localStorage.getItem('worflogy-basketball-best'));if(Number.isFinite(saved))best=Math.max(0,Math.min(BASKET.maxScore,saved));}catch{}
@@ -153,7 +154,7 @@ export function mountBasketball(host,{onExit,onWin,english=false}={}){
  }
  }
  function animate(now){
- if(disposed)return;const dt=document.hidden?0:Math.min((now-last)/1000,.05);last=now;acc+=dt;
+ if(disposed)return;if(document.hidden){last=now;frame=requestAnimationFrame(animate);return;}const dt=document.hidden?0:Math.min((now-last)/1000,.05);last=now;acc+=dt;
  if(game.phase==='spinning'){const dx=(keys.has('ArrowRight')||keys.has('d')?1:0)-(keys.has('ArrowLeft')||keys.has('a')?1:0),dz=(keys.has('ArrowDown')||keys.has('s')?1:0)-(keys.has('ArrowUp')||keys.has('w')?1:0);if((dx||dz)&&game.bounces>0){gripperActive=true;game.setGrip(game.grip.x+dx*dt*5,game.grip.z+dz*dt*5);}}
  while(acc>=1/240){game.step(1/240);acc-=1/240;}outcomes();
  syncGuide(status,basketballGuide(game,t,{mode:pointer?.mode,gripperActive,loft:loft.value}));

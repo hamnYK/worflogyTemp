@@ -1,3 +1,4 @@
+import {resizeArcadeRenderer} from './arcade-rendering.mjs';
 import {adjustPower} from './game-input.mjs';
 import {curlingGuide,syncGuide} from './game-guides.mjs';
 import {createCurlingJunk} from './curling-junk.mjs';
@@ -12,7 +13,7 @@ export function mountCurling(host,{onExit,onWin,english=false}={}){
  const root=host.firstElementChild,canvas=root.querySelector('canvas'),status=root.querySelector('.chip-status'),progress=root.querySelector('.chip-progress'),result=root.querySelector('.chip-result'),aim=root.querySelector('.curl-aim'),spin=root.querySelector('.curl-spin'),power=root.querySelector('.chip-power'),fire=root.querySelector('.chip-fire');
  let renderer;
  try{renderer=new THREE.WebGLRenderer({canvas,antialias:true});}catch{root.innerHTML='<p>'+t('3D 화면을 시작할 수 없습니다.','Unable to start 3D.')+'</p><button type="button" class="wf-button">BACK</button>';root.querySelector('button').onclick=onExit;return{dispose(){}};}
- renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1;
+ renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1;
  const scene=new THREE.Scene();scene.background=new THREE.Color('#172a3a');
  const camera=new THREE.PerspectiveCamera(38,1,.1,100),geos=new Set(),mats=new Set(),textures=new Set(),finish=createArcadeFinish(renderer,scene,geos,mats,textures);
  const mat=(color,roughness=.4,metalness=0)=>finish.material({color,roughness,metalness});
@@ -46,7 +47,7 @@ export function mountCurling(host,{onExit,onWin,english=false}={}){
  function resetCourtPosition(){pan.offset.set(0,0,1);}
  resetCourtPosition();
  function view(){const d=distance*Math.max(1,1.1/camera.aspect);camera.position.set(Math.sin(azimuth)*Math.cos(elevation)*d,Math.sin(elevation)*d,Math.cos(azimuth)*Math.cos(elevation)*d);camera.position.add(pan.offset);camera.lookAt(pan.offset);camera.updateMatrixWorld();}
- function resize(){const r=canvas.parentElement.getBoundingClientRect();renderer.setSize(r.width,r.height,false);camera.aspect=r.width/r.height;camera.updateProjectionMatrix();view();}
+ function resize(){const r=canvas.parentElement.getBoundingClientRect();resizeArcadeRenderer(renderer,r.width,r.height);camera.aspect=r.width/r.height;camera.updateProjectionMatrix();view();}
  const ro=new ResizeObserver(resize);ro.observe(canvas.parentElement);
  function refresh(){
  root.dataset.phase=game.phase;root.dataset.score=game.score;
@@ -69,7 +70,7 @@ export function mountCurling(host,{onExit,onWin,english=false}={}){
  function reset(){game.reset();phase='';result.className='chip-result';result.textContent='';aim.value=spin.value=0;power.value=4.2;status.textContent=t('칩 3개로 합계 6점! 원은 3·2·1점, 잡동사니를 원 밖으로 밀어내면 개당 +2점입니다.','Reach 6 points in 3 shots. Rings: 3/2/1. Each object cleared from the house: +2.');refresh();}
  function outcome(){if(phase===game.phase)return;phase=game.phase;refresh();if(phase==='ready'&&game.shots)status.textContent=t('다음 칩을 발사하세요. 앞선 칩을 밀어낼 수도 있습니다.','Launch the next chip. You can move earlier chips.');
  if(phase==='won'||phase==='fail'){best=Math.max(best,game.score);try{localStorage.setItem('worflogy-curling-best',String(best));}catch{}refresh();result.textContent=(phase==='won'?'CLEAR':'RETRY')+' · '+game.score+' PTS';result.classList.add('show');status.textContent=t('원 점수 ','RINGS ')+game.ringScore+' + '+t('보너스 ','BONUS ')+game.bonus+' · '+t('최고 ','BEST ')+best+' · '+(phase==='won'?t('AFTER HOURS로 돌아갑니다.','Returning to AFTER HOURS.'):t('다시 도전합니다.','Starting another round.'));timer=setTimeout(()=>{if(!disposed){if(game.phase==='won')onWin();else reset();}},1800);}}
- function animate(now){if(disposed)return;const dt=document.hidden?0:Math.min((now-last)/1000,.05);last=now;acc+=dt;while(acc>=1/240){game.step(1/240);acc-=1/240;}outcome();
+ function animate(now){if(disposed)return;if(document.hidden){last=now;frame=requestAnimationFrame(animate);return;}const dt=document.hidden?0:Math.min((now-last)/1000,.05);last=now;acc+=dt;while(acc>=1/240){game.step(1/240);acc-=1/240;}outcome();
  syncGuide(status,curlingGuide(game,t,pointer?.mode==='aim',spin.value));
  syncJunk(game.junk);
  chips.forEach((g,i)=>{const p=game.chips[i];g.visible=!!p||(game.phase==='ready'&&i===game.shots);g.position.set(p?p.x:0,0,p?p.z:7);g.rotation.y=p?p.angle:0;});

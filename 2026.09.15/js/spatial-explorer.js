@@ -214,11 +214,15 @@
   }
   function notify(){callbacks.story?.({phase:running?'spatial':stage?'complete':'idle',step:stage,total:7});}
   function advance(){stage=Math.min(7,stage+1);elapsed=0;if(stage===7)running=false;notify();render();}
-  function tick(time){const dt=last?Math.min(100,time-last):0;last=time;if(visible&&running){elapsed+=dt;if(elapsed>=2400)advance();else if(!reduced.matches){
+  function stop(){cancelAnimationFrame(frame);frame=0;last=0;}
+  function schedule(){if(!frame&&visible&&running&&!document.hidden)frame=requestAnimationFrame(tick);}
+  function visibility(){if(document.hidden)stop();else schedule();}
+  document.addEventListener("visibilitychange",visibility);
+  function tick(time){frame=0;const dt=last?Math.min(100,time-last):0;last=time;if(visible&&running){elapsed+=dt;if(elapsed>=2400)advance();else if(!reduced.matches){
     for(const packet of svg.querySelectorAll('[data-packet]')){const t=(elapsed%1400)/1400,a=Number(packet.dataset.from),b=Number(packet.dataset.to);packet.setAttribute('cy',a+(b-a)*(packet.dataset.packet==='return'?1-t:t));}
     if(stage>=5)for(const arm of svg.querySelectorAll('[data-arm]'))arm.setAttribute('transform',`rotate(${Math.sin(elapsed/480+Number(arm.dataset.arm))*4} 9 -38)`);
-   }}frame=requestAnimationFrame(tick);}
-  function reset(){stage=0;running=false;elapsed=0;zoom=1;pan={x:0,y:0};notify();render();}
+   }}schedule();}
+  function reset(){stop();stage=0;running=false;elapsed=0;zoom=1;pan={x:0,y:0};notify();render();}
   // Match the earlier canvases: Ctrl+wheel zooms around the cursor.
   const wheelHandler=event=>{
    if(mobile.matches||!event.ctrlKey||event.deltaY===0)return;
@@ -238,7 +242,7 @@
   const down=e=>{if(mobile.matches)return;drag={x:e.clientX,y:e.clientY,pan:{...pan}};svg.setPointerCapture(e.pointerId);};
   const move=e=>{if(!drag||mobile.matches)return;const ratio=700/svg.getBoundingClientRect().width/zoom;pan={x:drag.pan.x+(e.clientX-drag.x)*ratio,y:drag.pan.y+(e.clientY-drag.y)*ratio};render();};
   const up=()=>{drag=null;};svg.addEventListener('pointerdown',down);svg.addEventListener('pointermove',move);svg.addEventListener('pointerup',up);svg.addEventListener('pointercancel',up);
-  frame=requestAnimationFrame(tick);
-  return {load(value){diagram=value;reset();},play(){stage=1;elapsed=0;running=true;notify();render();},next(){if(running)advance();},reset,select(){},zoom(factor){if(mobile.matches)return;zoom=Math.max(.7,Math.min(2,zoom*factor));render();},setVisible(value){visible=value;last=0;},destroy(){host.removeEventListener("wheel",wheelHandler);cancelAnimationFrame(frame);resize.disconnect();svg.remove();}};
+  schedule();
+  return {load(value){diagram=value;reset();},play(){stage=1;elapsed=0;running=true;schedule();notify();render();},next(){if(running)advance();},reset,select(){},zoom(factor){if(mobile.matches)return;zoom=Math.max(.7,Math.min(2,zoom*factor));render();},setVisible(value){visible=value;stop();schedule();},destroy(){stop();document.removeEventListener("visibilitychange",visibility);host.removeEventListener("wheel",wheelHandler);cancelAnimationFrame(frame);resize.disconnect();svg.remove();}};
  };
 })();

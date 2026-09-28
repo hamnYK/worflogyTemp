@@ -1,3 +1,4 @@
+import {resizeArcadeRenderer} from './arcade-rendering.mjs';
 import * as THREE from '../lib/three.module.min.js';
 import {createArcadeFinish} from './arcade-finish.mjs';
 import {createTablePan} from './table-pan.mjs';
@@ -9,7 +10,7 @@ export function createTriangleTable(board,onProject,{title='TRIANGLE TERRITORY',
  const canvas=document.createElement('canvas');canvas.className='triangle-table-canvas';canvas.setAttribute('aria-hidden','true');board.prepend(canvas);
  let renderer;
  try{renderer=new THREE.WebGLRenderer({canvas,antialias:true});}catch{canvas.remove();return null;}
- renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.shadowMap.autoUpdate=false;renderer.shadowMap.needsUpdate=true;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;
+ renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.shadowMap.autoUpdate=false;renderer.shadowMap.needsUpdate=true;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;
  const scene=new THREE.Scene();scene.background=new THREE.Color(eastern?'#252f2d':'#34302d');
  const camera=new THREE.PerspectiveCamera(36,1,.1,100),geos=new Set(),mats=new Set(),textures=new Set(),finish=createArcadeFinish(renderer,scene,geos,mats,textures);
  const mat=(color,roughness=.6,metalness=0)=>finish.material({color,roughness,metalness});
@@ -48,7 +49,11 @@ export function createTriangleTable(board,onProject,{title='TRIANGLE TERRITORY',
  const defaultElevation=Math.atan2(1,.43);let azimuth=0,elevation=defaultElevation,zoom=1,baseDistance=16.5,pointer=null;
  function world(p){return new THREE.Vector3((p.x/1000-.5)*12,.072,(p.y/640-.5)*8*depthScale);}
  function project(){if(state)onProject(state.game.points.map(p=>{const q=world(p).project(camera);return{x:(q.x+1)*50,y:(1-q.y)*50,visible:q.z>=-1&&q.z<=1&&Math.abs(q.x)<=1&&Math.abs(q.y)<=1};}));}
- function view(){const radius=baseDistance*Math.hypot(1,.43)*zoom;camera.position.set(Math.sin(azimuth)*Math.cos(elevation)*radius,Math.sin(elevation)*radius,Math.cos(azimuth)*Math.cos(elevation)*radius).add(pan.offset);camera.lookAt(pan.offset);camera.updateMatrixWorld();project();dirty=true;}
+ function schedule(){if(!disposed&&!frame&&!document.hidden)frame=requestAnimationFrame(animate);}
+ function invalidate(){dirty=true;schedule();}
+ function visibility(){if(document.hidden){cancelAnimationFrame(frame);frame=0;}else if(dirty||started)schedule();}
+ document.addEventListener("visibilitychange",visibility);
+ function view(){const radius=baseDistance*Math.hypot(1,.43)*zoom;camera.position.set(Math.sin(azimuth)*Math.cos(elevation)*radius,Math.sin(elevation)*radius,Math.cos(azimuth)*Math.cos(elevation)*radius).add(pan.offset);camera.lookAt(pan.offset);camera.updateMatrixWorld();project();invalidate();}
  function control(action){if(action==='in')zoom=Math.max(.6,zoom/1.15);if(action==='out')zoom=Math.min(1.65,zoom*1.15);if(action==='left')azimuth-=.2;if(action==='right')azimuth+=.2;if(action==='home'){zoom=1;azimuth=0;elevation=defaultElevation;pan.reset();}view();}
  function down(e){
   if(pointer||e.target.closest('[data-triangle-camera]')||![0,2].includes(e.button))return;
@@ -69,11 +74,11 @@ export function createTriangleTable(board,onProject,{title='TRIANGLE TERRITORY',
   for(const {ids,owner} of (game.boxes||game.triangles)){ctx.save();ctx.beginPath();ids.forEach((id,i)=>{const p=game.points[id];ctx[i?'lineTo':'moveTo'](p.x,p.y);});ctx.closePath();ctx.clip();ctx.fillStyle=owner===0?'#208d7670':'#c66b4475';ctx.fillRect(0,0,1000,640);ctx.strokeStyle=owner===0?'#1f695b90':'#95492d90';ctx.lineWidth=.6;for(let x=-640;x<1100;x+=5){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x+(owner===0?640:-640),640);ctx.stroke();}ctx.restore();const p=ids.reduce((a,i)=>({x:a.x+game.points[i].x/ids.length,y:a.y+game.points[i].y/ids.length}),{x:0,y:0});ctx.fillStyle='#354a43';ctx.font='600 19px Georgia';ctx.textAlign='center';ctx.fillText(owner===0?'Y':'C',p.x,p.y+4);}
   game.edges.forEach(([a,b],i)=>{const p=game.points[a],q=game.points[b],f=i===game.edges.length-1?fraction:1;ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p.x+(q.x-p.x)*f,p.y+(q.y-p.y)*f);ctx.strokeStyle=i===game.edges.length-1?(eastern?'#a04d38':'#977039'):(eastern?'#303b35':'#4b4030');ctx.lineWidth=eastern?3.7:3.2;ctx.lineCap='round';ctx.stroke();});
   // Projected native dot buttons keep targets and labels crisp at every size.
-  ctx.restore();paperTexture.needsUpdate=true;dirty=true;
+  ctx.restore();paperTexture.needsUpdate=true;invalidate();
  }
- function resize(){const r=board.getBoundingClientRect();renderer.setSize(r.width,r.height,false);camera.aspect=r.width/r.height;depthScale=r.width<600?1.3:1;paperGroup.scale.z=depthScale;
+ function resize(){const r=board.getBoundingClientRect();resizeArcadeRenderer(renderer,r.width,r.height);camera.aspect=r.width/r.height;depthScale=r.width<600?1.3:1;paperGroup.scale.z=depthScale;
   renderer.shadowMap.needsUpdate=true;baseDistance=r.width<600?22:16.5;camera.updateProjectionMatrix();view();draw();}
  const ro=new ResizeObserver(resize);ro.observe(board);board.classList.add('triangle-3d');resize();
- function animate(now){if(disposed)return;if(!document.hidden){const f=Math.min(1,(now-started)/330);if(f<1||started){draw(f);if(f===1)started=0;}if(dirty){renderer.render(scene,camera);dirty=false;}}frame=requestAnimationFrame(animate);}frame=requestAnimationFrame(animate);
- return {control,sync(game,selected){const added=state&&state.game===game&&game.edges.length>edgeCount;state={game,selected};edgeCount=game.edges.length;if(added&&!matchMedia('(prefers-reduced-motion: reduce)').matches)started=performance.now();else started=0;draw(started?0:1);project();},dispose(){disposed=true;cancelAnimationFrame(frame);ro.disconnect();if(pointer)up({pointerId:pointer.id});for(const [type,fn] of [['pointerdown',down],['pointermove',move],['pointerup',up],['pointercancel',up],['lostpointercapture',up],['wheel',wheel],['contextmenu',context],['keydown',key]])board.removeEventListener(type,fn);finish.dispose();sun.shadow.dispose();geos.forEach(g=>g.dispose());mats.forEach(m=>m.dispose());textures.forEach(t=>t.dispose());renderer.dispose();renderer.forceContextLoss();canvas.remove();board.classList.remove('triangle-3d');}};
+ function animate(now){frame=0;if(disposed||document.hidden)return;if(started){const f=Math.min(1,(now-started)/330);draw(f);if(f===1)started=0;}if(dirty){renderer.render(scene,camera);dirty=false;}if(started)schedule();}schedule();
+ return {control,sync(game,selected){const added=state&&state.game===game&&game.edges.length>edgeCount;state={game,selected};edgeCount=game.edges.length;if(added&&!matchMedia('(prefers-reduced-motion: reduce)').matches)started=performance.now();else started=0;draw(started?0:1);project();},dispose(){disposed=true;document.removeEventListener("visibilitychange",visibility);cancelAnimationFrame(frame);ro.disconnect();if(pointer)up({pointerId:pointer.id});for(const [type,fn] of [['pointerdown',down],['pointermove',move],['pointerup',up],['pointercancel',up],['lostpointercapture',up],['wheel',wheel],['contextmenu',context],['keydown',key]])board.removeEventListener(type,fn);finish.dispose();sun.shadow.dispose();geos.forEach(g=>g.dispose());mats.forEach(m=>m.dispose());textures.forEach(t=>t.dispose());renderer.dispose();renderer.forceContextLoss();canvas.remove();board.classList.remove('triangle-3d');}};
 }
