@@ -139,6 +139,8 @@ function lobby(){
  const ready=!!window.WorflogyNullSector?.mount;
  dialog.querySelector('.arcade-cards').insertAdjacentHTML('beforeend','<div class="wf-card null-sector-card"><h2 class="wf-card__title" lang="en" aria-label="NULL SECTOR : PRE-DEMO"><span>NULL SECTOR</span><span class="wf-badge wf-badge--neutral null-sector-edition">PRE-DEMO</span></h2><button type="button" class="wf-button wf-button--primary arcade-null-sector-play" '+(ready?'':'disabled')+'>'+(ready?'PLAY':t('준비 중','COMING SOON'))+'</button></div>');
  dialog.querySelector('.arcade-null-sector-play').onclick=nullSectorEntry;
+ dialog.querySelector('.arcade-cards').insertAdjacentHTML('beforeend','<div class="wf-card wf-card--glass wf-card--compact claw-card"><h2 class="wf-card__title" lang="en">POCKET PLUSH</h2><button type="button" class="wf-card__action arcade-claw-play"><span aria-hidden="true">&#9654;</span> PLAY</button></div>');
+ dialog.querySelector('.arcade-claw-play').onclick=()=>start('claw');
  dialog.querySelector('.arcade-play').onclick=()=>start('football');
  dialog.querySelector('.arcade-basketball-play').onclick=()=>start('basketball');
  dialog.querySelector('.arcade-curling-play').onclick=()=>start('curling');
@@ -173,7 +175,7 @@ async function start(kind='football'){
  }
  const games=await loadFootball();
  if(generation!==gameGeneration||!dialog.open||closing)return;
- gameHandle=(kind==='boxes'?games.mountDotsAndBoxes:kind==='pebble'?games.mountPebbleTerritory:kind==='triangle'?games.mountTriangleTerritory:kind==='ping'?games.mountChalkboardPingPong:kind==='eraser'?games.mountEraserWrestling:kind==='book-flip'?games.mountBookFlip:kind==='curling'?games.mountCurling:kind==='basketball'?games.mountBasketball:games.mountFootball)(host,{onExit:lobby,onWin:lobby,english:en()});
+ gameHandle=(kind==='claw'?games.mountClawMachine:kind==='boxes'?games.mountDotsAndBoxes:kind==='pebble'?games.mountPebbleTerritory:kind==='triangle'?games.mountTriangleTerritory:kind==='ping'?games.mountChalkboardPingPong:kind==='eraser'?games.mountEraserWrestling:kind==='book-flip'?games.mountBookFlip:kind==='curling'?games.mountCurling:kind==='basketball'?games.mountBasketball:games.mountFootball)(host,{onExit:lobby,onWin:lobby,english:en()});
  }catch(error){
  if(generation!==gameGeneration||!dialog.open||closing)return;
  host.innerHTML='<p>'+t('게임을 불러오지 못했습니다.','Could not load the game.')+'</p><button type="button" class="wf-button">BACK</button>';

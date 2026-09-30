@@ -153,3 +153,5 @@ export {mountTriangleTerritory} from './triangle-territory.mjs';
 export {mountPebbleTerritory} from './pebble-territory.mjs';
 
 export {mountDotsAndBoxes} from './dots-and-boxes.mjs';
+
+export {mountClawMachine} from './claw-machine.mjs';
