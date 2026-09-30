@@ -36,6 +36,12 @@ export function plushShape(type){
  if(type==='octopus')return{center:.39,mass:.2,balls:[[0,.49,0,.34],...[0,1,2,3,4,5,6,7].map(i=>[Math.sin(i*Math.PI/4)*.35,.13,Math.cos(i*Math.PI/4)*.35,.12])]};
  return ordinary;
 }
+// Claw contacts cover the continuous sewn belly, independently of the lightweight pile shapes.
+export function plushGripBalls(type){
+ const shape=plushShape(type);
+ if(!['bunny','bear','cat'].includes(type))return shape.balls;
+ return [...[[0,.12,0,.28],[0,.30,0,.36],[0,.48,0,.325],[0,.64,0,.25],[0,.72,0,.295],[-.085,.98,0,.365],[.085,.98,0,.365],[-.32,.4,0,.135],[.32,.4,0,.135],[-.2,.12,.12,.14],[.2,.12,.12,.14]],...(type==='bunny'?shape.balls.slice(-2):[])];
+}
 export function plushInventory(){
  return Array.from({length:30},(_,i)=>({kind:i%9,s:Math.min([0,4,7].includes(i%9)?.86:1,[.62,.78,.92,1.08,1.28,.7,1.4,.86,1.02][(i*5+Math.floor(i/9)*2)%9]*.8)}));
 }
@@ -67,10 +73,19 @@ export class ClawPhysics{
    const shape=plushShape(spec.type),s=spec.s;
    const body=new C.Body({mass:shape.mass*s*s*s,material:this.fabric,linearDamping:.24,angularDamping:.34,sleepSpeedLimit:.08,sleepTimeLimit:.6,collisionFilterGroup:2});
    for(const [x,y,z,r] of shape.balls)body.addShape(new C.Sphere(r*s),V(x*s,(y-shape.center)*s,z*s));
+   if(['bunny','bear','cat'].includes(spec.type)){
+   const inertiaBeforeGrip=body.inertia.clone(),inverseBeforeGrip=body.invInertia.clone();
+   body.shapes.forEach(s=>s.collisionFilterMask&=~4);
+   for(const [x,y,z,r] of plushGripBalls(spec.type)){
+    const grip=new C.Sphere(r*s);grip.collisionFilterMask=4;
+    body.addShape(grip,V(x*s,(y-shape.center)*s,z*s));
+   }
+   body.inertia.copy(inertiaBeforeGrip);body.invInertia.copy(inverseBeforeGrip);body.updateInertiaWorld(true);
+   }
    // Detailed envelopes only contact cabinet walls; the rounded grasp/stack shapes stay unchanged.
    if(spec.wallBounds?.length){
     const inertia=body.inertia.clone(),invInertia=body.invInertia.clone();
-    body.shapes.forEach(s=>s.collisionFilterMask=~8);
+    body.shapes.forEach(s=>s.collisionFilterMask&=~8);
     for(const bounds of spec.wallBounds){
      const hull=new C.Box(V(...bounds.half.map(v=>v*s)));hull.collisionFilterMask=8;
      body.addShape(hull,V(bounds.center[0]*s,(bounds.center[1]-shape.center)*s,bounds.center[2]*s));
@@ -96,6 +111,7 @@ export class ClawPhysics{
   this.heading=0;this.aim={x:0,z:0};this.command={x:0,y:CLAW.home,z:0};
   this.anchor=new C.Body({mass:0,type:C.Body.KINEMATIC,position:V(0,CLAW.home+.24,0),collisionFilterMask:0,allowSleep:false});this.world.addBody(this.anchor);
   this.palm=new C.Body({mass:.26,material:this.rubber,position:V(0,CLAW.home,0),shape:new C.Sphere(.235),linearDamping:.2,angularDamping:.55,collisionFilterGroup:4,collisionFilterMask:11,allowSleep:false});this.world.addBody(this.palm);
+  this.palm.shapes.forEach(s=>s.collisionFilterGroup=4);
   this.suspension=new C.Spring(this.anchor,this.palm,{localAnchorB:V(0,.24,0),restLength:0,stiffness:190,damping:9});
   this.fingers=[];
   for(let i=0;i<3;i++){
@@ -109,6 +125,7 @@ export class ClawPhysics{
     body.addShape(new C.Box(V(.043,delta.length()/2,.048)),a.vadd(b).scale(.5),q);
    }
    body.addShape(new C.Sphere(.073),V(.11,-.82,0));
+   body.shapes.forEach(s=>s.collisionFilterGroup=4);
    const open=new C.Quaternion();open.setFromAxisAngle(V(0,0,1),.5);base.mult(open,body.quaternion);
    body.position.copy(this.palm.position.vadd(pivot));this.world.addBody(body);
    const hinge=new C.HingeConstraint(this.palm,body,{pivotA:pivot,pivotB:V(),axisA:base.vmult(V(0,0,1)),axisB:V(0,0,1),maxForce:150,collideConnected:false});

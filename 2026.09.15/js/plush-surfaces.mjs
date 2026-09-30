@@ -1,7 +1,7 @@
 ﻿
 import * as THREE from '../lib/three.module.min.js';
 
-// Continuous stuffed panels. Profiles stay within the existing collision shapes.
+// Continuous stuffed panels. Torso and patch contact coverage is verified by test-claw-contact.
 export function createPlushSurfaces(geos){
  function profile(points,{horizontal=false}={}){
   const curve=new THREE.CatmullRomCurve3(points.map(p=>new THREE.Vector3(...p))),samples=[];
