@@ -194,3 +194,19 @@
 .coin-arcade .null-sector-card .null-sector-edition{font-family:var(--font-body);font-size:var(--font-size-xs);font-weight:var(--font-weight-medium);line-height:var(--line-height-tight);white-space:nowrap}
 .coin-arcade .null-sector-card .arcade-null-sector-play{margin-top:auto;min-height:var(--control-height-touch);font-family:var(--font-body);font-size:var(--font-size-sm);font-weight:var(--font-weight-semibold)}
 .coin-arcade .null-sector-card .arcade-null-sector-play:focus-visible{outline:var(--focus-ring);outline-offset:var(--focus-offset)}
+
+/* Pocket Plush follows the shared arcade shell and touch controls. */
+.claw-caption{position:absolute;left:20px;top:16px;color:#eee3c9;font:600 10px var(--font-body);letter-spacing:2px;pointer-events:none}
+.claw-caption span{display:block;margin-top:6px;font-size:8px;letter-spacing:1px;opacity:.65}
+.claw-directions{display:flex;gap:6px}
+.claw-directions button{min-width:44px;touch-action:none}
+.claw-collection{display:flex;flex-wrap:wrap;gap:var(--space-2)}
+.claw-collection:empty{display:none}
+.claw-collection span{display:inline-flex;align-items:center;gap:7px;padding:6px 10px;border:1px solid var(--color-border);border-radius:var(--radius-pill);font-size:12px}
+.claw-collection span:before{content:'';width:12px;height:12px;border-radius:50%;background:var(--plush-color);box-shadow:inset 0 -2px 2px #0002}
+@media(max-width:650px){.claw-game .chip-viewport{height:400px}.claw-caption{left:12px;top:12px;font-size:8px}.claw-game .chip-controls{gap:8px}.claw-game .claw-grab{flex:1}}
+
+.claw-game .chip-camera{flex-wrap:wrap;justify-content:flex-end;max-width:calc(100% - 16px)}
+.claw-game .chip-camera button{min-width:36px}
+
+.claw-turns{display:flex;align-items:center;gap:6px;font-size:12px}.claw-turns button{padding-inline:10px}
