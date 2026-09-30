@@ -5,7 +5,7 @@ const types=['bunny','bear','cat','bear','bunny','penguin','star','seal','octopu
 const inventory=()=>plushInventory().map(p=>({...p,type:types[p.kind]}));
 assert.equal(plushInventory().length,30,'cabinet contains thirty plushies');
 const run=(sim,seconds)=>{for(let i=0;i<Math.round(seconds/CLAW.step);i++)sim.step(CLAW.step);};
-const finish=sim=>{for(let i=0;i<2400&&!['ready','done'].includes(sim.phase);i++)sim.step(CLAW.step);assert.ok(['ready','done'].includes(sim.phase),'cycle terminates');};
+const finish=sim=>{for(let i=0;i<2400&&!['ready','done','fail'].includes(sim.phase);i++)sim.step(CLAW.step);assert.ok(['ready','done','fail'].includes(sim.phase),'cycle terminates');};
 for(const seed of [31,1769,888,7]){
  const s=new ClawPhysics(inventory(),{seed});run(s,1);
  assert.ok(s.toys.every(p=>Number.isFinite(p.body.position.y)&&p.body.position.y>1&&Math.abs(p.body.position.x)<3.3&&Math.abs(p.body.position.z)<2.6),'pile remains inside cabinet');
@@ -34,7 +34,8 @@ for(const fps of [30,60]){
 }
 assert.equal(outcomes[0].score,outcomes[1].score);assert.ok(Math.abs(outcomes[0].y-outcomes[1].y)<.02,'fixed-step physics is frame-rate independent');
 const empty=new ClawPhysics([],{settleSteps:0});
-for(let i=0;i<9;i++){empty.start();run(empty,.1);empty.start();finish(empty);}
-assert.equal(empty.tries,9);assert.equal(empty.phase,'ready','no forced refill after eight tries');empty.dispose();
-console.log('PASS: stable piled shapes, size-dependent mass, physical prize, neighbor displacement, persistence, manual close, reset, 30/60 FPS consistency, unlimited tries.');
+for(let i=0;i<5;i++){empty.start();run(empty,.1);empty.start();finish(empty);}
+assert.equal(empty.tries,5);assert.equal(empty.phase,'fail');assert.equal(empty.start(),false,'a sixth attempt is forbidden');empty.reset();assert.equal(empty.phase,'ready');assert.equal(empty.tries,0);empty.dispose();
+for(const [tries,score,expected] of [[5,2,'fail'],[5,3,'done'],[3,3,'done'],[4,2,'ready']]){const s=new ClawPhysics([],{settleSteps:0});s.tries=tries;s.score=score;s.next('return');run(s,1.7);assert.equal(s.phase,expected);s.dispose();}
+console.log('PASS: stable piled shapes, size-dependent mass, physical prize, neighbor displacement, persistence, manual close, reset, 30/60 FPS consistency, five-try limit, final-attempt win, early win and retry reset.');
 

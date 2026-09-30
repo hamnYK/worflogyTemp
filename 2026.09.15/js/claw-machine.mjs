@@ -8,13 +8,13 @@ import {clawGuide,syncGuide} from './game-guides.mjs';
 import {createPlushAtelier} from './plush-atelier.mjs';
 import {ClawPhysics,plushInventory,CLAW,chuteLayout} from './claw-physics.mjs';
 
-export function mountClawMachine(host,{onExit,english=false}={}){
+export function mountClawMachine(host,{onExit,onWin=onExit,english=false}={}){
  const t=(ko,en)=>english?en:ko;
- host.innerHTML=`<div class="chip-game claw-game"><div class="chip-game-heading"><button class="wf-button claw-back" type="button">${t('게임 선택','Games')}</button><h2>POCKET PLUSH</h2><output class="chip-progress"></output></div><div class="chip-viewport"><canvas tabindex="0" aria-label="${t('인형 뽑기. 클릭 또는 터치로 틈 조준. 방향키로 위치, Q와 E로 집게 방향 조절. 스페이스로 내리고 다시 누르면 닫기.','Claw machine. Click or tap a gap. Arrow keys move, Q and E turn the claw. Space lowers; press again to close.')}"></canvas><div class="claw-caption">AFTER HOURS TOY CLUB<span>SMALL FRIENDS, BIG FEELINGS.</span></div><div class="chip-camera"><button type="button" data-camera="in" aria-label="${t('확대','Zoom in')}">+</button><button type="button" data-camera="out" aria-label="${t('축소','Zoom out')}">−</button><button type="button" data-camera="left" aria-label="${t('왼쪽 회전','Rotate left')}">↶</button><button type="button" data-camera="right" aria-label="${t('오른쪽 회전','Rotate right')}">↷</button><button type="button" data-view="front">${t('정면','Front')}</button><button type="button" data-view="top">${t('위에서','Above')}</button></div></div><div class="chip-controls"><div class="claw-directions">${[['left','←','왼쪽','Left'],['up','↑','뒤로','Back'],['down','↓','앞으로','Forward'],['right','→','오른쪽','Right']].map(([d,s,k,e])=>`<button type="button" data-move="${d}" aria-label="${t(k,e)}">${s}</button>`).join('')}</div><div class="claw-turns"><span>${t('집게 방향','Claw angle')}</span><button type="button" data-turn="-1" aria-label="${t('집게 왼쪽 회전 · Q','Turn claw left · Q')}">↶ Q</button><button type="button" data-turn="1" aria-label="${t('집게 오른쪽 회전 · E','Turn claw right · E')}">E ↷</button></div><button type="button" class="wf-button claw-grab">${t('집기 · SPACE','GRAB · SPACE')}</button><button type="button" class="wf-button claw-reset">${t('새로 채우기','Refill')}</button></div><p class="chip-status" role="status" aria-live="polite"></p><div class="claw-collection" aria-label="${t('모은 인형','Collected plushies')}"></div></div>`;
- const root=host.firstElementChild,canvas=root.querySelector('canvas'),status=root.querySelector('.chip-status'),progress=root.querySelector('output'),grab=root.querySelector('.claw-grab'),collection=root.querySelector('.claw-collection');
+ host.innerHTML=`<div class="chip-game claw-game"><div class="chip-game-heading"><button class="wf-button claw-back" type="button">${t('게임 선택','Games')}</button><h2>POCKET PLUSH</h2><output class="chip-progress"></output></div><div class="chip-viewport"><canvas tabindex="0" aria-label="${t('인형 뽑기. 키보드 전용. 5회 안에 친구 3개. 방향키로 위치, Q와 E로 집게 방향 조절. 스페이스로 내리고 다시 누르면 닫기.','Claw machine. Keyboard only. Collect 3 friends in 5 tries. Arrow keys move, Q and E turn the claw. Space lowers; press again to close.')}"></canvas><div class="chip-result" aria-hidden="true"></div><div class="claw-caption">AFTER HOURS TOY CLUB<span>SMALL FRIENDS, BIG FEELINGS.</span></div><div class="chip-camera"><button type="button" data-camera="in" aria-label="${t('확대','Zoom in')}">+</button><button type="button" data-camera="out" aria-label="${t('축소','Zoom out')}">−</button><button type="button" data-camera="left" aria-label="${t('왼쪽 회전','Rotate left')}">↶</button><button type="button" data-camera="right" aria-label="${t('오른쪽 회전','Rotate right')}">↷</button><button type="button" data-view="front">${t('정면','Front')}</button><button type="button" data-view="top">${t('위에서','Above')}</button></div></div><div class="chip-controls claw-keyboard"><span><kbd>↑ ↓ ← →</kbd> ${t('이동','Move')}</span><span><kbd>Q / E</kbd> ${t('집게 회전','Turn claw')}</span><span><kbd>SPACE</kbd> ${t('내리기 / 닫기','Lower / close')}</span></div><p class="chip-status" role="status" aria-live="polite"></p><div class="claw-collection" aria-label="${t('모은 인형','Collected plushies')}"></div></div>`;
+ const root=host.firstElementChild,canvas=root.querySelector('canvas'),status=root.querySelector('.chip-status'),progress=root.querySelector('output'),result=root.querySelector('.chip-result'),collection=root.querySelector('.claw-collection');
  root.querySelector('.claw-back').onclick=onExit;
  let renderer;
- try{renderer=new THREE.WebGLRenderer({canvas,antialias:true});}catch{status.textContent=t('3D 화면을 시작할 수 없습니다. 하드웨어 가속을 확인해 주세요.','Unable to start 3D. Please check hardware acceleration.');grab.disabled=true;return{dispose(){}};}
+ try{renderer=new THREE.WebGLRenderer({canvas,antialias:true});}catch{status.textContent=t('3D 화면을 시작할 수 없습니다. 하드웨어 가속을 확인해 주세요.','Unable to start 3D. Please check hardware acceleration.');return{dispose(){}};}
  renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.04;
  const scene=new THREE.Scene();scene.background=new THREE.Color('#233b43');scene.fog=new THREE.Fog('#233b43',24,55);
  const camera=new THREE.PerspectiveCamera(36,1,.1,80),geos=new Set(),mats=new Set(),textures=new Set();
@@ -161,29 +161,21 @@ export function mountClawMachine(host,{onExit,english=false}={}){
  const simulation=new ClawPhysics(inventory.map((p,i)=>({...p,type:kinds[p.kind].type,wallBounds:plushes[i].art.wallBounds})),{seed:Math.floor(Math.random()*1000000)});
  plushes.forEach((p,i)=>p.physics=simulation.toys[i]);
  const fingerVisuals=fingers.map(f=>{const g=new THREE.Group();f.parent.remove(f);f.position.set(-.18,.07,0);g.add(f);scene.add(g);return g;});
- let phase=simulation.phase,tries=0,score=0,disposed=false,frame,last=performance.now(),heldKey=null,best=0,attemptResult='';
+ let phase=simulation.phase,tries=0,score=0,disposed=false,frame,last=performance.now(),heldKey=null,best=0,attemptResult='',resultTimer=null;
  const pan=createTablePan(camera,canvas),pointers=new Map();
  let azimuth=Math.atan2(6.5,14.8),elevation=Math.atan2(6.1,Math.hypot(6.5,14.8)),distance=Math.hypot(6.5,6.1,14.8),targetY=3.05,gesture=null,aimed=false;
  const aim={x:0,z:0},reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
  try{best=Math.max(0,Math.min(3,Number(localStorage.getItem('worflogy-plush-physics-best'))||0));}catch{}
  function refresh(){
   root.dataset.phase=phase;root.dataset.caught=score;root.dataset.attempt=tries;
-  progress.textContent=t('친구 ','FRIENDS ')+score+'/3 · '+t('시도 ','TRIES ')+tries+t('회 · ',' · ')+t('최고 ','BEST ')+best;
-  grab.disabled=!['ready','down'].includes(phase);grab.textContent=phase==='down'?t('지금 닫기 · SPACE','CLOSE NOW · SPACE'):t('집기 · SPACE','GRAB · SPACE');root.querySelectorAll('[data-move],[data-turn]').forEach(b=>b.disabled=phase!=='ready');
+  progress.textContent=t('친구 ','FRIENDS ')+score+'/3 · '+t('시도 ','TRIES ')+tries+'/5 · '+t('최고 ','BEST ')+best;
+
  }
  function guide(){syncGuide(status,clawGuide({phase,tries,score,holding:simulation.holding},t,{mode:[...pointers.values()].some(p=>p.moved),aimed,result:attemptResult}));}
  function readyText(){guide();}
  function setAim(x,z){if(phase!=='ready')return;simulation.setAim(x,z);aim.x=simulation.aim.x;aim.z=simulation.aim.z;aimed=true;guide();}
  function grabToy(){if(simulation.start()){heldKey=null;phase=simulation.phase;tries=simulation.tries;attemptResult='';refresh();guide();}}
- grab.onclick=grabToy;
- const ray=new THREE.Raycaster(),plane=new THREE.Plane(new THREE.Vector3(0,1,0),-1.57),point=new THREE.Vector3();
- function pointAim(event){
-  if(phase!=='ready')return;
-  const r=canvas.getBoundingClientRect();ray.setFromCamera(new THREE.Vector2((event.clientX-r.left)/r.width*2-1,-(event.clientY-r.top)/r.height*2+1),camera);
-  const hits=ray.intersectObjects(plushes.filter(p=>!p.caught).map(p=>p.g),true);
-  if(hits.length){let object=hits[0].object;while(object.parent!==scene)object=object.parent;const p=plushes.find(p=>p.g===object);if(p)setAim(hits[0].point.x,hits[0].point.z);}
-  else if(ray.ray.intersectPlane(plane,point))setAim(point.x,point.z);
- }
+
  function touchPair(){const a=[...pointers.values()];if(a.length<2)return null;const [p,q]=a;return{x:(p.x+q.x)/2,y:(p.y+q.y)/2,d:Math.max(1,Math.hypot(p.x-q.x,p.y-q.y)),angle:Math.atan2(q.y-p.y,q.x-p.x)};}
  function zoom(factor){distance=THREE.MathUtils.clamp(distance*factor,7,32);view();}
  canvas.oncontextmenu=e=>e.preventDefault();
@@ -209,7 +201,7 @@ export function mountClawMachine(host,{onExit,english=false}={}){
  };
  function releasePointer(e,cancelled=false){
   const p=pointers.get(e.pointerId);if(!p)return;
-  if(!cancelled&&!p.moved&&p.button===0)pointAim(e);
+
   pointers.delete(e.pointerId);gesture=null;
   if(canvas.hasPointerCapture(e.pointerId))canvas.releasePointerCapture(e.pointerId);
  }
@@ -219,12 +211,6 @@ export function mountClawMachine(host,{onExit,english=false}={}){
  canvas.addEventListener('wheel',wheel,{passive:false});
  const move=(direction,delta=.075)=>{setAim(aim.x+(direction==='left'?-delta:direction==='right'?delta:0),aim.z+(direction==='up'?-delta:direction==='down'?delta:0));};
  canvas.onkeydown=e=>{if(['+','=','-'].includes(e.key)){e.preventDefault();zoom(e.key==='-'?1.12:1/1.12);return;}if(pointers.size)return;if(['q','e'].includes(e.key.toLowerCase())){e.preventDefault();simulation.twist(e.key.toLowerCase()==='q'?-.2:.2);return;}const d={ArrowLeft:'left',ArrowRight:'right',ArrowUp:'up',ArrowDown:'down'}[e.key];if(d){e.preventDefault();move(d);}if(e.code==='Space'){e.preventDefault();if(!e.repeat)grabToy();}};
- for(const b of root.querySelectorAll('[data-move]')){
-  b.onpointerdown=e=>{e.preventDefault();heldKey=b.dataset.move;move(heldKey);b.setPointerCapture(e.pointerId);};
-  b.onpointerup=b.onpointercancel=b.onlostpointercapture=()=>{heldKey=null;};
-  b.onclick=e=>{if(e.detail===0)move(b.dataset.move);};
- }
- root.querySelectorAll('[data-turn]').forEach(b=>b.onclick=()=>simulation.twist(Number(b.dataset.turn)*.2));
  function view(){
   const d=distance*Math.max(1,.92/camera.aspect);
   roof.forEach(o=>o.visible=elevation<.85);
@@ -240,14 +226,16 @@ export function mountClawMachine(host,{onExit,english=false}={}){
   const action=b.dataset.camera;if(action==='in')zoom(1/1.15);if(action==='out')zoom(1.15);
   if(action==='left')azimuth-=.2;if(action==='right')azimuth+=.2;view();
  });
+ root.querySelectorAll('[data-view],[data-camera]').forEach(b=>b.addEventListener('click',()=>canvas.focus({preventScroll:true})));
  function resize(){const r=canvas.parentElement.getBoundingClientRect();resizeArcadeRenderer(renderer,r.width,r.height);camera.aspect=Math.max(1,r.width)/Math.max(1,r.height);camera.updateProjectionMatrix();view();}
  const ro=new ResizeObserver(resize);ro.observe(canvas.parentElement);
  function refill(reset=true){
+  clearTimeout(resultTimer);resultTimer=null;result.classList.remove('show');
   if(reset)simulation.reset();
   plushes.forEach((p,i)=>{p.physics=simulation.toys[i];p.g.visible=true;p.shadow.visible=true;p.compression=0;});
-  phase=simulation.phase;tries=score=0;attemptResult='';aimed=false;heldKey=null;aim.x=aim.z=0;collection.replaceChildren();refresh();guide();
+  phase=simulation.phase;tries=score=0;attemptResult='';aimed=false;heldKey=null;aim.x=aim.z=0;collection.replaceChildren();refresh();guide();canvas.focus({preventScroll:true});
  }
- root.querySelector('.claw-reset').onclick=()=>refill();
+
  const offset=new THREE.Vector3(),cableStart=new THREE.Vector3(),cableEnd=new THREE.Vector3(),cableDirection=new THREE.Vector3(),up=new THREE.Vector3(0,1,0);
  function tick(now){
   if(disposed)return;const dt=Math.min((now-last)/1000,.05);last=now;
@@ -262,7 +250,13 @@ export function mountClawMachine(host,{onExit,english=false}={}){
    const badge=document.createElement('span');badge.style.setProperty('--plush-color',kinds[toy.kind].color);
    badge.textContent=kinds[toy.kind].name+' · '+(toy.s<.8?'S':toy.s<1.1?'M':'L');collection.append(badge);
   }
-  if(changed)refresh();
+  if(changed){
+   refresh();
+   if((phase==='done'||phase==='fail')&&resultTimer===null){
+    result.textContent=phase==='done'?'FRIENDS FOUND!':'TRY AGAIN';result.classList.add('show');
+    resultTimer=setTimeout(()=>{resultTimer=null;if(disposed)return;if(phase==='done')onWin?.();else refill();},3000);
+   }
+  }
   claw.position.copy(simulation.palm.position);claw.quaternion.copy(simulation.palm.quaternion);
   fingerVisuals.forEach((g,i)=>{g.position.copy(simulation.fingers[i].body.position);g.quaternion.copy(simulation.fingers[i].body.quaternion);});
   carriage.position.z=simulation.command.z;trolley.position.set(simulation.command.x,0,simulation.command.z);
@@ -301,6 +295,6 @@ export function mountClawMachine(host,{onExit,english=false}={}){
   guide();renderer.render(scene,camera);frame=requestAnimationFrame(tick);
  }
  refill(false);resize();frame=requestAnimationFrame(tick);
- return{dispose(){if(disposed)return;disposed=true;cancelAnimationFrame(frame);ro.disconnect();simulation.dispose();heldKey=null;pointers.clear();canvas.removeEventListener('wheel',wheel);scene.traverse(o=>{if(o.isInstancedMesh)o.dispose();});finish.dispose();geos.forEach(g=>g.dispose());mats.forEach(m=>m.dispose());textures.forEach(t=>t.dispose());sun.shadow.map?.dispose();renderer.dispose();renderer.forceContextLoss();}};
+ return{dispose(){if(disposed)return;disposed=true;clearTimeout(resultTimer);cancelAnimationFrame(frame);ro.disconnect();simulation.dispose();heldKey=null;pointers.clear();canvas.removeEventListener('wheel',wheel);scene.traverse(o=>{if(o.isInstancedMesh)o.dispose();});finish.dispose();geos.forEach(g=>g.dispose());mats.forEach(m=>m.dispose());textures.forEach(t=>t.dispose());sun.shadow.map?.dispose();renderer.dispose();renderer.forceContextLoss();}};
 }
 

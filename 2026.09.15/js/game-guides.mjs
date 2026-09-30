@@ -75,8 +75,9 @@ export function pingPongGuide(g,t,{mode,notice='',noticeUntil=0}={}){
 ﻿
 ﻿
 export function clawGuide(g,t,{mode,aimed=false,result=''}={}){
- if(g.phase==='done')return t('인형 3개 수집 완료! 새로 채우기로 다른 더미에 도전하세요.','Three prizes collected! Refill for a different pile.');
- if(g.phase==='down')return t('내려가는 중 · Space 또는 지금 닫기로 집게를 닫을 높이를 정하세요. 끝까지 내리면 닿은 위치에서 자동으로 닫힙니다.','Descending · Press Space or Close now to choose the gripping height. Otherwise the claw closes when it reaches the pile or bed.');
+ if(g.phase==='done')return t('친구 3개 수집 성공! 3초 후 로비로 돌아갑니다.','Three friends collected! Returning to the lobby in 3 seconds.');
+ if(g.phase==='fail')return t('5회의 기회를 모두 사용했습니다. 3초 후 다시 도전합니다.','All 5 tries used. Restarting in 3 seconds.');
+ if(g.phase==='down')return t('내려가는 중 · Space로 집게를 닫을 높이를 정하세요. 끝까지 내리면 닿은 위치에서 자동으로 닫힙니다.','Descending · Press Space to choose the gripping height. Otherwise the claw closes when it reaches the pile or bed.');
  if(g.phase==='grip')return t('집게가 닫히는 중입니다. 인형에 막힌 발은 더 닫히지 않습니다. 틈으로 들어간 발이 몸통 아래를 받쳐야 잘 들립니다.','Closing with limited force. Blocked fingers cannot close farther; fingers under the body give better support.');
  if(g.phase==='lift')return g.holding?t('들어 올리는 중 · 무게와 마찰로 버티고 있습니다. 한쪽만 걸리면 돌거나 빠질 수 있습니다.','Lifting · Weight and friction determine the grip. An uneven hold may twist or slip.'):t('들어 올리는 중 · 집게와 함께 올라오는 인형이 있는지 확인하세요. 주변 인형이 눌러 막을 수도 있습니다.','Lifting · Watch whether a plush rises with the claw. Neighbors can pin it down.');
  if(g.phase==='carry')return g.holding?t('배출구로 운반 중 · 흔들림에 버텨야 합니다. 배출구 안으로 떨어져야 수집됩니다.','Carrying · The grip must withstand the sway. Only a drop through the chute counts.'):t('배출구로 이동 중입니다. 집게에서 빠진 인형은 더미에 남으며 다음 시도에서 다시 노릴 수 있습니다.','Moving to the chute. Slipped plushies stay in the pile for the next attempt.');
@@ -85,6 +86,6 @@ export function clawGuide(g,t,{mode,aimed=false,result=''}={}){
  if(g.phase!=='ready')return null;
  if(mode)return t('시야 조정 중 · 위에서 보며 인형 사이 틈을 찾으세요. 오른쪽 드래그로 회전, 휠·두 손가락으로 확대·축소합니다.','Adjusting the view · Look from above for gaps. Right-drag to rotate; scroll or pinch to zoom.');
  if(aimed)return t('방향키로 위치, Q/E로 집게 발 방향 조절 → Space로 내리기 → 다시 누르면 그 높이에서 닫기. 큰 인형·묻힌 인형은 들기 어렵습니다.','Arrows adjust position; Q/E turns the claw. Space lowers; press again to close at that height. Large or buried plushies are harder to lift.');
- return (result==='caught'?t('수집 성공! ','Collected! '):result==='slipped'?t('들어 올렸지만 놓쳤습니다. ','Lifted, but lost the grip. '):result==='blocked'?t('틈이 부족해 인형을 받치지 못했습니다. ','Not enough room to support a plush. '):'')+t('틈을 클릭·터치해 조준하세요. Q/E로 집게 회전, Space로 내리고 다시 눌러 닫기. 더미는 다음 시도에도 유지됩니다. 목표 3개.','Click or tap a gap. Q/E turns the claw; Space lowers and closes. Changes to the pile persist between tries. Target: 3 prizes.');
+ return (result==='caught'?t('수집 성공! ','Collected! '):result==='slipped'?t('들어 올렸지만 놓쳤습니다. ','Lifted, but lost the grip. '):result==='blocked'?t('틈이 부족해 인형을 받치지 못했습니다. ','Not enough room to support a plush. '):'')+t('방향키로 이동, Q/E로 집게 회전, Space로 내리고 다시 눌러 닫기. 5회 안에 친구 3개를 모으세요.','Arrow keys move; Q/E turns the claw; Space lowers and closes. Collect 3 friends in 5 tries.');
 }
 

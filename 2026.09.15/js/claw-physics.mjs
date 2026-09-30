@@ -1,7 +1,7 @@
 
 import * as C from '../lib/cannon-es.mjs';
 
-export const CLAW={step:1/120,bed:1.52,home:5.13,chute:{x:-1.85,z:1.15,half:.85,mouth:.95},target:3};
+export const CLAW={step:1/120,bed:1.52,home:5.13,chute:{x:-1.85,z:1.15,half:.85,mouth:.95},target:3,attempts:5};
 
 export function chuteLayout(){
  const {x,z,half:h,mouth:m}=CLAW.chute,left=x-m,right=x+m,back=z-m,front=z+m;
@@ -120,7 +120,7 @@ export class ClawPhysics{
  setAim(x,z){if(this.phase!=='ready')return;this.aim.x=clamp(x,-2.45,2.45);this.aim.z=clamp(z,-1.65,1.75);}
  start(){
   if(this.phase==='down'){this.next('grip');return true;}
-  if(this.phase!=='ready')return false;
+  if(this.phase!=='ready'||this.tries>=CLAW.attempts)return false;
   this.tries++;this.result='';this.everLifted=false;this.touched=false;this.obstructed=0;
   this.toys.forEach(p=>{p.startY=p.body.position.y;p.peak=p.startY;});
   this.next('down');return true;
@@ -155,7 +155,7 @@ export class ClawPhysics{
   }else if(this.phase==='release'){if(this.elapsed>2.4)this.next('return');}
   else if(this.phase==='return'){
    const f=smooth(this.elapsed/1.6);c.x=this.from.x*(1-f);c.z=this.from.z*(1-f);c.y=this.from.y+(CLAW.home-this.from.y)*f;
-   if(this.elapsed>=1.6){this.aim.x=this.aim.z=0;this.next(this.score>=CLAW.target?'done':'ready');}
+   if(this.elapsed>=1.6){this.aim.x=this.aim.z=0;this.next(this.score>=CLAW.target?'done':this.tries>=CLAW.attempts?'fail':'ready');}
   }
   this.anchor.velocity.set((c.x-this.anchor.position.x)/dt,(c.y+.24-this.anchor.position.y)/dt,(c.z-this.anchor.position.z)/dt);
   const closing=['grip','lift','carry'].includes(this.phase),target=closing?-.3:.52;
