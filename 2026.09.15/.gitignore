@@ -1,9 +1,12 @@
 # Regenerable build/deploy staging and generated QA screenshots
 /tmp/
 /output/*.png
+/output/**/*.png
 
 /output/*.log
+/output/**/*.log
 /output/*.json
+/output/**/*.json
 
 # Generated NULL SECTOR artifacts; source lives in the external development folder.
 /ns/
