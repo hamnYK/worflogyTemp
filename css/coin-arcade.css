@@ -210,3 +210,44 @@
 .claw-game .chip-camera button{min-width:36px}
 
 .claw-turns{display:flex;align-items:center;gap:6px;font-size:12px}.claw-turns button{padding-inline:10px}
+
+/* Touch actions are real buttons; desktop keyboard and direct dragging remain available. */
+.arcade-touch-controls{display:none}
+.arcade-touch-pad{display:grid;grid-template-columns:repeat(3,var(--control-height-touch));gap:var(--space-1)}
+.arcade-touch-pad [data-move="up"]{grid-column:2}
+.arcade-touch-pad [data-move="left"]{grid-column:1;grid-row:2}
+.arcade-touch-pad [data-move="down"]{grid-column:2;grid-row:2}
+.arcade-touch-pad [data-move="right"]{grid-column:3;grid-row:2}
+.coin-arcade .arcade-touch-pad button,.coin-arcade [data-aim],.coin-arcade [data-turn]{touch-action:none;user-select:none;min-width:var(--control-height-touch);padding:var(--space-1)}
+.coin-arcade .chip-game button.is-held{background:var(--color-surface-hover);border-color:var(--color-action);color:var(--color-action)}
+.claw-actions{display:flex;flex-direction:column;gap:var(--space-2);flex:1;min-width:0}
+.claw-turns{justify-content:space-between}
+.arcade-point-picker label{display:flex;align-items:center;gap:var(--space-2);font-size:var(--font-size-sm)}
+.arcade-point-picker select{width:76px;min-height:var(--control-height-touch)}
+@media(max-width:760px),(pointer:coarse){
+ .arcade-touch-controls{display:flex;align-items:center;gap:var(--space-2);flex-wrap:wrap}
+ .claw-touch,.book-touch,.ping-touch,.arcade-point-picker{margin-top:var(--space-3)}
+ .claw-touch{align-items:stretch}
+ .claw-keyboard{display:none}
+ .football-aim{gap:var(--space-1)}
+ .book-touch,.arcade-point-picker{justify-content:space-between}
+ .coin-arcade .chip-camera{flex-wrap:wrap;max-width:calc(100% - 16px)}
+ .coin-arcade .chip-camera button,.coin-arcade .chip-picks button{min-width:var(--control-height-touch);min-height:var(--control-height-touch)}
+ .coin-arcade .chip-controls input[type="range"]{height:var(--control-height-touch);margin-block:0}
+ .coin-arcade .chip-controls label{min-height:var(--control-height-touch)}
+ .coin-arcade .chip-game button:not(.triangle-dot){min-width:var(--control-height-touch)}
+ .coin-arcade .chip-game h2{overflow-wrap:anywhere;min-width:0;max-width:100%}
+ .coin-arcade .chip-progress{max-width:100%;overflow-wrap:anywhere}
+ .coin-arcade .ping-rally{flex-basis:100%}
+ .coin-arcade .ping-smash{font-size:var(--font-size-sm)}
+}
+@media(max-width:760px){
+ .coin-arcade.arcade-playing .arcade-close{position:absolute;left:auto;right:0;top:0;bottom:auto;transform:none;width:var(--space-16);min-height:var(--space-16)}
+ .coin-arcade.arcade-playing .arcade-header{padding-left:0;padding-right:calc(var(--space-16) + var(--space-3));min-height:var(--space-16);text-align:left;justify-content:flex-start}
+ .coin-arcade.arcade-playing .arcade-shell{padding-bottom:calc(var(--space-4) + env(safe-area-inset-bottom,0px))}
+ .coin-arcade.arcade-playing .arcade-content{padding-top:var(--space-4)}
+ .null-sector-player-bar{flex-wrap:wrap;gap:var(--space-1);padding:var(--space-2)}
+ .null-sector-player-bar strong{font-size:var(--font-size-ui)}
+ .null-sector-player-bar button{min-height:var(--control-height-touch)}
+ .coin-arcade.null-sector-active .arcade-shell{padding:0}
+}
