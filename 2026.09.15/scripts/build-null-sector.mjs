@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
+import {adaptNullSectorMobile} from './adapt-null-sector-mobile.mjs';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 export function buildNullSector(){
@@ -41,6 +42,7 @@ export function buildNullSector(){
  console.error('Building NULL SECTOR from: '+source);
  npm(['ci','--include=dev','--no-audit','--no-fund']);
  npm(['run','build']);
+ adaptNullSectorMobile(work);
  for(const entry of ['dist/index.html','dist/design-system.html','local/index.html','local/design-system.html']){
   if(!fs.existsSync(path.join(work,entry)))throw new Error('Missing NULL SECTOR build entry: '+entry);
  }

@@ -1,3 +1,4 @@
+import {directionPad,holdButton} from './touch-controls.mjs';
 import {batchPlushParts} from './plush-batching.mjs';
 ﻿
 import * as THREE from '../lib/three.module.min.js';
@@ -10,7 +11,7 @@ import {ClawPhysics,plushInventory,CLAW,chuteLayout} from './claw-physics.mjs';
 
 export function mountClawMachine(host,{onExit,onWin=onExit,english=false}={}){
  const t=(ko,en)=>english?en:ko;
- host.innerHTML=`<div class="chip-game claw-game"><div class="chip-game-heading"><button class="wf-button claw-back" type="button">${t('게임 선택','Games')}</button><h2>POCKET PLUSH</h2><output class="chip-progress"></output></div><div class="chip-viewport"><canvas tabindex="0" aria-label="${t('인형 뽑기. 키보드 전용. 5회 안에 친구 3개. 방향키로 위치, Q와 E로 집게 방향 조절. 스페이스로 내리고 다시 누르면 닫기.','Claw machine. Keyboard only. Collect 3 friends in 5 tries. Arrow keys move, Q and E turn the claw. Space lowers; press again to close.')}"></canvas><div class="chip-result" aria-hidden="true"></div><div class="claw-caption">AFTER HOURS TOY CLUB<span>SMALL FRIENDS, BIG FEELINGS.</span></div><div class="chip-camera"><button type="button" data-camera="in" aria-label="${t('확대','Zoom in')}">+</button><button type="button" data-camera="out" aria-label="${t('축소','Zoom out')}">−</button><button type="button" data-camera="left" aria-label="${t('왼쪽 회전','Rotate left')}">↶</button><button type="button" data-camera="right" aria-label="${t('오른쪽 회전','Rotate right')}">↷</button><button type="button" data-view="front">${t('정면','Front')}</button><button type="button" data-view="top">${t('위에서','Above')}</button></div></div><div class="chip-controls claw-keyboard"><span><kbd>↑ ↓ ← →</kbd> ${t('이동','Move')}</span><span><kbd>Q / E</kbd> ${t('집게 회전','Turn claw')}</span><span><kbd>SPACE</kbd> ${t('내리기 / 닫기','Lower / close')}</span></div><p class="chip-status" role="status" aria-live="polite"></p><div class="claw-collection" aria-label="${t('모은 인형','Collected plushies')}"></div></div>`;
+ host.innerHTML=`<div class="chip-game claw-game"><div class="chip-game-heading"><button class="wf-button claw-back" type="button">${t('게임 선택','Games')}</button><h2>POCKET PLUSH</h2><output class="chip-progress"></output></div><div class="chip-viewport"><canvas tabindex="0" aria-label="${t('인형 뽑기. 화면 버튼 또는 키보드로 조작. 5회 안에 친구 3개. 방향키로 위치, Q와 E로 집게 방향 조절. 스페이스로 내리고 다시 누르면 닫기.','Claw machine. Use the on-screen buttons or keyboard. Collect 3 friends in 5 tries. Arrow keys move, Q and E turn the claw. Space lowers; press again to close.')}"></canvas><div class="chip-result" aria-hidden="true"></div><div class="claw-caption">AFTER HOURS TOY CLUB<span>SMALL FRIENDS, BIG FEELINGS.</span></div><div class="chip-camera"><button type="button" data-camera="in" aria-label="${t('확대','Zoom in')}">+</button><button type="button" data-camera="out" aria-label="${t('축소','Zoom out')}">−</button><button type="button" data-camera="left" aria-label="${t('왼쪽 회전','Rotate left')}">↶</button><button type="button" data-camera="right" aria-label="${t('오른쪽 회전','Rotate right')}">↷</button><button type="button" data-view="front">${t('정면','Front')}</button><button type="button" data-view="top">${t('위에서','Above')}</button></div></div><div class="arcade-touch-controls claw-touch"><div class="claw-movement"></div><div class="claw-actions"><div class="claw-turns"><button type="button" class="wf-button" data-turn="left" aria-label="${t('집게 왼쪽 회전','Turn claw left')}">↶</button><span>${t('집게 회전','Turn claw')}</span><button type="button" class="wf-button" data-turn="right" aria-label="${t('집게 오른쪽 회전','Turn claw right')}">↷</button></div><button type="button" class="wf-button claw-grab">${t('내리기','Lower')}</button></div></div><div class="chip-controls claw-keyboard"><span><kbd>↑ ↓ ← →</kbd> ${t('이동','Move')}</span><span><kbd>Q / E</kbd> ${t('집게 회전','Turn claw')}</span><span><kbd>SPACE</kbd> ${t('내리기 / 닫기','Lower / close')}</span></div><p class="chip-status" role="status" aria-live="polite"></p><div class="claw-collection" aria-label="${t('모은 인형','Collected plushies')}"></div></div>`;
  const root=host.firstElementChild,canvas=root.querySelector('canvas'),status=root.querySelector('.chip-status'),progress=root.querySelector('output'),result=root.querySelector('.chip-result'),collection=root.querySelector('.claw-collection');
  root.querySelector('.claw-back').onclick=onExit;
  let renderer;
@@ -167,6 +168,9 @@ export function mountClawMachine(host,{onExit,onWin=onExit,english=false}={}){
  const aim={x:0,z:0},reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
  try{best=Math.max(0,Math.min(3,Number(localStorage.getItem('worflogy-plush-physics-best'))||0));}catch{}
  function refresh(){
+  touchPad?.sync();
+  root.querySelectorAll('[data-turn]').forEach(b=>b.disabled=phase!=='ready');
+  const grab=root.querySelector('.claw-grab');grab.disabled=!['ready','down'].includes(phase);grab.textContent=phase==='down'?t('지금 닫기','Close now'):t('내리기','Lower');
   root.dataset.phase=phase;root.dataset.caught=score;root.dataset.attempt=tries;
   progress.textContent=t('친구 ','FRIENDS ')+score+'/3 · '+t('시도 ','TRIES ')+tries+'/5 · '+t('최고 ','BEST ')+best;
 
@@ -210,6 +214,9 @@ export function mountClawMachine(host,{onExit,onWin=onExit,english=false}={}){
  const wheel=e=>{e.preventDefault();zoom(Math.exp(THREE.MathUtils.clamp(e.deltaY,-500,500)*.001));};
  canvas.addEventListener('wheel',wheel,{passive:false});
  const move=(direction,delta=.075)=>{setAim(aim.x+(direction==='left'?-delta:direction==='right'?delta:0),aim.z+(direction==='up'?-delta:direction==='down'?delta:0));};
+ const touchPad=directionPad(root.querySelector('.claw-movement'),{t,label:t('집게 이동','Move claw'),onMove:d=>move(d,.12),enabled:()=>phase==='ready'&&!pointers.size});
+ const turnBindings=[...root.querySelectorAll('[data-turn]')].map(b=>holdButton(b,()=>simulation.twist(b.dataset.turn==='left'?-.12:.12),{enabled:()=>phase==='ready'}));
+ root.querySelector('.claw-grab').onclick=grabToy;
  canvas.onkeydown=e=>{if(['+','=','-'].includes(e.key)){e.preventDefault();zoom(e.key==='-'?1.12:1/1.12);return;}if(pointers.size)return;if(['q','e'].includes(e.key.toLowerCase())){e.preventDefault();simulation.twist(e.key.toLowerCase()==='q'?-.2:.2);return;}const d={ArrowLeft:'left',ArrowRight:'right',ArrowUp:'up',ArrowDown:'down'}[e.key];if(d){e.preventDefault();move(d);}if(e.code==='Space'){e.preventDefault();if(!e.repeat)grabToy();}};
  function view(){
   const d=distance*Math.max(1,.92/camera.aspect);
@@ -295,6 +302,6 @@ export function mountClawMachine(host,{onExit,onWin=onExit,english=false}={}){
   guide();renderer.render(scene,camera);frame=requestAnimationFrame(tick);
  }
  refill(false);resize();frame=requestAnimationFrame(tick);
- return{dispose(){if(disposed)return;disposed=true;clearTimeout(resultTimer);cancelAnimationFrame(frame);ro.disconnect();simulation.dispose();heldKey=null;pointers.clear();canvas.removeEventListener('wheel',wheel);scene.traverse(o=>{if(o.isInstancedMesh)o.dispose();});finish.dispose();geos.forEach(g=>g.dispose());mats.forEach(m=>m.dispose());textures.forEach(t=>t.dispose());sun.shadow.map?.dispose();renderer.dispose();renderer.forceContextLoss();}};
+ return{dispose(){if(disposed)return;disposed=true;touchPad.dispose();turnBindings.forEach(b=>b.dispose());clearTimeout(resultTimer);cancelAnimationFrame(frame);ro.disconnect();simulation.dispose();heldKey=null;pointers.clear();canvas.removeEventListener('wheel',wheel);scene.traverse(o=>{if(o.isInstancedMesh)o.dispose();});finish.dispose();geos.forEach(g=>g.dispose());mats.forEach(m=>m.dispose());textures.forEach(t=>t.dispose());sun.shadow.map?.dispose();renderer.dispose();renderer.forceContextLoss();}};
 }
 

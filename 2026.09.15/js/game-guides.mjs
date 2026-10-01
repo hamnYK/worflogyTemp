@@ -1,5 +1,7 @@
 // State-derived guidance: never announce a completed action while another is moving.
+const touchControls=()=>typeof matchMedia==='function'&&matchMedia('(max-width:760px), (pointer:coarse)').matches;
 export function footballGuide(g,t,dragging=false){
+ if(touchControls()&&g.phase==='ready')return t('칩 번호 선택 → 조준 버튼과 힘 슬라이더 조절 → 발사. 칩을 직접 당겼다 놓아도 됩니다. 세 칩 모두 다른 두 칩 사이로 통과한 뒤 슈팅하세요.','Select a chip number, adjust the aim buttons and power slider, then Launch. You can also pull and release a chip. Pass all three through the gap before shooting.');
  if(g.phase==='breaking')return t('칩을 펼치는 중입니다. 모두 멈추면 시작합니다. 이 동작은 횟수·충돌 실패에서 제외됩니다.','Spreading the chips. Wait until they stop. This opening is uncounted and allows collisions.');
  if(g.phase==='moving')return g.crossed
  ?t('두 칩 사이를 통과했습니다. 아직 이동 중이니 결과를 기다리세요.','Gap crossed. The chip is still moving; wait for the result.')
@@ -33,6 +35,7 @@ export function basketballResult(g,t){
  return (reasons[g.result]||t('이번 시도는 실패입니다.','Attempt missed.'))+t(' 이번 기회는 0점입니다. ',' This attempt scores zero. ');
 }
 export function curlingGuide(g,t,dragging=false,spin=0){
+ if(touchControls()&&g.phase==='ready'&&!dragging)return (g.shots+1)+t('/3번째 칩 · 조준·회전·힘 슬라이더를 조절하고 발사를 누르세요. 칩을 직접 당겼다 놓아도 됩니다. 원 3·2·1점 + 밀어낸 물건당 2점, 목표 6점.','/3 · Set Aim, Curl and Power, then tap Launch. You can also pull and release the chip. Rings 3/2/1, cleared objects +2, target 6.');
  if(g.phase==='moving')return t('칩과 잡동사니가 움직이는 중입니다. 모두 멈춘 뒤 점수를 계산합니다.','Chips and objects are moving. Scores update once everything stops.');
  if(g.phase!=='ready')return null;
  if(dragging)return t('당겨서 방향·힘 조절 · ←/→로 회전 ','Pull to aim and set power · Left/right for curl ')+Number(spin).toFixed(1)+t(' · 놓으면 발사됩니다.',' · Release to launch.');
@@ -41,6 +44,7 @@ export function curlingGuide(g,t,dragging=false,spin=0){
 export function syncGuide(status,text){if(text!==null&&status.textContent!==text)status.textContent=text;}
 
 export function bookFlipGuide(g,t,{pending=false,mode}={}){
+ if(touchControls()&&g.phase==='ready'&&!pending&&!mode)return (5-g.hits)+t('회 남음 · 책 위를 길게 눌렀다 놓거나, 방향 버튼으로 타격 위치와 슬라이더로 힘을 정하고 ‘책 치기’를 누르세요. 초록 면 3개가 위로 향하면 승리, 하나라도 떨어지면 실패.',' hits left · Hold and release on the book, or use the direction buttons and power slider, then Strike book. Three green faces up wins; any chip falling off fails.');
  if(pending)return t('책을 내리치는 중입니다. 칩이 튄 뒤 멈출 때까지 기다리세요.','Striking the book. Wait for the chips to bounce and settle.');
  if(g.phase==='moving')return t('칩이 움직이고 있습니다. 뒤집힘은 모두 멈춘 뒤 판정하며, 책 밖으로 떨어지면 즉시 실패합니다.','Chips are moving. Flips are judged after settling; falling off the book fails immediately.');
  if(g.phase!=='ready')return null;
@@ -49,6 +53,7 @@ export function bookFlipGuide(g,t,{pending=false,mode}={}){
  return (5-g.hits)+t('회 남음 · 책 위를 길게 눌렀다 놓으세요. 초록 면 3개가 모두 위로 향하면 승리, 하나라도 떨어지면 실패. 방향키로 위치·PageUp/PageDown 또는 슬라이더로 힘을 정하고 Space로도 칩니다.',' hits left · Hold and release on the book. Win with all three green faces up; any chip falling off fails. Or set position with arrows, power with PageUp/PageDown or the slider, then press Space.');
 }
 export function eraserGuide(g,t,{mode,selected=0}={}){
+ if(touchControls()&&g.phase==='ready'&&g.turn===0&&!mode)return t('누를 위치의 번호와 힘을 정하고 ‘뒤집기’를 누르세요. 파란 지우개의 번호를 직접 길게 눌렀다 놓아도 됩니다. 상대 위에 완전히 올라타거나 모든 누름점을 막으면 승리합니다.','Choose a press-point number and power, then Flip. You can also hold and release a numbered edge on the blue eraser. Fully ride on the rival or block all its press points to win.');
  if(g.phase==='moving')return t('지우개가 움직이는 중입니다. 멈춘 뒤 올라타기·봉쇄·장외를 판정합니다. 경계에 걸쳐 있어도 되지만 완전히 나가면 패배입니다.','Erasers are moving. Riding, blocked edges and ring-out are judged after settling. Straddling the boundary is allowed; fully outside loses.');
  if(g.phase!=='ready')return null;
  if(g.turn===1)return t('상대 차례입니다. 상대가 누를 위치와 힘을 고르고 있습니다.','Rival turn. The rival is choosing an edge and power.');
@@ -58,6 +63,7 @@ export function eraserGuide(g,t,{mode,selected=0}={}){
  return t('파란 지우개의 번호를 길게 눌렀다 놓으세요. 1–8로 위치·PageUp/PageDown 또는 슬라이더로 힘을 정하고 Space로도 뒤집습니다. 상대 위에 완전히 올라타거나 누를 곳을 모두 막으면 승리, 단순히 걸친 상태는 계속 진행합니다.','Hold and release a numbered edge, or choose 1–8, set power with PageUp/PageDown or the slider and press Space. Fully ride on the rival or block all its press points to win. Partial overlap continues play.');
 }
 export function pingPongGuide(g,t,{mode,notice='',noticeUntil=0}={}){
+ if(touchControls()&&g.phase==='ready')return t('‘서브 시작’을 누르세요. 경기 중 화면을 드래그하거나 방향 버튼으로 지우개를 옮기고, 손을 떼거나 ‘타격’을 눌러 치세요. 높은 공은 ‘스매시’로 칩니다.','Tap Serve. During play, drag on the table or use the direction buttons to move the eraser. Lift your finger or tap Hit to return; use Smash for a high ball.');
  if(g.phase==='ready'){
  const server=g.server===0?t('내 서브 · ','Your serve · '):t('상대 서브 · ','Rival serve · ');
  return server+(mode==='pan'||mode==='orbit'?t('시야 조정 중입니다. 드래그를 놓고 ↑ 방향키를 누르면 서브가 시작됩니다.','Adjusting the view. Release the drag, then press Arrow Up to start the serve.'):t('왼쪽 드래그로 위치, 오른쪽 드래그로 회전, 휠로 확대·축소. ↑ 방향키로 서브를 시작하세요.','Left-drag to pan, right-drag to rotate, wheel to zoom. Press Arrow Up to start the serve.'));
@@ -75,6 +81,8 @@ export function pingPongGuide(g,t,{mode,notice='',noticeUntil=0}={}){
 ﻿
 ﻿
 export function clawGuide(g,t,{mode,aimed=false,result=''}={}){
+ if(touchControls()&&g.phase==='ready'&&!mode)return t('방향 버튼을 길게 눌러 집게를 이동하고 ↶/↷로 집게를 회전하세요. ‘내리기’ → 원하는 높이에서 ‘지금 닫기’. 화면 드래그는 시야 이동, 두 손가락은 확대·회전입니다. 5회 안에 친구 3개를 모으세요.','Hold the direction buttons to move, and ↶/↷ to turn the claw. Tap Lower, then Close now at the desired height. Drag the view; use two fingers to zoom and rotate. Collect 3 friends in 5 tries.');
+ if(touchControls()&&g.phase==='down')return t('내려가는 중 · ‘지금 닫기’를 누르면 그 높이에서 집게가 닫힙니다. 끝까지 내리면 자동으로 닫힙니다.','Descending · Tap Close now to grip at this height, or let the claw close automatically at the bottom.');
  if(g.phase==='done')return t('친구 3개 수집 성공! 3초 후 로비로 돌아갑니다.','Three friends collected! Returning to the lobby in 3 seconds.');
  if(g.phase==='fail')return t('5회의 기회를 모두 사용했습니다. 3초 후 다시 도전합니다.','All 5 tries used. Restarting in 3 seconds.');
  if(g.phase==='down')return t('내려가는 중 · Space로 집게를 닫을 높이를 정하세요. 끝까지 내리면 닿은 위치에서 자동으로 닫힙니다.','Descending · Press Space to choose the gripping height. Otherwise the claw closes when it reaches the pile or bed.');

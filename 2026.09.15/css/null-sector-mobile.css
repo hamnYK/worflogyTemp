@@ -1,0 +1,40 @@
+/* Homepage integration: use NULL SECTOR's own palette inside its iframe. */
+.ns-mobile-tools{display:none}
+@media(max-width:760px){
+ body:not(.ds-page) #app{height:calc(100dvh - var(--copyright-height,28px));display:flex;flex-direction:column;min-height:0}
+ body:not(.ds-page) #app>header{height:44px;flex:0 0 44px;padding:0 12px;gap:8px}
+ body:not(.ds-page) #app>header .brand{font-size:16px;letter-spacing:.5px}
+ body:not(.ds-page) #app>header nav{display:none}
+ body:not(.ds-page) #app>header .connection{font-size:10px}
+ body:not(.ds-page) #app>main{flex:1;height:auto;min-height:180px}
+ .ns-mobile-tools{display:flex;gap:4px;align-items:center;padding:6px 8px;background:var(--surface);border-bottom:1px solid var(--border);flex:0 0 auto;flex-wrap:wrap}
+ .ns-mobile-tools button{min-height:44px;min-width:44px;padding:6px 9px;font:600 12px var(--font-ui)}
+ .ns-mobile-tools button[aria-expanded="true"]{background:var(--accent-soft);border-color:var(--accent)}
+ .ns-mobile-tools .ns-mobile-command{margin-right:auto}
+ body:not(.ds-page) #app .left-panel,body:not(.ds-page) #app .right-panel{display:none;top:8px;bottom:8px;left:8px;right:auto;width:min(280px,calc(100% - 16px));z-index:12;background:var(--surface);padding:12px}
+ body:not(.ds-page) #app[data-mobile-panel="squad"] .left-panel{display:block}
+ body:not(.ds-page) #app[data-mobile-panel="targets"] .right-panel{display:block;left:auto;right:8px}
+ body:not(.ds-page) .map-top{left:8px;right:8px;top:8px;gap:4px;flex-wrap:wrap}
+ body:not(.ds-page) .map-top .map-tag{font-size:11px;padding:4px 6px}
+ body:not(.ds-page) .map-caption{left:8px;right:8px;bottom:8px;gap:4px;font-size:11px}
+ body:not(.ds-page) .map-caption>span:first-child{display:none}
+ body:not(.ds-page) .map-caption button{min-width:44px;min-height:44px}
+ body:not(.ds-page) #app>footer{flex:0 0 auto;display:block;height:auto;padding:8px;overflow:visible}
+ #app>footer>.dock-mission,#app>footer>.dock-record,#app>footer>.dock-intel{display:none}
+ body:not(.ds-page) #app>footer .turn-controls{display:grid;grid-template-columns:minmax(0,1fr) 100px;grid-template-rows:44px 44px;gap:6px}
+ .turn-controls #auto-stance{grid-column:1;grid-row:1;height:44px;font-size:12px}
+ .turn-controls .auto-buttons{grid-column:1;grid-row:2;gap:6px}
+ body:not(.ds-page) #app>footer .turn-controls .end-turn{grid-column:2;grid-row:1/3;min-height:44px;font-size:14px}
+ #app[data-mobile-panel="info"]>footer>.dock-mission,#app[data-mobile-panel="info"]>footer>.dock-record,#app[data-mobile-panel="info"]>footer>.dock-intel{display:block;max-height:140px;overflow:auto;padding:8px 0}
+ #app[data-mobile-panel="info"]>footer{max-height:60dvh;overflow:auto}
+ .dock-mission #objectives{display:block}
+ .dock-mission .objective{margin:8px 0}
+ body:not(.ds-page) #unit-commands{width:calc(100vw - 16px);max-height:calc(100dvh - 44px);padding:12px}
+ body:not(.ds-page) #unit-commands .action{height:auto;min-height:60px;padding-block:8px}
+ body:not(.ds-page) #close-commands{min-height:44px;min-width:44px}
+ #attack-preview{width:calc(100% - 16px);max-height:calc(100% - 16px);bottom:8px;padding:12px;overflow:auto}
+ #attack-title{font-size:24px}
+ #cancel-attack{min-height:44px}
+ .attack-metrics{gap:8px;padding:8px 0}
+ #viewport canvas{touch-action:none}
+}

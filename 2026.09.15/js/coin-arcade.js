@@ -121,6 +121,7 @@ dialog.addEventListener('cancel',e=>{e.preventDefault();closeDoors();});
 dialog.addEventListener('close',()=>{syncBackground();syncMusic();stopGame();clearTimeout(doorTimer);document.body.style.overflow=oldOverflow;dialog.querySelectorAll('.arcade-doors').forEach(node=>node.remove());closing=false;trigger.focus({preventScroll:true});});
 window.addEventListener('null-sector-registered',()=>{if(dialog.open&&inLobby&&!closing)lobby();});
 function lobby(){
+ dialog.classList.remove('arcade-playing');dialog.scrollTop=0;
  stopGame();inLobby=true;syncMusic();
  
  dialog.querySelector('.arcade-content').innerHTML='<div class="arcade-cards"><div class="wf-card wf-card--glass wf-card--compact football-card"><h2 class="wf-card__title" lang="en">3 CHIPS FOOTBALL</h2><button type="button" class="wf-card__action arcade-play"><span aria-hidden="true">&#9654;</span> PLAY</button></div><div class="wf-card wf-card--glass wf-card--compact wf-card--glass-slate basketball-card"><h2 class="wf-card__title" lang="en">1 CHIP BASKETBALL</h2><button type="button" class="wf-card__action arcade-basketball-play"><span aria-hidden="true">&#9654;</span> PLAY</button></div><div class="wf-card wf-card--glass wf-card--compact curling-card"><h2 class="wf-card__title" lang="en">3 CHIPS CURLING</h2><button type="button" class="wf-card__action arcade-curling-play"><span aria-hidden="true">&#9654;</span> PLAY</button></div></div>';
@@ -164,6 +165,7 @@ function nullSectorEntry(){
  };
 }
 async function start(kind='football'){
+ dialog.classList.add('arcade-playing');dialog.scrollTop=0;
  stopGame();inLobby=false;syncMusic();const generation=gameGeneration;
  const host=dialog.querySelector('.arcade-content');
  host.innerHTML='<p class="arcade-loading" role="status">'+t('게임을 준비하고 있습니다.','Preparing the game.')+'</p>';

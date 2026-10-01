@@ -1,3 +1,4 @@
+import {holdButton} from './touch-controls.mjs';
 import {resizeArcadeRenderer} from './arcade-rendering.mjs';
 import {adjustPower} from './game-input.mjs';
 import {footballGuide,syncGuide} from './game-guides.mjs';
@@ -9,7 +10,7 @@ import {ChipFootball,FIELD} from './chip-football-rules.mjs';
 export function mountFootball(host,{onExit,onWin,english=false}={}){
  const t=(ko,en)=>english?en:ko;
  const game=new ChipFootball();
- host.innerHTML=`<div class="chip-game"><div class="chip-game-heading"><button type="button" class="wf-button chip-back">${t('게임 선택','Games')}</button><h2>3 CHIPS FOOTBALL</h2><output class="chip-progress"></output></div><div class="chip-viewport"><canvas tabindex="0" aria-label="${t('칩 축구. 1, 2, 3 선택. 좌우 방향키 조준. 스페이스 발사.','Chip football. Select 1, 2, 3. Arrow keys aim. Space launches.')}"></canvas><div class="chip-result" aria-hidden="true"></div><div class="chip-camera"><button type="button" data-camera="in" aria-label="${t('확대','Zoom in')}">+</button><button type="button" data-camera="out" aria-label="${t('축소','Zoom out')}">−</button><button type="button" data-camera="left" aria-label="${t('왼쪽 회전','Rotate left')}">↶</button><button type="button" data-camera="right" aria-label="${t('오른쪽 회전','Rotate right')}">↷</button><button type="button" data-camera="home">${t('기본 뷰','Reset view')}</button></div></div><div class="chip-controls"><div class="chip-picks"></div><label>${t('힘','Power')} <input class="chip-power" aria-keyshortcuts="PageUp PageDown" aria-label="${t('발사 강도','Launch power')}" type="range" min=".6" max="22" step=".1" value="8"></label><button type="button" class="wf-button chip-fire">${t('발사','Launch')}</button></div><p class="chip-status" role="status" aria-live="polite"></p></div>`;
+ host.innerHTML=`<div class="chip-game"><div class="chip-game-heading"><button type="button" class="wf-button chip-back">${t('게임 선택','Games')}</button><h2>3 CHIPS FOOTBALL</h2><output class="chip-progress"></output></div><div class="chip-viewport"><canvas tabindex="0" aria-label="${t('칩 축구. 1, 2, 3 선택. 좌우 방향키 조준. 스페이스 발사.','Chip football. Select 1, 2, 3. Arrow keys aim. Space launches.')}"></canvas><div class="chip-result" aria-hidden="true"></div><div class="chip-camera"><button type="button" data-camera="in" aria-label="${t('확대','Zoom in')}">+</button><button type="button" data-camera="out" aria-label="${t('축소','Zoom out')}">−</button><button type="button" data-camera="left" aria-label="${t('왼쪽 회전','Rotate left')}">↶</button><button type="button" data-camera="right" aria-label="${t('오른쪽 회전','Rotate right')}">↷</button><button type="button" data-camera="home">${t('기본 뷰','Reset view')}</button></div></div><div class="chip-controls"><div class="chip-picks"></div><div class="arcade-touch-controls football-aim" role="group" aria-label="${t('조준','Aim')}"><button type="button" class="wf-button" data-aim="left" aria-label="${t('왼쪽 조준','Aim left')}">↶</button><span>${t('조준','Aim')}</span><button type="button" class="wf-button" data-aim="right" aria-label="${t('오른쪽 조준','Aim right')}">↷</button></div><label>${t('힘','Power')} <input class="chip-power" aria-keyshortcuts="PageUp PageDown" aria-label="${t('발사 강도','Launch power')}" type="range" min=".6" max="22" step=".1" value="8"></label><button type="button" class="wf-button chip-fire">${t('발사','Launch')}</button></div><p class="chip-status" role="status" aria-live="polite"></p></div>`;
  const root=host.querySelector('.chip-game'),canvas=root.querySelector('canvas'),status=root.querySelector('.chip-status'),progress=root.querySelector('.chip-progress'),result=root.querySelector('.chip-result');
  let renderer;
  try{renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:false});}catch(error){root.innerHTML='<p>'+t('3D 화면을 시작할 수 없습니다. 브라우저의 하드웨어 가속 설정을 확인해 주세요.','Unable to start 3D. Check hardware acceleration in your browser.')+'</p><button class="wf-button" type="button">'+t('게임 선택','Games')+'</button>';root.querySelector('button').onclick=onExit;return{dispose(){}};}
@@ -76,6 +77,7 @@ export function mountFootball(host,{onExit,onWin,english=false}={}){
  progress.textContent=(game.opening?t('시작 배치 · 횟수 제외 · ','OPENING · UNCOUNTED · '):game.turns+t('회 / 목표 4회 · ',' SHOTS / TARGET 4 · '))+(bestTurns===null?'':t('최고 ','BEST ')+bestTurns+' · ')+t('패스 완료 ','PASSES ')+game.chips.filter(c=>c.passed).length+'/3 · '+(game.canShoot?t('슈팅 가능','SHOT UNLOCKED'):t('슈팅 잠김','SHOT LOCKED'));
  [...picks.children].forEach((b,i)=>{b.textContent=(i+1)+(game.chips[i].passed?' ✓':'');b.setAttribute('aria-label',t('칩 ','Chip ')+(i+1)+(game.chips[i].passed?t(' 패스 완료',' passed'):''));b.disabled=game.phase!=='ready'||i===game.previous||(game.selected!==null&&i!==game.selected);b.setAttribute('aria-pressed',String(i===game.selected));});
  power.disabled=game.phase!=='ready';
+ root.querySelectorAll('[data-aim]').forEach(b=>b.disabled=game.phase!=='ready'||game.selected===null);
  root.querySelector('.chip-fire').disabled=game.phase!=='ready'||game.selected===null;
  root.dataset.phase=game.phase;root.dataset.turns=game.turns;root.dataset.opening=String(game.opening);
  }
@@ -83,6 +85,7 @@ export function mountFootball(host,{onExit,onWin,english=false}={}){
  function fire(vx,vz){if(game.launch(vx,vz)){say(game.phase==='breaking'?t('칩을 펼치는 중입니다.','Spreading the chips.'):game.readyAtLaunch?t('슈팅! 두 칩 사이를 통과해 골대로.','Shoot through the gap and into the goal.'):t('패스 중 · 아직 골을 넣으면 FAIL입니다.','Passing · Scoring before unlock is a FAIL.'));updateUI();}}
  const power=root.querySelector('.chip-power');
  canvas.setAttribute('aria-label',t('칩 축구. 1, 2, 3 선택. 좌우 방향키 조준. 위아래 방향키 힘 조절. 스페이스 발사.','Chip football. Select 1, 2, 3. Left/right aim. Up/down adjust power. Space launches.'));
+ const aimBindings=[...root.querySelectorAll('[data-aim]')].map(b=>holdButton(b,()=>angle+=b.dataset.aim==='left'?-.06:.06,{enabled:()=>game.phase==='ready'&&game.selected!==null&&!pointer}));
  function launchKey(){fire(Math.cos(angle)*+power.value,Math.sin(angle)*+power.value);}
  function dragAim(p){
   if(!p||game.selected===null||game.phase!=='ready')return false;
@@ -137,7 +140,7 @@ export function mountFootball(host,{onExit,onWin,english=false}={}){
  renderer.render(scene,camera);frame=requestAnimationFrame(render);
  }
  reset();resize();frame=requestAnimationFrame(render);
- return{dispose(){if(disposed)return;disposed=true;cancelAnimationFrame(frame);clearTimeout(timer);ro.disconnect();finish.dispose();geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());textures.forEach(t=>t.dispose());arrow.line.geometry.dispose();arrow.line.material.dispose();arrow.cone.geometry.dispose();arrow.cone.material.dispose();renderer.dispose();renderer.forceContextLoss();}};
+ return{dispose(){if(disposed)return;disposed=true;aimBindings.forEach(b=>b.dispose());cancelAnimationFrame(frame);clearTimeout(timer);ro.disconnect();finish.dispose();geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());textures.forEach(t=>t.dispose());arrow.line.geometry.dispose();arrow.line.material.dispose();arrow.cone.geometry.dispose();arrow.cone.material.dispose();renderer.dispose();renderer.forceContextLoss();}};
 }
 
 export {mountBasketball} from './chip-basketball.mjs';

@@ -1,3 +1,4 @@
+import {directionPad} from './touch-controls.mjs';
 import {resizeArcadeRenderer} from './arcade-rendering.mjs';
 import {adjustPower} from './game-input.mjs';
 import {bookFlipGuide,syncGuide} from './game-guides.mjs';
@@ -34,7 +35,11 @@ export function mountBookFlip(host,{onExit,onWin,english=false}={}){
  function view(){const d=distance*Math.max(1,1.1/camera.aspect);camera.position.set(Math.sin(azimuth)*Math.cos(elevation)*d,Math.sin(elevation)*d,Math.cos(azimuth)*Math.cos(elevation)*d).add(pan.offset);camera.lookAt(pan.offset.clone().add(new THREE.Vector3(0,.3,0)));camera.updateMatrixWorld();}
  function resize(){const r=canvas.parentElement.getBoundingClientRect();resizeArcadeRenderer(renderer,r.width,r.height);camera.aspect=r.width/r.height;camera.updateProjectionMatrix();view();}
  const ro=new ResizeObserver(resize);ro.observe(canvas.parentElement);
+ const touchRow=document.createElement('div');touchRow.className='arcade-touch-controls book-touch';root.querySelector('.chip-controls').before(touchRow);
+ const touchLabel=document.createElement('span');touchLabel.textContent=t('타격 위치','Strike position');touchRow.append(touchLabel);
+ const touchPad=directionPad(touchRow,{t,label:t('타격 위치','Strike position'),enabled:()=>game.phase==='ready'&&!pendingStrike&&!pointer,onMove:d=>{hit.x=THREE.MathUtils.clamp(hit.x+(d==='left'?-.2:d==='right'?.2:0),-2.9,2.9);hit.z=THREE.MathUtils.clamp(hit.z+(d==='up'?-.2:d==='down'?.2:0),-3.9,3.9);}});
  function refresh(){
+ touchPad.sync();
  root.dataset.phase=pendingStrike?'striking':game.phase;root.dataset.book=game.kind;root.dataset.hits=game.hits;
  progress.textContent=t('남은 기회 ','HITS LEFT ')+(BOOK.attempts-game.hits)+'/5 · '+t('뒤집힘 ','FLIPPED ')+(game.phase==='moving'?t('판정 중','pending'):game.flipped+'/3');
  strike.disabled=power.disabled=!!pendingStrike||game.phase!=='ready';
@@ -72,5 +77,5 @@ export function mountBookFlip(host,{onExit,onWin,english=false}={}){
  renderer.render(scene,camera);frame=requestAnimationFrame(animate);
  }
  reset();resize();frame=requestAnimationFrame(animate);
- return{dispose(){if(disposed)return;disposed=true;cancelAnimationFrame(frame);clearTimeout(timer);ro.disconnect();finish.dispose();geos.forEach(g=>g.dispose());mats.forEach(m=>m.dispose());textures.forEach(t=>t.dispose());renderer.dispose();renderer.forceContextLoss();}};
+ return{dispose(){if(disposed)return;disposed=true;touchPad.dispose();cancelAnimationFrame(frame);clearTimeout(timer);ro.disconnect();finish.dispose();geos.forEach(g=>g.dispose());mats.forEach(m=>m.dispose());textures.forEach(t=>t.dispose());renderer.dispose();renderer.forceContextLoss();}};
 }

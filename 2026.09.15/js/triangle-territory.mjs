@@ -1,3 +1,4 @@
+import {pointPicker} from './touch-controls.mjs';
 import {TriangleTerritory} from './triangle-territory-rules.mjs';
 import {createTriangleTable} from './triangle-table.mjs';
 
@@ -7,6 +8,7 @@ export function mountTriangleTerritory(host,{onExit,onWin=onExit,english=false}=
  host.innerHTML=`<div class="chip-game triangle-game"><div class="chip-game-heading"><button type="button" class="wf-button chip-back">${t('게임 선택','Games')}</button><h2 lang="en">TRIANGLE TERRITORY</h2><button type="button" class="wf-button triangle-new">${t('새 판','New board')}</button></div><div class="triangle-score"><span class="triangle-you">${t('나','YOU')} <strong class="triangle-score-you">0</strong></span><span class="triangle-turn"></span><span class="triangle-ai">${t('컴퓨터','COMPUTER')} <strong class="triangle-score-ai">0</strong></span></div><div class="triangle-board" role="group" aria-label="${t('점 21개를 연결하는 세모 땅따먹기 판','Triangle territory board with 21 dots')}"><svg viewBox="0 0 1000 640" preserveAspectRatio="none" aria-hidden="true" focusable="false"><g class="triangle-fills"></g><g class="triangle-lines"></g></svg><div class="triangle-dots"></div></div><div class="chip-controls"><button type="button" class="wf-button triangle-cancel">${t('선택 취소','Clear selection')}</button><span class="triangle-count"></span></div><p class="chip-status" role="status" aria-live="polite" aria-atomic="true"></p></div>`;
  const root=host.firstElementChild,board=root.querySelector('.triangle-board'),dots=root.querySelector('.triangle-dots'),fills=root.querySelector('.triangle-fills'),lines=root.querySelector('.triangle-lines'),status=root.querySelector('.chip-status'),cancel=root.querySelector('.triangle-cancel');
  let buttons=[];
+ const picker=pointPicker(root,{t,choose});
  let endTimer=null;
  const resultOverlay=document.createElement('div');resultOverlay.className='chip-result';resultOverlay.setAttribute('aria-hidden','true');resultOverlay.style.zIndex='4';board.append(resultOverlay);
  const share=i=>game.shares[i].toFixed(1)+'%';
@@ -35,6 +37,7 @@ export function mountTriangleTerritory(host,{onExit,onWin=onExit,english=false}=
   lines.replaceChildren(...game.edges.map(([a,b],i)=>svg('line',{x1:game.points[a].x,y1:game.points[a].y,x2:game.points[b].x,y2:game.points[b].y,class:i===game.edges.length-1&&lastEdge?'triangle-last-edge':''})));
   buttons.forEach((button,i)=>{button.disabled=game.turn!==0||game.phase!=='playing';button.tabIndex=i===focused?0:-1;button.setAttribute('aria-pressed',String(i===selected));button.classList.toggle('triangle-available',selected!==null&&i!==selected&&!game.invalid(selected,i));});
   cancel.disabled=selected===null||game.turn!==0;status.textContent=notice?notice+' '+message():message();
+  picker.sync(buttons);
   table?.sync(game,selected);
   if(game.phase==='finished'&&endTimer===null){
    resultOverlay.textContent=game.winner===0?'VICTORY':game.winner===-1?'DRAW':'TRY AGAIN';resultOverlay.classList.add('show');

@@ -18,6 +18,8 @@
 - 게임은 WebGL 초기화 후 부모에게 postMessage로 null-sector-ready 또는 null-sector-error를 알린다. 부모는 메시지를 보낸 창이 실제 게임 iframe인지 확인한다. file://에서는 contentDocument 접근에 의존하지 않는다.
 - js/coin-arcade.js는 NULL SECTOR의 PLAY에서만 현재 4자리 코드를 검사한다. 시작한 iframe에는 시간 만료 처리를 걸지 않는다.
 - AFTER HOURS 복귀 시 iframe과 메시지 수신기를 정리한다. 다시 입장할 때는 현재 코드가 필요하다.
+- 모바일 전투 화면은 홈페이지 어댑터 `js/null-sector-mobile.js`, `css/null-sector-mobile.css`를 iframe 안에서 사용한다. 760px 이하에서 분대·표적·작전 패널을 접고, 선택한 요원 명령 및 확대·축소 버튼을 제공한다. 전투 판정과 AP 검사는 기존 게임 핸들러가 담당한다.
+- `scripts/adapt-null-sector-mobile.mjs`가 HTTP용 dist와 파일 실행용 local의 HTML에 어댑터를 연결한다. `build-null-sector.mjs`가 재빌드 후 이를 적용하므로 외부 게임 원본을 수정하지 않고 유지한다.
 - 코드는 정적 사이트의 발견용 입장 키이며 서버 인증 비밀이 아니다.
 
 ## 회귀 확인

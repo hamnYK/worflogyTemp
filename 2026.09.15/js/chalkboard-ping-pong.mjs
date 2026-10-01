@@ -1,3 +1,4 @@
+import {directionPad} from './touch-controls.mjs';
 import {resizeArcadeRenderer} from './arcade-rendering.mjs';
 import {pingPongGuide} from './game-guides.mjs';
 import * as THREE from '../lib/three.module.min.js';
@@ -6,7 +7,7 @@ import {createArcadeFinish} from './arcade-finish.mjs';
 import {ChalkboardPingPong,PING,SCRATCHES} from './chalkboard-ping-pong-rules.mjs';
 export function mountChalkboardPingPong(host,{onExit,onWin,english=false}={}){
  const t=(ko,en)=>english?en:ko,game=new ChalkboardPingPong();
- host.innerHTML=`<div class="chip-game ping-game"><div class="chip-game-heading"><button class="wf-button chip-back">${t('게임 선택','Games')}</button><h2>CHALKBOARD PING PONG</h2><output class="chip-progress"></output></div><div class="chip-viewport"><canvas tabindex="0" aria-label="${t('칠판 지우개 탁구. 서브 전 드래그로 시야 이동, 위쪽 방향키로 서브. 마우스로 지우개 이동, 클릭 또는 Space로 타격, Shift와 함께 누르면 스매시.','Chalkboard ping pong. Drag to frame the table before serving with Arrow Up. Move with the mouse, click or Space to hit, Shift to smash.')}"></canvas><div class="chip-result" aria-hidden="true"></div><div class="chip-camera"><button data-camera="in" aria-label="${t('확대','Zoom in')}">+</button><button data-camera="out" aria-label="${t('축소','Zoom out')}">−</button><button data-camera="left" aria-label="${t('왼쪽 회전','Rotate left')}">↶</button><button data-camera="right" aria-label="${t('오른쪽 회전','Rotate right')}">↷</button><button data-camera="home">${t('기본 뷰','Reset view')}</button></div></div><div class="chip-controls"><span class="ping-rally"></span><button class="wf-button ping-hit">${t('타격','Hit')}</button><button class="wf-button ping-smash">${t('스매시 · Shift','Smash · Shift')}</button></div><p class="chip-status" role="status" aria-live="polite"></p></div>`;
+ host.innerHTML=`<div class="chip-game ping-game"><div class="chip-game-heading"><button class="wf-button chip-back">${t('게임 선택','Games')}</button><h2>CHALKBOARD PING PONG</h2><output class="chip-progress"></output></div><div class="chip-viewport"><canvas tabindex="0" aria-label="${t('칠판 지우개 탁구. 서브 전 드래그로 시야 이동, 위쪽 방향키로 서브. 마우스로 지우개 이동, 클릭 또는 Space로 타격, Shift와 함께 누르면 스매시.','Chalkboard ping pong. Drag to frame the table before serving with Arrow Up. Move with the mouse, click or Space to hit, Shift to smash.')}"></canvas><div class="chip-result" aria-hidden="true"></div><div class="chip-camera"><button data-camera="in" aria-label="${t('확대','Zoom in')}">+</button><button data-camera="out" aria-label="${t('축소','Zoom out')}">−</button><button data-camera="left" aria-label="${t('왼쪽 회전','Rotate left')}">↶</button><button data-camera="right" aria-label="${t('오른쪽 회전','Rotate right')}">↷</button><button data-camera="home">${t('기본 뷰','Reset view')}</button></div></div><div class="chip-controls"><span class="ping-rally"></span><button type="button" class="wf-button ping-serve">${t('서브 시작','Serve')}</button><button class="wf-button ping-hit">${t('타격','Hit')}</button><button class="wf-button ping-smash">${t('스매시 · Shift','Smash · Shift')}</button></div><p class="chip-status" role="status" aria-live="polite"></p></div>`;
  const root=host.firstElementChild,canvas=root.querySelector('canvas'),status=root.querySelector('.chip-status'),progress=root.querySelector('.chip-progress'),result=root.querySelector('.chip-result'),hitButton=root.querySelector('.ping-hit'),smashButton=root.querySelector('.ping-smash'),rally=root.querySelector('.ping-rally');
  let renderer;try{renderer=new THREE.WebGLRenderer({canvas,antialias:true});}catch{root.innerHTML='<p>'+t('3D 화면을 시작할 수 없습니다.','Unable to start 3D.')+'</p><button class="wf-button">BACK</button>';root.querySelector('button').onclick=onExit;return{dispose(){}};}
  renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=.94;
@@ -73,18 +74,23 @@ export function mountChalkboardPingPong(host,{onExit,onWin,english=false}={}){
  if(game.phase!=='rally')return;
  const ok=game.swing(0,smash);if(ok){notice='';noticeUntil=0;details.impact(game.ball,true);}if(!ok&&game.phase==='rally'){notice=smash?t('스매시는 내 쪽에서 튄 높은 공이 타격 범위에 왔을 때 가능합니다.','Smash when a high ball reaches your paddle after bouncing on your desk.'):t('공이 내 쪽에서 한 번 튄 뒤, 지우개 가까이 왔을 때 치세요.','Hit when the ball reaches your paddle after one bounce on your desk.');noticeUntil=game.time+.65;}
  }
+ function serve(){if(game.phase!=='ready')return;if(pointer){const id=pointer.id;pointer=null;if(canvas.hasPointerCapture(id))canvas.releasePointerCapture(id);}keys.clear();game.serve();details.impact(game.ball,true);}
+ const serveButton=root.querySelector('.ping-serve');serveButton.onclick=serve;
+ const touchRow=document.createElement('div');touchRow.className='arcade-touch-controls ping-touch';root.querySelector('.chip-controls').before(touchRow);
+ const touchPad=directionPad(touchRow,{t,label:t('지우개 이동','Move paddle'),enabled:()=>game.phase==='rally',onMove:d=>{const p=game.paddles[0];game.setPaddle(p.x+(d==='left'?-.24:d==='right'?.24:0),p.z+(d==='up'?-.24:d==='down'?.24:0));}});
  hitButton.onclick=()=>strike();smashButton.onclick=()=>strike(true);
  const ray=new THREE.Raycaster(),plane=new THREE.Plane(new THREE.Vector3(0,1,0));
  function track(e){const r=canvas.getBoundingClientRect();plane.constant=-game.paddles[0].y;ray.setFromCamera(new THREE.Vector2((e.clientX-r.left)/r.width*2-1,1-(e.clientY-r.top)/r.height*2),camera);const p=ray.ray.intersectPlane(plane,new THREE.Vector3());if(p)game.setPaddle(p.x,p.z);}
  canvas.oncontextmenu=e=>e.preventDefault();
- canvas.onpointermove=e=>{if(pointer?.mode==='orbit'){azimuth-=(e.clientX-pointer.x)*.007;elevation=THREE.MathUtils.clamp(elevation+(e.clientY-pointer.y)*.004,.5,1.15);pointer.x=e.clientX;pointer.y=e.clientY;view();}else if(pointer?.mode==='pan'){const scale=2*camera.position.distanceTo(target)*Math.tan(THREE.MathUtils.degToRad(camera.fov/2))/canvas.clientHeight;const right=new THREE.Vector3().setFromMatrixColumn(camera.matrixWorld,0),up=new THREE.Vector3().setFromMatrixColumn(camera.matrixWorld,1);target.addScaledVector(right,-(e.clientX-pointer.x)*scale).addScaledVector(up,(e.clientY-pointer.y)*scale);target.x=THREE.MathUtils.clamp(target.x,-5,5);target.y=THREE.MathUtils.clamp(target.y,-3,4);target.z=THREE.MathUtils.clamp(target.z,-5,5);pointer.x=e.clientX;pointer.y=e.clientY;view();}else if(game.phase==='rally')track(e);};
- canvas.onpointerdown=e=>{canvas.focus({preventScroll:true});if(e.button===2){pointer={mode:'orbit',id:e.pointerId,x:e.clientX,y:e.clientY};canvas.setPointerCapture(e.pointerId);}else if(e.button===0){if(game.phase==='ready'){pointer={mode:'pan',id:e.pointerId,x:e.clientX,y:e.clientY};canvas.setPointerCapture(e.pointerId);return;}if(game.phase!=='rally')return;track(e);if(e.pointerType==='touch'){pointer={mode:'touch',id:e.pointerId};canvas.setPointerCapture(e.pointerId);}else strike(e.shiftKey);}};
+ canvas.onpointermove=e=>{if(pointer&&pointer.id!==e.pointerId)return;if(pointer?.mode==='orbit'){azimuth-=(e.clientX-pointer.x)*.007;elevation=THREE.MathUtils.clamp(elevation+(e.clientY-pointer.y)*.004,.5,1.15);pointer.x=e.clientX;pointer.y=e.clientY;view();}else if(pointer?.mode==='pan'){const scale=2*camera.position.distanceTo(target)*Math.tan(THREE.MathUtils.degToRad(camera.fov/2))/canvas.clientHeight;const right=new THREE.Vector3().setFromMatrixColumn(camera.matrixWorld,0),up=new THREE.Vector3().setFromMatrixColumn(camera.matrixWorld,1);target.addScaledVector(right,-(e.clientX-pointer.x)*scale).addScaledVector(up,(e.clientY-pointer.y)*scale);target.x=THREE.MathUtils.clamp(target.x,-5,5);target.y=THREE.MathUtils.clamp(target.y,-3,4);target.z=THREE.MathUtils.clamp(target.z,-5,5);pointer.x=e.clientX;pointer.y=e.clientY;view();}else if(game.phase==='rally')track(e);};
+ canvas.onpointerdown=e=>{if(pointer)return;canvas.focus({preventScroll:true});if(e.button===2){pointer={mode:'orbit',id:e.pointerId,x:e.clientX,y:e.clientY};canvas.setPointerCapture(e.pointerId);}else if(e.button===0){if(game.phase==='ready'){pointer={mode:'pan',id:e.pointerId,x:e.clientX,y:e.clientY};canvas.setPointerCapture(e.pointerId);return;}if(game.phase!=='rally')return;track(e);if(e.pointerType==='touch'){pointer={mode:'touch',id:e.pointerId};canvas.setPointerCapture(e.pointerId);}else strike(e.shiftKey);}};
  canvas.onpointerup=e=>{if(pointer?.id===e.pointerId){if(pointer.mode==='touch')strike(e.shiftKey);if(canvas.hasPointerCapture(e.pointerId))canvas.releasePointerCapture(e.pointerId);pointer=null;}};
- canvas.onpointercancel=()=>pointer=null;
+ canvas.onpointercancel=canvas.onlostpointercapture=()=>pointer=null;
  root.onkeydown=e=>{
+ if(e.target!==canvas)return;
  if(game.phase==='ready'){
  if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown',' '].includes(e.key))e.preventDefault();
- if(e.key==='ArrowUp'&&!e.repeat){if(pointer){if(canvas.hasPointerCapture(pointer.id))canvas.releasePointerCapture(pointer.id);pointer=null;}keys.clear();game.serve();details.impact(game.ball,true);canvas.focus({preventScroll:true});}
+ if(e.key==='ArrowUp'&&!e.repeat)serve();
  return;
  }
  if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','a','d','w','s'].includes(e.key)){e.preventDefault();keys.add(e.key);}
@@ -107,6 +113,7 @@ export function mountChalkboardPingPong(host,{onExit,onWin,english=false}={}){
  root.dataset.phase=game.phase;root.dataset.score=game.scores.join('-');root.dataset.canHit=String(game.canHit(0)&&game.swings[0]===0);root.dataset.smash=String(game.smashReady&&game.swings[0]===0);
  progress.textContent=t('나 ','YOU ')+game.scores[0]+' : '+game.scores[1]+t(' 상대 · 5점 선승',' RIVAL · FIRST TO 5');
  rally.textContent=t('랠리 ','RALLY ')+game.rally+' · '+t('최고 ','BEST ')+game.bestRally;
+ serveButton.hidden=game.phase!=='ready';serveButton.disabled=game.phase!=='ready';touchPad.sync();
  hitButton.disabled=game.phase!=='rally';smashButton.disabled=!game.smashReady||game.swings[0]>0;
  hitButton.classList.toggle('basket-catch-ready',game.canHit(0));
  let text;
@@ -122,5 +129,5 @@ export function mountChalkboardPingPong(host,{onExit,onWin,english=false}={}){
  renderer.render(scene,camera);frame=requestAnimationFrame(animate);
  }
  resize();canvas.focus({preventScroll:true});frame=requestAnimationFrame(animate);
- return{dispose(){if(disposed)return;disposed=true;cancelAnimationFrame(frame);clearTimeout(timer);ro.disconnect();finish.dispose();geos.forEach(g=>g.dispose());mats.forEach(m=>m.dispose());textures.forEach(t=>t.dispose());renderer.dispose();renderer.forceContextLoss();}};
+ return{dispose(){if(disposed)return;disposed=true;touchPad.dispose();keys.clear();cancelAnimationFrame(frame);clearTimeout(timer);ro.disconnect();finish.dispose();geos.forEach(g=>g.dispose());mats.forEach(m=>m.dispose());textures.forEach(t=>t.dispose());renderer.dispose();renderer.forceContextLoss();}};
 }
