@@ -1,0 +1,439 @@
+{
+  "@context": {
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "sh": "http://www.w3.org/ns/shacl#",
+    "ont": "http://admin.go.kr/ontology#",
+    "swrl": "http://www.w3.org/2003/11/swrl#",
+    "swrlb": "http://www.w3.org/2003/11/swrlb#",
+    "prov": "http://www.w3.org/ns/prov#"
+  },
+  "@graph": [
+    {
+      "@id": "http://admin.go.kr/ontology#",
+      "@type": "owl:Ontology",
+      "rdfs:label": {
+        "@value": "행정 혁신 온톨로지",
+        "@language": "ko"
+      },
+      "owl:versionInfo": "2026-10-01T17:13:34.914Z"
+    },
+    {
+      "@id": "ont:Person",
+      "@type": "owl:Class",
+      "rdfs:label": {
+        "@value": "Person",
+        "@language": "ko"
+      }
+    },
+    {
+      "@id": "ont:Org",
+      "@type": "owl:Class",
+      "rdfs:label": {
+        "@value": "Org",
+        "@language": "ko"
+      }
+    },
+    {
+      "@id": "ont:Wrong",
+      "@type": "owl:Class",
+      "rdfs:label": {
+        "@value": "Wrong",
+        "@language": "ko"
+      }
+    },
+    {
+      "@id": "ont:knows",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": {
+        "@value": "knows",
+        "@language": "ko"
+      },
+      "rdfs:domain": {
+        "@id": "ont:Person"
+      },
+      "rdfs:range": {
+        "@id": "ont:Person"
+      }
+    },
+    {
+      "@id": "ont:knownBy",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": {
+        "@value": "knownBy",
+        "@language": "ko"
+      },
+      "rdfs:domain": {
+        "@id": "ont:Person"
+      },
+      "rdfs:range": {
+        "@id": "ont:Person"
+      }
+    },
+    {
+      "@id": "ont:age",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:label": {
+        "@value": "age",
+        "@language": "ko"
+      },
+      "rdfs:domain": {
+        "@id": "ont:Person"
+      },
+      "rdfs:range": {
+        "@id": "xsd:integer"
+      }
+    },
+    {
+      "@id": "ont:alice",
+      "ont:age": {
+        "@value": 0,
+        "@type": "xsd:integer"
+      }
+    },
+    {
+      "@id": "ont:RULE_01",
+      "@type": "ont:ExceptionRule",
+      "rdfs:label": {
+        "@value": "Test",
+        "@language": "ko"
+      },
+      "ont:ifConditions": "Person(?x); age(?x,?v); swrlb:greaterThanOrEqual(?v,0)",
+      "ont:thenAction": "knows(?x,?x)",
+      "ont:severity": "",
+      "ont:domain": "Test",
+      "ont:legalBasis": "확인 필요",
+      "ont:evidenceStatus": "unverified",
+      "ont:evidenceQuote": ""
+    },
+    {
+      "@id": "ont:Agent",
+      "@type": "owl:Class",
+      "rdfs:label": {
+        "@value": "Agent",
+        "@language": "ko"
+      },
+      "rdfs:comment": {
+        "@value": "",
+        "@language": "ko"
+      }
+    },
+    {
+      "@id": "ont:Entity",
+      "@type": "owl:Class",
+      "rdfs:label": {
+        "@value": "Entity",
+        "@language": "ko"
+      },
+      "rdfs:comment": {
+        "@value": "",
+        "@language": "ko"
+      }
+    },
+    {
+      "@id": "ont:Person",
+      "rdfs:subClassOf": {
+        "@id": "ont:Agent"
+      }
+    },
+    {
+      "@id": "ont:PersonShape",
+      "@type": "sh:NodeShape",
+      "sh:targetClass": {
+        "@id": "ont:Person"
+      },
+      "sh:name": {
+        "@value": "PersonShape",
+        "@language": "ko"
+      },
+      "sh:property": [
+        {
+          "@type": "sh:PropertyShape",
+          "sh:path": {
+            "@id": "ont:age"
+          },
+          "sh:minCount": 1,
+          "sh:maxCount": 1
+        }
+      ]
+    },
+    {
+      "@id": "ont:INF_01",
+      "@type": "ont:InferenceRule",
+      "rdfs:label": {
+        "@value": "",
+        "@language": "ko"
+      },
+      "ont:swrlCondition": "Person(?x)",
+      "ont:swrlAction": "Unknown(?x)",
+      "ont:riskLevel": "",
+      "ont:responsibleDept": "",
+      "ont:businessImpact": {
+        "@value": "",
+        "@language": "ko"
+      },
+      "ont:cascadeRules": ""
+    },
+    {
+      "@id": "ont:INF_02",
+      "@type": "ont:InferenceRule",
+      "rdfs:label": {
+        "@value": "",
+        "@language": "ko"
+      },
+      "ont:swrlCondition": "Person(?xy)",
+      "ont:swrlAction": "Person(?x)",
+      "ont:riskLevel": "",
+      "ont:responsibleDept": "",
+      "ont:businessImpact": {
+        "@value": "",
+        "@language": "ko"
+      },
+      "ont:cascadeRules": ""
+    },
+    {
+      "@id": "ont:INF_03",
+      "@type": "ont:InferenceRule",
+      "rdfs:label": {
+        "@value": "",
+        "@language": "ko"
+      },
+      "ont:swrlCondition": "Person(42)",
+      "ont:swrlAction": "Person(alice)",
+      "ont:riskLevel": "",
+      "ont:responsibleDept": "",
+      "ont:businessImpact": {
+        "@value": "",
+        "@language": "ko"
+      },
+      "ont:cascadeRules": ""
+    },
+    {
+      "@id": "ont:Person",
+      "ont:sourceIdentifier": "ont:Person"
+    },
+    {
+      "@id": "ont:Org",
+      "ont:sourceIdentifier": "ont:Org"
+    },
+    {
+      "@id": "ont:Wrong",
+      "ont:sourceIdentifier": "ont:Wrong"
+    },
+    {
+      "@id": "ont:knows",
+      "owl:inverseOf": {
+        "@id": "ont:knownBy"
+      }
+    },
+    {
+      "@id": "ont:knownBy"
+    },
+    {
+      "@id": "ont:age"
+    },
+    {
+      "@id": "ont:alice",
+      "@type": [
+        "owl:NamedIndividual",
+        "ont:Person"
+      ],
+      "rdfs:label": "alice",
+      "ont:sourceIdentifier": "ont:alice"
+    },
+    {
+      "@id": "urn:worflogy:evidence:Test:0",
+      "@type": "rdf:Statement",
+      "rdf:subject": {
+        "@id": "ont:alice"
+      },
+      "rdf:predicate": {
+        "@id": "ont:age"
+      },
+      "rdf:object": {
+        "@value": 0,
+        "@type": "xsd:integer"
+      },
+      "ont:provenanceRecord": "{\"origin\":\"document\",\"document\":\"sample\",\"location\":\"p1\",\"quote\":\"age 0\",\"status\":\"reviewed\"}"
+    },
+    {
+      "@id": "urn:worflogy:rule:Test:RULE_01",
+      "@type": "swrl:Imp",
+      "rdfs:label": "Test",
+      "ont:sourceRuleId": "RULE_01",
+      "ont:domain": "Test",
+      "ont:conditionText": "Person(?x) ∧ age(?x,?v) ∧ swrlb:greaterThanOrEqual(?v,0)",
+      "ont:actionText": "knows(?x,?x)",
+      "ont:provenanceRecord": "{\"origin\":\"document\"}",
+      "ont:sourceRules": [],
+      "swrl:body": {
+        "@list": [
+          {
+            "@type": "swrl:ClassAtom",
+            "swrl:classPredicate": {
+              "@id": "ont:Person"
+            },
+            "swrl:argument1": {
+              "@id": "urn:worflogy:variable:x"
+            }
+          },
+          {
+            "@type": "swrl:DatavaluedPropertyAtom",
+            "swrl:propertyPredicate": {
+              "@id": "ont:age"
+            },
+            "swrl:argument1": {
+              "@id": "urn:worflogy:variable:x"
+            },
+            "swrl:argument2": {
+              "@id": "urn:worflogy:variable:v"
+            }
+          },
+          {
+            "@type": "swrl:BuiltinAtom",
+            "swrl:builtin": {
+              "@id": "swrlb:greaterThanOrEqual"
+            },
+            "swrl:arguments": {
+              "@list": [
+                {
+                  "@id": "urn:worflogy:variable:v"
+                },
+                {
+                  "@value": 0
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "swrl:head": {
+        "@list": [
+          {
+            "@type": "swrl:IndividualPropertyAtom",
+            "swrl:propertyPredicate": {
+              "@id": "ont:knows"
+            },
+            "swrl:argument1": {
+              "@id": "urn:worflogy:variable:x"
+            },
+            "swrl:argument2": {
+              "@id": "urn:worflogy:variable:x"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@id": "ont:PersonShape",
+      "ont:sourceConstraint": "{\"shape_id\":\"PersonShape\",\"target_class\":\"Person\",\"path\":\"age\",\"min_count\":1,\"max_count\":1,\"pattern\":\"extra\"}"
+    },
+    {
+      "@id": "urn:worflogy:procedure:Test:P1",
+      "@type": "ont:WorkflowStep",
+      "rdfs:label": "Review",
+      "ont:actor": "Officer",
+      "ont:trigger": "Received",
+      "ont:action": "Review record",
+      "ont:nextStep": [],
+      "ont:ruleReferences": "RULE_01"
+    },
+    {
+      "@id": "ont:Agent",
+      "owl:equivalentClass": {
+        "@id": "ont:Entity"
+      },
+      "owl:disjointWith": [
+        {
+          "@id": "ont:Org"
+        }
+      ]
+    },
+    {
+      "@id": "ont:Entity"
+    },
+    {
+      "@id": "urn:worflogy:mapping:G:0",
+      "@type": "owl:Axiom",
+      "owl:annotatedSource": {
+        "@id": "ont:Person"
+      },
+      "owl:annotatedProperty": {
+        "@id": "rdfs:subClassOf"
+      },
+      "owl:annotatedTarget": {
+        "@id": "ont:Agent"
+      },
+      "ont:rationale": "Common actor",
+      "ont:preservedDifferences": "Roles vary",
+      "ont:provenanceRecord": "{\"origin\":\"user\",\"status\":\"reviewed\"}"
+    },
+    {
+      "@id": "urn:worflogy:rule:inference:INF_01",
+      "@type": "ont:RuleDraft",
+      "rdfs:label": "INF_01",
+      "ont:sourceRuleId": "INF_01",
+      "ont:domain": "inference",
+      "ont:conditionText": "Person(?x)",
+      "ont:actionText": "Unknown(?x)",
+      "ont:sourceRules": [
+        {
+          "@value": "RULE_01"
+        }
+      ]
+    },
+    {
+      "@id": "urn:worflogy:rule:inference:INF_02",
+      "@type": "ont:RuleDraft",
+      "rdfs:label": "INF_02",
+      "ont:sourceRuleId": "INF_02",
+      "ont:domain": "inference",
+      "ont:conditionText": "Person(?xy)",
+      "ont:actionText": "Person(?x)",
+      "ont:sourceRules": []
+    },
+    {
+      "@id": "urn:worflogy:rule:inference:INF_03",
+      "@type": "ont:RuleDraft",
+      "rdfs:label": "INF_03",
+      "ont:sourceRuleId": "INF_03",
+      "ont:domain": "inference",
+      "ont:conditionText": "Person(42)",
+      "ont:actionText": "Person(alice)",
+      "ont:sourceRules": []
+    },
+    {
+      "@id": "ont:bob",
+      "@type": [
+        "owl:NamedIndividual",
+        "ont:Person"
+      ],
+      "ont:age": {
+        "@value": 0,
+        "@type": "xsd:integer"
+      }
+    },
+    {
+      "@id": "urn:worflogy:variable:x",
+      "@type": "swrl:Variable"
+    },
+    {
+      "@id": "urn:worflogy:variable:v",
+      "@type": "swrl:Variable"
+    },
+    {
+      "@id": "urn:worflogy:export-report",
+      "@type": "ont:ExportReport",
+      "ont:warning": [
+        "PersonShape: 추가 필드는 원본으로 보존하며 SHACL 의미 변환은 지원하지 않습니다 — pattern",
+        "INF_01: SWRL 구조화 변환 생략 — 클래스·속성 선언 또는 원자 인수 수를 확인하세요: Unknown 원문 규칙은 보존됩니다.",
+        "INF_02: SWRL 구조화 변환 생략 — 결론에만 있는 변수가 있습니다. 원문 규칙은 보존됩니다.",
+        "INF_03: SWRL 구조화 변환 생략 — 개체 인수 위치에 리터럴이 있습니다. 원문 규칙은 보존됩니다."
+      ],
+      "rdfs:comment": "업무 절차와 근거 기록은 도구 확장 어휘로 보존합니다. SWRL 구조화 변환은 실행·일관성 증명을 뜻하지 않습니다.",
+      "ont:structuredRuleCount": 1
+    }
+  ]
+}
