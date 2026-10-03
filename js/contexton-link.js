@@ -2,7 +2,7 @@
 (()=>{
  let contextonWindow=null;
  document.addEventListener('click',event=>{
-  const link=event.target.closest?.('a.contexton-floating');
+  const link=event.target.closest?.('a.contexton-floating,a[data-contexton-link]');
   if(!link||event.defaultPrevented||event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
   if(contextonWindow&&!contextonWindow.closed){
    try{contextonWindow.focus();event.preventDefault();return;}catch{contextonWindow=null;}

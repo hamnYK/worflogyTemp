@@ -61,9 +61,16 @@
 <script defer src="./js/contact.js"></script>
 <script defer src="./js/press.js"></script>
 <script defer src="./js/activities.js"></script>
-<script defer src="./js/contexton-link.js"></script></head>
+<script defer src="./js/contexton-link.js"></script><link rel="stylesheet" href="./css/updates.css"><script defer src="./js/updates.js"></script></head>
 <body class="studio-home">
 <a class="skip-link" href="#main">본문 바로가기</a>
+<aside id="site-updates" class="site-updates" aria-labelledby="updates-title" hidden>
+<div class="updates-heading"><h2 id="updates-title">워플로지 새 소식</h2><button id="updates-close" type="button">닫기</button></div>
+<article><span class="updates-label">UPDATE · v1.1</span><h3>워크숍 v1.1 업데이트</h3><p class="updates-subtitle">W3C 표준 준수 강화 버전</p><p>W3C 온톨로지 기술 표준을 체험하고, 기술 형식 활용의 한계를 알아보세요.</p><a class="updates-action" data-updates-workshop href="./nia-ontology-workshop-with-worflogy.html" target="_blank" rel="noopener noreferrer">워크숍 체험하기</a></article>
+<article><span class="updates-label">NEW · CONTEXTON</span><h3>맥락쓰기 신규 공개</h3><p class="updates-subtitle">서사 구조 이해 온톨로지 엔진</p><p>협업으로 서사 구조를 디자인하고, AI로 글을 생성해 보세요.</p><a class="updates-action" data-contexton-link href="https://contextonai.com/" target="_blank" rel="noopener noreferrer">맥락쓰기 시작하기</a></article>
+<div class="updates-footer"><button id="updates-today" type="button">오늘 하루 보지 않기</button></div>
+</aside>
+<button id="updates-reopen" class="updates-reopen" type="button" aria-controls="site-updates" hidden>새 소식</button>
 <main id="main">
 <div id="diagram-sections"><!-- STATIC_DIAGRAMS_START -->
 <section class="diagram-section" id="section-overview" aria-labelledby="title-overview">

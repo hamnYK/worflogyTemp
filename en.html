@@ -61,9 +61,16 @@
 <script defer src="./js/contact.js"></script>
 <script defer src="./js/press.js"></script>
 <script defer src="./js/activities.js"></script>
-<script defer src="./js/contexton-link.js"></script></head>
+<script defer src="./js/contexton-link.js"></script><link rel="stylesheet" href="./css/updates.css"><script defer src="./js/updates.js"></script></head>
 <body class="studio-home">
 <a class="skip-link" href="#main"><span data-i18n-ko="본문 바로가기">Skip to content</span></a>
+<aside id="site-updates" class="site-updates" aria-labelledby="updates-title" hidden>
+<div class="updates-heading"><h2 id="updates-title"><span data-i18n-ko="워플로지 새 소식">What&#x27;s new at Worflogy</span></h2><button id="updates-close" type="button"><span data-i18n-ko="닫기">Close</span></button></div>
+<article><span class="updates-label">UPDATE · v1.1</span><h3><span data-i18n-ko="워크숍 v1.1 업데이트">Workshop v1.1 update</span></h3><p class="updates-subtitle"><span data-i18n-ko="W3C 표준 준수 강화 버전">Enhanced W3C standards compliance</span></p><p><span data-i18n-ko="W3C 온톨로지 기술 표준을 체험하고, 기술 형식 활용의 한계를 알아보세요.">Explore W3C ontology standards and understand the limits of applying their technical formats.</span></p><a class="updates-action" data-updates-workshop href="./nia-ontology-workshop-with-worflogy.html" target="_blank" rel="noopener noreferrer"><span data-i18n-ko="워크숍 체험하기">Try the workshop</span></a></article>
+<article><span class="updates-label">NEW · CONTEXTON</span><h3><span data-i18n-ko="맥락쓰기 신규 공개">Introducing Contexton</span></h3><p class="updates-subtitle"><span data-i18n-ko="서사 구조 이해 온톨로지 엔진">An ontology engine for understanding narrative structure</span></p><p><span data-i18n-ko="협업으로 서사 구조를 디자인하고, AI로 글을 생성해 보세요.">Design narrative structures collaboratively and generate writing with AI.</span></p><a class="updates-action" data-contexton-link href="https://contextonai.com/" target="_blank" rel="noopener noreferrer"><span data-i18n-ko="맥락쓰기 시작하기">Try Contexton</span></a></article>
+<div class="updates-footer"><button id="updates-today" type="button"><span data-i18n-ko="오늘 하루 보지 않기">Don&#x27;t show again today</span></button></div>
+</aside>
+<button id="updates-reopen" class="updates-reopen" type="button" aria-controls="site-updates" hidden><span data-i18n-ko="새 소식">What&#x27;s new</span></button>
 <main id="main">
 <div id="diagram-sections"><!-- STATIC_DIAGRAMS_START -->
 <section class="diagram-section" id="section-overview" aria-labelledby="title-overview">
