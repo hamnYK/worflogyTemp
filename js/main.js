@@ -241,11 +241,10 @@
   workshopLink.addEventListener("click",event=>{
     // Preserve native new-tab/new-window and other modified link actions.
     if(event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
-    if(!workshopWindow||workshopWindow.closed){
-      workshopWindow=window.open(workshopLink.href,"worflogy-workshop");
-      if(!workshopWindow)return;
-      workshopWindow.opener=null;
-    }
+    workshopWindow=window.open('',"worflogy-workshop");
+    if(!workshopWindow)return;
+    try{if(workshopWindow.location.href==='about:blank')workshopWindow.location.replace(workshopLink.href);}catch{}
+
     event.preventDefault();
     workshopWindow.focus();
   });
