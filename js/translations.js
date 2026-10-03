@@ -1,4 +1,6 @@
 window.WORFLOGY_EN = {
+  "맥락쓰기": "Contexton",
+  "맥락쓰기 (새 탭에서 열기)": "Contexton (opens in a new tab)",
   "가제 : NULL SECTOR": "Working title: NULL SECTOR",
   "개발 진행 중": "In development",
   "실증 테스트 가능": "Available for proof-of-concept testing",

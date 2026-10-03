@@ -29,7 +29,7 @@ p,dd,figcaption{text-wrap:pretty}
 #press-dialog .article-meta,#press-dialog .visual-caption,.press-sources{font-size:.8125rem;line-height:1.65}
 #press-dialog .diagram-caption,#press-dialog .diagram-node,#press-dialog .flow-step{font-size:.875rem;line-height:1.7}
 .language-floating{display:inline-flex;align-items:center;justify-content:center;padding:7px 16px;border:1px solid var(--color-action);font-size:.8125rem;line-height:1.4;text-decoration:none}
-.workshop-floating{font-size:.875rem}
+:is(.workshop-floating,.contexton-floating){font-size:.875rem}
 footer{font-size:.75rem;line-height:1.7}
 .static-diagram-description{max-width:72ch;margin:16px 0 24px;color:var(--color-text-muted)}
 html[lang="en"] .guide-header h1,html[lang="en"] .diagram-section-title{letter-spacing:-.015em}
