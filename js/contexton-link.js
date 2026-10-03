@@ -19,9 +19,9 @@
   const link=event.target.closest?.(SELECTOR);
   if(!link||event.defaultPrevented||event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
   const url=new URL(link.href,location.href);if(!isPeer(url.origin))return;
-  if(peer&&!peer.closed){try{peer.focus();event.preventDefault();return;}catch{peer=null;}}
-  // Empty URL recovers a named, related tab without reloading its work.
-  const opened=window.open('',peerName);if(!opened){event.preventDefault();return;}
+  // Reopen the named context during the user gesture to activate its tab.
+  // A focus-only call on a stored WindowProxy can leave it in the background.
+  const opened=window.open('',peerName);if(!opened){return;}
   event.preventDefault();peer=opened;
   try{if(opened.location.href==='about:blank')opened.location.replace(url.href);}catch{/* Existing cross-origin tab: keep its page intact. */}
   announce(opened);try{opened.focus();}catch{}
