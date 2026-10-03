@@ -61,7 +61,7 @@
 <script defer src="./js/contact.js"></script>
 <script defer src="./js/press.js"></script>
 <script defer src="./js/activities.js"></script>
-<script defer src="./js/contexton-link.js"></script><link rel="stylesheet" href="./css/updates.css"><script defer src="./js/updates.js"></script></head>
+<script defer src="./js/contexton-link.js"></script><link rel="stylesheet" href="./css/updates.css"><script defer src="./js/updates.js"></script><link rel="stylesheet" href="css/privacy-modal.css"><script defer src="js/privacy-modal.js"></script></head>
 <body class="studio-home">
 <a class="skip-link" href="#main">본문 바로가기</a>
 <aside id="site-updates" class="site-updates" aria-labelledby="updates-title" hidden>
@@ -212,7 +212,7 @@
 <section id="company" class="simple-section"><h2>주식회사 워플로지</h2><dl class="company-info"><div><dt>창업</dt><dd>2025년 7월 10일 · 1인 창조 기업</dd></div><div><dt>대표</dt><dd>함영국<small class="company-specialty">전문 분야 : 시맨틱 기반 운영 리스크 최적화</small></dd></div><div><dt>사업자 등록 번호</dt><dd>580-88-03419</dd></div><div><dt>소재</dt><dd>경기도 성남시 분당구 대왕판교로645번길 12, 경기글로벌게임센터</dd></div><div><dt>연구개발</dt><dd>경기도 수원시 권선구 산업로156번길 142-10, 수원시 기업지원센터</dd></div><div><dt>문의</dt><dd><button type="button" id="open-contact-modal">이메일 보내기</button><p class="contact-invitation">교육, 협업 및 기타 요청이 있으시면 자유롭게 메일 주세요.</p></dd></div></dl><section class="partners-section" aria-labelledby="partners-title"><h2 id="partners-title">파트너</h2><div class="partner-list"><a class="partner-link" href="https://hiai.korea.ac.kr/cooperations/" target="_blank" rel="noopener noreferrer"><img src="./assets/images/partners/hiai.png" width="1024" height="1024" loading="lazy" alt="고려대학교 Human-inspired AI 연구원 (HIAI)"></a></div></section></section>
 </main>
 <div class="floating-actions"><a id="language-toggle" class="language-floating" data-language-control lang="en" hreflang="en" href="./en.html" aria-label="Switch to English">English</a><a class="contexton-floating" href="https://contextonai.com/" target="_blank" rel="noopener noreferrer" aria-label="맥락쓰기 (새 탭에서 열기)">맥락쓰기</a><a class="workshop-floating" href="./nia-ontology-workshop-with-worflogy.html">워크숍</a></div>
-<footer>© <span id="year">2025</span> 주식회사 워플로지</footer>
+<footer class="site-footer"><span>© <span id="year">2025</span> 주식회사 워플로지</span><a class="privacy-policy-link" href="worflogy_privacy_policy.html" aria-haspopup="dialog" aria-controls="privacy-policy-dialog" aria-label="개인정보 처리방침 열기">개인정보 처리방침</a></footer>
 <template id="diagram-template"><div class="diagram-shell">
 <div class="toolbar" role="group" aria-label="도면 보기 조절"><button type="button" data-ui="reset" title="줌, 화면 위치, 오브젝트 배치를 처음 상태로 되돌립니다">화면 초기화</button><button type="button" data-ui="play-story" class="icon-button" aria-label="재생" title="재생"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 2.5 13 8l-9 5.5Z" fill="currentColor"/></svg></button><button type="button" data-ui="next-stage" class="icon-button" aria-label="다음 단계" title="다음 단계" disabled><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m3 3 7 5-7 5Z" fill="currentColor"/><path d="M12 3v10" stroke="currentColor" stroke-width="2"/></svg></button><span data-ui="story-progress" class="toolbar-progress"></span><span data-ui="technology-label" class="toolbar-technology"></span></div>
 <div class="canvas-viewport">
@@ -413,5 +413,6 @@
           <span style="font-size: var(--font-size-xs); display: inline-block; margin-top: var(--space-2);">본 아카이브는 법인 홈페이지 개편 및 유실 방지를 위한 소장 목적으로 기사 전문을 백업한 페이지입니다. 원본 링크는 연혁 페이지 내 아웃링크를 통해 접속 가능합니다.</span>
         </p>
       </article></div></dialog>
+<dialog id="privacy-policy-dialog" aria-labelledby="privacy-policy-title"><div class="privacy-modal-header"><h2 id="privacy-policy-title">개인정보 처리방침</h2><button id="privacy-policy-close" type="button" autofocus>닫기</button></div><iframe id="privacy-policy-frame" title="개인정보 처리방침 전문" data-src="worflogy_privacy_policy.html?embedded=1"></iframe></dialog>
 </body>
 </html>

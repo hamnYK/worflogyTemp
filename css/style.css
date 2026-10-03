@@ -201,3 +201,6 @@ footer{padding-bottom:calc(var(--space-16) + 96px)}
 
 /* Upcoming game canvas: preserve the entire video on desktop and mobile. */
 .diagram-canvas.diagram-canvas--video{display:block;height:auto;object-fit:contain;background:#fff;cursor:default;touch-action:auto;pointer-events:none}
+
+/* Public privacy notice, shared semantic design tokens. */
+.site-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 24px}.site-footer .privacy-policy-link{display:inline-flex;align-items:center;min-height:44px;font-family:var(--font-body);font-size:14px;color:var(--color-text);text-decoration:underline;text-underline-offset:3px}.site-footer .privacy-policy-link:hover{color:var(--color-action)}.site-footer .privacy-policy-link:focus-visible{outline:var(--focus-ring);outline-offset:var(--focus-offset)}
